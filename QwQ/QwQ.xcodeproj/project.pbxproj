@@ -100,8 +100,13 @@
 			isa = PBXGroup;
 			children = (
 				7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */,
+				7EC7E6812418B84600C2F9BB /* Logic */,
+				7EC7E6802418B83300C2F9BB /* Storage */,
+				7EC7E67E2418B81100C2F9BB /* Models */,
+				7EC7E67F2418B81D00C2F9BB /* Views */,
+				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
+				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
-				7EC7E6512418B6C300C2F9BB /* ViewController.swift */,
 				7EC7E6532418B6C300C2F9BB /* Main.storyboard */,
 				7EC7E6562418B6C900C2F9BB /* Assets.xcassets */,
 				7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */,
@@ -126,6 +131,49 @@
 				7EC7E6712418B6CA00C2F9BB /* Info.plist */,
 			);
 			path = QwQUITests;
+			sourceTree = "<group>";
+		};
+		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E6512418B6C300C2F9BB /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7EC7E67E2418B81100C2F9BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7EC7E67F2418B81D00C2F9BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7EC7E6802418B83300C2F9BB /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		7EC7E6812418B84600C2F9BB /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		7EC7E6822418B85800C2F9BB /* Others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
