@@ -180,6 +180,16 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		7EC7E6832418BF3000C2F9BB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */,
+				7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */,
+				7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		D4A771612418C1B1009610C7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,16 +209,6 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
-		7EC7E6832418BF3000C2F9BB /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */,
-				7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */,
-				7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -219,6 +219,7 @@
 				7EC7E6462418B6C300C2F9BB /* Sources */,
 				7EC7E6472418B6C300C2F9BB /* Frameworks */,
 				7EC7E6482418B6C300C2F9BB /* Resources */,
+				5C39D2032418DA5B001E03C0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -337,6 +338,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C39D2032418DA5B001E03C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EC7E6462418B6C300C2F9BB /* Sources */ = {
