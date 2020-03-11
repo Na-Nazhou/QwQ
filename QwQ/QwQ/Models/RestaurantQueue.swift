@@ -6,10 +6,13 @@
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
+import Foundation
+
 struct RestaurantQueue {
 
     var restaurant: Restaurant
     var queue = [QueueRecord]()
-    var closed: Bool
 
+    var openTime: Date?
+    var closeTime: Date?
 }
