@@ -23,6 +23,8 @@
 		D4A771652418C266009610C7 /* QueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771642418C266009610C7 /* QueueLogic.swift */; };
 		D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771672418C98F009610C7 /* QueueStorage.swift */; };
 		D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771692418D00C009610C7 /* QueueStorageSync.swift */; };
+		D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */; };
+		D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		D4A771642418C266009610C7 /* QueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogic.swift; sourceTree = "<group>"; };
 		D4A771672418C98F009610C7 /* QueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorage.swift; sourceTree = "<group>"; };
 		D4A771692418D00C009610C7 /* QueueStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorageSync.swift; sourceTree = "<group>"; };
+		D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
+		D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,8 @@
 			children = (
 				D4A771622418C1CC009610C7 /* QueueLogicManager.swift */,
 				D4A771642418C266009610C7 /* QueueLogic.swift */,
+				D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */,
+				D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -323,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
@@ -333,6 +340,7 @@
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
 				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
+				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
 				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

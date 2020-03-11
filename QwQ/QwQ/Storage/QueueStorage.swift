@@ -8,5 +8,5 @@ protocol QueueStorage {
     func updateQueueRecord(record: QueueRecord)
     
     // MARK: - Query
-    func isQueueOpen(for restaurant: Restaurant, at time: Date) -> Bool
+//    func isQueueOpen(for restaurant: Restaurant, at time: Date) -> Bool
 }
