@@ -274,7 +274,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = Appfish;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7EC7E6492418B6C300C2F9BB = {
 						CreatedOnToolsVersion = 11.3.1;
