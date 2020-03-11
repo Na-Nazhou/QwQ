@@ -11,12 +11,5 @@ struct Restaurant: User {
     let email: String
 
     let address: String
-    let queue = [QueueRecord]()
-
-    init(name: String, email: String, address: String) {
-        self.name = name;
-        self.email = email;
-        self.address = address;
-    }
 }
 
