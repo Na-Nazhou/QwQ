@@ -1,24 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-background" translatesAutoresizingMaskIntoConstraints="NO" id="kNb-yu-9DG">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
+                            </imageView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sl-UY-G9b">
+                                <rect key="frame" x="138" y="200" width="558" height="780"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMP-nu-B0d">
+                                        <rect key="frame" x="104" y="351" width="350" height="55"/>
+                                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="Bpm-Yz-oud"/>
+                                            <constraint firstAttribute="width" constant="350" id="Z0f-zo-GPS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRt-MH-ebt">
+                                        <rect key="frame" x="104" y="434" width="350" height="55"/>
+                                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="c2C-S0-7Eu"/>
+                                            <constraint firstAttribute="width" constant="350" id="u8h-b9-hYU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wlq-en-AOc">
+                                        <rect key="frame" x="179" y="650" width="200" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="Lse-Ke-cDA"/>
+                                            <constraint firstAttribute="height" constant="50" id="ebJ-JU-GId"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Customer"/>
+                                            <segment title="Restaurant"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="vRt-MH-ebt" firstAttribute="centerX" secondItem="9sl-UY-G9b" secondAttribute="centerX" id="EKh-3M-spB"/>
+                                    <constraint firstItem="qMP-nu-B0d" firstAttribute="centerX" secondItem="9sl-UY-G9b" secondAttribute="centerX" id="JSI-U7-Qhv"/>
+                                    <constraint firstAttribute="height" constant="780" id="MiR-qg-Ir7"/>
+                                    <constraint firstAttribute="width" constant="558" id="bi5-md-27n"/>
+                                    <constraint firstItem="vRt-MH-ebt" firstAttribute="top" secondItem="qMP-nu-B0d" secondAttribute="bottom" constant="28" id="fSr-MK-E6y"/>
+                                    <constraint firstItem="Wlq-en-AOc" firstAttribute="centerX" secondItem="9sl-UY-G9b" secondAttribute="centerX" id="uuW-Hi-0PI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="KlE-Cl-Jeh">
+                                <rect key="frame" x="235" y="230" width="364" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="IzW-vP-Mbl"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IQ-8Z-Ump">
+                                <rect key="frame" x="337" y="717" width="160" height="60"/>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.41960784313725491" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="fgp-cf-RzY"/>
+                                    <constraint firstAttribute="width" constant="160" id="pTU-WL-dcp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
+                                <state key="normal" title="LOGIN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
+                                <rect key="frame" x="353" y="788" width="128" height="37"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
+                                <state key="normal" title="Or Sign Up">
+                                    <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3on-J4-Qu5"/>
+                            <constraint firstItem="99D-WQ-Szf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4jK-VD-d6C"/>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="top" secondItem="KlE-Cl-Jeh" secondAttribute="top" constant="-30" id="A0a-pf-VM4"/>
+                            <constraint firstItem="7IQ-8Z-Ump" firstAttribute="top" secondItem="vRt-MH-ebt" secondAttribute="bottom" constant="28" id="Fn6-Nj-ELy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kNb-yu-9DG" secondAttribute="bottom" id="KI4-8x-28C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kNb-yu-9DG" secondAttribute="trailing" id="Z9A-z8-aw8"/>
+                            <constraint firstItem="kNb-yu-9DG" firstAttribute="top" secondItem="9sl-UY-G9b" secondAttribute="top" constant="-200" id="Zdc-te-z41"/>
+                            <constraint firstItem="Wlq-en-AOc" firstAttribute="top" secondItem="99D-WQ-Szf" secondAttribute="bottom" constant="25" id="a0k-gf-AEs"/>
+                            <constraint firstItem="7IQ-8Z-Ump" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gDE-t0-uRj"/>
+                            <constraint firstItem="KlE-Cl-Jeh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kxl-Ri-gJr"/>
+                            <constraint firstItem="kNb-yu-9DG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tyy-sc-iQr"/>
+                            <constraint firstItem="kNb-yu-9DG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vB4-ev-NrE"/>
+                            <constraint firstItem="qMP-nu-B0d" firstAttribute="top" secondItem="KlE-Cl-Jeh" secondAttribute="bottom" constant="21" id="vlX-LC-BZc"/>
+                            <constraint firstItem="99D-WQ-Szf" firstAttribute="top" secondItem="7IQ-8Z-Ump" secondAttribute="bottom" constant="11" id="yKe-1h-2rs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.65467625899282" y="101.50753768844221"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="login-background" width="2048" height="2732"/>
+        <image name="logo" width="364" height="416"/>
+    </resources>
 </document>

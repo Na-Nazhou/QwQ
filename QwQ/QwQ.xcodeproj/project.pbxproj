@@ -15,6 +15,9 @@
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
 		7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */; };
 		7EC7E6702418B6CA00C2F9BB /* QwQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */; };
+		7EC7E6872418BF9700C2F9BB /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */; };
+		7EC7E6882418BF9700C2F9BB /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */; };
+		7EC7E6892418BF9700C2F9BB /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		7EC7E66B2418B6CA00C2F9BB /* QwQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQUITests.swift; sourceTree = "<group>"; };
 		7EC7E6712418B6CA00C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
+		7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
+		7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,8 +178,19 @@
 		7EC7E6822418B85800C2F9BB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				7EC7E6832418BF3000C2F9BB /* Fonts */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		7EC7E6832418BF3000C2F9BB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */,
+				7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */,
+				7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,8 +297,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC7E6872418BF9700C2F9BB /* Comfortaa-Light.ttf in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
+				7EC7E6882418BF9700C2F9BB /* Comfortaa-Bold.ttf in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
+				7EC7E6892418BF9700C2F9BB /* Comfortaa-Regular.ttf in Resources */,
 				7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
