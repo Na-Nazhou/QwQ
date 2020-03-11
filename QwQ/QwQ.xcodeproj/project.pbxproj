@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
+		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
+		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
+		61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA92418BF5300B88018 /* QueueRecord.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
 		7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* ViewController.swift */; };
@@ -18,6 +22,10 @@
 		7EC7E6872418BF9700C2F9BB /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */; };
 		7EC7E6882418BF9700C2F9BB /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */; };
 		7EC7E6892418BF9700C2F9BB /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */; };
+		D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771622418C1CC009610C7 /* QueueLogicManager.swift */; };
+		D4A771652418C266009610C7 /* QueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771642418C266009610C7 /* QueueLogic.swift */; };
+		D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771672418C98F009610C7 /* QueueStorage.swift */; };
+		D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771692418D00C009610C7 /* QueueStorageSync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		61B2EAA72418BD7300B88018 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		61B2EAA92418BF5300B88018 /* QueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +67,10 @@
 		7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
+		D4A771622418C1CC009610C7 /* QueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogicManager.swift; sourceTree = "<group>"; };
+		D4A771642418C266009610C7 /* QueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogic.swift; sourceTree = "<group>"; };
+		D4A771672418C98F009610C7 /* QueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorage.swift; sourceTree = "<group>"; };
+		D4A771692418D00C009610C7 /* QueueStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorageSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +98,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61B2EAA22418BAA400B88018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61B2EAA32418BABB00B88018 /* User.swift */,
+				61B2EAA52418BC3200B88018 /* Customer.swift */,
+				61B2EAA72418BD7300B88018 /* Restaurant.swift */,
+				61B2EAA92418BF5300B88018 /* QueueRecord.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7EC7E6412418B6C300C2F9BB = {
 			isa = PBXGroup;
 			children = (
@@ -106,10 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */,
-				7EC7E6812418B84600C2F9BB /* Logic */,
-				7EC7E6802418B83300C2F9BB /* Storage */,
-				7EC7E67E2418B81100C2F9BB /* Models */,
-				7EC7E67F2418B81D00C2F9BB /* Views */,
+				D4A771662418C899009610C7 /* Storage */,
+				D4A771612418C1B1009610C7 /* Logic */,
+				61B2EAA22418BAA400B88018 /* Models */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
@@ -147,40 +173,30 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		7EC7E67E2418B81100C2F9BB /* Models */ = {
+		7EC7E6822418B85800C2F9BB /* Others */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Models;
+			path = Others;
 			sourceTree = "<group>";
 		};
-		7EC7E67F2418B81D00C2F9BB /* Views */ = {
+		D4A771612418C1B1009610C7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		7EC7E6802418B83300C2F9BB /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
-		7EC7E6812418B84600C2F9BB /* Logic */ = {
-			isa = PBXGroup;
-			children = (
+				D4A771622418C1CC009610C7 /* QueueLogicManager.swift */,
+				D4A771642418C266009610C7 /* QueueLogic.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
 		};
-		7EC7E6822418B85800C2F9BB /* Others */ = {
+		D4A771662418C899009610C7 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				7EC7E6832418BF3000C2F9BB /* Fonts */,
+				D4A771672418C98F009610C7 /* QueueStorage.swift */,
+				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
 			);
-			path = Others;
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		7EC7E6832418BF3000C2F9BB /* Fonts */ = {
@@ -327,9 +343,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
+				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
+				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
+				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
 				7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */,
+				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
+				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
+				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
+				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +527,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QwQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QwQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
