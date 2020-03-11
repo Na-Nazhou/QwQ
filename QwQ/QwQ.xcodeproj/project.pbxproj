@@ -7,14 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1C4B39013BC0025CBA7D8D /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F81CF49565D68BBC9F190D91 /* Pods_QwQTests.framework */; };
+		2BB3C407E900ABF334539E3C /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28EFD02D99D695F5AAC8772 /* Pods_QwQ.framework */; };
 		5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */; };
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
 		5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD062418E375002B88E3 /* GoogleService-Info.plist */; };
+		6105A1E3241917A500B2FA29 /* RestaurantQueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1E2241917A500B2FA29 /* RestaurantQueueRecord.swift */; };
+		6105A1E724191BAB00B2FA29 /* RestaurantQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1E624191BAB00B2FA29 /* RestaurantQueueStorage.swift */; };
+		6105A1E924191C1800B2FA29 /* RestaurantQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1E824191C1800B2FA29 /* RestaurantQueueLogic.swift */; };
+		6105A1EB24191CF000B2FA29 /* RestaurantQueueStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1EA24191CF000B2FA29 /* RestaurantQueueStorageSync.swift */; };
+		6105A1ED24191ED500B2FA29 /* RestaurantQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1EC24191ED500B2FA29 /* RestaurantQueueLogicManager.swift */; };
+		6105A1EF24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1EE24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift */; };
+		6105A1F3241925F800B2FA29 /* RestaurantLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1F2241925F800B2FA29 /* RestaurantLogic.swift */; };
+		6105A1F52419266500B2FA29 /* RestaurantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1F42419266500B2FA29 /* RestaurantStorage.swift */; };
+		6105A1F72419274A00B2FA29 /* CustomerQueueStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1F62419274A00B2FA29 /* CustomerQueueStorageStub.swift */; };
+		6105A1FD2419355C00B2FA29 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1FC2419355C00B2FA29 /* QueueRecord.swift */; };
+		6105A1FF241939D600B2FA29 /* CustomerQueueStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A1FE241939D600B2FA29 /* CustomerQueueStorageSync.swift */; };
+		6105A20124193B0900B2FA29 /* RestaurantLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A20024193B0900B2FA29 /* RestaurantLogicManager.swift */; };
+		6105A20324193BAF00B2FA29 /* RestaurantStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6105A20224193BAF00B2FA29 /* RestaurantStorageStub.swift */; };
 		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
-		61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA92418BF5300B88018 /* QueueRecord.swift */; };
+		61B2EAAA2418BF5300B88018 /* CustomerQueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA92418BF5300B88018 /* CustomerQueueRecord.swift */; };
 		61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
@@ -24,15 +39,11 @@
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
 		7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */; };
 		7EC7E6702418B6CA00C2F9BB /* QwQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */; };
-		AAA6F8D8063CEC78486A39B0 /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */; };
-		B1D8B678FCC0DEDC93B33725 /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */; };
-		D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771622418C1CC009610C7 /* QueueLogicManager.swift */; };
-		D4A771652418C266009610C7 /* QueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771642418C266009610C7 /* QueueLogic.swift */; };
-		D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771672418C98F009610C7 /* QueueStorage.swift */; };
-		D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771692418D00C009610C7 /* QueueStorageSync.swift */; };
-		D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */; };
-		D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */; };
-		F69730837861DD97A0D93813 /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */; };
+		D4A771632418C1CC009610C7 /* CustomerQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771622418C1CC009610C7 /* CustomerQueueLogicManager.swift */; };
+		D4A771652418C266009610C7 /* CustomerQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771642418C266009610C7 /* CustomerQueueLogic.swift */; };
+		D4A771682418C98F009610C7 /* CustomerQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771672418C98F009610C7 /* CustomerQueueStorage.swift */; };
+		D4A7716A2418D00C009610C7 /* RestaurantStorageSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771692418D00C009610C7 /* RestaurantStorageSync.swift */; };
+		E92F3F78B042548A99FFE637 /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF03302468D4D9F7EA73831 /* Pods_QwQ_QwQUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,22 +64,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		28B13FBFCAE64C354FC9DC04 /* Pods-QwQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.debug.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.debug.xcconfig"; sourceTree = "<group>"; };
-		29B88849783EDA73EDE093E1 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
-		596993604A6FD0C13635E678 /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E32F0F130C4B7AE194EBB44 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		31D9D3542D836BB9AADE4865 /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4413ED8A4153CF9B93C63AA9 /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
+		562CBEEB272649B21B968EC8 /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		5C11FD062418E375002B88E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
+		6105A1E2241917A500B2FA29 /* RestaurantQueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueRecord.swift; sourceTree = "<group>"; };
+		6105A1E624191BAB00B2FA29 /* RestaurantQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorage.swift; sourceTree = "<group>"; };
+		6105A1E824191C1800B2FA29 /* RestaurantQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogic.swift; sourceTree = "<group>"; };
+		6105A1EA24191CF000B2FA29 /* RestaurantQueueStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorageSync.swift; sourceTree = "<group>"; };
+		6105A1EC24191ED500B2FA29 /* RestaurantQueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogicManager.swift; sourceTree = "<group>"; };
+		6105A1EE24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorageStub.swift; sourceTree = "<group>"; };
+		6105A1F2241925F800B2FA29 /* RestaurantLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLogic.swift; sourceTree = "<group>"; };
+		6105A1F42419266500B2FA29 /* RestaurantStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStorage.swift; sourceTree = "<group>"; };
+		6105A1F62419274A00B2FA29 /* CustomerQueueStorageStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueStorageStub.swift; sourceTree = "<group>"; };
+		6105A1FC2419355C00B2FA29 /* QueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
+		6105A1FE241939D600B2FA29 /* CustomerQueueStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueStorageSync.swift; sourceTree = "<group>"; };
+		6105A20024193B0900B2FA29 /* RestaurantLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLogicManager.swift; sourceTree = "<group>"; };
+		6105A20224193BAF00B2FA29 /* RestaurantStorageStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStorageStub.swift; sourceTree = "<group>"; };
 		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		61B2EAA72418BD7300B88018 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		61B2EAA92418BF5300B88018 /* QueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
+		61B2EAA92418BF5300B88018 /* CustomerQueueRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueRecord.swift; sourceTree = "<group>"; };
 		61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueue.swift; sourceTree = "<group>"; };
-		63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,14 +104,15 @@
 		7EC7E66B2418B6CA00C2F9BB /* QwQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQUITests.swift; sourceTree = "<group>"; };
 		7EC7E6712418B6CA00C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4A771622418C1CC009610C7 /* QueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogicManager.swift; sourceTree = "<group>"; };
-		D4A771642418C266009610C7 /* QueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogic.swift; sourceTree = "<group>"; };
-		D4A771672418C98F009610C7 /* QueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorage.swift; sourceTree = "<group>"; };
-		D4A771692418D00C009610C7 /* QueueStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorageSync.swift; sourceTree = "<group>"; };
-		D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
-		D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogic.swift; sourceTree = "<group>"; };
+		C28EFD02D99D695F5AAC8772 /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2D614FE3D1175881840707D /* Pods-QwQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.debug.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.debug.xcconfig"; sourceTree = "<group>"; };
+		D4A771622418C1CC009610C7 /* CustomerQueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogicManager.swift; sourceTree = "<group>"; };
+		D4A771642418C266009610C7 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
+		D4A771672418C98F009610C7 /* CustomerQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueStorage.swift; sourceTree = "<group>"; };
+		D4A771692418D00C009610C7 /* RestaurantStorageSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStorageSync.swift; sourceTree = "<group>"; };
+		EFF03302468D4D9F7EA73831 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F81CF49565D68BBC9F190D91 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9E31C9D1515737633A2F88B /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1D8B678FCC0DEDC93B33725 /* Pods_QwQ.framework in Frameworks */,
+				2BB3C407E900ABF334539E3C /* Pods_QwQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F69730837861DD97A0D93813 /* Pods_QwQTests.framework in Frameworks */,
+				0D1C4B39013BC0025CBA7D8D /* Pods_QwQTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,13 +136,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAA6F8D8063CEC78486A39B0 /* Pods_QwQ_QwQUITests.framework in Frameworks */,
+				E92F3F78B042548A99FFE637 /* Pods_QwQ_QwQUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		312777B1E916C7D03DA80BE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C28EFD02D99D695F5AAC8772 /* Pods_QwQ.framework */,
+				EFF03302468D4D9F7EA73831 /* Pods_QwQ_QwQUITests.framework */,
+				F81CF49565D68BBC9F190D91 /* Pods_QwQTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5C11FCFF2418E2D1002B88E3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,14 +163,86 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		61B2EAA22418BAA400B88018 /* Models */ = {
+		6105A1DC241914F900B2FA29 /* CustomerApp */ = {
+			isa = PBXGroup;
+			children = (
+				D4A771662418C899009610C7 /* Storage */,
+				D4A771612418C1B1009610C7 /* Logic */,
+				61B2EAA22418BAA400B88018 /* Models */,
+			);
+			path = CustomerApp;
+			sourceTree = "<group>";
+		};
+		6105A1DD2419150300B2FA29 /* RestaurantApp */ = {
+			isa = PBXGroup;
+			children = (
+				6105A1DE241916A700B2FA29 /* Storage */,
+				6105A1DF241916B200B2FA29 /* Logic */,
+				6105A1E0241916C300B2FA29 /* Model */,
+			);
+			path = RestaurantApp;
+			sourceTree = "<group>";
+		};
+		6105A1DE241916A700B2FA29 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				6105A1FB241928AC00B2FA29 /* Stub */,
+				6105A1E624191BAB00B2FA29 /* RestaurantQueueStorage.swift */,
+				6105A1EA24191CF000B2FA29 /* RestaurantQueueStorageSync.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		6105A1DF241916B200B2FA29 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				6105A1E824191C1800B2FA29 /* RestaurantQueueLogic.swift */,
+				6105A1EC24191ED500B2FA29 /* RestaurantQueueLogicManager.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		6105A1E0241916C300B2FA29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */,
+				6105A1E2241917A500B2FA29 /* RestaurantQueueRecord.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6105A1E12419173700B2FA29 /* SharedModels */ = {
 			isa = PBXGroup;
 			children = (
 				61B2EAA32418BABB00B88018 /* User.swift */,
 				61B2EAA52418BC3200B88018 /* Customer.swift */,
 				61B2EAA72418BD7300B88018 /* Restaurant.swift */,
-				61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */,
-				61B2EAA92418BF5300B88018 /* QueueRecord.swift */,
+				6105A1FC2419355C00B2FA29 /* QueueRecord.swift */,
+			);
+			path = SharedModels;
+			sourceTree = "<group>";
+		};
+		6105A1F82419275E00B2FA29 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				6105A1F62419274A00B2FA29 /* CustomerQueueStorageStub.swift */,
+				6105A20224193BAF00B2FA29 /* RestaurantStorageStub.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		6105A1FB241928AC00B2FA29 /* Stub */ = {
+			isa = PBXGroup;
+			children = (
+				6105A1EE24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift */,
+			);
+			path = Stub;
+			sourceTree = "<group>";
+		};
+		61B2EAA22418BAA400B88018 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61B2EAA92418BF5300B88018 /* CustomerQueueRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,7 +255,7 @@
 				7EC7E66E2418B6CA00C2F9BB /* QwQUITests */,
 				7EC7E64B2418B6C300C2F9BB /* Products */,
 				EA0FC2A023335949098FAD44 /* Pods */,
-				EAD5377221265EB84F250C22 /* Frameworks */,
+				312777B1E916C7D03DA80BE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,9 +273,9 @@
 			isa = PBXGroup;
 			children = (
 				7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */,
-				D4A771662418C899009610C7 /* Storage */,
-				D4A771612418C1B1009610C7 /* Logic */,
-				61B2EAA22418BAA400B88018 /* Models */,
+				6105A1E12419173700B2FA29 /* SharedModels */,
+				6105A1DC241914F900B2FA29 /* CustomerApp */,
+				6105A1DD2419150300B2FA29 /* RestaurantApp */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
@@ -221,10 +325,10 @@
 		D4A771612418C1B1009610C7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				D4A771622418C1CC009610C7 /* QueueLogicManager.swift */,
-				D4A771642418C266009610C7 /* QueueLogic.swift */,
-				D4A7716B2418D941009610C7 /* CustomerQueueLogic.swift */,
-				D4A7716D2418D953009610C7 /* RestaurantQueueLogic.swift */,
+				D4A771642418C266009610C7 /* CustomerQueueLogic.swift */,
+				D4A771622418C1CC009610C7 /* CustomerQueueLogicManager.swift */,
+				6105A1F2241925F800B2FA29 /* RestaurantLogic.swift */,
+				6105A20024193B0900B2FA29 /* RestaurantLogicManager.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -232,8 +336,11 @@
 		D4A771662418C899009610C7 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				D4A771672418C98F009610C7 /* QueueStorage.swift */,
-				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
+				6105A1F82419275E00B2FA29 /* Stubs */,
+				D4A771672418C98F009610C7 /* CustomerQueueStorage.swift */,
+				6105A1FE241939D600B2FA29 /* CustomerQueueStorageSync.swift */,
+				6105A1F42419266500B2FA29 /* RestaurantStorage.swift */,
+				D4A771692418D00C009610C7 /* RestaurantStorageSync.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -241,24 +348,14 @@
 		EA0FC2A023335949098FAD44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				28B13FBFCAE64C354FC9DC04 /* Pods-QwQ.debug.xcconfig */,
-				5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */,
-				29B88849783EDA73EDE093E1 /* Pods-QwQ-QwQUITests.debug.xcconfig */,
-				63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */,
-				596993604A6FD0C13635E678 /* Pods-QwQTests.debug.xcconfig */,
-				60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */,
+				C2D614FE3D1175881840707D /* Pods-QwQ.debug.xcconfig */,
+				F9E31C9D1515737633A2F88B /* Pods-QwQ.release.xcconfig */,
+				1E32F0F130C4B7AE194EBB44 /* Pods-QwQ-QwQUITests.debug.xcconfig */,
+				31D9D3542D836BB9AADE4865 /* Pods-QwQ-QwQUITests.release.xcconfig */,
+				562CBEEB272649B21B968EC8 /* Pods-QwQTests.debug.xcconfig */,
+				4413ED8A4153CF9B93C63AA9 /* Pods-QwQTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		EAD5377221265EB84F250C22 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */,
-				9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */,
-				6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,12 +365,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E6742418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQ" */;
 			buildPhases = (
-				5615F04BBF6ABF11E7D3600F /* [CP] Check Pods Manifest.lock */,
+				094A465B6EB4F726A201C5FF /* [CP] Check Pods Manifest.lock */,
 				7EC7E6462418B6C300C2F9BB /* Sources */,
 				7EC7E6472418B6C300C2F9BB /* Frameworks */,
 				7EC7E6482418B6C300C2F9BB /* Resources */,
 				5C39D2032418DA5B001E03C0 /* ShellScript */,
-				2BB576706BE394DC36B11ED6 /* [CP] Embed Pods Frameworks */,
+				D7A60A3BD1CC0E2A553F5FFA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -288,7 +385,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E6772418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQTests" */;
 			buildPhases = (
-				973AA7EC1D6A902C605BA275 /* [CP] Check Pods Manifest.lock */,
+				8D412E6C689CAE860EB67D99 /* [CP] Check Pods Manifest.lock */,
 				7EC7E65C2418B6CA00C2F9BB /* Sources */,
 				7EC7E65D2418B6CA00C2F9BB /* Frameworks */,
 				7EC7E65E2418B6CA00C2F9BB /* Resources */,
@@ -307,11 +404,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E67A2418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQUITests" */;
 			buildPhases = (
-				1388101244DC845BF5CD179A /* [CP] Check Pods Manifest.lock */,
+				976D80C7B2BFEF50E7C1A7E3 /* [CP] Check Pods Manifest.lock */,
 				7EC7E6672418B6CA00C2F9BB /* Sources */,
 				7EC7E6682418B6CA00C2F9BB /* Frameworks */,
 				7EC7E6692418B6CA00C2F9BB /* Resources */,
-				24435A69246156312F680D06 /* [CP] Embed Pods Frameworks */,
+				4961826D07E1C49B70EBEB37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -398,63 +495,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1388101244DC845BF5CD179A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QwQ-QwQUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		24435A69246156312F680D06 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2BB576706BE394DC36B11ED6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5615F04BBF6ABF11E7D3600F /* [CP] Check Pods Manifest.lock */ = {
+		094A465B6EB4F726A201C5FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -476,6 +517,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4961826D07E1C49B70EBEB37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5C39D2032418DA5B001E03C0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,7 +551,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		973AA7EC1D6A902C605BA275 /* [CP] Check Pods Manifest.lock */ = {
+		8D412E6C689CAE860EB67D99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -515,6 +573,45 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		976D80C7B2BFEF50E7C1A7E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QwQ-QwQUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7A60A3BD1CC0E2A553F5FFA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -522,20 +619,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */,
+				6105A1F72419274A00B2FA29 /* CustomerQueueStorageStub.swift in Sources */,
+				6105A1F52419266500B2FA29 /* RestaurantStorage.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
+				6105A1EF24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift in Sources */,
+				6105A20324193BAF00B2FA29 /* RestaurantStorageStub.swift in Sources */,
+				6105A1E924191C1800B2FA29 /* RestaurantQueueLogic.swift in Sources */,
+				6105A1EB24191CF000B2FA29 /* RestaurantQueueStorageSync.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
-				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
+				D4A771632418C1CC009610C7 /* CustomerQueueLogicManager.swift in Sources */,
 				7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */,
-				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
-				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
+				6105A1E724191BAB00B2FA29 /* RestaurantQueueStorage.swift in Sources */,
+				D4A771682418C98F009610C7 /* CustomerQueueStorage.swift in Sources */,
+				6105A1FD2419355C00B2FA29 /* QueueRecord.swift in Sources */,
+				6105A1F3241925F800B2FA29 /* RestaurantLogic.swift in Sources */,
+				D4A771652418C266009610C7 /* CustomerQueueLogic.swift in Sources */,
+				6105A1E3241917A500B2FA29 /* RestaurantQueueRecord.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
+				6105A20124193B0900B2FA29 /* RestaurantLogicManager.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
 				61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */,
-				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
-				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
-				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
+				6105A1ED24191ED500B2FA29 /* RestaurantQueueLogicManager.swift in Sources */,
+				61B2EAAA2418BF5300B88018 /* CustomerQueueRecord.swift in Sources */,
+				D4A7716A2418D00C009610C7 /* RestaurantStorageSync.swift in Sources */,
+				6105A1FF241939D600B2FA29 /* CustomerQueueStorageSync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +814,7 @@
 		};
 		7EC7E6752418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28B13FBFCAE64C354FC9DC04 /* Pods-QwQ.debug.xcconfig */;
+			baseConfigurationReference = C2D614FE3D1175881840707D /* Pods-QwQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -725,7 +833,7 @@
 		};
 		7EC7E6762418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */;
+			baseConfigurationReference = F9E31C9D1515737633A2F88B /* Pods-QwQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -744,7 +852,7 @@
 		};
 		7EC7E6782418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 596993604A6FD0C13635E678 /* Pods-QwQTests.debug.xcconfig */;
+			baseConfigurationReference = 562CBEEB272649B21B968EC8 /* Pods-QwQTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -766,7 +874,7 @@
 		};
 		7EC7E6792418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */;
+			baseConfigurationReference = 4413ED8A4153CF9B93C63AA9 /* Pods-QwQTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -788,7 +896,7 @@
 		};
 		7EC7E67B2418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29B88849783EDA73EDE093E1 /* Pods-QwQ-QwQUITests.debug.xcconfig */;
+			baseConfigurationReference = 1E32F0F130C4B7AE194EBB44 /* Pods-QwQ-QwQUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -808,7 +916,7 @@
 		};
 		7EC7E67C2418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */;
+			baseConfigurationReference = 31D9D3542D836BB9AADE4865 /* Pods-QwQ-QwQUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
