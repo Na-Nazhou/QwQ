@@ -20,6 +20,9 @@
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
 		7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */; };
 		7EC7E6702418B6CA00C2F9BB /* QwQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */; };
+		7EC7E6872418BF9700C2F9BB /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */; };
+		7EC7E6882418BF9700C2F9BB /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */; };
+		7EC7E6892418BF9700C2F9BB /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */; };
 		D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771622418C1CC009610C7 /* QueueLogicManager.swift */; };
 		D4A771652418C266009610C7 /* QueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771642418C266009610C7 /* QueueLogic.swift */; };
 		D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771672418C98F009610C7 /* QueueStorage.swift */; };
@@ -65,6 +68,9 @@
 		7EC7E66B2418B6CA00C2F9BB /* QwQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQUITests.swift; sourceTree = "<group>"; };
 		7EC7E6712418B6CA00C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
+		7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
+		7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		D4A771622418C1CC009610C7 /* QueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogicManager.swift; sourceTree = "<group>"; };
 		D4A771642418C266009610C7 /* QueueLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogic.swift; sourceTree = "<group>"; };
 		D4A771672418C98F009610C7 /* QueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorage.swift; sourceTree = "<group>"; };
@@ -181,6 +187,16 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		7EC7E6832418BF3000C2F9BB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E6852418BF9700C2F9BB /* Comfortaa-Bold.ttf */,
+				7EC7E6842418BF9700C2F9BB /* Comfortaa-Light.ttf */,
+				7EC7E6862418BF9700C2F9BB /* Comfortaa-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		D4A771612418C1B1009610C7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +211,7 @@
 		D4A771662418C899009610C7 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				7EC7E6832418BF3000C2F9BB /* Fonts */,
 				D4A771672418C98F009610C7 /* QueueStorage.swift */,
 				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
 			);
@@ -211,6 +228,7 @@
 				7EC7E6462418B6C300C2F9BB /* Sources */,
 				7EC7E6472418B6C300C2F9BB /* Frameworks */,
 				7EC7E6482418B6C300C2F9BB /* Resources */,
+				5C39D2032418DA5B001E03C0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -305,8 +323,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC7E6872418BF9700C2F9BB /* Comfortaa-Light.ttf in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
+				7EC7E6882418BF9700C2F9BB /* Comfortaa-Bold.ttf in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
+				7EC7E6892418BF9700C2F9BB /* Comfortaa-Regular.ttf in Resources */,
 				7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +347,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C39D2032418DA5B001E03C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7EC7E6462418B6C300C2F9BB /* Sources */ = {
