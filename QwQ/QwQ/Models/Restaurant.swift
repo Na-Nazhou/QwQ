@@ -6,15 +6,14 @@
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
-class Restaurant: User {
-    var id: String
-    var name: String
-    var email: String
+struct Restaurant: User {
+    let name: String
+    let email: String
 
-    var address: String
+    let address: String
+    let queue = [QueueRecord]()
 
-    init(id: String, name: String, email: String, address: String) {
-        self.id = id;
+    init(name: String, email: String, address: String) {
         self.name = name;
         self.email = email;
         self.address = address;

@@ -6,13 +6,11 @@
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
-class Customer: User {
-    var id: String
-    var name: String
-    var email: String
+struct Customer: User {
+    let name: String
+    let email: String
 
-    init(id: String, name: String, email: String) {
-        self.id = id;
+    init(name: String, email: String) {
         self.name = name;
         self.email = email;
     }
