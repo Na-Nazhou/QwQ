@@ -1,6 +1,7 @@
 import Foundation
 
 class QueueLogicManager: QueueLogic {
+
     func enqueue(customer: Customer, to restaurant: Restaurant,
                  with groupSize: Int,
                  babyCount: Int, wheelchairCount: Int) -> String? {
@@ -10,5 +11,18 @@ class QueueLogicManager: QueueLogic {
                                     babyCount: babyCount, wheelchairCount: wheelchairCount,
                                     startTime: startTime)
         //add to db
+        return ""
+    }
+
+    func dequeueAndNotify() {
+
+    }
+
+    func notify() {
+
+    }
+
+    func update() {
+
     }
 }
