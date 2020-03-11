@@ -25,7 +25,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                             groupSize: groupSize,
                                             babyCount: babyCount,
                                             wheelchairCount: wheelchairCount,
-                                            startTime: startTime)
+                                            startTime: startTime,
+                                            serveTime: nil)
 
         currentQueueRecord = newRecord
 
@@ -37,10 +38,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                          babyCount: Int,
                          wheelchairCount: Int) {
         guard currentQueueRecord != nil else {
+            // Check if there is any change
             return
         }
         // Cannot update the restaurant, startTime
-        // Reset startTime (?)
+        // Reset startTime (??)
 
         // Update the queue record in db
     }

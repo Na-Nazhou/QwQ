@@ -1,5 +1,5 @@
 /// Represents the queue protocol needed to sync when storage notifies of any changes.
-protocol RestaurantStorageSyncDelegate {
+protocol RestaurantStorageSyncDelegate: AnyObject {
     func didOpenQueue(restaurant: Restaurant)
     func didCloseQueue(restaurant: Restaurant)
 }

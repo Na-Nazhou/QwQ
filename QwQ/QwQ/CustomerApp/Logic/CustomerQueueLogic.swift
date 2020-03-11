@@ -1,10 +1,9 @@
-protocol CustomerQueueStorageSyncDelegate {
+protocol CustomerQueueStorageSyncDelegate: AnyObject {
     func didAdmitCustomer()
 }
 
 protocol CustomerQueueLogic: CustomerQueueStorageSyncDelegate {
     var queueStorage: CustomerQueueStorage { get set }
-
     var currentQueueRecord: CustomerQueueRecord? { get set }
 
     func loadCurrentQueueRecord()

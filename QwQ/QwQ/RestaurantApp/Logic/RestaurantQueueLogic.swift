@@ -1,4 +1,4 @@
-protocol RestaurantQueueStorageSyncDelegate {
+protocol RestaurantQueueStorageSyncDelegate: AnyObject {
     func didAddQueueRecord(record: RestaurantQueueRecord)
     func didUpdateQueueRecord(old: RestaurantQueueRecord, new: RestaurantQueueRecord)
     func didDeleteQueueRecord(record: RestaurantQueueRecord)

@@ -3,7 +3,7 @@ protocol CustomerQueueStorage {
 
     /// Insert a queue record
     func addQueueRecord(record: CustomerQueueRecord)
-    /// Update a queue record (only update in groupSize, babyCount, wheelchairCount)
+    /// Update a queue record (can only update groupSize, babyCount, wheelchairCount)
     func updateQueueRecord(old: CustomerQueueRecord, new: CustomerQueueRecord)
     /// Delete a queue record
     func deleteQueueRecord(record: CustomerQueueRecord)

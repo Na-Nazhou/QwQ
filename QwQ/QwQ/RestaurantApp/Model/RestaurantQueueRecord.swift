@@ -6,7 +6,6 @@ struct RestaurantQueueRecord: QueueRecord {
     let groupSize: Int
     let babyCount: Int
     let wheelchairCount: Int
-
     let startTime: Date
     let serveTime: Date?
 }
