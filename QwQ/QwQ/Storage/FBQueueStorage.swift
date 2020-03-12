@@ -23,7 +23,7 @@ class FBQueueStorage: QueueStorage {
 
     func addQueueRecord(record: QueueRecord) {
         db.collection("queues")
-            .document(getRestaurantIDFromName(restaurantName: record.restaurant.name))
+            .document(record.restaurant.uid)
             .collection(date)
             .addDocument(data: queueRecordToDictionary(record)) { (error) in
                 if let error = error {
@@ -34,7 +34,7 @@ class FBQueueStorage: QueueStorage {
 
     func removeQueueRecord(record: QueueRecord) {
         db.collection("queues")
-            .document(getRestaurantIDFromName(restaurantName: record.restaurant.name))
+            .document(record.restaurant.uid)
             .collection(date)
             .document("")
             .delete()
@@ -42,7 +42,7 @@ class FBQueueStorage: QueueStorage {
 
     func updateQueueRecord(record: QueueRecord) {
         db.collection("queues")
-            .document(getRestaurantIDFromName(restaurantName: record.restaurant.name))
+            .document(record.restaurant.uid)
             .collection(date).document("")
             .setData(queueRecordToDictionary(record)) { (error) in
                 if let error = error {
@@ -53,7 +53,7 @@ class FBQueueStorage: QueueStorage {
 
     private func queueRecordToDictionary(_ record: QueueRecord) -> [String: Any] {
         var data = [String: Any]()
-        data["customer"] = record.customer
+        data["customer"] = record.customer.uid
         data["groupSize"] = record.groupSize
         data["babyCount"] = record.babyCount
         data["wheelchairCount"] = record.wheelchairCount
@@ -64,10 +64,6 @@ class FBQueueStorage: QueueStorage {
         }
 
         return data
-    }
-
-    private func getRestaurantIDFromName(restaurantName: String) -> String {
-        return ""
     }
 
 }
