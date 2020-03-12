@@ -1,4 +1,4 @@
-protocol CustomerQueueStorage {
+protocol CustomerQueueStorage: QueueStorageSync {
     // MARK: - Modifier
 
     /// Insert a queue record

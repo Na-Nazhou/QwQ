@@ -1,6 +1,6 @@
 class RestaurantLogicManager: RestaurantLogic {
     var currentlyOpenRestaurantPage: RestaurantLogicDelegate?
-    
+
     var restaurantStorage: RestaurantStorage = RestaurantStorageStub()
 
     var openRestaurants = [Restaurant]()

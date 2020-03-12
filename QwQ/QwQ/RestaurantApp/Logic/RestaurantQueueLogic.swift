@@ -1,8 +1,8 @@
-protocol RestaurantQueueLogicPresentationDelegate {
+protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
     func restaurantDidOpenQueue()
     func restaurantDidCloseQueue()
 
-    func removeFromQueue(queueRecord: RestaurantQueueRecord)
+    func removeFromQueue(queueRecord: QueueRecord)
 }
 
 protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDelegate {

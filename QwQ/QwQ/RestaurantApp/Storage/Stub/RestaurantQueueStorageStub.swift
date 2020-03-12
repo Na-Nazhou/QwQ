@@ -1,24 +1,57 @@
+import Foundation
 class RestaurantQueueStorageStub: RestaurantQueueStorage, QueueStorageSync {
-    weak var logicDelegate: RestaurantQueueStorageSyncDelegate?
+    weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
+    weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
 
-    func loadQueue() {
+    func openQueue(of restaurant: Restaurant, at time: Date) {
+        //
     }
 
-    func openQueue() {
+    func closeQueue(of restaurant: Restaurant, at time: Date) {
+        //
     }
 
-    func closeQueue() {
+    func admitCustomer(record: QueueRecord) {
+        //
     }
 
-    func admitCustomer(record: RestaurantQueueRecord) {
+    func removeCustomerFromQueue(record: QueueRecord) {
+        //
     }
 
-    func didAddQueueRecord(record: RestaurantQueueRecord) {
+    func serveCustomer(record: QueueRecord) {
+        //
     }
 
-    func didUpdateQueueRecord(old: RestaurantQueueRecord, new: RestaurantQueueRecord) {
+    func rejectCustomer(record: QueueRecord) {
+        //
     }
 
-    func didDeleteQueueRecord(record: RestaurantQueueRecord) {
+    func loadQueue(of restaurant: Restaurant) {
+        //
+    }
+
+    func didDetectNewQueueRecord(record: QueueRecord) {
+        //
+    }
+
+    func didDetectQueueRecordUpdate(old: QueueRecord, new: QueueRecord) {
+        //
+    }
+
+    func didDetectWithdrawnQueueRecord(record: QueueRecord) {
+        //
+    }
+
+    func didDetectAdmissionOfCustomer(record: QueueRecord) {
+        //
+    }
+
+    func didDetectOpenQueue(restaurant: Restaurant) {
+        //
+    }
+
+    func didDetectCloseQueue(restaurant: Restaurant) {
+        //
     }
 }

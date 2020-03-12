@@ -1,7 +1,7 @@
 import Foundation
 
 struct RestaurantQueue {
-    var queue = [RestaurantQueueRecord]()
+    var queue = [QueueRecord]()
 
     var openTime: Date?
     var closeTime: Date?

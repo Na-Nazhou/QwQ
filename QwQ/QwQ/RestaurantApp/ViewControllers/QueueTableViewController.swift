@@ -1,5 +1,5 @@
 import UIKit
-class ViewController: UIViewController {
+class QueueTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

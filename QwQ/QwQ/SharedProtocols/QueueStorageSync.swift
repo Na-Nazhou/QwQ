@@ -3,7 +3,7 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func customerDidJoinQueue(with record: QueueRecord)
     func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord)
     func customerDidWithdrawQueue(record: QueueRecord)
-    
+
     // if we allow restaurants to reject customers
     func restaurantDidRemoveQueueRecord(record: QueueRecord)
 
@@ -12,7 +12,7 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func restaurantDidRejectCustomer(record: QueueRecord)
 }
 
-protocol QueueOpenCloseSyncDelegate {
+protocol QueueOpenCloseSyncDelegate: AnyObject {
     /// Notify if restaurant is open.
     func restaurantDidOpenQueue(restaurant: Restaurant)
     /// Notify if restuarant is closed.

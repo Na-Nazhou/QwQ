@@ -28,7 +28,7 @@
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
 		61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */; };
-		61DDEEB52419468F009E9A05 /* QueueHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DDEEB42419468F009E9A05 /* QueueHistory.swift */; };
+		61DDEEB52419468F009E9A05 /* CustomerQueueHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DDEEB42419468F009E9A05 /* CustomerQueueHistory.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
 		7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* ViewController.swift */; };
@@ -87,7 +87,7 @@
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		61B2EAA72418BD7300B88018 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueue.swift; sourceTree = "<group>"; };
-		61DDEEB42419468F009E9A05 /* QueueHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueHistory.swift; sourceTree = "<group>"; };
+		61DDEEB42419468F009E9A05 /* CustomerQueueHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerQueueHistory.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 		61B2EAA22418BAA400B88018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				61DDEEB42419468F009E9A05 /* QueueHistory.swift */,
+				61DDEEB42419468F009E9A05 /* CustomerQueueHistory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -640,7 +640,7 @@
 				6105A1F52419266500B2FA29 /* RestaurantStorage.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
 				6105A1EF24191F0F00B2FA29 /* RestaurantQueueStorageStub.swift in Sources */,
-				61DDEEB52419468F009E9A05 /* QueueHistory.swift in Sources */,
+				61DDEEB52419468F009E9A05 /* CustomerQueueHistory.swift in Sources */,
 				6105A20324193BAF00B2FA29 /* RestaurantStorageStub.swift in Sources */,
 				6105A1E924191C1800B2FA29 /* RestaurantQueueLogic.swift in Sources */,
 				6105A1EB24191CF000B2FA29 /* QueueStorageSync.swift in Sources */,

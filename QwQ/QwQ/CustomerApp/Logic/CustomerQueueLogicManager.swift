@@ -1,26 +1,32 @@
 import Foundation
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
-    private var queueLogic: CustomerQueueLogicManager?
+    var queueStorage: CustomerQueueStorage = CustomerQueueStorageStub()
 
+    private static var queueLogic: CustomerQueueLogicManager?
+
+    /// Returns shared customer queue logic manager for the logged in application. If it does not exist,
+    /// a queue logic manager is initiailised with the given customer identity to share.
     static func shared(for customerIdentity: Customer?) -> CustomerQueueLogicManager {
         if let logic = queueLogic {
             return logic
         }
 
-        let logic = CustomerQueueLogicManager(customerIdentity)
-        logic.queueStorage.queueModificationLogicDelegate = self
-        //TODO: need to check if we are going to have singleton storage; else do we create 1 for custoemr queue logic and 1 for restaurant logic in the customer app?
+        assert(customerIdentity != nil,
+               "Customer identity must be given non-nil to make the customer's queue logic manager.")
+        let logic = CustomerQueueLogicManager(customer: customerIdentity!)
+        logic.queueStorage.queueModificationLogicDelegate = logic
+
         return logic
     }
 
-    private init(restaurant: Restaurant) {
-        self.restaurant = restaurant
+    private init(customer: Customer) {
+        self.customer = customer
     }
 
-    var queueStorage: CustomerQueueStorage = CustomerQueueStorageStub()
+    private var customer: Customer
 
-    var currentQueueRecord: CustomerQueueRecord?
+    var currentQueueRecord: QueueRecord?
 
     func loadCurrentQueueRecord() {
         // Load the current queue record (if any)
@@ -38,12 +44,14 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         let startTime = Date()
-        let newRecord = CustomerQueueRecord(restaurant: restaurant,
-                                            groupSize: groupSize,
-                                            babyCount: babyCount,
-                                            wheelchairCount: wheelchairCount,
-                                            startTime: startTime,
-                                            serveTime: nil)
+        let newRecord = QueueRecord(restaurant: restaurant,
+                                    customer: customer,
+                                    groupSize: groupSize,
+                                    babyCount: babyCount,
+                                    wheelchairCount: wheelchairCount,
+                                    startTime: startTime,
+                                    admitTime: nil,
+                                    serveTime: nil)
 
         currentQueueRecord = newRecord
 
@@ -74,7 +82,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         //Delete the queue record from db
     }
 
-    func restaurantDidAdmitCustomer() {
+    func restaurantDidAdmitCustomer(record: QueueRecord) {
         guard currentQueueRecord != nil else {
             return
         }
@@ -85,26 +93,26 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func restaurantDidServeCustomer(record: QueueRecord) {
-        
+        //
     }
 
     func restaurantDidRejectCustomer(record: QueueRecord) {
-        
+        //
     }
 
-    
     func customerDidJoinQueue(with record: QueueRecord) {
-        
+        //
     }
+
     func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
-        
+        //
     }
     func customerDidWithdrawQueue(record: QueueRecord) {
-        
+        //
     }
-    
+
     // if we allow restaurants to reject customers
     func restaurantDidRemoveQueueRecord(record: QueueRecord) {
-        
+        //
     }
 }

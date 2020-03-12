@@ -1,16 +1,22 @@
 import Foundation
 class RestaurantQueueLogicManager: RestaurantQueueLogic {
-    // Singleton created upon successful login
-    private var queueLogic: RestaurantQueueLogicManager?
+    weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
+    // Singleton created upon successful login
+    private static var queueLogic: RestaurantQueueLogicManager?
+
+    /// Returns shared restaurant queue logic manager for the logged in application. If it does not exist,
+    /// a queue logic manager is initiailised with the given restaurant identity to share.
     static func shared(for restaurantIdentity: Restaurant?) -> RestaurantQueueLogicManager {
         if let logic = queueLogic {
             return logic
         }
 
-        let logic = RestaurantQueueLogicManager(restaurantIdentity)
-        logic.queueStorage.queueModificationLogicDelegate = self
-        logic.queueStorage.queueStatusLogicDelegate = self
+        assert(restaurantIdentity != nil,
+               "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
+        let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
+        logic.queueStorage.queueModificationLogicDelegate = logic
+        logic.queueStorage.queueStatusLogicDelegate = logic
         return logic
     }
 
@@ -46,7 +52,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         queueStorage.removeCustomerFromQueue(record: record)
         queueStorage.admitCustomer(record: admittedRecord)
 
-        notifyCustomerOfAdmission()
+        notifyCustomerOfAdmission(record: admittedRecord)
     }
 
     func notifyCustomerOfAdmission(record: QueueRecord) {
@@ -54,15 +60,16 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     func notifyCustomerOfRejection(record: QueueRecord) {
-        // send one time message to tell customer it has taken them __ min but hasnt arrived so they kicked them out or sth
+        // send one time message to tell customer it has taken them __ min but
+        // hasnt arrived so they kicked them out or sth
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
-        
+        //
     }
 
     func restaurantDidCloseQueue(restaurant: Restaurant) {
-        
+        //
     }
 
     func customerDidJoinQueue(with record: QueueRecord) {
@@ -76,18 +83,18 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     func customerDidWithdrawQueue(record: QueueRecord) {
         // delete the queue record from the current queue
     }
-    
+
     func restaurantDidAdmitCustomer(record: QueueRecord) {
-        
+        //
     }
     func restaurantDidServeCustomer(record: QueueRecord) {
-        
+        //
     }
     func restaurantDidRejectCustomer(record: QueueRecord) {
-        
+        //
     }
     func restaurantDidRemoveQueueRecord(record: QueueRecord) {
-        
+        //
     }
 }
 
@@ -95,8 +102,9 @@ extension RestaurantQueueLogicManager {
     private func currentTime() -> Date {
         return Date()
     }
-    private func updateAdmitTime(queueRecord: RestaurantQueueRecord) -> RestaurantQueueRecord {
-        queueRecord.admitTime = currentTime()
-        return queueRecord
+    private func updateAdmitTime(queueRecord: QueueRecord) -> QueueRecord {
+        var updatedRec = queueRecord
+        updatedRec.admitTime = currentTime()
+        return updatedRec
     }
 }
