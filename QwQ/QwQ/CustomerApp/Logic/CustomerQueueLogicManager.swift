@@ -1,6 +1,23 @@
 import Foundation
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
+    private var queueLogic: CustomerQueueLogicManager?
+
+    static func shared(for customerIdentity: Customer?) -> CustomerQueueLogicManager {
+        if let logic = queueLogic {
+            return logic
+        }
+
+        let logic = CustomerQueueLogicManager(customerIdentity)
+        logic.queueStorage.queueModificationLogicDelegate = self
+        //TODO: need to check if we are going to have singleton storage; else do we create 1 for custoemr queue logic and 1 for restaurant logic in the customer app?
+        return logic
+    }
+
+    private init(restaurant: Restaurant) {
+        self.restaurant = restaurant
+    }
+
     var queueStorage: CustomerQueueStorage = CustomerQueueStorageStub()
 
     var currentQueueRecord: CustomerQueueRecord?
@@ -57,7 +74,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         //Delete the queue record from db
     }
 
-    func didAdmitCustomer() {
+    func restaurantDidAdmitCustomer() {
         guard currentQueueRecord != nil else {
             return
         }
@@ -65,5 +82,29 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         // Send notification to the user
 
         currentQueueRecord = nil
+    }
+
+    func restaurantDidServeCustomer(record: QueueRecord) {
+        
+    }
+
+    func restaurantDidRejectCustomer(record: QueueRecord) {
+        
+    }
+
+    
+    func customerDidJoinQueue(with record: QueueRecord) {
+        
+    }
+    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
+        
+    }
+    func customerDidWithdrawQueue(record: QueueRecord) {
+        
+    }
+    
+    // if we allow restaurants to reject customers
+    func restaurantDidRemoveQueueRecord(record: QueueRecord) {
+        
     }
 }

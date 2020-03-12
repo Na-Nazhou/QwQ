@@ -1,4 +1,4 @@
-class RestaurantQueueStorageStub: RestaurantQueueStorage, RestaurantQueueStorageSync {
+class RestaurantQueueStorageStub: RestaurantQueueStorage, QueueStorageSync {
     weak var logicDelegate: RestaurantQueueStorageSyncDelegate?
 
     func loadQueue() {

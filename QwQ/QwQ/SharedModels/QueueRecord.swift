@@ -1,14 +1,14 @@
 import Foundation
 
-protocol QueueRecord {
-    var groupSize: Int { get }
-    var babyCount: Int { get }
-    var wheelchairCount: Int { get }
+struct QueueRecord {
+    let restaurant: Restaurant
+    let customer: Customer
 
-    /// Time when customer started to queue
-    var startTime: Date { get }
-    /// Time when restaurant allows customers in.
-    var admitTime: Date { get }
-    /// Time when customer turns up.
-    var serveTime: Date? { get }
+    let groupSize: Int
+    let babyCount: Int
+    let wheelchairCount: Int
+
+    let startTime: Date
+    let admitTime: Date?
+    let serveTime: Date?
 }

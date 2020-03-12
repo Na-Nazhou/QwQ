@@ -1,4 +1,6 @@
 class RestaurantLogicManager: RestaurantLogic {
+    var currentlyOpenRestaurantPage: RestaurantLogicDelegate?
+    
     var restaurantStorage: RestaurantStorage = RestaurantStorageStub()
 
     var openRestaurants = [Restaurant]()
@@ -6,9 +8,9 @@ class RestaurantLogicManager: RestaurantLogic {
     func loadOpenRestaurants() {
     }
 
-    func didOpenQueue(restaurant: Restaurant) {
+    func restaurantDidOpenQueue(restaurant: Restaurant) {
     }
 
-    func didCloseQueue(restaurant: Restaurant) {
+    func restaurantDidCloseQueue(restaurant: Restaurant) {
     }
 }

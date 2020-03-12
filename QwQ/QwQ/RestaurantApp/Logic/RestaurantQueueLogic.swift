@@ -5,7 +5,7 @@ protocol RestaurantQueueLogicPresentationDelegate {
     func removeFromQueue(queueRecord: RestaurantQueueRecord)
 }
 
-protocol RestaurantQueueLogic: RestaurantQueueStorageSyncDelegate {
+protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDelegate {
     var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
 
     var queueStorage: RestaurantQueueStorage { get set }
@@ -18,8 +18,8 @@ protocol RestaurantQueueLogic: RestaurantQueueStorageSyncDelegate {
     func closeQueue()
 
     /// Dequeues and admits customer.
-    func admitCustomer(record: RestaurantQueueRecord)
+    func admitCustomer(record: QueueRecord)
     /// Notifies customer every 5 min while customer is in admitted state.
-    func notifyCustomerOfAdmission(record: RestaurantQueueRecord)
-    func notifyCustomerOfRejection(record: RestaurantQueueRecord)
+    func notifyCustomerOfAdmission(record: QueueRecord)
+    func notifyCustomerOfRejection(record: QueueRecord)
 }

@@ -4,11 +4,6 @@ protocol RestaurantStorageSyncDelegate: AnyObject {
     func restaurantDidCloseQueue(restaurant: Restaurant)
 }
 
-protocol RestaurantStorageSync {
+protocol RestaurantStorageSync: QueueOpenCloseSyncDelegate {
     var logicDelegate: RestaurantStorageSyncDelegate? { get set }
-
-    /// Notify when a restaurant is opened
-    func didOpenQueue(restaurant: Restaurant)
-    /// Notify when a restaurant is closed
-    func didCloseQueue(restaurant: Restaurant)
 }

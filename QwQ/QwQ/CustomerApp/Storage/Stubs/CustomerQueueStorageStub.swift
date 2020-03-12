@@ -1,14 +1,14 @@
 class CustomerQueueStorageStub: CustomerQueueStorage {
-    func addQueueRecord(record: CustomerQueueRecord) {
+    func addQueueRecord(record: QueueRecord) {
     }
 
-    func updateQueueRecord(old: CustomerQueueRecord, new: CustomerQueueRecord) {
+    func updateQueueRecord(old: QueueRecord, new: QueueRecord) {
     }
 
-    func deleteQueueRecord(record: CustomerQueueRecord) {
+    func deleteQueueRecord(record: QueueRecord) {
     }
 
-    func loadQueueRecord() -> CustomerQueueRecord? {
+    func loadQueueRecord() -> QueueRecord? {
         nil
     }
 }

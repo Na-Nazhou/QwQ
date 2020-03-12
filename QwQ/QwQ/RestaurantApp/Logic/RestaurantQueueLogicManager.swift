@@ -7,7 +7,11 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         if let logic = queueLogic {
             return logic
         }
-        return RestaurantQueueLogicManager(restaurantIdentity)
+
+        let logic = RestaurantQueueLogicManager(restaurantIdentity)
+        logic.queueStorage.queueModificationLogicDelegate = self
+        logic.queueStorage.queueStatusLogicDelegate = self
+        return logic
     }
 
     private init(restaurant: Restaurant) {
@@ -35,7 +39,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         queueStorage.closeQueue(of: restaurant, at: currentTime())
     }
 
-    func admitCustomer(record: RestaurantQueueRecord) {
+    func admitCustomer(record: QueueRecord) {
         // Set the serveTime of the queue record
         let admittedRecord = updateAdmitTime(queueRecord: record)
         // Remove the queue record from the current queue
@@ -45,24 +49,45 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         notifyCustomerOfAdmission()
     }
 
-    func notifyCustomerOfAdmission(record: RestaurantQueueRecord) {
+    func notifyCustomerOfAdmission(record: QueueRecord) {
         //setup timer events
     }
 
-    func notifyCustomerOfRejection(record: RestaurantQueueRecord) {
+    func notifyCustomerOfRejection(record: QueueRecord) {
         // send one time message to tell customer it has taken them __ min but hasnt arrived so they kicked them out or sth
     }
 
-    func didAddQueueRecord(record: RestaurantQueueRecord) {
+    func restaurantDidOpenQueue(restaurant: Restaurant) {
+        
+    }
+
+    func restaurantDidCloseQueue(restaurant: Restaurant) {
+        
+    }
+
+    func customerDidJoinQueue(with record: QueueRecord) {
         // Add the queue record to the queue
     }
 
-    func didUpdateQueueRecord(old: RestaurantQueueRecord, new: RestaurantQueueRecord) {
+    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
         // Update the queue record in the current queue
     }
 
-    func didDeleteQueueRecord(record: RestaurantQueueRecord) {
+    func customerDidWithdrawQueue(record: QueueRecord) {
         // delete the queue record from the current queue
+    }
+    
+    func restaurantDidAdmitCustomer(record: QueueRecord) {
+        
+    }
+    func restaurantDidServeCustomer(record: QueueRecord) {
+        
+    }
+    func restaurantDidRejectCustomer(record: QueueRecord) {
+        
+    }
+    func restaurantDidRemoveQueueRecord(record: QueueRecord) {
+        
     }
 }
 

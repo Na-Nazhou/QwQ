@@ -2,13 +2,13 @@ protocol CustomerQueueStorage {
     // MARK: - Modifier
 
     /// Insert a queue record
-    func addQueueRecord(record: CustomerQueueRecord)
+    func addQueueRecord(record: QueueRecord)
     /// Update a queue record (can only update groupSize, babyCount, wheelchairCount)
-    func updateQueueRecord(old: CustomerQueueRecord, new: CustomerQueueRecord)
+    func updateQueueRecord(old: QueueRecord, new: QueueRecord)
     /// Delete a queue record
-    func deleteQueueRecord(record: CustomerQueueRecord)
+    func deleteQueueRecord(record: QueueRecord)
 
     // MARK: - Query
     /// Return the current queue record (if any)
-    func loadQueueRecord() -> CustomerQueueRecord?
+    func loadQueueRecord() -> QueueRecord?
 }
