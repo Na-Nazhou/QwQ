@@ -1,11 +1,12 @@
-/// Represents the queue protocol needed to sync when storage notifies of any changes.
-protocol RestaurantStorageSyncDelegate: AnyObject {
-    func didOpenQueue(restaurant: Restaurant)
-    func didCloseQueue(restaurant: Restaurant)
+/// Protocol for delegate of restaurant loggic presentation to follow.
+protocol RestaurantLogicDelegate {
+    func restaurantDidSetQueueStatus(of restaurant: Restaurant, toIsOpen isOpen: Bool)
 }
 
-/// Represents the entire queue logic protocol needed for the application.
+/// Represents the protocol for a restaurant page that customers view.
 protocol RestaurantLogic: RestaurantStorageSyncDelegate {
+    var currentlyOpenRestaurantPage: RestaurantLogicDelegate?
+
     var restaurantStorage: RestaurantStorage { get set }
     var openRestaurants: [Restaurant] { get set }
 

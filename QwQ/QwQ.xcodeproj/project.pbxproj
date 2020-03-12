@@ -168,6 +168,7 @@
 		6105A1DC241914F900B2FA29 /* CustomerApp */ = {
 			isa = PBXGroup;
 			children = (
+				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
 				D4A771662418C899009610C7 /* Storage */,
 				D4A771612418C1B1009610C7 /* Logic */,
 				61B2EAA22418BAA400B88018 /* Models */,
@@ -178,6 +179,7 @@
 		6105A1DD2419150300B2FA29 /* RestaurantApp */ = {
 			isa = PBXGroup;
 			children = (
+				D4494E47241A200600BD0780 /* ViewControllers */,
 				6105A1DE241916A700B2FA29 /* Storage */,
 				6105A1DF241916B200B2FA29 /* Logic */,
 				6105A1E0241916C300B2FA29 /* Model */,
@@ -279,7 +281,6 @@
 				6105A1E12419173700B2FA29 /* SharedModels */,
 				6105A1DC241914F900B2FA29 /* CustomerApp */,
 				6105A1DD2419150300B2FA29 /* RestaurantApp */,
-				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
 				7EC7E6532418B6C300C2F9BB /* Main.storyboard */,
@@ -323,6 +324,13 @@
 				5C11FCFF2418E2D1002B88E3 /* Fonts */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		D4494E47241A200600BD0780 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		D4A771612418C1B1009610C7 /* Logic */ = {
