@@ -24,7 +24,7 @@
 		61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
-		7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* ViewController.swift */; };
+		7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */; };
 		7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6532418B6C300C2F9BB /* Main.storyboard */; };
 		7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6562418B6C900C2F9BB /* Assets.xcassets */; };
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
@@ -85,7 +85,7 @@
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7EC7E6512418B6C300C2F9BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7EC7E6542418B6C300C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EC7E6562418B6C900C2F9BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EC7E6592418B6C900C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7EC7E6512418B6C300C2F9BB /* ViewController.swift */,
+				7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -571,7 +571,7 @@
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
 				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
-				7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */,
+				7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */,
 				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */,
