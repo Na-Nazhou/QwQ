@@ -30,6 +30,8 @@ protocol QueueStorageSync {
     func didDetectWithdrawnQueueRecord(record: QueueRecord)
 
     func didDetectAdmissionOfCustomer(record: QueueRecord)
+    func didDetectServiceOfCustomer(record: QueueRecord)
+    func didDetectRejectionOfCustomer(record: QueueRecord)
 
     func didDetectOpenQueue(restaurant: Restaurant)
     func didDetectCloseQueue(restaurant: Restaurant)

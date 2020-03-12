@@ -16,5 +16,6 @@ protocol RestaurantQueueStorage: QueueStorageSync {
     func rejectCustomer(record: QueueRecord)
 
     // MARK: - Query
-    func loadQueue(of restaurant: Restaurant)
+    func loadQueue(of restaurant: Restaurant) -> [QueueRecord]
+    func loadWaitingList(of restaurant: Restaurant) -> [QueueRecord]
 }

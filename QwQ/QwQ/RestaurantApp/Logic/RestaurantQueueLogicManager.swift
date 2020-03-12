@@ -20,12 +20,17 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         return logic
     }
 
+    static func deinitShared() {
+        queueLogic = nil
+    }
+
     private init(restaurant: Restaurant) {
         self.restaurant = restaurant
+        queueStorage = RestaurantQueueStorageStub()
     }
 
     private var restaurant: Restaurant
-    var queueStorage: RestaurantQueueStorage = RestaurantQueueStorageStub()
+    var queueStorage: RestaurantQueueStorage
 
     var restaurantQueue = RestaurantQueue()
 

@@ -4,4 +4,6 @@ struct Restaurant: User {
 
     let phone: String
     let address: String
+
+    var isOpen: Bool
 }

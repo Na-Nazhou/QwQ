@@ -1,5 +1,5 @@
-protocol RestaurantStorage {
+protocol RestaurantStorage: RestaurantStorageSync {
     // MARK: - Query
-    /// Return all the currently open restaurants
-    func loadOpenRestaurants() -> [Restaurant]
+    /// Return all the restaurants.
+    func loadAllRestaurants() -> [Restaurant]
 }

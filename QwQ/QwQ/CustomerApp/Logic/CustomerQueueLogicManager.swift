@@ -20,6 +20,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         return logic
     }
 
+    static func deinitShared() {
+        queueLogic = nil
+    }
+
     private init(customer: Customer) {
         self.customer = customer
     }

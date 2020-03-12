@@ -7,7 +7,7 @@ protocol RestaurantLogicDelegate: AnyObject {
 protocol RestaurantLogic: RestaurantStorageSyncDelegate {
     var currentlyOpenRestaurantPage: RestaurantLogicDelegate? { get set }
 
-    var restaurantStorage: RestaurantStorage { get set }
+    var restaurantStorage: RestaurantStorage { get }
     var openRestaurants: [Restaurant] { get set }
 
     func loadOpenRestaurants()
