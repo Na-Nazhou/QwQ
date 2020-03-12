@@ -16,6 +16,7 @@ class FBAuthenticator {
                 print(error.localizedDescription)
             } else if let result = result {
                 print("login success! \(result.user.uid)")
+                self.createUserInfo(name: name, email: email, uid: result.user.uid)
             }
         }
     }
@@ -30,9 +31,9 @@ class FBAuthenticator {
         }
     }
 
-    private func createUserInfo(name: String, email: String) {
+    private func createUserInfo(name: String, email: String, uid: String) {
         let db = Firestore.firestore()
-        db.collection("customers").addDocument(data: ["name": name, "email:": email]) { (error) in
+        db.collection("customers").addDocument(data: ["name": name, "email:": email, "id": uid]) { (error) in
             if let error = error {
                 print(error.localizedDescription)
             }
