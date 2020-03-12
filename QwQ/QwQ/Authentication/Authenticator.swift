@@ -7,7 +7,7 @@
 
 protocol Authenticator {
 
-    func signup(name: String, email: String, password: String)
+    func signup(name: String, email: String, password: String) throws -> String
 
-    func login(email: String, password: String)
+    func login(email: String, password: String) throws -> String
 }

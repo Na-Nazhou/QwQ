@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
 
     @IBAction private func handleLogin(_ sender: Any) {
         let auth = FBAuthenticator()
+        var uid = ""
 
         guard var email = emailTextField.text else {
             showMessage(title: "Missing Email", message: "Please provide a valid email.", buttonMessage: "Okay")
@@ -38,7 +39,15 @@ class LoginViewController: UIViewController {
         email = email.trimmingCharacters(in: .whitespacesAndNewlines)
         password = password.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        auth.login(email: email, password: password)
+        do {
+            uid = try auth.login(email: email, password: password)
+        } catch LoginError.firebaseError(let errorMessage) {
+            showMessage(title: "Error", message: "An internal error occured: \(errorMessage)", buttonMessage: "Okay")
+        } catch {
+            showMessage(title: "Oops!", message: "Something went wrong.", buttonMessage: "Okay")
+        }
+
+        print(uid)
 
     }
 

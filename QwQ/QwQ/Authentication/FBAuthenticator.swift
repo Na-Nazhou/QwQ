@@ -8,26 +8,56 @@
 import FirebaseAuth
 import FirebaseFirestore
 
-class FBAuthenticator {
+class FBAuthenticator: Authenticator {
 
-    func signup(name: String, email: String, password: String) {
+    func signup(name: String, email: String, password: String) throws -> String {
+        var signupError: Error?
+        var signupResult: AuthDataResult?
+
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print(error.localizedDescription)
-            } else if let result = result {
-                print("login success! \(result.user.uid)")
-                self.createUserInfo(name: name, email: email, uid: result.user.uid)
+                signupError = error
+            }
+            if let result = result {
+                signupResult = result
             }
         }
+
+        if let error = signupError {
+            throw SignupError.firebaseError(error: error.localizedDescription)
+        }
+
+        if let result = signupResult {
+            createUserInfo(name: name, email: email, uid: result.user.uid)
+            return result.user.uid
+        } else {
+            throw SignupError.firebaseError(error: "Something went wrong.")
+        }
+
     }
 
-    func login(email: String, password: String) {
+    func login(email: String, password: String) throws -> String {
+        var loginError: Error?
+        var loginResult: AuthDataResult?
+
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print(error.localizedDescription)
-            } else if let result = result {
-                print("login success! \(result.user.uid)")
+                print("error")
+                loginError = error
             }
+            if let result = result {
+                print("result")
+                loginResult = result
+            }
+        }
+
+        if let error = loginError {
+            throw LoginError.firebaseError(error: error.localizedDescription)
+        }
+        if let result = loginResult {
+            return result.user.uid
+        } else {
+            throw LoginError.firebaseError(error: "Something went wrong.")
         }
     }
 
