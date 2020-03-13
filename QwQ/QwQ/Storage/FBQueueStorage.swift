@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FBQueueStorage: QueueStorage {
+class FBQueueStorage: CustomerQueueStorage {
 
     let db: Firestore
     var date: String {
