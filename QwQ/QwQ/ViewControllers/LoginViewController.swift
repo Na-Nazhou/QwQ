@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  QwQ
 //
-//  Created by Tan Su Yee on 11/3/20.
+//  Created by Tan Su Yee on 13/3/20.
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
@@ -10,9 +10,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var passwordTextField: UITextField!
-
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBAction func loginButton(_ sender: Any) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -67,3 +69,4 @@ class LoginViewController: UIViewController {
     }
 
 }
+

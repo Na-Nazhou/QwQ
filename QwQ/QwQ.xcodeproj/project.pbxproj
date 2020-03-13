@@ -22,14 +22,20 @@
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
 		61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA92418BF5300B88018 /* QueueRecord.swift */; };
 		61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */; };
+		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
+		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
-		7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */; };
-		7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6532418B6C300C2F9BB /* Main.storyboard */; };
 		7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6562418B6C900C2F9BB /* Assets.xcassets */; };
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
 		7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */; };
 		7EC7E6702418B6CA00C2F9BB /* QwQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */; };
+		7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */; };
+		7EC7E68E241B2FED00C2F9BB /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E68D241B2FED00C2F9BB /* Search.storyboard */; };
+		7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E691241B379900C2F9BB /* SignUpViewController.swift */; };
+		7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E693241B383400C2F9BB /* ProfileViewController.swift */; };
+		7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E695241B385E00C2F9BB /* SearchViewController.swift */; };
+		7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */; };
 		AAA6F8D8063CEC78486A39B0 /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */; };
 		B1D8B678FCC0DEDC93B33725 /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */; };
 		D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A771622418C1CC009610C7 /* QueueLogicManager.swift */; };
@@ -82,11 +88,11 @@
 		61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueue.swift; sourceTree = "<group>"; };
 		63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		7EC7E6542418B6C300C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EC7E6562418B6C900C2F9BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EC7E6592418B6C900C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EC7E65B2418B6C900C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +102,12 @@
 		7EC7E66B2418B6CA00C2F9BB /* QwQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQUITests.swift; sourceTree = "<group>"; };
 		7EC7E6712418B6CA00C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		7EC7E68D241B2FED00C2F9BB /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		7EC7E691241B379900C2F9BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		7EC7E693241B383400C2F9BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7EC7E695241B385E00C2F9BB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A771622418C1CC009610C7 /* QueueLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueLogicManager.swift; sourceTree = "<group>"; };
@@ -217,7 +229,8 @@
 				5C0B4D3324191DCE0061B1FE /* Exceptions */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
-				7EC7E6532418B6C300C2F9BB /* Main.storyboard */,
+				7E72B14D241B8C7D00C1EE72 /* Main.storyboard */,
+				7EC7E68A241B2FAB00C2F9BB /* Storyboards */,
 				7EC7E6562418B6C900C2F9BB /* Assets.xcassets */,
 				7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */,
 				7EC7E65B2418B6C900C2F9BB /* Info.plist */,
@@ -247,7 +260,11 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */,
+				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
+				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
+				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
+				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
+				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -258,6 +275,15 @@
 				5C11FCFF2418E2D1002B88E3 /* Fonts */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		7EC7E68A241B2FAB00C2F9BB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */,
+				7EC7E68D241B2FED00C2F9BB /* Search.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		D4A771612418C1B1009610C7 /* Logic */ = {
@@ -417,9 +443,11 @@
 			files = (
 				5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
+				7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
-				7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */,
+				7EC7E68E241B2FED00C2F9BB /* Search.storyboard in Resources */,
 				5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */,
+				7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */,
 				5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */,
 				5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */,
 			);
@@ -571,13 +599,17 @@
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
 				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
-				7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */,
+				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */,
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
+				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
+				7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */,
+				7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */,
+				7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */,
 				5C0B4D3624191DF10061B1FE /* LoginError.swift in Sources */,
 				5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
@@ -621,14 +653,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7EC7E6532418B6C300C2F9BB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7EC7E6542418B6C300C2F9BB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
