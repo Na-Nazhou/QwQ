@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0B4D3624191DF10061B1FE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B4D3524191DF10061B1FE /* LoginError.swift */; };
+		5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B4D3724191F7D0061B1FE /* SignupError.swift */; };
 		5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */; };
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
 		5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD062418E375002B88E3 /* GoogleService-Info.plist */; };
+		5C11FD092418E503002B88E3 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD082418E503002B88E3 /* UserStorage.swift */; };
+		5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0B2418E63D002B88E3 /* Authenticator.swift */; };
+		5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */; };
+		5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */; };
 		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
@@ -18,7 +24,7 @@
 		61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAAF2418DB1700B88018 /* RestaurantQueue.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
-		7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* ViewController.swift */; };
+		7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */; };
 		7EC7E6552418B6C300C2F9BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6532418B6C300C2F9BB /* Main.storyboard */; };
 		7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6562418B6C900C2F9BB /* Assets.xcassets */; };
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
@@ -57,10 +63,17 @@
 		29B88849783EDA73EDE093E1 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		596993604A6FD0C13635E678 /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C0B4D3524191DF10061B1FE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		5C0B4D3724191F7D0061B1FE /* SignupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupError.swift; sourceTree = "<group>"; };
 		5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		5C11FD062418E375002B88E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5C11FD082418E503002B88E3 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		5C11FD0B2418E63D002B88E3 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
+		5C161100241A2D1E00602245 /* QwQ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QwQ.entitlements; sourceTree = "<group>"; };
+		5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBQueueStorage.swift; sourceTree = "<group>"; };
 		60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
 		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -72,7 +85,7 @@
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7EC7E6512418B6C300C2F9BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7EC7E6542418B6C300C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EC7E6562418B6C900C2F9BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EC7E6592418B6C900C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,6 +134,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C0B4D3324191DCE0061B1FE /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				5C0B4D3424191DDB0061B1FE /* Authentication */,
+			);
+			path = Exceptions;
+			sourceTree = "<group>";
+		};
+		5C0B4D3424191DDB0061B1FE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5C0B4D3524191DF10061B1FE /* LoginError.swift */,
+				5C0B4D3724191F7D0061B1FE /* SignupError.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		5C11FCFF2418E2D1002B88E3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +159,15 @@
 				5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		5C11FD0A2418E611002B88E3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5C11FD0B2418E63D002B88E3 /* Authenticator.swift */,
+				5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		61B2EAA22418BAA400B88018 /* Models */ = {
@@ -168,11 +207,14 @@
 		7EC7E64C2418B6C300C2F9BB /* QwQ */ = {
 			isa = PBXGroup;
 			children = (
+				5C161100241A2D1E00602245 /* QwQ.entitlements */,
 				7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */,
+				5C11FD0A2418E611002B88E3 /* Authentication */,
 				D4A771662418C899009610C7 /* Storage */,
 				D4A771612418C1B1009610C7 /* Logic */,
 				61B2EAA22418BAA400B88018 /* Models */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
+				5C0B4D3324191DCE0061B1FE /* Exceptions */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
 				7EC7E6532418B6C300C2F9BB /* Main.storyboard */,
@@ -205,7 +247,7 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7EC7E6512418B6C300C2F9BB /* ViewController.swift */,
+				7EC7E6512418B6C300C2F9BB /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -233,7 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				D4A771672418C98F009610C7 /* QueueStorage.swift */,
+				5C11FD082418E503002B88E3 /* UserStorage.swift */,
 				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
+				5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -527,15 +571,21 @@
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
 				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
-				7EC7E6522418B6C300C2F9BB /* ViewController.swift in Sources */,
+				7EC7E6522418B6C300C2F9BB /* LoginViewController.swift in Sources */,
 				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
+				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
+				5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */,
+				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
+				5C0B4D3624191DF10061B1FE /* LoginError.swift in Sources */,
+				5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
 				61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */,
 				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
 				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
 				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
+				5C11FD092418E503002B88E3 /* UserStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,6 +759,7 @@
 			baseConfigurationReference = 28B13FBFCAE64C354FC9DC04 /* Pods-QwQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QwQ/Info.plist;
@@ -728,6 +779,7 @@
 			baseConfigurationReference = 5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QwQ/Info.plist;
