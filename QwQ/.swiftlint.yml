@@ -1,7 +1,7 @@
 excluded:
   - Pods
-  - PeggleClone/AppDelegate.swift
-  - PeggleClone/SceneDelegate.swift
+  - QwQ/AppDelegate.swift
+  - QwQ/SceneDelegate.swift
 
 opt_in_rules:
   - anyobject_protocol
@@ -64,7 +64,6 @@ opt_in_rules:
   - switch_case_on_newline
   - toggle_bool
   - unavailable_function
-  - unneeded_parentheses_in_closure_argument
   - unowned_variable_capture
   - untyped_error_in_catch
   - unused_declaration
@@ -80,6 +79,7 @@ disabled_rules:
   - todo
   - type_name
   - object_literal
+  - unneeded_parentheses_in_closure_argument
 
 line_length:
   warning: 120
