@@ -8,7 +8,6 @@
 import FirebaseFirestore
 
 class FBQueueStorage: CustomerQueueStorage {
-
     let db: Firestore
     var date: String {
         let date = Date()
@@ -64,6 +63,56 @@ class FBQueueStorage: CustomerQueueStorage {
         }
 
         return data
+    }
+
+    // MARK: - Protocl conformance
+    
+    func updateQueueRecord(old: QueueRecord, new: QueueRecord) {
+        
+    }
+    
+    func deleteQueueRecord(record: QueueRecord) {
+        
+    }
+    
+    func loadQueueRecord() -> QueueRecord? {
+        return nil
+    }
+    
+    var queueModificationLogicDelegate: QueueStorageSyncDelegate?
+    
+    var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
+    
+    func didDetectNewQueueRecord(record: QueueRecord) {
+        
+    }
+    
+    func didDetectQueueRecordUpdate(old: QueueRecord, new: QueueRecord) {
+        
+    }
+    
+    func didDetectWithdrawnQueueRecord(record: QueueRecord) {
+        
+    }
+    
+    func didDetectAdmissionOfCustomer(record: QueueRecord) {
+        
+    }
+    
+    func didDetectServiceOfCustomer(record: QueueRecord) {
+        
+    }
+    
+    func didDetectRejectionOfCustomer(record: QueueRecord) {
+        
+    }
+    
+    func didDetectOpenQueue(restaurant: Restaurant) {
+        
+    }
+    
+    func didDetectCloseQueue(restaurant: Restaurant) {
+        
     }
 
 }
