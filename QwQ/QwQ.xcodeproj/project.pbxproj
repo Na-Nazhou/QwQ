@@ -45,10 +45,10 @@
 		D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */; };
 		D4EA85C1241B2648009EB85B /* RestaurantStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC7241B24FE00BD0780 /* RestaurantStorageStub.swift */; };
 		D4EA85C2241B264D009EB85B /* CustomerQueueStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC6241B24FE00BD0780 /* CustomerQueueStorageStub.swift */; };
-		D4EA85C7241B279F009EB85B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85C3241B279F009EB85B /* User.swift */; };
-		D4EA85C8241B279F009EB85B /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85C4241B279F009EB85B /* QueueRecord.swift */; };
-		D4EA85C9241B279F009EB85B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85C5241B279F009EB85B /* Customer.swift */; };
-		D4EA85CA241B279F009EB85B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85C6241B279F009EB85B /* Restaurant.swift */; };
+		D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CB241B29CB009EB85B /* QueueRecord.swift */; };
+		D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CC241B29CB009EB85B /* Customer.swift */; };
+		D4EA85D1241B29CC009EB85B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CD241B29CC009EB85B /* User.swift */; };
+		D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CE241B29CC009EB85B /* Restaurant.swift */; };
 		F69730837861DD97A0D93813 /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -122,10 +122,10 @@
 		D4494EC7241B24FE00BD0780 /* RestaurantStorageStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStorageStub.swift; sourceTree = "<group>"; };
 		D4EA85BD241B25B6009EB85B /* CustomerQueueHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueHistory.swift; sourceTree = "<group>"; };
 		D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerPostLoginSetupManager.swift; path = QwQ/CustomerPostLoginSetupManager.swift; sourceTree = SOURCE_ROOT; };
-		D4EA85C3241B279F009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D4EA85C4241B279F009EB85B /* QueueRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
-		D4EA85C5241B279F009EB85B /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		D4EA85C6241B279F009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		D4EA85CB241B29CB009EB85B /* QueueRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueueRecord.swift; path = QwQ/Models/SharedModels/QueueRecord.swift; sourceTree = SOURCE_ROOT; };
+		D4EA85CC241B29CB009EB85B /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = QwQ/Models/SharedModels/Customer.swift; sourceTree = SOURCE_ROOT; };
+		D4EA85CD241B29CC009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QwQ/Models/SharedModels/User.swift; sourceTree = SOURCE_ROOT; };
+		D4EA85CE241B29CC009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Restaurant.swift; path = QwQ/Models/SharedModels/Restaurant.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,10 +305,10 @@
 		D4494EAB241B241800BD0780 /* SharedModels */ = {
 			isa = PBXGroup;
 			children = (
-				D4EA85C5241B279F009EB85B /* Customer.swift */,
-				D4EA85C4241B279F009EB85B /* QueueRecord.swift */,
-				D4EA85C6241B279F009EB85B /* Restaurant.swift */,
-				D4EA85C3241B279F009EB85B /* User.swift */,
+				D4EA85CC241B29CB009EB85B /* Customer.swift */,
+				D4EA85CB241B29CB009EB85B /* QueueRecord.swift */,
+				D4EA85CE241B29CC009EB85B /* Restaurant.swift */,
+				D4EA85CD241B29CC009EB85B /* User.swift */,
 			);
 			name = SharedModels;
 			path = QwQ/SharedModels;
@@ -646,15 +646,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4EA85CA241B279F009EB85B /* Restaurant.swift in Sources */,
-				D4EA85C7241B279F009EB85B /* User.swift in Sources */,
 				D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */,
 				D4EA85C1241B2648009EB85B /* RestaurantStorageStub.swift in Sources */,
+				D4EA85D1241B29CC009EB85B /* User.swift in Sources */,
 				D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */,
 				5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */,
+				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSync.swift in Sources */,
-				D4EA85C8241B279F009EB85B /* QueueRecord.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
+				D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSync.swift in Sources */,
@@ -662,7 +662,7 @@
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
 				5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */,
 				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
-				D4EA85C9241B279F009EB85B /* Customer.swift in Sources */,
+				D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */,
 				D4EA85BE241B25B6009EB85B /* CustomerQueueHistory.swift in Sources */,
 				D4494EC3241B24D900BD0780 /* RestaurantStorage.swift in Sources */,
 				D4EA85C2241B264D009EB85B /* CustomerQueueStorageStub.swift in Sources */,
