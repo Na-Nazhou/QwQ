@@ -86,7 +86,7 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="3ww-oy-hdo" kind="show" id="O5f-Cv-aX5"/>
+                                                    <segue destination="zBd-vc-N4j" kind="show" id="O5f-Cv-aX5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
@@ -98,9 +98,6 @@
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
                                                 </variation>
-                                                <connections>
-                                                    <segue destination="BYd-Vi-XFv" kind="show" id="Cjf-Pn-0A4"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -146,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="885.61151079136698" y="101.50753768844221"/>
         </scene>
-        <!--View Controller-->
+        <!--Item-->
         <scene sceneID="EoM-sX-Scl">
             <objects>
                 <viewController id="3ww-oy-hdo" sceneMemberID="viewController">
@@ -155,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="zbr-3c-kS1">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="136.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="124.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DTc-4n-hUt">
                                 <rect key="frame" x="29.5" y="15" width="261" height="92"/>
@@ -185,27 +182,27 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t6C-li-meN">
-                                <rect key="frame" x="0.0" y="133.5" width="320" height="434.5"/>
+                                <rect key="frame" x="0.0" y="121.5" width="320" height="397.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DWS-Lq-hst">
-                                    <size key="itemSize" width="834" height="193"/>
+                                    <size key="itemSize" width="320" height="193"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="restaurantCell" id="D22-ek-D3P">
-                                        <rect key="frame" x="-257" y="0.0" width="834" height="193"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5mc-Qb-cyL">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="193"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="KHX-4t-FwD">
-                                                    <rect key="frame" x="253" y="15" width="328" height="173.5"/>
+                                                    <rect key="frame" x="0.0" y="15" width="320" height="173.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-T3-81B">
-                                                            <rect key="frame" x="0.0" y="0.0" width="328" height="101.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -213,8 +210,8 @@
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRq-38-xFe">
-                                                            <rect key="frame" x="0.0" y="101.5" width="328" height="72"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRq-38-xFe">
+                                                            <rect key="frame" x="0.0" y="72" width="320" height="101.5"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                                             <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -229,12 +226,13 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="KHX-4t-FwD" firstAttribute="width" secondItem="5mc-Qb-cyL" secondAttribute="width" id="6em-2S-Atm"/>
                                                 <constraint firstItem="KHX-4t-FwD" firstAttribute="top" secondItem="5mc-Qb-cyL" secondAttribute="top" constant="15" id="9en-gv-Flg"/>
                                                 <constraint firstItem="KHX-4t-FwD" firstAttribute="centerX" secondItem="5mc-Qb-cyL" secondAttribute="centerX" id="BhH-1z-N50"/>
                                                 <constraint firstItem="KHX-4t-FwD" firstAttribute="height" secondItem="5mc-Qb-cyL" secondAttribute="height" multiplier="0.9" id="S6a-u6-DLt"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="834" height="193"/>
+                                        <size key="customSize" width="320" height="193"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -254,11 +252,173 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kg0-c1-pkH"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="PRO-GP-WRH"/>
                     <navigationItem key="navigationItem" id="2Lj-90-uSv"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="id1-XZ-z4o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701.4388489208634" y="-86.934673366834176"/>
+            <point key="canvasLocation" x="2698.125" y="-87.676056338028175"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VBX-o0-lC2">
+            <objects>
+                <viewController id="f3b-5R-fXN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vKd-24-eqi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="cL5-sz-Mq8">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="136.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="QUEUING DETAILS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGj-Ea-VEJ">
+                                <rect key="frame" x="30" y="55" width="261" height="26"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gbr-Jp-H1P">
+                                <rect key="frame" x="15" y="151.5" width="290" height="326.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1vq-1i-tSv">
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="326.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDx-Zj-2o2">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="53"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmn-bb-ECt">
+                                                <rect key="frame" x="0.0" y="68" width="110" height="53.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOh-bp-UBG">
+                                                <rect key="frame" x="0.0" y="136.5" width="110" height="53.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uq6-E5-m2G">
+                                                <rect key="frame" x="0.0" y="205" width="110" height="53"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4p-do-9FW">
+                                                <rect key="frame" x="0.0" y="273" width="110" height="53.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="XaI-in-NHr">
+                                        <rect key="frame" x="130" y="0.0" width="160" height="326.5"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Jane" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pVK-Sd-gi8">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="53"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="98635485" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="gp6-Qq-AKI">
+                                                <rect key="frame" x="0.0" y="68" width="160" height="53.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N6v-Io-RaA">
+                                                <rect key="frame" x="0.0" y="136.5" width="160" height="53.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="RF6-ld-I5n">
+                                                <rect key="frame" x="0.0" y="205" width="160" height="53"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFA-3X-D58">
+                                                <rect key="frame" x="0.0" y="273" width="162" height="53.5"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTL-Vq-OUc">
+                                <rect key="frame" x="0.0" y="522.5" width="320" height="45.5"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sGj-Ea-VEJ" firstAttribute="centerY" secondItem="cL5-sz-Mq8" secondAttribute="centerY" id="7n7-dE-FnG"/>
+                            <constraint firstItem="BNG-gI-4BL" firstAttribute="bottom" secondItem="Gbr-Jp-H1P" secondAttribute="bottom" constant="90" id="CCB-SL-eHl"/>
+                            <constraint firstItem="cL5-sz-Mq8" firstAttribute="leading" secondItem="BNG-gI-4BL" secondAttribute="leading" id="H9E-ZS-4nY"/>
+                            <constraint firstItem="jTL-Vq-OUc" firstAttribute="height" secondItem="BNG-gI-4BL" secondAttribute="height" multiplier="0.08" id="JtT-Oe-Xhw"/>
+                            <constraint firstItem="cL5-sz-Mq8" firstAttribute="top" secondItem="BNG-gI-4BL" secondAttribute="top" id="OWb-4q-Res"/>
+                            <constraint firstItem="cL5-sz-Mq8" firstAttribute="trailing" secondItem="BNG-gI-4BL" secondAttribute="trailing" id="ZLE-v9-0xQ"/>
+                            <constraint firstItem="BNG-gI-4BL" firstAttribute="bottom" secondItem="jTL-Vq-OUc" secondAttribute="bottom" id="ZrY-Tc-3zN"/>
+                            <constraint firstItem="pVK-Sd-gi8" firstAttribute="width" secondItem="BNG-gI-4BL" secondAttribute="width" multiplier="0.5" id="h0J-fT-cS9"/>
+                            <constraint firstItem="cL5-sz-Mq8" firstAttribute="height" secondItem="BNG-gI-4BL" secondAttribute="height" multiplier="0.24" id="oYU-Jv-WZu"/>
+                            <constraint firstItem="BNG-gI-4BL" firstAttribute="trailing" secondItem="Gbr-Jp-H1P" secondAttribute="trailing" constant="15" id="tRx-3c-sNF"/>
+                            <constraint firstItem="Gbr-Jp-H1P" firstAttribute="top" secondItem="cL5-sz-Mq8" secondAttribute="bottom" constant="15" id="urL-2e-C55"/>
+                            <constraint firstItem="Gbr-Jp-H1P" firstAttribute="leading" secondItem="BNG-gI-4BL" secondAttribute="leading" constant="15" id="voN-FR-pb6"/>
+                            <constraint firstItem="jTL-Vq-OUc" firstAttribute="leading" secondItem="BNG-gI-4BL" secondAttribute="leading" id="xHj-MI-PkR"/>
+                            <constraint firstItem="jTL-Vq-OUc" firstAttribute="trailing" secondItem="BNG-gI-4BL" secondAttribute="trailing" id="yP8-oD-LaH"/>
+                            <constraint firstItem="sGj-Ea-VEJ" firstAttribute="centerX" secondItem="cL5-sz-Mq8" secondAttribute="centerX" id="yuo-om-Ky8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BNG-gI-4BL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NYO-Bx-wHI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.625" y="692.95774647887322"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Mid-1l-4e7">
@@ -375,7 +535,7 @@ Pancake</string>
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="29" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQt-H0-A5w">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQt-H0-A5w">
                                                 <rect key="frame" x="0.0" y="286.5" width="280" height="43.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
@@ -444,7 +604,110 @@ Pancake</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1y-tU-5Ob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2540.2877697841727" y="-86.4321608040201"/>
+            <point key="canvasLocation" x="3488" y="-88"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fyR-GW-nMp">
+            <objects>
+                <viewController id="LHT-dd-hQm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dcg-N1-dcY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-background" translatesAutoresizingMaskIntoConstraints="NO" id="B67-Mk-uMN">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="md7-9a-vfy">
+                                <rect key="frame" x="112" y="20" width="96" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="md7-9a-vfy" secondAttribute="height" multiplier="8:8" id="hi2-9K-S25"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="dAb-IJ-mTv">
+                                <rect key="frame" x="15" y="183" width="290" height="370"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="NHG-gL-OBU">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="370"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRl-gh-MEv">
+                                                <rect key="frame" x="0.0" y="0.0" width="41" height="123.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fQ-4k-K2z">
+                                                <rect key="frame" x="0.0" y="123.5" width="53.5" height="123"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC5-ku-P1V">
+                                                <rect key="frame" x="0.0" y="246.5" width="39.5" height="123.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fBK-6i-LiP">
+                                        <rect key="frame" x="130" y="0.0" width="160" height="370"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uui-gh-kbQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="123.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOn-GF-0V9">
+                                                <rect key="frame" x="0.0" y="123.5" width="160" height="123"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLy-Kp-Q5v">
+                                                <rect key="frame" x="0.0" y="246.5" width="160" height="123.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JOn-GF-0V9" firstAttribute="width" secondItem="uui-gh-kbQ" secondAttribute="width" id="C3o-KN-yll"/>
+                                            <constraint firstItem="RLy-Kp-Q5v" firstAttribute="width" secondItem="JOn-GF-0V9" secondAttribute="width" id="uXS-JW-CS5"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BSA-bD-ivp" firstAttribute="bottom" secondItem="B67-Mk-uMN" secondAttribute="bottom" constant="400" id="31T-Sp-O4R"/>
+                            <constraint firstItem="md7-9a-vfy" firstAttribute="width" secondItem="Dcg-N1-dcY" secondAttribute="width" multiplier="0.3" id="KtG-8X-YZU"/>
+                            <constraint firstItem="dAb-IJ-mTv" firstAttribute="top" secondItem="B67-Mk-uMN" secondAttribute="bottom" constant="15" id="OO0-03-ZAY"/>
+                            <constraint firstItem="BSA-bD-ivp" firstAttribute="bottom" secondItem="dAb-IJ-mTv" secondAttribute="bottom" constant="15" id="R5E-Oa-XOl"/>
+                            <constraint firstItem="md7-9a-vfy" firstAttribute="centerX" secondItem="Dcg-N1-dcY" secondAttribute="centerX" id="Yzf-hv-Hpr"/>
+                            <constraint firstItem="uui-gh-kbQ" firstAttribute="width" secondItem="BSA-bD-ivp" secondAttribute="width" multiplier="0.5" id="a7r-Pc-poj"/>
+                            <constraint firstItem="BSA-bD-ivp" firstAttribute="trailing" secondItem="dAb-IJ-mTv" secondAttribute="trailing" constant="15" id="eo7-MD-7KE"/>
+                            <constraint firstItem="dAb-IJ-mTv" firstAttribute="leading" secondItem="BSA-bD-ivp" secondAttribute="leading" constant="15" id="ffJ-SN-LtO"/>
+                            <constraint firstItem="B67-Mk-uMN" firstAttribute="leading" secondItem="BSA-bD-ivp" secondAttribute="leading" id="mkP-ug-ihh"/>
+                            <constraint firstItem="md7-9a-vfy" firstAttribute="top" secondItem="B67-Mk-uMN" secondAttribute="bottom" constant="-148" id="p8F-ij-gYV"/>
+                            <constraint firstItem="BSA-bD-ivp" firstAttribute="trailing" secondItem="B67-Mk-uMN" secondAttribute="trailing" id="s9i-Vo-Inv"/>
+                            <constraint firstItem="B67-Mk-uMN" firstAttribute="top" secondItem="BSA-bD-ivp" secondAttribute="top" id="xNn-bX-IO5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BSA-bD-ivp"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sZM-ZX-wul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2698" y="693"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V4T-oO-RXe">
@@ -463,12 +726,32 @@ Pancake</string>
             </objects>
             <point key="canvasLocation" x="131.65467625899282" y="101.50753768844221"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="f1s-pw-52w">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="zBd-vc-N4j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6S5-d2-BVc"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SAD-0Q-yOk">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="3ww-oy-hdo" kind="relationship" relationship="viewControllers" id="WO7-2F-fC5"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.625" y="-87.676056338028175"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
+        <image name="default-profile-pic" width="435" height="418"/>
         <image name="food-background" width="2048" height="871"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="login-background" width="2048" height="2732"/>
         <image name="logo" width="364" height="416"/>
+        <image name="profile-background" width="2037" height="1401"/>
     </resources>
 </document>
