@@ -10,23 +10,46 @@ import FirebaseFirestore
 
 class FBProfileStorage: ProfileStorage {
 
-    let uid: String
-    let customers: CollectionReference
+    private weak var delegate: ProfileDelegate?
 
-    init() {
+    func setDelegate(delegate: ProfileDelegate) {
+        self.delegate = delegate
+    }
+
+    func getCustomerInfo() {
+        let db = Firestore.firestore()
         guard let user = Auth.auth().currentUser else {
             return
         }
-        self.uid = user.uid
-        self.db = Firestore.firestore().collection("customers").document()
+        let docRef = db.collection("customers").document(user.uid)
+
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                self.delegate?.showMessage(title: "Error!", message: error.localizedDescription, buttonText: "Okay")
+            }
+            if let data = document?.data() {
+                guard let customer = Customer(dictionary: data) else {
+                    self.delegate?.showMessage(title: "Error!", message: "A fatal error occured.", buttonText: "Okay")
+                    return
+                }
+                self.delegate?.getCustomerInfoComplete(customer: customer)
+            }
+        }
     }
 
-    func getCustomer() -> Customer {
+    func updateCustomerInfo(customer: Customer) {
+        let db = Firestore.firestore()
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        let docRef = db.collection("customers").document(user.uid)
 
+        docRef.updateData(customer.dictionary) { (error) in
+            if let error = error {
+                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
+                return
+            }
+            self.delegate?.updateComplete()
+        }
     }
-
-    func updateCustomer(customer: Customer) {
-        <#code#>
-    }
-    
 }

@@ -18,6 +18,8 @@
 		5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9066B3241BB85C00731130 /* AuthDelegate.swift */; };
 		5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA15943241C928B00835102 /* LoginUtilities.swift */; };
 		5CA15948241C9F9400835102 /* FBProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA15947241C9F9400835102 /* FBProfileStorage.swift */; };
+		5CE17B4C241CD80600A04B8B /* ProfileDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE17B4B241CD80600A04B8B /* ProfileDelegate.swift */; };
+		5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */; };
 		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
@@ -82,6 +84,8 @@
 		5C9066B3241BB85C00731130 /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
 		5CA15943241C928B00835102 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = SOURCE_ROOT; };
 		5CA15947241C9F9400835102 /* FBProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBProfileStorage.swift; sourceTree = "<group>"; };
+		5CE17B4B241CD80600A04B8B /* ProfileDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDelegate.swift; sourceTree = "<group>"; };
+		5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = QwQ/ViewControllers/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
 		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				5C9066B3241BB85C00731130 /* AuthDelegate.swift */,
+				5CE17B4B241CD80600A04B8B /* ProfileDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -237,7 +242,6 @@
 				61B2EAA22418BAA400B88018 /* Models */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
 				7E72B199241C9CC700C1EE72 /* Views */,
-				5C0B4D3324191DCE0061B1FE /* Exceptions */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E68A241B2FAB00C2F9BB /* Storyboards */,
 				7EC7E6562418B6C900C2F9BB /* Assets.xcassets */,
@@ -270,11 +274,12 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
 				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
 				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
 				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
+				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
+				5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 			files = (
 				5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */,
 				D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */,
+				5CE17B4C241CD80600A04B8B /* ProfileDelegate.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
@@ -632,6 +638,7 @@
 				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
 				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
 				5C11FD092418E503002B88E3 /* ProfileStorage.swift in Sources */,
+				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
