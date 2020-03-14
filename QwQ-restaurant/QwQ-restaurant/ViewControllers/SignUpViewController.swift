@@ -10,13 +10,19 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var contactTextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func submitButton(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 
