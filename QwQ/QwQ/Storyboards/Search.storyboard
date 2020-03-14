@@ -378,7 +378,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2x-y3-4IH">
-                                                <rect key="frame" x="0.0" y="65" width="374" height="300"/>
+                                                <rect key="frame" x="0.0" y="65" width="374" height="298.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
                                                         <string key="content">Hawaiian Pizza (S/M/L)
@@ -389,7 +389,7 @@ Chicken Risotto
 Pancake</string>
                                                         <attributes>
                                                             <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="25" name="Comfortaa-Regular"/>
+                                                            <font key="NSFont" metaFont="system" size="25"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -406,7 +406,7 @@ Chicken Risotto
 Pancake</string>
                                                             <attributes>
                                                                 <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <font key="NSFont" size="13" name="Comfortaa-Regular"/>
+                                                                <font key="NSFont" metaFont="system"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -414,7 +414,7 @@ Pancake</string>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmW-dT-K5i">
-                                                <rect key="frame" x="0.0" y="380" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="378.5" width="374" height="50"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -423,12 +423,12 @@ Pancake</string>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nad-DH-dLq">
-                                                <rect key="frame" x="0.0" y="445" width="374" height="22"/>
+                                                <rect key="frame" x="0.0" y="443.5" width="374" height="23.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                         <attributes>
                                                             <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="25" name="Comfortaa-Regular"/>
+                                                            <font key="NSFont" metaFont="system" size="25"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -439,7 +439,7 @@ Pancake</string>
                                                         <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" size="13" name="Comfortaa-Regular"/>
+                                                                <font key="NSFont" metaFont="system"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>

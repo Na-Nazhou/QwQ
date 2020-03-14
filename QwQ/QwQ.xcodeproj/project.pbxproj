@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C0B4D3624191DF10061B1FE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B4D3524191DF10061B1FE /* LoginError.swift */; };
-		5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B4D3724191F7D0061B1FE /* SignupError.swift */; };
 		5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */; };
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
@@ -17,6 +15,8 @@
 		5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0B2418E63D002B88E3 /* Authenticator.swift */; };
 		5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */; };
 		5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */; };
+		5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9066B3241BB85C00731130 /* AuthDelegate.swift */; };
+		5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA15943241C928B00835102 /* LoginUtilities.swift */; };
 		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
@@ -69,8 +69,6 @@
 		29B88849783EDA73EDE093E1 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5626527F2E8F5D97FB4DC13A /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		596993604A6FD0C13635E678 /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5C0B4D3524191DF10061B1FE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
-		5C0B4D3724191F7D0061B1FE /* SignupError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupError.swift; sourceTree = "<group>"; };
 		5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -80,6 +78,8 @@
 		5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		5C161100241A2D1E00602245 /* QwQ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QwQ.entitlements; sourceTree = "<group>"; };
 		5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBQueueStorage.swift; sourceTree = "<group>"; };
+		5C9066B3241BB85C00731130 /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
+		5CA15943241C928B00835102 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = SOURCE_ROOT; };
 		60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
 		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -146,21 +146,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C0B4D3324191DCE0061B1FE /* Exceptions */ = {
+		5C046A7E241BD84E00662505 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				5C0B4D3424191DDB0061B1FE /* Authentication */,
+				5C9066B3241BB85C00731130 /* AuthDelegate.swift */,
 			);
-			path = Exceptions;
-			sourceTree = "<group>";
-		};
-		5C0B4D3424191DDB0061B1FE /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				5C0B4D3524191DF10061B1FE /* LoginError.swift */,
-				5C0B4D3724191F7D0061B1FE /* SignupError.swift */,
-			);
-			path = Authentication;
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		5C11FCFF2418E2D1002B88E3 /* Fonts */ = {
@@ -180,6 +171,15 @@
 				5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		5CA15946241C92A900835102 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5CA15943241C928B00835102 /* LoginUtilities.swift */,
+			);
+			name = Utilities;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		61B2EAA22418BAA400B88018 /* Models */ = {
@@ -226,7 +226,6 @@
 				D4A771612418C1B1009610C7 /* Logic */,
 				61B2EAA22418BAA400B88018 /* Models */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
-				5C0B4D3324191DCE0061B1FE /* Exceptions */,
 				7EC7E6822418B85800C2F9BB /* Others */,
 				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
 				7E72B14D241B8C7D00C1EE72 /* Main.storyboard */,
@@ -272,6 +271,7 @@
 		7EC7E6822418B85800C2F9BB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				5CA15946241C92A900835102 /* Utilities */,
 				5C11FCFF2418E2D1002B88E3 /* Fonts */,
 			);
 			path = Others;
@@ -300,6 +300,7 @@
 		D4A771662418C899009610C7 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				5C046A7E241BD84E00662505 /* Delegates */,
 				D4A771672418C98F009610C7 /* QueueStorage.swift */,
 				5C11FD082418E503002B88E3 /* UserStorage.swift */,
 				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
@@ -594,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */,
 				D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
@@ -602,15 +604,14 @@
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
-				5C0B4D3824191F7D0061B1FE /* SignupError.swift in Sources */,
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
+				5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */,
 				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
 				7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */,
 				7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */,
 				7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */,
-				5C0B4D3624191DF10061B1FE /* LoginError.swift in Sources */,
 				5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
 				61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */,
@@ -785,7 +786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = QwQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -805,7 +806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = QwQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

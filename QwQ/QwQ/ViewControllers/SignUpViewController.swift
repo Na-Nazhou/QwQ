@@ -7,19 +7,88 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, AuthDelegate {
 
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var contactTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBAction func submitButton(_ sender: Any) {
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var contactTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+
+    let auth: Authenticator
+
+    init() {
+        self.auth = FBAuthenticator()
+        super.init(nibName: nil, bundle: nil)
     }
-    
+
+    required init?(coder: NSCoder) {
+        self.auth = FBAuthenticator()
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        auth.setView(view: self)
         // Do any additional setup after loading the view.
     }
 
+    @IBAction private func submitButton(_ sender: Any) {
+
+        let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
+        let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("yes")
+
+        guard checkIfAllFieldsAreFilled() else {
+            showMessage(title: "Error:", message: "Please fill in all the fields!", buttonText: "Okay")
+            return
+        }
+
+        guard let name = trimmedName, let contact = trimmedContact,
+            let email = trimmedEmail, let password = trimmedPassword else {
+                return
+        }
+
+        guard LoginUtilities.validateEmail(email: email) else {
+            showMessage(title: "Error!", message: "Please enter a valid email.", buttonText: "Okay")
+            return
+        }
+
+        guard LoginUtilities.validateContact(contact: contact) else {
+            showMessage(title: "Error!", message: "Please enter a valid contact number: 8 numbers only.",
+                        buttonText: "Okay")
+            return
+        }
+
+        auth.signup(name: name, contact: contact, email: email, password: password)
+    }
+
+    func showMessage(title: String, message: String, buttonText: String) {
+        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
+        message.addAction(closeDialogAction)
+
+        self.present(message, animated: true)
+    }
+
+    func authSucceeded() {
+        performSegue(withIdentifier: "signupCompleted", sender: self)
+    }
+
+    private func checkIfAllFieldsAreFilled() -> Bool {
+        if let name = nameTextField.text,
+            let contact = contactTextField.text,
+            let email = emailTextField.text,
+            let password = passwordTextField.text {
+            return !name.trimmingCharacters(in: .newlines).isEmpty &&
+                !contact.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
+        return false
+    }
 
 }
 
