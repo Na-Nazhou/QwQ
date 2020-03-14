@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uXK-ad-Mgw">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-background" translatesAutoresizingMaskIntoConstraints="NO" id="kNb-yu-9DG">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
+                            </imageView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sl-UY-G9b">
+                                <rect key="frame" x="83.5" y="127.5" width="667" height="939"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-k1-x3V">
+                                        <rect key="frame" x="123.5" y="519.5" width="420" height="282"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qMP-nu-B0d">
+                                                <rect key="frame" x="0.0" y="0.0" width="420" height="55"/>
+                                                <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qMP-nu-B0d" secondAttribute="height" multiplier="230:30" id="mZ7-dc-Itv"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="vRt-MH-ebt">
+                                                <rect key="frame" x="0.0" y="65" width="420" height="54.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="vRt-MH-ebt" secondAttribute="height" multiplier="230:30" id="7Z8-3A-yHi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IQ-8Z-Ump">
+                                                <rect key="frame" x="0.0" y="129.5" width="420" height="87"/>
+                                                <color key="backgroundColor" red="0.95686274509803915" green="0.41960784313725491" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="7IQ-8Z-Ump" secondAttribute="height" multiplier="92:19" id="1bo-We-rvI"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
+                                                <state key="normal" title="LOGIN">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=compact-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
+                                                <rect key="frame" x="0.0" y="226.5" width="420" height="55.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
+                                                <state key="normal" title="Or Sign Up">
+                                                    <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
+                                                </variation>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vRt-MH-ebt" firstAttribute="centerX" secondItem="WfF-k1-x3V" secondAttribute="centerX" id="grl-5v-wwf"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="WfF-k1-x3V" firstAttribute="height" secondItem="9sl-UY-G9b" secondAttribute="height" multiplier="0.3" id="Acp-6N-duW"/>
+                                    <constraint firstItem="WfF-k1-x3V" firstAttribute="centerX" secondItem="9sl-UY-G9b" secondAttribute="centerX" id="OSV-I3-gPR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="r-logo" translatesAutoresizingMaskIntoConstraints="NO" id="KlE-Cl-Jeh">
+                                <rect key="frame" x="173.5" y="157.5" width="487" height="469.5"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="1wV-SM-xrw"/>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3on-J4-Qu5"/>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6Iq-bf-QTJ"/>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="top" secondItem="KlE-Cl-Jeh" secondAttribute="top" constant="-30" id="A0a-pf-VM4"/>
+                            <constraint firstItem="KlE-Cl-Jeh" firstAttribute="height" secondItem="9sl-UY-G9b" secondAttribute="height" multiplier="0.5" id="BwT-H6-q69"/>
+                            <constraint firstItem="9sl-UY-G9b" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.8" id="GOd-G1-TU9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kNb-yu-9DG" secondAttribute="bottom" id="KI4-8x-28C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kNb-yu-9DG" secondAttribute="trailing" id="Z9A-z8-aw8"/>
+                            <constraint firstItem="WfF-k1-x3V" firstAttribute="top" secondItem="KlE-Cl-Jeh" secondAttribute="bottom" constant="20" id="eeh-mP-DMO"/>
+                            <constraint firstItem="KlE-Cl-Jeh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kxl-Ri-gJr"/>
+                            <constraint firstItem="kNb-yu-9DG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tyy-sc-iQr"/>
+                            <constraint firstItem="kNb-yu-9DG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vB4-ev-NrE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qxR-Zv-WeF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885.61151079136698" y="101.50753768844221"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="V4T-oO-RXe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="uXK-ad-Mgw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Cr-1H-9GE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rEk-pL-VkY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6K-oP-loh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.65467625899282" y="101.50753768844221"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="f1s-pw-52w">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="zBd-vc-N4j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6S5-d2-BVc"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SAD-0Q-yOk">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="EIt-7S-tb5" kind="relationship" relationship="viewControllers" id="8Lo-0i-yHN"/>
+                        <segue destination="B7R-25-xWy" kind="relationship" relationship="viewControllers" id="geg-cd-Up8"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.625" y="-87.676056338028175"/>
+        </scene>
+        <!--Activities-->
+        <scene sceneID="UBO-CK-qMg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Activities" id="EIt-7S-tb5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="8fU-D9-jVV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6oP-Yc-OWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2585" y="-11"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="uvw-VP-MlA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="B7R-25-xWy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="aWJ-rd-aJG"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Egv-4c-Mv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2583" y="128"/>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="pzF-pP-bbx">
+            <objects>
+                <viewController id="cYR-K6-pmi" customClass="SignUpViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qZx-fA-huR">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="yHx-Mu-I5p">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="282"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP WITH Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ3-eg-qhj">
+                                <rect key="frame" x="280" y="120.5" width="274.5" height="41"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2t0-jl-ydk">
+                                <rect key="frame" x="15" y="297" width="804" height="513"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ci9-CS-fKN">
+                                        <rect key="frame" x="0.0" y="0.0" width="367" height="513"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RU4-IP-4Ir">
+                                                <rect key="frame" x="0.0" y="0.0" width="367" height="161"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnn-eS-UyB">
+                                                <rect key="frame" x="0.0" y="176" width="367" height="161"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJ0-ym-dRE">
+                                                <rect key="frame" x="0.0" y="352" width="367" height="161"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="G44-0s-Y09">
+                                        <rect key="frame" x="387" y="0.0" width="417" height="513"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Jane" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="1cL-Sc-r32">
+                                                <rect key="frame" x="0.0" y="0.0" width="417" height="161"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="1cL-Sc-r32" secondAttribute="height" multiplier="207:80" id="RN4-7x-RCV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="98635485" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="t6r-Qf-ME5">
+                                                <rect key="frame" x="0.0" y="176" width="417" height="161"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="t6r-Qf-ME5" secondAttribute="height" multiplier="207:80" id="AwI-lV-K1v"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jane@gmail.com" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fcg-lT-1vz">
+                                                <rect key="frame" x="0.0" y="352" width="417" height="161"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Fcg-lT-1vz" secondAttribute="height" multiplier="207:80" id="JQe-QQ-04u"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhu-nh-gWC">
+                                <rect key="frame" x="0.0" y="1080" width="834" height="94"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2t0-jl-ydk" firstAttribute="top" secondItem="yHx-Mu-I5p" secondAttribute="bottom" constant="15" id="2r0-Ti-86B"/>
+                            <constraint firstItem="Tp8-pK-s1o" firstAttribute="bottom" secondItem="Vhu-nh-gWC" secondAttribute="bottom" id="ABb-Mb-ncK"/>
+                            <constraint firstItem="Vhu-nh-gWC" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="Aa7-ez-NoK"/>
+                            <constraint firstItem="Tp8-pK-s1o" firstAttribute="trailing" secondItem="2t0-jl-ydk" secondAttribute="trailing" constant="15" id="CBx-Sv-TqA"/>
+                            <constraint firstItem="1cL-Sc-r32" firstAttribute="width" secondItem="Tp8-pK-s1o" secondAttribute="width" multiplier="0.5" id="PpG-KZ-hqq"/>
+                            <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerY" secondItem="yHx-Mu-I5p" secondAttribute="centerY" id="c6P-f0-gDY"/>
+                            <constraint firstItem="Vhu-nh-gWC" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.08" id="cC5-G6-LpL"/>
+                            <constraint firstItem="Vhu-nh-gWC" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="d3X-bK-oEW"/>
+                            <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerX" secondItem="yHx-Mu-I5p" secondAttribute="centerX" id="hwt-f2-Fyj"/>
+                            <constraint firstItem="yHx-Mu-I5p" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="j1s-hW-szC"/>
+                            <constraint firstItem="yHx-Mu-I5p" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="pi1-Yq-Lwx"/>
+                            <constraint firstItem="yHx-Mu-I5p" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.24" id="pu8-51-zW7"/>
+                            <constraint firstItem="yHx-Mu-I5p" firstAttribute="top" secondItem="Tp8-pK-s1o" secondAttribute="top" id="wti-Qq-gnO"/>
+                            <constraint firstItem="2t0-jl-ydk" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" constant="15" id="xUq-Lk-bAl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tp8-pK-s1o"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0id-m5-wWI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1701" y="781"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gradient-background" width="2048" height="2732"/>
+        <image name="login-background" width="2048" height="2732"/>
+        <image name="r-logo" width="487" height="558"/>
+    </resources>
+</document>
