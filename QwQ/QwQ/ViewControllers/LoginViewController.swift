@@ -27,15 +27,10 @@ class LoginViewController: UIViewController, AuthDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        auth.setView(view: self)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        // Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+
+        auth.setDelegate(view: self)
+
+        self.hideKeyboardWhenTappedAround()
     }
 
     @IBAction private func loginButton(_ sender: Any) {
@@ -48,17 +43,17 @@ class LoginViewController: UIViewController, AuthDelegate {
         }
 
         guard !email.isEmpty else {
-            showMessage(title: "Missing Email", message: "Please provide a valid email.", buttonText: "Okay")
+            showMessage(title: Constants.missingEmailTitle, message: Constants.missingEmailMessage, buttonText: Constants.okayButton)
             return
         }
 
         guard LoginUtilities.validateEmail(email: email) else {
-            showMessage(title: "Invalid Email", message: "Please provide a proper email.", buttonText: "Okay")
+            showMessage(title: Constants.invalidEmailTitle, message: Constants.invalidEmailMessage, buttonText: Constants.okayButton)
             return
         }
 
         guard !password.isEmpty else {
-            showMessage(title: "Missing Password", message: "Please provide a valid password.", buttonText: "Okay")
+            showMessage(title: Constants.missingPasswordTitle, message: Constants.missingPasswordMessage, buttonText: Constants.okayButton)
             return
         }
 
@@ -76,7 +71,7 @@ class LoginViewController: UIViewController, AuthDelegate {
     }
 
     func authSucceeded() {
-        performSegue(withIdentifier: "loginCompleted", sender: self)
+        performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
     }
 
 }

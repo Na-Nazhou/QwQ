@@ -7,7 +7,7 @@
 
 protocol Authenticator {
 
-    func setView(view: AuthDelegate)
+    func setDelegate(view: AuthDelegate)
 
     func signup(name: String, contact: String, email: String, password: String)
 

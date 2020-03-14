@@ -21,18 +21,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-background" translatesAutoresizingMaskIntoConstraints="NO" id="O9d-Dr-9Bv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="369"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="413"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="fNg-50-TMe">
                                 <rect key="frame" x="145" y="265" width="124" height="124"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fNg-50-TMe" secondAttribute="height" multiplier="8:8" id="Hpm-JN-yJT"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="p45-dP-InM">
                                 <rect key="frame" x="15" y="428" width="384" height="370"/>
@@ -112,7 +107,7 @@
                             <constraint firstItem="SaD-11-Aib" firstAttribute="width" secondItem="j7u-nN-AS7" secondAttribute="width" multiplier="0.5" id="f3Z-Fj-zyS"/>
                             <constraint firstItem="p45-dP-InM" firstAttribute="leading" secondItem="j7u-nN-AS7" secondAttribute="leading" constant="15" id="jUs-1U-2IO"/>
                             <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="O9d-Dr-9Bv" secondAttribute="trailing" id="wDN-wg-Z08"/>
-                            <constraint firstItem="O9d-Dr-9Bv" firstAttribute="top" secondItem="j7u-nN-AS7" secondAttribute="top" id="wwB-cj-reK"/>
+                            <constraint firstItem="O9d-Dr-9Bv" firstAttribute="top" secondItem="uez-KQ-DMx" secondAttribute="top" id="wwB-cj-reK"/>
                             <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="AA3-k5-Oxb" secondAttribute="trailing" constant="15" id="zQj-5U-3pg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j7u-nN-AS7"/>
@@ -123,16 +118,17 @@
                         <outlet property="contactLabel" destination="Sx7-31-N9e" id="Thb-oa-57Q"/>
                         <outlet property="emailLabel" destination="4To-Of-qc3" id="GCB-yN-Gp7"/>
                         <outlet property="nameLabel" destination="SaD-11-Aib" id="NdJ-Og-9hs"/>
+                        <outlet property="profileImageView" destination="fNg-50-TMe" id="oTc-2v-rle"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lv-4c-uUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1700.0000000000002" y="766.74107142857144"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Profile View Controller-->
         <scene sceneID="4I6-oF-qt4">
             <objects>
-                <viewController id="uvb-Aq-pGb" sceneMemberID="viewController">
+                <viewController id="uvb-Aq-pGb" customClass="EditProfileViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="no3-1h-BWi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -243,6 +239,9 @@
                                 <state key="normal" title="SAVE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="Vts-mO-17q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -265,6 +264,11 @@
                         <viewLayoutGuide key="safeArea" id="E3a-Bj-mhH"/>
                     </view>
                     <navigationItem key="navigationItem" id="VJU-uy-D91"/>
+                    <connections>
+                        <outlet property="contactTextField" destination="aK6-5x-eCJ" id="5Dx-32-SU5"/>
+                        <outlet property="emailTextField" destination="GfW-bI-YCB" id="Fi5-Rk-qKb"/>
+                        <outlet property="nameTextField" destination="FtT-b8-3JZ" id="VbA-oP-Uyh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mg4-Dr-HRK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

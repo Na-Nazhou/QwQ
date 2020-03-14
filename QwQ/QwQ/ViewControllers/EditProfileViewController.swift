@@ -1,45 +1,51 @@
 //
-//  SignUpViewController.swift
+//  EditProfileViewController.swift
 //  QwQ
 //
-//  Created by Tan Su Yee on 13/3/20.
+//  Created by Daniel Wong on 14/3/20.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController, AuthDelegate {
+class EditProfileViewController: UIViewController, ProfileDelegate {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var passwordTextField: UITextField!
 
-    let auth: Authenticator
+    let profileStorage: ProfileStorage
+    var uid: String?
 
     init() {
-        self.auth = FBAuthenticator()
+        profileStorage = FBProfileStorage()
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
+        profileStorage = FBProfileStorage()
         super.init(coder: coder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        auth.setDelegate(view: self)
+        
+        profileStorage.setDelegate(delegate: self)
+        profileStorage.getCustomerInfo()
 
         self.hideKeyboardWhenTappedAround()
     }
 
-    @IBAction private func submitButton(_ sender: Any) {
+    func getCustomerInfoComplete(customer: Customer) {
+        self.uid = customer.uid
+        self.nameTextField.text = customer.name
+        self.contactTextField.text = customer.contact
+        self.emailTextField.text = customer.email
+    }
 
+    @IBAction private func saveButton(_ sender: Any) {
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
@@ -48,25 +54,26 @@ class SignUpViewController: UIViewController, AuthDelegate {
             return
         }
 
-        guard let name = trimmedName, let contact = trimmedContact,
-            let email = trimmedEmail, let password = trimmedPassword else {
+        guard let uid = uid, let name = trimmedName,
+            let contact = trimmedContact, let email = trimmedEmail else {
                 return
         }
 
-        guard LoginUtilities.validateEmail(email: email) else {
-            showMessage(title: Constants.invalidEmailTitle,
-                        message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayButton)
-            return
-        }
+        profileStorage.updateCustomerInfo(customer: Customer(uid: uid, name: name, email: email, contact: contact))
+    }
 
-        guard LoginUtilities.validateContact(contact: contact) else {
-            showMessage(title: Constants.invalidContactTitle, message: Constants.invalidContactMessage,
-                        buttonText: Constants.okayButton)
-            return
-        }
+    func updateComplete() {
+        let message = UIAlertController(title: Constants.successfulUpdateTitle,
+                                        message: Constants.successfulUpdateMessage,
+                                        preferredStyle: .alert)
 
-        auth.signup(name: name, contact: contact, email: email, password: password)
+        let closeDialogAction = UIAlertAction(title: Constants.okayButton,
+                                              style: .default) { (_: UIAlertAction!) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }
+        message.addAction(closeDialogAction)
+
+        self.present(message, animated: true)
     }
 
     func showMessage(title: String, message: String, buttonText: String) {
@@ -78,22 +85,15 @@ class SignUpViewController: UIViewController, AuthDelegate {
         self.present(message, animated: true)
     }
 
-    func authSucceeded() {
-        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
-    }
-
     private func checkIfAllFieldsAreFilled() -> Bool {
         if let name = nameTextField.text,
             let contact = contactTextField.text,
-            let email = emailTextField.text,
-            let password = passwordTextField.text {
+            let email = emailTextField.text {
             return !name.trimmingCharacters(in: .newlines).isEmpty &&
                 !contact.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-                !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-                !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
         return false
     }
 
 }
-
