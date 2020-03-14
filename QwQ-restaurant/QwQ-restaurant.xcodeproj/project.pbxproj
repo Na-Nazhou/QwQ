@@ -1,0 +1,677 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
+		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
+		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
+		7E72B168241C940500C1EE72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B166241C940500C1EE72 /* LaunchScreen.storyboard */; };
+		7E72B173241C940500C1EE72 /* QwQ_restaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */; };
+		7E72B17E241C940500C1EE72 /* QwQ_restaurantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B17D241C940500C1EE72 /* QwQ_restaurantUITests.swift */; };
+		7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B18B241C95BF00C1EE72 /* Main.storyboard */; };
+		7E72B190241C95F000C1EE72 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B18E241C95F000C1EE72 /* Activities.storyboard */; };
+		7E72B191241C95F000C1EE72 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B18F241C95F000C1EE72 /* Profile.storyboard */; };
+		7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B19B241C9D4D00C1EE72 /* Constants.swift */; };
+		7E72B19E241CA52F00C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */; };
+		7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B19F241CA54600C1EE72 /* ActivitiesViewController.swift */; };
+		7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */; };
+		7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7E72B16F241C940500C1EE72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E72B150241C93FE00C1EE72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E72B157241C93FE00C1EE72;
+			remoteInfo = "QwQ-restaurant";
+		};
+		7E72B17A241C940500C1EE72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E72B150241C93FE00C1EE72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E72B157241C93FE00C1EE72;
+			remoteInfo = "QwQ-restaurant";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7E72B164241C940500C1EE72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7E72B167241C940500C1EE72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7E72B169241C940500C1EE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E72B16E241C940500C1EE72 /* QwQ-restaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QwQ-restaurantTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQ_restaurantTests.swift; sourceTree = "<group>"; };
+		7E72B174241C940500C1EE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E72B179241C940500C1EE72 /* QwQ-restaurantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QwQ-restaurantUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E72B17D241C940500C1EE72 /* QwQ_restaurantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQ_restaurantUITests.swift; sourceTree = "<group>"; };
+		7E72B17F241C940500C1EE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E72B18B241C95BF00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7E72B18E241C95F000C1EE72 /* Activities.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
+		7E72B18F241C95F000C1EE72 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		7E72B19B241C9D4D00C1EE72 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7E72B19F241CA54600C1EE72 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
+		7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7E72B155241C93FE00C1EE72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B16B241C940500C1EE72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B176241C940500C1EE72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7E72B14F241C93FE00C1EE72 = {
+			isa = PBXGroup;
+			children = (
+				7E72B15A241C93FE00C1EE72 /* QwQ-restaurant */,
+				7E72B171241C940500C1EE72 /* QwQ-restaurantTests */,
+				7E72B17C241C940500C1EE72 /* QwQ-restaurantUITests */,
+				7E72B159241C93FE00C1EE72 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7E72B159241C93FE00C1EE72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */,
+				7E72B16E241C940500C1EE72 /* QwQ-restaurantTests.xctest */,
+				7E72B179241C940500C1EE72 /* QwQ-restaurantUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E72B15A241C93FE00C1EE72 /* QwQ-restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */,
+				7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */,
+				7E72B197241C9C7500C1EE72 /* Authentication */,
+				7E72B198241C9C8200C1EE72 /* Storage */,
+				7E72B195241C963800C1EE72 /* Logic */,
+				7E72B192241C961700C1EE72 /* Models */,
+				7E72B194241C962100C1EE72 /* ViewControllers */,
+				7E72B193241C961B00C1EE72 /* Views */,
+				7E72B19A241C9CF300C1EE72 /* Exceptions */,
+				7E72B196241C963D00C1EE72 /* Others */,
+				7E72B18D241C95F000C1EE72 /* Storyboards */,
+				7E72B164241C940500C1EE72 /* Assets.xcassets */,
+				7E72B18B241C95BF00C1EE72 /* Main.storyboard */,
+				7E72B166241C940500C1EE72 /* LaunchScreen.storyboard */,
+				7E72B169241C940500C1EE72 /* Info.plist */,
+			);
+			path = "QwQ-restaurant";
+			sourceTree = "<group>";
+		};
+		7E72B171241C940500C1EE72 /* QwQ-restaurantTests */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */,
+				7E72B174241C940500C1EE72 /* Info.plist */,
+			);
+			path = "QwQ-restaurantTests";
+			sourceTree = "<group>";
+		};
+		7E72B17C241C940500C1EE72 /* QwQ-restaurantUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B17D241C940500C1EE72 /* QwQ_restaurantUITests.swift */,
+				7E72B17F241C940500C1EE72 /* Info.plist */,
+			);
+			path = "QwQ-restaurantUITests";
+			sourceTree = "<group>";
+		};
+		7E72B18D241C95F000C1EE72 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B18E241C95F000C1EE72 /* Activities.storyboard */,
+				7E72B18F241C95F000C1EE72 /* Profile.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7E72B192241C961700C1EE72 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7E72B193241C961B00C1EE72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7E72B194241C962100C1EE72 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
+				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
+				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
+				7E72B19F241CA54600C1EE72 /* ActivitiesViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7E72B195241C963800C1EE72 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		7E72B196241C963D00C1EE72 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		7E72B197241C9C7500C1EE72 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7E72B198241C9C8200C1EE72 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		7E72B19A241C9CF300C1EE72 /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Exceptions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7E72B157241C93FE00C1EE72 /* QwQ-restaurant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E72B182241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurant" */;
+			buildPhases = (
+				7E72B154241C93FE00C1EE72 /* Sources */,
+				7E72B155241C93FE00C1EE72 /* Frameworks */,
+				7E72B156241C93FE00C1EE72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "QwQ-restaurant";
+			productName = "QwQ-restaurant";
+			productReference = 7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7E72B16D241C940500C1EE72 /* QwQ-restaurantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E72B185241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurantTests" */;
+			buildPhases = (
+				7E72B16A241C940500C1EE72 /* Sources */,
+				7E72B16B241C940500C1EE72 /* Frameworks */,
+				7E72B16C241C940500C1EE72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E72B170241C940500C1EE72 /* PBXTargetDependency */,
+			);
+			name = "QwQ-restaurantTests";
+			productName = "QwQ-restaurantTests";
+			productReference = 7E72B16E241C940500C1EE72 /* QwQ-restaurantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7E72B178241C940500C1EE72 /* QwQ-restaurantUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E72B188241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurantUITests" */;
+			buildPhases = (
+				7E72B175241C940500C1EE72 /* Sources */,
+				7E72B176241C940500C1EE72 /* Frameworks */,
+				7E72B177241C940500C1EE72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E72B17B241C940500C1EE72 /* PBXTargetDependency */,
+			);
+			name = "QwQ-restaurantUITests";
+			productName = "QwQ-restaurantUITests";
+			productReference = 7E72B179241C940500C1EE72 /* QwQ-restaurantUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7E72B150241C93FE00C1EE72 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Appfish;
+				TargetAttributes = {
+					7E72B157241C93FE00C1EE72 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					7E72B16D241C940500C1EE72 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 7E72B157241C93FE00C1EE72;
+					};
+					7E72B178241C940500C1EE72 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 7E72B157241C93FE00C1EE72;
+					};
+				};
+			};
+			buildConfigurationList = 7E72B153241C93FE00C1EE72 /* Build configuration list for PBXProject "QwQ-restaurant" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7E72B14F241C93FE00C1EE72;
+			productRefGroup = 7E72B159241C93FE00C1EE72 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7E72B157241C93FE00C1EE72 /* QwQ-restaurant */,
+				7E72B16D241C940500C1EE72 /* QwQ-restaurantTests */,
+				7E72B178241C940500C1EE72 /* QwQ-restaurantUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7E72B156241C93FE00C1EE72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */,
+				7E72B168241C940500C1EE72 /* LaunchScreen.storyboard in Resources */,
+				7E72B191241C95F000C1EE72 /* Profile.storyboard in Resources */,
+				7E72B190241C95F000C1EE72 /* Activities.storyboard in Resources */,
+				7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B16C241C940500C1EE72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B177241C940500C1EE72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7E72B154241C93FE00C1EE72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
+				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
+				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
+				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
+				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
+				7E72B19E241CA52F00C1EE72 /* LoginViewController.swift in Sources */,
+				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B16A241C940500C1EE72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E72B173241C940500C1EE72 /* QwQ_restaurantTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E72B175241C940500C1EE72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E72B17E241C940500C1EE72 /* QwQ_restaurantUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7E72B170241C940500C1EE72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E72B157241C93FE00C1EE72 /* QwQ-restaurant */;
+			targetProxy = 7E72B16F241C940500C1EE72 /* PBXContainerItemProxy */;
+		};
+		7E72B17B241C940500C1EE72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E72B157241C93FE00C1EE72 /* QwQ-restaurant */;
+			targetProxy = 7E72B17A241C940500C1EE72 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7E72B166241C940500C1EE72 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E72B167241C940500C1EE72 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7E72B180241C940500C1EE72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7E72B181241C940500C1EE72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7E72B183241C940500C1EE72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		7E72B184241C940500C1EE72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurant";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		7E72B186241C940500C1EE72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurantTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurantTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QwQ-restaurant.app/QwQ-restaurant";
+			};
+			name = Debug;
+		};
+		7E72B187241C940500C1EE72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurantTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurantTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QwQ-restaurant.app/QwQ-restaurant";
+			};
+			name = Release;
+		};
+		7E72B189241C940500C1EE72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurantUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurantUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "QwQ-restaurant";
+			};
+			name = Debug;
+		};
+		7E72B18A241C940500C1EE72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "QwQ-restaurantUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurantUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "QwQ-restaurant";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7E72B153241C93FE00C1EE72 /* Build configuration list for PBXProject "QwQ-restaurant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E72B180241C940500C1EE72 /* Debug */,
+				7E72B181241C940500C1EE72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E72B182241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E72B183241C940500C1EE72 /* Debug */,
+				7E72B184241C940500C1EE72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E72B185241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E72B186241C940500C1EE72 /* Debug */,
+				7E72B187241C940500C1EE72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E72B188241C940500C1EE72 /* Build configuration list for PBXNativeTarget "QwQ-restaurantUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E72B189241C940500C1EE72 /* Debug */,
+				7E72B18A241C940500C1EE72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7E72B150241C93FE00C1EE72 /* Project object */;
+}

@@ -194,6 +194,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		7E72B199241C9CC700C1EE72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7EC7E6412418B6C300C2F9BB = {
 			isa = PBXGroup;
 			children = (
@@ -221,16 +228,18 @@
 			children = (
 				5C161100241A2D1E00602245 /* QwQ.entitlements */,
 				7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */,
+				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
 				5C11FD0A2418E611002B88E3 /* Authentication */,
 				D4A771662418C899009610C7 /* Storage */,
 				D4A771612418C1B1009610C7 /* Logic */,
 				61B2EAA22418BAA400B88018 /* Models */,
 				7EC7E67D2418B7FB00C2F9BB /* ViewControllers */,
+				7E72B199241C9CC700C1EE72 /* Views */,
+				5C0B4D3324191DCE0061B1FE /* Exceptions */,
 				7EC7E6822418B85800C2F9BB /* Others */,
-				7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */,
-				7E72B14D241B8C7D00C1EE72 /* Main.storyboard */,
 				7EC7E68A241B2FAB00C2F9BB /* Storyboards */,
 				7EC7E6562418B6C900C2F9BB /* Assets.xcassets */,
+				7E72B14D241B8C7D00C1EE72 /* Main.storyboard */,
 				7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */,
 				7EC7E65B2418B6C900C2F9BB /* Info.plist */,
 				5C11FD062418E375002B88E3 /* GoogleService-Info.plist */,
