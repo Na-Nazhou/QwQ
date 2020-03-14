@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZIh-3X-Z4Q">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Profile-->
+        <scene sceneID="iTM-tW-BnG">
+            <objects>
+                <viewController id="ZIh-3X-Z4Q" customClass="ProfileViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uez-KQ-DMx">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-background" translatesAutoresizingMaskIntoConstraints="NO" id="O9d-Dr-9Bv">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="729"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="fNg-50-TMe">
+                                <rect key="frame" x="292" y="229" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fNg-50-TMe" secondAttribute="height" multiplier="8:8" id="Hpm-JN-yJT"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="p45-dP-InM">
+                                <rect key="frame" x="15" y="744" width="804" height="370"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MvX-15-ZM8">
+                                        <rect key="frame" x="0.0" y="0.0" width="387" height="370"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R6-OI-YtX">
+                                                <rect key="frame" x="0.0" y="0.0" width="62.5" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBm-IN-oiB">
+                                                <rect key="frame" x="0.0" y="92.5" width="60" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxa-tM-vHI">
+                                                <rect key="frame" x="0.0" y="185" width="92.5" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uht-qD-SPG">
+                                                <rect key="frame" x="0.0" y="277.5" width="60" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tCc-8n-hZV">
+                                        <rect key="frame" x="387" y="0.0" width="417" height="370"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaD-11-Aib">
+                                                <rect key="frame" x="0.0" y="0.0" width="417" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4To-Of-qc3">
+                                                <rect key="frame" x="0.0" y="92.5" width="417" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sx7-31-N9e">
+                                                <rect key="frame" x="0.0" y="185" width="417" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2X-6u-bgO">
+                                                <rect key="frame" x="0.0" y="277.5" width="417" height="92.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                </variation>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="m2X-6u-bgO" firstAttribute="width" secondItem="Sx7-31-N9e" secondAttribute="width" id="71q-Nh-8O2"/>
+                                            <constraint firstItem="Sx7-31-N9e" firstAttribute="width" secondItem="SaD-11-Aib" secondAttribute="width" id="Kxb-je-9FN"/>
+                                            <constraint firstItem="4To-Of-qc3" firstAttribute="width" secondItem="Sx7-31-N9e" secondAttribute="width" id="pjd-aT-qB8"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA3-k5-Oxb">
+                                <rect key="frame" x="766" y="16" width="53" height="63"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="square.and.pencil" catalog="system"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="uvb-Aq-pGb" kind="show" id="wVk-Dg-lWh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="bottom" secondItem="O9d-Dr-9Bv" secondAttribute="bottom" constant="400" id="34a-Hb-d2s"/>
+                            <constraint firstItem="fNg-50-TMe" firstAttribute="width" secondItem="uez-KQ-DMx" secondAttribute="width" multiplier="0.3" id="5Yy-nv-txN"/>
+                            <constraint firstItem="O9d-Dr-9Bv" firstAttribute="leading" secondItem="j7u-nN-AS7" secondAttribute="leading" id="EoC-Zh-e4p"/>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="bottom" secondItem="p45-dP-InM" secondAttribute="bottom" constant="15" id="Eu5-US-ehh"/>
+                            <constraint firstItem="p45-dP-InM" firstAttribute="top" secondItem="O9d-Dr-9Bv" secondAttribute="bottom" constant="15" id="FU6-7i-yF8"/>
+                            <constraint firstItem="fNg-50-TMe" firstAttribute="top" secondItem="O9d-Dr-9Bv" secondAttribute="bottom" constant="-500" id="IQm-Z9-URQ"/>
+                            <constraint firstItem="AA3-k5-Oxb" firstAttribute="top" secondItem="j7u-nN-AS7" secondAttribute="top" constant="16" id="NJb-ZR-QKb"/>
+                            <constraint firstItem="fNg-50-TMe" firstAttribute="centerX" secondItem="uez-KQ-DMx" secondAttribute="centerX" id="R1a-ob-ekv"/>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="p45-dP-InM" secondAttribute="trailing" constant="15" id="eb7-K7-IC4"/>
+                            <constraint firstItem="SaD-11-Aib" firstAttribute="width" secondItem="j7u-nN-AS7" secondAttribute="width" multiplier="0.5" id="f3Z-Fj-zyS"/>
+                            <constraint firstItem="p45-dP-InM" firstAttribute="leading" secondItem="j7u-nN-AS7" secondAttribute="leading" constant="15" id="jUs-1U-2IO"/>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="O9d-Dr-9Bv" secondAttribute="trailing" id="wDN-wg-Z08"/>
+                            <constraint firstItem="O9d-Dr-9Bv" firstAttribute="top" secondItem="j7u-nN-AS7" secondAttribute="top" id="wwB-cj-reK"/>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="AA3-k5-Oxb" secondAttribute="trailing" constant="15" id="zQj-5U-3pg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j7u-nN-AS7"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.circle" catalog="system" id="p3D-JD-Qxh"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lv-4c-uUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.0000000000002" y="766.3316582914573"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4I6-oF-qt4">
+            <objects>
+                <viewController id="uvb-Aq-pGb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="no3-1h-BWi">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="wg1-mI-11x">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="403"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE DETAILS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54C-SX-OcD">
+                                <rect key="frame" x="211" y="181" width="290" height="41"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kCI-SM-wzl">
+                                <rect key="frame" x="15" y="418" width="682" height="482.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Mu-z5j">
+                                        <rect key="frame" x="0.0" y="0.0" width="306" height="482.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipo-2G-pRx">
+                                                <rect key="frame" x="0.0" y="0.0" width="306" height="116.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="ipo-2G-pRx" secondAttribute="height" multiplier="157:60" id="uZJ-5G-aQY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huU-A8-IEQ">
+                                                <rect key="frame" x="0.0" y="131.5" width="306" height="117"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="huU-A8-IEQ" secondAttribute="height" multiplier="157:60" id="77P-ta-Ooy"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-hH-h5U">
+                                                <rect key="frame" x="0.0" y="263.5" width="306" height="117"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="4Z3-hH-h5U" secondAttribute="height" multiplier="157:60" id="bed-V0-b1C"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umL-41-vHc">
+                                                <rect key="frame" x="0.0" y="395.5" width="306" height="87"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8y8-X4-WzQ">
+                                        <rect key="frame" x="326" y="0.0" width="356" height="482.5"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hot Tomato" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FtT-b8-3JZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="356" height="103"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="FtT-b8-3JZ" secondAttribute="height" multiplier="207:60" id="zSg-hS-cmE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="hottomato@outlook.com" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="GfW-bI-YCB">
+                                                <rect key="frame" x="0.0" y="118" width="356" height="103"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="GfW-bI-YCB" secondAttribute="height" multiplier="207:60" id="Lxm-Ni-PFN"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="28 Jurong West St 41, S648123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aK6-5x-eCJ">
+                                                <rect key="frame" x="0.0" y="236" width="356" height="103.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="aK6-5x-eCJ" secondAttribute="height" multiplier="207:60" id="O36-nx-oMY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="location"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ejd-lG-K4E">
+                                                <rect key="frame" x="0.0" y="354.5" width="356" height="128"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xe5-rj-t0D">
+                                <rect key="frame" x="0.0" y="926.5" width="712" height="80.5"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <state key="normal" title="SAVE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                </variation>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="E3a-Bj-mhH" firstAttribute="bottom" secondItem="Xe5-rj-t0D" secondAttribute="bottom" id="9wj-gt-9av"/>
+                            <constraint firstItem="Xe5-rj-t0D" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" id="GeA-Gs-ux3"/>
+                            <constraint firstItem="Xe5-rj-t0D" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.08" id="HXb-4i-hwi"/>
+                            <constraint firstItem="54C-SX-OcD" firstAttribute="centerY" secondItem="wg1-mI-11x" secondAttribute="centerY" id="Ly2-1B-1no"/>
+                            <constraint firstItem="Xe5-rj-t0D" firstAttribute="trailing" secondItem="E3a-Bj-mhH" secondAttribute="trailing" id="Phf-v4-qYH"/>
+                            <constraint firstItem="kCI-SM-wzl" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" constant="15" id="SB2-lm-cYK"/>
+                            <constraint firstItem="wg1-mI-11x" firstAttribute="top" secondItem="E3a-Bj-mhH" secondAttribute="top" id="SGT-qf-1M0"/>
+                            <constraint firstItem="FtT-b8-3JZ" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.5" id="c9s-dV-rNd"/>
+                            <constraint firstItem="wg1-mI-11x" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.4" id="gL0-lx-c2Q"/>
+                            <constraint firstItem="wg1-mI-11x" firstAttribute="trailing" secondItem="E3a-Bj-mhH" secondAttribute="trailing" id="mQq-vx-OU4"/>
+                            <constraint firstItem="kCI-SM-wzl" firstAttribute="top" secondItem="wg1-mI-11x" secondAttribute="bottom" constant="15" id="nZO-ai-wAs"/>
+                            <constraint firstItem="54C-SX-OcD" firstAttribute="centerX" secondItem="wg1-mI-11x" secondAttribute="centerX" id="suW-JX-UPY"/>
+                            <constraint firstItem="E3a-Bj-mhH" firstAttribute="trailing" secondItem="kCI-SM-wzl" secondAttribute="trailing" constant="15" id="svG-Oe-fvy"/>
+                            <constraint firstItem="wg1-mI-11x" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" id="zaU-ac-ll9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E3a-Bj-mhH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VJU-uy-D91"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mg4-Dr-HRK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2712" y="767"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="default-profile-pic" width="435" height="418"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+        <image name="person.circle" catalog="system" width="64" height="60"/>
+        <image name="profile-background" width="2037" height="1401"/>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+    </resources>
+</document>
