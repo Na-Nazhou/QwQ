@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="1700.0000000000002" y="766.74107142857144"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Profile View Controller-->
         <scene sceneID="4I6-oF-qt4">
             <objects>
-                <viewController id="uvb-Aq-pGb" sceneMemberID="viewController">
+                <viewController id="uvb-Aq-pGb" customClass="EditProfileViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="no3-1h-BWi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -243,6 +243,9 @@
                                 <state key="normal" title="SAVE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="Vts-mO-17q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -265,6 +268,11 @@
                         <viewLayoutGuide key="safeArea" id="E3a-Bj-mhH"/>
                     </view>
                     <navigationItem key="navigationItem" id="VJU-uy-D91"/>
+                    <connections>
+                        <outlet property="contactTextField" destination="aK6-5x-eCJ" id="5Dx-32-SU5"/>
+                        <outlet property="emailTextField" destination="GfW-bI-YCB" id="Fi5-Rk-qKb"/>
+                        <outlet property="nameTextField" destination="FtT-b8-3JZ" id="VbA-oP-Uyh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mg4-Dr-HRK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
