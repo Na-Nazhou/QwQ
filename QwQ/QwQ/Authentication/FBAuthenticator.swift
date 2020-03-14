@@ -10,64 +10,48 @@ import FirebaseFirestore
 
 class FBAuthenticator: Authenticator {
 
-    func signup(name: String, email: String, password: String) throws -> String {
-        var signupError: Error?
-        var signupResult: AuthDataResult?
+    private weak var view: AuthDelegate?
+
+    func setView(view: AuthDelegate) {
+        self.view = view
+    }
+
+    func signup(name: String, contact: String, email: String, password: String) {
 
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                signupError = error
+                self.view?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
+                return
             }
-            if let result = result {
-                signupResult = result
+            guard let result = result else {
+                return
             }
-        }
 
-        if let error = signupError {
-            throw SignupError.firebaseError(error: error.localizedDescription)
+            self.createUserInfo(name: name, contact: contact, email: email, uid: result.user.uid)
+            self.login(email: email, password: password)
         }
-
-        if let result = signupResult {
-            createUserInfo(name: name, email: email, uid: result.user.uid)
-            return result.user.uid
-        } else {
-            throw SignupError.firebaseError(error: "Something went wrong.")
-        }
-
     }
 
-    func login(email: String, password: String) throws -> String {
-        var loginError: Error?
-        var loginResult: AuthDataResult?
+    func login(email: String, password: String) {
 
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if let error = error {
-                print("error")
-                loginError = error
+                self.view?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
+                return
             }
-            if let result = result {
-                print("result")
-                loginResult = result
-            }
-        }
 
-        if let error = loginError {
-            throw LoginError.firebaseError(error: error.localizedDescription)
-        }
-        if let result = loginResult {
-            return result.user.uid
-        } else {
-            throw LoginError.firebaseError(error: "Something went wrong.")
+            self.view?.authSucceeded()
         }
     }
 
-    private func createUserInfo(name: String, email: String, uid: String) {
+    private func createUserInfo(name: String, contact: String, email: String, uid: String) {
         let db = Firestore.firestore()
-        db.collection("customers").addDocument(data: ["name": name, "email:": email, "id": uid]) { (error) in
+        db.collection("customers")
+            .addDocument(data: ["name": name, "contact": contact, "email": email, "uid": uid]) { (error) in
             if let error = error {
-                print(error.localizedDescription)
+                self.view?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
             }
-        }
+            }
     }
 
 }

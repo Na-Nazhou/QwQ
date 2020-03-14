@@ -8,65 +8,68 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, AuthDelegate {
 
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBAction func loginButton(_ sender: Any) {
+    let auth: Authenticator
+
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
+
+    init() {
+        self.auth = FBAuthenticator()
+        super.init(nibName: nil, bundle: nil)
     }
-    
+
+    required init?(coder: NSCoder) {
+        self.auth = FBAuthenticator()
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        auth.setView(view: self)
         // Do any additional setup after loading the view.
     }
 
-    @IBAction private func handleLogin(_ sender: Any) {
-        let auth = FBAuthenticator()
-        var uid = ""
+    @IBAction private func loginButton(_ sender: Any) {
 
-        guard var email = emailTextField.text else {
-            showMessage(title: "Missing Email", message: "Please provide a valid email.", buttonMessage: "Okay")
+        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard let email = trimmedEmail, let password = trimmedPassword else {
             return
         }
 
-        guard validateEmail(email: email) else {
-            showMessage(title: "Invalid Email", message: "Please provide a proper email.", buttonMessage: "Okay")
+        guard !email.isEmpty else {
+            showMessage(title: "Missing Email", message: "Please provide a valid email.", buttonText: "Okay")
             return
         }
 
-        guard var password = passwordTextField.text else {
-            showMessage(title: "Missing Password", message: "Please provide a valid password.", buttonMessage: "Okay")
+        guard LoginUtilities.validateEmail(email: email) else {
+            showMessage(title: "Invalid Email", message: "Please provide a proper email.", buttonText: "Okay")
             return
         }
-        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        password = password.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        do {
-            uid = try auth.login(email: email, password: password)
-        } catch LoginError.firebaseError(let errorMessage) {
-            showMessage(title: "Error", message: "An internal error occured: \(errorMessage)", buttonMessage: "Okay")
-        } catch {
-            showMessage(title: "Oops!", message: "Something went wrong.", buttonMessage: "Okay")
+        guard !password.isEmpty else {
+            showMessage(title: "Missing Password", message: "Please provide a valid password.", buttonText: "Okay")
+            return
         }
 
-        print(uid)
+        auth.login(email: email, password: password)
 
     }
 
-    func showMessage(title: String, message: String, buttonMessage: String) {
+    func showMessage(title: String, message: String, buttonText: String) {
         let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        let closeDialogAction = UIAlertAction(title: buttonMessage, style: .default)
+        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
         message.addAction(closeDialogAction)
 
         self.present(message, animated: true)
     }
 
-    /// taken from https://emailregex.com/
-    private func validateEmail(email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+    func authSucceeded() {
+        performSegue(withIdentifier: "loginCompleted", sender: self)
     }
 
 }
-
