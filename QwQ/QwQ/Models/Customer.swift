@@ -10,4 +10,6 @@ struct Customer: User {
     let uid: String
     let name: String
     let email: String
+
+    let contact: String
 }

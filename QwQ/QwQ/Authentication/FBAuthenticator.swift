@@ -47,7 +47,8 @@ class FBAuthenticator: Authenticator {
     private func createUserInfo(name: String, contact: String, email: String, uid: String) {
         let db = Firestore.firestore()
         db.collection("customers")
-            .addDocument(data: ["name": name, "contact": contact, "email": email, "uid": uid]) { (error) in
+            .document("uid")
+            .setData(["name": name, "contact": contact, "email": email]) { (error) in
             if let error = error {
                 self.view?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
             }

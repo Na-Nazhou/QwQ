@@ -9,10 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

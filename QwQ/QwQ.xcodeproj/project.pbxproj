@@ -11,12 +11,13 @@
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
 		5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD062418E375002B88E3 /* GoogleService-Info.plist */; };
-		5C11FD092418E503002B88E3 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD082418E503002B88E3 /* UserStorage.swift */; };
+		5C11FD092418E503002B88E3 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD082418E503002B88E3 /* ProfileStorage.swift */; };
 		5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0B2418E63D002B88E3 /* Authenticator.swift */; };
 		5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */; };
 		5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */; };
 		5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9066B3241BB85C00731130 /* AuthDelegate.swift */; };
 		5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA15943241C928B00835102 /* LoginUtilities.swift */; };
+		5CA15948241C9F9400835102 /* FBProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA15947241C9F9400835102 /* FBProfileStorage.swift */; };
 		61B2EAA42418BABB00B88018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA32418BABB00B88018 /* User.swift */; };
 		61B2EAA62418BC3200B88018 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA52418BC3200B88018 /* Customer.swift */; };
 		61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B2EAA72418BD7300B88018 /* Restaurant.swift */; };
@@ -73,13 +74,14 @@
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		5C11FD062418E375002B88E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5C11FD082418E503002B88E3 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		5C11FD082418E503002B88E3 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
 		5C11FD0B2418E63D002B88E3 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		5C11FD0D2418E652002B88E3 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		5C161100241A2D1E00602245 /* QwQ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QwQ.entitlements; sourceTree = "<group>"; };
 		5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBQueueStorage.swift; sourceTree = "<group>"; };
 		5C9066B3241BB85C00731130 /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
 		5CA15943241C928B00835102 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = SOURCE_ROOT; };
+		5CA15947241C9F9400835102 /* FBProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBProfileStorage.swift; sourceTree = "<group>"; };
 		60284286A03C46049CE623AE /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
 		61B2EAA32418BABB00B88018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		61B2EAA52418BC3200B88018 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -300,11 +302,12 @@
 		D4A771662418C899009610C7 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
 				5C046A7E241BD84E00662505 /* Delegates */,
 				D4A771672418C98F009610C7 /* QueueStorage.swift */,
-				5C11FD082418E503002B88E3 /* UserStorage.swift */,
-				D4A771692418D00C009610C7 /* QueueStorageSync.swift */,
+				5C11FD082418E503002B88E3 /* ProfileStorage.swift */,
 				5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */,
+				5CA15947241C9F9400835102 /* FBProfileStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				D4A771682418C98F009610C7 /* QueueStorage.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
+				5CA15948241C9F9400835102 /* FBProfileStorage.swift in Sources */,
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				D4A771652418C266009610C7 /* QueueLogic.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
@@ -618,7 +622,7 @@
 				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
 				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
 				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
-				5C11FD092418E503002B88E3 /* UserStorage.swift in Sources */,
+				5C11FD092418E503002B88E3 /* ProfileStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
