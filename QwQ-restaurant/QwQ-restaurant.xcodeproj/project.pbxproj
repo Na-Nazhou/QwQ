@@ -11,6 +11,9 @@
 		5C44C9AE241DCE9F0097C006 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */; };
 		5C44C9B0241DCF240097C006 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AF241DCF240097C006 /* AuthDelegate.swift */; };
 		5C44C9B3241DD0390097C006 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9B2241DD0390097C006 /* LoginUtilities.swift */; };
+		5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
+		5C4A54FF241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
+		5C4A5500241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
 		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
@@ -55,6 +58,7 @@
 		5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		5C44C9AF241DCF240097C006 /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
 		5C44C9B2241DD0390097C006 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
+		5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7A56C4E7B305C7762F8B0550 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				7E72B18B241C95BF00C1EE72 /* Main.storyboard */,
 				7E72B166241C940500C1EE72 /* LaunchScreen.storyboard */,
 				7E72B169241C940500C1EE72 /* Info.plist */,
+				5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */,
 			);
 			path = "QwQ-restaurant";
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				7E72B191241C95F000C1EE72 /* Profile.storyboard in Resources */,
 				7E72B190241C95F000C1EE72 /* Activities.storyboard in Resources */,
 				7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */,
+				5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C4A54FF241E0A780054C926 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +405,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C4A5500241E0A780054C926 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
