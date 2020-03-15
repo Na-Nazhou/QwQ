@@ -28,10 +28,16 @@ class SignUpViewController: UIViewController, AuthDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         auth.setDelegate(view: self)
-        // Do any additional setup after loading the view.
+
+        self.hideKeyboardWhenTappedAround()
     }
 
+    @IBAction func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction private func submitButton(_ sender: Any) {
 
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
@@ -40,7 +46,9 @@ class SignUpViewController: UIViewController, AuthDelegate {
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard checkIfAllFieldsAreFilled() else {
-            showMessage(title: "Error:", message: "Please fill in all the fields!", buttonText: "Okay")
+            showMessage(title: Constants.missingFieldsTitle,
+                        message: Constants.missingFieldsMessage,
+                        buttonText: Constants.okayTitle)
             return
         }
 
@@ -50,13 +58,16 @@ class SignUpViewController: UIViewController, AuthDelegate {
         }
 
         guard LoginUtilities.validateEmail(email: email) else {
-            showMessage(title: "Error!", message: "Please enter a valid email.", buttonText: "Okay")
+            showMessage(title: Constants.invalidEmailTitle,
+                        message: Constants.invalidEmailMessage,
+                        buttonText: Constants.okayTitle)
             return
         }
 
         guard LoginUtilities.validateContact(contact: contact) else {
-            showMessage(title: "Error!", message: "Please enter a valid contact number: 8 numbers only.",
-                        buttonText: "Okay")
+            showMessage(title: Constants.invalidContactTitle,
+                        message: Constants.invalidContactMessage,
+                        buttonText: Constants.okayTitle)
             return
         }
 
@@ -73,7 +84,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
     }
 
     func authSucceeded() {
-        performSegue(withIdentifier: "signupCompleted", sender: self)
+        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {
