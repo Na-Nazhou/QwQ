@@ -13,10 +13,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Search View Controller-->
+        <!--Activities View Controller-->
         <scene sceneID="8Pv-qo-QEm">
             <objects>
-                <viewController id="unC-H2-shI" customClass="SearchViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="unC-H2-shI" customClass="ActivitiesViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BKf-ZL-3DJ">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,10 +25,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="271"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="254.5" y="50" width="325.5" height="107"/>
+                                <rect key="frame" x="235" y="50" width="364" height="105.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUEUE/ BOOKINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
-                                        <rect key="frame" x="0.0" y="0.0" width="325.5" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                                         </variation>
                                     </label>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Eq4-dl-NjE">
-                                        <rect key="frame" x="0.0" y="51" width="325.5" height="56"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="364" height="56"/>
                                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
@@ -51,28 +51,28 @@
                                     </searchBar>
                                 </subviews>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="urr-2m-4eq">
-                                <rect key="frame" x="0.0" y="268" width="834" height="861"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ss1-lc-U0X">
+                                <rect key="frame" x="20" y="279" width="794" height="850"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VJt-Vb-yu0">
-                                    <size key="itemSize" width="834" height="193"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d0B-Rw-EPH">
+                                    <size key="itemSize" width="770" height="193"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="restaurantCell" id="lhN-ab-ua4">
-                                        <rect key="frame" x="0.0" y="0.0" width="834" height="193"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueRecordCell" id="lhN-ab-ua4" customClass="QueueRecordCell" customModule="QwQ_restaurant" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="0.0" width="770" height="193"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="193"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="770" height="193"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-zS-MIV">
-                                                    <rect key="frame" x="0.0" y="15" width="834" height="173.5"/>
+                                                    <rect key="frame" x="0.0" y="15" width="770" height="173.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-f4-NMI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="834" height="54.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="770" height="54"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 pax, 1 baby chair" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Ic-Js3">
-                                                            <rect key="frame" x="0.0" y="54.5" width="834" height="46"/>
+                                                            <rect key="frame" x="0.0" y="54" width="770" height="45.5"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                                             <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -89,24 +89,26 @@
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
                                                             </variation>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGB-sk-njd">
-                                                            <rect key="frame" x="0.0" y="100.5" width="834" height="73"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KGB-sk-njd">
+                                                            <rect key="frame" x="0.0" y="99.5" width="770" height="74"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pi5-Gp-cFO">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="73"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="385" height="74"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                                                    <state key="normal" title="DEQUEUE">
+                                                                    <state key="normal" title="ADMIT">
                                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
                                                                     <connections>
-                                                                        <segue destination="9OI-BT-VJ6" kind="show" id="q3q-Qr-jrA"/>
+                                                                        <action selector="handleAdmit:" destination="lhN-ab-ua4" eventType="touchUpInside" id="Dsu-58-tUo"/>
+                                                                        <action selector="queueButton:" destination="lhN-ab-ua4" eventType="touchUpInside" id="fm2-T1-eFZ"/>
+                                                                        <segue destination="9OI-BT-VJ6" kind="show" identifier="queueRecordSelected" id="q3q-Qr-jrA"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8B-GC-KIy">
-                                                                    <rect key="frame" x="584" y="0.0" width="250" height="73"/>
+                                                                    <rect key="frame" x="385" y="0.0" width="385" height="74"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                     <state key="normal" title="REMOVE">
                                                                         <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -114,11 +116,11 @@
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
+                                                                    <connections>
+                                                                        <action selector="handleRemove:" destination="lhN-ab-ua4" eventType="touchUpInside" id="A38-le-6EU"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="s8B-GC-KIy" firstAttribute="width" secondItem="KGB-sk-njd" secondAttribute="width" multiplier="0.3" id="k7j-50-uC9"/>
-                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -133,7 +135,11 @@
                                                 <constraint firstItem="sL4-zS-MIV" firstAttribute="top" secondItem="d5m-QS-HYA" secondAttribute="top" constant="15" id="nin-jp-GXX"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="834" height="193"/>
+                                        <size key="customSize" width="770" height="193"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="fd7-Ic-Js3" id="co0-NY-2u1"/>
+                                            <outlet property="nameLabel" destination="ez4-f4-NMI" id="Vl1-g0-Skx"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -141,31 +147,32 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="top" secondItem="r2s-La-V29" secondAttribute="top" constant="50" id="CLd-Cv-LqJ"/>
+                            <constraint firstItem="ss1-lc-U0X" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" constant="20" id="CaH-Ue-y4h"/>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="centerX" secondItem="BKf-ZL-3DJ" secondAttribute="centerX" id="J6Q-Y8-fZk"/>
-                            <constraint firstItem="urr-2m-4eq" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" id="P8D-OT-ITO"/>
-                            <constraint firstItem="urr-2m-4eq" firstAttribute="top" secondItem="nOr-ig-2QA" secondAttribute="bottom" constant="-3" id="PR5-xk-SQh"/>
-                            <constraint firstItem="r2s-La-V29" firstAttribute="trailing" secondItem="urr-2m-4eq" secondAttribute="trailing" id="XTF-68-CWg"/>
+                            <constraint firstItem="ss1-lc-U0X" firstAttribute="top" secondItem="nOr-ig-2QA" secondAttribute="bottom" constant="8" symbolic="YES" id="UjR-W9-jxA"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="top" secondItem="r2s-La-V29" secondAttribute="top" id="deG-Ob-mdz"/>
+                            <constraint firstItem="r2s-La-V29" firstAttribute="trailing" secondItem="ss1-lc-U0X" secondAttribute="trailing" constant="20" id="gda-57-h0n"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="height" secondItem="r2s-La-V29" secondAttribute="height" multiplier="0.24" id="kuB-Z0-N5E"/>
-                            <constraint firstItem="r2s-La-V29" firstAttribute="bottom" secondItem="urr-2m-4eq" secondAttribute="bottom" id="nXd-rV-iFj"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" id="rAp-Wv-dl2"/>
+                            <constraint firstItem="r2s-La-V29" firstAttribute="bottom" secondItem="ss1-lc-U0X" secondAttribute="bottom" id="ss9-PI-eij"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="trailing" secondItem="r2s-La-V29" secondAttribute="trailing" id="u0M-bu-8sA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r2s-La-V29"/>
                     </view>
                     <navigationItem key="navigationItem" id="Nln-qZ-h8h"/>
                     <connections>
-                        <outlet property="restaurantCollectionView" destination="urr-2m-4eq" id="1lY-bP-R8e"/>
+                        <outlet property="queueRecordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
+                        <outlet property="searchBarController" destination="Eq4-dl-NjE" id="OLx-dj-dbR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZd-hd-jF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3694.9640287769785" y="-87.939698492462313"/>
         </scene>
-        <!--View Controller-->
+        <!--Queue Record View Controller-->
         <scene sceneID="eND-32-OAz">
             <objects>
-                <viewController id="9OI-BT-VJ6" sceneMemberID="viewController">
+                <viewController id="9OI-BT-VJ6" customClass="QueueRecordViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XED-LO-yaF">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -192,13 +199,6 @@
                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-up-TA1">
-                                <rect key="frame" x="10" y="20" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gFj-up-TA1" secondAttribute="height" id="fHh-NH-xWO"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="back-icon"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUD-DO-NV8">
                                 <rect key="frame" x="0.0" y="1038.5" width="834" height="90.5"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,6 +209,9 @@
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                 </variation>
+                                <connections>
+                                    <action selector="handleSubmit:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="k46-Cs-I6G"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-Uq-Gtn">
                                 <rect key="frame" x="0.0" y="279" width="834" height="751.5"/>
@@ -327,13 +330,21 @@
                                     <constraint firstAttribute="width" secondItem="Xo5-Su-msW" secondAttribute="height" multiplier="1:1" id="CtI-z3-SoL"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFJ-5D-us5">
+                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CFJ-5D-us5" secondAttribute="height" multiplier="1:1" id="t2W-qN-KBt"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="Jib-9r-QyD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="leading" secondItem="gFj-up-TA1" secondAttribute="trailing" constant="-40" id="0xg-Wh-wgn"/>
                             <constraint firstItem="vFV-E1-Kcm" firstAttribute="centerX" secondItem="XED-LO-yaF" secondAttribute="centerX" id="2K6-8S-JVJ"/>
                             <constraint firstItem="UUD-DO-NV8" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="2SG-Na-tYZ"/>
-                            <constraint firstItem="gFj-up-TA1" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" constant="10" id="2kW-x6-qPB"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="top" secondItem="37u-KV-kYY" secondAttribute="top" id="CUK-Dj-x1K"/>
                             <constraint firstItem="i5m-MW-5bh" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.5" id="E2e-CB-cYn"/>
                             <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="Lgn-aC-fHD"/>
@@ -344,17 +355,27 @@
                             <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="top" secondItem="9SF-iG-iOr" secondAttribute="bottom" constant="8" symbolic="YES" id="cvm-nL-glC"/>
                             <constraint firstItem="UUD-DO-NV8" firstAttribute="top" secondItem="uzQ-Uq-Gtn" secondAttribute="bottom" constant="8" symbolic="YES" id="eK5-vn-OZk"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="lFo-nv-T3g"/>
+                            <constraint firstItem="CFJ-5D-us5" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.0551559" id="mO0-5I-Bry"/>
+                            <constraint firstItem="CFJ-5D-us5" firstAttribute="top" secondItem="37u-KV-kYY" secondAttribute="top" constant="30" id="nM2-tR-M9b"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="trailing" secondItem="UUD-DO-NV8" secondAttribute="trailing" id="nZe-pE-p5w"/>
                             <constraint firstItem="Xo5-Su-msW" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.2" id="nm6-fn-KBe"/>
                             <constraint firstItem="UUD-DO-NV8" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.08" id="obh-Sr-9cp"/>
+                            <constraint firstItem="CFJ-5D-us5" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" constant="20" id="uyp-a6-1tD"/>
                             <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="vhQ-b2-sYH"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="top" secondItem="gFj-up-TA1" secondAttribute="bottom" constant="-50" id="w7D-im-aT7"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="bottom" secondItem="UUD-DO-NV8" secondAttribute="bottom" id="yq8-29-baz"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="zLL-cc-223"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="37u-KV-kYY"/>
                     </view>
                     <navigationItem key="navigationItem" id="oaR-MC-pKJ"/>
+                    <connections>
+                        <outlet property="babyChairQuantityLabel" destination="DR2-hK-G43" id="vjr-9b-F8t"/>
+                        <outlet property="contactLabel" destination="XIR-sW-eub" id="hPd-Ux-ReD"/>
+                        <outlet property="groupSizeLabel" destination="g0R-1i-4ei" id="7aY-8a-rZF"/>
+                        <outlet property="nameLabel" destination="i5m-MW-5bh" id="22k-az-6hA"/>
+                        <outlet property="profileImageView" destination="Xo5-Su-msW" id="w1d-0c-Rlc"/>
+                        <outlet property="wheelchairFriendlySwitch" destination="uDC-We-AIf" id="bTj-Kp-DcT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRg-zD-JSZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

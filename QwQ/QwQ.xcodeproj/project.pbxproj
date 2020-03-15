@@ -31,7 +31,6 @@
 		7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64F2418B6C300C2F9BB /* SceneDelegate.swift */; };
 		7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6562418B6C900C2F9BB /* Assets.xcassets */; };
 		7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */; };
-		7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */; };
 		7EC7E6702418B6CA00C2F9BB /* QwQUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */; };
 		7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */; };
 		7EC7E68E241B2FED00C2F9BB /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC7E68D241B2FED00C2F9BB /* Search.storyboard */; };
@@ -39,6 +38,12 @@
 		7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E693241B383400C2F9BB /* ProfileViewController.swift */; };
 		7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E695241B385E00C2F9BB /* SearchViewController.swift */; };
 		7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */; };
+		7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */; };
+		7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D014241D2BEC00C1465E /* Constants.swift */; };
+		7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D016241DB57F00C1465E /* AlertService.swift */; };
+		7EE6D019241DC0EA00C1465E /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */; };
+		7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */; };
+		7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D020241E202A00C1465E /* EditBookingViewController.swift */; };
 		AAA6F8D8063CEC78486A39B0 /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */; };
 		B1D8B678FCC0DEDC93B33725 /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */; };
 		D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */; };
@@ -108,7 +113,6 @@
 		7EC7E6592418B6C900C2F9BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EC7E65B2418B6C900C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC7E6602418B6CA00C2F9BB /* QwQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQTests.swift; sourceTree = "<group>"; };
 		7EC7E6662418B6CA00C2F9BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EC7E66B2418B6CA00C2F9BB /* QwQUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QwQUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC7E66F2418B6CA00C2F9BB /* QwQUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQUITests.swift; sourceTree = "<group>"; };
@@ -119,6 +123,12 @@
 		7EC7E693241B383400C2F9BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7EC7E695241B385E00C2F9BB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
+		7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
+		7EE6D014241D2BEC00C1465E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7EE6D016241DB57F00C1465E /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQueueViewController.swift; sourceTree = "<group>"; };
+		7EE6D020241E202A00C1465E /* EditBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookingViewController.swift; sourceTree = "<group>"; };
 		8009A426DCE12C28F5D0578C /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C3AC7F4F0710CE2947FBD15 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogicManager.swift; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 		7E72B199241C9CC700C1EE72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,7 +280,6 @@
 		7EC7E6632418B6CA00C2F9BB /* QwQTests */ = {
 			isa = PBXGroup;
 			children = (
-				7EC7E6642418B6CA00C2F9BB /* QwQTests.swift */,
 				7EC7E6662418B6CA00C2F9BB /* Info.plist */,
 			);
 			path = QwQTests;
@@ -290,7 +300,9 @@
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
 				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
 				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
+				7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */,
 				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
+				7EE6D020241E202A00C1465E /* EditBookingViewController.swift */,
 				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
 				5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */,
 			);
@@ -302,6 +314,9 @@
 			children = (
 				5CA15946241C92A900835102 /* Utilities */,
 				5C11FCFF2418E2D1002B88E3 /* Fonts */,
+				7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */,
+				7EE6D014241D2BEC00C1465E /* Constants.swift */,
+				7EE6D016241DB57F00C1465E /* AlertService.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -676,15 +691,18 @@
 				D4A7716C2418D941009610C7 /* CustomerQueueLogic.swift in Sources */,
 				5CE17B4C241CD80600A04B8B /* ProfileDelegate.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* User.swift in Sources */,
+				7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* Customer.swift in Sources */,
 				61B2EAA82418BD7300B88018 /* Restaurant.swift in Sources */,
 				D4A771632418C1CC009610C7 /* QueueLogicManager.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSync.swift in Sources */,
+				7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */,
 				5CA15948241C9F9400835102 /* FBProfileStorage.swift in Sources */,
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
+				7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */,
 				5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */,
 				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
 				D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */,
@@ -701,11 +719,14 @@
 				D4494EBC241B247600BD0780 /* CustomerQueueLogicManager.swift in Sources */,
 				5C11FD092418E503002B88E3 /* UserStorage.swift in Sources */,
 				61B2EAB02418DB1700B88018 /* RestaurantQueue.swift in Sources */,
+				7EE6D019241DC0EA00C1465E /* RestaurantCell.swift in Sources */,
+				7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */,
 				61B2EAAA2418BF5300B88018 /* QueueRecord.swift in Sources */,
 				D4A7716E2418D953009610C7 /* RestaurantQueueLogic.swift in Sources */,
 				D4A7716A2418D00C009610C7 /* QueueStorageSync.swift in Sources */,
 				5C11FD092418E503002B88E3 /* ProfileStorage.swift in Sources */,
 				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
+				7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +734,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC7E6652418B6CA00C2F9BB /* QwQTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

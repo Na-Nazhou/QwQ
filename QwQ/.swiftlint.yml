@@ -80,6 +80,7 @@ disabled_rules:
   - type_name
   - object_literal
   - unneeded_parentheses_in_closure_argument
+  - trailing_whitespace
 
 line_length:
   warning: 120

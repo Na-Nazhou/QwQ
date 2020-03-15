@@ -12,7 +12,8 @@ class ProfileViewController: UIViewController, ProfileDelegate {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
-
+    @IBOutlet private var profileImageView: UIImageView!
+    
     let profileStorage: ProfileStorage
 
     init() {
@@ -27,13 +28,27 @@ class ProfileViewController: UIViewController, ProfileDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         profileStorage.setDelegate(delegate: self)
-        // Do any additional setup after loading the view.
+
+        setUpProfileImageView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         profileStorage.getCustomerInfo()
+    }
+
+    private func setUpProfileImageView() {
+        profileImageView.layer.borderWidth = Constants.profileBorderWidth
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = Constants.profileBorderColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.clipsToBounds = true
+    }
+
+    @IBAction func logoutButton(_ sender: Any) {
     }
 
     func getCustomerInfoComplete(customer: Customer) {
