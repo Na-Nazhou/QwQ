@@ -84,6 +84,9 @@
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ve9-2G-jOh"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
                                                 <rect key="frame" x="0.0" y="226.5" width="420" height="55.5"/>
@@ -94,6 +97,9 @@
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
                                                 </variation>
+                                                <connections>
+                                                    <segue destination="cYR-K6-pmi" kind="show" id="AOZ-DQ-0nd"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -134,6 +140,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="qxR-Zv-WeF"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="qMP-nu-B0d" id="sWI-Sv-UEJ"/>
+                        <outlet property="passwordTextField" destination="vRt-MH-ebt" id="9rX-UU-HwP"/>
+                        <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="23e-ha-7lb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -174,7 +185,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700.625" y="-87.676056338028175"/>
+            <point key="canvasLocation" x="1809" y="102"/>
         </scene>
         <!--Activities-->
         <scene sceneID="UBO-CK-qMg">
@@ -184,7 +195,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oP-Yc-OWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2585" y="-11"/>
+            <point key="canvasLocation" x="2503" y="5"/>
         </scene>
         <!--Profile-->
         <scene sceneID="uvw-VP-MlA">
@@ -194,7 +205,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egv-4c-Mv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2583" y="128"/>
+            <point key="canvasLocation" x="2497" y="181"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="pzF-pP-bbx">
@@ -208,7 +219,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="282"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP WITH Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ3-eg-qhj">
-                                <rect key="frame" x="280" y="120.5" width="274.5" height="41"/>
+                                <rect key="frame" x="268.5" y="121" width="297" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -220,10 +231,10 @@
                                 </variation>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2t0-jl-ydk">
-                                <rect key="frame" x="15" y="297" width="804" height="513"/>
+                                <rect key="frame" x="15" y="297" width="804" height="689.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ci9-CS-fKN">
-                                        <rect key="frame" x="0.0" y="0.0" width="367" height="513"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="367" height="689.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RU4-IP-4Ir">
                                                 <rect key="frame" x="0.0" y="0.0" width="367" height="161"/>
@@ -243,10 +254,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akA-XG-Oty" userLabel="Password">
+                                                <rect key="frame" x="0.0" y="528" width="367" height="161.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="G44-0s-Y09">
-                                        <rect key="frame" x="387" y="0.0" width="417" height="513"/>
+                                        <rect key="frame" x="387" y="0.0" width="417" height="689.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Jane" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="1cL-Sc-r32">
                                                 <rect key="frame" x="0.0" y="0.0" width="417" height="161"/>
@@ -299,7 +316,27 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                             </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2ba-Kg-7qM">
+                                                <rect key="frame" x="0.0" y="528" width="417" height="161.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="2ba-Kg-7qM" secondAttribute="height" multiplier="207:80" id="Sfy-a6-Sj7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2ba-Kg-7qM" firstAttribute="width" secondItem="2ba-Kg-7qM" secondAttribute="height" multiplier="207:80" id="gM6-Om-8dy"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -310,6 +347,9 @@
                                 <state key="normal" title="SUBMIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitButton:" destination="cYR-K6-pmi" eventType="touchUpInside" id="iBc-uP-6WH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -332,10 +372,17 @@
                         <viewLayoutGuide key="safeArea" id="Tp8-pK-s1o"/>
                     </view>
                     <navigationItem key="navigationItem" id="0id-m5-wWI"/>
+                    <connections>
+                        <outlet property="contactTextField" destination="t6r-Qf-ME5" id="zar-II-MJ4"/>
+                        <outlet property="emailTextField" destination="Fcg-lT-1vz" id="dbB-ng-qp8"/>
+                        <outlet property="nameTextField" destination="1cL-Sc-r32" id="FFK-68-7w5"/>
+                        <outlet property="passwordTextField" destination="2ba-Kg-7qM" id="Dr8-qg-GHk"/>
+                        <segue destination="zBd-vc-N4j" kind="show" identifier="signupCompleted" id="y5a-2U-37J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="781"/>
+            <point key="canvasLocation" x="886" y="872"/>
         </scene>
     </scenes>
     <resources>
@@ -343,4 +390,7 @@
         <image name="login-background" width="2048" height="2732"/>
         <image name="r-logo" width="487" height="558"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="y5a-2U-37J"/>
+    </inferredMetricsTieBreakers>
 </document>
