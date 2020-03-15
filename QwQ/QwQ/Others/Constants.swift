@@ -15,7 +15,8 @@ struct Constants {
     // MARK: Alert settings
     static let missingFieldsTitle = "Error - Missing Fields"
     static let missingFieldsMessage = "Please fill in all the fields!"
-    static let okayButton = "Okay"
+    static let okayTitle = "Okay"
+    static let cancelTitle = "Cancel"
     static let successfulUpdateTitle = "Success"
     static let successfulUpdateMessage = "Your profile has been updated."
     static let invalidEmailTitle = "Error - Invalid Email"
@@ -26,8 +27,21 @@ struct Constants {
     static let missingEmailMessage = "Please provide a valid email."
     static let missingPasswordTitle = "Error - Missing Password"
     static let missingPasswordMessage = "Please provide a valid password."
+    static let chooseFromPhotoLibraryTitle = "Choose from Library"
+    static let chooseFromCameraTitle = "Take from Camera"
+    static let showImagePickerTitle = "Choose your image"
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
+    static let restaurantSelectedSegue = "restaurantSelected"
+    static let queueSelectedSegue = "queueSelected"
+    static let bookSelectedSegue = "bookSelected"
+    
+    // MARK: Collection view settings
+    static let restaurantReuseIdentifier = "restaurantCell"
+    static let restaurantSectionInsets = UIEdgeInsets(top: 20.0,
+                                                    left: 30.0,
+                                                    bottom: 20.0,
+                                                    right: 30.0)
 }

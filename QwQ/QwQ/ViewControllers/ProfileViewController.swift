@@ -28,9 +28,18 @@ class ProfileViewController: UIViewController, ProfileDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         profileStorage.setDelegate(delegate: self)
-        
+
+        setUpProfileImageView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        profileStorage.getCustomerInfo()
+    }
+
+    private func setUpProfileImageView() {
         profileImageView.layer.borderWidth = Constants.profileBorderWidth
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.borderColor = Constants.profileBorderColor
@@ -39,9 +48,7 @@ class ProfileViewController: UIViewController, ProfileDelegate {
         profileImageView.clipsToBounds = true
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        profileStorage.getCustomerInfo()
+    @IBAction func logoutButton(_ sender: Any) {
     }
 
     func getCustomerInfoComplete(customer: Customer) {

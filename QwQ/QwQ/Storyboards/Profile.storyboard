@@ -84,14 +84,29 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA3-k5-Oxb">
-                                <rect key="frame" x="378.5" y="60" width="20.5" height="22"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="square.and.pencil" catalog="system"/>
-                                <connections>
-                                    <segue destination="uvb-Aq-pGb" kind="show" id="wVk-Dg-lWh"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="boo-kg-gqS">
+                                <rect key="frame" x="234.5" y="59" width="164.5" height="21"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA3-k5-Oxb">
+                                        <rect key="frame" x="0.0" y="0.5" width="61.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Edit" image="square.and.pencil" catalog="system"/>
+                                        <connections>
+                                            <segue destination="uvb-Aq-pGb" kind="show" id="wVk-Dg-lWh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlH-Cn-hEf">
+                                        <rect key="frame" x="76.5" y="0.0" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Logout" image="square.and.arrow.up" catalog="system"/>
+                                        <connections>
+                                            <action selector="logoutButton:" destination="ZIh-3X-Z4Q" eventType="touchUpInside" id="7XO-fB-Xju"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -100,19 +115,19 @@
                             <constraint firstItem="O9d-Dr-9Bv" firstAttribute="leading" secondItem="j7u-nN-AS7" secondAttribute="leading" id="EoC-Zh-e4p"/>
                             <constraint firstItem="j7u-nN-AS7" firstAttribute="bottom" secondItem="p45-dP-InM" secondAttribute="bottom" constant="15" id="Eu5-US-ehh"/>
                             <constraint firstItem="p45-dP-InM" firstAttribute="top" secondItem="O9d-Dr-9Bv" secondAttribute="bottom" constant="15" id="FU6-7i-yF8"/>
+                            <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="boo-kg-gqS" secondAttribute="trailing" constant="15" id="I0z-hS-Fty"/>
                             <constraint firstItem="fNg-50-TMe" firstAttribute="top" secondItem="O9d-Dr-9Bv" secondAttribute="bottom" constant="-148" id="IQm-Z9-URQ"/>
-                            <constraint firstItem="AA3-k5-Oxb" firstAttribute="top" secondItem="j7u-nN-AS7" secondAttribute="top" constant="16" id="NJb-ZR-QKb"/>
+                            <constraint firstItem="boo-kg-gqS" firstAttribute="top" secondItem="j7u-nN-AS7" secondAttribute="top" constant="15" id="Jeb-dV-EBZ"/>
                             <constraint firstItem="fNg-50-TMe" firstAttribute="centerX" secondItem="uez-KQ-DMx" secondAttribute="centerX" id="R1a-ob-ekv"/>
                             <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="p45-dP-InM" secondAttribute="trailing" constant="15" id="eb7-K7-IC4"/>
                             <constraint firstItem="SaD-11-Aib" firstAttribute="width" secondItem="j7u-nN-AS7" secondAttribute="width" multiplier="0.5" id="f3Z-Fj-zyS"/>
                             <constraint firstItem="p45-dP-InM" firstAttribute="leading" secondItem="j7u-nN-AS7" secondAttribute="leading" constant="15" id="jUs-1U-2IO"/>
                             <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="O9d-Dr-9Bv" secondAttribute="trailing" id="wDN-wg-Z08"/>
                             <constraint firstItem="O9d-Dr-9Bv" firstAttribute="top" secondItem="uez-KQ-DMx" secondAttribute="top" id="wwB-cj-reK"/>
-                            <constraint firstItem="j7u-nN-AS7" firstAttribute="trailing" secondItem="AA3-k5-Oxb" secondAttribute="trailing" constant="15" id="zQj-5U-3pg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j7u-nN-AS7"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.circle" catalog="system" id="p3D-JD-Qxh"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.circle" catalog="system" landscapeImage="person.circle" selectedImage="person.circle" id="p3D-JD-Qxh"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contactLabel" destination="Sx7-31-N9e" id="Thb-oa-57Q"/>
@@ -137,7 +152,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="323"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE DETAILS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54C-SX-OcD">
-                                <rect key="frame" x="104" y="148.5" width="206.5" height="26"/>
+                                <rect key="frame" x="104" y="35" width="206.5" height="26"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -243,13 +258,23 @@
                                     <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="Vts-mO-17q"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="oMO-Fa-FG7">
+                                <rect key="frame" x="145" y="124" width="124" height="124"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oMO-Fa-FG7" secondAttribute="height" multiplier="8:8" id="6lr-lR-QEe"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="width" secondItem="oMO-Fa-FG7" secondAttribute="height" multiplier="8:8" id="2rN-SY-GmF"/>
+                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="centerX" secondItem="no3-1h-BWi" secondAttribute="centerX" id="5dU-XZ-Znr"/>
                             <constraint firstItem="E3a-Bj-mhH" firstAttribute="bottom" secondItem="Xe5-rj-t0D" secondAttribute="bottom" id="9wj-gt-9av"/>
+                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="top" secondItem="54C-SX-OcD" secondAttribute="bottom" constant="63" id="EXY-mz-pIT"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" id="GeA-Gs-ux3"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.08" id="HXb-4i-hwi"/>
-                            <constraint firstItem="54C-SX-OcD" firstAttribute="centerY" secondItem="wg1-mI-11x" secondAttribute="centerY" id="Ly2-1B-1no"/>
+                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.3" id="KEa-MR-o7X"/>
+                            <constraint firstItem="54C-SX-OcD" firstAttribute="top" secondItem="wg1-mI-11x" secondAttribute="top" constant="35" id="NPH-bH-GiH"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="trailing" secondItem="E3a-Bj-mhH" secondAttribute="trailing" id="Phf-v4-qYH"/>
                             <constraint firstItem="kCI-SM-wzl" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" constant="15" id="SB2-lm-cYK"/>
                             <constraint firstItem="wg1-mI-11x" firstAttribute="top" secondItem="E3a-Bj-mhH" secondAttribute="top" id="SGT-qf-1M0"/>
@@ -268,11 +293,12 @@
                         <outlet property="contactTextField" destination="aK6-5x-eCJ" id="5Dx-32-SU5"/>
                         <outlet property="emailTextField" destination="GfW-bI-YCB" id="Fi5-Rk-qKb"/>
                         <outlet property="nameTextField" destination="FtT-b8-3JZ" id="VbA-oP-Uyh"/>
+                        <outlet property="profileImageView" destination="oMO-Fa-FG7" id="ysd-e3-1p8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mg4-Dr-HRK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2712" y="767"/>
+            <point key="canvasLocation" x="2711.594202898551" y="766.74107142857144"/>
         </scene>
     </scenes>
     <resources>
@@ -280,6 +306,7 @@
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="person.circle" catalog="system" width="64" height="60"/>
         <image name="profile-background" width="2037" height="1401"/>
+        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
     </resources>
 </document>
