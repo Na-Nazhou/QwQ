@@ -333,7 +333,6 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		7E72B19A241C9CF300C1EE72 /* Exceptions */ = {
 		7E72B198241C9C8200C1EE72 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +394,8 @@
 				D4EA85FF241B2CC5009EB85B /* QueueStorageSync.swift */,
 			);
 			path = SharedProtocols;
+            sourceTree = "<group>";
+        };
 		7EE6D034241E57CC00C1465E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,10 +555,17 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+            inputPaths = (
+                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+                "${PODS_ROOT}/Manifest.lock",
+            );
+            name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
+            outputPaths = (
+                "$(DERIVED_FILE_DIR)/Pods-QwQ-restaurantTests-checkManifestLockResult.txt",
+            );
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant-frameworks.sh\"\n";
@@ -637,10 +645,17 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+            inputPaths = (
+                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+                "${PODS_ROOT}/Manifest.lock",
+            );
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
+            outputPaths = (
+                "$(DERIVED_FILE_DIR)/Pods-QwQ-restaurant-checkManifestLockResult.txt",
+            );
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests-frameworks.sh\"\n";
