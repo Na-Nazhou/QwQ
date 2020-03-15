@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C44C9AC241DCE8E0097C006 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AB241DCE8E0097C006 /* Authenticator.swift */; };
+		5C44C9AE241DCE9F0097C006 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */; };
+		5C44C9B0241DCF240097C006 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AF241DCF240097C006 /* AuthDelegate.swift */; };
+		5C44C9B3241DD0390097C006 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9B2241DD0390097C006 /* LoginUtilities.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
 		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
@@ -47,6 +51,10 @@
 		02D15F2C2F86E0408443805B /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant_QwQ_restaurantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		348FC0930931C3EC7435E434 /* Pods-QwQ-restaurantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurantTests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurantTests/Pods-QwQ-restaurantTests.release.xcconfig"; sourceTree = "<group>"; };
 		58F7EC49F1CBD82D857B321D /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5C44C9AB241DCE8E0097C006 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
+		5C44C9AF241DCF240097C006 /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
+		5C44C9B2241DD0390097C006 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
 		7A56C4E7B305C7762F8B0550 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,8 +131,24 @@
 				9484E256C1F4334BCC828185 /* Pods-QwQ-restaurantTests.debug.xcconfig */,
 				348FC0930931C3EC7435E434 /* Pods-QwQ-restaurantTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5C44C9AA241DCE7B0097C006 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5C44C9AB241DCE8E0097C006 /* Authenticator.swift */,
+				5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		5C44C9B1241DD02F0097C006 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5C44C9B2241DD0390097C006 /* LoginUtilities.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		7E72B14F241C93FE00C1EE72 = {
@@ -154,7 +178,7 @@
 			children = (
 				7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */,
 				7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */,
-				7E72B197241C9C7500C1EE72 /* Authentication */,
+				5C44C9AA241DCE7B0097C006 /* Authentication */,
 				7E72B198241C9C8200C1EE72 /* Storage */,
 				7E72B195241C963800C1EE72 /* Logic */,
 				7E72B192241C961700C1EE72 /* Models */,
@@ -232,21 +256,16 @@
 		7E72B196241C963D00C1EE72 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				5C44C9B1241DD02F0097C006 /* Utilities */,
 				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
 		};
-		7E72B197241C9C7500C1EE72 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
 		7E72B198241C9C8200C1EE72 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				5C44C9AF241DCF240097C006 /* AuthDelegate.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -320,7 +339,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = Appfish;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7E72B157241C93FE00C1EE72 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -493,11 +512,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
+				5C44C9AC241DCE8E0097C006 /* Authenticator.swift in Sources */,
+				5C44C9B3241DD0390097C006 /* LoginUtilities.swift in Sources */,
+				5C44C9B0241DCF240097C006 /* AuthDelegate.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
 				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
 				7E72B19E241CA52F00C1EE72 /* LoginViewController.swift in Sources */,
+				5C44C9AE241DCE9F0097C006 /* FBAuthenticator.swift in Sources */,
 				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +688,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,6 +707,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

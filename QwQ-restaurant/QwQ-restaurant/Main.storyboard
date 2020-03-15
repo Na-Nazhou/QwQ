@@ -119,7 +119,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="r-logo" translatesAutoresizingMaskIntoConstraints="NO" id="KlE-Cl-Jeh">
-                                <rect key="frame" x="-70" y="157.5" width="974" height="469.5"/>
+                                <rect key="frame" x="173.5" y="157.5" width="487" height="469.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -143,7 +143,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="qMP-nu-B0d" id="sWI-Sv-UEJ"/>
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="9rX-UU-HwP"/>
-                        <segue destination="zBd-vc-N4j" kind="show" id="23e-ha-7lb"/>
+                        <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="23e-ha-7lb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -364,6 +364,6 @@
         <image name="r-logo" width="487" height="558"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y5a-2U-37J"/>
+        <segue reference="23e-ha-7lb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -3,7 +3,6 @@
 //  QwQ-restaurant
 //
 //  Created by Tan Su Yee on 14/3/20.
-//  Copyright © 2020 Appfish. All rights reserved.
 //
 
 import UIKit
