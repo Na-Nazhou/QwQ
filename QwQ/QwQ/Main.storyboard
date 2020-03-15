@@ -119,7 +119,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="KlE-Cl-Jeh">
-                                <rect key="frame" x="-157" y="150.66666666666666" width="728" height="327.33333333333337"/>
+                                <rect key="frame" x="25" y="150.66666666666666" width="364" height="327.33333333333337"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -352,9 +352,20 @@
                                     <action selector="submitButton:" destination="cYR-K6-pmi" eventType="touchUpInside" id="Qgk-Xk-ae8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-7f-CkB">
+                                <rect key="frame" x="15" y="26" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C4F-7f-CkB" secondAttribute="height" multiplier="1:1" id="zXJ-4Q-sub"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="cYR-K6-pmi" eventType="touchUpInside" id="omE-hb-WXY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="C4F-7f-CkB" firstAttribute="width" secondItem="Tp8-pK-s1o" secondAttribute="width" multiplier="0.08" id="2GP-tD-VXe"/>
                             <constraint firstItem="2t0-jl-ydk" firstAttribute="top" secondItem="yHx-Mu-I5p" secondAttribute="bottom" constant="15" id="2r0-Ti-86B"/>
                             <constraint firstItem="Tp8-pK-s1o" firstAttribute="bottom" secondItem="Vhu-nh-gWC" secondAttribute="bottom" id="ABb-Mb-ncK"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="Aa7-ez-NoK"/>
@@ -363,10 +374,12 @@
                             <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerY" secondItem="yHx-Mu-I5p" secondAttribute="centerY" id="c6P-f0-gDY"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.08" id="cC5-G6-LpL"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="d3X-bK-oEW"/>
+                            <constraint firstItem="C4F-7f-CkB" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" constant="15" id="flx-Bh-Hke"/>
                             <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerX" secondItem="yHx-Mu-I5p" secondAttribute="centerX" id="hwt-f2-Fyj"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="j1s-hW-szC"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="pi1-Yq-Lwx"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.3" id="pu8-51-zW7"/>
+                            <constraint firstItem="Tp8-pK-s1o" firstAttribute="top" secondItem="C4F-7f-CkB" secondAttribute="bottom" constant="-15" id="qKn-pS-6R7"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="top" secondItem="qZx-fA-huR" secondAttribute="top" id="wti-Qq-gnO"/>
                             <constraint firstItem="2t0-jl-ydk" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" constant="15" id="xUq-Lk-bAl"/>
                         </constraints>
@@ -387,6 +400,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back-icon" width="1060" height="1060"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="login-background" width="2048" height="2732"/>
         <image name="logo" width="364" height="416"/>

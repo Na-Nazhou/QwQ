@@ -38,6 +38,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         setUpProfileImageView()
     }
     
+    @IBAction func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func setUpProfileImageView() {
         profileImageView.layer.borderWidth = Constants.profileBorderWidth
         profileImageView.layer.masksToBounds = false

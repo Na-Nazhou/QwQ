@@ -34,6 +34,10 @@ class SignUpViewController: UIViewController, AuthDelegate {
         self.hideKeyboardWhenTappedAround()
     }
 
+    @IBAction func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction private func submitButton(_ sender: Any) {
 
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
