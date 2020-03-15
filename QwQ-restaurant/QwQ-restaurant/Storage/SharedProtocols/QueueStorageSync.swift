@@ -4,11 +4,9 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord)
     func customerDidWithdrawQueue(record: QueueRecord)
 
-    // if we allow restaurants to reject customers
-    func restaurantDidRemoveQueueRecord(record: QueueRecord)
-
     func restaurantDidAdmitCustomer(record: QueueRecord)
     func restaurantDidServeCustomer(record: QueueRecord)
+    // Supposing restaurant can only kick customers from waiting list and not the queue itself
     func restaurantDidRejectCustomer(record: QueueRecord)
 }
 

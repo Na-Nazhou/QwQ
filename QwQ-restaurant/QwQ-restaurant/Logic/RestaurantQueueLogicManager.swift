@@ -34,10 +34,13 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     var restaurantQueue = RestaurantQueue()
 
-    func loadQueue() {
+    func loadQueue() -> [QueueRecord] {
         // Fetch the current queue from db
-        queueStorage.loadQueue(of: restaurant)
-        // TODO: Feedback to views
+        return queueStorage.loadQueue(of: restaurant)
+    }
+
+    func loadWaiting() -> [QueueRecord] {
+        return queueStorage.loadWaitingList(of: restaurant)
     }
 
     func openQueue() {
@@ -69,38 +72,58 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         // hasnt arrived so they kicked them out or sth
     }
 
+    func alertRestaurantIfCustomerTookTooLongToArrive(record: QueueRecord) {
+        // TODO: popup alert
+    }
+
+    // MARK: - sync from global db update
     func restaurantDidOpenQueue(restaurant: Restaurant) {
-        //
+        if restaurant != self.restaurant {
+            //all endpoints get notified, but if does not pertain to itself, nothing is done.
+            return
+        }
+        presentationDelegate?.restaurantDidOpenQueue()
     }
 
     func restaurantDidCloseQueue(restaurant: Restaurant) {
-        //
+        if restaurant != self.restaurant {
+            return
+        }
+        presentationDelegate?.restaurantDidCloseQueue()
     }
 
     func customerDidJoinQueue(with record: QueueRecord) {
         // Add the queue record to the queue
+        presentationDelegate?.logicDidAddRecordToQueue(with: record)
+        // TODO: notify/alert that customer had joined queue
     }
 
     func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
         // Update the queue record in the current queue
+        presentationDelegate?.logicDidModifyRecordInQueue(from: old, to: new)
+        // TODO: notify/alert that customer had made changes
     }
 
     func customerDidWithdrawQueue(record: QueueRecord) {
         // delete the queue record from the current queue
+        presentationDelegate?.logicDidRemoveRecordFromQueue(queueRecord: record)
+        // TODO: notify/alert that customer had quit queue
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {
-        //
+        presentationDelegate?.logicDidRemoveRecordFromQueue(queueRecord: record)
+        presentationDelegate?.logicDidAddRecordToWaiting(record: record)
     }
+
     func restaurantDidServeCustomer(record: QueueRecord) {
-        //
+        presentationDelegate?.logicDidRemoveRecordFromWaiting(record: record)
     }
+
     func restaurantDidRejectCustomer(record: QueueRecord) {
-        //
+        presentationDelegate?.logicDidRemoveRecordFromWaiting(record: record)
+        //TODO: add back to end of queue?
     }
-    func restaurantDidRemoveQueueRecord(record: QueueRecord) {
-        //
-    }
+
 }
 
 extension RestaurantQueueLogicManager {
