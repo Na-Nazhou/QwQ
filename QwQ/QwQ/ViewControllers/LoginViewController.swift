@@ -27,8 +27,7 @@ class LoginViewController: UIViewController, AuthDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        auth.setView(view: self)
-        // Do any additional setup after loading the view.
+        auth.setDelegate(view: self)
     }
 
     @IBAction private func loginButton(_ sender: Any) {

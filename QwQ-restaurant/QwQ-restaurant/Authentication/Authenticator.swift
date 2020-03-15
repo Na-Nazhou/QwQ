@@ -1,8 +1,8 @@
 //
 //  Authenticator.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 11/3/20.
+//  Created by Daniel Wong on 15/3/20.
 //
 
 protocol Authenticator {

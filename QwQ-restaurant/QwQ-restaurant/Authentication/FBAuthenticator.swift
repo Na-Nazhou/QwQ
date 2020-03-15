@@ -1,8 +1,8 @@
 //
 //  FBAuthenticator.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 11/3/20.
+//  Created by Daniel Wong on 15/3/20.
 //
 
 import FirebaseAuth
@@ -46,7 +46,7 @@ class FBAuthenticator: Authenticator {
 
     private func createUserInfo(name: String, contact: String, email: String, uid: String) {
         let db = Firestore.firestore()
-        db.collection("customers")
+        db.collection("restaurants")
             .document(uid)
             .setData(["uid": uid, "name": name, "contact": contact, "email": email]) { (error) in
             if let error = error {
