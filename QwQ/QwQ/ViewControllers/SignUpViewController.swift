@@ -97,4 +97,3 @@ class SignUpViewController: UIViewController, AuthDelegate {
     }
 
 }
-
