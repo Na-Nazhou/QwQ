@@ -21,14 +21,6 @@ class EditProfileViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,13 +30,6 @@ class EditProfileViewController: UIViewController {
     }
     
     private func setUpProfileImageView() {
-        profileImageView.layer.borderWidth = Constants.profileBorderWidth
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = Constants.profileBorderColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.clipsToBounds = true
-        
         let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true

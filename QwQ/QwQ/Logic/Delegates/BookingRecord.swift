@@ -8,6 +8,7 @@
 import Foundation
 
 struct BookingRecord {
+    var id = "0"
     let restaurant: Restaurant
     let customer: Customer
 
@@ -16,4 +17,5 @@ struct BookingRecord {
     var wheelchairFriendly: Bool
 
     let time: Date
+    var admitTime: Date?
 }

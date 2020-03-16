@@ -187,8 +187,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFV-E1-Kcm">
-                                <rect key="frame" x="264.5" y="39" width="305.5" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFV-E1-Kcm">
+                                <rect key="frame" x="231.5" y="40.5" width="371" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -203,13 +203,14 @@
                                 <rect key="frame" x="0.0" y="1038.5" width="834" height="90.5"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
-                                <state key="normal" title="QUEUE">
+                                <state key="normal" title="ADMIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                 </variation>
                                 <connections>
+                                    <action selector="handleAdmit:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="zGO-9g-BJc"/>
                                     <action selector="handleSubmit:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="k46-Cs-I6G"/>
                                 </connections>
                             </button>
@@ -324,8 +325,8 @@
                                     <constraint firstItem="vFf-iS-bhv" firstAttribute="top" secondItem="uzQ-Uq-Gtn" secondAttribute="top" constant="15" id="m1i-4s-UTN"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="Xo5-Su-msW">
-                                <rect key="frame" x="333.5" y="88" width="167" height="167"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="Xo5-Su-msW" customClass="ProfileImageView" customModule="QwQ_restaurant" customModuleProvider="target">
+                                <rect key="frame" x="354.5" y="88" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xo5-Su-msW" secondAttribute="height" multiplier="1:1" id="CtI-z3-SoL"/>
                                 </constraints>
@@ -358,7 +359,7 @@
                             <constraint firstItem="CFJ-5D-us5" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.0551559" id="mO0-5I-Bry"/>
                             <constraint firstItem="CFJ-5D-us5" firstAttribute="top" secondItem="37u-KV-kYY" secondAttribute="top" constant="30" id="nM2-tR-M9b"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="trailing" secondItem="UUD-DO-NV8" secondAttribute="trailing" id="nZe-pE-p5w"/>
-                            <constraint firstItem="Xo5-Su-msW" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.2" id="nm6-fn-KBe"/>
+                            <constraint firstItem="Xo5-Su-msW" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.15" id="nm6-fn-KBe"/>
                             <constraint firstItem="UUD-DO-NV8" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.08" id="obh-Sr-9cp"/>
                             <constraint firstItem="CFJ-5D-us5" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" constant="20" id="uyp-a6-1tD"/>
                             <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="vhQ-b2-sYH"/>
@@ -369,12 +370,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="oaR-MC-pKJ"/>
                     <connections>
-                        <outlet property="babyChairQuantityLabel" destination="DR2-hK-G43" id="vjr-9b-F8t"/>
-                        <outlet property="contactLabel" destination="XIR-sW-eub" id="hPd-Ux-ReD"/>
-                        <outlet property="groupSizeLabel" destination="g0R-1i-4ei" id="7aY-8a-rZF"/>
-                        <outlet property="nameLabel" destination="i5m-MW-5bh" id="22k-az-6hA"/>
-                        <outlet property="profileImageView" destination="Xo5-Su-msW" id="w1d-0c-Rlc"/>
-                        <outlet property="wheelchairFriendlySwitch" destination="uDC-We-AIf" id="bTj-Kp-DcT"/>
+                        <outlet property="babyChairQuantityLabel" destination="RUO-Ag-kAS" id="I87-m5-qEv"/>
+                        <outlet property="contactLabel" destination="aVd-A7-LfE" id="B4K-t5-jxc"/>
+                        <outlet property="groupSizeLabel" destination="tqe-nJ-iYU" id="tbT-yS-T2N"/>
+                        <outlet property="nameLabel" destination="i5m-MW-5bh" id="1OS-AE-Gsh"/>
+                        <outlet property="profileImageView" destination="Xo5-Su-msW" id="uqU-Id-Cn1"/>
+                        <outlet property="wheelchairFriendlySwitch" destination="tey-X4-Dmn" id="I0H-uN-XcH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRg-zD-JSZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

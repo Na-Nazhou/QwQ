@@ -16,6 +16,7 @@ class EditBookingViewController: UIViewController {
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
     
     
+    
     @IBAction func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }

@@ -12,12 +12,13 @@ class QueueRecordViewController: UIViewController {
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var groupSizeLabel: UILabel!
     @IBOutlet weak var babyChairQuantityLabel: UILabel!
-    @IBOutlet weak var wheelchairFriendlySwitch: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
     
     var queueRecord: QueueRecord?
     
-    @IBAction func handleSubmit(_ sender: Any) {
+    @IBAction func handleAdmit(_ sender: Any) {
+        showMessage(title: Constants.admitCustomerTitle, message: Constants.admitCustomerMessage, buttonText: Constants.okayTitle)
     }
     
     override func viewDidLoad() {
@@ -34,7 +35,16 @@ class QueueRecordViewController: UIViewController {
         nameLabel.text = queueRecord?.customer.name
         contactLabel.text = queueRecord?.customer.contact
         groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(queueRecord?.babyChairQuantity ?? 0)
+        babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
 //        wheelchairFriendlySwitch. = String(queueRecord?.wheelchairFriendly)
+    }
+    
+    func showMessage(title: String, message: String, buttonText: String) {
+        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
+        message.addAction(closeDialogAction)
+        
+        self.present(message, animated: true)
     }
 }
