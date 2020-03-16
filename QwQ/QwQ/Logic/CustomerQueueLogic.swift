@@ -8,12 +8,12 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
 
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
-                 babyCount: Int,
-                 wheelchairCount: Int) -> String?
+                 babyChairQuantity: Int,
+                 wheelchairFriendly: Bool) -> String?
 
     func editQueueRecord(with groupSize: Int,
-                         babyCount: Int,
-                         wheelchairCount: Int)
+                         babyChairQuantity: Int,
+                         wheelchairFriendly: Bool)
 
     func deleteQueueRecord()
 }

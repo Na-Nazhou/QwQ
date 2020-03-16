@@ -1,5 +1,21 @@
 class RestaurantLogicManager: RestaurantLogic {
-    weak var currentlyOpenRestaurantPage: RestaurantLogicDelegate?
+    private(set) var restaurantStorage: RestaurantStorage
+
+    private var customer: Customer
+    weak var currentlyOpenRestaurantPage: RestaurantDelegate?
+    var openRestaurants = [Restaurant]()
+
+    func loadOpenRestaurants() {
+    }
+
+    func restaurantDidOpenQueue(restaurant: Restaurant) {
+    }
+
+    func restaurantDidCloseQueue(restaurant: Restaurant) {
+    }
+}
+
+extension RestaurantLogicManager {
 
     private static var restaurantLogic: RestaurantLogicManager?
 
@@ -22,19 +38,5 @@ class RestaurantLogicManager: RestaurantLogic {
     private init(customer: Customer) {
         self.customer = customer
         restaurantStorage = RestaurantStorageStub()
-    }
-
-    private var customer: Customer
-    private(set) var restaurantStorage: RestaurantStorage
-
-    var openRestaurants = [Restaurant]()
-
-    func loadOpenRestaurants() {
-    }
-
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-    }
-
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
     }
 }

@@ -38,8 +38,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
-                 babyCount: Int,
-                 wheelchairCount: Int) -> String? {
+                 babyChairQuantity: Int,
+                 wheelchairFriendly: Bool) -> String? {
         guard currentQueueRecord == nil else {
             // Disallow enqueue if there is a current queue
             // Check if the restaurant is open
@@ -51,8 +51,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         let newRecord = QueueRecord(restaurant: restaurant,
                                     customer: customer,
                                     groupSize: groupSize,
-                                    babyCount: babyCount,
-                                    wheelchairCount: wheelchairCount,
+                                    babyChairQuantity: babyChairQuantity,
+                                    wheelchairFriendly: wheelchairFriendly,
                                     startTime: startTime,
                                     admitTime: nil,
                                     serveTime: nil)
@@ -64,8 +64,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func editQueueRecord(with groupSize: Int,
-                         babyCount: Int,
-                         wheelchairCount: Int) {
+                         babyChairQuantity: Int,
+                         wheelchairFriendly: Bool) {
         guard currentQueueRecord != nil else {
             // Check if there is any change
             return
@@ -111,6 +111,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
         //
     }
+    
     func customerDidWithdrawQueue(record: QueueRecord) {
         //
     }
