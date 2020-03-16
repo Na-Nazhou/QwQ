@@ -8,12 +8,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     // View Controller
     weak var queueDelegate: QueueDelegate?
 
-    private var customer: Customer
+    private(set) var customer: Customer
     var currentQueueRecord: QueueRecord?
 
     private init(customer: Customer) {
         self.customer = customer
-        queueStorage = CustomerQueueStorageStub()
+        queueStorage = FBQueueStorage()
         loadQueueRecord()
     }
 
@@ -57,13 +57,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         // Reset startTime (??)
 
         let new = QueueRecord(restaurant: old.restaurant,
-                                    customer: customer,
-                                    groupSize: groupSize,
-                                    babyChairQuantity: babyChairQuantity,
-                                    wheelchairFriendly: wheelchairFriendly,
-                                    startTime: old.startTime,
-                                    admitTime: nil,
-                                    serveTime: nil)
+                              customer: customer,
+                              groupSize: groupSize,
+                              babyChairQuantity: babyChairQuantity,
+                              wheelchairFriendly: wheelchairFriendly,
+                              startTime: old.startTime,
+                              admitTime: nil,
+                              serveTime: nil)
 
         queueStorage.updateQueueRecord(old: old, new: new)
     }
@@ -87,7 +87,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         currentQueueRecord = nil
     }
-
 
     func restaurantDidRejectCustomer(record: QueueRecord) {
         //
@@ -138,6 +137,7 @@ extension CustomerQueueLogicManager {
         let logic = CustomerQueueLogicManager(customer: customerIdentity!)
         logic.queueStorage.queueModificationLogicDelegate = logic
 
+        queueLogic = logic
         return logic
     }
 

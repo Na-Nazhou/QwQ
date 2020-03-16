@@ -7,5 +7,5 @@
 
 /// Protocol for delegate of restaurant logic presentation to follow.
 protocol SearchDelegate: AnyObject {
-    
+    func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool)
 }

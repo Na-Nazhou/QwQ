@@ -1,4 +1,5 @@
 class RestaurantLogicManager: RestaurantLogic {
+
     // Storage
     private(set) var restaurantStorage: RestaurantStorage
 
@@ -6,7 +7,8 @@ class RestaurantLogicManager: RestaurantLogic {
     weak var restaurantDelegate: RestaurantDelegate?
     weak var searchDelegate: SearchDelegate?
 
-    private var customer: Customer
+    private(set) var customer: Customer
+    var currentRestaurant: Restaurant?
     var restaurants = [Restaurant]()
 
     private init(customer: Customer) {
@@ -20,9 +22,24 @@ class RestaurantLogicManager: RestaurantLogic {
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
+        if let currentRestaurant = self.currentRestaurant,
+            restaurant == currentRestaurant {
+            self.currentRestaurant?.isOpen = true
+            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
+        }
+
+        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: true)
+
     }
 
     func restaurantDidCloseQueue(restaurant: Restaurant) {
+        if let currentRestaurant = self.currentRestaurant,
+            restaurant == currentRestaurant {
+            self.currentRestaurant?.isOpen = false
+            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
+        }
+
+        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: false)
     }
 }
 
@@ -39,6 +56,8 @@ extension RestaurantLogicManager {
                "Customer identity must be given non-nil to make the customer's restaurant logic manager.")
         let logic = RestaurantLogicManager(customer: customerIdentity!)
         logic.restaurantStorage.logicDelegate = logic
+
+        restaurantLogic = logic
         return logic
     }
 
