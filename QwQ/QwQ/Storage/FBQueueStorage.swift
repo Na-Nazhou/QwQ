@@ -62,30 +62,63 @@ class FBQueueStorage: CustomerQueueStorage {
             }
     }
 
-    private func queueRecordToDictionary(_ record: QueueRecord) -> [String: Any] {
-        var data = [String: Any]()
-        data["customer"] = record.customer.uid
-        data["groupSize"] = record.groupSize
-        data["babyChairQuantity"] = record.babyChairQuantity
-        data["wheelchairFriendly"] = record.wheelchairFriendly
-        data["startTime"] = record.startTime
-
-        if let admitTime = record.admitTime {
-            data["admitTime"] = admitTime
-        }
-
-        return data
-    }
-
     // MARK: - Protocol conformance
     
     func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
         // Attach listener
+        db.collection("queues").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let restaurantQueuesToday = self.db.collection("queues")
+                        .document(document.documentID)
+                        .collection(QueueRecord.getDateString(from: Date()))
+                    restaurantQueuesToday.getDocuments() { (queueSnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                            for document in queueSnapshot!.documents {
+                                let queueCid = document.data()["customer"]
+                                if let qCid = (queueCid as? String) {
+                                    guard qCid == customer.uid else {
+                                        return
+                                    }
+                                    guard let servedTime = document.data()["serveTime"] as? TimeStamp else {
+                                        // past queue history
+                                        return
+                                    }
+                                    
+                                    completion(QueueRecord(document.data()))
+                                }
+                            }
+                        }
+                    }
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
     }
+
+    private
+
 
     func loadQueueHistory(customer: Customer, completion:  @escaping ([QueueRecord]) -> Void) {
         // Attach listener
-
+        var queues = [QueueRecord]()
+        db.collection("queues").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    db.collection("queues")
+                        .document(document.documentID)
+                        .getColl
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+        return []
     }
     
     func didDetectAdmissionOfCustomer(record: QueueRecord) {
