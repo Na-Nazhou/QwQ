@@ -23,15 +23,21 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
 
     func openQueue(of restaurant: Restaurant, at time: Date) {
-//        let newQueueRecordRef = db.collection("restaurants")
-//            .document(restaurant.uid)
-//        newQueueRecordRef.setData(queueRecordToDictionary(record)) { (error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            completion(newQueueRecordRef.documentID)
-//        }
+        let restaurantDoc = db.collection("restaurants")
+            .document(restaurant.uid)
+        restaurantDoc.setData(restaurantToDictionary(restaurant))
+    }
+
+    private func restaurantToDictionary(_ restaurant: Restaurant) -> [String: Any] {
+        var data = [String: Any]()
+        data["uid"] = restaurant.uid
+        data["name"] = restaurant.name
+        data["email"] = restaurant.email
+        data["contact"] = restaurant.contact
+        data["address"] = restaurant.address
+        data["menu"] = restaurant.menu
+        data["isOpen"] = restaurant.isOpen
+        return data
     }
     
     func closeQueue(of restaurant: Restaurant, at time: Date) {
