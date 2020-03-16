@@ -34,13 +34,25 @@ class FBAuthenticator: Authenticator {
 
     func login(email: String, password: String) {
 
-        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 self.view?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
                 return
             }
 
-            self.view?.authSucceeded()
+            if let result = result {
+                let db = Firestore.firestore()
+                let docRef = db.collection("customers").document(result.user.uid)
+                docRef.getDocument { (document, _) in
+                    if let data = document?.data() {
+                        guard let customer = Customer(dictionary: data) else {
+                            return
+                        }
+                        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
+                        self.view?.authSucceeded()
+                    }
+                }
+            }
         }
     }
 

@@ -5,8 +5,8 @@ struct QueueRecord: Hashable {
     let customer: Customer
 
     var groupSize: Int
-    var babyCount: Int
-    var wheelchairCount: Int
+    var babyChairQuantity: Int
+    var wheelchairFriendly: Bool
 
     let startTime: Date
     var admitTime: Date?
