@@ -40,7 +40,19 @@ class FBAuthenticator: Authenticator {
                 return
             }
 
-            self.view?.authSucceeded()
+            if let result = result {
+                let db = Firestore.firestore()
+                let docRef = db.collection("restaurants").document(result.user.uid)
+                docRef.getDocument { (document, _) in
+                    if let data = document?.data() {
+                        guard let restaurant = Restaurant(dictionary: data) else {
+                            return
+                        }
+                        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
+                        self.view?.authSucceeded()
+                    }
+                }
+            }
         }
     }
 
