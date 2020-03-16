@@ -7,18 +7,18 @@
 //
 
 import UIKit
+import Foundation
 
 class ActivitiesViewController: UIViewController {
     
     @IBOutlet weak var searchBarController: UISearchBar!
     @IBOutlet weak var queueRecordCollectionView: UICollectionView!
     
-    var queueRecords: [QueueRecord] = [QueueRecord(restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", phone: "98726582", address: "location", isOpen: true),
-                                                   customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", phone: "98273483"),
+    var queueRecords: [QueueRecord] = [QueueRecord(uid: "1",
+                                                   restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", contact: "12345678", address: "location", menu: "menu", isOpen: true), customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
                                                    groupSize: 4,
-                                                   babyCount: 0,
-                                                   wheelchairCount: 0,
-                                                   startTime: Date())]
+                                                   babyChairQuantity: 0, wheelchairFriendly: true,
+                                                   startTime: Date()), ]
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,8 +13,12 @@ class ProfileImageView: UIImageView {
         layer.borderWidth = Constants.profileBorderWidth
         layer.masksToBounds = false
         layer.borderColor = Constants.profileBorderColor
-        layer.cornerRadius = profileImageView.frame.height / 2
+        layer.cornerRadius = frame.height / 2
         contentMode = .scaleAspectFill
         clipsToBounds = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+         fatalError("init(coder:) has not been implemented")
     }
 }

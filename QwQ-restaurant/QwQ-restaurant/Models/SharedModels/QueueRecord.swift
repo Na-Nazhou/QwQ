@@ -1,17 +1,18 @@
 import Foundation
 
 struct QueueRecord: Hashable {
+    let uid: String
     let restaurant: Restaurant
     let customer: Customer
 
     var groupSize: Int
-    var babyCount: Int
-    var wheelchairCount: Int
+    var babyChairQuantity: Int
+    var wheelchairFriendly: Bool
 
     let startTime: Date
     var admitTime: Date?
     var serveTime: Date?
-    
+
     static func == (lhs: QueueRecord, rhs: QueueRecord) -> Bool {
         return lhs.restaurant == rhs.restaurant
             && lhs.customer == rhs.customer

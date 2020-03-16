@@ -13,11 +13,11 @@ struct Customer: User {
     let contact: String
 
     var dictionary: [String: Any] {
-        return [
+        [
             "uid": uid,
             "name": name,
             "email": email,
-            "contact": contact,
+            "contact": contact
         ]
     }
 

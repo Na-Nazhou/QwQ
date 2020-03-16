@@ -33,9 +33,9 @@ class QueueRecordViewController: UIViewController {
     
     private func setUpViews() {
         nameLabel.text = queueRecord?.customer.name
-        contactLabel.text = queueRecord?.customer.phone
+        contactLabel.text = queueRecord?.customer.contact
         groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(queueRecord?.wheelchairCount ?? 0)
+        babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
 //        wheelchairFriendlySwitch. = String(queueRecord?.wheelchairFriendly)
     }
     

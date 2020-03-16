@@ -7,16 +7,15 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
-    
+class SearchViewController: UIViewController, SearchDelegate {
+
     private let reuseIdentifier = Constants.restaurantReuseIdentifier
     
     @IBOutlet weak var restaurantCollectionView: UICollectionView!
     
-    var restaurants: [Restaurant] = [
-        Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", menu: "menu", address: "location", isOpen: true),
-        Restaurant(uid: "2", name: "restaurant2", email: "k@mail.com", menu: "menu", address: "location", isOpen: false),
-        Restaurant(uid: "3", name: "restaurant3", email: "l@mail.com", menu: "menu", address: "location", isOpen: true)]
+    var restaurants: [Restaurant] {
+        RestaurantLogicManager.shared().restaurants
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +24,12 @@ class SearchViewController: UIViewController {
         
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
+
+        RestaurantLogicManager.shared().searchDelegate = self
+    }
+
+    func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
+        // 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

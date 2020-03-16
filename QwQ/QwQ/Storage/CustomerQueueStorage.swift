@@ -9,6 +9,6 @@ protocol CustomerQueueStorage: QueueStorageSync {
     func deleteQueueRecord(record: QueueRecord)
 
     // MARK: - Query
-    /// Return the current queue record (if any)
-    func loadQueueRecord() -> QueueRecord?
+    /// Return the current queue record (if any) of the customer
+    func loadQueueRecord(customer: Customer) -> QueueRecord?
 }
