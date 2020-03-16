@@ -7,17 +7,27 @@
 
 import UIKit
 
-class RestaurantViewController: UIViewController {
+class RestaurantViewController: UIViewController, RestaurantDelegate {
+
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
 
-    var restaurant: Restaurant?
+    var restaurant: Restaurant? {
+        get {
+            RestaurantLogicManager.shared().currentRestaurant
+        }
+        set {
+            RestaurantLogicManager.shared().currentRestaurant = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpViews()
+
+        RestaurantLogicManager.shared().restaurantDelegate = self
     }
     
     @IBAction func handleQueueTap(_ sender: Any) {
@@ -36,5 +46,9 @@ class RestaurantViewController: UIViewController {
         nameLabel.text = restaurant?.name
         menuLabel.text = restaurant?.menu
         locationLabel.text = restaurant?.address
+    }
+
+    func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {
+        //
     }
 }

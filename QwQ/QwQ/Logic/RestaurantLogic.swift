@@ -1,14 +1,11 @@
-/// Protocol for delegate of restaurant loggic presentation to follow.
-protocol RestaurantLogicDelegate: AnyObject {
-    func restaurantDidSetQueueStatus(of restaurant: Restaurant, toIsOpen isOpen: Bool)
-}
-
 /// Represents the protocol for a restaurant page that customers view.
 protocol RestaurantLogic: RestaurantStorageSyncDelegate {
-    var currentlyOpenRestaurantPage: RestaurantLogicDelegate? { get set }
-
+    // Storage
     var restaurantStorage: RestaurantStorage { get }
-    var openRestaurants: [Restaurant] { get set }
 
-    func loadOpenRestaurants()
+    // View Controllers
+    var restaurantDelegate: RestaurantDelegate? { get set }
+    var searchDelegate: SearchDelegate? { get set }
+
+    var restaurants: [Restaurant] { get set }
 }

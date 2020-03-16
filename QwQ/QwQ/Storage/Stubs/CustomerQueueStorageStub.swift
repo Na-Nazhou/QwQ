@@ -46,7 +46,7 @@ class CustomerQueueStorageStub: CustomerQueueStorage {
         //firebase delete record
     }
 
-    func loadQueueRecord() -> QueueRecord? {
+    func loadQueueRecord(customer: Customer) -> QueueRecord? {
         //firebase get active (current) queue of customer
         return nil
     }
