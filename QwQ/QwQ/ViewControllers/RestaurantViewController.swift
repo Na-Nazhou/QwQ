@@ -30,15 +30,15 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         RestaurantLogicManager.shared().restaurantDelegate = self
     }
     
-    @IBAction func handleQueueTap(_ sender: Any) {
+    @IBAction private func handleQueueTap(_ sender: Any) {
         performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
     }
-    
-    @IBAction func handleBookTap(_ sender: Any) {
+
+    @IBAction private func handleBookTap(_ sender: Any) {
         performSegue(withIdentifier: Constants.bookSelectedSegue, sender: self)
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     

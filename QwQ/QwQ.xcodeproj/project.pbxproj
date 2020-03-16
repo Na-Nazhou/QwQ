@@ -32,6 +32,8 @@
 		61B2EAA82418BD7300B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61B2EAAA2418BF5300B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61B2EAB02418DB1700B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7E35B6D0241F0635001C5862 /* CustomerQueueStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E35B6CE241F0634001C5862 /* CustomerQueueStorageStub.swift */; };
+		7E35B6D1241F0635001C5862 /* RestaurantStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E35B6CF241F0634001C5862 /* RestaurantStorageStub.swift */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
@@ -115,6 +117,8 @@
 		617B62E0241F3C0F0010AB30 /* BookingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookingRecord.swift; path = QwQ/Logic/Delegates/BookingRecord.swift; sourceTree = SOURCE_ROOT; };
 		63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E35B6CE241F0634001C5862 /* CustomerQueueStorageStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueStorageStub.swift; sourceTree = "<group>"; };
+		7E35B6CF241F0634001C5862 /* RestaurantStorageStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantStorageStub.swift; sourceTree = "<group>"; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +243,15 @@
 				D4494EAB241B241800BD0780 /* SharedModels */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7E35B6CD241F0634001C5862 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				7E35B6CE241F0634001C5862 /* CustomerQueueStorageStub.swift */,
+				7E35B6CF241F0634001C5862 /* RestaurantStorageStub.swift */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		7E72B199241C9CC700C1EE72 /* Views */ = {
@@ -398,10 +411,11 @@
 			children = (
 				5C046A7E241BD84E00662505 /* Delegates */,
 				D4494EBD241B24D800BD0780 /* SharedProtocols */,
-				D4494EC8241B24FE00BD0780 /* Stubs */,
 				D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */,
+				7E35B6CD241F0634001C5862 /* Stubs */,
 				D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */,
 				D4494EC1241B24D900BD0780 /* RestaurantStorageSync.swift */,
+				D4494EB8241B247600BD0780 /* CustomerQueueLogicManager.swift */,
 				5C11FD082418E503002B88E3 /* ProfileStorage.swift */,
 				5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */,
 				5CA15947241C9F9400835102 /* FBProfileStorage.swift */,
@@ -710,6 +724,7 @@
 				5CE17B4C241CD80600A04B8B /* ProfileDelegate.swift in Sources */,
 				61B2EAA42418BABB00B88018 /* (null) in Sources */,
 				7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */,
+				7E35B6D1241F0635001C5862 /* RestaurantStorageStub.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* (null) in Sources */,
 				61B2EAA82418BD7300B88018 /* (null) in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
@@ -719,6 +734,7 @@
 				613267FC241F220D00B770B6 /* RestaurantDelegate.swift in Sources */,
 				5CA15948241C9F9400835102 /* FBProfileStorage.swift in Sources */,
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
+				7E35B6D0241F0635001C5862 /* CustomerQueueStorageStub.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
 				7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */,
 				5CA15944241C928B00835102 /* LoginUtilities.swift in Sources */,
@@ -735,6 +751,7 @@
 				D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */,
 				613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
+				D4494EBC241B247600BD0780 /* CustomerQueueLogicManager.swift in Sources */,
 				5C11FD092418E503002B88E3 /* ProfileStorage.swift in Sources */,
 				61B2EAB02418DB1700B88018 /* (null) in Sources */,
 				7EE6D019241DC0EA00C1465E /* RestaurantCell.swift in Sources */,
