@@ -1,16 +1,22 @@
 class RestaurantLogicManager: RestaurantLogic {
+    // Storage
     private(set) var restaurantStorage: RestaurantStorage
 
+    // View Controllers
+    weak var restaurantDelegate: RestaurantDelegate?
+    weak var searchDelegate: SearchDelegate?
+
     private var customer: Customer
-    weak var currentlyOpenRestaurantPage: RestaurantDelegate?
-    var openRestaurants = [Restaurant]()
+    var restaurants = [Restaurant]()
 
     private init(customer: Customer) {
         self.customer = customer
         restaurantStorage = RestaurantStorageStub()
+        loadRestaurants()
     }
 
-    func loadOpenRestaurants() {
+    private func loadRestaurants() {
+        restaurants = restaurantStorage.loadAllRestaurants()
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
@@ -24,7 +30,7 @@ extension RestaurantLogicManager {
 
     private static var restaurantLogic: RestaurantLogicManager?
 
-    static func shared(for customerIdentity: Customer?) -> RestaurantLogicManager {
+    static func shared(for customerIdentity: Customer? = nil) -> RestaurantLogicManager {
         if let logic = restaurantLogic {
             return logic
         }

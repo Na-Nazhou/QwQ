@@ -24,6 +24,9 @@
 		613267F7241F217500B770B6 /* CustomerQueueStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267F5241F217500B770B6 /* CustomerQueueStorageStub.swift */; };
 		613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */; };
 		613267FC241F220D00B770B6 /* RestaurantDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267FA241F220C00B770B6 /* RestaurantDelegate.swift */; };
+		617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DC241F392F0010AB30 /* SearchDelegate.swift */; };
+		617B62DF241F39EF0010AB30 /* QueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DE241F39EF0010AB30 /* QueueDelegate.swift */; };
+		617B62E1241F3C0F0010AB30 /* BookingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62E0241F3C0F0010AB30 /* BookingRecord.swift */; };
 		61B2EAA42418BABB00B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61B2EAA62418BC3200B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61B2EAA82418BD7300B88018 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -107,6 +110,9 @@
 		613267F5241F217500B770B6 /* CustomerQueueStorageStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueueStorageStub.swift; path = QwQ/Storage/Stubs/CustomerQueueStorageStub.swift; sourceTree = SOURCE_ROOT; };
 		613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogicManager.swift; sourceTree = "<group>"; };
 		613267FA241F220C00B770B6 /* RestaurantDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDelegate.swift; sourceTree = "<group>"; };
+		617B62DC241F392F0010AB30 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
+		617B62DE241F39EF0010AB30 /* QueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDelegate.swift; sourceTree = "<group>"; };
+		617B62E0241F3C0F0010AB30 /* BookingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookingRecord.swift; path = QwQ/Logic/Delegates/BookingRecord.swift; sourceTree = SOURCE_ROOT; };
 		63BE2572029F0DDBE0C1511A /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6ED4D09D5FA987DD5736BDB5 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				613267FA241F220C00B770B6 /* RestaurantDelegate.swift */,
+				617B62DC241F392F0010AB30 /* SearchDelegate.swift */,
+				617B62DE241F39EF0010AB30 /* QueueDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 				D4EA85CC241B29CB009EB85B /* Customer.swift */,
 				D4EA85CE241B29CC009EB85B /* Restaurant.swift */,
 				D4EA85CB241B29CB009EB85B /* QueueRecord.swift */,
+				617B62E0241F3C0F0010AB30 /* BookingRecord.swift */,
 			);
 			name = SharedModels;
 			path = QwQ/SharedModels;
@@ -688,10 +697,13 @@
 			files = (
 				D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */,
 				D4EA85D1241B29CC009EB85B /* User.swift in Sources */,
+				617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */,
 				613267F6241F217500B770B6 /* RestaurantStorageStub.swift in Sources */,
 				D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */,
 				5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */,
+				617B62E1241F3C0F0010AB30 /* BookingRecord.swift in Sources */,
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
+				617B62DF241F39EF0010AB30 /* QueueDelegate.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSync.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
 				D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */,
