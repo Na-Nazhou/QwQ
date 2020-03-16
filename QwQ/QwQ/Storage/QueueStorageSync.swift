@@ -1,11 +1,6 @@
 /// Represents the protocol any queue storage syncing delegates need to conform to.
 protocol QueueStorageSyncDelegate: AnyObject {
-    func customerDidJoinQueue(with record: QueueRecord)
-    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord)
-    func customerDidWithdrawQueue(record: QueueRecord)
-
     func restaurantDidAdmitCustomer(record: QueueRecord)
-    func restaurantDidServeCustomer(record: QueueRecord)
     // Supposing restaurant can only kick customers from waiting list and not the queue itself
     func restaurantDidRejectCustomer(record: QueueRecord)
 }
@@ -22,13 +17,7 @@ protocol QueueStorageSync {
     var queueModificationLogicDelegate: QueueStorageSyncDelegate? { get set }
     var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate? { get set }
 
-    // MARK: - Sync handlers
-    func didDetectNewQueueRecord(record: QueueRecord)
-    func didDetectQueueRecordUpdate(old: QueueRecord, new: QueueRecord)
-    func didDetectWithdrawnQueueRecord(record: QueueRecord)
-
     func didDetectAdmissionOfCustomer(record: QueueRecord)
-    func didDetectServiceOfCustomer(record: QueueRecord)
     func didDetectRejectionOfCustomer(record: QueueRecord)
 
     func didDetectOpenQueue(restaurant: Restaurant)

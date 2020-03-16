@@ -61,9 +61,9 @@ class FBAuthenticator: Authenticator {
         db.collection("customers")
             .document(uid)
             .setData(["uid": uid, "name": name, "contact": contact, "email": email]) { (error) in
-            if let error = error {
-                self.view?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
-            }
+                if let error = error {
+                    self.view?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
+                }
             }
     }
 
