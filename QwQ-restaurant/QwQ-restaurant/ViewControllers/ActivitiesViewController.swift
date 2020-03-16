@@ -20,6 +20,9 @@ class ActivitiesViewController: UIViewController {
                                                    babyChairQuantity: 0, wheelchairFriendly: true,
                                                    startTime: Date()), ]
     
+    @IBAction func handleOpenClose(_ sender: Any) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
