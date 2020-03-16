@@ -12,7 +12,7 @@ class EditQueueViewController: UIViewController {
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var groupSizeTextField: UITextField!
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
-    @IBOutlet weak var wheelChairFriendlySwitch: UISwitch!
+    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
     
     @IBAction func handleSubmit(_ sender: Any) {
     }

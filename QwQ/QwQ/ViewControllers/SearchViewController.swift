@@ -59,10 +59,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.nameLabel.text = restaurant.name
         restaurantCell.locationLabel.text = restaurant.address
         
-        restaurantCell.queueAction = {
-            self.performSegue(withIdentifier: Constants.queueSelectedSegue, sender: indexPath)
-        }
-        
         return restaurantCell
     }
     
