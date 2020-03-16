@@ -13,12 +13,12 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet weak var searchBarController: UISearchBar!
     @IBOutlet weak var queueRecordCollectionView: UICollectionView!
     
-    var queueRecords: [QueueRecord] = [QueueRecord(uid: "1",
-                                                   customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
-                                                   restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", menu: "menu", address: "location"),
+    var queueRecords: [QueueRecord] = [QueueRecord(restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", phone: "98726582", address: "location", isOpen: true),
+                                                   customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", phone: "98273483"),
                                                    groupSize: 4,
-                                                   wheelchairFriendly: true,
-                                                   babyChairQuantity: 0)]
+                                                   babyCount: 0,
+                                                   wheelchairCount: 0,
+                                                   startTime: Date())]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,15 @@ class ActivitiesViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func showMessage(title: String, message: String, buttonText: String) {
+        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
+        message.addAction(closeDialogAction)
+        
+        self.present(message, animated: true)
     }
 }
 
@@ -62,10 +71,10 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         queueRecordCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
         
         queueRecordCell.admitAction = {
-            //            self.performSegue(withIdentifier: Constants.queueSelectedSegue, sender: indexPath)
+            self.showMessage(title: Constants.admitCustomerTitle, message: Constants.admitCustomerMessage, buttonText: Constants.okayTitle)
         }
         queueRecordCell.removeAction = {
-            //            self.performSegue(withIdentifier: Constants.queueSelectedSegue, sender: indexPath)
+            self.showMessage(title: Constants.removeCustomerTitle, message: Constants.removeCustomerMessage, buttonText: Constants.okayTitle)
         }
         
         return queueRecordCell
