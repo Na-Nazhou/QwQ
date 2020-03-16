@@ -54,8 +54,8 @@ class FBQueueStorage: CustomerQueueStorage {
         var data = [String: Any]()
         data["customer"] = record.customer.uid
         data["groupSize"] = record.groupSize
-        data["babyCount"] = record.babyCount
-        data["wheelchairCount"] = record.wheelchairCount
+        data["babyChairQuantity"] = record.babyChairQuantity
+        data["wheelchairFriendly"] = record.wheelchairFriendly
         data["startTime"] = record.startTime
 
         if let serveTime = record.serveTime {

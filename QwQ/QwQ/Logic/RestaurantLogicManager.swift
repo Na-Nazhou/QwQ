@@ -5,6 +5,11 @@ class RestaurantLogicManager: RestaurantLogic {
     weak var currentlyOpenRestaurantPage: RestaurantDelegate?
     var openRestaurants = [Restaurant]()
 
+    private init(customer: Customer) {
+        self.customer = customer
+        restaurantStorage = RestaurantStorageStub()
+    }
+
     func loadOpenRestaurants() {
     }
 
@@ -33,10 +38,5 @@ extension RestaurantLogicManager {
 
     static func deinitShared() {
         restaurantLogic = nil
-    }
-
-    private init(customer: Customer) {
-        self.customer = customer
-        restaurantStorage = RestaurantStorageStub()
     }
 }

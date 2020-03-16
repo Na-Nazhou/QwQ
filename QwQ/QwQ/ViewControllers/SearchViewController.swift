@@ -14,9 +14,12 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var restaurantCollectionView: UICollectionView!
     
     var restaurants: [Restaurant] = [
-        Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", menu: "menu", address: "location", isOpen: true),
-        Restaurant(uid: "2", name: "restaurant2", email: "k@mail.com", menu: "menu", address: "location", isOpen: false),
-        Restaurant(uid: "3", name: "restaurant3", email: "l@mail.com", menu: "menu", address: "location", isOpen: true)]
+        Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", contact: "12345678",
+                   address: "location", menu: "menu", isOpen: true),
+        Restaurant(uid: "2", name: "restaurant2", email: "k@mail.com", contact: "12345678",
+                   address: "location", menu: "menu", isOpen: false),
+        Restaurant(uid: "3", name: "restaurant3", email: "l@mail.com", contact: "12345678",
+                   address: "location", menu: "menu", isOpen: true)]
     
     override func viewDidLoad() {
         super.viewDidLoad()

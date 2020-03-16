@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ActivitiesViewController: UIViewController {
     
@@ -14,11 +15,10 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet weak var queueRecordCollectionView: UICollectionView!
     
     var queueRecords: [QueueRecord] = [QueueRecord(uid: "1",
-                                                   customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
-                                                   restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", menu: "menu", address: "location"),
+                                                   restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", contact: "12345678", address: "location", menu: "menu", isOpen: true), customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
                                                    groupSize: 4,
-                                                   wheelchairFriendly: true,
-                                                   babyChairQuantity: 0)]
+                                                   babyChairQuantity: 0, wheelchairFriendly: true,
+                                                   startTime: Date()), ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
