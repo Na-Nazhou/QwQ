@@ -50,6 +50,7 @@ class FBProfileStorage: ProfileStorage {
                 return
             }
             self.delegate?.updateComplete()
+            CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)
         }
     }
 }

@@ -9,4 +9,9 @@ class CustomerPostLoginSetupManager {
         CustomerQueueLogicManager.deinitShared()
         RestaurantLogicManager.deinitShared()
     }
+
+    static func customerDidUpdateProfile(updated: Customer) {
+        CustomerQueueLogicManager.shared().customer = updated
+        RestaurantLogicManager.shared().customer = updated
+    }
 }
