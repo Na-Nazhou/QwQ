@@ -26,7 +26,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
-            self.queueHistory.addToHistory($0)
+            guard $0 != nil else {
+                return
+            }
+            self.queueHistory.addToHistory($0!)
         })
     }
 

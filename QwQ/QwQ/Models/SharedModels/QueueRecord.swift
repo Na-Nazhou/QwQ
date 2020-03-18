@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 
 struct QueueRecord {
-    let id: String
+    var id: String = "0"
     let restaurant: Restaurant
     let customer: Customer
 
@@ -19,7 +19,7 @@ struct QueueRecord {
         QueueRecord.getDateString(from: startTime)
     }
 
-    init(id: String, restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool, startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+    init(id: String = "0", restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool, startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
