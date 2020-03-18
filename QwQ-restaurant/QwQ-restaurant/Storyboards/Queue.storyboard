@@ -1,7 +1,234 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y4k-oO-3TI">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Queue Record View Controller-->
+        <scene sceneID="jl5-RE-sMs">
+            <objects>
+                <viewController id="y4k-oO-3TI" customClass="QueueRecordViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jXh-Kb-8kU">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-GW-lnd">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="282"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smf-Ud-Fzq">
+                                <rect key="frame" x="231.5" y="40.5" width="371" height="39.5"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvi-fF-z4O">
+                                <rect key="frame" x="0.0" y="1080" width="834" height="94"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                <state key="normal" title="ADMIT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <connections>
+                                    <action selector="handleAdmit:" destination="y4k-oO-3TI" eventType="touchUpInside" id="fUm-ht-Ke2"/>
+                                    <action selector="handleSubmit:" destination="y4k-oO-3TI" eventType="touchUpInside" id="C55-jS-CXg"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s17-7R-EFf">
+                                <rect key="frame" x="0.0" y="290" width="834" height="782"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MNQ-Yg-G9L">
+                                        <rect key="frame" x="15" y="15" width="804" height="752"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="21E-DU-NYN">
+                                                <rect key="frame" x="0.0" y="0.0" width="367" height="752"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg8-Az-Opa">
+                                                        <rect key="frame" x="0.0" y="0.0" width="367" height="138"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h2-0x-1GS">
+                                                        <rect key="frame" x="0.0" y="153" width="367" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yP2-3W-I0s">
+                                                        <rect key="frame" x="0.0" y="306.5" width="367" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6T-Vi-x64">
+                                                        <rect key="frame" x="0.0" y="460" width="367" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpR-0U-mnN">
+                                                        <rect key="frame" x="0.0" y="613.5" width="367" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                        </variation>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ui7-Jt-TCW">
+                                                <rect key="frame" x="387" y="0.0" width="417" height="752"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypw-2G-Qen">
+                                                        <rect key="frame" x="0.0" y="0.0" width="417" height="138"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7C-H6-uR0">
+                                                        <rect key="frame" x="0.0" y="153" width="417" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eN-Qg-eYz">
+                                                        <rect key="frame" x="0.0" y="306.5" width="417" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBU-2a-Q71">
+                                                        <rect key="frame" x="0.0" y="460" width="417" height="138.5"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        </variation>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wci-VU-s0o">
+                                                        <rect key="frame" x="0.0" y="613.5" width="419" height="138.5"/>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="MNQ-Yg-G9L" firstAttribute="top" secondItem="s17-7R-EFf" secondAttribute="top" constant="15" id="AZi-k4-sEg"/>
+                                    <constraint firstAttribute="bottom" secondItem="MNQ-Yg-G9L" secondAttribute="bottom" constant="15" id="j7e-dy-KDo"/>
+                                    <constraint firstAttribute="trailing" secondItem="MNQ-Yg-G9L" secondAttribute="trailing" constant="15" id="pO9-89-69r"/>
+                                    <constraint firstItem="MNQ-Yg-G9L" firstAttribute="leading" secondItem="s17-7R-EFf" secondAttribute="leading" constant="15" id="qlR-5u-gRJ"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="ax2-mf-kPX" customClass="ProfileImageView" customModule="QwQ_restaurant" customModuleProvider="target">
+                                <rect key="frame" x="354.5" y="88" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ax2-mf-kPX" secondAttribute="height" multiplier="1:1" id="hqu-k3-bpt"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-fV-mKw">
+                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vB8-fV-mKw" secondAttribute="height" multiplier="1:1" id="Tfj-7I-NaV"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="y4k-oO-3TI" eventType="touchUpInside" id="Lgh-n3-LQG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="s17-7R-EFf" firstAttribute="trailing" secondItem="dJC-0y-zyF" secondAttribute="trailing" id="3Gh-aE-ng3"/>
+                            <constraint firstItem="fvi-fF-z4O" firstAttribute="height" secondItem="dJC-0y-zyF" secondAttribute="height" multiplier="0.08" id="ADx-51-tva"/>
+                            <constraint firstItem="fvi-fF-z4O" firstAttribute="top" secondItem="s17-7R-EFf" secondAttribute="bottom" constant="8" symbolic="YES" id="Bxe-67-kEC"/>
+                            <constraint firstItem="dJC-0y-zyF" firstAttribute="trailing" secondItem="fvi-fF-z4O" secondAttribute="trailing" id="Cgy-Nt-363"/>
+                            <constraint firstItem="vB8-fV-mKw" firstAttribute="width" secondItem="dJC-0y-zyF" secondAttribute="width" multiplier="0.0551559" id="GZw-9N-7N1"/>
+                            <constraint firstItem="Kug-GW-lnd" firstAttribute="top" secondItem="dJC-0y-zyF" secondAttribute="top" id="Ky3-dp-nSf"/>
+                            <constraint firstItem="vB8-fV-mKw" firstAttribute="top" secondItem="dJC-0y-zyF" secondAttribute="top" constant="30" id="NZP-u7-zfY"/>
+                            <constraint firstItem="Kug-GW-lnd" firstAttribute="trailing" secondItem="dJC-0y-zyF" secondAttribute="trailing" id="Nt0-Ld-IPV"/>
+                            <constraint firstItem="ax2-mf-kPX" firstAttribute="centerX" secondItem="jXh-Kb-8kU" secondAttribute="centerX" id="RF2-FA-Ue0"/>
+                            <constraint firstItem="vB8-fV-mKw" firstAttribute="leading" secondItem="dJC-0y-zyF" secondAttribute="leading" constant="20" id="WE7-v9-kxL"/>
+                            <constraint firstItem="Kug-GW-lnd" firstAttribute="height" secondItem="dJC-0y-zyF" secondAttribute="height" multiplier="0.24" id="Xzd-36-GOm"/>
+                            <constraint firstItem="Kug-GW-lnd" firstAttribute="leading" secondItem="dJC-0y-zyF" secondAttribute="leading" id="Zcd-Js-jke"/>
+                            <constraint firstItem="ax2-mf-kPX" firstAttribute="width" secondItem="dJC-0y-zyF" secondAttribute="width" multiplier="0.15" id="ZvY-pt-Zrt"/>
+                            <constraint firstItem="ax2-mf-kPX" firstAttribute="top" secondItem="smf-Ud-Fzq" secondAttribute="bottom" constant="8" id="aFa-ov-j5z"/>
+                            <constraint firstItem="fvi-fF-z4O" firstAttribute="leading" secondItem="dJC-0y-zyF" secondAttribute="leading" id="aT7-3T-8Ym"/>
+                            <constraint firstItem="ypw-2G-Qen" firstAttribute="width" secondItem="dJC-0y-zyF" secondAttribute="width" multiplier="0.5" id="c9V-6P-sIX"/>
+                            <constraint firstItem="s17-7R-EFf" firstAttribute="top" secondItem="Kug-GW-lnd" secondAttribute="bottom" constant="8" symbolic="YES" id="dAQ-Cx-zO4"/>
+                            <constraint firstItem="s17-7R-EFf" firstAttribute="leading" secondItem="dJC-0y-zyF" secondAttribute="leading" id="dVY-2Q-A7A"/>
+                            <constraint firstItem="dJC-0y-zyF" firstAttribute="bottom" secondItem="fvi-fF-z4O" secondAttribute="bottom" id="orL-76-eCr"/>
+                            <constraint firstItem="smf-Ud-Fzq" firstAttribute="centerX" secondItem="jXh-Kb-8kU" secondAttribute="centerX" id="owf-vd-egF"/>
+                            <constraint firstItem="smf-Ud-Fzq" firstAttribute="bottom" secondItem="dJC-0y-zyF" secondAttribute="top" constant="80" id="tpX-wc-mCN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dJC-0y-zyF"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lEd-8m-sJB"/>
+                    <connections>
+                        <outlet property="babyChairQuantityLabel" destination="zBU-2a-Q71" id="ODK-kN-KhO"/>
+                        <outlet property="contactLabel" destination="X7C-H6-uR0" id="aoJ-LH-Cdz"/>
+                        <outlet property="groupSizeLabel" destination="6eN-Qg-eYz" id="D8y-OE-uTv"/>
+                        <outlet property="nameLabel" destination="ypw-2G-Qen" id="DU5-t4-3G0"/>
+                        <outlet property="profileImageView" destination="ax2-mf-kPX" id="0fR-Rq-5i6"/>
+                        <outlet property="wheelchairFriendlySwitch" destination="wci-VU-s0o" id="Meg-xA-iyW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rmy-RC-79B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4461" y="-90"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="default-profile-pic" width="435" height="418"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+    </resources>
 </document>
