@@ -46,6 +46,7 @@
 		7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E693241B383400C2F9BB /* ProfileViewController.swift */; };
 		7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E695241B385E00C2F9BB /* SearchViewController.swift */; };
 		7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */; };
+		7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */; };
 		7EE4A4152422003A00BFB603 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE4A4142422003A00BFB603 /* Search.storyboard */; };
 		7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */; };
 		7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D014241D2BEC00C1465E /* Constants.swift */; };
@@ -137,6 +138,7 @@
 		7EC7E693241B383400C2F9BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7EC7E695241B385E00C2F9BB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
+		7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7EE4A4142422003A00BFB603 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
 		7EE6D014241D2BEC00C1465E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */,
 				7EC1F3142421FB7F005D20CD /* ActivityCell.swift */,
+				7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */,
 				61B2EAA62418BC3200B88018 /* (null) in Sources */,
 				61B2EAA82418BD7300B88018 /* (null) in Sources */,
+				7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSync.swift in Sources */,

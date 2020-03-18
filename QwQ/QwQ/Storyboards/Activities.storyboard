@@ -50,23 +50,40 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9ab-pK-Anb">
                                                     <rect key="frame" x="20" y="20" width="344" height="112"/>
                                                     <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEX-J5-cJe">
+                                                            <rect key="frame" x="0.0" y="0.0" width="344" height="28"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimated time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2Y-0y-GSK">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="316" height="28"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
+                                                                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="c-queue-icon" translatesAutoresizingMaskIntoConstraints="NO" id="77o-IU-jGY">
+                                                                    <rect key="frame" x="316" y="0.0" width="28" height="28"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="77o-IU-jGY" secondAttribute="height" multiplier="1:1" id="3Dz-z1-Fge"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                        </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRo-Q0-mf7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="344" height="37.5"/>
+                                                            <rect key="frame" x="0.0" y="28" width="344" height="28"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-SV-Xed">
-                                                            <rect key="frame" x="0.0" y="37.5" width="344" height="37"/>
+                                                            <rect key="frame" x="0.0" y="56" width="344" height="28"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-q2-Oh9">
-                                                            <rect key="frame" x="0.0" y="74.5" width="344" height="37.5"/>
+                                                            <rect key="frame" x="0.0" y="84" width="344" height="28"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsT-QL-e0k">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="37.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="28"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                     <state key="normal" title="DELETE">
                                                                         <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -76,7 +93,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-ti-REL">
-                                                                    <rect key="frame" x="172" y="0.0" width="172" height="37.5"/>
+                                                                    <rect key="frame" x="172" y="0.0" width="172" height="28"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                     <state key="normal" title="EDIT">
                                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,7 +119,9 @@
                                             <outlet property="deleteButton" destination="NsT-QL-e0k" id="3Rf-ty-DCe"/>
                                             <outlet property="descriptionLabel" destination="oaU-SV-Xed" id="yJp-Bj-Qvs"/>
                                             <outlet property="editButton" destination="GIl-ti-REL" id="IdU-Gd-o3A"/>
+                                            <outlet property="estimatedTimeLabel" destination="E2Y-0y-GSK" id="BB8-eD-fX1"/>
                                             <outlet property="nameLabel" destination="RRo-Q0-mf7" id="PRl-Pv-oHB"/>
+                                            <outlet property="queueBookImageView" destination="77o-IU-jGY" id="LSU-ae-mp2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -136,11 +155,28 @@
                     <connections>
                         <outlet property="activeHistoryControl" destination="RLh-KF-0QH" id="KUS-ro-vVQ"/>
                         <outlet property="activitiesCollectionView" destination="gMT-pe-MMR" id="A8s-aY-74f"/>
+                        <segue destination="xnZ-GI-Pks" kind="show" id="fcA-9s-ho5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPM-gT-fo6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573.91304347826087" y="3.3482142857142856"/>
+            <point key="canvasLocation" x="506" y="3"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1V2-qN-lS6">
+            <objects>
+                <viewController id="xnZ-GI-Pks" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f7w-1L-ptg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7ic-w5-3SX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mQh-B5-7t2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lbH-iE-j18" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365" y="3"/>
         </scene>
         <!--Activities-->
         <scene sceneID="KV5-Hn-ZdU">
@@ -163,6 +199,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="c-queue-icon" width="194" height="114"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="person.3" catalog="system" width="72" height="35"/>
     </resources>

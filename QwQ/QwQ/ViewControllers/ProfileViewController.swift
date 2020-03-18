@@ -34,22 +34,11 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
 
         profileStorage.setDelegate(delegate: self)
         auth.setDelegate(delegate: self)
-
-        setUpProfileImageView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         profileStorage.getCustomerInfo()
-    }
-
-    private func setUpProfileImageView() {
-        profileImageView.layer.borderWidth = Constants.profileBorderWidth
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = Constants.profileBorderColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.clipsToBounds = true
     }
 
     @IBAction private func logoutButton(_ sender: Any) {

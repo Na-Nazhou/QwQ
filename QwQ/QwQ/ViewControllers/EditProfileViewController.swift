@@ -43,13 +43,6 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
     
     private func setUpProfileImageView() {
-        profileImageView.layer.borderWidth = Constants.profileBorderWidth
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = Constants.profileBorderColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.clipsToBounds = true
-        
         let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true

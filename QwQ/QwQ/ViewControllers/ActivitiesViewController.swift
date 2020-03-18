@@ -10,6 +10,7 @@ import UIKit
 class ActivitiesViewController: UIViewController {
     @IBOutlet weak var activeHistoryControl: UISegmentedControl!
     @IBOutlet weak var activitiesCollectionView: UICollectionView!
+    
     var queueRecords: [QueueRecord] = [QueueRecord(restaurant: Restaurant(uid: "1",
                                                                           name: "jane",
                                                                           email: "jane@gmail.com",
@@ -51,6 +52,10 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         activityCell.nameLabel.text = queueRecord.restaurant.name
         activityCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
+        activityCell.estimatedTimeLabel.text = "00:00"
+        if let image = UIImage(named: "c-book-icon") {
+            activityCell.queueBookImageView.image = image
+        }
         
         return activityCell
     }

@@ -15,7 +15,8 @@ class ProfileViewController: UIViewController, AuthDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-
+    @IBOutlet weak var contactLabel: UILabel!
+    
     let auth: Authenticator
 
     init() {
