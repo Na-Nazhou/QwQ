@@ -21,18 +21,19 @@ class FBProfileStorage: ProfileStorage {
         guard let user = Auth.auth().currentUser else {
             return
         }
-        let docRef = db.collection("customers").document(user.uid)
+        let docRef = db.collection("restaurants").document(user.uid)
 
         docRef.getDocument { (document, error) in
             if let error = error {
                 self.delegate?.showMessage(title: "Error!", message: error.localizedDescription, buttonText: "Okay")
             }
             if let data = document?.data() {
-                guard let customer = Customer(dictionary: data) else {
+                print(data)
+                guard let restaurant = Restaurant(dictionary: data) else {
                     self.delegate?.showMessage(title: "Error!", message: "A fatal error occured.", buttonText: "Okay")
                     return
                 }
-                self.delegate?.getCustomerInfoComplete(customer: customer)
+                self.delegate?.getRestaurantInfoComplete(restaurant: restaurant)
             }
         }
     }
@@ -42,7 +43,7 @@ class FBProfileStorage: ProfileStorage {
         guard let user = Auth.auth().currentUser else {
             return
         }
-        let docRef = db.collection("restaurant").document(user.uid)
+        let docRef = db.collection("restaurants").document(user.uid)
 
         docRef.updateData(restaurant.dictionary) { (error) in
             if let error = error {

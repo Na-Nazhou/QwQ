@@ -25,10 +25,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="125.5" y="59" width="163" height="71"/>
+                                <rect key="frame" x="15" y="59" width="384" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="27"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="26"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                                         </variation>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5j-dB-YTw">
-                                        <rect key="frame" x="0.0" y="37" width="163" height="34"/>
+                                        <rect key="frame" x="0.0" y="36" width="384" height="34"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -67,7 +67,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="290" height="173.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-f4-NMI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="44"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Ic-Js3">
-                                                            <rect key="frame" x="0.0" y="43.5" width="290" height="63.5"/>
+                                                            <rect key="frame" x="0.0" y="44" width="290" height="63"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                                             <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -119,10 +119,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="rKm-Fu-FR5" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" constant="15" id="CK8-Nn-fMr"/>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="top" secondItem="r2s-La-V29" secondAttribute="top" constant="15" id="CLd-Cv-LqJ"/>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="centerX" secondItem="BKf-ZL-3DJ" secondAttribute="centerX" id="J6Q-Y8-fZk"/>
                             <constraint firstItem="urr-2m-4eq" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" id="P8D-OT-ITO"/>
                             <constraint firstItem="urr-2m-4eq" firstAttribute="top" secondItem="nOr-ig-2QA" secondAttribute="bottom" constant="-3" id="PR5-xk-SQh"/>
+                            <constraint firstItem="r2s-La-V29" firstAttribute="trailing" secondItem="rKm-Fu-FR5" secondAttribute="trailing" constant="15" id="U1p-u3-tsz"/>
                             <constraint firstItem="r2s-La-V29" firstAttribute="trailing" secondItem="urr-2m-4eq" secondAttribute="trailing" id="XTF-68-CWg"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="top" secondItem="BKf-ZL-3DJ" secondAttribute="top" id="deG-Ob-mdz"/>
                             <constraint firstItem="nOr-ig-2QA" firstAttribute="height" secondItem="r2s-La-V29" secondAttribute="height" multiplier="0.3" id="kuB-Z0-N5E"/>
@@ -166,7 +168,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LYU-1i-2ra">
-                                <rect key="frame" x="15" y="17" width="33" height="33"/>
+                                <rect key="frame" x="15" y="44" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LYU-1i-2ra" secondAttribute="height" id="2oj-3M-WGm"/>
                                 </constraints>
@@ -308,7 +310,7 @@
                             <constraint firstItem="7Wc-yM-O7j" firstAttribute="bottom" secondItem="dVA-T8-xr9" secondAttribute="bottom" id="OBq-Sq-N9P"/>
                             <constraint firstItem="tDW-1M-bY2" firstAttribute="height" secondItem="7Wc-yM-O7j" secondAttribute="height" multiplier="0.3" id="Rj0-sg-std"/>
                             <constraint firstItem="dVA-T8-xr9" firstAttribute="height" secondItem="7Wc-yM-O7j" secondAttribute="height" multiplier="0.08" id="THj-pN-zwD"/>
-                            <constraint firstItem="LYU-1i-2ra" firstAttribute="bottom" secondItem="tDW-1M-bY2" secondAttribute="top" constant="50" id="WmC-YO-U2B"/>
+                            <constraint firstItem="LYU-1i-2ra" firstAttribute="top" secondItem="7Wc-yM-O7j" secondAttribute="top" id="WmC-YO-U2B"/>
                             <constraint firstItem="LYU-1i-2ra" firstAttribute="width" secondItem="LYU-1i-2ra" secondAttribute="height" id="Y9r-Yi-BN6"/>
                             <constraint firstItem="7Wc-yM-O7j" firstAttribute="trailing" secondItem="fuV-ef-onc" secondAttribute="trailing" constant="15" id="Zf8-10-KZf"/>
                             <constraint firstItem="LYU-1i-2ra" firstAttribute="leading" secondItem="7Wc-yM-O7j" secondAttribute="leading" constant="15" id="ahk-0o-5SO"/>
@@ -372,7 +374,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-up-TA1">
-                                <rect key="frame" x="10" y="17" width="33" height="33"/>
+                                <rect key="frame" x="10" y="44" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gFj-up-TA1" secondAttribute="height" id="fHh-NH-xWO"/>
                                 </constraints>
@@ -533,7 +535,7 @@ Pancake</string>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="bottom" secondItem="au2-Jo-O9J" secondAttribute="bottom" id="qVb-1b-bPd"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="trailing" secondItem="au2-Jo-O9J" secondAttribute="trailing" id="tBF-xv-Icf"/>
                             <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="vhQ-b2-sYH"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="top" secondItem="gFj-up-TA1" secondAttribute="bottom" constant="-50" id="w7D-im-aT7"/>
+                            <constraint firstItem="37u-KV-kYY" firstAttribute="top" secondItem="gFj-up-TA1" secondAttribute="top" id="w7D-im-aT7"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="zLL-cc-223"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="37u-KV-kYY"/>
@@ -593,8 +595,8 @@ Pancake</string>
                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5n-oj-8j5">
-                                <rect key="frame" x="15" y="10" width="33" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5n-oj-8j5">
+                                <rect key="frame" x="15" y="44" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g5n-oj-8j5" secondAttribute="height" id="VDr-dE-hcR"/>
                                 </constraints>
@@ -745,6 +747,7 @@ Pancake</string>
                             <constraint firstItem="g5n-oj-8j5" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" constant="15" id="51H-D2-sbc"/>
                             <constraint firstItem="wLG-lY-Z1t" firstAttribute="centerX" secondItem="yhv-E2-7gs" secondAttribute="centerX" id="7RL-oC-GMj"/>
                             <constraint firstItem="yhv-E2-7gs" firstAttribute="height" secondItem="7aN-VE-zg3" secondAttribute="height" multiplier="0.3" id="9Pv-bR-Ggt"/>
+                            <constraint firstItem="7aN-VE-zg3" firstAttribute="top" secondItem="g5n-oj-8j5" secondAttribute="top" id="FvO-DI-7g2"/>
                             <constraint firstItem="yhv-E2-7gs" firstAttribute="trailing" secondItem="7aN-VE-zg3" secondAttribute="trailing" id="Huv-ZI-wKf"/>
                             <constraint firstItem="oQc-TO-fjT" firstAttribute="trailing" secondItem="7aN-VE-zg3" secondAttribute="trailing" id="Jn8-1B-ruJ"/>
                             <constraint firstItem="AmH-Sd-NEo" firstAttribute="centerX" secondItem="lPE-oS-NQ3" secondAttribute="centerX" id="Kb3-eN-NVM"/>
@@ -753,7 +756,6 @@ Pancake</string>
                             <constraint firstItem="g5n-oj-8j5" firstAttribute="width" secondItem="g5n-oj-8j5" secondAttribute="height" id="ToI-Qz-SXd"/>
                             <constraint firstItem="vwr-TF-Mt9" firstAttribute="top" secondItem="yhv-E2-7gs" secondAttribute="bottom" constant="15" id="Wpf-r0-fj8"/>
                             <constraint firstItem="oQc-TO-fjT" firstAttribute="top" secondItem="vwr-TF-Mt9" secondAttribute="bottom" constant="8" symbolic="YES" id="Zyr-va-D0a"/>
-                            <constraint firstItem="g5n-oj-8j5" firstAttribute="bottom" secondItem="yhv-E2-7gs" secondAttribute="top" constant="50" id="dJb-KU-hZP"/>
                             <constraint firstItem="vwr-TF-Mt9" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" constant="15" id="e45-QH-XhI"/>
                             <constraint firstItem="yhv-E2-7gs" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" id="e4T-Gu-qPK"/>
                             <constraint firstItem="g5n-oj-8j5" firstAttribute="width" secondItem="7aN-VE-zg3" secondAttribute="width" multiplier="0.08" id="hwH-9m-KRr"/>

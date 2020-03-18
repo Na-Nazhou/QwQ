@@ -9,7 +9,7 @@ import UIKit
 
 protocol ProfileDelegate: AnyObject {
 
-    func getCustomerInfoComplete(customer: Customer)
+    func getRestaurantInfoComplete(restaurant: Restaurant)
 
     func updateComplete()
 

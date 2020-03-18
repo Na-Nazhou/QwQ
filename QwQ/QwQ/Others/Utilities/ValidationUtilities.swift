@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LoginUtilities {
+class ValidationUtilities {
 
     /// taken from https://emailregex.com/
     static func validateEmail(email: String) -> Bool {

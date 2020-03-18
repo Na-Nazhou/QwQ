@@ -10,13 +10,16 @@ import UIKit
 class EditProfileViewController: UIViewController, ProfileDelegate {
 
     @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var contactTextField: UITextField!
+    @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
+
+    @IBOutlet private var profileImageView: UIImageView!
 
     let profileStorage: ProfileStorage
     var uid: String?
+    var isOpen: Bool?
 
     init() {
         profileStorage = FBProfileStorage()
@@ -35,25 +38,33 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        profileStorage.setDelegate(delegate: self)
+        profileStorage.getRestaurantInfo()
+
         self.hideKeyboardWhenTappedAround()
         
         setUpProfileImageView()
     }
-    
-    private func setUpProfileImageView() {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
-        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
-        profileImageView.isUserInteractionEnabled = true
+
+    func getRestaurantInfoComplete(restaurant: Restaurant) {
+        self.uid = restaurant.uid
+        self.nameTextField.text = restaurant.name
+        self.emailTextField.text = restaurant.email
+        self.contactTextField.text = restaurant.contact
+        self.addressTextField.text = restaurant.address
+        self.menuTextView.text = restaurant.menu
+        self.isOpen = restaurant.isOpen
     }
-    
+
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
         showImagePickerControllerActionSheet()
     }
 
     @IBAction private func saveButton(_ sender: Any) {
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
-        let trimmedAddress = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedAddress = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedMenu = menuTextView.text
 
         guard checkIfAllFieldsAreFilled() else {
@@ -63,19 +74,18 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
             return
         }
 
-        guard let uid = uid, let name = trimmedName,
-            let address = trimmedAddress, let email = trimmedEmail, let menu = trimmedMenu else {
+        guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
+            let address = trimmedAddress, let menu = trimmedMenu, let isOpen = isOpen else {
                 return
         }
 
-        profileStorage.update(restaurant: Restaurant(uid: uid, name: name, email: email, contact: <#T##String#>, address: address, menu: menu, isOpen: <#T##Bool#>))
-    }
-
-    func getCustomerInfoComplete(customer: Customer) {
-        self.uid = customer.uid
-        self.nameTextField.text = customer.name
-        self.contactTextField.text = customer.contact
-        self.emailTextField.text = customer.email
+        profileStorage.updateRestaurantInfo(restaurant: Restaurant(uid: uid,
+                                                     name: name,
+                                                     email: email,
+                                                     contact: contact,
+                                                     address: address,
+                                                     menu: menu,
+                                                     isOpen: isOpen))
     }
 
     func updateComplete() {
@@ -101,14 +111,22 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         self.present(message, animated: true)
     }
 
+    private func setUpProfileImageView() {
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
+        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
+        profileImageView.isUserInteractionEnabled = true
+    }
+
     private func checkIfAllFieldsAreFilled() -> Bool {
         if let name = nameTextField.text,
-            let address = addressTextField.text,
             let email = emailTextField.text,
+            let contact = contactTextField.text,
+            let address = addressTextField.text,
             let menu = menuTextView.text {
             return !name.trimmingCharacters(in: .newlines).isEmpty &&
-                !address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
                 !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !contact.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
                 !menu.isEmpty
         }
         return false
