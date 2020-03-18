@@ -63,7 +63,6 @@ opt_in_rules:
   - strong_iboutlet
   - switch_case_on_newline
   - toggle_bool
-  - unavailable_function
   - unowned_variable_capture
   - untyped_error_in_catch
   - unused_declaration
@@ -81,7 +80,7 @@ disabled_rules:
   - object_literal
   - unneeded_parentheses_in_closure_argument
   - trailing_whitespace
-
+  - unavailable_function
 line_length:
   warning: 120
   error: 150

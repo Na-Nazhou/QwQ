@@ -28,6 +28,7 @@ class LoginViewController: UIViewController, AuthDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         auth.setDelegate(view: self)
+        auth.checkIfAlreadyLoggedIn()
     }
     
     @IBAction func loginButton(_ sender: Any) {
