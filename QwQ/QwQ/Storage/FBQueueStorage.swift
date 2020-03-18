@@ -84,24 +84,20 @@ class FBQueueStorage: CustomerQueueStorage {
                                     guard qCid == customer.uid else {
                                         return
                                     }
-                                    guard let servedTime = document.data()["serveTime"] as? TimeStamp else {
-                                        // past queue history
+                                    if document.data()["serveTime"] as? Timestamp != nil || document.data()["rejectTime"] as? Timestamp != nil {
+                                        //already served/rejected = past queue history
                                         return
                                     }
                                     
-                                    completion(QueueRecord(document.data()))
+                                    completion(QueueRecord(dictionary: document.data()))
                                 }
                             }
                         }
                     }
-                    print("\(document.documentID) => \(document.data())")
                 }
             }
         }
     }
-
-    private
-
 
     func loadQueueHistory(customer: Customer, completion:  @escaping ([QueueRecord]) -> Void) {
         // Attach listener
