@@ -24,10 +24,10 @@ class ActivitiesViewController: UIViewController {
                                                    babyChairQuantity: 0, wheelchairFriendly: true,
                                                    startTime: Date())]
     
-    @IBOutlet weak var searchBarController: UISearchBar!
-    @IBOutlet weak var queueRecordCollectionView: UICollectionView!
+    @IBOutlet private var searchBarController: UISearchBar!
+    @IBOutlet private var queueRecordCollectionView: UICollectionView!
     
-    @IBAction func handleOpenClose(_ sender: Any) { 
+    @IBAction private func handleOpenClose(_ sender: Any) { 
     }
     
     override func viewDidLoad() {
@@ -105,22 +105,19 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
         
-        let queueRecord = filtered[indexPath.row]
+        let record = filtered[indexPath.row]
         
-        queueRecordCell.nameLabel.text = queueRecord.customer.name
-        queueRecordCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
+        queueRecordCell.setUpView(record: record)
         
         queueRecordCell.admitAction = {
             self.showMessage(title: Constants.admitCustomerTitle,
                              message: Constants.admitCustomerMessage,
-                             buttonText: Constants.okayTitle,
-                             buttonAction: nil)
+                             buttonText: Constants.okayTitle)
         }
         queueRecordCell.removeAction = {
             self.showMessage(title: Constants.removeCustomerTitle,
                              message: Constants.removeCustomerMessage,
-                             buttonText: Constants.okayTitle,
-                             buttonAction: nil)
+                             buttonText: Constants.okayTitle)
         }
         
         return queueRecordCell

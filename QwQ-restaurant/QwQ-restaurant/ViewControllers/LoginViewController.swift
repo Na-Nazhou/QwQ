@@ -12,8 +12,8 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     let auth: Authenticator
     
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
     
     init() {
         self.auth = FBAuthenticator()
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, AuthDelegate {
         self.hideKeyboardWhenTappedAround()
     }
     
-    @IBAction func loginButton(_ sender: Any) {
+    @IBAction private func loginButton(_ sender: Any) {
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         

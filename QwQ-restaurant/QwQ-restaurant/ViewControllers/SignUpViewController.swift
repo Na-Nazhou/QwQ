@@ -10,10 +10,10 @@ import UIKit
 
 class SignUpViewController: UIViewController, AuthDelegate {
     
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var contactTextField: UITextField!
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var contactTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
     
     let auth: Authenticator
     
@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
         super.init(nibName: nil, bundle: nil)
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
@@ -40,7 +40,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
         self.hideKeyboardWhenTappedAround()
     }
     
-    @IBAction func submitButton(_ sender: Any) {
+    @IBAction private func submitButton(_ sender: Any) {
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)

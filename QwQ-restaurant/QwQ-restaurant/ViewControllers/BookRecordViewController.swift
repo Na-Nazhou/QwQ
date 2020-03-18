@@ -8,16 +8,16 @@
 import UIKit
 
 class BookRecordViewController: UIViewController {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var groupSizeLabel: UILabel!
-    @IBOutlet weak var babyChairQuantityLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var groupSizeLabel: UILabel!
+    @IBOutlet private var babyChairQuantityLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     
     var bookRecord: BookRecord?
     
-    @IBAction func handleAdmit(_ sender: Any) {
+    @IBAction private func handleAdmit(_ sender: Any) {
         showMessage(title: Constants.admitCustomerTitle,
                     message: Constants.admitCustomerMessage,
                     buttonText: Constants.okayTitle)
@@ -29,7 +29,7 @@ class BookRecordViewController: UIViewController {
         setUpViews()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
