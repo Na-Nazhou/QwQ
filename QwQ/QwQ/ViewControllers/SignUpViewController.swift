@@ -48,8 +48,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 
@@ -61,16 +60,14 @@ class SignUpViewController: UIViewController, AuthDelegate {
         guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 
         guard ValidationUtilities.validateContact(contact: contact) else {
             showMessage(title: Constants.invalidContactTitle,
                         message: Constants.invalidContactMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 

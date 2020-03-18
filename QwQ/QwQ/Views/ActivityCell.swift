@@ -39,6 +39,7 @@ class ActivityCell: UICollectionViewCell {
     func setUpView(queueRecord: QueueRecord) {
         nameLabel.text = queueRecord.restaurant.name
         descriptionLabel.text = "\(queueRecord.groupSize) pax"
+        // TODO
         estimatedTimeLabel.text = "00:00"
         if let image = UIImage(named: "c-book-icon") {
             queueBookImageView.image = image

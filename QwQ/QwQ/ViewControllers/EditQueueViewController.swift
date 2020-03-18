@@ -69,13 +69,17 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
-        } else { // Auto fill the name and contact
+        } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return
             }
             restaurantNameLabel.text = restaurant.name
+
+            // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+            nameTextField.isEnabled = false
+            contactTextField.isEnabled = false
         }
     }
 

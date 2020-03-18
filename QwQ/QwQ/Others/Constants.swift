@@ -20,6 +20,7 @@ struct Constants {
     // MARK: Alert settings
     static let missingFieldsTitle = "Error - Missing Fields"
     static let missingFieldsMessage = "Please fill in all the fields!"
+    static let errorTitle = "Error"
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
     static let successfulUpdateTitle = "Success"

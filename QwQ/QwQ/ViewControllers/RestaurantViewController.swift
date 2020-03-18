@@ -31,16 +31,18 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         }
         // Cannot queue if the restaurant is currently not open
         if !restaurant.isOpen {
-            showMessage(title: "Error", message: "This restaurant is currently not open!",
-                        buttonText: Constants.okayTitle, buttonAction: nil)
+            showMessage(title: Constants.errorTitle,
+                        message: "This restaurant is currently not open!",
+                        buttonText: Constants.okayTitle)
             return
         }
 
         if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
             performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
         } else {
-            showMessage(title: "Error", message: "You have an existing queue record",
-                        buttonText: Constants.okayTitle, buttonAction: nil)
+            showMessage(title: Constants.errorTitle,
+                        message: "You have an existing queue record",
+                        buttonText: Constants.okayTitle)
         }
     }
 

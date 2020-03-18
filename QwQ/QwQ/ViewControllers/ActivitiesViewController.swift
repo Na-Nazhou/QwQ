@@ -45,8 +45,12 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         setUpSegmentedControl()
     }
 
-    private func setUpSegmentedControl() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         activitiesCollectionView.reloadData()
+    }
+
+    private func setUpSegmentedControl() {
         activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
 

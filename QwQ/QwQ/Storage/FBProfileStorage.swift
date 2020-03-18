@@ -26,12 +26,12 @@ class FBProfileStorage: ProfileStorage {
         docRef.getDocument { (document, error) in
             if let error = error {
                 self.delegate?.showMessage(title: "Error!", message: error.localizedDescription,
-                                           buttonText: "Okay", buttonAction: nil)
+                                           buttonText: Constants.okayTitle, buttonAction: nil)
             }
             if let data = document?.data() {
                 guard let customer = Customer(dictionary: data) else {
                     self.delegate?.showMessage(title: "Error!", message: "A fatal error occured.",
-                                               buttonText: "Okay", buttonAction: nil)
+                                               buttonText: Constants.okayTitle, buttonAction: nil)
                     return
                 }
                 self.delegate?.getCustomerInfoComplete(customer: customer)
@@ -49,7 +49,7 @@ class FBProfileStorage: ProfileStorage {
         docRef.updateData(customer.dictionary) { (error) in
             if let error = error {
                 self.delegate?.showMessage(title: "Error:", message: error.localizedDescription,
-                                           buttonText: "Okay", buttonAction: nil)
+                                           buttonText: Constants.okayTitle, buttonAction: nil)
                 return
             }
             CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)

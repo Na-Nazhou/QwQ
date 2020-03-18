@@ -102,16 +102,18 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
             if !restaurant.isOpen {
-                self.showMessage(title: "Error", message: "This restaurant is currently not open!",
-                                 buttonText: Constants.okayTitle, buttonAction: nil)
+                self.showMessage(title: Constants.errorTitle,
+                                 message: "This restaurant is currently not open!",
+                                 buttonText: Constants.okayTitle)
                 return
             }
 
             if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
             } else {
-                self.showMessage(title: "Error", message: "You have an existing queue record",
-                                 buttonText: Constants.okayTitle, buttonAction: nil)
+                self.showMessage(title: Constants.errorTitle,
+                                 message: "You have an existing queue record",
+                                 buttonText: Constants.okayTitle)
             }
         }
         return restaurantCell
