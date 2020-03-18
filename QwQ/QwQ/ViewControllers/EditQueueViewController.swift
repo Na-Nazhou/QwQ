@@ -86,9 +86,11 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
-            nameTextField.isEnabled = false
-            contactTextField.isEnabled = false
         }
+
+        // Disable name and contact fields
+        nameTextField.isEnabled = false
+        contactTextField.isEnabled = false
     }
 
     func didAddQueueRecord() {

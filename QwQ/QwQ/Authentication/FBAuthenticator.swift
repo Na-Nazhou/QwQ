@@ -51,8 +51,8 @@ class FBAuthenticator: Authenticator {
             try Auth.auth().signOut()
             delegate?.authCompleted()
         } catch {
-            delegate?.showMessage(title: Constants.okayTitle, message: "A logout error occured.",
-                                  buttonText: Constants.errorTitle, buttonAction: nil)
+            delegate?.showMessage(title: Constants.errorTitle, message: "A logout error occured.",
+                                  buttonText: Constants.okayTitle, buttonAction: nil)
         }
     }
 
