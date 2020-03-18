@@ -20,7 +20,8 @@ class FBAuthenticator: Authenticator {
 
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay", buttonAction: nil)
+                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription,
+                                           buttonText: "Okay", buttonAction: nil)
                 return
             }
             guard let result = result else {
@@ -36,7 +37,8 @@ class FBAuthenticator: Authenticator {
 
         Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if let error = error {
-                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay", buttonAction: nil)
+                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription,
+                                           buttonText: "Okay", buttonAction: nil)
                 return
             }
 
@@ -49,7 +51,8 @@ class FBAuthenticator: Authenticator {
             try Auth.auth().signOut()
             delegate?.authCompleted()
         } catch {
-            delegate?.showMessage(title: "Error", message: "A logout error occured.", buttonText: "Okay", buttonAction: nil)
+            delegate?.showMessage(title: "Error", message: "A logout error occured.",
+                                  buttonText: "Okay", buttonAction: nil)
         }
     }
 
@@ -65,7 +68,8 @@ class FBAuthenticator: Authenticator {
             .document(uid)
             .setData(["uid": uid, "name": name, "contact": contact, "email": email]) { (error) in
                 if let error = error {
-                    self.delegate?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay", buttonAction: nil)
+                    self.delegate?.showMessage(title: "Error", message: error.localizedDescription,
+                                               buttonText: "Okay", buttonAction: nil)
                 }
             }
     }

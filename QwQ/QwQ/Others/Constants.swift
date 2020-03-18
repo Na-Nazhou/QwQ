@@ -38,6 +38,7 @@ struct Constants {
 
     static let successQueueRecordCreationMessage = "You have created a new queue record."
     static let successQueueRecordUpdateMessage = "Your queue record has been updated."
+    static let successQueueRecordDeleteMessage = "Your queue record has been deleted."
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -52,13 +53,13 @@ struct Constants {
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"
     static let restaurantSectionInsets = UIEdgeInsets(top: 20.0,
-                                                    left: 30.0,
-                                                    bottom: 20.0,
-                                                    right: 30.0)
+                                                      left: 30.0,
+                                                      bottom: 20.0,
+                                                      right: 30.0)
     static let activitiesReuseIdentifier = "activityCell"
     static let activitiesSectionInsets = UIEdgeInsets(top: 20.0,
-                                                    left: 30.0,
-                                                    bottom: 20.0,
-                                                    right: 30.0)
+                                                      left: 30.0,
+                                                      bottom: 20.0,
+                                                      right: 30.0)
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
 }

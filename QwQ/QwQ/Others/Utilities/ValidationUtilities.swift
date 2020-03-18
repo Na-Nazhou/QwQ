@@ -16,7 +16,7 @@ class ValidationUtilities {
     }
 
     static func validateContact(contact: String) -> Bool {
-        return isAllDigits(text: contact) && contact.count == 8
+        isAllDigits(text: contact) && contact.count == 8
     }
 
     /// adapted from https://gist.github.com/ranmyfriend/96f6ae1b64b177af62de402c6898a314

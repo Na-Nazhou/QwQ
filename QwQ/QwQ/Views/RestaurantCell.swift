@@ -8,9 +8,15 @@
 import UIKit
 
 class RestaurantCell: UICollectionViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
+    var queueAction: (() -> Void)?
     
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var locationLabel: UILabel!
+
+    @IBAction private func handleQueueTap(sender: Any?) {
+        queueAction?()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -19,5 +25,10 @@ class RestaurantCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    func setUpView(restaurant: Restaurant) {
+        nameLabel.text = restaurant.name
+        locationLabel.text = restaurant.address
     }
 }

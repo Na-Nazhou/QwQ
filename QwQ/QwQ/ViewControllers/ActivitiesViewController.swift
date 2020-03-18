@@ -7,35 +7,77 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController {
-    @IBOutlet weak var activeHistoryControl: UISegmentedControl!
-    @IBOutlet weak var activitiesCollectionView: UICollectionView!
-    
-    var queueRecords: [QueueRecord] = [QueueRecord(restaurant: Restaurant(uid: "1",
-                                                                          name: "jane",
-                                                                          email: "jane@gmail.com",
-                                                                          contact: "9872",
-                                                                          address: "1",
-                                                                          menu: "1",
-                                                                          isOpen: true),
-                                                   customer: Customer(uid: "2", name: "name", email: "name@", contact: "9827"),
-                                                   groupSize: 2,
-                                                   babyChairQuantity: 1,
-                                                   wheelchairFriendly: false,
-                                                   startTime: Date(),
-                                                   admitTime: Date())]
+class ActivitiesViewController: UIViewController, ActivitiesDelegate {
+
+    @IBOutlet private var activeHistoryControl: UISegmentedControl!
+    @IBOutlet private var activitiesCollectionView: UICollectionView!
+
+    var queueRecords: [QueueRecord] {
+        if isActive {
+            return activeRecords
+        } else {
+            return historyRecords
+        }
+    }
+
+    var isActive = true
+
+    var activeRecords: [QueueRecord] {
+        if let activeRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
+            return [activeRecord]
+        } else {
+            return []
+        }
+    }
+
+    var historyRecords: [QueueRecord] {
+        CustomerQueueLogicManager.shared().queueHistory
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activitiesCollectionView.dataSource = self
         activitiesCollectionView.delegate = self
+
+        CustomerQueueLogicManager.shared().activitiesDelegate = self
+
+        setUpSegmentedControl()
+    }
+
+    private func setUpSegmentedControl() {
+        activitiesCollectionView.reloadData()
+        activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+    }
+
+    @IBAction private func onTapSegButton(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            isActive = true
+        case 1:
+            CustomerQueueLogicManager.shared().fetchQueueHistory()
+            isActive = false
+        default:
+            return
+        }
+        activitiesCollectionView.reloadData()
+    }
+
+    func didDeleteQueueRecord() {
+        showMessage(
+            title: Constants.successfulUpdateTitle,
+            message: Constants.successQueueRecordDeleteMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.navigationController?.popViewController(animated: true)
+                self.activitiesCollectionView.reloadData()
+            })
     }
 }
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return queueRecords.count
+        queueRecords.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -49,15 +91,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         
         let queueRecord = queueRecords[indexPath.row]
-        
-        activityCell.nameLabel.text = queueRecord.restaurant.name
-        activityCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
-        activityCell.estimatedTimeLabel.text = "00:00"
+        activityCell.setUpView(queueRecord: queueRecord)
         activityCell.editAction = {
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
         }
-        if let image = UIImage(named: "c-book-icon") {
-            activityCell.queueBookImageView.image = image
+        activityCell.deleteAction = {
+            CustomerQueueLogicManager.shared().deleteQueueRecord()
         }
         
         return activityCell
@@ -83,21 +122,14 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                     bookRecordViewController.bookRecord = queueRecords[row]
                 }
             }
-        case Constants.editQueueSelectedSegue:
-            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
-                let row = indexPaths[0].item
-                if let editQueueViewController = segue.destination as? EditQueueViewController {
-//                    editQueueViewController.queueRecord = queueRecords[row]
-                }
-            }
         case Constants.editBookSelectedSegue:
-            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
-                let row = indexPaths[0].item
-                if let editBookingViewController = segue.destination as? EditBookingViewController {
-//                    editBookingViewController.bookRecord = queueRecords[row]
-                }
+            // TODO: fix
+            if let bookRecord = sender as? QueueRecord,
+                let editBookingViewController = segue.destination as? EditBookingViewController {
+                    editBookingViewController.bookRecord = bookRecord
             }
         default:
+            // No need to to anything for editQueueSelectedSegue
             return
         }
     }
@@ -107,19 +139,18 @@ extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
+        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constants.activitiesSectionInsets
+        Constants.activitiesSectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        0
     }
 }
-

@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     var searchActive: Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet weak var restaurantCollectionView: UICollectionView!
+    @IBOutlet private var restaurantCollectionView: UICollectionView!
     
     var restaurants: [Restaurant] {
         RestaurantLogicManager.shared().restaurants
@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
-        // 
+        //TODO
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,6 +42,11 @@ class SearchViewController: UIViewController, SearchDelegate {
                 let row = indexPaths[0].item
                 RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
             }
+        }
+
+        if segue.identifier == Constants.editQueueSelectedSegue,
+            let restaurant = sender as? Restaurant {
+            RestaurantLogicManager.shared().currentRestaurant = restaurant
         }
     }
 }
@@ -79,7 +84,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filtered.count
+        restaurants.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -91,12 +96,24 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let restaurantCell = cell as? RestaurantCell else {
             return cell
         }
-        
-        let restaurant = filtered[indexPath.row]
-        
-        restaurantCell.nameLabel.text = restaurant.name
-        restaurantCell.locationLabel.text = restaurant.address
 
+        let restaurant = filtered[indexPath.row]
+
+        restaurantCell.setUpView(restaurant: restaurant)
+        restaurantCell.queueAction = {
+            if !restaurant.isOpen {
+                self.showMessage(title: "Error", message: "This restaurant is currently not open!",
+                                 buttonText: Constants.okayTitle, buttonAction: nil)
+                return
+            }
+
+            if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
+                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
+            } else {
+                self.showMessage(title: "Error", message: "You have an existing queue record",
+                                 buttonText: Constants.okayTitle, buttonAction: nil)
+            }
+        }
         return restaurantCell
     }
     
@@ -109,18 +126,18 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
+        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constants.restaurantSectionInsets
+        Constants.restaurantSectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        0
     }
 }
