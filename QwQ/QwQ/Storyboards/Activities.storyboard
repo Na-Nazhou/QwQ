@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ykL-OW-g2w">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Activities View Controller-->
+        <scene sceneID="Z6X-wA-rkO">
+            <objects>
+                <viewController id="07R-S5-BfO" customClass="ActivitiesViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5fZ-AD-hlT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="DhZ-hD-LWP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw6-yj-Epa">
+                                <rect key="frame" x="108" y="95.5" width="198.5" height="39.5"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gMT-pe-MMR">
+                                <rect key="frame" x="15" y="238" width="384" height="560"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGS-Zd-gvF">
+                                    <size key="itemSize" width="384" height="152"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="activityCell" id="A74-J4-hxb" customClass="ActivityCell" customModule="QwQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="152"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8pk-Me-4iC">
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="152"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9ab-pK-Anb">
+                                                    <rect key="frame" x="20" y="20" width="344" height="112"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRo-Q0-mf7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="344" height="37.5"/>
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-SV-Xed">
+                                                            <rect key="frame" x="0.0" y="37.5" width="344" height="37"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Smo-q2-Oh9">
+                                                            <rect key="frame" x="0.0" y="74.5" width="344" height="37.5"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsT-QL-e0k">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="37.5"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                                    <state key="normal" title="DELETE">
+                                                                        <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="handleDelete:" destination="A74-J4-hxb" eventType="touchUpInside" id="UOj-Ua-QcO"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-ti-REL">
+                                                                    <rect key="frame" x="172" y="0.0" width="172" height="37.5"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                                    <state key="normal" title="EDIT">
+                                                                        <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="handleEdit:" destination="A74-J4-hxb" eventType="touchUpInside" id="wfV-Oj-W0n"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="9ab-pK-Anb" secondAttribute="trailing" constant="20" symbolic="YES" id="9uK-oe-0E5"/>
+                                                <constraint firstItem="9ab-pK-Anb" firstAttribute="top" secondItem="8pk-Me-4iC" secondAttribute="top" constant="20" symbolic="YES" id="Aob-Eh-GHD"/>
+                                                <constraint firstItem="9ab-pK-Anb" firstAttribute="leading" secondItem="8pk-Me-4iC" secondAttribute="leading" constant="20" symbolic="YES" id="Fhg-mc-mGo"/>
+                                                <constraint firstAttribute="bottom" secondItem="9ab-pK-Anb" secondAttribute="bottom" constant="20" symbolic="YES" id="MZf-Wx-8Vb"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="384" height="152"/>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="NsT-QL-e0k" id="3Rf-ty-DCe"/>
+                                            <outlet property="descriptionLabel" destination="oaU-SV-Xed" id="yJp-Bj-Qvs"/>
+                                            <outlet property="editButton" destination="GIl-ti-REL" id="IdU-Gd-o3A"/>
+                                            <outlet property="nameLabel" destination="RRo-Q0-mf7" id="PRl-Pv-oHB"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RLh-KF-0QH">
+                                <rect key="frame" x="143.5" y="168.5" width="127" height="32"/>
+                                <segments>
+                                    <segment title="Active"/>
+                                    <segment title="History"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DhZ-hD-LWP" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" id="AgO-JZ-gTU"/>
+                            <constraint firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="top" id="Hq8-MR-Cnn"/>
+                            <constraint firstItem="DhZ-hD-LWP" firstAttribute="trailing" secondItem="Agy-ft-Iet" secondAttribute="trailing" id="TYo-ON-NhY"/>
+                            <constraint firstItem="RLh-KF-0QH" firstAttribute="top" secondItem="dw6-yj-Epa" secondAttribute="bottom" constant="33.5" id="a0X-VS-vBX"/>
+                            <constraint firstItem="dw6-yj-Epa" firstAttribute="centerY" secondItem="DhZ-hD-LWP" secondAttribute="centerY" id="dwW-1x-Hdk"/>
+                            <constraint firstItem="DhZ-hD-LWP" firstAttribute="height" secondItem="Agy-ft-Iet" secondAttribute="height" multiplier="0.3" id="fNH-aj-q4I"/>
+                            <constraint firstItem="gMT-pe-MMR" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" constant="15" id="jSd-Tl-ml1"/>
+                            <constraint firstItem="dw6-yj-Epa" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="ntS-yi-6Cb"/>
+                            <constraint firstItem="Agy-ft-Iet" firstAttribute="trailing" secondItem="gMT-pe-MMR" secondAttribute="trailing" constant="15" id="rGs-2w-deD"/>
+                            <constraint firstItem="gMT-pe-MMR" firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="bottom" constant="7.5" id="vOu-Lh-vXn"/>
+                            <constraint firstItem="Agy-ft-Iet" firstAttribute="bottom" secondItem="gMT-pe-MMR" secondAttribute="bottom" constant="15" id="xwv-a3-ZEh"/>
+                            <constraint firstItem="RLh-KF-0QH" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="ywS-j0-WPw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Agy-ft-Iet"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AnF-ie-i4t"/>
+                    <connections>
+                        <outlet property="activeHistoryControl" destination="RLh-KF-0QH" id="KUS-ro-vVQ"/>
+                        <outlet property="activitiesCollectionView" destination="gMT-pe-MMR" id="A8s-aY-74f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SPM-gT-fo6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="573.91304347826087" y="3.3482142857142856"/>
+        </scene>
+        <!--Activities-->
+        <scene sceneID="KV5-Hn-ZdU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ykL-OW-g2w" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Activities" image="person.3" catalog="system" id="js8-ke-KhC"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uVN-zR-dcc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="07R-S5-BfO" kind="relationship" relationship="rootViewController" id="lzv-3D-hXv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rHd-uV-MVX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-336.23188405797106" y="3.3482142857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gradient-background" width="2048" height="2732"/>
+        <image name="person.3" catalog="system" width="72" height="35"/>
+    </resources>
+</document>
