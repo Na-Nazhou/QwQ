@@ -115,7 +115,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="UVn-Z3-Kf9">
+                                        <searchBar contentMode="redraw" placeholder="Enter restaurant name" translatesAutoresizingMaskIntoConstraints="NO" id="UVn-Z3-Kf9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>

@@ -141,6 +141,5 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             profileImageView.image = originalImage
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }
