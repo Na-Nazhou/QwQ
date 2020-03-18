@@ -12,8 +12,8 @@ class FBAuthenticator: Authenticator {
 
     private weak var delegate: AuthDelegate?
 
-    func setDelegate(view: AuthDelegate) {
-        self.delegate = view
+    func setDelegate(delegate: AuthDelegate) {
+        self.delegate = delegate
     }
 
     func signup(name: String, contact: String, email: String, password: String) {
@@ -40,20 +40,22 @@ class FBAuthenticator: Authenticator {
                 return
             }
 
-            self.delegate?.authSucceeded()
+            self.delegate?.authCompleted()
         }
     }
 
     func logout() {
         do {
             try Auth.auth().signOut()
+            delegate?.authCompleted()
         } catch {
+            delegate?.showMessage(title: "Error", message: "A logout error occured.", buttonText: "Okay")
         }
     }
 
     func checkIfAlreadyLoggedIn() {
         if Auth.auth().currentUser != nil {
-            delegate?.authSucceeded()
+            delegate?.authCompleted()
         }
     }
 

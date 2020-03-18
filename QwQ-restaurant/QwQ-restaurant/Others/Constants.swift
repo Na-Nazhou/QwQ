@@ -47,6 +47,7 @@ struct Constants {
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
     static let queueRecordSelectedSegue = "queueRecordSelected"
+    static let logoutSegue = "logout"
     
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"
