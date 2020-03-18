@@ -12,8 +12,9 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var groupSizeTextField: UITextField!
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
-    @IBOutlet weak var wheelChairFriendlySwitch: UISwitch!
-
+    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet weak var restaurantNameLabel: UIImageView!
+    
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
     }
@@ -32,7 +33,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             CustomerQueueLogicManager.shared()
             .editQueueRecord(with: groupSize,
                              babyChairQuantity: babyChairQuantity,
-                             wheelchairFriendly: wheelChairFriendlySwitch.isOn)
+                             wheelchairFriendly: wheelchairFriendlySwitch.isOn)
         }
 
         // Create a new queue record
@@ -40,7 +41,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
-                     wheelchairFriendly: wheelChairFriendlySwitch.isOn)
+                     wheelchairFriendly: wheelchairFriendlySwitch.isOn)
     }
     
     @IBAction func handleBack(_ sender: Any) {
@@ -62,8 +63,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             contactTextField.text = queueRecord.customer.contact
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
-            wheelChairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
-        } else { // Auto fill the name and contact 
+            wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+        } else { // Auto fill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
         }

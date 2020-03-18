@@ -14,6 +14,7 @@ class EditBookingViewController: UIViewController {
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet weak var restaurantNameLabel: UILabel!
     
     
     
