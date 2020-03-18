@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="15" y="59" width="384" height="70"/>
+                                <rect key="frame" x="15" y="59" width="384" height="26"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="26"/>
@@ -39,11 +39,6 @@
                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5j-dB-YTw">
-                                        <rect key="frame" x="0.0" y="36" width="384" height="34"/>
-                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="urr-2m-4eq">
@@ -51,13 +46,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VJt-Vb-yu0">
                                     <size key="itemSize" width="400" height="193"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="restaurantCell" id="lhN-ab-ua4" customClass="RestaurantCell" customModule="QwQ" customModuleProvider="target">
-                                        <rect key="frame" x="47" y="0.0" width="320" height="193"/>
+                                        <rect key="frame" x="47" y="50" width="320" height="193"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
@@ -115,6 +110,28 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="collectionViewHeader" id="HFw-SO-Lbs" customClass="SearchCollectionReusableView" customModule="QwQ" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="UVn-Z3-Kf9">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="unC-H2-shI" id="BDP-8b-DQf"/>
+                                            </connections>
+                                        </searchBar>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="UVn-Z3-Kf9" firstAttribute="leading" secondItem="HFw-SO-Lbs" secondAttribute="leading" symbolic="YES" id="KS6-ce-elU"/>
+                                        <constraint firstItem="UVn-Z3-Kf9" firstAttribute="top" secondItem="HFw-SO-Lbs" secondAttribute="top" symbolic="YES" id="WcL-VF-w05"/>
+                                        <constraint firstAttribute="bottom" secondItem="UVn-Z3-Kf9" secondAttribute="bottom" symbolic="YES" id="eSv-ZY-PDb"/>
+                                        <constraint firstAttribute="trailing" secondItem="UVn-Z3-Kf9" secondAttribute="trailing" symbolic="YES" id="jDv-1n-b2f"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="searchBar" destination="UVn-Z3-Kf9" id="FDJ-BB-Iwk"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -405,6 +422,6 @@ Pancake</string>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IfD-L4-uNp"/>
+        <segue reference="FLm-Lt-X8B"/>
     </inferredMetricsTieBreakers>
 </document>

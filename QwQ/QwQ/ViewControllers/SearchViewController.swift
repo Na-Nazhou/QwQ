@@ -7,9 +7,11 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, SearchDelegate {
-
-    private let reuseIdentifier = Constants.restaurantReuseIdentifier
+class SearchViewController: UIViewController, SearchDelegate, UISearchBarDelegate {
+    
+    var filtered:[Restaurant] = []
+    var searchActive: Bool = false
+    let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var restaurantCollectionView: UICollectionView!
     
@@ -28,6 +30,18 @@ class SearchViewController: UIViewController, SearchDelegate {
         RestaurantLogicManager.shared().searchDelegate = self
         RestaurantLogicManager.shared().fetchRestaurants()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if(!(searchBar.text?.isEmpty)!){
+            self.restaurantCollectionView?.reloadData()
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.isEmpty ? restaurants : restaurants.filter { (item: Restaurant) -> Bool in
+            return item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+    }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
         // 
@@ -44,8 +58,25 @@ class SearchViewController: UIViewController, SearchDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            let headerView:UICollectionReusableView =  collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                  withReuseIdentifier: Constants.collectionViewHeaderReuseIdentifier,
+                                                  for: indexPath)
+
+             return headerView
+         }
+
+         return UICollectionReusableView()
+
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return restaurants.count
+        return filtered.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -58,7 +89,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         }
         
-        let restaurant = restaurants[indexPath.row]
+        let restaurant = filtered[indexPath.row]
         
         restaurantCell.nameLabel.text = restaurant.name
         restaurantCell.locationLabel.text = restaurant.address
