@@ -42,6 +42,7 @@
 		7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */; };
 		7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */; };
 		7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */; };
+		7E7F7DCF2422597300A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */; };
 		7EE6D023241E393A00C1465E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D022241E393A00C1465E /* EditProfileViewController.swift */; };
 		7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */; };
 		7EE6D02F241E3CAA00C1465E /* QueueRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */; };
@@ -127,6 +128,7 @@
 		7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordViewController.swift; sourceTree = "<group>"; };
+		7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		7EE6D022241E393A00C1465E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordViewController.swift; sourceTree = "<group>"; };
 		7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordCell.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */,
 				7E53E2C1241F74990047C40F /* ProfileImageView.swift */,
+				7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				D440FC16241F9D1100606681 /* FBQueueStorage.swift in Sources */,
 				D4EA85F0241B2C65009EB85B /* RestaurantQueue.swift in Sources */,
 				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
+				7E7F7DCF2422597300A080E5 /* SearchCollectionReusableView.swift in Sources */,
 				5CE032F62421FCF6008DB047 /* FBProfileStorage.swift in Sources */,
 				7EE6D023241E393A00C1465E /* EditProfileViewController.swift in Sources */,
 				7E56AF952421F210002E9BAC /* FBAuthenticator.swift in Sources */,

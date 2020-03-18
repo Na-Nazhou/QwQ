@@ -27,8 +27,12 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         auth.setDelegate(delegate: self)
         auth.checkIfAlreadyLoggedIn()
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
     
     @IBAction func loginButton(_ sender: Any) {

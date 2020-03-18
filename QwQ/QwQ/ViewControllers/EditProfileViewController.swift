@@ -35,6 +35,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         profileStorage.setDelegate(delegate: self)
         profileStorage.getCustomerInfo()
 
+        self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 
@@ -52,7 +53,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                     buttonText: Constants.okayTitle,
                     buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
     }
-    
+
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -124,12 +125,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) {
-            (action) in
+        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .photoLibrary)
         }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) {
-            (action) in
+        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .camera)
         }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
@@ -158,6 +157,5 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             self.image = originalImage
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }

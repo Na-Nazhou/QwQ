@@ -33,8 +33,11 @@ class SignUpViewController: UIViewController, AuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         auth.setDelegate(delegate: self)
-        // Do any additional setup after loading the view.
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
     
     @IBAction func submitButton(_ sender: Any) {

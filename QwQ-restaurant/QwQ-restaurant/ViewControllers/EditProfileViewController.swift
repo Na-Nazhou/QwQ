@@ -37,9 +37,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
         profileStorage.setDelegate(delegate: self)
         profileStorage.getRestaurantInfo()
-
+        
+        self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
-            }
+    }
 
     func getRestaurantInfoComplete(restaurant: Restaurant) {
         self.uid = restaurant.uid

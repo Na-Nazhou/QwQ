@@ -9,10 +9,12 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var menuLabel: UILabel!
-    @IBOutlet private var locationLabel: UILabel!
-
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var menuLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var contactLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
     }

@@ -30,8 +30,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smf-Ud-Fzq">
-                                <rect key="frame" x="231.5" y="40.5" width="371" height="39.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUEUING DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smf-Ud-Fzq">
+                                <rect key="frame" x="247" y="40.5" width="340" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -53,8 +53,7 @@
                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                 </variation>
                                 <connections>
-                                    <action selector="handleAdmit:" destination="y4k-oO-3TI" eventType="touchUpInside" id="fUm-ht-Ke2"/>
-                                    <action selector="handleSubmit:" destination="y4k-oO-3TI" eventType="touchUpInside" id="C55-jS-CXg"/>
+                                    <action selector="handleAdmit:" destination="y4k-oO-3TI" eventType="touchUpInside" id="c6P-SH-OtN"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s17-7R-EFf">
@@ -66,7 +65,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="21E-DU-NYN">
                                                 <rect key="frame" x="0.0" y="0.0" width="367" height="752"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg8-Az-Opa">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg8-Az-Opa">
                                                         <rect key="frame" x="0.0" y="0.0" width="367" height="138"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
@@ -75,7 +74,7 @@
                                                             <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h2-0x-1GS">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h2-0x-1GS">
                                                         <rect key="frame" x="0.0" y="153" width="367" height="138.5"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
@@ -152,7 +151,7 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                         </variation>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wci-VU-s0o">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wci-VU-s0o">
                                                         <rect key="frame" x="0.0" y="613.5" width="419" height="138.5"/>
                                                     </switch>
                                                 </subviews>
