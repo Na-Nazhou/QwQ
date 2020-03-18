@@ -12,4 +12,7 @@ protocol Authenticator {
     func signup(name: String, contact: String, email: String, password: String)
 
     func login(email: String, password: String)
+
+    func checkIfAlreadyLoggedIn()
+    
 }

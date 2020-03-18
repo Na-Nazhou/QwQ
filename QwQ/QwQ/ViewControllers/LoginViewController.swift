@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, AuthDelegate {
+class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
 
     let auth: Authenticator
 
@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, AuthDelegate {
         super.viewDidLoad()
 
         auth.setDelegate(view: self)
+        auth.checkIfAlreadyLoggedIn()
 
         self.hideKeyboardWhenTappedAround()
     }
@@ -77,7 +78,19 @@ class LoginViewController: UIViewController, AuthDelegate {
     }
 
     func authSucceeded() {
+        let profile = FBProfileStorage()
+        profile.setDelegate(delegate: self)
+
+        profile.getCustomerInfo()
+    }
+
+    func getCustomerInfoComplete(customer: Customer) {
+        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
+    }
+
+    func updateComplete() {
+        fatalError("This method is not used here.")
     }
 
 }
