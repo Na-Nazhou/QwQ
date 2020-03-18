@@ -14,6 +14,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var menuTextView: UITextView!
+    @IBOutlet weak var contactLabel: UITextField!
     
     var uid: String?
     
