@@ -19,11 +19,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func loadQueueRecord() {
-        currentQueueRecord = queueStorage.loadQueueRecord(customer: customer)
+        queueStorage.loadQueueRecord(customer: customer, completion: {
+            self.currentQueueRecord = $0
+        })
     }
 
     func fetchQueueHistory() {
-        queueHistory = queueStorage.loadQueueHistory(customer: customer)
+        queueStorage.loadQueueHistory(customer: customer, completion: {
+            self.queueHistory = $0
+        })
     }
 
     func enqueue(to restaurant: Restaurant,
