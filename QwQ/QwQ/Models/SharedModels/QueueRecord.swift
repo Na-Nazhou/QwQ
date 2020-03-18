@@ -19,7 +19,16 @@ struct QueueRecord {
         QueueRecord.getDateString(from: startTime)
     }
 
-    init(id: String = "0", restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool, startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+    init(restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
+         startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+        self.init(id: "0", restaurant: restaurant, customer: customer,
+                  groupSize: groupSize, babyChairQuantity: babyChairQuantity, wheelchairFriendly: wheelchairFriendly,
+                  startTime: startTime, admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime)
+    }
+
+    init(id: String, restaurant: Restaurant, customer: Customer,
+         groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
+         startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -42,14 +51,14 @@ struct QueueRecord {
             let startTime = (dictionary["startTime"] as? Timestamp)?.dateValue() else {
                 return nil
         }
-        let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue() ?? nil
-        let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue() ?? nil
-        let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue() ?? nil
-
+        let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
+        let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
+        let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
 
         //TODO: replace with mtd to get R from uid of restaurant.
         func getRestaurant(rid: String) -> Restaurant {
-            return Restaurant(uid: rid, name: "Dummy restaurant", email: "r123@example.com", contact: "6565161729", address: "Clementi road", menu: "burger, $3;", isOpen: false)
+            return Restaurant(uid: rid, name: "Dummy restaurant", email: "r123@example.com",
+                              contact: "6565161729", address: "Clementi road", menu: "burger, $3;", isOpen: false)
         }
         //TODO: similarly; would placing the two methods in the same class make sense?
         func getCustomer(cid: String) -> Customer {

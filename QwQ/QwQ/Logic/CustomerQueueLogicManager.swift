@@ -11,7 +11,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
-    var queueHistory = CustomerQueueHistory() //[QueueRecord]()
+    private var queueHistory = CustomerQueueHistory() //[QueueRecord]()
+    var pastQueueRecords: [QueueRecord] {
+        return Array(queueHistory.history)
+    }
 
     private init(customer: Customer) {
         self.customer = customer

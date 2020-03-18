@@ -97,9 +97,10 @@ class FBQueueStorage: CustomerQueueStorage {
         }
     }
 
-    /// Searches for the customer's queue records in the past week (7 days) and calls the completion handler when records are found.
+    /// Searches for the customer's queue records in the past week (7 days) and
+    /// calls the completion handler when records are found.
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
-        db.collection("queues").getDocuments() { (querySnapshot, err) in
+        db.collection("queues").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -108,17 +109,21 @@ class FBQueueStorage: CustomerQueueStorage {
                         let rQueue = self.db.collection("queues")
                             .document(document.documentID)
                             .collection(QueueRecord.getDateString(from: self.dateOf(daysBeforeToday: numDaysAgo)))
-                        rQueue.getDocuments() {
-                            (queueSnapshot, err) in
+                        rQueue.getDocuments { (queueSnapshot, err) in
                             if let err = err {
                                 print("Error getting documents: \(err)")
                             } else {
-                                self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(queueSnapshot: queueSnapshot!, forCustomer: customer, condition: { dict in
-                                    if document.data()["serveTime"] as? Timestamp != nil || document.data()["rejectTime"] as? Timestamp != nil {
-                                        //over=> past history
-                                        return true
-                                    }
-                                    return false
+                                self
+                                    .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
+                                        queueSnapshot: queueSnapshot!,
+                                        forCustomer: customer,
+                                        condition: { dict in
+                                            if dict["serveTime"] as? Timestamp != nil
+                                                || dict["rejectTime"] as? Timestamp != nil {
+                                                //over=> past history
+                                                return true
+                                            }
+                                            return false
                                 }, completion: completion)
                             }
                         }
@@ -128,7 +133,9 @@ class FBQueueStorage: CustomerQueueStorage {
         }
     }
 
-    private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(queueSnapshot: QuerySnapshot, forCustomer customer: Customer, condition: (([String: Any]) -> Bool), completion: @escaping (QueueRecord?) -> Void) {
+    private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
+        queueSnapshot: QuerySnapshot, forCustomer customer: Customer,
+        condition: (([String: Any]) -> Bool), completion: @escaping (QueueRecord?) -> Void) {
         for document in queueSnapshot.documents {
             guard let qCid = (document.data()["customer"] as? String), qCid == customer.uid else {
                 return

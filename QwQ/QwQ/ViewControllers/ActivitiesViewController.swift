@@ -31,7 +31,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     var historyRecords: [QueueRecord] {
-        CustomerQueueLogicManager.shared().queueHistory
+        CustomerQueueLogicManager.shared().pastQueueRecords
     }
     
     override func viewDidLoad() {
