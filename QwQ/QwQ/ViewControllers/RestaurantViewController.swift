@@ -64,6 +64,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         nameLabel.text = restaurant.name
         menuLabel.text = restaurant.menu
         locationLabel.text = restaurant.address
+        contactLabel.text = restaurant.contact
+        emailLabel.text = restaurant.email
     }
 
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {

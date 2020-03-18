@@ -11,6 +11,8 @@ target 'QwQ' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage'
+  pod 'SDWebImage/Core'
 
   target 'QwQTests' do
     inherit! :search_paths

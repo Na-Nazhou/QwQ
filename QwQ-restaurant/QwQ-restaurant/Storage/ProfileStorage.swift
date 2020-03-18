@@ -13,6 +13,10 @@ protocol ProfileStorage {
 
     func getRestaurantInfo()
 
+    func getRestaurantProfilePic(uid: String, placeholder imageView: UIImageView)
+
     func updateRestaurantInfo(restaurant: Restaurant)
+
+    func updateRestaurantProfilePic(uid: String, image: UIImage)
 
 }

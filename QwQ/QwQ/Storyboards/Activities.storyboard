@@ -126,20 +126,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RLh-KF-0QH">
-                                <rect key="frame" x="143.5" y="168.5" width="127" height="32"/>
-                                <segments>
-                                    <segment title="Active"/>
-                                    <segment title="History"/>
-                                </segments>
-                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-DD-Q5f" customClass="SegmentedControl" customModule="QwQ" customModuleProvider="target">
+                                <rect key="frame" x="87" y="155" width="240" height="57"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="5uI-lV-wK3"/>
+                                    <constraint firstAttribute="width" constant="240" id="t16-8D-E74"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="R4T-DD-Q5f" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="4rh-y1-LuQ"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" id="AgO-JZ-gTU"/>
                             <constraint firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="top" id="Hq8-MR-Cnn"/>
+                            <constraint firstItem="R4T-DD-Q5f" firstAttribute="top" secondItem="dw6-yj-Epa" secondAttribute="bottom" constant="20" id="QYm-5D-eMN"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="trailing" secondItem="Agy-ft-Iet" secondAttribute="trailing" id="TYo-ON-NhY"/>
-                            <constraint firstItem="RLh-KF-0QH" firstAttribute="top" secondItem="dw6-yj-Epa" secondAttribute="bottom" constant="33.5" id="a0X-VS-vBX"/>
                             <constraint firstItem="dw6-yj-Epa" firstAttribute="centerY" secondItem="DhZ-hD-LWP" secondAttribute="centerY" id="dwW-1x-Hdk"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="height" secondItem="Agy-ft-Iet" secondAttribute="height" multiplier="0.3" id="fNH-aj-q4I"/>
                             <constraint firstItem="gMT-pe-MMR" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" constant="15" id="jSd-Tl-ml1"/>
@@ -147,13 +149,12 @@
                             <constraint firstItem="Agy-ft-Iet" firstAttribute="trailing" secondItem="gMT-pe-MMR" secondAttribute="trailing" constant="15" id="rGs-2w-deD"/>
                             <constraint firstItem="gMT-pe-MMR" firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="bottom" constant="7.5" id="vOu-Lh-vXn"/>
                             <constraint firstItem="Agy-ft-Iet" firstAttribute="bottom" secondItem="gMT-pe-MMR" secondAttribute="bottom" constant="15" id="xwv-a3-ZEh"/>
-                            <constraint firstItem="RLh-KF-0QH" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="ywS-j0-WPw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Agy-ft-Iet"/>
                     </view>
                     <navigationItem key="navigationItem" id="AnF-ie-i4t"/>
                     <connections>
-                        <outlet property="activeHistoryControl" destination="RLh-KF-0QH" id="KUS-ro-vVQ"/>
+                        <outlet property="activeHistoryControl" destination="R4T-DD-Q5f" id="Rtw-7g-iWH"/>
                         <outlet property="activitiesCollectionView" destination="gMT-pe-MMR" id="A8s-aY-74f"/>
                         <segue destination="NGo-9A-thp" kind="show" identifier="queueSelected" id="wAb-S6-564"/>
                         <segue destination="i2s-ga-rpF" kind="show" identifier="bookSelected" id="LxS-rR-JuO"/>
@@ -163,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPM-gT-fo6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="506" y="3"/>
+            <point key="canvasLocation" x="505.79710144927537" y="2.6785714285714284"/>
         </scene>
         <!--EditBook-->
         <scene sceneID="p8Z-rI-fAw">

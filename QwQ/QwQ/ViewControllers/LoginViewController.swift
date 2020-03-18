@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
         auth.setDelegate(delegate: self)
         auth.checkIfAlreadyLoggedIn()
 
+        self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 

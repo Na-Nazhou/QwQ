@@ -49,6 +49,8 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
         self.nameLabel.text = customer.name
         self.contactLabel.text = customer.contact
         self.emailLabel.text = customer.email
+
+        profileStorage.getCustomerProfilePic(uid: customer.uid, placeholder: profileImageView)
     }
 
     func authCompleted() {

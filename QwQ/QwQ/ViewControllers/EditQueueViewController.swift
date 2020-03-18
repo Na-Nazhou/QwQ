@@ -56,6 +56,9 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         super.viewDidLoad()
 
         CustomerQueueLogicManager.shared().queueDelegate = self
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func viewDidAppear(_ animated: Bool) {

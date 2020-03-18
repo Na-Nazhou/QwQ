@@ -28,5 +28,8 @@ class EditBookingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
 }

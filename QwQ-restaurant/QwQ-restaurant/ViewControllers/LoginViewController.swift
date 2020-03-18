@@ -27,8 +27,12 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         auth.setDelegate(delegate: self)
         auth.checkIfAlreadyLoggedIn()
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
     
     @IBAction func loginButton(_ sender: Any) {
@@ -47,7 +51,7 @@ class LoginViewController: UIViewController, AuthDelegate {
             return
         }
         
-        guard LoginUtilities.validateEmail(email: email) else {
+        guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
                         buttonText: Constants.okayTitle,
