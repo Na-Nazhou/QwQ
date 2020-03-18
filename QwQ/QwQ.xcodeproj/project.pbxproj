@@ -31,6 +31,7 @@
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
 		7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */; };
+		7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */; };
 		7EC1F3132421F837005D20CD /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */; };
 		7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3142421FB7F005D20CD /* ActivityCell.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
@@ -125,6 +126,7 @@
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		7EC1F3142421FB7F005D20CD /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */,
+				7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */,
 				7EC1F3142421FB7F005D20CD /* ActivityCell.swift */,
 				7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */,
 				7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */,
@@ -742,6 +745,7 @@
 			files = (
 				5C59E91D2422134A004DFEB7 /* ProfileStorage.swift in Sources */,
 				D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */,
+				7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */,
 				D4EA85D1241B29CC009EB85B /* User.swift in Sources */,
 				61673BF1241FC23800134891 /* RestaurantStorageStub.swift in Sources */,
 				617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */,
