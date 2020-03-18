@@ -1,8 +1,8 @@
 //
 //  FBProfileStorage.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 14/3/20.
+//  Created by Daniel Wong on 18/3/20.
 //
 
 import FirebaseAuth
@@ -49,7 +49,6 @@ class FBProfileStorage: ProfileStorage {
                 self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
                 return
             }
-            CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)
             self.delegate?.updateComplete()
         }
     }
