@@ -7,6 +7,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     // View Controller
     weak var queueDelegate: QueueDelegate?
+    weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?

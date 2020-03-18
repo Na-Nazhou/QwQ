@@ -7,29 +7,22 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController {
+class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     @IBOutlet weak var activeHistoryControl: UISegmentedControl!
     @IBOutlet weak var activitiesCollectionView: UICollectionView!
-    
-    var queueRecords: [QueueRecord] = [QueueRecord(restaurant: Restaurant(uid: "1",
-                                                                          name: "jane",
-                                                                          email: "jane@gmail.com",
-                                                                          contact: "9872",
-                                                                          address: "1",
-                                                                          menu: "1",
-                                                                          isOpen: true),
-                                                   customer: Customer(uid: "2", name: "name", email: "name@", contact: "9827"),
-                                                   groupSize: 2,
-                                                   babyChairQuantity: 1,
-                                                   wheelchairFriendly: false,
-                                                   startTime: Date(),
-                                                   admitTime: Date())]
+
+    var queueRecords: [QueueRecord] {
+           CustomerQueueLogicManager.shared().queueHistory
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activitiesCollectionView.dataSource = self
         activitiesCollectionView.delegate = self
+
+        CustomerQueueLogicManager.shared().activitiesDelegate = self
+        CustomerQueueLogicManager.shared().fetchQueueHistory()
     }
 }
 

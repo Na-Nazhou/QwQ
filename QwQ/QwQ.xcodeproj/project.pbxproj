@@ -22,6 +22,7 @@
 		613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */; };
 		613267FC241F220D00B770B6 /* RestaurantDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267FA241F220C00B770B6 /* RestaurantDelegate.swift */; };
 		61673BF1241FC23800134891 /* RestaurantStorageStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61673BEF241FC23800134891 /* RestaurantStorageStub.swift */; };
+		61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61673BF52422168400134891 /* ActivitiesDelegate.swift */; };
 		617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DC241F392F0010AB30 /* SearchDelegate.swift */; };
 		617B62DF241F39EF0010AB30 /* QueueDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DE241F39EF0010AB30 /* QueueDelegate.swift */; };
 		617B62E1241F3C0F0010AB30 /* BookingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62E0241F3C0F0010AB30 /* BookingRecord.swift */; };
@@ -112,6 +113,7 @@
 		613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogicManager.swift; sourceTree = "<group>"; };
 		613267FA241F220C00B770B6 /* RestaurantDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDelegate.swift; sourceTree = "<group>"; };
 		61673BEF241FC23800134891 /* RestaurantStorageStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantStorageStub.swift; sourceTree = "<group>"; };
+		61673BF52422168400134891 /* ActivitiesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDelegate.swift; sourceTree = "<group>"; };
 		617B62DC241F392F0010AB30 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		617B62DE241F39EF0010AB30 /* QueueDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueDelegate.swift; sourceTree = "<group>"; };
 		617B62E0241F3C0F0010AB30 /* BookingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookingRecord.swift; path = QwQ/Logic/Delegates/BookingRecord.swift; sourceTree = SOURCE_ROOT; };
@@ -241,6 +243,7 @@
 				613267FA241F220C00B770B6 /* RestaurantDelegate.swift */,
 				617B62DC241F392F0010AB30 /* SearchDelegate.swift */,
 				617B62DE241F39EF0010AB30 /* QueueDelegate.swift */,
+				61673BF52422168400134891 /* ActivitiesDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -772,6 +775,8 @@
 				5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */,
 				D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */,
 				617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */,
+				61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */,
+				617B62EB241F85ED0010AB30 /* LoginUtilities.swift in Sources */,
 				D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */,
 				613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,
