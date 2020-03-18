@@ -68,7 +68,7 @@ class FBQueueStorage: CustomerQueueStorage {
 
         // TODO: Attach listener
 
-        db.collection("queues").getDocuments() { (querySnapshot, err) in
+        db.collection("queues").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -76,7 +76,7 @@ class FBQueueStorage: CustomerQueueStorage {
                     let restaurantQueuesToday = self.db.collection("queues")
                         .document(document.documentID)
                         .collection(Date().toDateStringWithoutTime())
-                    restaurantQueuesToday.getDocuments() { (queueSnapshot, err) in
+                    restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
                         if let err = err {
                             print("Error getting documents: \(err)")
                         } else {
@@ -84,12 +84,12 @@ class FBQueueStorage: CustomerQueueStorage {
                                 queueSnapshot: queueSnapshot!,
                                 forCustomer: customer,
                                 condition: { dict in
-                                    if document.data()["serveTime"] as? Timestamp != nil || document.data()["rejectTime"] as? Timestamp != nil {
-                                    //already served/rejected = past queue history
-                                    return false
+                                    if dict["serveTime"] as? Timestamp != nil
+                                        || dict["rejectTime"] as? Timestamp != nil {
+                                    return false //already served/rejected = past queue history
                                 }
                                 return true
-                            }, completion: completion)
+                                }, completion: completion)
                         }
                     }
                 }
@@ -106,8 +106,7 @@ class FBQueueStorage: CustomerQueueStorage {
             } else {
                 for document in querySnapshot!.documents {
                     for numDaysAgo in 0...6 {
-                        let rQueue = self.db.collection("queues")
-                            .document(document.documentID)
+                        let rQueue = self.db.collection("queues").document(document.documentID)
                             .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
                         rQueue.getDocuments { (queueSnapshot, err) in
                             if let err = err {
@@ -115,16 +114,14 @@ class FBQueueStorage: CustomerQueueStorage {
                             } else {
                                 self
                                     .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                                        queueSnapshot: queueSnapshot!,
-                                        forCustomer: customer,
+                                        queueSnapshot: queueSnapshot!, forCustomer: customer,
                                         condition: { dict in
                                             if dict["serveTime"] as? Timestamp != nil
                                                 || dict["rejectTime"] as? Timestamp != nil {
-                                                //over=> past history
-                                                return true
+                                                return true //over=> past history
                                             }
                                             return false
-                                }, completion: completion)
+                                        }, completion: completion)
                             }
                         }
                     }
