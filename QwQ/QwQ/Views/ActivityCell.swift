@@ -9,6 +9,7 @@ import UIKit
 
 class ActivityCell: UICollectionViewCell {
     var editAction: (() -> Void)?
+    var deleteAction: (() -> Void)?
 
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
@@ -18,9 +19,10 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet private var queueBookImageView: UIImageView!
     
     @IBAction private func handleDelete(_ sender: Any) {
+        deleteAction?()
     }
 
-    @IBAction func handleEdit(_ sender: Any) {
+    @IBAction private func handleEdit(_ sender: Any) {
         editAction?()
     }
     
@@ -45,6 +47,9 @@ class ActivityCell: UICollectionViewCell {
         if queueRecord.isHistoryRecord {
             editButton.isHidden = true
             deleteButton.isHidden = true
+        } else {
+            editButton.isHidden = false
+            deleteButton.isHidden = false
         }
     }
 }

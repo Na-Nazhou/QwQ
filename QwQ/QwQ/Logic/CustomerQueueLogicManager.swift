@@ -93,7 +93,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         queueStorage.deleteQueueRecord(record: record,
-                                       completion: { self.currentQueueRecord = nil })
+                                       completion: {
+                                        self.currentQueueRecord = nil
+                                        self.activitiesDelegate?.didDeleteQueueRecord()
+        })
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {

@@ -6,4 +6,7 @@
 //
 
 protocol ActivitiesDelegate: AnyObject {
+
+    func didDeleteQueueRecord()
+
 }

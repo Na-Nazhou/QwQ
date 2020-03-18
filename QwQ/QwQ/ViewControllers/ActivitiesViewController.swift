@@ -8,13 +8,26 @@
 import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
+
     @IBOutlet private var activeHistoryControl: UISegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
-    var queueRecords = [QueueRecord]()
+    var queueRecords: [QueueRecord] {
+        if isActive {
+            return activeRecords
+        } else {
+            return historyRecords
+        }
+    }
 
-    var activeRecord: QueueRecord? {
-        CustomerQueueLogicManager.shared().currentQueueRecord
+    var isActive = true
+
+    var activeRecords: [QueueRecord] {
+        if let activeRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
+            return [activeRecord]
+        } else {
+            return []
+        }
     }
 
     var historyRecords: [QueueRecord] {
@@ -33,9 +46,6 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     private func setUpSegmentedControl() {
-        if let activeRecord = activeRecord {
-            queueRecords = [activeRecord]
-        }
         activitiesCollectionView.reloadData()
         activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
@@ -43,18 +53,25 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     @IBAction private func onTapSegButton(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            if let activeRecord = activeRecord {
-                queueRecords = [activeRecord]
-            } else {
-                queueRecords = []
-            }
+            isActive = true
         case 1:
             CustomerQueueLogicManager.shared().fetchQueueHistory()
-            queueRecords = historyRecords
+            isActive = false
         default:
             return
         }
         activitiesCollectionView.reloadData()
+    }
+
+    func didDeleteQueueRecord() {
+        showMessage(
+            title: Constants.successfulUpdateTitle,
+            message: Constants.successQueueRecordDeleteMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.navigationController?.popViewController(animated: true)
+                self.activitiesCollectionView.reloadData()
+            })
     }
 }
 
@@ -77,6 +94,9 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         activityCell.setUpView(queueRecord: queueRecord)
         activityCell.editAction = {
             self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+        }
+        activityCell.deleteAction = {
+            CustomerQueueLogicManager.shared().deleteQueueRecord()
         }
         
         return activityCell
