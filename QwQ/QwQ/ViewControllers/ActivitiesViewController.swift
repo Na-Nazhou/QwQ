@@ -9,7 +9,7 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
-    @IBOutlet private var activeHistoryControl: UISegmentedControl!
+    @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
     var queueRecords: [QueueRecord] {
@@ -50,8 +50,8 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
 
-    @IBAction private func onTapSegButton(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
+    @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
+        switch sender.selectedIndex {
         case 0:
             isActive = true
         case 1:
