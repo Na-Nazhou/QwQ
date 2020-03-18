@@ -11,14 +11,15 @@ import Foundation
 
 class ActivitiesViewController: UIViewController {
     
-    @IBOutlet weak var searchBarController: UISearchBar!
-    @IBOutlet weak var queueRecordCollectionView: UICollectionView!
-    
+    var filtered: [QueueRecord] = []
     var queueRecords: [QueueRecord] = [QueueRecord(uid: "1",
                                                    restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", contact: "12345678", address: "location", menu: "menu", isOpen: true), customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
                                                    groupSize: 4,
                                                    babyChairQuantity: 0, wheelchairFriendly: true,
                                                    startTime: Date()), ]
+    
+    @IBOutlet weak var searchBarController: UISearchBar!
+    @IBOutlet weak var queueRecordCollectionView: UICollectionView!
     
     @IBAction func handleOpenClose(_ sender: Any) { 
     }
@@ -30,6 +31,8 @@ class ActivitiesViewController: UIViewController {
         
         queueRecordCollectionView.delegate = self
         queueRecordCollectionView.dataSource = self
+        
+        filtered = queueRecords
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,9 +48,39 @@ class ActivitiesViewController: UIViewController {
     
 }
 
+extension ActivitiesViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !(searchBar.text?.isEmpty)! {
+            self.queueRecordCollectionView?.reloadData()
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.isEmpty ? queueRecords : queueRecords.filter { (item: QueueRecord) -> Bool in
+            item.customer.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+    }
+}
+
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView: UICollectionReusableView = collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                  withReuseIdentifier: Constants.collectionViewHeaderReuseIdentifier,
+                                                  for: indexPath)
+
+             return headerView
+         }
+
+         return UICollectionReusableView()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return queueRecords.count
+        return filtered.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -60,7 +93,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
         
-        let queueRecord = queueRecords[indexPath.row]
+        let queueRecord = filtered[indexPath.row]
         
         queueRecordCell.nameLabel.text = queueRecord.customer.name
         queueRecordCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
