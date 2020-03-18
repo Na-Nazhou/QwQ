@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */; };
 		5C44BB552422141A0012EC59 /* RestaurantPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */; };
 		5C44C9B3241DD0390097C006 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9B2241DD0390097C006 /* LoginUtilities.swift */; };
 		5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
@@ -22,7 +23,7 @@
 		6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */; };
 		6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */; };
 		6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */; };
-		7E53E2BA241F60A60047C40F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF922421F20F002E9BAC /* Authenticator.swift */; };
 		7E56AF952421F210002E9BAC /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF932421F210002E9BAC /* FBAuthenticator.swift */; };
@@ -84,6 +85,7 @@
 		02D15F2C2F86E0408443805B /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant_QwQ_restaurantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		348FC0930931C3EC7435E434 /* Pods-QwQ-restaurantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurantTests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurantTests/Pods-QwQ-restaurantTests.release.xcconfig"; sourceTree = "<group>"; };
 		58F7EC49F1CBD82D857B321D /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+checkCacheThenSetImage.swift"; sourceTree = "<group>"; };
 		5C44C9B2241DD0390097C006 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
 		5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C9D9B5D242222310019B7EE /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
 				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
 				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
+				5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -675,10 +678,11 @@
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
 				7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */,
-				7E53E2BA241F60A60047C40F /* BuildFile in Sources */,
+				7E53E2BA241F60A60047C40F /* (null) in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
+				5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */,
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
 				D4EA8600241B2CC6009EB85B /* RestaurantQueueStorageStub.swift in Sources */,

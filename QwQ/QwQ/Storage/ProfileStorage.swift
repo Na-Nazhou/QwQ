@@ -13,6 +13,10 @@ protocol ProfileStorage {
 
     func getCustomerInfo()
 
+    func getCustomerProfilePic(uid: String, placeholder imageView: UIImageView)
+
     func updateCustomerInfo(customer: Customer)
+
+    func updateCustomerProfilePic(uid: String, image: UIImage)
 
 }

@@ -12,10 +12,12 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
+    
     @IBOutlet private var profileImageView: UIImageView!
     
     let profileStorage: ProfileStorage
     var uid: String?
+    var image: UIImage?
 
     init() {
         profileStorage = FBProfileStorage()
@@ -34,22 +36,6 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         profileStorage.getCustomerInfo()
 
         self.hideKeyboardWhenTappedAround()
-        
-        setUpProfileImageView()
-    }
-    
-    @IBAction func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    private func setUpProfileImageView() {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
-        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
-        profileImageView.isUserInteractionEnabled = true
-    }
-    
-    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
-        showImagePickerControllerActionSheet()
     }
 
     func getCustomerInfoComplete(customer: Customer) {
@@ -57,6 +43,36 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         self.nameTextField.text = customer.name
         self.contactTextField.text = customer.contact
         self.emailTextField.text = customer.email
+        setUpProfileImageView(uid: customer.uid)
+    }
+
+    func updateComplete() {
+        let message = UIAlertController(title: Constants.successfulUpdateTitle,
+                                        message: Constants.successfulUpdateMessage,
+                                        preferredStyle: .alert)
+
+        let closeDialogAction = UIAlertAction(title: Constants.okayTitle,
+                                              style: .default) { (_: UIAlertAction!) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }
+        message.addAction(closeDialogAction)
+
+        self.present(message, animated: true)
+    }
+    
+    @IBAction private func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func setUpProfileImageView(uid: String) {
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
+        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
+        profileImageView.isUserInteractionEnabled = true
+        profileStorage.getCustomerProfilePic(uid: uid, placeholder: profileImageView)
+    }
+    
+    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
+        showImagePickerControllerActionSheet()
     }
 
     @IBAction private func saveButton(_ sender: Any) {
@@ -78,20 +94,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         }
 
         profileStorage.updateCustomerInfo(customer: Customer(uid: uid, name: name, email: email, contact: contact))
-    }
 
-    func updateComplete() {
-        let message = UIAlertController(title: Constants.successfulUpdateTitle,
-                                        message: Constants.successfulUpdateMessage,
-                                        preferredStyle: .alert)
-
-        let closeDialogAction = UIAlertAction(title: Constants.okayTitle,
-                                              style: .default) { (_: UIAlertAction!) -> Void in
-            self.navigationController?.popViewController(animated: true)
+        if let image = image {
+            profileStorage.updateCustomerProfilePic(uid: uid, image: image)
         }
-        message.addAction(closeDialogAction)
-
-        self.present(message, animated: true)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {
@@ -136,8 +142,10 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
+            self.image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImageView.image = originalImage
+            self.image = originalImage
         }
         dismiss(animated: true, completion: nil)
         
