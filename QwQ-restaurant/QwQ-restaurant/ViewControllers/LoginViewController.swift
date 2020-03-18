@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, AuthDelegate {
             return
         }
         
-        guard LoginUtilities.validateEmail(email: email) else {
+        guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
                         buttonText: Constants.okayTitle,

@@ -54,17 +54,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
 
     func updateComplete() {
-        let message = UIAlertController(title: Constants.successfulUpdateTitle,
-                                        message: Constants.successfulUpdateMessage,
-                                        preferredStyle: .alert)
-
-        let closeDialogAction = UIAlertAction(title: Constants.okayTitle,
-                                              style: .default) { (_: UIAlertAction!) -> Void in
-            self.navigationController?.popViewController(animated: true)
-        }
-        message.addAction(closeDialogAction)
-
-        self.present(message, animated: true)
+        showMessage(title: Constants.successfulUpdateTitle,
+                    message: Constants.successfulUpdateMessage,
+                    buttonText: Constants.okayTitle,
+                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -95,6 +88,21 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                 return
         }
 
+        guard ValidationUtilities.validateEmail(email: email) else {
+            showMessage(title: Constants.invalidEmailTitle,
+                        message: Constants.invalidEmailMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return
+        }
+
+        guard ValidationUtilities.validateContact(contact: contact) else {
+            showMessage(title: Constants.invalidContactTitle,
+                        message: Constants.invalidContactMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return
+        }
         profileStorage.updateRestaurantInfo(restaurant: Restaurant(uid: uid,
                                                      name: name,
                                                      email: email,
