@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="W4z-EM-bhe">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Edit Booking View Controller-->
+        <scene sceneID="PkI-Hz-O64">
+            <objects>
+                <viewController id="W4z-EM-bhe" customClass="EditBookingViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lPE-oS-NQ3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="yhv-E2-7gs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="245.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOOKING DETAILS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLG-lY-Z1t">
+                                <rect key="frame" x="96.5" y="109.5" width="221.5" height="26"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5n-oj-8j5">
+                                <rect key="frame" x="15" y="44" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="g5n-oj-8j5" secondAttribute="height" id="VDr-dE-hcR"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="W4z-EM-bhe" eventType="touchUpInside" id="dBp-6b-HXp"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vwr-TF-Mt9">
+                                <rect key="frame" x="15" y="260.5" width="384" height="528"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oF4-4h-q3r">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="215"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="4rd-YB-Xxn">
+                                                <rect key="frame" x="0.0" y="0.0" width="157" height="215"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vG7-02-ZVx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UiV-XV-tAd">
+                                                        <rect key="frame" x="0.0" y="46" width="157" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGV-1W-sqs">
+                                                        <rect key="frame" x="0.0" y="92" width="157" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCV-pe-Oow">
+                                                        <rect key="frame" x="0.0" y="138" width="157" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewT-jn-DKj">
+                                                        <rect key="frame" x="0.0" y="184" width="157" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OF5-Mp-dOQ">
+                                                <rect key="frame" x="177" y="0.0" width="207" height="215"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Jane" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ijm-kT-XTq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="31"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                        <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                        </variation>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="98635485" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rcy-JT-Kcv">
+                                                        <rect key="frame" x="0.0" y="46" width="207" height="31"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                        </variation>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fA8-sg-UOh">
+                                                        <rect key="frame" x="0.0" y="92" width="207" height="31"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                        </variation>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="wUs-KW-IOu">
+                                                        <rect key="frame" x="0.0" y="138" width="207" height="31"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                        </variation>
+                                                    </textField>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ohm-wc-7Ul">
+                                                        <rect key="frame" x="0.0" y="184" width="209" height="31"/>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu4-Qa-HHF">
+                                        <rect key="frame" x="0.0" y="230" width="384" height="23"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-Vh-FNI">
+                                        <rect key="frame" x="0.0" y="268" width="384" height="260"/>
+                                    </datePicker>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQc-TO-fjT">
+                                <rect key="frame" x="0.0" y="796.5" width="414" height="65.5"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleSubmit:" destination="W4z-EM-bhe" eventType="touchUpInside" id="ve2-MM-MNU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qu-q3-HXD">
+                                <rect key="frame" x="181" y="170" width="52.5" height="19"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="g5n-oj-8j5" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" constant="15" id="51H-D2-sbc"/>
+                            <constraint firstItem="wLG-lY-Z1t" firstAttribute="centerX" secondItem="yhv-E2-7gs" secondAttribute="centerX" id="7RL-oC-GMj"/>
+                            <constraint firstItem="yhv-E2-7gs" firstAttribute="height" secondItem="7aN-VE-zg3" secondAttribute="height" multiplier="0.3" id="9Pv-bR-Ggt"/>
+                            <constraint firstItem="yhv-E2-7gs" firstAttribute="trailing" secondItem="7aN-VE-zg3" secondAttribute="trailing" id="Huv-ZI-wKf"/>
+                            <constraint firstItem="oQc-TO-fjT" firstAttribute="trailing" secondItem="7aN-VE-zg3" secondAttribute="trailing" id="Jn8-1B-ruJ"/>
+                            <constraint firstItem="Ijm-kT-XTq" firstAttribute="width" secondItem="7aN-VE-zg3" secondAttribute="width" multiplier="0.5" id="P9G-l2-6q9"/>
+                            <constraint firstItem="7aN-VE-zg3" firstAttribute="trailing" secondItem="vwr-TF-Mt9" secondAttribute="trailing" constant="15" id="PhA-MR-yjo"/>
+                            <constraint firstItem="g5n-oj-8j5" firstAttribute="width" secondItem="g5n-oj-8j5" secondAttribute="height" id="ToI-Qz-SXd"/>
+                            <constraint firstItem="vwr-TF-Mt9" firstAttribute="top" secondItem="yhv-E2-7gs" secondAttribute="bottom" constant="15" id="Wpf-r0-fj8"/>
+                            <constraint firstItem="8qu-q3-HXD" firstAttribute="top" secondItem="wLG-lY-Z1t" secondAttribute="bottom" constant="34.5" id="YXf-rC-MQH"/>
+                            <constraint firstItem="oQc-TO-fjT" firstAttribute="top" secondItem="vwr-TF-Mt9" secondAttribute="bottom" constant="8" symbolic="YES" id="Zyr-va-D0a"/>
+                            <constraint firstItem="g5n-oj-8j5" firstAttribute="top" secondItem="7aN-VE-zg3" secondAttribute="top" id="dJb-KU-hZP"/>
+                            <constraint firstItem="vwr-TF-Mt9" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" constant="15" id="e45-QH-XhI"/>
+                            <constraint firstItem="yhv-E2-7gs" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" id="e4T-Gu-qPK"/>
+                            <constraint firstItem="g5n-oj-8j5" firstAttribute="width" secondItem="7aN-VE-zg3" secondAttribute="width" multiplier="0.08" id="hwH-9m-KRr"/>
+                            <constraint firstItem="8qu-q3-HXD" firstAttribute="centerX" secondItem="lPE-oS-NQ3" secondAttribute="centerX" id="iYt-JD-9Ne"/>
+                            <constraint firstItem="oQc-TO-fjT" firstAttribute="height" secondItem="7aN-VE-zg3" secondAttribute="height" multiplier="0.08" id="mob-nQ-iQc"/>
+                            <constraint firstItem="7aN-VE-zg3" firstAttribute="bottom" secondItem="oQc-TO-fjT" secondAttribute="bottom" id="ou5-aY-lvd"/>
+                            <constraint firstItem="wLG-lY-Z1t" firstAttribute="centerY" secondItem="yhv-E2-7gs" secondAttribute="centerY" id="pKt-NL-kzp"/>
+                            <constraint firstItem="yhv-E2-7gs" firstAttribute="top" secondItem="lPE-oS-NQ3" secondAttribute="top" id="tpe-h6-xZX"/>
+                            <constraint firstItem="oQc-TO-fjT" firstAttribute="leading" secondItem="7aN-VE-zg3" secondAttribute="leading" id="vnB-Fd-55y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7aN-VE-zg3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aiQ-s6-zVC"/>
+                    <connections>
+                        <outlet property="babyChairQuantityTextField" destination="wUs-KW-IOu" id="klA-jf-poY"/>
+                        <outlet property="contactTextField" destination="Rcy-JT-Kcv" id="wWH-Rr-fmE"/>
+                        <outlet property="datePicker" destination="2xb-Vh-FNI" id="faa-h2-T6I"/>
+                        <outlet property="groupSizeTextField" destination="fA8-sg-UOh" id="h3D-4a-Vw7"/>
+                        <outlet property="nameTextField" destination="Ijm-kT-XTq" id="85n-Hx-5kT"/>
+                        <outlet property="restaurantNameLabel" destination="8qu-q3-HXD" id="q89-Mj-ZA5"/>
+                        <outlet property="wheelchairFriendlySwitch" destination="Ohm-wc-7Ul" id="VYy-ZI-hHy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZAS-eg-cH0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4907" y="686"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+    </resources>
+</document>

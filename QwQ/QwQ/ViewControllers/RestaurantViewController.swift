@@ -26,7 +26,11 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
-        performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+        if CustomerQueueLogicManager.shared().currentQueueRecord == nil {
+            performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+        } else {
+            showMessage(title: "Error", message: "You have an existing queue record", buttonText: Constants.okayTitle)
+        }
     }
 
     @IBAction private func handleBookTap(_ sender: Any) {
@@ -45,5 +49,14 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {
         //
+    }
+
+    private func showMessage(title: String, message: String, buttonText: String) {
+        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
+        message.addAction(closeDialogAction)
+
+        self.present(message, animated: true)
     }
 }
