@@ -46,7 +46,8 @@ class SignUpViewController: UIViewController, AuthDelegate {
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
@@ -58,27 +59,20 @@ class SignUpViewController: UIViewController, AuthDelegate {
         guard LoginUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
         guard LoginUtilities.validateContact(contact: contact) else {
             showMessage(title: Constants.invalidContactTitle,
                         message: Constants.invalidContactMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
         auth.signup(name: name, contact: contact, email: email, password: password)
-    }
-    
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
-        message.addAction(closeDialogAction)
-        
-        self.present(message, animated: true)
     }
     
     func authCompleted() {

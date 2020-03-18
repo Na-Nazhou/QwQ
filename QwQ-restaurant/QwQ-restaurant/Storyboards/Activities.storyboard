@@ -116,7 +116,6 @@
                                                                     <connections>
                                                                         <action selector="handleAdmit:" destination="lhN-ab-ua4" eventType="touchUpInside" id="Dsu-58-tUo"/>
                                                                         <action selector="queueButton:" destination="lhN-ab-ua4" eventType="touchUpInside" id="fm2-T1-eFZ"/>
-                                                                        <segue destination="9OI-BT-VJ6" kind="show" identifier="queueRecordSelected" id="q3q-Qr-jrA"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8B-GC-KIy">
@@ -175,224 +174,33 @@
                     <connections>
                         <outlet property="queueRecordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
                         <outlet property="searchBarController" destination="Eq4-dl-NjE" id="OLx-dj-dbR"/>
+                        <segue destination="nN2-Nh-xwu" kind="show" identifier="queueRecordSelected" id="bsd-c0-28c"/>
+                        <segue destination="6p9-lG-Adi" kind="show" identifier="bookRecordSelected" id="1s6-DV-fT0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZd-hd-jF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3694.9640287769785" y="-87.939698492462313"/>
+            <point key="canvasLocation" x="3894" y="-9"/>
         </scene>
-        <!--Queue Record View Controller-->
-        <scene sceneID="eND-32-OAz">
+        <!--Queue-->
+        <scene sceneID="K9s-hQ-uPH">
             <objects>
-                <viewController id="9OI-BT-VJ6" customClass="QueueRecordViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XED-LO-yaF">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="9SF-iG-iOr">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="271"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFV-E1-Kcm">
-                                <rect key="frame" x="231.5" y="40.5" width="371" height="39.5"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
-                                </variation>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUD-DO-NV8">
-                                <rect key="frame" x="0.0" y="1038.5" width="834" height="90.5"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
-                                <state key="normal" title="ADMIT">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                </variation>
-                                <connections>
-                                    <action selector="handleAdmit:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="zGO-9g-BJc"/>
-                                    <action selector="handleSubmit:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="k46-Cs-I6G"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-Uq-Gtn">
-                                <rect key="frame" x="0.0" y="279" width="834" height="751.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vFf-iS-bhv">
-                                        <rect key="frame" x="15" y="15" width="804" height="721.5"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lvl-GS-BHS">
-                                                <rect key="frame" x="0.0" y="0.0" width="367" height="721.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCb-Ca-blZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="367" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIR-sW-eub">
-                                                        <rect key="frame" x="0.0" y="147.5" width="367" height="132"/>
-                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0R-1i-4ei">
-                                                        <rect key="frame" x="0.0" y="294.5" width="367" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DR2-hK-G43">
-                                                        <rect key="frame" x="0.0" y="442" width="367" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDC-We-AIf">
-                                                        <rect key="frame" x="0.0" y="589.5" width="367" height="132"/>
-                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                        </variation>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rSd-AU-flQ">
-                                                <rect key="frame" x="387" y="0.0" width="417" height="721.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5m-MW-5bh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="417" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVd-A7-LfE">
-                                                        <rect key="frame" x="0.0" y="147.5" width="417" height="132"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqe-nJ-iYU">
-                                                        <rect key="frame" x="0.0" y="294.5" width="417" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                        </variation>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUO-Ag-kAS">
-                                                        <rect key="frame" x="0.0" y="442" width="417" height="132.5"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                        <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                        </variation>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tey-X4-Dmn">
-                                                        <rect key="frame" x="0.0" y="589.5" width="419" height="132"/>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vFf-iS-bhv" secondAttribute="trailing" constant="15" id="MIY-hs-Aav"/>
-                                    <constraint firstItem="vFf-iS-bhv" firstAttribute="leading" secondItem="uzQ-Uq-Gtn" secondAttribute="leading" constant="15" id="P5Q-xe-N4L"/>
-                                    <constraint firstAttribute="bottom" secondItem="vFf-iS-bhv" secondAttribute="bottom" constant="15" id="j44-ai-tWL"/>
-                                    <constraint firstItem="vFf-iS-bhv" firstAttribute="top" secondItem="uzQ-Uq-Gtn" secondAttribute="top" constant="15" id="m1i-4s-UTN"/>
-                                </constraints>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="Xo5-Su-msW" customClass="ProfileImageView" customModule="QwQ_restaurant" customModuleProvider="target">
-                                <rect key="frame" x="354.5" y="88" width="125" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Xo5-Su-msW" secondAttribute="height" multiplier="1:1" id="CtI-z3-SoL"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFJ-5D-us5">
-                                <rect key="frame" x="20" y="30" width="46" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="CFJ-5D-us5" secondAttribute="height" multiplier="1:1" id="t2W-qN-KBt"/>
-                                </constraints>
-                                <state key="normal" image="back-icon"/>
-                                <connections>
-                                    <action selector="handleBack:" destination="9OI-BT-VJ6" eventType="touchUpInside" id="Jib-9r-QyD"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="vFV-E1-Kcm" firstAttribute="centerX" secondItem="XED-LO-yaF" secondAttribute="centerX" id="2K6-8S-JVJ"/>
-                            <constraint firstItem="UUD-DO-NV8" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="2SG-Na-tYZ"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="top" secondItem="37u-KV-kYY" secondAttribute="top" id="CUK-Dj-x1K"/>
-                            <constraint firstItem="i5m-MW-5bh" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.5" id="E2e-CB-cYn"/>
-                            <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="Lgn-aC-fHD"/>
-                            <constraint firstItem="Xo5-Su-msW" firstAttribute="top" secondItem="vFV-E1-Kcm" secondAttribute="bottom" constant="8" id="NST-fN-VH6"/>
-                            <constraint firstItem="Xo5-Su-msW" firstAttribute="centerX" secondItem="XED-LO-yaF" secondAttribute="centerX" id="P0K-Ut-Vyr"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.24" id="Qbl-oh-Abs"/>
-                            <constraint firstItem="vFV-E1-Kcm" firstAttribute="bottom" secondItem="37u-KV-kYY" secondAttribute="top" constant="80" id="cVO-39-agI"/>
-                            <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="top" secondItem="9SF-iG-iOr" secondAttribute="bottom" constant="8" symbolic="YES" id="cvm-nL-glC"/>
-                            <constraint firstItem="UUD-DO-NV8" firstAttribute="top" secondItem="uzQ-Uq-Gtn" secondAttribute="bottom" constant="8" symbolic="YES" id="eK5-vn-OZk"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="lFo-nv-T3g"/>
-                            <constraint firstItem="CFJ-5D-us5" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.0551559" id="mO0-5I-Bry"/>
-                            <constraint firstItem="CFJ-5D-us5" firstAttribute="top" secondItem="37u-KV-kYY" secondAttribute="top" constant="30" id="nM2-tR-M9b"/>
-                            <constraint firstItem="37u-KV-kYY" firstAttribute="trailing" secondItem="UUD-DO-NV8" secondAttribute="trailing" id="nZe-pE-p5w"/>
-                            <constraint firstItem="Xo5-Su-msW" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.15" id="nm6-fn-KBe"/>
-                            <constraint firstItem="UUD-DO-NV8" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.08" id="obh-Sr-9cp"/>
-                            <constraint firstItem="CFJ-5D-us5" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" constant="20" id="uyp-a6-1tD"/>
-                            <constraint firstItem="uzQ-Uq-Gtn" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="vhQ-b2-sYH"/>
-                            <constraint firstItem="37u-KV-kYY" firstAttribute="bottom" secondItem="UUD-DO-NV8" secondAttribute="bottom" id="yq8-29-baz"/>
-                            <constraint firstItem="9SF-iG-iOr" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="zLL-cc-223"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="37u-KV-kYY"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="oaR-MC-pKJ"/>
-                    <connections>
-                        <outlet property="babyChairQuantityLabel" destination="RUO-Ag-kAS" id="I87-m5-qEv"/>
-                        <outlet property="contactLabel" destination="aVd-A7-LfE" id="B4K-t5-jxc"/>
-                        <outlet property="groupSizeLabel" destination="tqe-nJ-iYU" id="tbT-yS-T2N"/>
-                        <outlet property="nameLabel" destination="i5m-MW-5bh" id="1OS-AE-Gsh"/>
-                        <outlet property="profileImageView" destination="Xo5-Su-msW" id="uqU-Id-Cn1"/>
-                        <outlet property="wheelchairFriendlySwitch" destination="tey-X4-Dmn" id="I0H-uN-XcH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xRg-zD-JSZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Queue" id="nN2-Nh-xwu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Fas-bw-goE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QWQ-0r-c7Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4461" y="-90"/>
+            <point key="canvasLocation" x="4322" y="-137"/>
+        </scene>
+        <!--Book-->
+        <scene sceneID="MBm-lx-dXE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Book" id="6p9-lG-Adi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="bZZ-FL-mjM"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECA-Rt-Gui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4348" y="28"/>
         </scene>
         <!--Activities-->
         <scene sceneID="xCl-4o-QYv">
@@ -415,8 +223,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back-icon" width="1060" height="1060"/>
-        <image name="default-profile-pic" width="435" height="418"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="person.3" catalog="system" width="72" height="35"/>
     </resources>

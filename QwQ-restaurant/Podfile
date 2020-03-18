@@ -10,6 +10,7 @@ target 'QwQ-restaurant' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 
   target 'QwQ-restaurantTests' do
     inherit! :search_paths
@@ -20,4 +21,4 @@ target 'QwQ-restaurant' do
     # Pods for testing
   end
 
-end
+	end

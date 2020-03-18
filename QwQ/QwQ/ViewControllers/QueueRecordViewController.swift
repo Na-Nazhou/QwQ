@@ -32,15 +32,7 @@ class QueueRecordViewController: UIViewController {
         contactLabel.text = queueRecord?.customer.contact
         groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
         babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
-//        wheelchairFriendlySwitch. = String(queueRecord?.wheelchairFriendly)
+        wheelchairFriendlySwitch.isOn = queueRecord?.wheelchairFriendly ?? false
     }
     
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
-        message.addAction(closeDialogAction)
-        
-        self.present(message, animated: true)
-    }
 }
