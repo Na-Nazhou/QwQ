@@ -16,8 +16,6 @@ class EditBookingViewController: UIViewController {
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     
-    
-    
     @IBAction func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -27,5 +25,8 @@ class EditBookingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
 }

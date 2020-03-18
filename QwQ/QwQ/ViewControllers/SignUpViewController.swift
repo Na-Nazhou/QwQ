@@ -31,6 +31,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
 
         auth.setDelegate(delegate: self)
 
+        self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 
