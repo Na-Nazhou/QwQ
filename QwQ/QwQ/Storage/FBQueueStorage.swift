@@ -6,8 +6,10 @@
 //
 
 import FirebaseFirestore
+import Foundation
 
 class FBQueueStorage: CustomerQueueStorage {
+
     let db: Firestore
 
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
@@ -51,13 +53,13 @@ class FBQueueStorage: CustomerQueueStorage {
             .document(record.restaurant.uid)
             .collection(record.startDate)
             .document(record.id)
-            .delete() { (error) in
+            .delete { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
                 completion()
-        }
+            }
     }
 
     private func queueRecordToDictionary(_ record: QueueRecord) -> [String: Any] {
@@ -75,16 +77,15 @@ class FBQueueStorage: CustomerQueueStorage {
         return data
     }
 
-    // MARK: - Protocl conformance
+    // MARK: - Protocol conformance
     
-    func loadQueueRecord(customer: Customer) -> QueueRecord? {
+    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
         // Attach listener
-        return nil
     }
 
-    func loadQueueHistory(customer: Customer) -> [QueueRecord] {
+    func loadQueueHistory(customer: Customer, completion:  @escaping ([QueueRecord]) -> Void) {
         // Attach listener
-        return []
+
     }
     
     func didDetectAdmissionOfCustomer(record: QueueRecord) {
@@ -104,13 +105,3 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
 }
-
-//var customer: Customer
-//var restaurant: Restaurant
-//
-//var groupSize: Int
-//var babyCount: Int
-//var wheelchairCount: Int
-//
-//var startTime: Date
-//var serveTime: Date?
