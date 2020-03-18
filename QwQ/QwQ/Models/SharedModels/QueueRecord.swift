@@ -15,6 +15,10 @@ struct QueueRecord {
     var serveTime: Date?
     var rejectTime: Date?
 
+    var startDate: String {
+        QueueRecord.getDateString(from: startTime)
+    }
+
     init(id: String, restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool, startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
@@ -45,11 +49,11 @@ struct QueueRecord {
 
         //TODO: replace with mtd to get R from uid of restaurant.
         func getRestaurant(rid: String) -> Restaurant {
-            return Restaurant(uid: "rid123", name: "Dummy restaurant", email: "r123@example.com", contact: "6565161729", address: "Clementi road", menu: "burger, $3;", isOpen: false)
+            return Restaurant(uid: rid, name: "Dummy restaurant", email: "r123@example.com", contact: "6565161729", address: "Clementi road", menu: "burger, $3;", isOpen: false)
         }
         //TODO: similarly; would placing the two methods in the same class make sense?
         func getCustomer(cid: String) -> Customer {
-            return Customer(uid: "cid321", name: "Dummy customer", email: "c321@example.com", contact: "6599898898")
+            return Customer(uid: cid, name: "Dummy customer", email: "c321@example.com", contact: "6599898898")
         }
         
         self.id = id
@@ -98,6 +102,12 @@ extension QueueRecord {
 
         if let admitTime = record.admitTime {
             data["admitTime"] = admitTime
+        }
+        if let serveTime = record.serveTime {
+            data["serveTime"] = serveTime
+        }
+        if let rejectTime = record.rejectTime {
+            data["rejectTime"] = rejectTime
         }
 
         return data

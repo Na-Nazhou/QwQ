@@ -10,7 +10,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
-    var queueHistory = [QueueRecord]()
+    var queueHistory = CustomerQueueHistory() //[QueueRecord]()
 
     private init(customer: Customer) {
         self.customer = customer
@@ -26,7 +26,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
-            self.queueHistory = $0
+            self.queueHistory.addToHistory($0)
         })
     }
 
