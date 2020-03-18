@@ -12,7 +12,9 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-
+    @IBOutlet weak var contactLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
     }

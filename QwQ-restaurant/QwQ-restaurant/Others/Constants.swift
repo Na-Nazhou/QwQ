@@ -38,9 +38,9 @@ struct Constants {
     static let chooseFromPhotoLibraryTitle = "Choose from Library"
     static let chooseFromCameraTitle = "Take from Camera"
     static let showImagePickerTitle = "Choose your image"
-    static let admitCustomerTitle = "Admit customer"
+    static let admitCustomerTitle = "Admit Customer"
     static let admitCustomerMessage = "The customer has been notified."
-    static let removeCustomerTitle = "Remove customer"
+    static let removeCustomerTitle = "Remove Customer"
     static let removeCustomerMessage = "The customer has been removed from queue."
     
     // MARK: Segue settings

@@ -32,18 +32,20 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         
         profileStorage.setDelegate(delegate: self)
         profileStorage.getCustomerInfo()
-
-        self.hideKeyboardWhenTappedAround()
         
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
+
         setUpProfileImageView()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     private func setUpProfileImageView() {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
     }
@@ -109,12 +111,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) {
-            (action) in
+        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .photoLibrary)
         }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) {
-            (action) in
+        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .camera)
         }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
@@ -133,7 +133,8 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {

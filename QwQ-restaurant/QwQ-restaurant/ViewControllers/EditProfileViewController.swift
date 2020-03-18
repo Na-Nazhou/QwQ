@@ -40,10 +40,11 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
         profileStorage.setDelegate(delegate: self)
         profileStorage.getRestaurantInfo()
-
-        self.hideKeyboardWhenTappedAround()
         
         setUpProfileImageView()
+        
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
 
     func getRestaurantInfoComplete(restaurant: Restaurant) {
