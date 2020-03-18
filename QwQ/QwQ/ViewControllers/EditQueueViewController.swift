@@ -100,8 +100,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
 
     func didAddQueueRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successQueueRecordCreationMessage,
+            title: Constants.successTitle,
+            message: Constants.queueRecordCreateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.goBack()
@@ -110,8 +110,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
 
     func didUpdateQueueRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successQueueRecordUpdateMessage,
+            title: Constants.successTitle,
+            message: Constants.queueRecordUpdateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.goBack()

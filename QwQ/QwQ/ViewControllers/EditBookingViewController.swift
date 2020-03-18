@@ -92,8 +92,8 @@ class EditBookingViewController: UIViewController {
 
     func didAddBookRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successBookRecordCreationMessage,
+            title: Constants.successTitle,
+            message: Constants.bookRecordCreateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.goBack()
@@ -102,8 +102,8 @@ class EditBookingViewController: UIViewController {
 
     func didUpdateBookRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successBookRecordUpdateMessage,
+            title: Constants.successTitle,
+            message: Constants.bookRecordUpdateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.goBack()

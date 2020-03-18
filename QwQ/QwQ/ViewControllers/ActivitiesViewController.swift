@@ -69,8 +69,8 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     func didDeleteQueueRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successQueueRecordDeleteMessage,
+            title: Constants.successTitle,
+            message: Constants.queueRecordDeleteSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)

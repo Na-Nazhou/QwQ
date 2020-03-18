@@ -48,8 +48,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
 
     func updateComplete() {
-        showMessage(title: Constants.successfulUpdateTitle,
-                    message: Constants.successfulUpdateMessage,
+        showMessage(title: Constants.successTitle,
+                    message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
                     buttonAction: { (_: UIAlertAction!) -> Void in
                         self.navigationController?.popViewController(animated: true) })

@@ -102,7 +102,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.queueAction = {
             if !restaurant.isOpen {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: "This restaurant is currently not open!",
+                                 message: Constants.restaurantUnavailableMessage,
                                  buttonText: Constants.okayTitle)
                 return
             }
@@ -111,7 +111,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
             } else {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: "You have an existing queue record",
+                                 message: Constants.multipleQueueRecordsMessage,
                                  buttonText: Constants.okayTitle)
             }
         }
