@@ -32,7 +32,7 @@ class QueueRecordViewController: UIViewController {
         contactLabel.text = queueRecord?.customer.contact
         groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
         babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
-//        wheelchairFriendlySwitch. = String(queueRecord?.wheelchairFriendly)
+        wheelchairFriendlySwitch.isOn = queueRecord?.wheelchairFriendly ?? false
     }
     
 }

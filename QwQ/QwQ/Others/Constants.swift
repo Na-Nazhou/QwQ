@@ -45,6 +45,8 @@ struct Constants {
     static let restaurantSelectedSegue = "restaurantSelected"
     static let queueSelectedSegue = "queueSelected"
     static let bookSelectedSegue = "bookSelected"
+    static let editQueueSelectedSegue = "editQueueSelected"
+    static let editBookSelectedSegue = "editBookSelected"
     static let logoutSegue = "logout"
     
     // MARK: Collection view settings
@@ -58,4 +60,5 @@ struct Constants {
                                                     left: 30.0,
                                                     bottom: 20.0,
                                                     right: 30.0)
+    static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
 }

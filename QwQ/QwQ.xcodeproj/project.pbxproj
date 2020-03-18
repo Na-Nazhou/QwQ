@@ -30,6 +30,7 @@
 		7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E56AF9A2421F513002E9BAC /* Activities.storyboard */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
+		7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */; };
 		7EC1F3132421F837005D20CD /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */; };
 		7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3142421FB7F005D20CD /* ActivityCell.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
@@ -123,6 +124,7 @@
 		7E56AF9A2421F513002E9BAC /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		7EC1F3142421FB7F005D20CD /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,6 +279,7 @@
 				7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */,
 				7EC1F3142421FB7F005D20CD /* ActivityCell.swift */,
 				7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */,
+				7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				5C9066B4241BB85C00731130 /* AuthDelegate.swift in Sources */,
 				617B62E1241F3C0F0010AB30 /* BookingRecord.swift in Sources */,
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
+				7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */,
 				617B62DF241F39EF0010AB30 /* QueueDelegate.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSync.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
