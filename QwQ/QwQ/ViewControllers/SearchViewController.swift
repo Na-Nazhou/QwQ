@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
-        //TODO
+        restaurantCollectionView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -23,9 +23,13 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
             let groupSizeText = groupSizeTextField.text,
             let babyChairQueantityText = babyChairQuantityTextField.text,
-            let groupSize = Int(groupSizeText),
-            let babyChairQuantity = Int(babyChairQueantityText) else {
-            return
+            let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
+            let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
+                showMessage(title: Constants.errorTitle,
+                            message: "Invalid data",
+                            buttonText: Constants.okayTitle,
+                            buttonAction: nil)
+                return
         }
 
         // Edit existing queue record
@@ -66,6 +70,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             restaurantNameLabel.text = queueRecord.restaurant.name
             nameTextField.text = queueRecord.customer.name
             contactTextField.text = queueRecord.customer.contact
+
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly

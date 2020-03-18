@@ -1,4 +1,4 @@
-class RestaurantStorageStub: RestaurantStorage {
+class FBRestaurantStorage: RestaurantStorage {
     weak var logicDelegate: RestaurantStorageSyncDelegate?
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
@@ -10,6 +10,7 @@ class RestaurantStorageStub: RestaurantStorage {
     }
 
     func loadAllRestaurants() -> [Restaurant] {
+        //TODO
         [
             Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", contact: "12345678",
                        address: "location1", menu: "menu1", isOpen: true),
@@ -20,3 +21,4 @@ class RestaurantStorageStub: RestaurantStorage {
         ]
     }
 }
+

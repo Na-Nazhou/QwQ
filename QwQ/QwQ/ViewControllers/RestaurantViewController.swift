@@ -12,6 +12,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var menuLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
 
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
