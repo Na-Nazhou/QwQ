@@ -93,8 +93,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.queueDelegate?.didUpdateQueueRecord()
     }
 
-    func deleteQueueRecord() {
-        guard let record = currentQueueRecord else {
+    func deleteQueueRecord(_ queueRecord: QueueRecord) {
+        guard let record = currentQueueRecord,
+            queueRecord.id == record.id else {
             return
         }
 

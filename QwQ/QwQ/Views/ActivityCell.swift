@@ -36,6 +36,7 @@ class ActivityCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 
+    // TODO: take in record protocol instead
     func setUpView(queueRecord: QueueRecord) {
         nameLabel.text = queueRecord.restaurant.name
         descriptionLabel.text = "\(queueRecord.groupSize) pax"

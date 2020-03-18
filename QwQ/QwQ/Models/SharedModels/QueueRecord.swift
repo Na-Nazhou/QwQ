@@ -1,6 +1,6 @@
 import Foundation
 
-struct QueueRecord {
+struct QueueRecord: Record {
     var id = "0"
     let restaurant: Restaurant
     let customer: Customer

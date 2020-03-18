@@ -40,6 +40,9 @@ struct Constants {
     static let successQueueRecordCreationMessage = "You have created a new queue record."
     static let successQueueRecordUpdateMessage = "Your queue record has been updated."
     static let successQueueRecordDeleteMessage = "Your queue record has been deleted."
+    static let successBookRecordCreationMessage = "You have created a book queue record."
+    static let successBookRecordUpdateMessage = "This book record has been updated."
+    static let successBookRecordDeleteMessage = "This book record has been deleted."
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"

@@ -14,10 +14,13 @@ class RestaurantLogicManager: RestaurantLogic {
     private init(customer: Customer) {
         self.customer = customer
         restaurantStorage = FBRestaurantStorage()
+        restaurantStorage.logicDelegate = self
     }
 
     func fetchRestaurants() {
-        restaurants = restaurantStorage.loadAllRestaurants()
+        restaurantStorage.loadAllRestaurants(completion: {
+            self.restaurants = $0
+        })
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {

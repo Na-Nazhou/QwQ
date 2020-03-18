@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookRecord {
+struct BookRecord: Record {
     var id = "0"
     let restaurant: Restaurant
     let customer: Customer
@@ -18,4 +18,9 @@ struct BookRecord {
 
     let time: Date
     var admitTime: Date?
+    var rejectTime: Date?
+
+    var isHistoryRecord: Bool {
+        admitTime != nil || rejectTime != nil
+    }
 }

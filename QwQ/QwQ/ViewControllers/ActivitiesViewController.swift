@@ -100,7 +100,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
         }
         activityCell.deleteAction = {
-            CustomerQueueLogicManager.shared().deleteQueueRecord()
+            CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
         }
         
         return activityCell

@@ -93,13 +93,18 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         contactTextField.isEnabled = false
     }
 
+    // TODO: go to activities view controller instead
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     func didAddQueueRecord() {
         showMessage(
             title: Constants.successfulUpdateTitle,
             message: Constants.successQueueRecordCreationMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.goBack()
             })
     }
 
@@ -109,7 +114,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             message: Constants.successQueueRecordUpdateMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.goBack()
             })
     }
 }
