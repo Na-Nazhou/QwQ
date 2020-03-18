@@ -31,10 +31,11 @@ class SignUpViewController: UIViewController, AuthDelegate {
 
         auth.setDelegate(delegate: self)
 
+        self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     

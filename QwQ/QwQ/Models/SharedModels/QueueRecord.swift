@@ -112,4 +112,8 @@ extension QueueRecord {
 
         return data
     }
+
+    var isHistoryRecord: Bool {
+        admitTime != nil || rejectTime != nil
+    }
 }

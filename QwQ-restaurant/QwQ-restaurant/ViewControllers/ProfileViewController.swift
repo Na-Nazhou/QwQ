@@ -59,6 +59,8 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
         self.contactLabel.text = restaurant.contact
         self.addressLabel.text = restaurant.address
         self.menuLabel.text = restaurant.menu
+
+        profileStorage.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
     }
 
     func updateComplete() {

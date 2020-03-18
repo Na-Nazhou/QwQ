@@ -13,6 +13,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     private init(customer: Customer) {
         self.customer = customer
+        // TODO
         restaurantStorage = RestaurantStorageStub()
     }
 

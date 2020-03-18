@@ -20,6 +20,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     let profileStorage: ProfileStorage
     var uid: String?
     var isOpen: Bool?
+    var image: UIImage?
 
     init() {
         profileStorage = FBProfileStorage()
@@ -30,20 +31,15 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         profileStorage = FBProfileStorage()
         super.init(coder: coder)
     }
-    
-    @IBAction func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         profileStorage.setDelegate(delegate: self)
         profileStorage.getRestaurantInfo()
-
-        self.hideKeyboardWhenTappedAround()
         
-        setUpProfileImageView()
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
 
     func getRestaurantInfoComplete(restaurant: Restaurant) {
@@ -54,6 +50,19 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
         self.isOpen = restaurant.isOpen
+
+        setUpProfileImageView(uid: restaurant.uid)
+    }
+
+    func updateComplete() {
+        showMessage(title: Constants.successfulUpdateTitle,
+                    message: Constants.successfulUpdateMessage,
+                    buttonText: Constants.okayTitle,
+                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
+    }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
@@ -80,6 +89,21 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                 return
         }
 
+        guard ValidationUtilities.validateEmail(email: email) else {
+            showMessage(title: Constants.invalidEmailTitle,
+                        message: Constants.invalidEmailMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return
+        }
+
+        guard ValidationUtilities.validateContact(contact: contact) else {
+            showMessage(title: Constants.invalidContactTitle,
+                        message: Constants.invalidContactMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return
+        }
         profileStorage.updateRestaurantInfo(restaurant: Restaurant(uid: uid,
                                                      name: name,
                                                      email: email,
@@ -87,26 +111,17 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                                                      address: address,
                                                      menu: menu,
                                                      isOpen: isOpen))
-    }
 
-    func updateComplete() {
-        let message = UIAlertController(title: Constants.successfulUpdateTitle,
-                                        message: Constants.successfulUpdateMessage,
-                                        preferredStyle: .alert)
-
-        let closeDialogAction = UIAlertAction(title: Constants.okayTitle,
-                                              style: .default) { (_: UIAlertAction!) -> Void in
-            self.navigationController?.popViewController(animated: true)
+        if let image = image {
+            profileStorage.updateRestaurantProfilePic(uid: uid, image: image)
         }
-        message.addAction(closeDialogAction)
-
-        self.present(message, animated: true)
     }
 
-    private func setUpProfileImageView() {
+    private func setUpProfileImageView(uid: String) {
         let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
+        profileStorage.getRestaurantProfilePic(uid: uid, placeholder: profileImageView)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {
@@ -123,7 +138,6 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         }
         return false
     }
-
 
 }
 
@@ -156,8 +170,10 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
+            image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImageView.image = originalImage
+            image = originalImage
         }
         dismiss(animated: true, completion: nil)
         
