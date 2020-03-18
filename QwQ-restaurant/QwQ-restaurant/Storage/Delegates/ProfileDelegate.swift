@@ -1,15 +1,15 @@
 //
 //  ProfileDelegate.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 14/3/20.
+//  Created by Daniel Wong on 18/3/20.
 //
 
 import UIKit
 
 protocol ProfileDelegate: AnyObject {
 
-    func getCustomerInfoComplete(customer: Customer)
+    func getRestaurantInfoComplete(restaurant: Restaurant)
 
     func updateComplete()
 

@@ -75,22 +75,12 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         }
     }
 
-    private func showMessage(title: String, message: String, buttonText: String,
-                             handler: @escaping (UIAlertAction) -> Void) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default, handler: handler)
-        message.addAction(closeDialogAction)
-
-        self.present(message, animated: true)
-    }
-
     func didAddQueueRecord() {
         showMessage(
             title: Constants.successfulUpdateTitle,
             message: Constants.successQueueRecordCreationMessage,
             buttonText: Constants.okayTitle,
-            handler: {_ in
+            buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)
             })
     }
@@ -100,7 +90,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             title: Constants.successfulUpdateTitle,
             message: Constants.successQueueRecordUpdateMessage,
             buttonText: Constants.okayTitle,
-            handler: {_ in
+            buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)
             })
     }
