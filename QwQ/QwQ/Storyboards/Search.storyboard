@@ -86,7 +86,7 @@
                                                                 <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="lJC-Jw-heQ" kind="show" id="FLm-Lt-X8B"/>
+                                                                <action selector="handleQueueTapWithSender:" destination="lhN-ab-ua4" eventType="touchDown" id="Rpw-Yo-acz"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -155,6 +155,7 @@
                     <connections>
                         <outlet property="restaurantCollectionView" destination="urr-2m-4eq" id="x4B-i7-mII"/>
                         <segue destination="9OI-BT-VJ6" kind="show" identifier="restaurantSelected" id="fqS-VL-dLS"/>
+                        <segue destination="lJC-Jw-heQ" kind="show" identifier="queueSelected" id="1pS-0G-SKh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZd-hd-jF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -422,6 +423,6 @@ Pancake</string>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FLm-Lt-X8B"/>
+        <segue reference="1pS-0G-SKh"/>
     </inferredMetricsTieBreakers>
 </document>
