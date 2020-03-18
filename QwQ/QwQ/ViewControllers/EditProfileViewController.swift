@@ -126,14 +126,12 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default)
-        { _ in
-            self.showImagePickerController(sourceType: .photoLibrary)
-        }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default)
-        { _ in
-            self.showImagePickerController(sourceType: .camera)
-        }
+        let photoLibraryAction = UIAlertAction(
+            title: Constants.chooseFromPhotoLibraryTitle, style: .default
+            ) { _ in self.showImagePickerController(sourceType: .photoLibrary) }
+        let cameraAction = UIAlertAction(
+            title: Constants.chooseFromCameraTitle, style: .default
+            ) { _ in self.showImagePickerController(sourceType: .camera) }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
         
         AlertService.showAlert(style: .actionSheet,

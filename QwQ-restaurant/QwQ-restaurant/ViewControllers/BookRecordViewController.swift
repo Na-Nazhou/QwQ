@@ -38,8 +38,8 @@ class BookRecordViewController: UIViewController {
             return
         }
 
-        nameLabel.text = bookRecord.restaurant.name
-        contactLabel.text = bookRecord.restaurant.contact
+        nameLabel.text = bookRecord.customer.name
+        contactLabel.text = bookRecord.customer.contact
         groupSizeLabel.text = String(bookRecord.groupSize)
         babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly

@@ -39,8 +39,8 @@ class QueueRecordViewController: UIViewController {
             return
         }
 
-        nameLabel.text = queueRecord.restaurant.name
-        contactLabel.text = queueRecord.restaurant.contact
+        nameLabel.text = queueRecord.customer.name
+        contactLabel.text = queueRecord.customer.contact
         groupSizeLabel.text = String(queueRecord.groupSize)
         babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly

@@ -100,7 +100,8 @@ class FBQueueStorage: CustomerQueueStorage {
                                   babyChairQuantity: 1,
                                   wheelchairFriendly: false,
                                   startTime: Date(),
-                                  admitTime: Date())
+                                  admitTime: Date(),
+                                  serveTime: Date())
         let queueHistory = [record1]
         completion(queueHistory)
     }
