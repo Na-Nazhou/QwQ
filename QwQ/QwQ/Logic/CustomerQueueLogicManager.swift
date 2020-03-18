@@ -39,10 +39,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                  with groupSize: Int,
                  babyChairQuantity: Int,
                  wheelchairFriendly: Bool) {
-        guard currentQueueRecord == nil else {
-            // Disallow enqueue if there is a current queue
-            // Check if the restaurant is open
-            // TODO
+        guard canQueue(for: restaurant) else {
             return
         }
 

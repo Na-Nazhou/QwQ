@@ -11,7 +11,7 @@ class SearchViewController: UIViewController, SearchDelegate {
 
     private let reuseIdentifier = Constants.restaurantReuseIdentifier
     
-    @IBOutlet weak var restaurantCollectionView: UICollectionView!
+    @IBOutlet private var restaurantCollectionView: UICollectionView!
     
     var restaurants: [Restaurant] {
         RestaurantLogicManager.shared().restaurants
@@ -30,7 +30,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
-        // 
+        //TODO
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, SearchDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return restaurants.count
+        restaurants.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -64,10 +64,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         let restaurant = restaurants[indexPath.row]
-        
-        restaurantCell.nameLabel.text = restaurant.name
-        restaurantCell.locationLabel.text = restaurant.address
-        // TODO: refactor
+
+        restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
             if !restaurant.isOpen {
                 self.showMessage(title: "Error", message: "This restaurant is currently not open!",
@@ -94,18 +92,18 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
+        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constants.restaurantSectionInsets
+        Constants.restaurantSectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        0
     }
 }

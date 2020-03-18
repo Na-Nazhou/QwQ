@@ -8,8 +8,8 @@
 import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
-    @IBOutlet weak var activeHistoryControl: UISegmentedControl!
-    @IBOutlet weak var activitiesCollectionView: UICollectionView!
+    @IBOutlet private var activeHistoryControl: UISegmentedControl!
+    @IBOutlet private var activitiesCollectionView: UICollectionView!
 
     var queueRecords: [QueueRecord] {
            CustomerQueueLogicManager.shared().queueHistory
@@ -28,7 +28,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return queueRecords.count
+        queueRecords.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -42,13 +42,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         
         let queueRecord = queueRecords[indexPath.row]
-        
-        activityCell.nameLabel.text = queueRecord.restaurant.name
-        activityCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
-        activityCell.estimatedTimeLabel.text = "00:00"
-        if let image = UIImage(named: "c-book-icon") {
-            activityCell.queueBookImageView.image = image
-        }
+        activityCell.setUpView(queueRecord: queueRecord)
         
         return activityCell
     }
@@ -62,19 +56,18 @@ extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
+        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constants.activitiesSectionInsets
+        Constants.activitiesSectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        0
     }
 }
-

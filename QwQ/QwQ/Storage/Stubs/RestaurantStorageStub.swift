@@ -10,7 +10,7 @@ class RestaurantStorageStub: RestaurantStorage {
     }
 
     func loadAllRestaurants() -> [Restaurant] {
-        return [
+        [
             Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", contact: "12345678",
                        address: "location1", menu: "menu1", isOpen: true),
             Restaurant(uid: "2", name: "restaurant2", email: "k@mail.com", contact: "12345678",

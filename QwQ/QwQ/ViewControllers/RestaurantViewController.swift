@@ -9,9 +9,9 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var menuLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var menuLabel: UILabel!
+    @IBOutlet private var locationLabel: UILabel!
 
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
@@ -53,9 +53,13 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
     
     private func setUpViews() {
-        nameLabel.text = restaurant?.name
-        menuLabel.text = restaurant?.menu
-        locationLabel.text = restaurant?.address
+        guard let restaurant = restaurant else {
+            return
+        }
+
+        nameLabel.text = restaurant.name
+        menuLabel.text = restaurant.menu
+        locationLabel.text = restaurant.address
     }
 
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {

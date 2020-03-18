@@ -8,17 +8,17 @@
 import UIKit
 
 class ActivityCell: UICollectionViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var estimatedTimeLabel: UILabel!
-    @IBOutlet weak var queueBookImageView: UIImageView!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet private var deleteButton: UIButton!
+    @IBOutlet private var editButton: UIButton!
+    @IBOutlet private var estimatedTimeLabel: UILabel!
+    @IBOutlet private var queueBookImageView: UIImageView!
     
-    @IBAction func handleDelete(_ sender: Any) {
+    @IBAction private func handleDelete(_ sender: Any) {
     }
     
-    @IBAction func handleEdit(_ sender: Any) {
+    @IBAction private func handleEdit(_ sender: Any) {
     }
     
     override init(frame: CGRect) {
@@ -29,5 +29,14 @@ class ActivityCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+
+    func setUpView(queueRecord: QueueRecord) {
+        nameLabel.text = queueRecord.restaurant.name
+        descriptionLabel.text = "\(queueRecord.groupSize) pax"
+        estimatedTimeLabel.text = "00:00"
+        if let image = UIImage(named: "c-book-icon") {
+            queueBookImageView.image = image
+        }
     }
 }

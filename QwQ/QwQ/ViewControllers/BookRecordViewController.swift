@@ -8,15 +8,15 @@
 import UIKit
 
 class BookRecordViewController: UIViewController {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var groupSizeLabel: UILabel!
-    @IBOutlet weak var babyChairQuantityLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var groupSizeLabel: UILabel!
+    @IBOutlet private var babyChairQuantityLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet private var datePicker: UIDatePicker!
     
-    var bookRecord: QueueRecord?
+    var bookRecord: BookRecord?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +24,19 @@ class BookRecordViewController: UIViewController {
         setUpViews()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     private func setUpViews() {
-        nameLabel.text = bookRecord?.customer.name
-        contactLabel.text = bookRecord?.customer.contact
-        groupSizeLabel.text = String(bookRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(bookRecord?.wheelchairFriendly ?? false)
-//        wheelchairFriendlySwitch. = String(bookRecord?.wheelchairFriendly)
+        guard let bookRecord = bookRecord else {
+            return
+        }
+
+        nameLabel.text = bookRecord.restaurant.name
+        contactLabel.text = bookRecord.restaurant.contact
+        groupSizeLabel.text = String(bookRecord.groupSize)
+        babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
     }
 }
