@@ -7,6 +7,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     // View Controller
     weak var queueDelegate: QueueDelegate?
+    weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
@@ -24,6 +25,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         })
     }
 
+    func canQueue(for restaurant: Restaurant) -> Bool {
+        restaurant.isOpen && currentQueueRecord == nil
+    }
+
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
             self.queueHistory = $0
@@ -34,10 +39,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                  with groupSize: Int,
                  babyChairQuantity: Int,
                  wheelchairFriendly: Bool) {
-        guard currentQueueRecord == nil else {
-            // Disallow enqueue if there is a current queue
-            // Check if the restaurant is open
-            // TODO
+        guard canQueue(for: restaurant) else {
             return
         }
 
@@ -91,7 +93,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         queueStorage.deleteQueueRecord(record: record,
-                                       completion: { self.currentQueueRecord = nil })
+                                       completion: {
+                                        self.currentQueueRecord = nil
+                                        self.activitiesDelegate?.didDeleteQueueRecord()
+        })
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {

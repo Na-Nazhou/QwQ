@@ -8,18 +8,18 @@
 import UIKit
 
 class EditQueueViewController: UIViewController, QueueDelegate {
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var contactTextField: UITextField!
-    @IBOutlet weak var groupSizeTextField: UITextField!
-    @IBOutlet weak var babyChairQuantityTextField: UITextField!
-    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet weak var restaurantNameLabel: UILabel!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var contactTextField: UITextField!
+    @IBOutlet private var groupSizeTextField: UITextField!
+    @IBOutlet private var babyChairQuantityTextField: UITextField!
+    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet private var restaurantNameLabel: UILabel!
 
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
     }
     
-    @IBAction func handleSubmit(_ sender: Any) {
+    @IBAction private func handleSubmit(_ sender: Any) {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
             let groupSizeText = groupSizeTextField.text,
             let babyChairQueantityText = babyChairQuantityTextField.text,
@@ -44,7 +44,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn)
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
 
@@ -60,6 +60,10 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        setUpViews()
+    }
+
+    private func setUpViews() {
         // Editing an existing queue record
         if let queueRecord = queueRecord {
             restaurantNameLabel.text = queueRecord.restaurant.name
