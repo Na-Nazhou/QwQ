@@ -22,7 +22,7 @@
 		6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */; };
 		6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */; };
 		6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */; };
-		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7E53E2BA241F60A60047C40F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF922421F20F002E9BAC /* Authenticator.swift */; };
 		7E56AF952421F210002E9BAC /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF932421F210002E9BAC /* FBAuthenticator.swift */; };
@@ -569,16 +569,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QwQ-restaurantTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -659,16 +652,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QwQ-restaurant-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -689,7 +675,7 @@
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
 				7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */,
-				7E53E2BA241F60A60047C40F /* (null) in Sources */,
+				7E53E2BA241F60A60047C40F /* BuildFile in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
