@@ -15,6 +15,19 @@ struct QueueRecord {
     var serveTime: Date?
     var rejectTime: Date?
 
+    init(id: String, restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool, startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+        self.id = id
+        self.restaurant = restaurant
+        self.customer = customer
+        self.groupSize = groupSize
+        self.babyChairQuantity = babyChairQuantity
+        self.wheelchairFriendly = wheelchairFriendly
+        self.startTime = startTime
+        self.admitTime = admitTime
+        self.serveTime = serveTime
+        self.rejectTime = rejectTime
+    }
+
     init?(dictionary: [String: Any]) {
         guard let id = dictionary["id"] as? String,
             let rId = dictionary["restaurant"] as? String,
@@ -22,13 +35,32 @@ struct QueueRecord {
             let groupSize = dictionary["groupSize"] as? Int,
             let babyCQuantity = dictionary["babyChairQuantity"] as? Int,
             let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
-            let startTime = (dictionary["startTime"] as? TimeStamp)?.dateValue() else {
+            let startTime = (dictionary["startTime"] as? Timestamp)?.dateValue() else {
                 return nil
         }
-        //TODO - daniel: get R from uid of restaurant.
-        var serveTime = (dictionary["serveTime"] as? TimeStamp)?.dateValue() ?? nil
-        var rejectTime = (dictionary["rejectTime"] as? TimeStamp)?.dateValue() ?? nil
+        let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue() ?? nil
+        let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue() ?? nil
+        let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue() ?? nil
+
+
+        //TODO: replace with mtd to get R from uid of restaurant.
+        func getRestaurant(rid: String) -> Restaurant {
+            return Restaurant(uid: "rid123", name: "Dummy restaurant", email: "r123@example.com", contact: "6565161729", address: "Clementi road", menu: "burger, $3;", isOpen: false)
+        }
+        func getCustomer(cid: String) -> Customer {
+            return Customer(uid: "cid321", name: "Dummy customer", email: "c321@example.com", contact: "6599898898")
+        }
         
+        self.id = id
+        self.restaurant = getRestaurant(rid: rId)
+        self.customer = getCustomer(cid: cId)
+        self.groupSize = groupSize
+        self.babyChairQuantity = babyCQuantity
+        self.wheelchairFriendly = wheelchairFriendly
+        self.startTime = startTime
+        self.admitTime = admitTime
+        self.serveTime = serveTime
+        self.rejectTime = rejectTime
     }
 }
 
@@ -51,5 +83,22 @@ extension QueueRecord: Hashable {
         hasher.combine(self.restaurant)
         hasher.combine(self.customer)
         hasher.combine(self.startTime)
+    }
+}
+
+extension QueueRecord {
+    static func queueRecordToDictionary(_ record: QueueRecord) -> [String: Any] {
+        var data = [String: Any]()
+        data["customer"] = record.customer.uid
+        data["groupSize"] = record.groupSize
+        data["babyChairQuantity"] = record.babyChairQuantity
+        data["wheelchairFriendly"] = record.wheelchairFriendly
+        data["startTime"] = record.startTime
+
+        if let admitTime = record.admitTime {
+            data["admitTime"] = admitTime
+        }
+
+        return data
     }
 }
