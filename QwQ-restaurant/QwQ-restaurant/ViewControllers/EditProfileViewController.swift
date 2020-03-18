@@ -21,14 +21,6 @@ class EditProfileViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

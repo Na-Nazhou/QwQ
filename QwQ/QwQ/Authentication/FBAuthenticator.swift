@@ -10,17 +10,17 @@ import FirebaseFirestore
 
 class FBAuthenticator: Authenticator {
 
-    private weak var view: AuthDelegate?
+    private weak var delegate: AuthDelegate?
 
-    func setDelegate(view: AuthDelegate) {
-        self.view = view
+    func setDelegate(delegate: AuthDelegate) {
+        self.delegate = delegate
     }
 
     func signup(name: String, contact: String, email: String, password: String) {
 
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                self.view?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
+                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
                 return
             }
             guard let result = result else {
@@ -34,25 +34,28 @@ class FBAuthenticator: Authenticator {
 
     func login(email: String, password: String) {
 
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if let error = error {
-                self.view?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
+                self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
                 return
             }
 
-            if let result = result {
-                let db = Firestore.firestore()
-                let docRef = db.collection("customers").document(result.user.uid)
-                docRef.getDocument { (document, _) in
-                    if let data = document?.data() {
-                        guard let customer = Customer(dictionary: data) else {
-                            return
-                        }
-                        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
-                        self.view?.authSucceeded()
-                    }
-                }
-            }
+            self.delegate?.authCompleted()
+        }
+    }
+
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            delegate?.authCompleted()
+        } catch {
+            delegate?.showMessage(title: "Error", message: "A logout error occured.", buttonText: "Okay")
+        }
+    }
+
+    func checkIfAlreadyLoggedIn() {
+        if Auth.auth().currentUser != nil {
+            delegate?.authCompleted()
         }
     }
 
@@ -61,9 +64,9 @@ class FBAuthenticator: Authenticator {
         db.collection("customers")
             .document(uid)
             .setData(["uid": uid, "name": name, "contact": contact, "email": email]) { (error) in
-            if let error = error {
-                self.view?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
-            }
+                if let error = error {
+                    self.delegate?.showMessage(title: "Error", message: error.localizedDescription, buttonText: "Okay")
+                }
             }
     }
 

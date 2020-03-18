@@ -133,7 +133,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Logout" image="square.and.arrow.up" catalog="system"/>
                                         <connections>
-                                            <action selector="handleLogout:" destination="ZIh-3X-Z4Q" eventType="touchUpInside" id="ZLQ-Ah-S2D"/>
+                                            <action selector="logoutButton:" destination="ZIh-3X-Z4Q" eventType="touchUpInside" id="ZLQ-Ah-S2D"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -172,9 +172,11 @@
                         <outlet property="menuLabel" destination="m2X-6u-bgO" id="aW8-1q-qE3"/>
                         <outlet property="nameLabel" destination="SaD-11-Aib" id="XS2-Tt-dIO"/>
                         <outlet property="profileImageView" destination="fNg-50-TMe" id="3WG-6n-oX0"/>
+                        <segue destination="gvL-PQ-SuT" kind="unwind" identifier="logout" unwindAction="unwindToLogin:" id="gbg-ps-dH4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lv-4c-uUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="gvL-PQ-SuT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2453.9568345323742" y="766.3316582914573"/>
         </scene>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, ProfileDelegate {
+class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
 
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
@@ -15,14 +15,17 @@ class ProfileViewController: UIViewController, ProfileDelegate {
     @IBOutlet private var profileImageView: UIImageView!
     
     let profileStorage: ProfileStorage
+    let auth: Authenticator
 
     init() {
         profileStorage = FBProfileStorage()
+        auth = FBAuthenticator()
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         profileStorage = FBProfileStorage()
+        auth = FBAuthenticator()
         super.init(coder: coder)
     }
 
@@ -30,6 +33,7 @@ class ProfileViewController: UIViewController, ProfileDelegate {
         super.viewDidLoad()
 
         profileStorage.setDelegate(delegate: self)
+        auth.setDelegate(delegate: self)
 
         setUpProfileImageView()
     }
@@ -48,7 +52,8 @@ class ProfileViewController: UIViewController, ProfileDelegate {
         profileImageView.clipsToBounds = true
     }
 
-    @IBAction func logoutButton(_ sender: Any) {
+    @IBAction private func logoutButton(_ sender: Any) {
+        auth.logout()
     }
 
     func getCustomerInfoComplete(customer: Customer) {
@@ -57,8 +62,13 @@ class ProfileViewController: UIViewController, ProfileDelegate {
         self.emailLabel.text = customer.email
     }
 
+    func authCompleted() {
+        CustomerPostLoginSetupManager.tearDown()
+        performSegue(withIdentifier: Constants.logoutSegue, sender: self)
+    }
+
     func updateComplete() {
-        return
+        fatalError("This method is not implemented here.")
     }
 
     func showMessage(title: String, message: String, buttonText: String) {

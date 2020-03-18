@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, SearchDelegate {
         restaurantCollectionView.dataSource = self
 
         RestaurantLogicManager.shared().searchDelegate = self
+        RestaurantLogicManager.shared().fetchRestaurants()
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
@@ -34,11 +35,9 @@ class SearchViewController: UIViewController, SearchDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.restaurantSelectedSegue {
-            if let restaurantViewController = segue.destination as? RestaurantViewController {
-                if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
-                    let row = indexPaths[0].item
-                    restaurantViewController.restaurant = restaurants[row]
-                }
+            if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
             }
         }
     }

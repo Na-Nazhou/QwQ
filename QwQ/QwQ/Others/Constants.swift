@@ -35,6 +35,9 @@ struct Constants {
     static let chooseFromPhotoLibraryTitle = "Choose from Library"
     static let chooseFromCameraTitle = "Take from Camera"
     static let showImagePickerTitle = "Choose your image"
+
+    static let successQueueRecordCreationMessage = "You have created a new queue record."
+    static let successQueueRecordUpdateMessage = "Your queue record has been updated."
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -42,6 +45,7 @@ struct Constants {
     static let restaurantSelectedSegue = "restaurantSelected"
     static let queueSelectedSegue = "queueSelected"
     static let bookSelectedSegue = "bookSelected"
+    static let logoutSegue = "logout"
     
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"

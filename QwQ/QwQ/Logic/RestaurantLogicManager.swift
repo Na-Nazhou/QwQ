@@ -7,17 +7,16 @@ class RestaurantLogicManager: RestaurantLogic {
     weak var restaurantDelegate: RestaurantDelegate?
     weak var searchDelegate: SearchDelegate?
 
-    private(set) var customer: Customer
+    var customer: Customer
     var currentRestaurant: Restaurant?
     var restaurants = [Restaurant]()
 
     private init(customer: Customer) {
         self.customer = customer
         restaurantStorage = RestaurantStorageStub()
-        loadRestaurants()
     }
 
-    private func loadRestaurants() {
+    func fetchRestaurants() {
         restaurants = restaurantStorage.loadAllRestaurants()
     }
 

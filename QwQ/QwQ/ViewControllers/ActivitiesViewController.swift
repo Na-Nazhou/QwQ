@@ -22,8 +22,7 @@ class ActivitiesViewController: UIViewController {
                                                    babyChairQuantity: 1,
                                                    wheelchairFriendly: false,
                                                    startTime: Date(),
-                                                   admitTime: Date(),
-                                                   serveTime: Date())]
+                                                   admitTime: Date())]
     
     override func viewDidLoad() {
         super.viewDidLoad()

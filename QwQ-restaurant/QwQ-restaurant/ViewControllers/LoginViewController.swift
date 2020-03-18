@@ -27,7 +27,8 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        auth.setDelegate(view: self)
+        auth.setDelegate(delegate: self)
+        auth.checkIfAlreadyLoggedIn()
     }
     
     @IBAction func loginButton(_ sender: Any) {
@@ -71,8 +72,11 @@ class LoginViewController: UIViewController, AuthDelegate {
         self.present(message, animated: true)
     }
     
-    func authSucceeded() {
+    func authCompleted() {
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
+    }
+
+    @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
     }
     
 }
