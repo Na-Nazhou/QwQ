@@ -2,28 +2,6 @@ import Foundation
 class RestaurantQueueLogicManager: RestaurantQueueLogic {
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
-    // Singleton created upon successful login
-    private static var queueLogic: RestaurantQueueLogicManager?
-
-    /// Returns shared restaurant queue logic manager for the logged in application. If it does not exist,
-    /// a queue logic manager is initiailised with the given restaurant identity to share.
-    static func shared(for restaurantIdentity: Restaurant?) -> RestaurantQueueLogicManager {
-        if let logic = queueLogic {
-            return logic
-        }
-
-        assert(restaurantIdentity != nil,
-               "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
-        let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
-        logic.queueStorage.queueModificationLogicDelegate = logic
-        logic.queueStorage.queueStatusLogicDelegate = logic
-        return logic
-    }
-
-    static func deinitShared() {
-        queueLogic = nil
-    }
-
     private init(restaurant: Restaurant) {
         self.restaurant = restaurant
         queueStorage = RestaurantQueueStorageStub()
@@ -124,6 +102,30 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         //TODO: add back to end of queue?
     }
 
+}
+
+extension RestaurantQueueLogicManager {
+    // Singleton created upon successful login
+    private static var queueLogic: RestaurantQueueLogicManager?
+
+    /// Returns shared restaurant queue logic manager for the logged in application. If it does not exist,
+    /// a queue logic manager is initiailised with the given restaurant identity to share.
+    static func shared(for restaurantIdentity: Restaurant? = nil) -> RestaurantQueueLogicManager {
+        if let logic = queueLogic {
+            return logic
+        }
+
+        assert(restaurantIdentity != nil,
+               "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
+        let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
+        logic.queueStorage.queueModificationLogicDelegate = logic
+        logic.queueStorage.queueStatusLogicDelegate = logic
+        return logic
+    }
+
+    static func deinitShared() {
+        queueLogic = nil
+    }
 }
 
 extension RestaurantQueueLogicManager {

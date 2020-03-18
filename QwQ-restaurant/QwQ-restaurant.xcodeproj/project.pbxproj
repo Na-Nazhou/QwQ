@@ -24,6 +24,7 @@
 		6132680D241F28FF00B770B6 /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61326808241F28FF00B770B6 /* UIViewController+dismissKeyboard.swift */; };
 		7E35B6D5241F1FFE001C5862 /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E35B6D4241F1FFE001C5862 /* UIViewController+dismissKeyboard.swift */; };
 		7E35B6DB241F58C1001C5862 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E35B6DA241F58C1001C5862 /* AlertService.swift */; };
+		7E53E2BA241F60A60047C40F /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2B9241F60A60047C40F /* AuthDelegate.swift */; };
 		7E53E2BE241F6A630047C40F /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6D035241E57CC00C1465E /* Comfortaa-Light.ttf */; };
 		7E53E2BF241F6A630047C40F /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6D036241E57CC00C1465E /* Comfortaa-Regular.ttf */; };
 		7E53E2C0241F6A630047C40F /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6D037241E57CC00C1465E /* Comfortaa-Bold.ttf */; };
@@ -48,6 +49,7 @@
 		7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D032241E3EAC00C1465E /* Customer.swift */; };
 		7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D03B241E5AE400C1465E /* HomeViewController.swift */; };
 		96B5470DFD63B86550B5795A /* Pods_QwQ_restaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B66C12BEE9DE66BA575380 /* Pods_QwQ_restaurantTests.framework */; };
+		D440FC16241F9D1100606681 /* FBQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440FC15241F9D1100606681 /* FBQueueStorage.swift */; };
 		D4EA85E8241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift in Resources */ = {isa = PBXBuildFile; fileRef = D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */; };
 		D4EA85F0241B2C65009EB85B /* RestaurantQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85EA241B2C65009EB85B /* RestaurantQueue.swift */; };
 		D4EA85F2241B2C65009EB85B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85ED241B2C65009EB85B /* User.swift */; };
@@ -126,13 +128,11 @@
 		7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordViewController.swift; sourceTree = "<group>"; };
 		7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordCell.swift; sourceTree = "<group>"; };
 		7EE6D032241E3EAC00C1465E /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		7EE6D035241E57CC00C1465E /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
-		7EE6D036241E57CC00C1465E /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
-		7EE6D037241E57CC00C1465E /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		7EE6D03B241E5AE400C1465E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8B665DF9C615C6BA9EB9C536 /* Pods_QwQ_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9484E256C1F4334BCC828185 /* Pods-QwQ-restaurantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurantTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurantTests/Pods-QwQ-restaurantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C13B81CF3CF354B7BC7D4590 /* Pods-QwQ-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
+		D440FC15241F9D1100606681 /* FBQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBQueueStorage.swift; sourceTree = "<group>"; };
 		D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantPostLoginSetupManager.swift; path = "QwQ-restaurant/RestaurantPostLoginSetupManager.swift"; sourceTree = SOURCE_ROOT; };
 		D4EA85EA241B2C65009EB85B /* RestaurantQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueue.swift; sourceTree = "<group>"; };
 		D4EA85ED241B2C65009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -342,7 +342,6 @@
 		7E72B196241C963D00C1EE72 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				7EE6D034241E57CC00C1465E /* Fonts */,
 				7E35B6DA241F58C1001C5862 /* AlertService.swift */,
 				7E35B6D4241F1FFE001C5862 /* UIViewController+dismissKeyboard.swift */,
 				61326803241F28FF00B770B6 /* AlertService.swift */,
@@ -352,16 +351,6 @@
 				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
 			);
 			path = Others;
-			sourceTree = "<group>";
-		};
-		7EE6D034241E57CC00C1465E /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				7EE6D035241E57CC00C1465E /* Comfortaa-Light.ttf */,
-				7EE6D036241E57CC00C1465E /* Comfortaa-Regular.ttf */,
-				7EE6D037241E57CC00C1465E /* Comfortaa-Bold.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D4EA85E9241B2C65009EB85B /* Models */ = {
@@ -402,6 +391,7 @@
 				D4EA85FE241B2CC5009EB85B /* SharedProtocols */,
 				5CE032F12421FCBF008DB047 /* ProfileStorage.swift */,
 				5CE032F52421FCF6008DB047 /* FBProfileStorage.swift */,
+				D440FC15241F9D1100606681 /* FBQueueStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -531,9 +521,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E53E2BE241F6A630047C40F /* Comfortaa-Light.ttf in Resources */,
-				7E53E2BF241F6A630047C40F /* Comfortaa-Regular.ttf in Resources */,
-				7E53E2C0241F6A630047C40F /* Comfortaa-Bold.ttf in Resources */,
 				6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */,
 				7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */,
 				6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */,
@@ -702,6 +689,7 @@
 				7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */,
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
 				D4EA8600241B2CC6009EB85B /* RestaurantQueueStorageStub.swift in Sources */,
+				D440FC16241F9D1100606681 /* FBQueueStorage.swift in Sources */,
 				D4EA85F0241B2C65009EB85B /* RestaurantQueue.swift in Sources */,
 				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
 				5CE032F62421FCF6008DB047 /* FBProfileStorage.swift in Sources */,
