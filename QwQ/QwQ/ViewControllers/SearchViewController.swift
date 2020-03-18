@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
     
-    var filtered:[Restaurant] = []
+    var filtered: [Restaurant] = []
     var searchActive: Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -80,7 +80,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
          }
 
          return UICollectionReusableView()
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

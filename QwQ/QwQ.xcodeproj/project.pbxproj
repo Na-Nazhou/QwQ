@@ -34,6 +34,8 @@
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
 		7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */; };
+		7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */; };
+		7E7F7DD12422659F00A080E5 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7F7DD02422659F00A080E5 /* Search.storyboard */; };
 		7EC1F3132421F837005D20CD /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */; };
 		7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3142421FB7F005D20CD /* ActivityCell.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
@@ -48,7 +50,6 @@
 		7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */; };
 		7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */; };
 		7EDC5E5B24220E880053CA1D /* EditQueue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */; };
-		7EE4A4152422003A00BFB603 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE4A4142422003A00BFB603 /* Search.storyboard */; };
 		7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */; };
 		7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D014241D2BEC00C1465E /* Constants.swift */; };
 		7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D016241DB57F00C1465E /* AlertService.swift */; };
@@ -122,6 +123,8 @@
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		7E7F7DD02422659F00A080E5 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		7EC1F3142421FB7F005D20CD /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +145,6 @@
 		7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditQueue.storyboard; sourceTree = "<group>"; };
-		7EE4A4142422003A00BFB603 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
 		7EE6D014241D2BEC00C1465E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7EE6D016241DB57F00C1465E /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */,
+				7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */,
 				7EC1F3142421FB7F005D20CD /* ActivityCell.swift */,
 				7EDC5E58242206AB0053CA1D /* ProfileImageView.swift */,
 				7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */,
@@ -394,7 +397,7 @@
 		7EC7E68A241B2FAB00C2F9BB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				7EE4A4142422003A00BFB603 /* Search.storyboard */,
+				7E7F7DD02422659F00A080E5 /* Search.storyboard */,
 				7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */,
 				7EFB696D242210110073E535 /* EditBook.storyboard */,
 				7EFB6971242213000073E535 /* Queue.storyboard */,
@@ -575,10 +578,10 @@
 				7EFB696E242210110073E535 /* EditBook.storyboard in Resources */,
 				5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */,
 				7EFB69742422130C0073E535 /* Book.storyboard in Resources */,
+				7E7F7DD12422659F00A080E5 /* Search.storyboard in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
 				7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
-				7EE4A4152422003A00BFB603 /* Search.storyboard in Resources */,
 				7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */,
 				5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */,
 				7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */,
@@ -731,6 +734,7 @@
 			files = (
 				5C59E91D2422134A004DFEB7 /* ProfileStorage.swift in Sources */,
 				D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */,
+				7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */,
 				D4EA85D1241B29CC009EB85B /* User.swift in Sources */,
 				61673BF1241FC23800134891 /* RestaurantStorageStub.swift in Sources */,
 				617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */,

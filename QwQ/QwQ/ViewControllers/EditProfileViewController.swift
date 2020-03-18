@@ -32,9 +32,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         
         profileStorage.setDelegate(delegate: self)
         profileStorage.getCustomerInfo()
-
-        self.hideKeyboardWhenTappedAround()
         
+        self.registerObserversForKeyboard()
+        self.hideKeyboardWhenTappedAround()
+
         setUpProfileImageView()
     }
     
@@ -110,12 +111,10 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) {
-            (action) in
+        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .photoLibrary)
         }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) {
-            (action) in
+        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) { (action) in
             self.showImagePickerController(sourceType: .camera)
         }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
@@ -142,6 +141,5 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             profileImageView.image = originalImage
         }
         dismiss(animated: true, completion: nil)
-        
     }
 }
