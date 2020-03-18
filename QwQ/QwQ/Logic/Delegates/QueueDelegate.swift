@@ -7,4 +7,7 @@
 
 protocol QueueDelegate: AnyObject {
 
+    func didAddQueueRecord()
+
+    func didUpdateQueueRecord()
 }

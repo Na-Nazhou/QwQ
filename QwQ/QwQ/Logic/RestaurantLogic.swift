@@ -8,4 +8,6 @@ protocol RestaurantLogic: RestaurantStorageSyncDelegate {
     var searchDelegate: SearchDelegate? { get set }
 
     var restaurants: [Restaurant] { get set }
+
+    func fetchRestaurants()
 }

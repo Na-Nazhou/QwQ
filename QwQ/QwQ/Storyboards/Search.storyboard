@@ -321,7 +321,7 @@
                         <outlet property="contactTextField" destination="Krp-Us-XYE" id="44p-6a-sMs"/>
                         <outlet property="groupSizeTextField" destination="7wh-Bq-fI9" id="1iT-Ib-QdZ"/>
                         <outlet property="nameTextField" destination="1m3-QW-SS6" id="yhy-R2-ow7"/>
-                        <outlet property="wheelchairFriendlySwitch" destination="9Do-VC-HR2" id="XJS-HL-rgC"/>
+                        <outlet property="wheelChairFriendlySwitch" destination="9Do-VC-HR2" id="E8o-xW-ZkL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTU-B3-75P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

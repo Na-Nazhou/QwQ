@@ -14,12 +14,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet weak var locationLabel: UILabel!
 
     var restaurant: Restaurant? {
-        get {
-            RestaurantLogicManager.shared().currentRestaurant
-        }
-        set {
-            RestaurantLogicManager.shared().currentRestaurant = newValue
-        }
+        RestaurantLogicManager.shared().currentRestaurant
     }
     
     override func viewDidLoad() {

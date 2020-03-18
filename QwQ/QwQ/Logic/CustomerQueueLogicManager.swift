@@ -8,8 +8,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     // View Controller
     weak var queueDelegate: QueueDelegate?
 
-    private(set) var customer: Customer
+    var customer: Customer
     var currentQueueRecord: QueueRecord?
+    var queueHistory = [QueueRecord]()
 
     private init(customer: Customer) {
         self.customer = customer
@@ -19,6 +20,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func loadQueueRecord() {
         currentQueueRecord = queueStorage.loadQueueRecord(customer: customer)
+    }
+
+    func fetchQueueHistory() {
+        queueHistory = queueStorage.loadQueueHistory(customer: customer)
     }
 
     func enqueue(to restaurant: Restaurant,
@@ -33,16 +38,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         let startTime = Date()
-        let newRecord = QueueRecord(restaurant: restaurant,
+        var newRecord = QueueRecord(restaurant: restaurant,
                                     customer: customer,
                                     groupSize: groupSize,
                                     babyChairQuantity: babyChairQuantity,
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: startTime,
-                                    admitTime: nil,
-                                    serveTime: nil)
+                                    admitTime: nil)
 
-        queueStorage.addQueueRecord(record: newRecord)
+        queueStorage.addQueueRecord(record: newRecord,
+                                    completion: {
+                                        newRecord.id = $0
+                                        self.currentQueueRecord = newRecord
+                                        self.queueDelegate?.didAddQueueRecord()
+        })
     }
 
     func editQueueRecord(with groupSize: Int,
@@ -56,16 +65,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         // Cannot update the restaurant, startTime
         // Reset startTime (??)
 
-        let new = QueueRecord(restaurant: old.restaurant,
+        var new = QueueRecord(restaurant: old.restaurant,
                               customer: customer,
                               groupSize: groupSize,
                               babyChairQuantity: babyChairQuantity,
                               wheelchairFriendly: wheelchairFriendly,
                               startTime: old.startTime,
-                              admitTime: nil,
-                              serveTime: nil)
+                              admitTime: nil)
 
-        queueStorage.updateQueueRecord(old: old, new: new)
+        queueStorage.updateQueueRecord(old: old, new: new,
+                                       completion: {
+                                        new.id = old.id
+                                        self.currentQueueRecord = new
+                                        self.queueDelegate?.didUpdateQueueRecord()
+        })
     }
 
     func deleteQueueRecord() {
@@ -73,11 +86,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
-        queueStorage.deleteQueueRecord(record: record)
-    }
-
-    func restaurantDidServeCustomer(record: QueueRecord) {
-        //
+        queueStorage.deleteQueueRecord(record: record,
+                                       completion: { self.currentQueueRecord = nil })
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {
@@ -85,40 +95,19 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
+        // Notify customer
+
         currentQueueRecord = nil
     }
 
     func restaurantDidRejectCustomer(record: QueueRecord) {
-        //
-    }
-
-    func customerDidJoinQueue(with record: QueueRecord) {
-        guard record.customer == customer else {
+        guard currentQueueRecord != nil, record.customer == customer else {
             return
         }
 
-        currentQueueRecord = record
-    }
-
-    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
-        guard old.customer == customer && new.customer == customer else {
-            return
-        }
-
-        currentQueueRecord = new
-    }
-    
-    func customerDidWithdrawQueue(record: QueueRecord) {
-        guard record.customer == customer else {
-            return
-        }
+        // Notify customer
 
         currentQueueRecord = nil
-    }
-
-    // if we allow restaurants to reject customers
-    func restaurantDidRemoveQueueRecord(record: QueueRecord) {
-        //
     }
 }
 

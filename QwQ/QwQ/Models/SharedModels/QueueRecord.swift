@@ -1,6 +1,7 @@
 import Foundation
 
-struct QueueRecord: Hashable {
+struct QueueRecord {
+    var id = "0"
     let restaurant: Restaurant
     let customer: Customer
 
@@ -10,17 +11,11 @@ struct QueueRecord: Hashable {
 
     let startTime: Date
     var admitTime: Date?
-    var serveTime: Date?
+    var rejectTime: Date?
 
-    static func == (lhs: QueueRecord, rhs: QueueRecord) -> Bool {
-        return lhs.restaurant == rhs.restaurant
-            && lhs.customer == rhs.customer
-            && lhs.startTime == rhs.startTime
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.restaurant)
-        hasher.combine(self.customer)
-        hasher.combine(self.startTime)
+    var startDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "ddMMyyyy"
+        return formatter.string(from: startTime)
     }
 }
