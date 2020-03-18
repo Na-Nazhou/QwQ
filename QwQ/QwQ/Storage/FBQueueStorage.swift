@@ -81,11 +81,28 @@ class FBQueueStorage: CustomerQueueStorage {
     
     func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
         // Attach listener
+        completion(nil)
     }
 
     func loadQueueHistory(customer: Customer, completion:  @escaping ([QueueRecord]) -> Void) {
-        // Attach listener
-
+        // TODO
+        let restaurant = Restaurant(uid: "1",
+                                    name: "history queue record",
+                                    email: "restaurant@gmail.com",
+                                    contact: "98721234",
+                                    address: "address",
+                                    menu: "menu",
+                                    isOpen: true)
+        let customer = Customer(uid: "2", name: "name", email: "name@", contact: "9827")
+        let record1 = QueueRecord(restaurant: restaurant,
+                                  customer: customer,
+                                  groupSize: 2,
+                                  babyChairQuantity: 1,
+                                  wheelchairFriendly: false,
+                                  startTime: Date(),
+                                  admitTime: Date())
+        let queueHistory = [record1]
+        completion(queueHistory)
     }
     
     func didDetectAdmissionOfCustomer(record: QueueRecord) {
