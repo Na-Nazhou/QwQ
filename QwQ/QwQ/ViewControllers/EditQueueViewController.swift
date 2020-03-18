@@ -13,7 +13,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     @IBOutlet weak var groupSizeTextField: UITextField!
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
-
+    @IBOutlet weak var restaurantNameLabel: UIImageView!
+    
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
     }
