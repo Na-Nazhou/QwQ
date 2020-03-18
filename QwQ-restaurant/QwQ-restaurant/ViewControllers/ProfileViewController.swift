@@ -27,9 +27,18 @@ class ProfileViewController: UIViewController, AuthDelegate {
         self.auth = FBAuthenticator()
         super.init(coder: coder)
     }
-    
-    @IBAction func handleLogout(_ sender: Any) {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        auth.setDelegate(delegate: self)
+    }
+
+    @IBAction func logoutButton(_ sender: Any) {
+        auth.logout()
+    }
+
+    func authCompleted() {
+        performSegue(withIdentifier: Constants.logoutSegue, sender: self)
     }
 
     func showMessage(title: String, message: String, buttonText: String) {
@@ -41,11 +50,4 @@ class ProfileViewController: UIViewController, AuthDelegate {
         self.present(message, animated: true)
     }
 
-    func authSucceeded() {
-        fatalError("This function is not implemented here.")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

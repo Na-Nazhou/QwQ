@@ -45,6 +45,7 @@ struct Constants {
     static let restaurantSelectedSegue = "restaurantSelected"
     static let queueSelectedSegue = "queueSelected"
     static let bookSelectedSegue = "bookSelected"
+    static let logoutSegue = "logout"
     
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"

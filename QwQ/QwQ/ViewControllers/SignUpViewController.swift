@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth.setDelegate(view: self)
+        auth.setDelegate(delegate: self)
 
         self.hideKeyboardWhenTappedAround()
     }
@@ -83,7 +83,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
         self.present(message, animated: true)
     }
 
-    func authSucceeded() {
+    func authCompleted() {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 

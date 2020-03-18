@@ -134,9 +134,11 @@
                         <outlet property="emailLabel" destination="4To-Of-qc3" id="GCB-yN-Gp7"/>
                         <outlet property="nameLabel" destination="SaD-11-Aib" id="NdJ-Og-9hs"/>
                         <outlet property="profileImageView" destination="fNg-50-TMe" id="oTc-2v-rle"/>
+                        <segue destination="eFv-8R-m6T" kind="unwind" identifier="logout" unwindAction="unwindToLogin:" id="1Xu-re-txS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lv-4c-uUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="eFv-8R-m6T" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2610.144927536232" y="766.74107142857144"/>
         </scene>
