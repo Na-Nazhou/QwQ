@@ -18,4 +18,8 @@ struct QueueRecord {
         formatter.dateFormat = "ddMMyyyy"
         return formatter.string(from: startTime)
     }
+
+    var isHistoryRecord: Bool {
+        admitTime != nil || rejectTime != nil
+    }
 }

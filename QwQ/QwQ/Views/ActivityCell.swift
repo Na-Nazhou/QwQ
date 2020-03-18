@@ -41,5 +41,10 @@ class ActivityCell: UICollectionViewCell {
         if let image = UIImage(named: "c-book-icon") {
             queueBookImageView.image = image
         }
+
+        if queueRecord.isHistoryRecord {
+            editButton.isHidden = true
+            deleteButton.isHidden = true
+        }
     }
 }

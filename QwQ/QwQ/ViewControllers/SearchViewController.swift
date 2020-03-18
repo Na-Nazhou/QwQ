@@ -44,7 +44,7 @@ class SearchViewController: UIViewController, SearchDelegate {
             }
         }
 
-        if segue.identifier == Constants.queueSelectedSegue,
+        if segue.identifier == Constants.editQueueSelectedSegue,
             let restaurant = sender as? Restaurant {
             RestaurantLogicManager.shared().currentRestaurant = restaurant
         }
@@ -108,7 +108,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
 
             if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
-                self.performSegue(withIdentifier: Constants.queueSelectedSegue, sender: restaurant)
+                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
             } else {
                 self.showMessage(title: "Error", message: "You have an existing queue record",
                                  buttonText: Constants.okayTitle, buttonAction: nil)

@@ -11,8 +11,14 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     @IBOutlet private var activeHistoryControl: UISegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
-    var queueRecords: [QueueRecord] {
-           CustomerQueueLogicManager.shared().queueHistory
+    var queueRecords = [QueueRecord]()
+
+    var activeRecord: QueueRecord? {
+        CustomerQueueLogicManager.shared().currentQueueRecord
+    }
+
+    var historyRecords: [QueueRecord] {
+        CustomerQueueLogicManager.shared().queueHistory
     }
     
     override func viewDidLoad() {
@@ -22,7 +28,33 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.delegate = self
 
         CustomerQueueLogicManager.shared().activitiesDelegate = self
-        CustomerQueueLogicManager.shared().fetchQueueHistory()
+
+        setUpSegmentedControl()
+    }
+
+    private func setUpSegmentedControl() {
+        if let activeRecord = activeRecord {
+            queueRecords = [activeRecord]
+        }
+        activitiesCollectionView.reloadData()
+        activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+    }
+
+    @IBAction private func onTapSegButton(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            if let activeRecord = activeRecord {
+                queueRecords = [activeRecord]
+            } else {
+                queueRecords = []
+            }
+        case 1:
+            CustomerQueueLogicManager.shared().fetchQueueHistory()
+            queueRecords = historyRecords
+        default:
+            return
+        }
+        activitiesCollectionView.reloadData()
     }
 }
 

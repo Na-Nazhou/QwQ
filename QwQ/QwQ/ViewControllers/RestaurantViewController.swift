@@ -37,7 +37,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         }
 
         if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
-            performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+            performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
         } else {
             showMessage(title: "Error", message: "You have an existing queue record",
                         buttonText: Constants.okayTitle, buttonAction: nil)
