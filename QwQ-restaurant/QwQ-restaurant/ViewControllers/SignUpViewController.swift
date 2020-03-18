@@ -59,7 +59,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
                 return
         }
         
-        guard LoginUtilities.validateEmail(email: email) else {
+        guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
                         buttonText: Constants.okayTitle,
@@ -67,7 +67,7 @@ class SignUpViewController: UIViewController, AuthDelegate {
             return
         }
         
-        guard LoginUtilities.validateContact(contact: contact) else {
+        guard ValidationUtilities.validateContact(contact: contact) else {
             showMessage(title: Constants.invalidContactTitle,
                         message: Constants.invalidContactMessage,
                         buttonText: Constants.okayTitle,
