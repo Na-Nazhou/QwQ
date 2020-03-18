@@ -15,8 +15,9 @@ class BookRecordViewController: UIViewController {
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var datePicker: UIDatePicker!
-    
-    var bookRecord: BookRecord?
+
+    // TODO: fix
+    var bookRecord: QueueRecord?
 
     override func viewDidLoad() {
         super.viewDidLoad()

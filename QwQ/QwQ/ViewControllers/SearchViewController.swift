@@ -8,8 +8,10 @@
 import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
-
-    private let reuseIdentifier = Constants.restaurantReuseIdentifier
+    
+    var filtered:[Restaurant] = []
+    var searchActive: Bool = false
+    let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet private var restaurantCollectionView: UICollectionView!
     
@@ -27,6 +29,7 @@ class SearchViewController: UIViewController, SearchDelegate {
 
         RestaurantLogicManager.shared().searchDelegate = self
         RestaurantLogicManager.shared().fetchRestaurants()
+        filtered = restaurants
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
@@ -48,7 +51,38 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
 }
 
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !(searchBar.text?.isEmpty)! {
+            self.restaurantCollectionView?.reloadData()
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.isEmpty ? restaurants : restaurants.filter { (item: Restaurant) -> Bool in
+            item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+    }
+}
+
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView: UICollectionReusableView = collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                  withReuseIdentifier: Constants.collectionViewHeaderReuseIdentifier,
+                                                  for: indexPath)
+
+             return headerView
+         }
+
+         return UICollectionReusableView()
+
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         restaurants.count
     }
@@ -62,8 +96,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let restaurantCell = cell as? RestaurantCell else {
             return cell
         }
-        
-        let restaurant = restaurants[indexPath.row]
+
+        let restaurant = filtered[indexPath.row]
 
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {

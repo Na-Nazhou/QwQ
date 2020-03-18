@@ -54,13 +54,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3LU-gV-Hu9">
                                                 <rect key="frame" x="0.0" y="0.0" width="258.5" height="215"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aR-2H-yyy">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aR-2H-yyy">
                                                         <rect key="frame" x="0.0" y="0.0" width="258.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ods-pX-BKa">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ods-pX-BKa">
                                                         <rect key="frame" x="0.0" y="46" width="258.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
@@ -113,7 +113,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7p-xA-heJ">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7p-xA-heJ">
                                                         <rect key="frame" x="0.0" y="184" width="107.5" height="31"/>
                                                     </switch>
                                                 </subviews>
@@ -126,13 +126,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FGR-NK-EhD">
+                                    <datePicker contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FGR-NK-EhD">
                                         <rect key="frame" x="0.0" y="268" width="384" height="318.5"/>
                                     </datePicker>
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="fDC-nP-cUE" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
-                                <rect key="frame" x="145" y="110" width="124" height="124"/>
+                                <rect key="frame" x="165.5" y="110" width="83" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fDC-nP-cUE" secondAttribute="height" multiplier="1:1" id="gLH-xp-A35"/>
                                 </constraints>
@@ -149,7 +149,7 @@
                             <constraint firstItem="gjh-EV-y2U" firstAttribute="width" secondItem="jjU-8V-Off" secondAttribute="width" multiplier="0.08" id="Zji-Cu-E7E"/>
                             <constraint firstItem="YEg-We-lhr" firstAttribute="height" secondItem="jjU-8V-Off" secondAttribute="height" multiplier="0.3" id="bO7-wq-piY"/>
                             <constraint firstItem="TYk-Yn-caG" firstAttribute="top" secondItem="YEg-We-lhr" secondAttribute="bottom" constant="15" id="c0D-rb-6Yt"/>
-                            <constraint firstItem="fDC-nP-cUE" firstAttribute="width" secondItem="jjU-8V-Off" secondAttribute="width" multiplier="0.3" id="fXz-YZ-rGt"/>
+                            <constraint firstItem="fDC-nP-cUE" firstAttribute="width" secondItem="jjU-8V-Off" secondAttribute="width" multiplier="0.2" id="fXz-YZ-rGt"/>
                             <constraint firstItem="eOr-zI-p5U" firstAttribute="centerX" secondItem="YEg-We-lhr" secondAttribute="centerX" id="fb3-rp-NIL"/>
                             <constraint firstItem="TYk-Yn-caG" firstAttribute="leading" secondItem="jjU-8V-Off" secondAttribute="leading" constant="15" id="jpP-LT-qiQ"/>
                             <constraint firstItem="YEg-We-lhr" firstAttribute="trailing" secondItem="jjU-8V-Off" secondAttribute="trailing" id="mja-2Q-z8a"/>

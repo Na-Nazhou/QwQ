@@ -16,6 +16,9 @@ class EditBookingViewController: UIViewController {
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var restaurantNameLabel: UILabel!
 
+    // TODO: fix
+    var bookRecord: QueueRecord?
+
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }

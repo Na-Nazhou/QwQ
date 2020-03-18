@@ -8,6 +8,8 @@
 import UIKit
 
 class ActivityCell: UICollectionViewCell {
+    var editAction: (() -> Void)?
+
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet private var deleteButton: UIButton!
@@ -17,8 +19,9 @@ class ActivityCell: UICollectionViewCell {
     
     @IBAction private func handleDelete(_ sender: Any) {
     }
-    
-    @IBAction private func handleEdit(_ sender: Any) {
+
+    @IBAction func handleEdit(_ sender: Any) {
+        editAction?()
     }
     
     override init(frame: CGRect) {

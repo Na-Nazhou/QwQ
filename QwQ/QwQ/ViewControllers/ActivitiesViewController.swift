@@ -43,12 +43,43 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let queueRecord = queueRecords[indexPath.row]
         activityCell.setUpView(queueRecord: queueRecord)
+        activityCell.editAction = {
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+        }
         
         return activityCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.queueSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let queueRecordViewController = segue.destination as? QueueRecordViewController {
+                    queueRecordViewController.queueRecord = queueRecords[row]
+                }
+            }
+        case Constants.bookSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let bookRecordViewController = segue.destination as? BookRecordViewController {
+                    bookRecordViewController.bookRecord = queueRecords[row]
+                }
+            }
+        case Constants.editBookSelectedSegue:
+            // TODO: fix
+            if let bookRecord = sender as? QueueRecord,
+                let editBookingViewController = segue.destination as? EditBookingViewController {
+                    editBookingViewController.bookRecord = bookRecord
+            }
+        default:
+            // No need to to anything for editQueueSelectedSegue
+            return
+        }
     }
 }
 

@@ -45,7 +45,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
 
     @IBAction private func handleBookTap(_ sender: Any) {
-        performSegue(withIdentifier: Constants.bookSelectedSegue, sender: self)
+        performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
     }
     
     @IBAction private func handleBack(_ sender: Any) {
