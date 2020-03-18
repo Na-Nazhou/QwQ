@@ -75,7 +75,7 @@ class FBQueueStorage: CustomerQueueStorage {
                 for document in querySnapshot!.documents {
                     let restaurantQueuesToday = self.db.collection("queues")
                         .document(document.documentID)
-                        .collection(QueueRecord.getDateString(from: Date()))
+                        .collection(Date().toDateStringWithoutTime())
                     restaurantQueuesToday.getDocuments() { (queueSnapshot, err) in
                         if let err = err {
                             print("Error getting documents: \(err)")
@@ -108,7 +108,7 @@ class FBQueueStorage: CustomerQueueStorage {
                     for numDaysAgo in 0...6 {
                         let rQueue = self.db.collection("queues")
                             .document(document.documentID)
-                            .collection(QueueRecord.getDateString(from: self.dateOf(daysBeforeToday: numDaysAgo)))
+                            .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
                         rQueue.getDocuments { (queueSnapshot, err) in
                             if let err = err {
                                 print("Error getting documents: \(err)")
@@ -146,10 +146,6 @@ class FBQueueStorage: CustomerQueueStorage {
         }
     }
 
-    private func dateOf(daysBeforeToday numDays: Int) -> Date {
-        let dayComponent = DateComponents(day: -numDays)
-        return Calendar.current.date(byAdding: dayComponent, to: Date()) ?? Date()
-    }
 //    // MARK: - Protocol conformance
 //
 //    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {

@@ -63,6 +63,7 @@
 		7EFB6976242213470073E535 /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6975242213470073E535 /* QueueRecordViewController.swift */; };
 		7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6977242215B60073E535 /* BookRecordViewController.swift */; };
 		AFDCB8F2F62FE94B8F90CE72 /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE35E89B17D6D1B4C677B395 /* Pods_QwQTests.framework */; };
+		D41F91A224227FFE00724D6C /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F91A124227FFE00724D6C /* Date+Extensions.swift */; };
 		D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */; };
 		D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB6241B247600BD0780 /* RestaurantLogic.swift */; };
 		D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */; };
@@ -164,6 +165,7 @@
 		9FD9A6C728CACB71CBBA16A9 /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE35E89B17D6D1B4C677B395 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE6486DD1E3B4858B52F48B /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D41F91A124227FFE00724D6C /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogicManager.swift; sourceTree = "<group>"; };
 		D4494EB6241B247600BD0780 /* RestaurantLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogic.swift; sourceTree = "<group>"; };
 		D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				5C9D9B5B24221D2F0019B7EE /* UIViewController+ShowMessage.swift */,
 				7EE6D014241D2BEC00C1465E /* Constants.swift */,
 				7EE6D016241DB57F00C1465E /* AlertService.swift */,
+				D41F91A124227FFE00724D6C /* Date+Extensions.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */,
 				7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */,
 				5C9D9B5C24221D2F0019B7EE /* UIViewController+ShowMessage.swift in Sources */,
+				D41F91A224227FFE00724D6C /* Date+Extensions.swift in Sources */,
 				7EE6D013241D290F00C1465E /* UIViewController+dismissKeyboard.swift in Sources */,
 				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
 				D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */,

@@ -16,7 +16,7 @@ struct QueueRecord {
     var rejectTime: Date?
 
     var startDate: String {
-        QueueRecord.getDateString(from: startTime)
+        return startTime.toDateStringWithoutTime()
     }
 
     init(restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
@@ -75,14 +75,6 @@ struct QueueRecord {
         self.admitTime = admitTime
         self.serveTime = serveTime
         self.rejectTime = rejectTime
-    }
-}
-
-extension QueueRecord {
-    static func getDateString(from datetime: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "ddMMyyyy"
-        return formatter.string(from: datetime)
     }
 }
 
