@@ -12,6 +12,8 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var estimatedTimeLabel: UILabel!
+    @IBOutlet weak var queueBookImageView: UIImageView!
     
     @IBAction func handleDelete(_ sender: Any) {
     }

@@ -23,7 +23,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-background" translatesAutoresizingMaskIntoConstraints="NO" id="O9d-Dr-9Bv">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="413"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="fNg-50-TMe">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="fNg-50-TMe" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
                                 <rect key="frame" x="145" y="265" width="124" height="124"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fNg-50-TMe" secondAttribute="height" multiplier="8:8" id="Hpm-JN-yJT"/>
@@ -260,7 +260,7 @@
                                     <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="Vts-mO-17q"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="oMO-Fa-FG7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="oMO-Fa-FG7" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
                                 <rect key="frame" x="145" y="154" width="124" height="124"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oMO-Fa-FG7" secondAttribute="height" multiplier="8:8" id="6lr-lR-QEe"/>
