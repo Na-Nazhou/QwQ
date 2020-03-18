@@ -15,10 +15,12 @@ class BookRecordViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
     
-    var bookRecord: QueueRecord?
+    var bookRecord: BookRecord?
     
     @IBAction func handleAdmit(_ sender: Any) {
-        showMessage(title: Constants.admitCustomerTitle, message: Constants.admitCustomerMessage, buttonText: Constants.okayTitle)
+        showMessage(title: Constants.admitCustomerTitle,
+                    message: Constants.admitCustomerMessage,
+                    buttonText: Constants.okayTitle)
     }
     
     override func viewDidLoad() {
@@ -32,20 +34,16 @@ class BookRecordViewController: UIViewController {
     }
     
     private func setUpViews() {
-        nameLabel.text = bookRecord?.customer.name
-        contactLabel.text = bookRecord?.customer.contact
-        groupSizeLabel.text = String(bookRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(bookRecord?.wheelchairFriendly ?? false)
-        wheelchairFriendlySwitch.isOn = bookRecord?.wheelchairFriendly ?? false
-    }
-    
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
-        message.addAction(closeDialogAction)
-        
-        self.present(message, animated: true)
+        guard let bookRecord = bookRecord else {
+            return
+        }
+
+        nameLabel.text = bookRecord.restaurant.name
+        contactLabel.text = bookRecord.restaurant.contact
+        groupSizeLabel.text = String(bookRecord.groupSize)
+        babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
+
+        // TODO
     }
 }
-

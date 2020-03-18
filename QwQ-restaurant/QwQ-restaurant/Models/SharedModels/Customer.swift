@@ -42,4 +42,3 @@ struct Customer: User {
         self.contact = contact
     }
 }
-

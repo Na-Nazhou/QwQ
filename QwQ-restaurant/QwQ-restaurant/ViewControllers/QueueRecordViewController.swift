@@ -35,11 +35,14 @@ class QueueRecordViewController: UIViewController {
     }
     
     private func setUpViews() {
-        nameLabel.text = queueRecord?.customer.name
-        contactLabel.text = queueRecord?.customer.contact
-        groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
-        wheelchairFriendlySwitch.isOn = queueRecord?.wheelchairFriendly ?? false
-    }
+        guard let queueRecord = queueRecord else {
+            return
+        }
 
+        nameLabel.text = queueRecord.restaurant.name
+        contactLabel.text = queueRecord.restaurant.contact
+        groupSizeLabel.text = String(queueRecord.groupSize)
+        babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+    }
 }

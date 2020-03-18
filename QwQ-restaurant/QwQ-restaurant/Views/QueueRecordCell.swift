@@ -32,4 +32,3 @@ class QueueRecordCell: UICollectionViewCell {
         super.init(coder: coder)
     }
 }
-

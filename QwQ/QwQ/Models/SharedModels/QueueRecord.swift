@@ -11,6 +11,7 @@ struct QueueRecord: Record {
 
     let startTime: Date
     var admitTime: Date?
+    var serveTime: Date?
     var rejectTime: Date?
 
     var startDate: String {
@@ -20,6 +21,6 @@ struct QueueRecord: Record {
     }
 
     var isHistoryRecord: Bool {
-        admitTime != nil || rejectTime != nil
+        serveTime != nil || rejectTime != nil
     }
 }

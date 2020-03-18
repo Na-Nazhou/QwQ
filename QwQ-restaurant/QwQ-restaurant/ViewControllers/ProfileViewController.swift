@@ -42,6 +42,8 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         profileStorage.getRestaurantInfo()
     }
 

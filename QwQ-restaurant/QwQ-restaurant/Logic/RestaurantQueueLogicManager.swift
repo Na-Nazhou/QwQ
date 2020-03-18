@@ -18,7 +18,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     func loadWaiting() -> [QueueRecord] {
-        return queueStorage.loadWaitingList(of: restaurant)
+        queueStorage.loadWaitingList(of: restaurant)
     }
 
     func openQueue() {

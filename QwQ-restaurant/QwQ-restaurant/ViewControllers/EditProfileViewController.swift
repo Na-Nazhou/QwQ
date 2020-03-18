@@ -58,7 +58,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         showMessage(title: Constants.successfulUpdateTitle,
                     message: Constants.successfulUpdateMessage,
                     buttonText: Constants.okayTitle,
-                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
+                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true) })
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -167,7 +167,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
             image = editedImage
