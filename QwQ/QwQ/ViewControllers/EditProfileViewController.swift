@@ -67,7 +67,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
 
@@ -88,15 +89,6 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                                               style: .default) { (_: UIAlertAction!) -> Void in
             self.navigationController?.popViewController(animated: true)
         }
-        message.addAction(closeDialogAction)
-
-        self.present(message, animated: true)
-    }
-
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
         message.addAction(closeDialogAction)
 
         self.present(message, animated: true)

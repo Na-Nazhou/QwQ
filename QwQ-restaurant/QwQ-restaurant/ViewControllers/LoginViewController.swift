@@ -42,34 +42,28 @@ class LoginViewController: UIViewController, AuthDelegate {
         guard !email.isEmpty else {
             showMessage(title: Constants.missingEmailTitle,
                         message: Constants.missingEmailMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
         guard LoginUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
         guard !password.isEmpty else {
             showMessage(title: Constants.missingPasswordTitle,
                         message: Constants.missingPasswordMessage,
-                        buttonText: Constants.okayTitle)
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
             return
         }
         
         auth.login(email: email, password: password)
-    }
-    
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
-        message.addAction(closeDialogAction)
-        
-        self.present(message, animated: true)
     }
     
     func authCompleted() {

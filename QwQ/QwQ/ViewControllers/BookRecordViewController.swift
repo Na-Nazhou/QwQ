@@ -35,13 +35,4 @@ class BookRecordViewController: UIViewController {
         babyChairQuantityLabel.text = String(bookRecord?.wheelchairFriendly ?? false)
 //        wheelchairFriendlySwitch. = String(bookRecord?.wheelchairFriendly)
     }
-    
-    func showMessage(title: String, message: String, buttonText: String) {
-        let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let closeDialogAction = UIAlertAction(title: buttonText, style: .default)
-        message.addAction(closeDialogAction)
-        
-        self.present(message, animated: true)
-    }
 }

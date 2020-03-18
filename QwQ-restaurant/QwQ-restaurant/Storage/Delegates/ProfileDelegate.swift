@@ -13,6 +13,6 @@ protocol ProfileDelegate: AnyObject {
 
     func updateComplete()
 
-    func showMessage(title: String, message: String, buttonText: String)
+    func showMessage(title: String, message: String, buttonText: String, buttonAction: ((UIAlertAction) -> Void)?)
 
 }
