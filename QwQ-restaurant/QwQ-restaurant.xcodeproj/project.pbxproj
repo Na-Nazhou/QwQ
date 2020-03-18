@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C44C9AC241DCE8E0097C006 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AB241DCE8E0097C006 /* Authenticator.swift */; };
-		5C44C9AE241DCE9F0097C006 /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */; };
 		5C44C9B3241DD0390097C006 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9B2241DD0390097C006 /* LoginUtilities.swift */; };
 		5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
 		5C4A54FF241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
@@ -26,8 +24,10 @@
 		7E53E2BF241F6A630047C40F /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6D036241E57CC00C1465E /* Comfortaa-Regular.ttf */; };
 		7E53E2C0241F6A630047C40F /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE6D037241E57CC00C1465E /* Comfortaa-Bold.ttf */; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
-		7E6B1E26241F7F8000BFBDCB /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B1E24241F7F7B00BFBDCB /* FBAuthenticator.swift */; };
-		7E6B1E27241F7F8000BFBDCB /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B1E25241F7F7B00BFBDCB /* Authenticator.swift */; };
+		7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF922421F20F002E9BAC /* Authenticator.swift */; };
+		7E56AF952421F210002E9BAC /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF932421F210002E9BAC /* FBAuthenticator.swift */; };
+		7E56AF982421F245002E9BAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF962421F245002E9BAC /* Authenticator.swift */; };
+		7E56AF992421F245002E9BAC /* FBAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E56AF972421F245002E9BAC /* FBAuthenticator.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
 		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
@@ -83,8 +83,6 @@
 		02D15F2C2F86E0408443805B /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant_QwQ_restaurantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		348FC0930931C3EC7435E434 /* Pods-QwQ-restaurantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurantTests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurantTests/Pods-QwQ-restaurantTests.release.xcconfig"; sourceTree = "<group>"; };
 		58F7EC49F1CBD82D857B321D /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; sourceTree = "<group>"; };
-		5C44C9AB241DCE8E0097C006 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
-		5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		5C44C9B2241DD0390097C006 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
 		5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61326803241F28FF00B770B6 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -100,8 +98,10 @@
 		7E35B6DD241F58E7001C5862 /* FBAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		7E53E2B9241F60A60047C40F /* AuthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
-		7E6B1E24241F7F7B00BFBDCB /* FBAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
-		7E6B1E25241F7F7B00BFBDCB /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		7E56AF922421F20F002E9BAC /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		7E56AF932421F210002E9BAC /* FBAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
+		7E56AF962421F245002E9BAC /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		7E56AF972421F245002E9BAC /* FBAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,10 +201,10 @@
 		5C44C9AA241DCE7B0097C006 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				7E6B1E25241F7F7B00BFBDCB /* Authenticator.swift */,
-				7E6B1E24241F7F7B00BFBDCB /* FBAuthenticator.swift */,
-				5C44C9AB241DCE8E0097C006 /* Authenticator.swift */,
-				5C44C9AD241DCE9F0097C006 /* FBAuthenticator.swift */,
+				7E56AF962421F245002E9BAC /* Authenticator.swift */,
+				7E56AF972421F245002E9BAC /* FBAuthenticator.swift */,
+				7E56AF922421F20F002E9BAC /* Authenticator.swift */,
+				7E56AF932421F210002E9BAC /* FBAuthenticator.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -679,8 +679,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C44C9AE241DCE9F0097C006 /* FBAuthenticator.swift in Sources */,
-				5C44C9AC241DCE8E0097C006 /* Authenticator.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantQueueLogic.swift in Sources */,
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
 				7E35B6D5241F1FFE001C5862 /* UIViewController+dismissKeyboard.swift in Sources */,
@@ -688,7 +686,9 @@
 				6132680F241F292000B770B6 /* AuthDelegate.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
+				7E56AF942421F210002E9BAC /* Authenticator.swift in Sources */,
 				7E53E2BA241F60A60047C40F /* AuthDelegate.swift in Sources */,
+				7E56AF982421F245002E9BAC /* Authenticator.swift in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				7E35B6DB241F58C1001C5862 /* AlertService.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
@@ -698,11 +698,11 @@
 				D4EA8600241B2CC6009EB85B /* RestaurantQueueStorageStub.swift in Sources */,
 				D4EA85F0241B2C65009EB85B /* RestaurantQueue.swift in Sources */,
 				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
-				7E6B1E26241F7F8000BFBDCB /* FBAuthenticator.swift in Sources */,
 				7EE6D023241E393A00C1465E /* EditProfileViewController.swift in Sources */,
 				61326809241F28FF00B770B6 /* AlertService.swift in Sources */,
+				7E56AF952421F210002E9BAC /* FBAuthenticator.swift in Sources */,
+				7E56AF992421F245002E9BAC /* FBAuthenticator.swift in Sources */,
 				7EE6D02F241E3CAA00C1465E /* QueueRecordCell.swift in Sources */,
-				7E6B1E27241F7F8000BFBDCB /* Authenticator.swift in Sources */,
 				7E72B19E241CA52F00C1EE72 /* LoginViewController.swift in Sources */,
 				D4EA8601241B2CC6009EB85B /* RestaurantQueueStorage.swift in Sources */,
 				D4EA8602241B2CC6009EB85B /* QueueStorageSync.swift in Sources */,

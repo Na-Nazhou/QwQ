@@ -12,7 +12,7 @@ class EditQueueViewController: UIViewController {
     @IBOutlet weak var contactTextField: UITextField!
     @IBOutlet weak var groupSizeTextField: UITextField!
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
-    @IBOutlet weak var wheelChairFriendlySwitch: UISwitch!
+    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
 
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
@@ -32,7 +32,7 @@ class EditQueueViewController: UIViewController {
             CustomerQueueLogicManager.shared()
             .editQueueRecord(with: groupSize,
                              babyChairQuantity: babyChairQuantity,
-                             wheelchairFriendly: wheelChairFriendlySwitch.isOn)
+                             wheelchairFriendly: wheelchairFriendlySwitch.isOn)
         }
 
         // Create a new queue record
@@ -40,7 +40,7 @@ class EditQueueViewController: UIViewController {
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
-                     wheelchairFriendly: wheelChairFriendlySwitch.isOn)
+                     wheelchairFriendly: wheelchairFriendlySwitch.isOn)
     }
     
     @IBAction func handleBack(_ sender: Any) {
@@ -59,7 +59,7 @@ class EditQueueViewController: UIViewController {
             contactTextField.text = queueRecord.customer.contact
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
-            wheelChairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+            wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
         } else {
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact

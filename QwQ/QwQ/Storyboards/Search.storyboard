@@ -272,7 +272,7 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                             </textField>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Do-VC-HR2">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Io-co-6Jn">
                                                 <rect key="frame" x="0.0" y="394" width="209" height="83.5"/>
                                             </switch>
                                         </subviews>
@@ -321,7 +321,7 @@
                         <outlet property="contactTextField" destination="Krp-Us-XYE" id="44p-6a-sMs"/>
                         <outlet property="groupSizeTextField" destination="7wh-Bq-fI9" id="1iT-Ib-QdZ"/>
                         <outlet property="nameTextField" destination="1m3-QW-SS6" id="yhy-R2-ow7"/>
-                        <outlet property="wheelchairFriendlySwitch" destination="9Do-VC-HR2" id="XJS-HL-rgC"/>
+                        <outlet property="wheelchairFriendlySwitch" destination="8Io-co-6Jn" id="EfH-Jc-wWp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTU-B3-75P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
