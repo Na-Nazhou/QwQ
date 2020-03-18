@@ -10,7 +10,7 @@ protocol CustomerQueueStorage: QueueStorageSync {
 
     // MARK: - Query
     /// Return the current queue record (if any) of the customer
-    func loadQueueRecord(customer: Customer) -> QueueRecord?
+    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 
-    func loadQueueHistory(customer: Customer) -> [QueueRecord]
+    func loadQueueHistory(customer: Customer, completion: @escaping ([QueueRecord]) -> Void)
 }
