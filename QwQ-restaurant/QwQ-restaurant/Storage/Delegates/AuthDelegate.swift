@@ -5,9 +5,12 @@
 //  Created by Daniel Wong on 15/3/20.
 //
 
+import UIKit;
+
 protocol AuthDelegate: AnyObject {
 
-    func showMessage(title: String, message: String, buttonText: String)
-
     func authCompleted()
+
+    func showMessage(title: String, message: String, buttonText: String, buttonAction: ((UIAlertAction) -> Void)?)
+
 }
