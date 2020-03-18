@@ -16,7 +16,7 @@ class FBProfileStorage: ProfileStorage {
         self.delegate = delegate
     }
 
-    func getCustomerInfo() {
+    func getRestaurantInfo() {
         let db = Firestore.firestore()
         guard let user = Auth.auth().currentUser else {
             return
@@ -37,14 +37,14 @@ class FBProfileStorage: ProfileStorage {
         }
     }
 
-    func updateCustomerInfo(customer: Customer) {
+    func updateRestaurantInfo(restaurant: Restaurant) {
         let db = Firestore.firestore()
         guard let user = Auth.auth().currentUser else {
             return
         }
-        let docRef = db.collection("customers").document(user.uid)
+        let docRef = db.collection("restaurant").document(user.uid)
 
-        docRef.updateData(customer.dictionary) { (error) in
+        docRef.updateData(restaurant.dictionary) { (error) in
             if let error = error {
                 self.delegate?.showMessage(title: "Error:", message: error.localizedDescription, buttonText: "Okay")
                 return

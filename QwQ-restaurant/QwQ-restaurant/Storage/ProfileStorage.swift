@@ -11,8 +11,8 @@ protocol ProfileStorage {
 
     func setDelegate(delegate: ProfileDelegate)
 
-    func getCustomerInfo()
+    func getRestaurantInfo()
 
-    func updateCustomerInfo(customer: Customer)
+    func updateRestaurantInfo(restaurant: Restaurant)
 
 }

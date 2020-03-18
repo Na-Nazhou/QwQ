@@ -7,15 +7,26 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, ProfileDelegate {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var menuTextView: UITextView!
-    
+
+    let profileStorage: ProfileStorage
     var uid: String?
+
+    init() {
+        profileStorage = FBProfileStorage()
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        profileStorage = FBProfileStorage()
+        super.init(coder: coder)
+    }
     
     @IBAction func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -40,6 +51,31 @@ class EditProfileViewController: UIViewController {
     }
 
     @IBAction private func saveButton(_ sender: Any) {
+        let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
+        let trimmedAddress = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedMenu = menuTextView.text
+
+        guard checkIfAllFieldsAreFilled() else {
+            showMessage(title: Constants.missingFieldsTitle,
+                        message: Constants.missingFieldsMessage,
+                        buttonText: Constants.okayTitle)
+            return
+        }
+
+        guard let uid = uid, let name = trimmedName,
+            let address = trimmedAddress, let email = trimmedEmail, let menu = trimmedMenu else {
+                return
+        }
+
+        profileStorage.update(restaurant: Restaurant(uid: uid, name: name, email: email, contact: <#T##String#>, address: address, menu: menu, isOpen: <#T##Bool#>))
+    }
+
+    func getCustomerInfoComplete(customer: Customer) {
+        self.uid = customer.uid
+        self.nameTextField.text = customer.name
+        self.contactTextField.text = customer.contact
+        self.emailTextField.text = customer.email
     }
 
     func updateComplete() {
@@ -64,6 +100,20 @@ class EditProfileViewController: UIViewController {
 
         self.present(message, animated: true)
     }
+
+    private func checkIfAllFieldsAreFilled() -> Bool {
+        if let name = nameTextField.text,
+            let address = addressTextField.text,
+            let email = emailTextField.text,
+            let menu = menuTextView.text {
+            return !name.trimmingCharacters(in: .newlines).isEmpty &&
+                !address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                !menu.isEmpty
+        }
+        return false
+    }
+
 
 }
 
@@ -102,4 +152,5 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         dismiss(animated: true, completion: nil)
         
     }
+    
 }
