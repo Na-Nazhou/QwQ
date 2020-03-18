@@ -186,9 +186,9 @@
                     <navigationItem key="navigationItem" id="B5e-gj-Zbs"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addressLabel" destination="Sx7-31-N9e" id="79K-ZD-Dh2"/>
                         <outlet property="contactLabel" destination="irm-t1-E44" id="wII-yG-Nqa"/>
                         <outlet property="emailLabel" destination="4To-Of-qc3" id="hKi-zM-fv4"/>
-                        <outlet property="locationLabel" destination="Sx7-31-N9e" id="79K-ZD-Dh2"/>
                         <outlet property="menuLabel" destination="m2X-6u-bgO" id="aW8-1q-qE3"/>
                         <outlet property="nameLabel" destination="SaD-11-Aib" id="XS2-Tt-dIO"/>
                         <outlet property="profileImageView" destination="fNg-50-TMe" id="3WG-6n-oX0"/>
@@ -429,7 +429,7 @@
                     <navigationItem key="navigationItem" id="VJU-uy-D91"/>
                     <connections>
                         <outlet property="addressTextField" destination="aK6-5x-eCJ" id="S3g-cB-ZSL"/>
-                        <outlet property="contactLabel" destination="pV2-ga-XR4" id="K68-yJ-kKb"/>
+                        <outlet property="contactTextField" destination="pV2-ga-XR4" id="K68-yJ-kKb"/>
                         <outlet property="emailTextField" destination="GfW-bI-YCB" id="Jc0-OT-idL"/>
                         <outlet property="menuTextView" destination="ejd-lG-K4E" id="MWS-fN-GDu"/>
                         <outlet property="nameTextField" destination="FtT-b8-3JZ" id="bap-7B-SNO"/>
