@@ -25,6 +25,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         })
     }
 
+    func canQueue(for restaurant: Restaurant) -> Bool {
+        restaurant.isOpen && currentQueueRecord == nil
+    }
+
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
             self.queueHistory = $0

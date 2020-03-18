@@ -40,6 +40,11 @@ class SearchViewController: UIViewController, SearchDelegate {
                 RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
             }
         }
+
+        if segue.identifier == Constants.queueSelectedSegue,
+            let restaurant = sender as? Restaurant {
+            RestaurantLogicManager.shared().currentRestaurant = restaurant
+        }
     }
 }
 
@@ -62,7 +67,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         restaurantCell.nameLabel.text = restaurant.name
         restaurantCell.locationLabel.text = restaurant.address
+        // TODO: refactor
+        restaurantCell.queueAction = {
+            if !restaurant.isOpen {
+                self.showMessage(title: "Error", message: "This restaurant is currently not open!",
+                                 buttonText: Constants.okayTitle, buttonAction: nil)
+                return
+            }
 
+            if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
+                self.performSegue(withIdentifier: Constants.queueSelectedSegue, sender: restaurant)
+            } else {
+                self.showMessage(title: "Error", message: "You have an existing queue record",
+                                 buttonText: Constants.okayTitle, buttonAction: nil)
+            }
+        }
         return restaurantCell
     }
     

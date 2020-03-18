@@ -12,7 +12,11 @@ class RestaurantCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    
+
+    @IBAction private func handleQueueTap(sender: Any?) {
+        queueAction?()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

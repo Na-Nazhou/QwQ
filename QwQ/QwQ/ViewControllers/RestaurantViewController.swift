@@ -26,10 +26,21 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
-        if CustomerQueueLogicManager.shared().currentQueueRecord == nil {
+        guard let restaurant = restaurant else {
+            return
+        }
+        // Cannot queue if the restaurant is currently not open
+        if !restaurant.isOpen {
+            showMessage(title: "Error", message: "This restaurant is currently not open!",
+                        buttonText: Constants.okayTitle, buttonAction: nil)
+            return
+        }
+
+        if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
             performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
         } else {
-            showMessage(title: "Error", message: "You have an existing queue record", buttonText: Constants.okayTitle, buttonAction: nil)
+            showMessage(title: "Error", message: "You have an existing queue record",
+                        buttonText: Constants.okayTitle, buttonAction: nil)
         }
     }
 
@@ -48,7 +59,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
 
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {
-        //
+        //TODO
     }
 
 }
