@@ -8,8 +8,6 @@
 import UIKit
 
 class RestaurantCell: UICollectionViewCell {
-    var queueAction: (() -> Void)?
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     

@@ -33,6 +33,6 @@ class BookRecordViewController: UIViewController {
         contactLabel.text = bookRecord?.customer.contact
         groupSizeLabel.text = String(bookRecord?.groupSize ?? 0)
         babyChairQuantityLabel.text = String(bookRecord?.wheelchairFriendly ?? false)
-//        wheelchairFriendlySwitch. = String(bookRecord?.wheelchairFriendly)
+        wheelchairFriendlySwitch.isOn = bookRecord?.wheelchairFriendly ?? false
     }
 }

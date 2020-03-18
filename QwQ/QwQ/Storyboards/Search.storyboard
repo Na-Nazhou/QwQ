@@ -387,8 +387,8 @@ Pancake</string>
                         <outlet property="locationLabel" destination="nad-DH-dLq" id="5Vm-Ys-d70"/>
                         <outlet property="menuLabel" destination="U2x-y3-4IH" id="WHb-fr-ybi"/>
                         <outlet property="nameLabel" destination="vFV-E1-Kcm" id="lfM-tx-Wfh"/>
-                        <segue destination="lJC-Jw-heQ" kind="show" identifier="queueSelected" id="IfD-L4-uNp"/>
-                        <segue destination="GkK-8M-Jcl" kind="show" identifier="bookSelected" id="saL-Vy-eML"/>
+                        <segue destination="lJC-Jw-heQ" kind="show" identifier="editQueueSelected" id="IfD-L4-uNp"/>
+                        <segue destination="GkK-8M-Jcl" kind="show" identifier="editBookSelected" id="saL-Vy-eML"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRg-zD-JSZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

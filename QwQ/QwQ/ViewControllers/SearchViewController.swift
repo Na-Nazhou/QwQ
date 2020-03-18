@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, SearchDelegate, UISearchBarDelegate {
+class SearchViewController: UIViewController, SearchDelegate {
     
     var filtered:[Restaurant] = []
     var searchActive: Bool = false
@@ -29,18 +29,7 @@ class SearchViewController: UIViewController, SearchDelegate, UISearchBarDelegat
 
         RestaurantLogicManager.shared().searchDelegate = self
         RestaurantLogicManager.shared().fetchRestaurants()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if(!(searchBar.text?.isEmpty)!){
-            self.restaurantCollectionView?.reloadData()
-        }
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = searchText.isEmpty ? restaurants : restaurants.filter { (item: Restaurant) -> Bool in
-            return item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-        }
+        filtered = restaurants
     }
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
@@ -57,13 +46,27 @@ class SearchViewController: UIViewController, SearchDelegate, UISearchBarDelegat
     }
 }
 
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !(searchBar.text?.isEmpty)! {
+            self.restaurantCollectionView?.reloadData()
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = searchText.isEmpty ? restaurants : restaurants.filter { (item: Restaurant) -> Bool in
+            item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+    }
+}
+
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
 
-        if (kind == UICollectionView.elementKindSectionHeader) {
-            let headerView:UICollectionReusableView =  collectionView
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView: UICollectionReusableView = collectionView
                 .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                   withReuseIdentifier: Constants.collectionViewHeaderReuseIdentifier,
                                                   for: indexPath)

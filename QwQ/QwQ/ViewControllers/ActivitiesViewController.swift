@@ -53,6 +53,9 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         activityCell.nameLabel.text = queueRecord.restaurant.name
         activityCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
         activityCell.estimatedTimeLabel.text = "00:00"
+        activityCell.editAction = {
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
+        }
         if let image = UIImage(named: "c-book-icon") {
             activityCell.queueBookImageView.image = image
         }
@@ -62,6 +65,41 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.queueSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let queueRecordViewController = segue.destination as? QueueRecordViewController {
+                    queueRecordViewController.queueRecord = queueRecords[row]
+                }
+            }
+        case Constants.bookSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let bookRecordViewController = segue.destination as? BookRecordViewController {
+                    bookRecordViewController.bookRecord = queueRecords[row]
+                }
+            }
+        case Constants.editQueueSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let editQueueViewController = segue.destination as? EditQueueViewController {
+//                    editQueueViewController.queueRecord = queueRecords[row]
+                }
+            }
+        case Constants.editBookSelectedSegue:
+            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
+                let row = indexPaths[0].item
+                if let editBookingViewController = segue.destination as? EditBookingViewController {
+//                    editBookingViewController.bookRecord = queueRecords[row]
+                }
+            }
+        default:
+            return
+        }
     }
 }
 
