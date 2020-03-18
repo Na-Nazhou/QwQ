@@ -37,16 +37,17 @@ class ActivityCell: UICollectionViewCell {
     }
 
     // TODO: take in record protocol instead
-    func setUpView(queueRecord: QueueRecord) {
-        nameLabel.text = queueRecord.restaurant.name
-        descriptionLabel.text = "\(queueRecord.groupSize) pax"
+    func setUpView(record: Record) {
+        nameLabel.text = record.restaurant.name
+        descriptionLabel.text = "\(record.groupSize) pax"
+
         // TODO
         estimatedTimeLabel.text = "00:00"
         if let image = UIImage(named: "c-book-icon") {
             queueBookImageView.image = image
         }
 
-        if queueRecord.isHistoryRecord {
+        if record.isHistoryRecord {
             editButton.isHidden = true
             deleteButton.isHidden = true
         } else {

@@ -16,8 +16,7 @@ class BookRecordViewController: UIViewController {
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var datePicker: UIDatePicker!
 
-    // TODO: fix
-    var bookRecord: QueueRecord?
+    var bookRecord: BookRecord?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,5 +38,7 @@ class BookRecordViewController: UIViewController {
         groupSizeLabel.text = String(bookRecord.groupSize)
         babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
+
+        // TODO
     }
 }

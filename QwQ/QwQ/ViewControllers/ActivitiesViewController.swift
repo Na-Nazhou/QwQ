@@ -12,7 +12,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
-    var queueRecords: [QueueRecord] {
+    var records: [Record] {
         if isActive {
             return activeRecords
         } else {
@@ -22,15 +22,15 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     var isActive = true
 
-    var activeRecords: [QueueRecord] {
-        if let activeRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
-            return [activeRecord]
+    var activeRecords: [Record] {
+        if let activeQueueRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
+            return [activeQueueRecord]
         } else {
             return []
         }
     }
 
-    var historyRecords: [QueueRecord] {
+    var historyRecords: [Record] {
         CustomerQueueLogicManager.shared().queueHistory
     }
     
@@ -81,7 +81,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        queueRecords.count
+        records.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -94,41 +94,54 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
         
-        let queueRecord = queueRecords[indexPath.row]
-        activityCell.setUpView(queueRecord: queueRecord)
-        activityCell.editAction = {
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+        let record = records[indexPath.row]
+        activityCell.setUpView(record: record)
+        if let queueRecord = record as? QueueRecord {
+            activityCell.editAction = {
+                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+            }
+            activityCell.deleteAction = {
+                CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
+            }
         }
-        activityCell.deleteAction = {
-            CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
+
+        if let bookRecord = record as? BookRecord {
+            activityCell.editAction = {
+                self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
+            }
+            activityCell.deleteAction = {
+                // TODO
+            }
         }
-        
+
         return activityCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.queueSelectedSegue, sender: self)
+        let record = records[indexPath.row]
+        if let queueRecord = record as? QueueRecord {
+            performSegue(withIdentifier: Constants.queueSelectedSegue, sender: queueRecord)
+        }
+        if let bookRecord = record as? BookRecord {
+            performSegue(withIdentifier: Constants.bookSelectedSegue, sender: bookRecord)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.queueSelectedSegue:
-            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
-                let row = indexPaths[0].item
-                if let queueRecordViewController = segue.destination as? QueueRecordViewController {
-                    queueRecordViewController.queueRecord = queueRecords[row]
-                }
+            if let queueRecord = sender as? QueueRecord,
+                let queueRecordViewController = segue.destination as? QueueRecordViewController {
+                    queueRecordViewController.queueRecord = queueRecord
             }
         case Constants.bookSelectedSegue:
-            if let indexPaths = self.activitiesCollectionView.indexPathsForSelectedItems {
-                let row = indexPaths[0].item
-                if let bookRecordViewController = segue.destination as? BookRecordViewController {
-                    bookRecordViewController.bookRecord = queueRecords[row]
-                }
+            if let bookRecord = sender as? BookRecord,
+                let bookRecordViewController = segue.destination as? BookRecordViewController {
+                    bookRecordViewController.bookRecord = bookRecord
             }
         case Constants.editBookSelectedSegue:
             // TODO: fix
-            if let bookRecord = sender as? QueueRecord,
+            if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.bookRecord = bookRecord
             }
