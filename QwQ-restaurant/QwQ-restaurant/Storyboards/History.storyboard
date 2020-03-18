@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sQM-wJ-5De">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Regular.ttf">
+            <string>Comfortaa-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="G01-BZ-P98">
+            <objects>
+                <viewController id="sQM-wJ-5De" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N9J-ee-2gG">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="AZv-wO-y61">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="286.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTc-BE-U3l">
+                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mTc-BE-U3l" secondAttribute="height" multiplier="1:1" id="uhy-yk-TRX"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CUSTOMER DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVR-ZZ-zKm">
+                                <rect key="frame" x="231.5" y="40.5" width="371" height="39.5"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="mTc-BE-U3l" firstAttribute="width" secondItem="32F-NL-KNc" secondAttribute="width" multiplier="0.055" id="0vx-Rt-sYu"/>
+                            <constraint firstItem="mTc-BE-U3l" firstAttribute="leading" secondItem="32F-NL-KNc" secondAttribute="leading" constant="20" id="1Bb-o9-T4y"/>
+                            <constraint firstItem="AZv-wO-y61" firstAttribute="top" secondItem="N9J-ee-2gG" secondAttribute="top" id="DE2-Ia-FCt"/>
+                            <constraint firstItem="AZv-wO-y61" firstAttribute="leading" secondItem="32F-NL-KNc" secondAttribute="leading" id="KhY-mL-9mW"/>
+                            <constraint firstItem="32F-NL-KNc" firstAttribute="trailing" secondItem="AZv-wO-y61" secondAttribute="trailing" id="Qua-7T-cJn"/>
+                            <constraint firstItem="mTc-BE-U3l" firstAttribute="top" secondItem="32F-NL-KNc" secondAttribute="top" constant="30" id="XnP-Ic-OHf"/>
+                            <constraint firstItem="SVR-ZZ-zKm" firstAttribute="centerX" secondItem="N9J-ee-2gG" secondAttribute="centerX" id="bNO-Cf-BNd"/>
+                            <constraint firstItem="AZv-wO-y61" firstAttribute="height" secondItem="N9J-ee-2gG" secondAttribute="height" multiplier="0.24" id="rgc-8u-L5J"/>
+                            <constraint firstItem="32F-NL-KNc" firstAttribute="top" secondItem="SVR-ZZ-zKm" secondAttribute="bottom" constant="-80" id="zF8-fD-qEN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="32F-NL-KNc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gsm-mq-UwN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-77" y="84"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+    </resources>
+</document>
