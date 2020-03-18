@@ -9,5 +9,5 @@ protocol AuthDelegate: AnyObject {
 
     func showMessage(title: String, message: String, buttonText: String)
 
-    func authSucceeded()
+    func authCompleted()
 }

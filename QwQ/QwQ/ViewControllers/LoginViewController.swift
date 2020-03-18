@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth.setDelegate(view: self)
+        auth.setDelegate(delegate: self)
         auth.checkIfAlreadyLoggedIn()
 
         self.hideKeyboardWhenTappedAround()
@@ -77,7 +77,7 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
         self.present(message, animated: true)
     }
 
-    func authSucceeded() {
+    func authCompleted() {
         let profile = FBProfileStorage()
         profile.setDelegate(delegate: self)
 
@@ -93,4 +93,6 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
         fatalError("This method is not used here.")
     }
 
+    @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+    }
 }
