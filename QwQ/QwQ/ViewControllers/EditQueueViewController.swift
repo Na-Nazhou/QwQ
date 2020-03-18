@@ -13,8 +13,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     @IBOutlet weak var groupSizeTextField: UITextField!
     @IBOutlet weak var babyChairQuantityTextField: UITextField!
     @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet weak var restaurantNameLabel: UIImageView!
-    
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
     }
@@ -59,12 +59,17 @@ class EditQueueViewController: UIViewController, QueueDelegate {
 
         // Editing an existing queue record
         if let queueRecord = queueRecord {
+            restaurantNameLabel.text = queueRecord.restaurant.name
             nameTextField.text = queueRecord.customer.name
             contactTextField.text = queueRecord.customer.contact
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
         } else { // Auto fill the name and contact
+            guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+                return
+            }
+            restaurantNameLabel.text = restaurant.name
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
         }
