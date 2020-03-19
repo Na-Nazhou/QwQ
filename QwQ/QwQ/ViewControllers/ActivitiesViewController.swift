@@ -12,6 +12,8 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
+    var spinner: UIView?
+
     var records: [Record] {
         if isActive {
             return activeRecords
@@ -68,6 +70,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     func didDeleteQueueRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.queueRecordDeleteSuccessMessage,
@@ -101,6 +104,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
             }
             activityCell.deleteAction = {
+                self.spinner = self.showSpinner(onView: self.view)
                 CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
             }
         }
