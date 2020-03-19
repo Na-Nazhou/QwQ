@@ -88,7 +88,7 @@ class FBQueueStorage: CustomerQueueStorage {
                                 queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
                                 forCustomer: customer,
                                 isRecordToTake: { !$0.isHistoryRecord
-                            }, completion: completion, isOneRecordSufficient: true)
+                                }, completion: completion, isOneRecordSufficient: true)
                         }
                     }
                 }
@@ -114,13 +114,12 @@ class FBQueueStorage: CustomerQueueStorage {
                                 if queueSnapshot!.isEmpty {
                                     return
                                 }
-                                print("\n\tnumber of docs in rest \(document.documentID) is \(queueSnapshot!.count)\n")
                                 self
                                     .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
                                         queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
                                         forCustomer: customer,
                                         isRecordToTake: { $0.isHistoryRecord
-                                    }, completion: completion, isOneRecordSufficient: false)
+                                        }, completion: completion)
                             }
                         }
                     }
@@ -131,20 +130,16 @@ class FBQueueStorage: CustomerQueueStorage {
 
     private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
         queueSnapshot: QuerySnapshot, ofRestaurantId rId: String, forCustomer customer: Customer,
-        isRecordToTake condition: ((QueueRecord) -> Bool), completion: @escaping (QueueRecord?) -> Void, isOneRecordSufficient: Bool) {
+        isRecordToTake condition: ((QueueRecord) -> Bool), completion: @escaping (QueueRecord?) -> Void,
+        isOneRecordSufficient: Bool = false) {
         for document in queueSnapshot.documents {
-            print("wo dao ci yi you")
             guard let qCid = (document.data()["customer"] as? String), qCid == customer.uid else {
                 continue
             }
             guard let rec = QueueRecord(dictionary: document.data(), id: document.documentID, rId: rId) else {
                 continue
             }
-            print("found 1 same customer in queue \(document.documentID)")
-            print("serve time in dict \(document.data()["serveTime"])")
-            print("serveTime \(rec.serveTime)")
-            print("reject time in dict \(document.data()["rejectTime"])")
-            print("rejectTime \(rec.rejectTime)")
+
             if condition(rec) {
                 completion(rec)
 
