@@ -49,37 +49,43 @@
                                 <rect key="frame" x="15" y="260.5" width="384" height="586.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mf7-TT-BhY">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="215"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="261"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3LU-gV-Hu9">
-                                                <rect key="frame" x="0.0" y="0.0" width="258.5" height="215"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="257.5" height="261"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aR-2H-yyy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="258.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="257.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ods-pX-BKa">
-                                                        <rect key="frame" x="0.0" y="46" width="258.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="46" width="257.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-Ld-oHg">
+                                                        <rect key="frame" x="0.0" y="92" width="257.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzY-0Q-jpk">
-                                                        <rect key="frame" x="0.0" y="92" width="258.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="138" width="257.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBn-yh-95p">
-                                                        <rect key="frame" x="0.0" y="138" width="258.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="184" width="257.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIr-df-yoC">
-                                                        <rect key="frame" x="0.0" y="184" width="258.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="230" width="257.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -87,47 +93,53 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-xV-sut">
-                                                <rect key="frame" x="278.5" y="0.0" width="105.5" height="215"/>
+                                                <rect key="frame" x="277.5" y="0.0" width="106.5" height="261"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okI-rC-P4j">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105.5" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NH7-rG-wH6">
-                                                        <rect key="frame" x="0.0" y="46" width="105.5" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="46" width="106.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="let-Bm-Cpo">
+                                                        <rect key="frame" x="0.0" y="92" width="106.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlQ-OK-Hup">
-                                                        <rect key="frame" x="0.0" y="92" width="105.5" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="138" width="106.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w27-ms-Qug">
-                                                        <rect key="frame" x="0.0" y="138" width="105.5" height="31"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="184" width="106.5" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7p-xA-heJ">
-                                                        <rect key="frame" x="0.0" y="184" width="107.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="230" width="108.5" height="31"/>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5G-kZ-k5x">
-                                        <rect key="frame" x="0.0" y="230" width="384" height="23"/>
+                                        <rect key="frame" x="0.0" y="276" width="384" height="23"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FGR-NK-EhD">
-                                        <rect key="frame" x="0.0" y="268" width="384" height="318.5"/>
+                                        <rect key="frame" x="0.0" y="314" width="384" height="272.5"/>
                                     </datePicker>
                                 </subviews>
                             </stackView>
@@ -166,6 +178,7 @@
                         <outlet property="contactLabel" destination="NH7-rG-wH6" id="w8k-6J-nVk"/>
                         <outlet property="datePicker" destination="FGR-NK-EhD" id="Kih-mv-pZC"/>
                         <outlet property="groupSizeLabel" destination="SlQ-OK-Hup" id="eJN-jf-QJb"/>
+                        <outlet property="locationLabel" destination="let-Bm-Cpo" id="BkN-vO-SwE"/>
                         <outlet property="nameLabel" destination="okI-rC-P4j" id="SXI-5m-e0d"/>
                         <outlet property="profileImageView" destination="fDC-nP-cUE" id="bnq-Hx-ggr"/>
                         <outlet property="restaurantNameLabel" destination="YEg-We-lhr" id="cvj-td-BoB"/>

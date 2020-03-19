@@ -23,8 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         UITabBar.appearance().barTintColor = Constants.barTintColor
         UITabBar.appearance().tintColor = Constants.tintColor
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Constants.tabBarFont!], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Constants.tabBarFont!], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Constants.tabBarFont!],
+                                                         for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: Constants.tabBarFont!],
+                                                         for: .selected)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

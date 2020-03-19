@@ -64,13 +64,13 @@
                                         <rect key="frame" x="15" y="15" width="804" height="752"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Xhx-o1-16a">
-                                                <rect key="frame" x="0.0" y="0.0" width="804" height="235"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="804" height="310"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xs3-RK-7TF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="561.5" height="235"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="367" height="310"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-Mg-opb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="561.5" height="35"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="367" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -79,7 +79,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agc-bh-mMa">
-                                                                <rect key="frame" x="0.0" y="50" width="561.5" height="35"/>
+                                                                <rect key="frame" x="0.0" y="65" width="367" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lA-Wg-AaK">
-                                                                <rect key="frame" x="0.0" y="100" width="561.5" height="35"/>
+                                                                <rect key="frame" x="0.0" y="130" width="367" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baby Chair Quantity" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGM-Hy-4Z6">
-                                                                <rect key="frame" x="0.0" y="150" width="561.5" height="35"/>
+                                                                <rect key="frame" x="0.0" y="195" width="367" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wheelchair Friendly" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-v9-ITl">
-                                                                <rect key="frame" x="0.0" y="200" width="561.5" height="35"/>
+                                                                <rect key="frame" x="0.0" y="260" width="367" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -117,53 +117,63 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VyC-m9-hW3">
-                                                        <rect key="frame" x="581.5" y="0.0" width="222.5" height="235"/>
+                                                        <rect key="frame" x="387" y="0.0" width="417" height="310"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pF-OP-fhU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="222.5" height="35"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="417" height="50"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1t-JD-k3u">
-                                                                <rect key="frame" x="0.0" y="50" width="222.5" height="35"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="65" width="417" height="50"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEM-qQ-X16">
-                                                                <rect key="frame" x="0.0" y="100" width="222.5" height="35"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="130" width="417" height="50"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRN-iu-bho">
-                                                                <rect key="frame" x="0.0" y="150" width="222.5" height="35"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="195" width="417" height="50"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                 </variation>
                                                             </label>
-                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrO-uP-Xtq">
-                                                                <rect key="frame" x="0.0" y="200" width="224.5" height="35"/>
-                                                            </switch>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgy-vo-Spm">
+                                                                <rect key="frame" x="0.0" y="260" width="417" height="50"/>
+                                                                <subviews>
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VrO-uP-Xtq">
+                                                                        <rect key="frame" x="180" y="8" width="51" height="31"/>
+                                                                    </switch>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="VrO-uP-Xtq" firstAttribute="top" secondItem="cgy-vo-Spm" secondAttribute="top" constant="8" id="Mmz-nX-nUx"/>
+                                                                    <constraint firstItem="VrO-uP-Xtq" firstAttribute="leading" secondItem="cgy-vo-Spm" secondAttribute="leading" constant="180" id="gZD-Xb-GZe"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDK-Gc-bKt">
-                                                <rect key="frame" x="0.0" y="250" width="804" height="35"/>
+                                                <rect key="frame" x="0.0" y="325" width="804" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -172,7 +182,7 @@
                                                 </variation>
                                             </label>
                                             <datePicker contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Egu-Av-Wkh">
-                                                <rect key="frame" x="0.0" y="300" width="804" height="452"/>
+                                                <rect key="frame" x="0.0" y="375" width="804" height="377"/>
                                             </datePicker>
                                         </subviews>
                                     </stackView>
@@ -214,6 +224,7 @@
                             <constraint firstItem="RbM-Cd-tXc" firstAttribute="trailing" secondItem="jdd-0L-3dj" secondAttribute="trailing" id="LiB-rA-9t3"/>
                             <constraint firstItem="h2B-UN-zEU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.0551559" id="OIm-bH-eXI"/>
                             <constraint firstItem="h2B-UN-zEU" firstAttribute="leading" secondItem="jdd-0L-3dj" secondAttribute="leading" constant="20" id="PHX-Dt-GEL"/>
+                            <constraint firstItem="6pF-OP-fhU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.5" id="Q3Y-ZN-AWe"/>
                             <constraint firstItem="v3N-wr-E7l" firstAttribute="height" secondItem="jdd-0L-3dj" secondAttribute="height" multiplier="0.24" id="Rw8-pP-HOb"/>
                             <constraint firstItem="EP1-x7-OhS" firstAttribute="bottom" secondItem="jdd-0L-3dj" secondAttribute="top" constant="80" id="SMK-AC-ZxQ"/>
                             <constraint firstItem="h2B-UN-zEU" firstAttribute="top" secondItem="jdd-0L-3dj" secondAttribute="top" constant="30" id="V3E-aX-5qu"/>

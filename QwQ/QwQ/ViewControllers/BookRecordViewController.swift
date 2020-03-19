@@ -11,6 +11,7 @@ class BookRecordViewController: UIViewController {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var groupSizeLabel: UILabel!
+    @IBOutlet private var locationLabel: UILabel!
     @IBOutlet private var babyChairQuantityLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!

@@ -29,6 +29,7 @@
 		6148055C2422A388003D6D44 /* BookRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148055B2422A388003D6D44 /* BookRecord.swift */; };
 		6148055E2422A3B7003D6D44 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148055D2422A3B7003D6D44 /* Record.swift */; };
 		688B3DA4658AA94AF24E5878 /* Pods_QwQ_restaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA10592489DDE11A8686C67 /* Pods_QwQ_restaurantTests.framework */; };
+		7E11380024234828006984BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FF24234828006984BB /* SegmentedControl.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
@@ -106,6 +107,7 @@
 		614805582422A1EE003D6D44 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		6148055B2422A388003D6D44 /* BookRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecord.swift; sourceTree = "<group>"; };
 		6148055D2422A3B7003D6D44 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7E35B6DC241F58E7001C5862 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		7E35B6DD241F58E7001C5862 /* FBAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */,
 				7E53E2C1241F74990047C40F /* ProfileImageView.swift */,
+				7E1137FF24234828006984BB /* SegmentedControl.swift */,
 				7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */,
 			);
 			path = Views;
@@ -698,6 +701,7 @@
 				614805592422A1EF003D6D44 /* FBAuthenticator.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
+				7E11380024234828006984BB /* SegmentedControl.swift in Sources */,
 				5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */,
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
