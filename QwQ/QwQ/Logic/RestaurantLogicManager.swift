@@ -29,22 +29,24 @@ class RestaurantLogicManager: RestaurantLogic {
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
-        if let currentRestaurant = self.currentRestaurant,
-            restaurant == currentRestaurant {
-            self.currentRestaurant?.isQueueOpen = true
-            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
-        }
+        assert(restaurant.isQueueOpen,
+               "Updated restaurant (passed in as argument) should be open.")
+        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
+               "current restaurant should be the updated restaurant.")
+        
+        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
 
         searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: true)
 
     }
 
     func restaurantDidCloseQueue(restaurant: Restaurant) {
-        if let currentRestaurant = self.currentRestaurant,
-            restaurant == currentRestaurant {
-            self.currentRestaurant?.isQueueOpen = false
-            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
-        }
+        assert(!restaurant.isQueueOpen,
+               "Updated restaurant (passed in as argument) should be closed.")
+        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
+                      "current restaurant should be the updated restaurant.")
+        
+        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
 
         searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: false)
     }
