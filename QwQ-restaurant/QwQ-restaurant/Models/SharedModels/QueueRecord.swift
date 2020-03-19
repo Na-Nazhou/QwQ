@@ -1,7 +1,7 @@
 import Foundation
 
-struct QueueRecord: Hashable {
-    let uid: String
+struct QueueRecord: Hashable, Record {
+    let id: String
     let restaurant: Restaurant
     let customer: Customer
 
@@ -12,6 +12,11 @@ struct QueueRecord: Hashable {
     let startTime: Date
     var admitTime: Date?
     var serveTime: Date?
+    var rejectTime: Date?
+
+    var isHistoryRecord: Bool {
+        serveTime != nil || rejectTime != nil
+    }
 
     static func == (lhs: QueueRecord, rhs: QueueRecord) -> Bool {
         return lhs.restaurant == rhs.restaurant

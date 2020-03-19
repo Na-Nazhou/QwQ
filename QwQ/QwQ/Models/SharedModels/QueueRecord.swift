@@ -1,6 +1,6 @@
 import Foundation
 
-struct QueueRecord {
+struct QueueRecord: Record {
     var id = "0"
     let restaurant: Restaurant
     let customer: Customer
@@ -11,6 +11,7 @@ struct QueueRecord {
 
     let startTime: Date
     var admitTime: Date?
+    var serveTime: Date?
     var rejectTime: Date?
 
     var startDate: String {
@@ -20,6 +21,6 @@ struct QueueRecord {
     }
 
     var isHistoryRecord: Bool {
-        admitTime != nil || rejectTime != nil
+        serveTime != nil || rejectTime != nil
     }
 }

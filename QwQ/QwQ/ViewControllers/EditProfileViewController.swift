@@ -48,10 +48,11 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
 
     func updateComplete() {
-        showMessage(title: Constants.successfulUpdateTitle,
-                    message: Constants.successfulUpdateMessage,
+        showMessage(title: Constants.successTitle,
+                    message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
-                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
+                    buttonAction: { (_: UIAlertAction!) -> Void in
+                        self.navigationController?.popViewController(animated: true) })
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -59,7 +60,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
     
     private func setUpProfileImageView(uid: String) {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
         profileStorage.getCustomerProfilePic(uid: uid, placeholder: profileImageView)
@@ -77,8 +79,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 
@@ -125,12 +126,12 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) { (action) in
-            self.showImagePickerController(sourceType: .photoLibrary)
-        }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) { (action) in
-            self.showImagePickerController(sourceType: .camera)
-        }
+        let photoLibraryAction = UIAlertAction(
+            title: Constants.chooseFromPhotoLibraryTitle, style: .default
+            ) { _ in self.showImagePickerController(sourceType: .photoLibrary) }
+        let cameraAction = UIAlertAction(
+            title: Constants.chooseFromCameraTitle, style: .default
+            ) { _ in self.showImagePickerController(sourceType: .camera) }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
         
         AlertService.showAlert(style: .actionSheet,
@@ -148,7 +149,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey:Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
             self.image = editedImage

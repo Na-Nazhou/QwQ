@@ -10,13 +10,13 @@ import UIKit
 
 class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var menuLabel: UILabel!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var addressLabel: UILabel!
+    @IBOutlet private var menuLabel: UILabel!
 
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet private var profileImageView: UIImageView!
 
     let auth: Authenticator
     let profileStorage: ProfileStorage
@@ -42,10 +42,12 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         profileStorage.getRestaurantInfo()
     }
 
-    @IBAction func logoutButton(_ sender: Any) {
+    @IBAction private func logoutButton(_ sender: Any) {
         auth.logout()
     }
 

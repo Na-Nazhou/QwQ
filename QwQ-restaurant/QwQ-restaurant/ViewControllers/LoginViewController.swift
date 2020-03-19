@@ -12,8 +12,8 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     let auth: Authenticator
     
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var passwordTextField: UITextField!
     
     init() {
         self.auth = FBAuthenticator()
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, AuthDelegate {
         self.hideKeyboardWhenTappedAround()
     }
     
-    @IBAction func loginButton(_ sender: Any) {
+    @IBAction private func loginButton(_ sender: Any) {
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -46,24 +46,21 @@ class LoginViewController: UIViewController, AuthDelegate {
         guard !email.isEmpty else {
             showMessage(title: Constants.missingEmailTitle,
                         message: Constants.missingEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
         
         guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
         
         guard !password.isEmpty else {
             showMessage(title: Constants.missingPasswordTitle,
                         message: Constants.missingPasswordMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
         

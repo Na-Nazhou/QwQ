@@ -23,9 +23,13 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
             let groupSizeText = groupSizeTextField.text,
             let babyChairQueantityText = babyChairQuantityTextField.text,
-            let groupSize = Int(groupSizeText),
-            let babyChairQuantity = Int(babyChairQueantityText) else {
-            return
+            let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
+            let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
+                showMessage(title: Constants.errorTitle,
+                            message: "Invalid data",
+                            buttonText: Constants.okayTitle,
+                            buttonAction: nil)
+                return
         }
 
         // Edit existing queue record
@@ -69,36 +73,48 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             restaurantNameLabel.text = queueRecord.restaurant.name
             nameTextField.text = queueRecord.customer.name
             contactTextField.text = queueRecord.customer.contact
+
             groupSizeTextField.text = String(queueRecord.groupSize)
             babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
-        } else { // Auto fill the name and contact
+        } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return
             }
             restaurantNameLabel.text = restaurant.name
+
+            // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
         }
+
+        // Disable name and contact fields
+        nameTextField.isEnabled = false
+        contactTextField.isEnabled = false
+    }
+
+    // TODO: go to activities view controller instead
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     func didAddQueueRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successQueueRecordCreationMessage,
+            title: Constants.successTitle,
+            message: Constants.queueRecordCreateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.goBack()
             })
     }
 
     func didUpdateQueueRecord() {
         showMessage(
-            title: Constants.successfulUpdateTitle,
-            message: Constants.successQueueRecordUpdateMessage,
+            title: Constants.successTitle,
+            message: Constants.queueRecordUpdateSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.goBack()
             })
     }
 }

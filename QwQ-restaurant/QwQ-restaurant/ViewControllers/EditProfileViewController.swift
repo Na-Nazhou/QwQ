@@ -58,7 +58,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         showMessage(title: Constants.successfulUpdateTitle,
                     message: Constants.successfulUpdateMessage,
                     buttonText: Constants.okayTitle,
-                    buttonAction: { (_: UIAlertAction!) -> Void in self.navigationController?.popViewController(animated: true)})
+                    buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -104,13 +104,9 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                         buttonAction: nil)
             return
         }
-        profileStorage.updateRestaurantInfo(restaurant: Restaurant(uid: uid,
-                                                     name: name,
-                                                     email: email,
-                                                     contact: contact,
-                                                     address: address,
-                                                     menu: menu,
-                                                     isOpen: isOpen))
+        profileStorage.updateRestaurantInfo(restaurant:
+            Restaurant(uid: uid, name: name, email: email, contact: contact,
+                       address: address, menu: menu, isOpen: isOpen))
 
         if let image = image {
             profileStorage.updateRestaurantProfilePic(uid: uid, image: image)
@@ -118,7 +114,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
 
     private func setUpProfileImageView(uid: String) {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleProfileTap(_:)))
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
         profileStorage.getRestaurantProfilePic(uid: uid, placeholder: profileImageView)
@@ -143,12 +140,14 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerControllerActionSheet() {
-        let photoLibraryAction = UIAlertAction(title: Constants.chooseFromPhotoLibraryTitle, style: .default) {
-            (action) in
+        let photoLibraryAction = UIAlertAction(
+        title: Constants.chooseFromPhotoLibraryTitle, style: .default
+        ) { _ in
             self.showImagePickerController(sourceType: .photoLibrary)
         }
-        let cameraAction = UIAlertAction(title: Constants.chooseFromCameraTitle, style: .default) {
-            (action) in
+        let cameraAction = UIAlertAction(
+        title: Constants.chooseFromCameraTitle, style: .default
+        ) { _ in
             self.showImagePickerController(sourceType: .camera)
         }
         let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .cancel, handler: nil)
@@ -167,7 +166,8 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.image = editedImage
             image = editedImage

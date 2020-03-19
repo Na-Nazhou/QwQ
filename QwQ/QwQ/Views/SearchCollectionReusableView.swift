@@ -8,6 +8,6 @@
 import UIKit
 
 class SearchCollectionReusableView: UICollectionReusableView {
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private var searchBar: UISearchBar!
     
 }

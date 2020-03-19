@@ -53,11 +53,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     admitTime: nil)
 
         queueStorage.addQueueRecord(record: newRecord,
-                                    completion: {
-                                        newRecord.id = $0
-                                        self.currentQueueRecord = newRecord
-                                        self.queueDelegate?.didAddQueueRecord()
+                                    completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
+
         })
+    }
+
+    private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
+        newRecord.id = id
+        self.currentQueueRecord = newRecord
+        self.queueDelegate?.didAddQueueRecord()
     }
 
     func editQueueRecord(with groupSize: Int,
@@ -80,23 +84,28 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                               admitTime: nil)
 
         queueStorage.updateQueueRecord(old: old, new: new,
-                                       completion: {
-                                        new.id = old.id
-                                        self.currentQueueRecord = new
-                                        self.queueDelegate?.didUpdateQueueRecord()
-        })
+                                       completion: { self.didUpdateQueueRecord(old: old, new: &new) })
     }
 
-    func deleteQueueRecord() {
-        guard let record = currentQueueRecord else {
+    private func didUpdateQueueRecord(old: QueueRecord, new: inout QueueRecord) {
+        new.id = old.id
+        self.currentQueueRecord = new
+        self.queueDelegate?.didUpdateQueueRecord()
+    }
+
+    func deleteQueueRecord(_ queueRecord: QueueRecord) {
+        guard let record = currentQueueRecord,
+            queueRecord.id == record.id else {
             return
         }
 
         queueStorage.deleteQueueRecord(record: record,
-                                       completion: {
-                                        self.currentQueueRecord = nil
-                                        self.activitiesDelegate?.didDeleteQueueRecord()
-        })
+                                       completion: { self.didDeleteQueueRecord() })
+    }
+
+    private func didDeleteQueueRecord() {
+        currentQueueRecord = nil
+        activitiesDelegate?.didDeleteQueueRecord()
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {
@@ -106,7 +115,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         // Notify customer
 
-        currentQueueRecord = nil
+        currentQueueRecord?.admitTime = record.admitTime
     }
 
     func restaurantDidRejectCustomer(record: QueueRecord) {
@@ -116,7 +125,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         // Notify customer
 
-        currentQueueRecord = nil
+        currentQueueRecord?.rejectTime = record.rejectTime
     }
 }
 

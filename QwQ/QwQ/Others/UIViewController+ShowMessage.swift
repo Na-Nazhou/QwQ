@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     func showMessage(title: String, message: String, buttonText: String,
-                     buttonAction: ((UIAlertAction) -> Void)?) {
+                     buttonAction: ((UIAlertAction) -> Void)? = nil) {
         let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: buttonText, style: .default, handler: buttonAction)
