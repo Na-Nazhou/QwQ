@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController, ProfileDelegate {
+class EditProfileViewController: UIViewController {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
@@ -17,33 +17,24 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
     @IBOutlet private var profileImageView: UIImageView!
 
-    let profileStorage: ProfileStorage
+    typealias Profile = FBProfileStorage
+
     var uid: String?
     var isRestaurantOpen: Bool?
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
     var image: UIImage?
 
-    init() {
-        profileStorage = FBProfileStorage()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        profileStorage = FBProfileStorage()
-        super.init(coder: coder)
-    }
+    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        profileStorage.setDelegate(delegate: self)
-        profileStorage.getRestaurantInfo()
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 
+<<<<<<< HEAD
     func getRestaurantInfoComplete(restaurant: Restaurant) {
         self.uid = restaurant.uid
         self.nameTextField.text = restaurant.name
@@ -63,14 +54,16 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                     message: Constants.successfulUpdateMessage,
                     buttonText: Constants.okayTitle,
                     buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
+=======
+    override func viewDidAppear(_ animated: Bool) {
+        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                  errorHandler: handleError(error:))
+        spinner = showSpinner(onView: view)
+>>>>>>> master
     }
 
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
-    }
-
-    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
-        showImagePickerControllerActionSheet()
     }
 
     @IBAction private func saveButton(_ sender: Any) {
@@ -109,15 +102,45 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                         buttonAction: nil)
             return
         }
-        profileStorage.updateRestaurantInfo(restaurant:
-            Restaurant(uid: uid, name: name, email: email, contact: contact,
-                       address: address, menu: menu,
-                       isRestaurantOpen: isRestaurantOpen,
-                       queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime))
+
+        let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
+                                    address: address, menu: menu, isOpen: isOpen)
+
+        spinner = showSpinner(onView: view)
+
+        Profile.updateRestaurantInfo(restaurant: restaurant,
+                                     completion: updateComplete,
+                                     errorHandler: handleError(error:))
 
         if let image = image {
-            profileStorage.updateRestaurantProfilePic(uid: uid, image: image)
+            Profile.updateRestaurantProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
+    }
+
+    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
+        showImagePickerControllerActionSheet()
+    }
+
+    private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        self.uid = restaurant.uid
+        self.nameTextField.text = restaurant.name
+        self.emailTextField.text = restaurant.email
+        self.contactTextField.text = restaurant.contact
+        self.addressTextField.text = restaurant.address
+        self.menuTextView.text = restaurant.menu
+        self.isOpen = restaurant.isOpen
+
+        setUpProfileImageView(uid: restaurant.uid)
+
+        removeSpinner(spinner)
+    }
+
+    private func updateComplete() {
+        removeSpinner(spinner)
+        showMessage(title: Constants.successfulUpdateTitle,
+                    message: Constants.successfulUpdateMessage,
+                    buttonText: Constants.okayTitle,
+                    buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
     }
 
     private func setUpProfileImageView(uid: String) {
@@ -125,7 +148,13 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
                                                                  action: #selector(self.handleProfileTap(_:)))
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
-        profileStorage.getRestaurantProfilePic(uid: uid, placeholder: profileImageView)
+
+        Profile.getRestaurantProfilePic(uid: uid, placeholder: profileImageView)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {

@@ -12,8 +12,8 @@ class FBRestaurantInfoStorage: RestaurantInfoStorage {
     static func getRestaurantFromUID(uid: String,
                                      completion: @escaping (Restaurant) -> Void,
                                      errorHandler: ((Error) -> Void)?) {
-        let db = Firestore.firestore()
 
+        let db = Firestore.firestore()
         let docRef = db.collection(Constants.restaurantsDirectory).document(uid)
 
         docRef.getDocument { (document, error) in

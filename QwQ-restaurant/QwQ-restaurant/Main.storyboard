@@ -29,7 +29,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-k1-x3V">
                                         <rect key="frame" x="128.5" y="519.5" width="410" height="282"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test@example.com" placeholder="Email" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qMP-nu-B0d">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hot@tomato.com" placeholder="Email" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qMP-nu-B0d">
                                                 <rect key="frame" x="0.0" y="0.0" width="410" height="53.5"/>
                                                 <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -403,6 +403,6 @@
         <image name="r-logo" width="487" height="558"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y5a-2U-37J"/>
+        <segue reference="23e-ha-7lb"/>
     </inferredMetricsTieBreakers>
 </document>

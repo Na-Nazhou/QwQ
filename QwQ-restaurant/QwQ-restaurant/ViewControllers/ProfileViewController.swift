@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
+class ProfileViewController: UIViewController {
 
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
@@ -18,55 +18,39 @@ class ProfileViewController: UIViewController, AuthDelegate, ProfileDelegate {
 
     @IBOutlet private var profileImageView: UIImageView!
 
-    let auth: Authenticator
-    let profileStorage: ProfileStorage
+    typealias Profile = FBProfileStorage
+    typealias Auth = FBAuthenticator
 
-    init() {
-        self.auth = FBAuthenticator()
-        self.profileStorage = FBProfileStorage()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        self.profileStorage = FBProfileStorage()
-        super.init(coder: coder)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        auth.setDelegate(delegate: self)
-
-        profileStorage.setDelegate(delegate: self)
-        profileStorage.getRestaurantInfo()
-    }
+    var spinner: UIView?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        profileStorage.getRestaurantInfo()
+        spinner = showSpinner(onView: view)
+        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                  errorHandler: handleError(error:))
     }
 
     @IBAction private func logoutButton(_ sender: Any) {
-        auth.logout()
+        Auth.logout(completion: logoutComplete, errorHandler: handleError(error:))
     }
 
-    func authCompleted() {
-        performSegue(withIdentifier: Constants.logoutSegue, sender: self)
-    }
-
-    func getRestaurantInfoComplete(restaurant: Restaurant) {
+    private func getRestaurantInfoComplete(restaurant: Restaurant) {
         self.nameLabel.text = restaurant.name
         self.emailLabel.text = restaurant.email
         self.contactLabel.text = restaurant.contact
         self.addressLabel.text = restaurant.address
         self.menuLabel.text = restaurant.menu
 
-        profileStorage.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
+        Profile.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
     }
 
-    func updateComplete() {
-        fatalError("This method is not implemeneted here.")
+    private func logoutComplete() {
+        performSegue(withIdentifier: Constants.logoutSegue, sender: self)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 
 }
