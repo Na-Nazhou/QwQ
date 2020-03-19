@@ -19,6 +19,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     var uid: String?
     var image: UIImage?
 
+    var spinner: UIView?
+
     init() {
         profileStorage = FBProfileStorage()
         super.init(nibName: nil, bundle: nil)
@@ -48,6 +50,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     }
 
     func updateComplete() {
+        removeSpinner(spinner)
         showMessage(title: Constants.successTitle,
                     message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
@@ -104,6 +107,7 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
             return
         }
 
+        spinner = showSpinner(onView: view)
         profileStorage.updateCustomerInfo(customer: Customer(uid: uid, name: name, email: email, contact: contact))
 
         if let image = image {

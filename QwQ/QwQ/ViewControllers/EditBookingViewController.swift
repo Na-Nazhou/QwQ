@@ -17,7 +17,8 @@ class EditBookingViewController: UIViewController {
     @IBOutlet private var restaurantNameLabel: UILabel!
     
     var bookRecord: BookRecord?
-    
+    var spinner: UIView?
+
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -25,22 +26,24 @@ class EditBookingViewController: UIViewController {
     // TODO
     @IBAction private func handleSubmit(_ sender: Any) {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
-            let groupSizeText = groupSizeTextField.text,
-            let babyChairQueantityText = babyChairQuantityTextField.text,
-            let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
-            let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
-                showMessage(title: Constants.errorTitle,
-                            message: "Invalid data",
-                            buttonText: Constants.okayTitle,
-                            buttonAction: nil)
-                return
-        }
+                let groupSizeText = groupSizeTextField.text,
+                let babyChairQueantityText = babyChairQuantityTextField.text,
+                let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
+                let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
+                    showMessage(title: Constants.errorTitle,
+                                message: "Invalid data",
+                                buttonText: Constants.okayTitle,
+                                buttonAction: nil)
+                    return
+            }
+
+//        spinner = showSpinner(onView: view)
         
         // Edit existing book record
         if bookRecord != nil {
             // TODO
         }
-        
+
         // Create a new book record
         // TODO
     }
@@ -92,6 +95,7 @@ class EditBookingViewController: UIViewController {
     }
     
     func didAddBookRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.bookRecordCreateSuccessMessage,
@@ -103,6 +107,7 @@ class EditBookingViewController: UIViewController {
     }
     
     func didUpdateBookRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.bookRecordUpdateSuccessMessage,
