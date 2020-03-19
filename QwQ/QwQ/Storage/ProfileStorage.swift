@@ -20,3 +20,13 @@ protocol ProfileStorage {
     func updateCustomerProfilePic(uid: String, image: UIImage)
 
 }
+
+protocol ProfileDelegate: AnyObject {
+
+    func getCustomerInfoComplete(customer: Customer)
+
+    func updateComplete()
+
+    func showMessage(title: String, message: String, buttonText: String, buttonAction: ((UIAlertAction) -> Void)?)
+
+}
