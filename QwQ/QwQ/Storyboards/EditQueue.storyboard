@@ -15,6 +15,7 @@
         <!--Edit Queue View Controller-->
         <scene sceneID="U7h-Lm-hjG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKE-e7-kRL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="XAb-Di-Xtr" customClass="EditQueueViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CkI-Xb-6oY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -142,9 +143,19 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                             </textField>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45d-OD-ohS">
-                                                <rect key="frame" x="0.0" y="421" width="209" height="90.5"/>
-                                            </switch>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APY-GF-COS">
+                                                <rect key="frame" x="0.0" y="421" width="207" height="90.5"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45d-OD-ohS">
+                                                        <rect key="frame" x="70" y="30" width="51" height="31"/>
+                                                    </switch>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="45d-OD-ohS" firstAttribute="leading" secondItem="APY-GF-COS" secondAttribute="leading" constant="70" id="Nzc-gn-cAz"/>
+                                                    <constraint firstItem="45d-OD-ohS" firstAttribute="top" secondItem="APY-GF-COS" secondAttribute="top" constant="30" id="pgK-wQ-pWQ"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -203,7 +214,6 @@
                         <outlet property="wheelchairFriendlySwitch" destination="45d-OD-ohS" id="295-us-U5r"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xKE-e7-kRL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4086" y="686"/>
         </scene>

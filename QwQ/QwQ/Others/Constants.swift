@@ -53,6 +53,10 @@ struct Constants {
     static let bookRecordUpdateSuccessMessage = "This book record has been updated."
     static let bookRecordDeleteSuccessMessage = "This book record has been deleted."
     
+    // MARK: Record settings
+    static let defaultWheelchairFriendly = false
+    static let defaultBabyChairQuantity = 0
+    
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
@@ -75,4 +79,22 @@ struct Constants {
                                                       bottom: 20.0,
                                                       right: 30.0)
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
+    
+    // MARK: Popover content settings
+    static let popoverContentControllerIdentifier = "PopoverContentController"
+    
+    // MARK: Segmented control settings
+    static let segmentedControlTitles = ["Active", "History"]
+    static let segmentedControlDefaultSelectedIndex = 0
+    static let segmentedControlSelectedLabelColor = UIColor.black
+    static let segmentedControlUnselectedLabelColor = UIColor.white
+    static let segmentedControlThumbColor = UIColor.white
+    static let segmentedControlBorderColor = UIColor.white
+    static let segmentedControlFont = UIFont(name: "Comfortaa-Regular", size: 12)
+    static let segmentedControlLayerBorderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
+    static let segmentedControlLayerBorderWidth = CGFloat(2)
+    static let segmentedControlLabelFrame = CGRect(x: 0, y: 0, width: 70, height: 40)
+    static let segmentedControlLabelFont = UIFont(name: "Comfortaa-Regular", size: 15)
+    static let segmentedControlAnimationDuration = 0.5
+    static let segmentedControlAnimationDelay = 0.0
 }

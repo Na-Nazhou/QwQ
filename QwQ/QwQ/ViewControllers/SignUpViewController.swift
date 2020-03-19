@@ -40,7 +40,6 @@ class SignUpViewController: UIViewController, AuthDelegate {
     }
     
     @IBAction private func submitButton(_ sender: Any) {
-
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)

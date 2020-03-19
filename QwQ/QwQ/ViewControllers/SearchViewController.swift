@@ -13,10 +13,32 @@ class SearchViewController: UIViewController, SearchDelegate {
     var searchActive: Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet private var restaurantCollectionView: UICollectionView!
-    
     var restaurants: [Restaurant] {
         RestaurantLogicManager.shared().restaurants
+    }
+    
+    @IBOutlet private var restaurantCollectionView: UICollectionView!
+    
+    @IBAction private func handleSort(_ sender: Any) {
+        // Get the button frame
+        let button = sender as? UIButton
+        let buttonFrame = button?.frame ?? CGRect.zero
+        
+        // Configure the presentation controller
+        let popoverContentController = self.storyboard?
+            .instantiateViewController(withIdentifier: Constants.popoverContentControllerIdentifier)
+            as? PopoverContentController
+        popoverContentController?.modalPresentationStyle = .popover
+        
+        if let popoverPresentationController = popoverContentController?.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .up
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect = buttonFrame
+            popoverPresentationController.delegate = self
+            if let popoverController = popoverContentController {
+                present(popoverController, animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -26,12 +48,12 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
-
+        
         RestaurantLogicManager.shared().searchDelegate = self
         RestaurantLogicManager.shared().fetchRestaurants()
         filtered = restaurants
     }
-
+    
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
         restaurantCollectionView.reloadData()
     }
@@ -43,11 +65,27 @@ class SearchViewController: UIViewController, SearchDelegate {
                 RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
             }
         }
-
+        
         if segue.identifier == Constants.editQueueSelectedSegue,
             let restaurant = sender as? Restaurant {
             RestaurantLogicManager.shared().currentRestaurant = restaurant
         }
+    }
+}
+
+extension SearchViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController
+    ) {
+        
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController
+    ) -> Bool {
+        return true
     }
 }
 
@@ -57,7 +95,7 @@ extension SearchViewController: UISearchBarDelegate {
             self.restaurantCollectionView?.reloadData()
         }
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filtered = searchText.isEmpty ? restaurants : restaurants.filter { (item: Restaurant) -> Bool in
             item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -69,17 +107,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-
+        
         if kind == UICollectionView.elementKindSectionHeader {
             let headerView: UICollectionReusableView = collectionView
                 .dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                   withReuseIdentifier: Constants.collectionViewHeaderReuseIdentifier,
                                                   for: indexPath)
-
-             return headerView
-         }
-
-         return UICollectionReusableView()
+            
+            return headerView
+        }
+        
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,9 +133,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let restaurantCell = cell as? RestaurantCell else {
             return cell
         }
-
+        
         let restaurant = filtered[indexPath.row]
-
+        
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
             if !restaurant.isOpen {
@@ -106,7 +144,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                  buttonText: Constants.okayTitle)
                 return
             }
-
+            
             if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
             } else {

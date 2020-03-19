@@ -12,43 +12,43 @@ class SegmentedControl: UIControl {
     private var labels = [UILabel]()
     var thumbView = UIView()
     
-    var items: [String] = ["Active", "History"] {
+    var items = Constants.segmentedControlTitles {
         didSet {
             setupLabels()
         }
     }
     
-    var selectedIndex: Int = 0 {
+    var selectedIndex = Constants.segmentedControlDefaultSelectedIndex {
         didSet {
             displayNewSelectedIndex()
         }
     }
     
-    var selectedLabelColor: UIColor = .black {
+    var selectedLabelColor = Constants.segmentedControlSelectedLabelColor {
         didSet {
             setSelectedColors()
         }
     }
     
-    var unselectedLabelColor: UIColor = .white {
+    var unselectedLabelColor = Constants.segmentedControlUnselectedLabelColor {
         didSet {
             setSelectedColors()
         }
     }
     
-    var thumbColor: UIColor = .white {
+    var thumbColor = Constants.segmentedControlThumbColor {
         didSet {
             setSelectedColors()
         }
     }
     
-    var borderColor: UIColor = .white {
+    var borderColor = Constants.segmentedControlBorderColor {
         didSet {
             layer.borderColor = borderColor.cgColor
         }
     }
     
-    var font: UIFont! = UIFont.systemFont(ofSize: 12) {
+    var font = Constants.segmentedControlFont {
         didSet {
             setFont()
         }
@@ -56,7 +56,6 @@ class SegmentedControl: UIControl {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
     }
     
@@ -65,10 +64,10 @@ class SegmentedControl: UIControl {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         layer.cornerRadius = frame.height / 2
-        layer.borderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
-        layer.borderWidth = 2
+        layer.borderColor = Constants.segmentedControlLayerBorderColor
+        layer.borderWidth = Constants.segmentedControlLayerBorderWidth
         
         backgroundColor = .clear
         
@@ -79,7 +78,7 @@ class SegmentedControl: UIControl {
         insertSubview(thumbView, at: 0)
     }
     
-    func setupLabels() {
+    private func setupLabels() {
         for label in labels {
             label.removeFromSuperview()
         }
@@ -88,11 +87,11 @@ class SegmentedControl: UIControl {
         
         for index in 1...items.count {
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 40))
+            let label = UILabel(frame: Constants.segmentedControlLabelFrame)
             label.text = items[index - 1]
             label.backgroundColor = .clear
             label.textAlignment = .center
-            label.font = UIFont(name: "Comfortaa-Regular", size: 15)
+            label.font = Constants.segmentedControlLabelFont
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
@@ -116,7 +115,6 @@ class SegmentedControl: UIControl {
     }
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        
         let location = touch.location(in: self)
         
         var calculatedIndex: Int?
@@ -142,12 +140,16 @@ class SegmentedControl: UIControl {
         let label = labels[selectedIndex]
         label.textColor = selectedLabelColor
         
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: [], animations: {
-            self.thumbView.frame = label.frame
-        }, completion: nil)
+        UIView.animateKeyframes(withDuration: Constants.segmentedControlAnimationDuration,
+                                delay: Constants.segmentedControlAnimationDelay,
+                                options: [],
+                                animations: {
+                                    self.thumbView.frame = label.frame
+                                },
+                                completion: nil)
     }
     
-    func addIndividualItemConstraints(items: [UIView], mainView: UIView, padding: CGFloat) {
+    private func addIndividualItemConstraints(items: [UIView], mainView: UIView, padding: CGFloat) {
         for (index, button) in items.enumerated() {
             let topConstraint = NSLayoutConstraint(item: button,
                                                    attribute: NSLayoutConstraint.Attribute.top,
@@ -218,7 +220,7 @@ class SegmentedControl: UIControl {
         }
     }
     
-    func setSelectedColors() {
+    private func setSelectedColors() {
         for item in labels {
             item.textColor = unselectedLabelColor
         }
@@ -230,7 +232,7 @@ class SegmentedControl: UIControl {
         thumbView.backgroundColor = thumbColor
     }
     
-    func setFont() {
+    private func setFont() {
         for item in labels {
             item.font = font
         }

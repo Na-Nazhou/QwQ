@@ -86,6 +86,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+            wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
+            babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }
 
         // Disable name and contact fields
