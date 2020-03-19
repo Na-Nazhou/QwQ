@@ -43,7 +43,7 @@ struct Restaurant: User {
     }
 
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         isRestaurantOpen: Bool, queueOpenTime: Date?, queueCloseTime: Date?) {
+         isRestaurantOpen: Bool, queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
         self.uid = uid
         self.name = name
         self.email = email

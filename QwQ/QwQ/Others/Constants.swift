@@ -70,6 +70,7 @@ struct Constants {
     // MARK: Storage settings
     static let customersDirectory = "customers"
     static let restaurantsDirectory = "restaurants"
+    static let queuesDirectory = "queues"
     
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"

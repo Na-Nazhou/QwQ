@@ -7,7 +7,7 @@ protocol RestaurantLogic: RestaurantStorageSyncDelegate {
     var restaurantDelegate: RestaurantDelegate? { get set }
     var searchDelegate: SearchDelegate? { get set }
 
-    var restaurants: [Restaurant] { get set }
+    var restaurants: [Restaurant] { get }
 
     func fetchRestaurants()
 }

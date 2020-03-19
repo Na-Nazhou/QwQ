@@ -23,8 +23,8 @@ class FBQueueStorage: CustomerQueueStorage {
         // Attach listener
 
         //ensure that all collections/documents exist
-        db.collection("queues").document(record.restaurant.uid).setData([:], merge: true)
-        let newQueueRecordRef = db.collection("queues")
+        db.collection(Constants.queuesDirectory).document(record.restaurant.uid).setData([:], merge: true)
+        let newQueueRecordRef = db.collection(Constants.queuesDirectory)
             .document(record.restaurant.uid)
             .collection(record.startDate)
             .document()
@@ -38,7 +38,7 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
     func updateQueueRecord(old: QueueRecord, new: QueueRecord, completion: @escaping () -> Void) {
-        db.collection("queues")
+        db.collection(Constants.queuesDirectory)
             .document(new.restaurant.uid)
             .collection(old.startDate)
             .document(old.id)
@@ -52,7 +52,7 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
     func deleteQueueRecord(record: QueueRecord, completion: @escaping () -> Void) {
-        db.collection("queues")
+        db.collection(Constants.queuesDirectory)
             .document(record.restaurant.uid)
             .collection(record.startDate)
             .document(record.id)
@@ -71,13 +71,13 @@ class FBQueueStorage: CustomerQueueStorage {
 
         // TODO: Attach listener
 
-        db.collection("queues").getDocuments { (querySnapshot, err) in
+        db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
                 return
             }
             for document in querySnapshot!.documents {
-                let restaurantQueuesToday = self.db.collection("queues")
+                let restaurantQueuesToday = self.db.collection(Constants.queuesDirectory)
                     .document(document.documentID)
                     .collection(Date().toDateStringWithoutTime())
                 restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
@@ -97,15 +97,14 @@ class FBQueueStorage: CustomerQueueStorage {
     /// Searches for the customer's queue records in the past week (7 days) and
     /// calls the completion handler when records are found.
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
-        print("fetching q history")
-        db.collection("queues").getDocuments { (querySnapshot, err) in
+        db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
                 return
             }
             for document in querySnapshot!.documents {
                 for numDaysAgo in 0...6 {
-                    let rQueue = self.db.collection("queues").document(document.documentID)
+                    let rQueue = self.db.collection(Constants.queuesDirectory).document(document.documentID)
                         .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
                     rQueue.getDocuments { (queueSnapshot, err) in
                         if let err = err {

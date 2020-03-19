@@ -80,13 +80,19 @@ class FBQueueStorage: RestaurantQueueStorage {
                     return
                 }
                 for document in queueSnapshot!.documents {
-                    guard let rec = QueueRecord(dictionary: document.data(),
-                                                id: document.documentID, rId: restaurant.uid) else {
-                        continue
+                    guard let cid = document.data()["customer"] as? String else {
+                        return
                     }
-                    if condition(rec) {
-                        completion(rec)
-                    }
+                    FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
+                        guard let rec = QueueRecord(dictionary: document.data(),
+                                                    customer: customer, restaurant: restaurant,
+                                                    id: document.documentID) else {
+                                                        return
+                        }
+                        if condition(rec) {
+                            completion(rec)
+                        }
+                    }, errorHandler: nil)
                 }
             }
     }

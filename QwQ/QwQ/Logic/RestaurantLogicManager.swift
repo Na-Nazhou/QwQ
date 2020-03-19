@@ -9,7 +9,10 @@ class RestaurantLogicManager: RestaurantLogic {
 
     var customer: Customer
     var currentRestaurant: Restaurant?
-    var restaurants = [Restaurant]()
+    private var restaurantCollection = RestaurantCollection()
+    var restaurants: [Restaurant] {
+        Array(restaurantCollection.restaurants)
+    }
 
     private init(customer: Customer) {
         self.customer = customer
@@ -19,7 +22,9 @@ class RestaurantLogicManager: RestaurantLogic {
 
     func fetchRestaurants() {
         restaurantStorage.loadAllRestaurants(completion: {
-            self.restaurants = $0
+            if self.restaurantCollection.add($0) {
+                self.searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
+            }
         })
     }
 
