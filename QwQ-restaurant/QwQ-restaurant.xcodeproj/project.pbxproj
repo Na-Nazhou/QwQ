@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		065F799A3E737271E7634A8F /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F368F755EFE067E16E8441A /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework */; };
 		5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */; };
+		5C1A419324236BE500D1140B /* FBCustomerInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A419224236BE500D1140B /* FBCustomerInfoStorage.swift */; };
+		5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A419424236BEF00D1140B /* CustomerInfoStorage.swift */; };
 		5C44BB552422141A0012EC59 /* RestaurantPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */; };
 		5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44C9B2241DD0390097C006 /* ValidationUtilities.swift */; };
 		5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
@@ -91,6 +93,8 @@
 		33A63C76A607AA1C931867A4 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3FE4CD5D8955191C19C51D0F /* Pods_QwQ_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+checkCacheThenSetImage.swift"; sourceTree = "<group>"; };
+		5C1A419224236BE500D1140B /* FBCustomerInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCustomerInfoStorage.swift; sourceTree = "<group>"; };
+		5C1A419424236BEF00D1140B /* CustomerInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerInfoStorage.swift; sourceTree = "<group>"; };
 		5C44C9B2241DD0390097C006 /* ValidationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationUtilities.swift; sourceTree = "<group>"; };
 		5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C9D9B5D242222310019B7EE /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -410,6 +414,8 @@
 				D440FC15241F9D1100606681 /* FBQueueStorage.swift */,
 				5CE032F12421FCBF008DB047 /* ProfileStorage.swift */,
 				5CE032F52421FCF6008DB047 /* FBProfileStorage.swift */,
+				5C1A419424236BEF00D1140B /* CustomerInfoStorage.swift */,
+				5C1A419224236BE500D1140B /* FBCustomerInfoStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -693,6 +699,7 @@
 				6148055A2422A1EF003D6D44 /* Authenticator.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantQueueLogic.swift in Sources */,
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
+				5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */,
 				5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
@@ -721,6 +728,7 @@
 				D4EA85F3241B2C65009EB85B /* QueueRecord.swift in Sources */,
 				5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */,
 				5CE032F02421F9FC008DB047 /* AuthDelegate.swift in Sources */,
+				5C1A419324236BE500D1140B /* FBCustomerInfoStorage.swift in Sources */,
 				D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */,
 				7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */,
 				5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */,
