@@ -1,8 +1,8 @@
 //
 //  SegmentedControl.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Tan Su Yee on 18/3/20.
+//  Created by Tan Su Yee on 19/3/20.
 //
 
 import UIKit
