@@ -44,9 +44,8 @@ struct QueueRecord: Record {
         self.rejectTime = rejectTime
     }
 
-    init?(dictionary: [String: Any], id: String = "0", rId: String = "0") {
-        guard let cId = dictionary["customer"] as? String,
-            let groupSize = dictionary["groupSize"] as? Int,
+    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String = "0") {
+        guard let groupSize = dictionary["groupSize"] as? Int,
             let babyCQuantity = dictionary["babyChairQuantity"] as? Int,
             let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
             let startTime = (dictionary["startTime"] as? Timestamp)?.dateValue() else {
@@ -55,22 +54,10 @@ struct QueueRecord: Record {
         let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
         let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
-
-        //TODO: replace with mtd to get R from uid of restaurant.
-        func getRestaurant(rid: String) -> Restaurant {
-            return Restaurant(uid: rid, name: "Dummy restaurant", email: "r123@example.com",
-                              contact: "6565161729",
-                              address: "Clementi road", menu: "burger, $3;", isRestaurantOpen: false,
-                              queueOpenTime: nil, queueCloseTime: nil)
-        }
-        //TODO: similarly; would placing the two methods in the same class make sense?
-        func getCustomer(cid: String) -> Customer {
-            return Customer(uid: cid, name: "Dummy customer", email: "c321@example.com", contact: "6599898898")
-        }
         
         self.id = id
-        self.restaurant = getRestaurant(rid: rId)
-        self.customer = getCustomer(cid: cId)
+        self.restaurant = restaurant
+        self.customer = customer
         self.groupSize = groupSize
         self.babyChairQuantity = babyCQuantity
         self.wheelchairFriendly = wheelchairFriendly

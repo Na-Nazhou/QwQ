@@ -26,7 +26,7 @@ class RestaurantLogicManager: RestaurantLogic {
     func restaurantDidOpenQueue(restaurant: Restaurant) {
         if let currentRestaurant = self.currentRestaurant,
             restaurant == currentRestaurant {
-            self.currentRestaurant?.isOpen = true
+            self.currentRestaurant?.isQueueOpen = true
             restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
         }
 
@@ -37,7 +37,7 @@ class RestaurantLogicManager: RestaurantLogic {
     func restaurantDidCloseQueue(restaurant: Restaurant) {
         if let currentRestaurant = self.currentRestaurant,
             restaurant == currentRestaurant {
-            self.currentRestaurant?.isOpen = false
+            self.currentRestaurant?.isQueueOpen = false
             restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
         }
 

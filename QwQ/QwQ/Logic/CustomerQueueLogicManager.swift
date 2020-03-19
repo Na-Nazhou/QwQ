@@ -30,7 +30,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
-        restaurant.isOpen && currentQueueRecord == nil
+        restaurant.isQueueOpen && currentQueueRecord == nil
     }
 
     func fetchQueueHistory() {

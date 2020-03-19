@@ -7,7 +7,7 @@ struct Restaurant: User {
     let address: String
     let menu: String
 
-    var isOpen: Bool
+    var isQueueOpen: Bool
 
     var dictionary: [String: Any] {
         [
@@ -17,7 +17,7 @@ struct Restaurant: User {
             "contact": contact,
             "address": address,
             "menu": menu,
-            "isOpen": isOpen
+            "isQueueOpen": isQueueOpen
         ]
     }
 
@@ -28,7 +28,7 @@ struct Restaurant: User {
         self.contact = contact
         self.address = address
         self.menu = menu
-        self.isOpen = isOpen
+        self.isQueueOpen = isOpen
     }
 
     init?(dictionary: [String: Any]) {
@@ -38,7 +38,7 @@ struct Restaurant: User {
             let contact = dictionary["contact"] as? String,
             let address = dictionary["address"] as? String,
             let menu = dictionary["menu"] as? String,
-            let isOpen = dictionary["isOpen"] as? Bool
+            let isOpen = dictionary["isQueueOpen"] as? Bool
         else {
                 return nil
         }
@@ -49,6 +49,6 @@ struct Restaurant: User {
         self.contact = contact
         self.address = address
         self.menu = menu
-        self.isOpen = isOpen
+        self.isQueueOpen = isOpen
     }
 }

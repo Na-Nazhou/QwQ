@@ -88,7 +88,7 @@ class FBQueueStorage: CustomerQueueStorage {
                         queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
                         forCustomer: customer,
                         isRecordToTake: { !$0.isHistoryRecord
-                        }, completion: completion, isOneRecordSufficient: true)
+                        }, completion: completion)
                 }
             }
         }
@@ -97,6 +97,7 @@ class FBQueueStorage: CustomerQueueStorage {
     /// Searches for the customer's queue records in the past week (7 days) and
     /// calls the completion handler when records are found.
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
+        print("fetching q history")
         db.collection("queues").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -128,24 +129,34 @@ class FBQueueStorage: CustomerQueueStorage {
 
     private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
         queueSnapshot: QuerySnapshot, ofRestaurantId rId: String, forCustomer customer: Customer,
-        isRecordToTake condition: ((QueueRecord) -> Bool), completion: @escaping (QueueRecord?) -> Void,
-        isOneRecordSufficient: Bool = false) {
+        isRecordToTake condition: @escaping ((QueueRecord) -> Bool), completion: @escaping (QueueRecord?) -> Void) {
         for document in queueSnapshot.documents {
             guard let qCid = (document.data()["customer"] as? String), qCid == customer.uid else {
                 continue
             }
-            guard let rec = QueueRecord(dictionary: document.data(), id: document.documentID, rId: rId) else {
-                continue
-            }
 
-            if condition(rec) {
-                completion(rec)
-
-                if isOneRecordSufficient {
-                    return
+            makeQueueRecordAndComplete(qData: document.data(), qid: document.documentID, cid: qCid, rid: rId) { qRec in
+                if condition(qRec) {
+                    completion(qRec)
                 }
             }
         }
+    }
+
+    private func makeQueueRecordAndComplete(qData: [String: Any],
+                                            qid: String, cid: String, rid: String,
+                                            completion: @escaping (QueueRecord) -> Void) {
+        FBRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
+            FBProfileStorage.getCustomerInfo(
+                completion: { customer in
+                guard let rec = QueueRecord(dictionary: qData,
+                                            customer: customer, restaurant: restaurant, id: qid) else {
+                    return
+                }
+                completion(rec)
+                }, errorHandler: { _ in })
+            
+        }, errorHandler: nil)
     }
     
     func didDetectAdmissionOfCustomer(record: QueueRecord) {

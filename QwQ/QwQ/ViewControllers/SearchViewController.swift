@@ -138,7 +138,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
-            if !restaurant.isOpen {
+            if !restaurant.isQueueOpen {
                 self.showMessage(title: Constants.errorTitle,
                                  message: Constants.restaurantUnavailableMessage,
                                  buttonText: Constants.okayTitle)

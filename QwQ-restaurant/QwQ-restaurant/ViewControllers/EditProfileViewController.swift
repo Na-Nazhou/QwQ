@@ -34,32 +34,10 @@ class EditProfileViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
 
-<<<<<<< HEAD
-    func getRestaurantInfoComplete(restaurant: Restaurant) {
-        self.uid = restaurant.uid
-        self.nameTextField.text = restaurant.name
-        self.emailTextField.text = restaurant.email
-        self.contactTextField.text = restaurant.contact
-        self.addressTextField.text = restaurant.address
-        self.menuTextView.text = restaurant.menu
-        self.isRestaurantOpen = restaurant.isRestaurantOpen
-        self.queueOpenTime = restaurant.queueOpenTime
-        self.queueCloseTime = restaurant.queueCloseTime
-
-        setUpProfileImageView(uid: restaurant.uid)
-    }
-
-    func updateComplete() {
-        showMessage(title: Constants.successfulUpdateTitle,
-                    message: Constants.successfulUpdateMessage,
-                    buttonText: Constants.okayTitle,
-                    buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
-=======
     override func viewDidAppear(_ animated: Bool) {
         Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                   errorHandler: handleError(error:))
         spinner = showSpinner(onView: view)
->>>>>>> master
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -104,7 +82,7 @@ class EditProfileViewController: UIViewController {
         }
 
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
-                                    address: address, menu: menu, isOpen: isOpen)
+                                    address: address, menu: menu, isRestaurantOpen: isRestaurantOpen)
 
         spinner = showSpinner(onView: view)
 
@@ -128,7 +106,7 @@ class EditProfileViewController: UIViewController {
         self.contactTextField.text = restaurant.contact
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
-        self.isOpen = restaurant.isOpen
+        self.isRestaurantOpen = restaurant.isRestaurantOpen
 
         setUpProfileImageView(uid: restaurant.uid)
 
