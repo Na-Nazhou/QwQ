@@ -69,28 +69,26 @@ class FBQueueStorage: CustomerQueueStorage {
     
     func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
 
-        print("\nCOMMANDED LOADING OF QUEUE RECORD\n")
         // TODO: Attach listener
 
         db.collection("queues").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let restaurantQueuesToday = self.db.collection("queues")
-                        .document(document.documentID)
-                        .collection(Date().toDateStringWithoutTime())
-                    restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                                queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
-                                forCustomer: customer,
-                                isRecordToTake: { !$0.isHistoryRecord
-                                }, completion: completion, isOneRecordSufficient: true)
-                        }
+                return
+            }
+            for document in querySnapshot!.documents {
+                let restaurantQueuesToday = self.db.collection("queues")
+                    .document(document.documentID)
+                    .collection(Date().toDateStringWithoutTime())
+                restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
                     }
+                    self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
+                        queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
+                        forCustomer: customer,
+                        isRecordToTake: { !$0.isHistoryRecord
+                        }, completion: completion, isOneRecordSufficient: true)
                 }
             }
         }
@@ -102,26 +100,26 @@ class FBQueueStorage: CustomerQueueStorage {
         db.collection("queues").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    for numDaysAgo in 0...6 {
-                        let rQueue = self.db.collection("queues").document(document.documentID)
-                            .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
-                        rQueue.getDocuments { (queueSnapshot, err) in
-                            if let err = err {
-                                print("Error getting documents: \(err)")
-                            } else {
-                                if queueSnapshot!.isEmpty {
-                                    return
-                                }
-                                self
-                                    .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                                        queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
-                                        forCustomer: customer,
-                                        isRecordToTake: { $0.isHistoryRecord
-                                        }, completion: completion)
-                            }
+                return
+            }
+            for document in querySnapshot!.documents {
+                for numDaysAgo in 0...6 {
+                    let rQueue = self.db.collection("queues").document(document.documentID)
+                        .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
+                    rQueue.getDocuments { (queueSnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                            return
                         }
+                        if queueSnapshot!.isEmpty {
+                            return
+                        }
+                        self
+                            .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
+                                queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
+                                forCustomer: customer,
+                                isRecordToTake: { $0.isHistoryRecord
+                                }, completion: completion)
                     }
                 }
             }

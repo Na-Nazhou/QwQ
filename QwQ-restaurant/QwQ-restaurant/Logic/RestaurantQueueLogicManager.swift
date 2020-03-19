@@ -12,31 +12,51 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     var restaurantQueue = RestaurantQueue()
 
-    func loadQueue() -> [QueueRecord] {
+    func fetchQueue() {
         // Fetch the current queue from db
-        return queueStorage.loadQueue(of: restaurant)
+        queueStorage.loadQueue(of: restaurant, completion: {
+            if $0 == nil {
+                return
+            }
+            let didAddNew = self.restaurantQueue.addToQueue($0!)
+            if didAddNew {
+                self.presentationDelegate?.logicDidAddRecordToQueue(with: $0!)
+            }
+        })
     }
 
-    func loadWaiting() -> [QueueRecord] {
-        queueStorage.loadWaitingList(of: restaurant)
+    func fetchWaiting() {
+        queueStorage.loadWaitingList(of: restaurant, completion: {
+            if $0 == nil {
+                return
+            }
+            let didAddNew = self.restaurantQueue.addToWaiting($0!)
+            if didAddNew {
+                self.presentationDelegate?.logicDidAddRecordToWaiting(record: $0!)
+            }
+        })
     }
 
     func openQueue() {
-        // Set the openTime of the queue
+        assert(!restaurant.isQueueOpen, "Queue should be closed to open.")
         queueStorage.openQueue(of: restaurant, at: currentTime())
     }
 
     func closeQueue() {
-        // Set the closeTime of the queue
+        assert(restaurant.isQueueOpen, "Queue should be open to close.")
         queueStorage.closeQueue(of: restaurant, at: currentTime())
     }
 
     func admitCustomer(record: QueueRecord) {
         // Set the serveTime of the queue record
         let admittedRecord = updateAdmitTime(queueRecord: record)
-        // Remove the queue record from the current queue
-        queueStorage.removeCustomerFromQueue(record: record)
         queueStorage.admitCustomer(record: admittedRecord)
+        if restaurantQueue.removeFromQueue(record) {
+            presentationDelegate?.logicDidRemoveRecordFromQueue(queueRecord: record)
+        }
+        if restaurantQueue.addToWaiting(record) {
+            presentationDelegate?.logicDidAddRecordToWaiting(record: record)
+        }
 
         notifyCustomerOfAdmission(record: admittedRecord)
     }
@@ -71,14 +91,17 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     func customerDidJoinQueue(with record: QueueRecord) {
-        // Add the queue record to the queue
-        presentationDelegate?.logicDidAddRecordToQueue(with: record)
+        if restaurantQueue.addToQueue(record) {
+            presentationDelegate?.logicDidAddRecordToQueue(with: record)
+        }
         // TODO: notify/alert that customer had joined queue
     }
 
-    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord) {
-        // Update the queue record in the current queue
-        presentationDelegate?.logicDidModifyRecordInQueue(from: old, to: new)
+    func customerDidUpdateQueueRecord(to new: QueueRecord) {
+        let (didUpdate, old) = restaurantQueue.updateRecInQueue(to: new)
+        if didUpdate {
+            presentationDelegate?.logicDidModifyRecordInQueue(from: old!, to: new)
+        }
         // TODO: notify/alert that customer had made changes
     }
 

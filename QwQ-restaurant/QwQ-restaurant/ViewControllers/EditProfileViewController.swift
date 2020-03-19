@@ -19,7 +19,9 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
 
     let profileStorage: ProfileStorage
     var uid: String?
-    var isOpen: Bool?
+    var isRestaurantOpen: Bool?
+    private var queueOpenTime: Date?
+    private var queueCloseTime: Date?
     var image: UIImage?
 
     init() {
@@ -49,7 +51,9 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         self.contactTextField.text = restaurant.contact
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
-        self.isOpen = restaurant.isOpen
+        self.isRestaurantOpen = restaurant.isRestaurantOpen
+        self.queueOpenTime = restaurant.queueOpenTime
+        self.queueCloseTime = restaurant.queueCloseTime
 
         setUpProfileImageView(uid: restaurant.uid)
     }
@@ -85,7 +89,8 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         }
 
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu, let isOpen = isOpen else {
+            let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen,
+            let queueOpenTime = queueOpenTime, let queueCloseTime = queueCloseTime else {
                 return
         }
 
@@ -106,7 +111,9 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
         }
         profileStorage.updateRestaurantInfo(restaurant:
             Restaurant(uid: uid, name: name, email: email, contact: contact,
-                       address: address, menu: menu, isOpen: isOpen))
+                       address: address, menu: menu,
+                       isRestaurantOpen: isRestaurantOpen,
+                       queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime))
 
         if let image = image {
             profileStorage.updateRestaurantProfilePic(uid: uid, image: image)

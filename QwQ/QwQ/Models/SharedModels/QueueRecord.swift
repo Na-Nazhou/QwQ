@@ -115,4 +115,22 @@ extension QueueRecord {
     var isHistoryRecord: Bool {
         serveTime != nil || rejectTime != nil
     }
+    
+    var isWaitingRecord: Bool {
+        serveTime == nil && admitTime != nil
+    }
+
+    var isUnadmittedQueueingRecord: Bool {
+        admitTime == nil
+    }
+
+    func completelyIdentical(to other: QueueRecord) -> Bool {
+        return other == self
+            && other.groupSize == groupSize
+            && other.babyChairQuantity == babyChairQuantity
+            && other.wheelchairFriendly == wheelchairFriendly
+            && other.admitTime == admitTime
+            && other.serveTime == serveTime
+            && other.rejectTime == rejectTime
+    }
 }
