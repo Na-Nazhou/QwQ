@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="15" y="59" width="384" height="26"/>
+                                <rect key="frame" x="15" y="59" width="384" height="67"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="26"/>
@@ -39,6 +39,33 @@
                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                         </variation>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ldv-Z2-Nal">
+                                        <rect key="frame" x="0.0" y="36" width="384" height="31"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7M-CU-rAI">
+                                                <rect key="frame" x="0.0" y="0.0" width="121.5" height="31"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuT-bb-DAT">
+                                                <rect key="frame" x="131.5" y="0.0" width="121" height="31"/>
+                                                <color key="backgroundColor" red="0.1450980392" green="0.63137254899999995" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <state key="normal" title="SORT">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="handleSort:" destination="unC-H2-shI" eventType="touchUpInside" id="Aow-1K-t5A"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT4-OI-qoK">
+                                                <rect key="frame" x="262.5" y="0.0" width="121.5" height="31"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="urr-2m-4eq">
@@ -438,6 +465,21 @@ Pancake</string>
             </objects>
             <point key="canvasLocation" x="4461" y="-90"/>
         </scene>
+        <!--Popover Content Controller-->
+        <scene sceneID="tLu-Xw-MKe">
+            <objects>
+                <viewController storyboardIdentifier="PopoverContentController" id="Lsq-pZ-5kb" customClass="PopoverContentController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eYx-Fi-kg4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="aAf-Kc-bqY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ax2-Da-8De" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5251" y="-88"/>
+        </scene>
         <!--Search-->
         <scene sceneID="xCl-4o-QYv">
             <objects>
@@ -465,6 +507,6 @@ Pancake</string>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IfD-L4-uNp"/>
+        <segue reference="1pS-0G-SKh"/>
     </inferredMetricsTieBreakers>
 </document>
