@@ -1,7 +1,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct QueueRecord {
+struct QueueRecord: Record {
     let id: String
     let restaurant: Restaurant
     let customer: Customer
@@ -111,5 +111,9 @@ extension QueueRecord {
         }
 
         return data
+    }
+
+    var isHistoryRecord: Bool {
+        serveTime != nil || rejectTime != nil
     }
 }

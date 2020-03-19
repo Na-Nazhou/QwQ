@@ -11,14 +11,14 @@ class QueueRecordCell: UICollectionViewCell {
     var admitAction: (() -> Void)?
     var removeAction: (() -> Void)?
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var descriptionLabel: UILabel!
     
-    @IBAction func handleAdmit(_ sender: UIButton) {
+    @IBAction private func handleAdmit(_ sender: UIButton) {
         admitAction?()
     }
     
-    @IBAction func handleRemove(_ sender: UIButton) {
+    @IBAction private func handleRemove(_ sender: UIButton) {
         removeAction?()
     }
     
@@ -31,5 +31,9 @@ class QueueRecordCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-}
 
+    func setUpView(record: Record) {
+        nameLabel.text = record.customer.name
+        descriptionLabel.text = "\(record.groupSize) pax"
+    }
+}

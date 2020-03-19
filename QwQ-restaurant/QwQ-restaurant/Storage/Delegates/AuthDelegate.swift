@@ -5,7 +5,7 @@
 //  Created by Daniel Wong on 15/3/20.
 //
 
-import UIKit;
+import UIKit
 
 protocol AuthDelegate: AnyObject {
 

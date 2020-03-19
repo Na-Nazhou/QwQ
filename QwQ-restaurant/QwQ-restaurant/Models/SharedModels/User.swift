@@ -4,4 +4,3 @@ protocol User: Hashable {
     var email: String { get }
     var contact: String { get }
 }
-

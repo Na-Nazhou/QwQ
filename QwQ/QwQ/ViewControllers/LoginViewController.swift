@@ -47,24 +47,21 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
         guard !email.isEmpty else {
             showMessage(title: Constants.missingEmailTitle,
                         message: Constants.missingEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 
         guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 
         guard !password.isEmpty else {
             showMessage(title: Constants.missingPasswordTitle,
                         message: Constants.missingPasswordMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
+                        buttonText: Constants.okayTitle)
             return
         }
 

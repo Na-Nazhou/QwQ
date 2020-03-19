@@ -9,12 +9,12 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var menuLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var menuLabel: UILabel!
+    @IBOutlet private var locationLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
     }
@@ -33,16 +33,18 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         }
         // Cannot queue if the restaurant is currently not open
         if !restaurant.isOpen {
-            showMessage(title: "Error", message: "This restaurant is currently not open!",
-                        buttonText: Constants.okayTitle, buttonAction: nil)
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.restaurantUnavailableMessage,
+                        buttonText: Constants.okayTitle)
             return
         }
 
         if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
             performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
         } else {
-            showMessage(title: "Error", message: "You have an existing queue record",
-                        buttonText: Constants.okayTitle, buttonAction: nil)
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.multipleQueueRecordsMessage,
+                        buttonText: Constants.okayTitle)
         }
     }
 
@@ -62,6 +64,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         nameLabel.text = restaurant.name
         menuLabel.text = restaurant.menu
         locationLabel.text = restaurant.address
+        contactLabel.text = restaurant.contact
+        emailLabel.text = restaurant.email
     }
 
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {

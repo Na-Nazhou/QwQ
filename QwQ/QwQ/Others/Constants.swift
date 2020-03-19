@@ -18,12 +18,15 @@ struct Constants {
     static let profileBorderColor = UIColor.white.cgColor
     
     // MARK: Alert settings
-    static let missingFieldsTitle = "Error - Missing Fields"
-    static let missingFieldsMessage = "Please fill in all the fields!"
+    static let successTitle = "Success"
+    static let errorTitle = "Error"
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
-    static let successfulUpdateTitle = "Success"
-    static let successfulUpdateMessage = "Your profile has been updated."
+
+    // MARK: Signup / Profile
+    static let profileUpdateSuccessMessage = "Your profile has been updated."
+    static let missingFieldsTitle = "Error - Missing Fields"
+    static let missingFieldsMessage = "Please fill in all the fields!"
     static let invalidEmailTitle = "Error - Invalid Email"
     static let invalidEmailMessage = "Please enter a valid email."
     static let invalidContactTitle = "Error - Invalid Contact"
@@ -32,13 +35,23 @@ struct Constants {
     static let missingEmailMessage = "Please provide a valid email."
     static let missingPasswordTitle = "Error - Missing Password"
     static let missingPasswordMessage = "Please provide a valid password."
+
+    // MARK: Profile photo
     static let chooseFromPhotoLibraryTitle = "Choose from Library"
     static let chooseFromCameraTitle = "Take from Camera"
     static let showImagePickerTitle = "Choose your image"
 
-    static let successQueueRecordCreationMessage = "You have created a new queue record."
-    static let successQueueRecordUpdateMessage = "Your queue record has been updated."
-    static let successQueueRecordDeleteMessage = "Your queue record has been deleted."
+    // MARK: Queue record
+    static let restaurantUnavailableMessage = "This restaurant is currently not open!"
+    static let multipleQueueRecordsMessage = "You have an existing queue record."
+    static let queueRecordCreateSuccessMessage = "You have created a new queue record."
+    static let queueRecordUpdateSuccessMessage = "Your queue record has been updated."
+    static let queueRecordDeleteSuccessMessage = "Your queue record has been deleted."
+
+    // MARK: Book record
+    static let bookRecordCreateSuccessMessage = "You have created a book record."
+    static let bookRecordUpdateSuccessMessage = "This book record has been updated."
+    static let bookRecordDeleteSuccessMessage = "This book record has been deleted."
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"

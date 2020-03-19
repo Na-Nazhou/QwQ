@@ -8,16 +8,16 @@
 import UIKit
 
 class QueueRecordViewController: UIViewController {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var groupSizeLabel: UILabel!
-    @IBOutlet weak var babyChairQuantityLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var contactLabel: UILabel!
+    @IBOutlet private var groupSizeLabel: UILabel!
+    @IBOutlet private var babyChairQuantityLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     
     var queueRecord: QueueRecord?
     
-    @IBAction func handleAdmit(_ sender: Any) {
+    @IBAction private func handleAdmit(_ sender: Any) {
         showMessage(title: Constants.admitCustomerTitle,
                     message: Constants.admitCustomerMessage,
                     buttonText: Constants.okayTitle,
@@ -30,16 +30,19 @@ class QueueRecordViewController: UIViewController {
         setUpViews()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     private func setUpViews() {
-        nameLabel.text = queueRecord?.customer.name
-        contactLabel.text = queueRecord?.customer.contact
-        groupSizeLabel.text = String(queueRecord?.groupSize ?? 0)
-        babyChairQuantityLabel.text = String(queueRecord?.wheelchairFriendly ?? false)
-        wheelchairFriendlySwitch.isOn = queueRecord?.wheelchairFriendly ?? false
-    }
+        guard let queueRecord = queueRecord else {
+            return
+        }
 
+        nameLabel.text = queueRecord.customer.name
+        contactLabel.text = queueRecord.customer.contact
+        groupSizeLabel.text = String(queueRecord.groupSize)
+        babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+    }
 }

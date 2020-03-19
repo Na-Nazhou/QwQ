@@ -10,18 +10,24 @@ import UIKit
 import Foundation
 
 class ActivitiesViewController: UIViewController {
+    
+    var filtered: [Record] = []
+    var records: [Record] = [QueueRecord(id: "1",
 
-    var filtered: [QueueRecord] = []
-    var queueRecords: [QueueRecord] = [QueueRecord(id: "1",
-                                                   restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com", contact: "12345678", address: "location", menu: "menu", isOpen: true), customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
+                                         restaurant: Restaurant(uid: "3", name: "hottomato",
+                                                                email: "ht@mail.com", contact: "12345678",
+                                                                address: "location", menu: "menu",
+                                                                isOpen: true),
+                                         customer: Customer(uid: "2", name: "jane",
+                                                            email: "jane@gmail.com", contact: "98273483"),
                                                    groupSize: 4,
                                                    babyChairQuantity: 0, wheelchairFriendly: true,
-                                                   startTime: Date()), ]
+                                                   startTime: Date())]
     
-    @IBOutlet weak var searchBarController: UISearchBar!
-    @IBOutlet weak var queueRecordCollectionView: UICollectionView!
+    @IBOutlet private var searchBarController: UISearchBar!
+    @IBOutlet private var queueRecordCollectionView: UICollectionView!
     
-    @IBAction func handleOpenClose(_ sender: Any) { 
+    @IBAction private func handleOpenClose(_ sender: Any) { 
     }
     
     override func viewDidLoad() {
@@ -32,17 +38,23 @@ class ActivitiesViewController: UIViewController {
         queueRecordCollectionView.delegate = self
         queueRecordCollectionView.dataSource = self
         
-        filtered = queueRecords
+        filtered = records
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.queueRecordSelectedSegue {
-            if let queueRecordViewController = segue.destination as? QueueRecordViewController {
-                if let indexPaths = self.queueRecordCollectionView.indexPathsForSelectedItems {
-                    let row = indexPaths[0].item
-                    queueRecordViewController.queueRecord = queueRecords[row]
-                }
-            }
+        switch segue.identifier {
+        case Constants.queueRecordSelectedSegue:
+        if let queueRecord = sender as? QueueRecord,
+            let queueRecordViewController = segue.destination as? QueueRecordViewController {
+            queueRecordViewController.queueRecord = queueRecord
+        }
+        case Constants.bookRecordSelectedSegue:
+        if let bookRecord = sender as? BookRecord,
+            let bookRecordViewController = segue.destination as? BookRecordViewController {
+                bookRecordViewController.bookRecord = bookRecord
+        }
+        default:
+            return
         }
     }
     
@@ -56,7 +68,7 @@ extension ActivitiesViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = searchText.isEmpty ? queueRecords : queueRecords.filter { (item: QueueRecord) -> Bool in
+        filtered = searchText.isEmpty ? records : records.filter { (item: Record) -> Bool in
             item.customer.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
     }
@@ -80,7 +92,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filtered.count
+        filtered.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -93,29 +105,32 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
         
-        let queueRecord = filtered[indexPath.row]
+        let record = filtered[indexPath.row]
         
-        queueRecordCell.nameLabel.text = queueRecord.customer.name
-        queueRecordCell.descriptionLabel.text = "\(queueRecord.groupSize) pax"
+        queueRecordCell.setUpView(record: record)
         
         queueRecordCell.admitAction = {
             self.showMessage(title: Constants.admitCustomerTitle,
                              message: Constants.admitCustomerMessage,
-                             buttonText: Constants.okayTitle,
-                             buttonAction: nil)
+                             buttonText: Constants.okayTitle)
         }
         queueRecordCell.removeAction = {
             self.showMessage(title: Constants.removeCustomerTitle,
                              message: Constants.removeCustomerMessage,
-                             buttonText: Constants.okayTitle,
-                             buttonAction: nil)
+                             buttonText: Constants.okayTitle)
         }
         
         return queueRecordCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.queueRecordSelectedSegue, sender: self)
+        let record = records[indexPath.row]
+        if let queueRecord = record as? QueueRecord {
+            performSegue(withIdentifier: Constants.queueRecordSelectedSegue, sender: queueRecord)
+        }
+        if let bookRecord = record as? BookRecord {
+            performSegue(withIdentifier: Constants.bookRecordSelectedSegue, sender: bookRecord)
+        }
     }
 }
 
@@ -123,18 +138,18 @@ extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height / 5)
+        CGSize(width: self.view.frame.width * 0.9, height: self.view.frame.height / 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constants.queueRecordSectionInsets
+        Constants.queueRecordSectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        0
     }
 }

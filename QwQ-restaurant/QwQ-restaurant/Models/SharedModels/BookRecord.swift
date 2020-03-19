@@ -8,7 +8,7 @@
 import Foundation
 
 struct BookRecord: Record {
-    var id = "0"
+    let id: String
     let restaurant: Restaurant
     let customer: Customer
 

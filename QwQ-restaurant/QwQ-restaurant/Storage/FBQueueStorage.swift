@@ -9,8 +9,8 @@ import FirebaseFirestore
 
 class FBQueueStorage: RestaurantQueueStorage {
     let db: Firestore
-    var queueModificationLogicDelegate: QueueStorageSyncDelegate?
-    var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
+    weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
+    weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
     
     init() {
         self.db = Firestore.firestore()
@@ -61,14 +61,13 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
     
     func loadQueue(of restaurant: Restaurant) -> [QueueRecord] {
-        return []
+        []
     }
     
     func loadWaitingList(of restaurant: Restaurant) -> [QueueRecord] {
-        return []
+        []
     }
-    
-    
+
     func didDetectNewQueueRecord(record: QueueRecord) {
         
     }
@@ -100,6 +99,4 @@ class FBQueueStorage: RestaurantQueueStorage {
     func didDetectCloseQueue(restaurant: Restaurant) {
         
     }
-    
-    
 }

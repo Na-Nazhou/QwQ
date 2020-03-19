@@ -1,8 +1,8 @@
 import Foundation
 import FirebaseFirestore
 
-struct QueueRecord {
-    var id: String = "0"
+struct QueueRecord: Record {
+    var id = "0"
     let restaurant: Restaurant
     let customer: Customer
 
@@ -16,7 +16,7 @@ struct QueueRecord {
     var rejectTime: Date?
 
     var startDate: String {
-        return startTime.toDateStringWithoutTime()
+        startTime.toDateStringWithoutTime()
     }
 
     init(restaurant: Restaurant, customer: Customer, groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
@@ -115,6 +115,6 @@ extension QueueRecord {
     }
 
     var isHistoryRecord: Bool {
-        admitTime != nil || rejectTime != nil
+        serveTime != nil || rejectTime != nil
     }
 }

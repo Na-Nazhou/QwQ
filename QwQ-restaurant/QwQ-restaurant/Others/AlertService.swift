@@ -21,7 +21,8 @@ class AlertService {
         }
         if let topVC = UIApplication.getTopMostViewController() {
             alert.popoverPresentationController?.sourceView = topVC.view
-            alert.popoverPresentationController?.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
+            alert.popoverPresentationController?.sourceRect =
+                CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
             alert.popoverPresentationController?.permittedArrowDirections = []
             topVC.present(alert, animated: true, completion: completion)
         }
@@ -30,7 +31,8 @@ class AlertService {
 }
 
 extension UIApplication {
-    class func getTopMostViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func getTopMostViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+    ) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return getTopMostViewController(base: nav.visibleViewController)
         }

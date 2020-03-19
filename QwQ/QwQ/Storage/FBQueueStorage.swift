@@ -83,12 +83,7 @@ class FBQueueStorage: CustomerQueueStorage {
                             self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
                                 queueSnapshot: queueSnapshot!,
                                 forCustomer: customer,
-                                condition: { dict in
-                                    if dict["serveTime"] as? Timestamp != nil
-                                        || dict["rejectTime"] as? Timestamp != nil {
-                                    return false //already served/rejected = past queue history
-                                }
-                                return true
+                                condition: { !(QueueRecord(dictionary: $0)?.isHistoryRecord ?? true)
                                 }, completion: completion)
                         }
                     }
@@ -115,12 +110,7 @@ class FBQueueStorage: CustomerQueueStorage {
                                 self
                                     .triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
                                         queueSnapshot: queueSnapshot!, forCustomer: customer,
-                                        condition: { dict in
-                                            if dict["serveTime"] as? Timestamp != nil
-                                                || dict["rejectTime"] as? Timestamp != nil {
-                                                return true //over=> past history
-                                            }
-                                            return false
+                                        condition: { QueueRecord(dictionary: $0)?.isHistoryRecord ?? false
                                         }, completion: completion)
                             }
                         }
@@ -142,34 +132,6 @@ class FBQueueStorage: CustomerQueueStorage {
             }
         }
     }
-
-//    // MARK: - Protocol conformance
-//
-//    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
-//        // Attach listener
-//        completion(nil)
-//    }
-//
-//    func loadQueueHistory(customer: Customer, completion:  @escaping ([QueueRecord]) -> Void) {
-//        // TODO
-//        let restaurant = Restaurant(uid: "1",
-//                                    name: "history queue record",
-//                                    email: "restaurant@gmail.com",
-//                                    contact: "98721234",
-//                                    address: "address",
-//                                    menu: "menu",
-//                                    isOpen: true)
-//        let customer = Customer(uid: "2", name: "name", email: "name@", contact: "9827")
-//        let record1 = QueueRecord(restaurant: restaurant,
-//                                  customer: customer,
-//                                  groupSize: 2,
-//                                  babyChairQuantity: 1,
-//                                  wheelchairFriendly: false,
-//                                  startTime: Date(),
-//                                  admitTime: Date())
-//        let queueHistory = [record1]
-//        completion(queueHistory)
-//    }
     
     func didDetectAdmissionOfCustomer(record: QueueRecord) {
         queueModificationLogicDelegate?.restaurantDidAdmitCustomer(record: record)
