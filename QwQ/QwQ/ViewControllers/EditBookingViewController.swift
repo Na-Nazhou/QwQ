@@ -18,6 +18,8 @@ class EditBookingViewController: UIViewController {
 
     var bookRecord: BookRecord?
 
+    var spinner: UIView?
+
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -36,13 +38,15 @@ class EditBookingViewController: UIViewController {
                     return
             }
 
-            // Edit existing book record
-            if bookRecord != nil {
-                // TODO
-            }
+//        spinner = showSpinner(onView: view)
 
-            // Create a new book record
+        // Edit existing book record
+        if bookRecord != nil {
             // TODO
+        }
+
+        // Create a new book record
+        // TODO
     }
     
     override func viewDidLoad() {
@@ -90,6 +94,7 @@ class EditBookingViewController: UIViewController {
     }
 
     func didAddBookRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.bookRecordCreateSuccessMessage,
@@ -100,6 +105,7 @@ class EditBookingViewController: UIViewController {
     }
 
     func didUpdateBookRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.bookRecordUpdateSuccessMessage,

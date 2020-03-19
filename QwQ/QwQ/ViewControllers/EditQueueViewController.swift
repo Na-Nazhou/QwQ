@@ -15,6 +15,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var restaurantNameLabel: UILabel!
 
+    var spinner: UIView?
+
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
     }
@@ -32,6 +34,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
                 return
         }
 
+        spinner = showSpinner(onView: view)
         // Edit existing queue record
         if queueRecord != nil {
             CustomerQueueLogicManager.shared()
@@ -99,6 +102,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     }
 
     func didAddQueueRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.queueRecordCreateSuccessMessage,
@@ -109,6 +113,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     }
 
     func didUpdateQueueRecord() {
+        removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
             message: Constants.queueRecordUpdateSuccessMessage,
