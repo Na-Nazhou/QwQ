@@ -41,10 +41,8 @@ struct QueueRecord: Record {
         self.rejectTime = rejectTime
     }
 
-    init?(dictionary: [String: Any]) {
-        guard let id = dictionary["id"] as? String,
-            let rId = dictionary["restaurant"] as? String,
-            let cId = dictionary["customer"] as? String,
+    init?(dictionary: [String: Any], id: String = "0", rId: String = "0") {
+        guard let cId = dictionary["customer"] as? String,
             let groupSize = dictionary["groupSize"] as? Int,
             let babyCQuantity = dictionary["babyChairQuantity"] as? Int,
             let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,

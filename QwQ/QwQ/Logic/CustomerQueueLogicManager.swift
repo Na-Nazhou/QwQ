@@ -11,7 +11,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
-    private var queueHistory = CustomerQueueHistory() //[QueueRecord]()
+    private var queueHistory = CustomerQueueHistory()
     var pastQueueRecords: [QueueRecord] {
         return Array(queueHistory.history)
     }
@@ -20,6 +20,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.customer = customer
         queueStorage = FBQueueStorage()
         loadQueueRecord()
+        fetchQueueHistory()
     }
 
     private func loadQueueRecord() {
@@ -37,7 +38,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             guard $0 != nil else {
                 return
             }
-            self.queueHistory.addToHistory($0!)
+            let didAddNew = self.queueHistory.addToHistory($0!)
+            if !didAddNew {
+                return
+            }
+            self.activitiesDelegate?.didLoadNewRecords()
         })
     }
 

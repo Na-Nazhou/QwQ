@@ -67,6 +67,10 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.reloadData()
     }
 
+    func didLoadNewRecords() {
+        activitiesCollectionView.reloadData()
+    }
+
     func didDeleteQueueRecord() {
         showMessage(
             title: Constants.successTitle,
