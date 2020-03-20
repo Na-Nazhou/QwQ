@@ -107,6 +107,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             activityCell.deleteAction = {
                 CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
             }
+            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-queue-icon"))
         }
 
         if let bookRecord = record as? BookRecord {
@@ -116,6 +117,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             activityCell.deleteAction = {
                 // TODO
             }
+            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-book-icon"))
         }
 
         return activityCell

@@ -16,7 +16,7 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet private var deleteButton: UIButton!
     @IBOutlet private var editButton: UIButton!
     @IBOutlet private var estimatedTimeLabel: UILabel!
-    @IBOutlet private var queueBookImageView: UIImageView!
+    @IBOutlet var queueBookImageView: UIImageView!
     
     @IBAction private func handleDelete(_ sender: Any) {
         deleteAction?()
@@ -43,9 +43,6 @@ class ActivityCell: UICollectionViewCell {
 
         // TODO
         estimatedTimeLabel.text = "00:00"
-        if let image = UIImage(named: "c-book-icon") {
-            queueBookImageView.image = image
-        }
 
         if record.isHistoryRecord {
             editButton.isHidden = true
