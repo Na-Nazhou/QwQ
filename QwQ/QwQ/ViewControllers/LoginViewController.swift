@@ -59,9 +59,7 @@ class LoginViewController: UIViewController {
             return
         }
         let authDetails = AuthDetails(email: email, password: password)
-        Auth.login(authDetails: authDetails, completion: {
-            self.authCompleted()
-        }, errorHandler: handleError(error:))
+        Auth.login(authDetails: authDetails, completion: authCompleted, errorHandler: handleError(error:))
 
         spinner = showSpinner(onView: view)
 
@@ -83,6 +81,7 @@ class LoginViewController: UIViewController {
 
     private func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 
 }

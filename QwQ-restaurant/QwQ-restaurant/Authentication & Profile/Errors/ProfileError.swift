@@ -1,6 +1,6 @@
 //
 //  ProfileError.swift
-//  QwQ
+//  QwQ-restaurant
 //
 //  Created by Daniel Wong on 20/3/20.
 //

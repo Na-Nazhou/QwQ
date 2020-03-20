@@ -16,6 +16,8 @@ class SignUpViewController: UIViewController {
 
     typealias Auth = FBAuthenticator
 
+    var spinner: UIView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,19 +60,26 @@ class SignUpViewController: UIViewController {
                         buttonText: Constants.okayTitle)
             return
         }
+
+        spinner = showSpinner(onView: view)
+
         let signupDetails = SignupDetails(name: name, contact: contact)
         let authDetails = AuthDetails(email: email, password: password)
-        Auth.signup(signupDetails: signupDetails, authDetails: authDetails, completion: {
-            self.authCompleted()
-        }) { (error) in
-            self.showMessage(title: Constants.errorTitle,
-                             message: error.localizedDescription,
-                             buttonText: Constants.okayTitle)
-        }
+
+        Auth.signup(signupDetails: signupDetails,
+                    authDetails: authDetails,
+                    completion: authCompleted,
+                    errorHandler: handleError(error:))
     }
 
     private func authCompleted() {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+        removeSpinner(spinner)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {

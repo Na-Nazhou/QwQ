@@ -1,37 +1,38 @@
 //
-//  UserStorage.swift
-//  QwQ
+//  ProfileStorage.swift
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 11/3/20.
+//  Created by Daniel Wong on 18/3/20.
 //
 
 import UIKit
 
 protocol ProfileStorage {
 
-    // MARK: - Customer Creation Methods
+    // MARK: - Restaurant Creation Methods
 
-    static func createInitialCustomerProfile(uid: String,
+    static func createInitialRestaurantProfile(uid: String,
                                              signupDetails: SignupDetails,
                                              authDetails: AuthDetails,
                                              errorHandler: @escaping (Error) -> Void)
 
-    // MARK: - Customer Info Retrieval Methods
-    
-    static func getCustomerInfo(completion: @escaping (Customer) -> Void,
+    // MARK: - Restaurant Info Retrieval Methods
+
+    static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
                                 errorHandler: @escaping (Error) -> Void)
 
-    static func getCustomerProfilePic(uid: String,
+    static func getRestaurantProfilePic(uid: String,
                                       placeholder imageView: UIImageView)
 
-    // MARK: - Customer Info Update Methods
+    // MARK: - Restaurant Info Update Methods
 
-    static func updateCustomerInfo(customer: Customer,
+    static func updateRestaurantInfo(restaurant: Restaurant,
                                    completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void)
 
-    static func updateCustomerProfilePic(uid: String,
+    static func updateRestaurantProfilePic(uid: String,
                                          image: UIImage,
                                          errorHandler: @escaping (Error) -> Void)
 
 }
+

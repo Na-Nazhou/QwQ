@@ -1,8 +1,8 @@
 //
 //  FBProfileStorage.swift
-//  QwQ
+//  QwQ-restaurant
 //
-//  Created by Daniel Wong on 14/3/20.
+//  Created by Daniel Wong on 18/3/20.
 //
 
 import FirebaseAuth
@@ -13,32 +13,34 @@ import SDWebImage
 
 class FBProfileStorage: ProfileStorage {
 
-    static let dbRef = Firestore.firestore().collection("customers")
+    static let dbRef = Firestore.firestore().collection("restaurants")
     static let storageRef = Storage.storage().reference().child("profile-pics")
 
-    static func createInitialCustomerProfile(uid: String,
-                                             signupDetails: SignupDetails,
-                                             authDetails: AuthDetails,
-                                             errorHandler: @escaping (Error) -> Void) {
+    static func createInitialRestaurantProfile(uid: String,
+                                               signupDetails: SignupDetails,
+                                               authDetails: AuthDetails,
+                                               errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
-        db.collection("customers")
+        db.collection("restaurants")
             .document(uid)
             .setData(["uid": uid,
                       "name": signupDetails.name,
                       "contact": signupDetails.contact,
                       "email": authDetails.email]) { (error) in
-                if let error = error {
-                    errorHandler(error)
-                }
+            if let error = error {
+                errorHandler(error)
+            }
             }
     }
 
-    static func getCustomerInfo(completion: @escaping (Customer) -> Void,
-                                errorHandler: @escaping (Error) -> Void) {
+    static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
+                                  errorHandler: @escaping (Error) -> Void) {
+
         guard let user = Auth.auth().currentUser else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
+
         let docRef = dbRef.document(user.uid)
 
         docRef.getDocument { (document, error) in
@@ -46,10 +48,10 @@ class FBProfileStorage: ProfileStorage {
                 errorHandler(error)
                 return
             }
-
+            
             if let data = document?.data() {
-                if let customer = Customer(dictionary: data) {
-                    completion(customer)
+                if let restaurant = Restaurant(dictionary: data) {
+                    completion(restaurant)
                     return
                 }
             }
@@ -63,8 +65,8 @@ class FBProfileStorage: ProfileStorage {
         }
     }
 
-    static func getCustomerProfilePic(uid: String,
-                                      placeholder imageView: UIImageView) {
+    static func getRestaurantProfilePic(uid: String,
+                                        placeholder imageView: UIImageView) {
         let reference = storageRef.child("\(uid).png")
         guard let image = imageView.image else {
             return
@@ -72,28 +74,27 @@ class FBProfileStorage: ProfileStorage {
         imageView.checkCacheThenSetImage(with: reference, placeholder: image)
     }
 
-    static func updateCustomerInfo(customer: Customer,
-                                   completion: @escaping () -> Void,
-                                   errorHandler: @escaping (Error) -> Void) {
+    static func updateRestaurantInfo(restaurant: Restaurant,
+                                     completion: @escaping () -> Void,
+                                     errorHandler: @escaping (Error) -> Void) {
         guard let user = Auth.auth().currentUser else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
         let docRef = dbRef.document(user.uid)
 
-        docRef.updateData(customer.dictionary) { (error) in
+        docRef.updateData(restaurant.dictionary) { (error) in
             if let error = error {
                 errorHandler(error)
                 return
             }
-            CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)
             completion()
         }
     }
 
-    static func updateCustomerProfilePic(uid: String,
-                                         image: UIImage,
-                                         errorHandler: @escaping (Error) -> Void) {
+    static func updateRestaurantProfilePic(uid: String,
+                                           image: UIImage,
+                                           errorHandler: @escaping (Error) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             errorHandler(ProfileError.NoImageSelected)
             return
@@ -106,5 +107,4 @@ class FBProfileStorage: ProfileStorage {
         }
         SDImageCache.shared.removeImage(forKey: storageRef.child("\(uid).png").fullPath, withCompletion: nil)
     }
-
 }

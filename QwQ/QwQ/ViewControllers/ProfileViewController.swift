@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
+
     @IBOutlet private var profileImageView: UIImageView!
     
     typealias Profile = FBProfileStorage
