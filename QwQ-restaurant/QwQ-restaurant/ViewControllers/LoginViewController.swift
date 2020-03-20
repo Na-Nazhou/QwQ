@@ -3,33 +3,26 @@
 //  QwQ-restaurant
 //
 //  Created by Tan Su Yee on 14/3/20.
-//  Copyright © 2020 Appfish. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController, AuthDelegate {
+class LoginViewController: UIViewController {
     
-    let auth: Authenticator
+    typealias Profile = FBProfileStorage
+    typealias Auth = FBAuthenticator
     
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-    
-    init() {
-        self.auth = FBAuthenticator()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        super.init(coder: coder)
-    }
+
+    var spinner: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        auth.setDelegate(delegate: self)
-        auth.checkIfAlreadyLoggedIn()
+        Auth.checkIfAlreadyLoggedIn {
+            self.authCompleted()
+        }
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -64,14 +57,29 @@ class LoginViewController: UIViewController, AuthDelegate {
             return
         }
         
-        auth.login(email: email, password: password)
-    }
-    
-    func authCompleted() {
-        performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
+        let authDetails = AuthDetails(email: email, password: password)
+        Auth.login(authDetails: authDetails, completion: authCompleted, errorHandler: handleError(error:))
+
+        spinner = showSpinner(onView: view)
     }
 
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
     }
     
+    private func authCompleted() {
+        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                  errorHandler: handleError(error:))
+    }
+
+    private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        // RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
+        removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
+    }
+
 }

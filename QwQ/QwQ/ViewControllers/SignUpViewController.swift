@@ -7,29 +7,19 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, AuthDelegate {
+class SignUpViewController: UIViewController {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    let auth: Authenticator
+    typealias Auth = FBAuthenticator
 
-    init() {
-        self.auth = FBAuthenticator()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        super.init(coder: coder)
-    }
+    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        auth.setDelegate(delegate: self)
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -71,11 +61,25 @@ class SignUpViewController: UIViewController, AuthDelegate {
             return
         }
 
-        auth.signup(name: name, contact: contact, email: email, password: password)
+        spinner = showSpinner(onView: view)
+
+        let signupDetails = SignupDetails(name: name, contact: contact)
+        let authDetails = AuthDetails(email: email, password: password)
+
+        Auth.signup(signupDetails: signupDetails,
+                    authDetails: authDetails,
+                    completion: authCompleted,
+                    errorHandler: handleError(error:))
     }
 
-    func authCompleted() {
+    private func authCompleted() {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+        removeSpinner(spinner)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {
