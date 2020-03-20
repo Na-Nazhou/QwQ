@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        removeSpinner(spinner)
         self.nameLabel.text = restaurant.name
         self.emailLabel.text = restaurant.email
         self.contactLabel.text = restaurant.contact
