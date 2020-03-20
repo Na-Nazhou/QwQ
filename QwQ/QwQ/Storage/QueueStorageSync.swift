@@ -3,6 +3,12 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func restaurantDidAdmitCustomer(record: QueueRecord)
     // Supposing restaurant can only kick customers from waiting list and not the queue itself
     func restaurantDidRejectCustomer(record: QueueRecord)
+
+    func customerDidDeleteActiveQueueRecord()
+    func queueRecordDidUpdate(_ record: QueueRecord)
+    // Customer actions synced from other devices -- TODO?
+//    func queueRecordDidGetAdded(rec: QueueRecord)
+//    func customerDidModifyQueueRecord(rec: QueueRecord)
 }
 
 protocol QueueOpenCloseSyncDelegate: AnyObject {

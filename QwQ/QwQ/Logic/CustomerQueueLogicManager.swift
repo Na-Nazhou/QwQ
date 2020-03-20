@@ -10,7 +10,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
-    var currentQueueRecord: QueueRecord?
+    var currentQueueRecord: QueueRecord? {
+        didSet {
+            if let rec = currentQueueRecord {
+                activitiesDelegate?.didUpdateQueueRecord()
+
+                if let old = oldValue, old == rec {
+                    return
+                }
+
+                print("qlogic adding listener")
+                queueStorage.listenOnlyToCurrentRecord(rec)
+            }
+        }
+    }
     private var queueHistory = CustomerQueueHistory()
     var pastQueueRecords: [QueueRecord] {
         return Array(queueHistory.history)
@@ -21,6 +34,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         queueStorage = FBQueueStorage()
         loadQueueRecord()
         fetchQueueHistory()
+    }
+
+    deinit {
+        print("\n\tDEINITING\n")
+        queueStorage.removeListener()
     }
 
     private func loadQueueRecord() {
@@ -42,7 +60,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             if !didAddNew {
                 return
             }
-            self.activitiesDelegate?.didLoadNewRecords()
+            self.activitiesDelegate?.didLoadNewHistoryRecords()
         })
     }
 
@@ -111,12 +129,50 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         queueStorage.deleteQueueRecord(record: record,
-                                       completion: { self.didDeleteQueueRecord() })
+                                       completion: {  })
     }
 
-    private func didDeleteQueueRecord() {
+    func queueRecordDidUpdate(_ record: QueueRecord) {
+        assert(currentQueueRecord != nil, "current queue record should exist to trigger udpate.")
+        assert(currentQueueRecord! == record, "Should only receive update for current queue record.")
+        let modification = record.changeType(from: currentQueueRecord!)
+        switch modification {
+        case .admit:
+            // call some (activites) delegate to display admission status
+            currentQueueRecord = record //tent.
+            print("\ndetected admission\n")
+        case .serve:
+            addAsHistoryRecord(record)
+            removeActiveRecord()
+            print("\ndetected service\n")
+        case .reject:
+            addAsHistoryRecord(record)
+            removeActiveRecord()
+            print("\ndetected rejection\n")
+        case .customerUpdate:
+            currentQueueRecord = record
+            print("\ndetected regular modif\n")
+        case .none:
+            assert(false, "Modification should be something")
+        }
+    }
+
+    func customerDidDeleteActiveQueueRecord() {
+        assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
+        removeActiveRecord()
+    }
+
+    private func removeActiveRecord() {
+        queueStorage.removeListener()
+
         currentQueueRecord = nil
         activitiesDelegate?.didDeleteQueueRecord()
+    }
+
+    private func addAsHistoryRecord(_ record: QueueRecord) {
+        if queueHistory.addToHistory(record) {
+            activitiesDelegate?.didLoadNewHistoryRecords()
+        }
     }
 
     func restaurantDidAdmitCustomer(record: QueueRecord) {
