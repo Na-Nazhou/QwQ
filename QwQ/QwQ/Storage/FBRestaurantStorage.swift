@@ -1,6 +1,13 @@
+import FirebaseFirestore
 class FBRestaurantStorage: RestaurantStorage {
 
+    let db: Firestore
+
     weak var logicDelegate: RestaurantStorageSyncDelegate?
+
+    init() {
+        self.db = Firestore.firestore()
+    }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
         logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
@@ -10,16 +17,18 @@ class FBRestaurantStorage: RestaurantStorage {
         logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
     }
 
-    func loadAllRestaurants(completion: @escaping ([Restaurant]) -> Void) {
-        //TODO
-        let restaurants = [
-            Restaurant(uid: "1", name: "restaurant1", email: "j@mail.com", contact: "12345678",
-                       address: "location1", menu: "menu1", isOpen: true),
-            Restaurant(uid: "2", name: "restaurant2", email: "k@mail.com", contact: "12345678",
-                       address: "location2", menu: "menu2", isOpen: true),
-            Restaurant(uid: "3", name: "restaurant3", email: "l@mail.com", contact: "12345678",
-                       address: "location3", menu: "menu3", isOpen: false)
-        ]
-        completion(restaurants)
+    func loadAllRestaurants(completion: @escaping (Restaurant) -> Void) {
+        db.collection(Constants.restaurantsDirectory).getDocuments { (restaurantsSnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
+            }
+            for document in restaurantsSnapshot!.documents {
+                guard let restaurant = Restaurant(dictionary: document.data()) else {
+                    continue
+                }
+                completion(restaurant)
+            }
+        }
     }
 }

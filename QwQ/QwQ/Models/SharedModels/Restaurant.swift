@@ -1,3 +1,5 @@
+import FirebaseFirestore
+import Foundation
 struct Restaurant: User {
     let uid: String
     let name: String
@@ -7,7 +9,23 @@ struct Restaurant: User {
     let address: String
     let menu: String
 
-    var isOpen: Bool
+    var isRestaurantOpen: Bool
+
+    //previous recorded times
+    var queueOpenTime: Date?
+    var queueCloseTime: Date?
+
+    var isQueueOpen: Bool {
+        guard let queueOpenTime = queueOpenTime else {
+            return false
+        }
+        let isOpen = queueCloseTime == nil
+            || queueOpenTime > queueCloseTime!
+        if isOpen {
+            assert(Date() > queueOpenTime, "Current date should be after open time to be open!")
+        }
+        return isOpen
+    }
 
     var dictionary: [String: Any] {
         [
@@ -17,18 +35,23 @@ struct Restaurant: User {
             "contact": contact,
             "address": address,
             "menu": menu,
-            "isOpen": isOpen
+            "isRestaurantOpen": isRestaurantOpen,
+            "queueOpenTime": queueOpenTime as Any,
+            "queueCloseTime": queueCloseTime as Any
         ]
     }
 
-    init(uid: String, name: String, email: String, contact: String, address: String, menu: String, isOpen: Bool) {
+    init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
+         isRestaurantOpen: Bool, queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
         self.address = address
         self.menu = menu
-        self.isOpen = isOpen
+        self.isRestaurantOpen = isRestaurantOpen
+        self.queueOpenTime = queueOpenTime
+        self.queueCloseTime = queueCloseTime
     }
 
     init?(dictionary: [String: Any]) {
@@ -38,7 +61,7 @@ struct Restaurant: User {
             let contact = dictionary["contact"] as? String,
             let address = dictionary["address"] as? String,
             let menu = dictionary["menu"] as? String,
-            let isOpen = dictionary["isOpen"] as? Bool
+            let isRestaurantOpen = dictionary["isRestaurantOpen"] as? Bool
         else {
                 return nil
         }
@@ -49,6 +72,34 @@ struct Restaurant: User {
         self.contact = contact
         self.address = address
         self.menu = menu
-        self.isOpen = isOpen
+        self.isRestaurantOpen = isRestaurantOpen
+        self.queueOpenTime = (dictionary["queueOpenTime"] as? Timestamp)?.dateValue()
+        self.queueCloseTime = (dictionary["queueCloseTime"] as? Timestamp)?.dateValue()
+    }
+}
+
+extension Restaurant {
+    static func restaurantToDictionary(_ restaurant: Restaurant) -> [String: Any] {
+        var data = [String: Any]()
+        data["uid"] = restaurant.uid
+        data["name"] = restaurant.name
+        data["email"] = restaurant.email
+        data["contact"] = restaurant.contact
+        data["address"] = restaurant.address
+        data["menu"] = restaurant.menu
+        data["isRestaurantOpen"] = restaurant.isRestaurantOpen
+        data["queueOpenTime"] = restaurant.queueOpenTime
+        data["queueCloseTime"] = restaurant.queueCloseTime
+        return data
+    }
+}
+
+extension Restaurant {
+    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.uid)
     }
 }

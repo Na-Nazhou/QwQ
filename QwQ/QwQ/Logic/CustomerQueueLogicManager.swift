@@ -11,12 +11,16 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
-    var queueHistory = [QueueRecord]()
+    private var queueHistory = CustomerQueueHistory()
+    var pastQueueRecords: [QueueRecord] {
+        return Array(queueHistory.history)
+    }
 
     private init(customer: Customer) {
         self.customer = customer
         queueStorage = FBQueueStorage()
         loadQueueRecord()
+        fetchQueueHistory()
     }
 
     private func loadQueueRecord() {
@@ -26,12 +30,19 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
-        restaurant.isOpen && currentQueueRecord == nil
+        restaurant.isQueueOpen && currentQueueRecord == nil
     }
 
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
-            self.queueHistory = $0
+            guard $0 != nil else {
+                return
+            }
+            let didAddNew = self.queueHistory.addToHistory($0!)
+            if !didAddNew {
+                return
+            }
+            self.activitiesDelegate?.didLoadNewRecords()
         })
     }
 

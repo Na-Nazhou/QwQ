@@ -42,3 +42,13 @@ struct Customer: User {
         self.contact = contact
     }
 }
+
+extension Customer {
+    static func == (lhs: Customer, rhs: Customer) -> Bool {
+        return lhs.uid == rhs.uid
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.uid)
+    }
+}

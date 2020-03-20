@@ -9,8 +9,8 @@ protocol CustomerQueueStorage: QueueStorageSync {
     func deleteQueueRecord(record: QueueRecord, completion:  @escaping () -> Void)
 
     // MARK: - Query
-    /// Return the current queue record (if any) of the customer
+    /// Calls  completion handler when it finds customer's active queue record.
     func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 
-    func loadQueueHistory(customer: Customer, completion: @escaping ([QueueRecord]) -> Void)
+    func loadQueueHistory(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 }

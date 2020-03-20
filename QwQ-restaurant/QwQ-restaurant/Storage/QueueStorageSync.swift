@@ -1,7 +1,7 @@
 /// Represents the protocol any queue storage syncing delegates need to conform to.
 protocol QueueStorageSyncDelegate: AnyObject {
     func customerDidJoinQueue(with record: QueueRecord)
-    func customerDidUpdateQueueRecord(from old: QueueRecord, to new: QueueRecord)
+    func customerDidUpdateQueueRecord(to new: QueueRecord)
     func customerDidWithdrawQueue(record: QueueRecord)
 
     func restaurantDidAdmitCustomer(record: QueueRecord)
@@ -23,8 +23,9 @@ protocol QueueStorageSync {
     var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate? { get set }
 
     // MARK: - Sync handlers
+    //TODO: instead let logic handle what change in record it was. (from interacting with RQueue)
     func didDetectNewQueueRecord(record: QueueRecord)
-    func didDetectQueueRecordUpdate(old: QueueRecord, new: QueueRecord)
+    func didDetectQueueRecordUpdate(new: QueueRecord)
     func didDetectWithdrawnQueueRecord(record: QueueRecord)
 
     func didDetectAdmissionOfCustomer(record: QueueRecord)

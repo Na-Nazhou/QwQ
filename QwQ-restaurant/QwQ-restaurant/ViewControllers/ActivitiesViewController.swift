@@ -12,22 +12,21 @@ import Foundation
 class ActivitiesViewController: UIViewController {
     
     var filtered: [Record] = []
-    var records: [Record] = [QueueRecord(id: "1",
-
-                                         restaurant: Restaurant(uid: "3", name: "hottomato",
-                                                                email: "ht@mail.com", contact: "12345678",
-                                                                address: "location", menu: "menu",
-                                                                isOpen: true),
-                                         customer: Customer(uid: "2", name: "jane",
-                                                            email: "jane@gmail.com", contact: "98273483"),
-                                                   groupSize: 4,
-                                                   babyChairQuantity: 0, wheelchairFriendly: true,
-                                                   startTime: Date())]
+    var records: [Record] = [
+        QueueRecord(id: "1",
+                    restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com",
+                                           contact: "12345678", address: "location", menu: "menu",
+                                           isRestaurantOpen: true, queueOpenTime: nil, queueCloseTime: nil),
+                                         
+                    customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
+                    groupSize: 4, babyChairQuantity: 0, wheelchairFriendly: true, startTime: Date())
+    ]
     
     @IBOutlet private var searchBarController: UISearchBar!
     @IBOutlet private var queueRecordCollectionView: UICollectionView!
     
-    @IBAction private func handleOpenClose(_ sender: Any) { 
+    @IBAction private func handleOpenClose(_ sender: Any) {
+        
     }
     
     override func viewDidLoad() {
