@@ -12,8 +12,8 @@ class FBCustomerInfoStorage: CustomerInfoStorage {
     static func getCustomerFromUID(uid: String,
                                    completion: @escaping (Customer) -> Void,
                                    errorHandler: ((Error) -> Void)?) {
-        let db = Firestore.firestore()
 
+        let db = Firestore.firestore()
         let docRef = db.collection(Constants.customersDirectory).document(uid)
 
         docRef.getDocument { (document, error) in

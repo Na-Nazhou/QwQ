@@ -3,41 +3,30 @@
 //  QwQ-restaurant
 //
 //  Created by Tan Su Yee on 14/3/20.
-//  Copyright © 2020 Appfish. All rights reserved.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController, AuthDelegate {
+class SignUpViewController: UIViewController {
     
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
     
-    let auth: Authenticator
-    
-    init() {
-        self.auth = FBAuthenticator()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        super.init(coder: coder)
-    }
-    
+    typealias Auth = FBAuthenticator
+
+    var spinner: UIView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth.setDelegate(delegate: self)
-        
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
+    }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction private func submitButton(_ sender: Any) {
@@ -74,12 +63,26 @@ class SignUpViewController: UIViewController, AuthDelegate {
                         buttonAction: nil)
             return
         }
+
+        spinner = showSpinner(onView: view)
+
+        let signupDetails = SignupDetails(name: name, contact: contact)
+        let authDetails = AuthDetails(email: email, password: password)
         
-        auth.signup(name: name, contact: contact, email: email, password: password)
+        Auth.signup(signupDetails: signupDetails,
+                    authDetails: authDetails,
+                    completion: authCompleted,
+                    errorHandler: handleError(error:))
     }
     
-    func authCompleted() {
+    private func authCompleted() {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+        removeSpinner(spinner)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
     
     private func checkIfAllFieldsAreFilled() -> Bool {
