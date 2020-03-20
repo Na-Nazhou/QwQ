@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController, ProfileDelegate {
+class EditProfileViewController: UIViewController {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
@@ -15,63 +15,28 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
     
     @IBOutlet private var profileImageView: UIImageView!
     
-    let profileStorage: ProfileStorage
+    typealias Profile = FBProfileStorage
+
     var uid: String?
     var image: UIImage?
 
     var spinner: UIView?
 
-    init() {
-        profileStorage = FBProfileStorage()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        profileStorage = FBProfileStorage()
-        super.init(coder: coder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        profileStorage.setDelegate(delegate: self)
-        profileStorage.getCustomerInfo()
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
 
-    func getCustomerInfoComplete(customer: Customer) {
-        self.uid = customer.uid
-        self.nameTextField.text = customer.name
-        self.contactTextField.text = customer.contact
-        self.emailTextField.text = customer.email
-        setUpProfileImageView(uid: customer.uid)
-    }
-
-    func updateComplete() {
-        removeSpinner(spinner)
-        showMessage(title: Constants.successTitle,
-                    message: Constants.profileUpdateSuccessMessage,
-                    buttonText: Constants.okayTitle,
-                    buttonAction: { (_: UIAlertAction!) -> Void in
-                        self.navigationController?.popViewController(animated: true) })
+    override func viewDidAppear(_ animated: Bool) {
+        Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
+                                errorHandler: handleError(error:))
+        spinner = showSpinner(onView: view)
     }
 
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
-    }
-    
-    private func setUpProfileImageView(uid: String) {
-        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                                 action: #selector(self.handleProfileTap(_:)))
-        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
-        profileImageView.isUserInteractionEnabled = true
-        profileStorage.getCustomerProfilePic(uid: uid, placeholder: profileImageView)
-    }
-    
-    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
-        showImagePickerControllerActionSheet()
     }
 
     @IBAction private func saveButton(_ sender: Any) {
@@ -107,12 +72,51 @@ class EditProfileViewController: UIViewController, ProfileDelegate {
             return
         }
 
+        let customer = Customer(uid: uid, name: name, email: email, contact: contact)
+
         spinner = showSpinner(onView: view)
-        profileStorage.updateCustomerInfo(customer: Customer(uid: uid, name: name, email: email, contact: contact))
+        Profile.updateCustomerInfo(customer: customer, completion: updateComplete, errorHandler: handleError(error:))
 
         if let image = image {
-            profileStorage.updateCustomerProfilePic(uid: uid, image: image)
+            Profile.updateCustomerProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
+    }
+
+    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
+        showImagePickerControllerActionSheet()
+    }
+
+    private func getCustomerInfoComplete(customer: Customer) {
+        self.uid = customer.uid
+        self.nameTextField.text = customer.name
+        self.contactTextField.text = customer.contact
+        self.emailTextField.text = customer.email
+
+        setUpProfileImageView(uid: customer.uid)
+        
+        removeSpinner(spinner)
+    }
+
+    private func updateComplete() {
+        removeSpinner(spinner)
+        showMessage(title: Constants.successTitle,
+                    message: Constants.profileUpdateSuccessMessage,
+                    buttonText: Constants.okayTitle,
+                    buttonAction: { (_: UIAlertAction!) -> Void in
+                        self.navigationController?.popViewController(animated: true) })
+    }
+    
+    private func setUpProfileImageView(uid: String) {
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(self.handleProfileTap(_:)))
+        profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
+        profileImageView.isUserInteractionEnabled = true
+
+        Profile.getCustomerProfilePic(uid: uid, placeholder: profileImageView)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {

@@ -8,28 +8,22 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
+class LoginViewController: UIViewController {
 
-    let auth: Authenticator
+    typealias Profile = FBProfileStorage
+    typealias Auth = FBAuthenticator
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    init() {
-        self.auth = FBAuthenticator()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        super.init(coder: coder)
-    }
+    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth.setDelegate(delegate: self)
-        auth.checkIfAlreadyLoggedIn()
+        Auth.checkIfAlreadyLoggedIn {
+            self.authCompleted()
+        }
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -64,27 +58,31 @@ class LoginViewController: UIViewController, AuthDelegate, ProfileDelegate {
                         buttonText: Constants.okayTitle)
             return
         }
+        let authDetails = AuthDetails(email: email, password: password)
+        Auth.login(authDetails: authDetails, completion: {
+            self.authCompleted()
+        }, errorHandler: handleError(error:))
 
-        auth.login(email: email, password: password)
+        spinner = showSpinner(onView: view)
 
-    }
-
-    func authCompleted() {
-        let profile = FBProfileStorage()
-        profile.setDelegate(delegate: self)
-
-        profile.getCustomerInfo()
-    }
-
-    func getCustomerInfoComplete(customer: Customer) {
-        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
-        performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
-    }
-
-    func updateComplete() {
-        fatalError("This method is not used here.")
     }
 
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
     }
+
+    private func authCompleted() {
+        Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
+                                errorHandler: handleError(error:))
+    }
+
+    private func getCustomerInfoComplete(customer: Customer) {
+        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
+        removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
+    }
+
+    private func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+    }
+
 }

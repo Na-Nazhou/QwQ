@@ -7,29 +7,17 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, AuthDelegate {
+class SignUpViewController: UIViewController {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    let auth: Authenticator
-
-    init() {
-        self.auth = FBAuthenticator()
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.auth = FBAuthenticator()
-        super.init(coder: coder)
-    }
+    typealias Auth = FBAuthenticator
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        auth.setDelegate(delegate: self)
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -70,11 +58,18 @@ class SignUpViewController: UIViewController, AuthDelegate {
                         buttonText: Constants.okayTitle)
             return
         }
-
-        auth.signup(name: name, contact: contact, email: email, password: password)
+        let signupDetails = SignupDetails(name: name, contact: contact)
+        let authDetails = AuthDetails(email: email, password: password)
+        Auth.signup(signupDetails: signupDetails, authDetails: authDetails, completion: {
+            self.authCompleted()
+        }) { (error) in
+            self.showMessage(title: Constants.errorTitle,
+                             message: error.localizedDescription,
+                             buttonText: Constants.okayTitle)
+        }
     }
 
-    func authCompleted() {
+    private func authCompleted() {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
