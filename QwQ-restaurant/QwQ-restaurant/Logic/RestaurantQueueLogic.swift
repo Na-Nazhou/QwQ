@@ -16,10 +16,10 @@ protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDeleg
     var queueStorage: RestaurantQueueStorage { get set }
     var restaurantQueue: RestaurantQueue { get set }
 
-    /// Loads and returns the active queue records of the restaurant.
-    func loadQueue() -> [QueueRecord]
-    /// Loads and returns the list of customers the restaurant is waiting to turn up after being admitted.
-    func loadWaiting() -> [QueueRecord]
+    /// Loads the active queue records of the restaurant.
+    func fetchQueue()
+    /// Loads the list of customers the restaurant is waiting to turn up after being admitted.
+    func fetchWaiting()
     /// Opens queue and registers the opening time of the restaurant as the current time.
     func openQueue()
     /// Closes queue and registers the closing time of the restaurant as the current time.

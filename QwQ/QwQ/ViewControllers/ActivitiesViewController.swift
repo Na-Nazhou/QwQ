@@ -33,7 +33,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     var historyRecords: [Record] {
-        CustomerQueueLogicManager.shared().queueHistory
+        CustomerQueueLogicManager.shared().pastQueueRecords
     }
     
     override func viewDidLoad() {
@@ -66,6 +66,10 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         default:
             return
         }
+        activitiesCollectionView.reloadData()
+    }
+
+    func didLoadNewRecords() {
         activitiesCollectionView.reloadData()
     }
 

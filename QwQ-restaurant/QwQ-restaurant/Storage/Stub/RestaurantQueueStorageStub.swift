@@ -16,10 +16,6 @@ class RestaurantQueueStorageStub: RestaurantQueueStorage, QueueStorageSync {
         //firebase admit customer
     }
 
-    func removeCustomerFromQueue(record: QueueRecord) {
-        //firebase remove customer
-    }
-
     func serveCustomer(record: QueueRecord) {
         //firebase clear customer from active waiting to turn up list
     }
@@ -28,22 +24,20 @@ class RestaurantQueueStorageStub: RestaurantQueueStorage, QueueStorageSync {
         //firebase reject customer from waiting to turn up list
     }
 
-    func loadQueue(of restaurant: Restaurant) -> [QueueRecord] {
+    func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
         //firebase load active queue
-        return []
     }
 
-    func loadWaitingList(of restaurant: Restaurant) -> [QueueRecord] {
+    func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
         //firebase load active waiting list
-        return []
     }
 
     func didDetectNewQueueRecord(record: QueueRecord) {
         queueModificationLogicDelegate?.customerDidJoinQueue(with: record)
     }
 
-    func didDetectQueueRecordUpdate(old: QueueRecord, new: QueueRecord) {
-        queueModificationLogicDelegate?.customerDidUpdateQueueRecord(from: old, to: new)
+    func didDetectQueueRecordUpdate(new: QueueRecord) {
+        queueModificationLogicDelegate?.customerDidUpdateQueueRecord(to: new)
     }
 
     func didDetectWithdrawnQueueRecord(record: QueueRecord) {

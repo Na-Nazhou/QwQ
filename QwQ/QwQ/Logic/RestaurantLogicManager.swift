@@ -9,7 +9,10 @@ class RestaurantLogicManager: RestaurantLogic {
 
     var customer: Customer
     var currentRestaurant: Restaurant?
-    var restaurants = [Restaurant]()
+    private var restaurantCollection = RestaurantCollection()
+    var restaurants: [Restaurant] {
+        Array(restaurantCollection.restaurants)
+    }
 
     private init(customer: Customer) {
         self.customer = customer
@@ -19,27 +22,31 @@ class RestaurantLogicManager: RestaurantLogic {
 
     func fetchRestaurants() {
         restaurantStorage.loadAllRestaurants(completion: {
-            self.restaurants = $0
+            if self.restaurantCollection.add($0) {
+                self.searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
+            }
         })
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {
-        if let currentRestaurant = self.currentRestaurant,
-            restaurant == currentRestaurant {
-            self.currentRestaurant?.isOpen = true
-            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
-        }
+        assert(restaurant.isQueueOpen,
+               "Updated restaurant (passed in as argument) should be open.")
+        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
+               "current restaurant should be the updated restaurant.")
+        
+        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
 
         searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: true)
 
     }
 
     func restaurantDidCloseQueue(restaurant: Restaurant) {
-        if let currentRestaurant = self.currentRestaurant,
-            restaurant == currentRestaurant {
-            self.currentRestaurant?.isOpen = false
-            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
-        }
+        assert(!restaurant.isQueueOpen,
+               "Updated restaurant (passed in as argument) should be closed.")
+        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
+                      "current restaurant should be the updated restaurant.")
+        
+        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
 
         searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: false)
     }

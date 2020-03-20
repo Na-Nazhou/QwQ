@@ -20,7 +20,9 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FBProfileStorage
 
     var uid: String?
-    var isOpen: Bool?
+    var isRestaurantOpen: Bool?
+    private var queueOpenTime: Date?
+    private var queueCloseTime: Date?
     var image: UIImage?
 
     var spinner: UIView?
@@ -58,7 +60,8 @@ class EditProfileViewController: UIViewController {
         }
 
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu, let isOpen = isOpen else {
+            let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen,
+            let queueOpenTime = queueOpenTime, let queueCloseTime = queueCloseTime else {
                 return
         }
 
@@ -79,7 +82,7 @@ class EditProfileViewController: UIViewController {
         }
 
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
-                                    address: address, menu: menu, isOpen: isOpen)
+                                    address: address, menu: menu, isRestaurantOpen: isRestaurantOpen)
 
         spinner = showSpinner(onView: view)
 
@@ -103,7 +106,7 @@ class EditProfileViewController: UIViewController {
         self.contactTextField.text = restaurant.contact
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
-        self.isOpen = restaurant.isOpen
+        self.isRestaurantOpen = restaurant.isRestaurantOpen
 
         setUpProfileImageView(uid: restaurant.uid)
 
