@@ -42,7 +42,7 @@ class ActivityCell: UICollectionViewCell {
         descriptionLabel.text = "\(record.groupSize) pax"
 
         // TODO
-        estimatedTimeLabel.text = "00:00"
+        estimatedTimeLabel.text = "Estimated time: 00:00"
 
         if record.isHistoryRecord {
             editButton.isHidden = true
