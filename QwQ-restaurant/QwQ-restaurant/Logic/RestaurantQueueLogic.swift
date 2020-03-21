@@ -1,13 +1,12 @@
 protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
-    func restaurantDidOpenQueue()
-    func restaurantDidCloseQueue()
+    func restaurantDidChangeQueueStatus(toIsOpen: Bool)
 
-    func logicDidAddRecordToQueue(with record: QueueRecord)
-    func logicDidRemoveRecordFromQueue(queueRecord: QueueRecord)
-    func logicDidModifyRecordInQueue(from old: QueueRecord, to new: QueueRecord)
+    func didAddRecordToQueue(record: QueueRecord)
+    func didRemoveRecordFromQueue(record: QueueRecord)
+    func didUpdateRecordInQueue(to new: QueueRecord)
 
-    func logicDidAddRecordToWaiting(record: QueueRecord)
-    func logicDidRemoveRecordFromWaiting(record: QueueRecord)
+    func didAddRecordToWaiting(toWaiting record: QueueRecord)
+    func didRemoveRecordFromWaiting(record: QueueRecord)
 }
 
 protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDelegate {

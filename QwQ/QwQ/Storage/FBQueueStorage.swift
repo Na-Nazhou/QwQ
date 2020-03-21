@@ -161,12 +161,7 @@ class FBQueueStorage: CustomerQueueStorage {
                 print("Error fetching document: \(err!)!")
                 return
             }
-            //assume will never have to remove listeners
             guard let qRecData = qRecDocument.data() else {
-//                assert(false,
-//                       "queue record should never be emptied; i.e. should exist 'forever'."
-//                        + " In other words, qRec should never be deleted on database.")
-                //allow deletion of currQRec
                 self.queueModificationLogicDelegate?.customerDidDeleteActiveQueueRecord()
                 return
             }
@@ -183,14 +178,6 @@ class FBQueueStorage: CustomerQueueStorage {
     func removeListener() {
         listener?.remove()
         listener = nil
-    }
-    
-    func didDetectAdmissionOfCustomer(record: QueueRecord) {
-        queueModificationLogicDelegate?.restaurantDidAdmitCustomer(record: record)
-    }
-    
-    func didDetectRejectionOfCustomer(record: QueueRecord) {
-        queueModificationLogicDelegate?.restaurantDidRejectCustomer(record: record)
     }
     
     func didDetectOpenQueue(restaurant: Restaurant) {

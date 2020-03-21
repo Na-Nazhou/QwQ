@@ -107,7 +107,7 @@ extension QueueRecord {
     }
     
     var isWaitingRecord: Bool {
-        serveTime == nil && admitTime != nil
+        serveTime == nil && admitTime != nil && rejectTime == nil
     }
 
     var isUnadmittedQueueingRecord: Bool {

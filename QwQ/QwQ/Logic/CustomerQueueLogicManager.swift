@@ -174,26 +174,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             activitiesDelegate?.didLoadNewHistoryRecords()
         }
     }
-
-    func restaurantDidAdmitCustomer(record: QueueRecord) {
-        guard currentQueueRecord != nil, record.customer == customer else {
-            return
-        }
-
-        // Notify customer
-
-        currentQueueRecord?.admitTime = record.admitTime
-    }
-
-    func restaurantDidRejectCustomer(record: QueueRecord) {
-        guard currentQueueRecord != nil, record.customer == customer else {
-            return
-        }
-
-        // Notify customer
-
-        currentQueueRecord?.rejectTime = record.rejectTime
-    }
 }
 
 extension CustomerQueueLogicManager {
