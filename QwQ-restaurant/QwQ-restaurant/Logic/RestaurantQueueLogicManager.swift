@@ -52,12 +52,16 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     func openQueue() {
         assert(!restaurant.isQueueOpen, "Queue should be closed to open.")
-        queueStorage.openQueue(of: restaurant, at: currentTime())
+        let time = currentTime()
+        restaurant.queueOpenTime = time
+        queueStorage.openQueue(of: restaurant, at: time)
     }
 
     func closeQueue() {
         assert(restaurant.isQueueOpen, "Queue should be open to close.")
-        queueStorage.closeQueue(of: restaurant, at: currentTime())
+        let time = currentTime()
+        restaurant.queueCloseTime = time
+        queueStorage.closeQueue(of: restaurant, at: time)
     }
 
     func admitCustomer(record: QueueRecord) {
