@@ -201,5 +201,14 @@ extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
         filtered = records
         queueRecordCollectionView.reloadData()
     }
+}
 
+extension ActivitiesViewController : UICollectionViewDelegateFlowLayout {
+  //1
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    return CGSize(width: self.view.frame.width * 0.9, height: Constants.activityCellHeight)
+  }
 }
