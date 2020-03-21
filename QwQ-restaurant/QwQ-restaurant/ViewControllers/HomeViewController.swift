@@ -11,11 +11,9 @@ class HomeViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-    override func viewWillLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         var tabFrame = self.tabBar.frame
         tabFrame.size.height = Constants.tabBarHeight
         tabFrame.origin.y = self.view.frame.size.height - Constants.tabBarHeight

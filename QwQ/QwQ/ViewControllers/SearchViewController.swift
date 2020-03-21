@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
-
+    
     var filtered: [Restaurant] = []
     var searchActive: Bool = false
     let searchController = UISearchController(searchResultsController: nil)
@@ -33,8 +33,13 @@ class SearchViewController: UIViewController, SearchDelegate {
         if let popoverPresentationController = popoverContentController?.popoverPresentationController {
             popoverPresentationController.permittedArrowDirections = .up
             popoverPresentationController.sourceView = self.view
-            popoverPresentationController.sourceRect = buttonFrame
+            popoverPresentationController.sourceRect = CGRect(
+                x: button!.center.x - Constants.popoverContentControllerOffset,
+                y: buttonFrame.height,
+                width: 80.0,
+                height: 80.0)
             popoverPresentationController.delegate = self
+            popoverContentController?.delegate = self
             if let popoverController = popoverContentController {
                 present(popoverController, animated: true, completion: nil)
             }
@@ -57,7 +62,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
         restaurantCollectionView.reloadData()
     }
-
+    
     func restaurantCollectionDidLoadNewRestaurant() {
         //TODO: change to filtering based on new array of restaurants.
         filtered = restaurants
@@ -79,6 +84,12 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
 }
 
+extension SearchViewController: PopoverContentControllerDelegate {
+    func popoverContent(controller: PopoverContentController, didselectItem name: String) {
+        print("pop")
+    }
+}
+
 extension SearchViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
@@ -89,7 +100,8 @@ extension SearchViewController: UIPopoverPresentationControllerDelegate {
         
     }
     
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController
+    func popoverPresentationControllerShouldDismissPopover(
+        _ popoverPresentationController: UIPopoverPresentationController
     ) -> Bool {
         return true
     }
@@ -165,25 +177,5 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
-    }
-}
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        Constants.restaurantSectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
     }
 }
