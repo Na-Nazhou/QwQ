@@ -244,7 +244,7 @@
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSf-c4-dSx">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt0-XQ-w6s">
                                                 <rect key="frame" x="0.0" y="191.5" width="367" height="80.5"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                 <nil key="textColor"/>
@@ -253,7 +253,7 @@
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-hH-h5U">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSf-c4-dSx">
                                                 <rect key="frame" x="0.0" y="287" width="367" height="80.5"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                 <nil key="textColor"/>
@@ -262,8 +262,17 @@
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 </variation>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z3-hH-h5U">
+                                                <rect key="frame" x="0.0" y="382.5" width="367" height="80.5"/>
+                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                </variation>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umL-41-vHc">
-                                                <rect key="frame" x="0.0" y="382.5" width="367" height="174.5"/>
+                                                <rect key="frame" x="0.0" y="478" width="367" height="79"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -310,8 +319,25 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="98263837" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pV2-ga-XR4">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Leave blank if no change" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JPT-3Z-rdw">
                                                 <rect key="frame" x="0.0" y="191.5" width="417" height="80.5"/>
+                                                <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JPT-3Z-rdw" secondAttribute="height" multiplier="207:40" id="alV-PO-axr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES" textContentType="tel"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="98263837" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pV2-ga-XR4">
+                                                <rect key="frame" x="0.0" y="287" width="417" height="80.5"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pV2-ga-XR4" secondAttribute="height" multiplier="207:40" id="0aD-qX-hPu"/>
@@ -328,7 +354,7 @@
                                                 </variation>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="28 Jurong West St 41, S648123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aK6-5x-eCJ">
-                                                <rect key="frame" x="0.0" y="287" width="417" height="80.5"/>
+                                                <rect key="frame" x="0.0" y="382.5" width="417" height="80.5"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="aK6-5x-eCJ" secondAttribute="height" multiplier="207:40" id="O36-nx-oMY"/>
@@ -345,7 +371,7 @@
                                                 </variation>
                                             </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ejd-lG-K4E">
-                                                <rect key="frame" x="0.0" y="382.5" width="417" height="174.5"/>
+                                                <rect key="frame" x="0.0" y="478" width="417" height="79"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
@@ -357,9 +383,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JPT-3Z-rdw" firstAttribute="width" secondItem="JPT-3Z-rdw" secondAttribute="height" multiplier="207:40" id="LeZ-Ye-RKi"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="qt0-XQ-w6s" firstAttribute="height" secondItem="JPT-3Z-rdw" secondAttribute="height" id="8eq-ro-mAt"/>
                                     <constraint firstItem="4Z3-hH-h5U" firstAttribute="height" secondItem="aK6-5x-eCJ" secondAttribute="height" id="esZ-TJ-AIQ"/>
                                     <constraint firstItem="ejd-lG-K4E" firstAttribute="leading" secondItem="umL-41-vHc" secondAttribute="trailing" constant="20" id="iCb-MV-zKi"/>
                                     <constraint firstItem="huU-A8-IEQ" firstAttribute="height" secondItem="GfW-bI-YCB" secondAttribute="height" id="mxd-Fs-N2A"/>
@@ -433,6 +463,7 @@
                         <outlet property="emailTextField" destination="GfW-bI-YCB" id="Jc0-OT-idL"/>
                         <outlet property="menuTextView" destination="ejd-lG-K4E" id="MWS-fN-GDu"/>
                         <outlet property="nameTextField" destination="FtT-b8-3JZ" id="bap-7B-SNO"/>
+                        <outlet property="newPasswordTextField" destination="JPT-3Z-rdw" id="Skc-bL-Pxj"/>
                         <outlet property="profileImageView" destination="nzA-vM-KMR" id="1NW-W2-O0e"/>
                     </connections>
                 </viewController>

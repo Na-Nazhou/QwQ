@@ -13,6 +13,9 @@ class QueueRecordCell: UICollectionViewCell {
     
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet private var queuedAtTimeLabel: UILabel!
+    @IBOutlet weak var queueBookImageView: UIImageView!
+    @IBOutlet weak var estimatedTimeLabel: UILabel!
     
     @IBAction private func handleAdmit(_ sender: UIButton) {
         admitAction?()
