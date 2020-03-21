@@ -74,19 +74,13 @@ struct Constants {
     
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"
-    static let restaurantSectionInsets = UIEdgeInsets(top: 20.0,
-                                                      left: 30.0,
-                                                      bottom: 20.0,
-                                                      right: 30.0)
     static let activitiesReuseIdentifier = "activityCell"
-    static let activitiesSectionInsets = UIEdgeInsets(top: 20.0,
-                                                      left: 30.0,
-                                                      bottom: 20.0,
-                                                      right: 30.0)
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     
     // MARK: Popover content settings
     static let popoverContentControllerIdentifier = "PopoverContentController"
+    static let popoverContentControllerOffset = CGFloat(20)
+    static let popoverContentReuseIdentifier = "popoverContentCell"
     
     // MARK: Segmented control settings
     static let segmentedControlTitles = ["Active", "History"]
@@ -102,4 +96,9 @@ struct Constants {
     static let segmentedControlLabelFont = UIFont(name: "Comfortaa-Regular", size: 15)
     static let segmentedControlAnimationDuration = 0.5
     static let segmentedControlAnimationDelay = 0.0
+    
+    // MARK: Spinner settings
+    static let spinnerViewBackgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+    static let spinnerViewFrame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+    static let spinnerViewColor = UIColor.white
 }

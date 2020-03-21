@@ -14,7 +14,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
-
+    @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
 
     typealias Profile = FBProfileStorage
@@ -35,6 +35,7 @@ class EditProfileViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                   errorHandler: handleError(error:))
         spinner = showSpinner(onView: view)

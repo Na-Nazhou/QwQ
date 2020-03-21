@@ -111,6 +111,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.spinner = self.showSpinner(onView: self.view)
                 CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
             }
+            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-queue-icon"))
         }
 
         if let bookRecord = record as? BookRecord {
@@ -120,6 +121,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             activityCell.deleteAction = {
                 // TODO
             }
+            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-book-icon"))
         }
 
         return activityCell
@@ -157,25 +159,5 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             // No need to to anything for editQueueSelectedSegue
             return
         }
-    }
-}
-
-extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: self.view.frame.width, height: self.view.frame.height / 5)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        Constants.activitiesSectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
     }
 }

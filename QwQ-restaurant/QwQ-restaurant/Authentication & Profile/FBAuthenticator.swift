@@ -9,14 +9,14 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FBAuthenticator: Authenticator {
-
+    
     typealias Profile = FBProfileStorage
-
+    
     static func signup(signupDetails: SignupDetails,
-                    authDetails: AuthDetails,
-                    completion: @escaping () -> Void,
-                    errorHandler: @escaping (Error) -> Void) {
-
+                       authDetails: AuthDetails,
+                       completion: @escaping () -> Void,
+                       errorHandler: @escaping (Error) -> Void) {
+        
         Auth.auth().createUser(withEmail: authDetails.email, password: authDetails.password) { (result, error) in
             if let error = error {
                 errorHandler(error)
@@ -25,7 +25,7 @@ class FBAuthenticator: Authenticator {
             guard let result = result else {
                 return
             }
-
+            
             Profile.createInitialRestaurantProfile(uid: result.user.uid,
                                                    signupDetails: signupDetails,
                                                    authDetails: authDetails,
@@ -35,11 +35,11 @@ class FBAuthenticator: Authenticator {
                                   errorHandler: errorHandler)
         }
     }
-
+    
     static func login(authDetails: AuthDetails,
-                    completion: @escaping () -> Void,
-                    errorHandler: @escaping (Error) -> Void) {
-
+                      completion: @escaping () -> Void,
+                      errorHandler: @escaping (Error) -> Void) {
+        
         Auth.auth().signIn(withEmail: authDetails.email, password: authDetails.password) { (_, error) in
             if let error = error {
                 errorHandler(error)
@@ -48,7 +48,7 @@ class FBAuthenticator: Authenticator {
             completion()
         }
     }
-
+    
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void) {
         do {
             try Auth.auth().signOut()
@@ -57,11 +57,16 @@ class FBAuthenticator: Authenticator {
             errorHandler(AuthError.SignOutError)
         }
     }
-
-    static func checkIfAlreadyLoggedIn(completion: @escaping () -> Void) {
+    
+    static func checkIfAlreadyLoggedIn(completion: @escaping () -> Void, failure: @escaping () -> Void) {
         if Auth.auth().currentUser != nil {
             completion()
+        } else {
+            failure()
         }
     }
-
+    
+    static func getUIDOfCurrentUser() -> String? {
+        return Auth.auth().currentUser?.uid
+    }
 }

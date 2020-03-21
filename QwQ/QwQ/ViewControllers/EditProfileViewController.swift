@@ -12,7 +12,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
-    
+    @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
     
     typealias Profile = FBProfileStorage
@@ -30,6 +30,7 @@ class EditProfileViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
                                 errorHandler: handleError(error:))
         spinner = showSpinner(onView: view)
