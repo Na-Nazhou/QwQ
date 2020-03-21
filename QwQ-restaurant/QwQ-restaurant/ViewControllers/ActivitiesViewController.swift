@@ -136,13 +136,17 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         queueRecordCell.setUpView(record: record)
         
         queueRecordCell.admitAction = {
-            print("\n\tOK ADMIT CALLED\n")
+            guard let qRec = record as? QueueRecord else {
+                assert(false, "Considering only queue recs and no bookings; TODO")
+                return
+            }
+            RestaurantQueueLogicManager.shared().admitCustomer(record: qRec)
             self.showMessage(title: Constants.admitCustomerTitle,
                              message: Constants.admitCustomerMessage,
                              buttonText: Constants.okayTitle)
-            print("\n\tHELLO\n")
         }
         queueRecordCell.removeAction = {
+            //TODO allow only at waiting list and link to logic
             self.showMessage(title: Constants.removeCustomerTitle,
                              message: Constants.removeCustomerMessage,
                              buttonText: Constants.okayTitle)

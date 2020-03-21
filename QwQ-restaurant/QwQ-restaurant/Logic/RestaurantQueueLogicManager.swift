@@ -78,6 +78,12 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         notifyCustomerOfAdmission(record: admittedRecord)
     }
 
+    func rejectCustomer(record: QueueRecord) {
+        //TODO: when remove is allowed only at waiting list
+        // then allow reject at waiting list
+        // to be consistent with customer app model
+    }
+
     func notifyCustomerOfAdmission(record: QueueRecord) {
         //setup timer events
     }
