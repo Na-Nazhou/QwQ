@@ -150,7 +150,6 @@
                                                                     </variation>
                                                                     <connections>
                                                                         <action selector="handleAdmit:" destination="lhN-ab-ua4" eventType="touchUpInside" id="Dsu-58-tUo"/>
-                                                                        <action selector="queueButton:" destination="lhN-ab-ua4" eventType="touchUpInside" id="fm2-T1-eFZ"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8B-GC-KIy">

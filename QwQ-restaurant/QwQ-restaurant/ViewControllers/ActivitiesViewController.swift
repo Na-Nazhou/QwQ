@@ -136,9 +136,11 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         queueRecordCell.setUpView(record: record)
         
         queueRecordCell.admitAction = {
+            print("\n\tOK ADMIT CALLED\n")
             self.showMessage(title: Constants.admitCustomerTitle,
                              message: Constants.admitCustomerMessage,
                              buttonText: Constants.okayTitle)
+            print("\n\tHELLO\n")
         }
         queueRecordCell.removeAction = {
             self.showMessage(title: Constants.removeCustomerTitle,
