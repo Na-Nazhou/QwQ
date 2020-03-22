@@ -20,7 +20,7 @@ protocol Authenticator {
 
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void)
 
-    static func checkIfAlreadyLoggedIn(completion: @escaping () -> Void, failure: @escaping () -> Void)
+    static func checkIfAlreadyLoggedIn() -> Bool
 
     static func getUIDOfCurrentUser() -> String?
 

@@ -57,13 +57,9 @@ class FBAuthenticator: Authenticator {
             errorHandler(AuthError.SignOutError)
         }
     }
-    
-    static func checkIfAlreadyLoggedIn(completion: @escaping () -> Void, failure: @escaping () -> Void) {
-        if Auth.auth().currentUser != nil {
-            completion()
-        } else {
-            failure()
-        }
+
+    static func checkIfAlreadyLoggedIn() -> Bool {
+        return Auth.auth().currentUser != nil
     }
     
     static func getUIDOfCurrentUser() -> String? {
