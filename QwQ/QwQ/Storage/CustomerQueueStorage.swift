@@ -13,4 +13,8 @@ protocol CustomerQueueStorage: QueueStorageSync {
     func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 
     func loadQueueHistory(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
+    
+    // MARK: - Listeners
+    func listenOnlyToCurrentRecord(_ rec: QueueRecord)
+    func removeListener()
 }

@@ -21,8 +21,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         spinner = showSpinner(onView: view)
-        Auth.checkIfAlreadyLoggedIn(completion: authCompleted, failure: notYetLoggedIn)
-        
+        if Auth.checkIfAlreadyLoggedIn() {
+            authCompleted()
+        } else {
+            removeSpinner(spinner)
+        }
+
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
@@ -70,12 +74,8 @@ class LoginViewController: UIViewController {
                                   errorHandler: handleError(error:))
     }
 
-    private func notYetLoggedIn() {
-        removeSpinner(spinner)
-    }
-
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
-        // RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
+        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
     }

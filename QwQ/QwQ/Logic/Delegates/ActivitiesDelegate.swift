@@ -7,9 +7,11 @@
 
 protocol ActivitiesDelegate: AnyObject {
 
+    func didLoadNewHistoryRecords()
+
+    func didUpdateQueueRecord()
+
     func didDeleteQueueRecord()
-
+    
     func didDeleteBookRecord()
-
-    func didLoadNewRecords()
 }

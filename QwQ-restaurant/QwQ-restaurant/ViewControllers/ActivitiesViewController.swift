@@ -10,23 +10,32 @@ import UIKit
 import Foundation
 
 class ActivitiesViewController: UIViewController {
-    
+
     var filtered: [Record] = []
-    var records: [Record] = [
-        QueueRecord(id: "1",
-                    restaurant: Restaurant(uid: "3", name: "hottomato", email: "ht@mail.com",
-                                           contact: "12345678", address: "location", menu: "menu",
-                                           isRestaurantOpen: true, queueOpenTime: nil, queueCloseTime: nil),
-                                         
-                    customer: Customer(uid: "2", name: "jane", email: "jane@gmail.com", contact: "98273483"),
-                    groupSize: 4, babyChairQuantity: 0, wheelchairFriendly: true, startTime: Date())
-    ]
+    var records: [Record] {
+        RestaurantQueueLogicManager.shared().queueRecords
+    }
     
     @IBOutlet private var searchBarController: UISearchBar!
     @IBOutlet private var queueRecordCollectionView: UICollectionView!
     
-    @IBAction private func handleOpenClose(_ sender: Any) {
-        
+    @IBOutlet private var openCloseButton: UIButton!
+
+    @IBAction private func handleOpenClose(_ sender: UIButton) {
+        guard let title = sender.currentTitle?.uppercased() else {
+            assert(false, "open close button title should not be nil")
+            return
+        }
+        switch title {
+        case "OPEN":
+            closeQueue()
+            RestaurantQueueLogicManager.shared().openQueue()
+        case "CLOSE":
+            openQueue()
+            RestaurantQueueLogicManager.shared().closeQueue()
+        default:
+            assert(false, "open close button title should be either open or close.")
+        }
     }
     
     override func viewDidLoad() {
@@ -36,8 +45,16 @@ class ActivitiesViewController: UIViewController {
         
         queueRecordCollectionView.delegate = self
         queueRecordCollectionView.dataSource = self
+
+        RestaurantQueueLogicManager.shared().presentationDelegate = self
         
         filtered = records
+
+        if RestaurantQueueLogicManager.shared().isQueueOpen {
+            closeQueue()
+        } else {
+            openQueue()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,6 +72,16 @@ class ActivitiesViewController: UIViewController {
         default:
             return
         }
+    }
+
+    private func openQueue() {
+        openCloseButton.setTitle("OPEN", for: .normal)
+        openCloseButton.backgroundColor = .systemGreen
+    }
+
+    private func closeQueue() {
+        openCloseButton.setTitle("CLOSE", for: .normal)
+        openCloseButton.backgroundColor = .systemRed
     }
     
 }
@@ -109,11 +136,17 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         queueRecordCell.setUpView(record: record)
         
         queueRecordCell.admitAction = {
+            guard let qRec = record as? QueueRecord else {
+                assert(false, "Considering only queue recs and no bookings; TODO")
+                return
+            }
+            RestaurantQueueLogicManager.shared().admitCustomer(record: qRec)
             self.showMessage(title: Constants.admitCustomerTitle,
                              message: Constants.admitCustomerMessage,
                              buttonText: Constants.okayTitle)
         }
         queueRecordCell.removeAction = {
+            //TODO allow only at waiting list and link to logic
             self.showMessage(title: Constants.removeCustomerTitle,
                              message: Constants.removeCustomerMessage,
                              buttonText: Constants.okayTitle)
@@ -130,6 +163,43 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         if let bookRecord = record as? BookRecord {
             performSegue(withIdentifier: Constants.bookRecordSelectedSegue, sender: bookRecord)
         }
+    }
+}
+
+extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
+    func restaurantDidChangeQueueStatus(toIsOpen: Bool) {
+        if toIsOpen {
+            openQueue()
+        } else {
+            closeQueue()
+        }
+    }
+
+    func didAddRecordToQueue(record: QueueRecord) {
+        tempUpdateFiltered()
+    }
+
+    func didRemoveRecordFromQueue(record: QueueRecord) {
+        tempUpdateFiltered()
+    }
+
+    func didUpdateRecordInQueue(to new: QueueRecord) {
+        tempUpdateFiltered()
+    }
+
+    func didAddRecordToWaiting(toWaiting record: QueueRecord) {
+        //TODO to waiting list
+        tempUpdateFiltered()
+    }
+
+    func didRemoveRecordFromWaiting(record: QueueRecord) {
+        //TODO
+        tempUpdateFiltered()
+    }
+
+    private func tempUpdateFiltered() {
+        filtered = records
+        queueRecordCollectionView.reloadData()
     }
 }
 

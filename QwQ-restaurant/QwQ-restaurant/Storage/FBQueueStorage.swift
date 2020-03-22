@@ -12,14 +12,87 @@ class FBQueueStorage: RestaurantQueueStorage {
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
     weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
     
-    init() {
+    init(restaurant: Restaurant) {
         self.db = Firestore.firestore()
-        attachListenerOnRestaurantData()
+        attachListenerOnRestaurantQueue(restaurant: restaurant)
     }
 
-    private func attachListenerOnRestaurantData() {
+    private func attachListenerOnRestaurantQueue(restaurant: Restaurant) {
         //listen to restaurant's queue document for 'today'
+        //assuming users will restart app everyday
+        let today = Date().toDateStringWithoutTime()
+        db.collection(Constants.queuesDirectory).document(restaurant.uid)
+            .collection(today).addSnapshotListener { (queueSnapshot, err) in
+                if let err = err {
+                    print("Error fetching documents: \(err)")
+                    return
+                }
+                queueSnapshot!.documentChanges.forEach { diff in
+                    var completion: (QueueRecord) -> Void
+                    switch diff.type {
+                    case .added:
+                        //customerDidJoinQueue
+                        print("\n\tfound new q\n")
+                        completion = { self.queueModificationLogicDelegate?.customerDidJoinQueue(with: $0) }
+                    case .modified:
+                        //customerDidUpdateInfo
+                        //or restaurantDidChangeCustomerQueueStatus
+                        completion = {
+                            switch self.getUpdateType(of: $0) {
+                            case .admit:
+                                self.queueModificationLogicDelegate?.restaurantDidAdmitCustomer(record: $0)
+                            case .reject:
+                                self.queueModificationLogicDelegate?.restaurantDidRejectCustomer(record: $0)
+                            case .serve:
+                                self.queueModificationLogicDelegate?.restaurantDidServeCustomer(record: $0)
+                            case .customerUpdate:
+                                self.queueModificationLogicDelegate?.customerDidUpdateQueueRecord(to: $0)
+                            }
+                        }
+                    case .removed:
+                        //customerDidQuitQueue
+                        print("\n\tcustomer deleted q themselves!\n")
+                        completion = { self.queueModificationLogicDelegate?.customerDidWithdrawQueue(record: $0) }
+                    }
+                    guard let customer = diff.document.data()["customer"] as? String else {
+                        assert(false, "all docs, including removed ones, should contain non empty data..?")
+                        return
+                    }
+                    self.getQueueRecordAndComplete(
+                        data: diff.document.data(), ofQid: diff.document.documentID,
+                        forCid: customer, atRestaurant: restaurant, completion: completion)
+                }
+            }
+        
         //listen to restaurant's profile
+    }
+
+    private func getUpdateType(of rec: QueueRecord) -> QueueRecordModificationType {
+        if rec.admitTime == nil {
+            print("\n\tmodif is update!\n")
+            return .customerUpdate
+        }
+        if rec.serveTime != nil {
+            print("\n\tmodif is serve!\n")
+            return .serve
+        }
+        if rec.rejectTime != nil {
+            print("\n\tmodif is reject!\n")
+            return .reject
+        }
+        print("\n\tmodif is admit!?\n")
+        return .admit
+    }
+
+    private func getQueueRecordAndComplete(
+        data: [String: Any], ofQid qid: String, forCid cid: String,
+        atRestaurant restaurant: Restaurant, completion: @escaping (QueueRecord) -> Void) {
+        FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
+            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: qid) else {
+                return
+            }
+            completion(rec)
+            }, errorHandler: nil)
     }
 
     // Time should have been checked to be valid before passing in.
@@ -71,7 +144,7 @@ class FBQueueStorage: RestaurantQueueStorage {
     
     private func loadQueueRecords(of restaurant: Restaurant, where condition: @escaping (QueueRecord) -> Bool,
                                   completion: @escaping (QueueRecord?) -> Void) {
-        db.collection("queues")
+        db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
             .collection(Date().toDateStringWithoutTime())
             .getDocuments { (queueSnapshot, err) in

@@ -5,13 +5,14 @@
 //  Created by Daniel Wong on 14/3/20.
 //
 
-import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 import FirebaseUI
 import SDWebImage
 
 class FBProfileStorage: ProfileStorage {
+
+    typealias Auth = FBAuthenticator
 
     static let dbRef = Firestore.firestore().collection("customers")
     static let storageRef = Storage.storage().reference().child("profile-pics")
@@ -35,11 +36,11 @@ class FBProfileStorage: ProfileStorage {
 
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
                                 errorHandler: @escaping (Error) -> Void) {
-        guard let user = Auth.auth().currentUser else {
+        guard let uid = Auth.getUIDOfCurrentUser() else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
-        let docRef = dbRef.document(user.uid)
+        let docRef = dbRef.document(uid)
 
         docRef.getDocument { (document, error) in
             if let error = error {
@@ -55,11 +56,9 @@ class FBProfileStorage: ProfileStorage {
             }
 
             errorHandler(ProfileError.IncorrectUserType)
-            do {
-                try Auth.auth().signOut()
-            } catch {
-                errorHandler(AuthError.SignOutError)
-            }
+            Auth.logout(completion: {
+                return
+            }, errorHandler: errorHandler)
         }
     }
 
@@ -75,11 +74,11 @@ class FBProfileStorage: ProfileStorage {
     static func updateCustomerInfo(customer: Customer,
                                    completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
-        guard let user = Auth.auth().currentUser else {
+        guard let uid = Auth.getUIDOfCurrentUser() else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
-        let docRef = dbRef.document(user.uid)
+        let docRef = dbRef.document(uid)
 
         docRef.updateData(customer.dictionary) { (error) in
             if let error = error {
