@@ -43,6 +43,7 @@ class ActivityCell: UICollectionViewCell {
             timeLabel.text = bookRecord.formattedTime
         }
 
+        // Hide edit and delete buttons if it is history record
         if record.isHistoryRecord {
             editButton.isHidden = true
             deleteButton.isHidden = true

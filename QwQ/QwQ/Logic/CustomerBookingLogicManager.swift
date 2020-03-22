@@ -18,14 +18,15 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     var customer: Customer
 
-    var currentBookRecords = Set<BookRecord>()
+    private var currentBookRecords = Set<BookRecord>()
     var activeBookRecords: [BookRecord] {
         Array(currentBookRecords)
     }
 
     // TODO
+    private var bookingHistory = Set<BookRecord>()
     var pastBookRecords: [BookRecord] {
-        []
+        Array(bookingHistory)
     }
 
     private init(customer: Customer) {
@@ -35,6 +36,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,
                        with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) {
+        // Check conflicts
         var newRecord = BookRecord(restaurant: restaurant,
                                    customer: customer,
                                    groupSize: groupSize,
@@ -59,24 +61,34 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         with groupSize: Int,
                         babyChairQuantity: Int,
                         wheelchairFriendly: Bool) {
-        let newRecord = BookRecord(restaurant: oldRecord.restaurant,
+        // Check conflicts
+        var newRecord = BookRecord(restaurant: oldRecord.restaurant,
                                    customer: customer,
                                    groupSize: groupSize,
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly,
                                    time: time)
         bookingStorage.updateBookRecord(old: oldRecord, new: newRecord, completion: {
-            self.currentBookRecords.remove(oldRecord)
-            self.currentBookRecords.insert(newRecord)
-            self.bookingDelegate?.didUpdateBookRecord()
+            self.didUpdateBookRecord(oldRecord: oldRecord, newRecord: &newRecord)
         })
+    }
+
+    private func didUpdateBookRecord(oldRecord: BookRecord, newRecord: inout BookRecord) {
+        newRecord.id = oldRecord.id
+        currentBookRecords.remove(oldRecord)
+        currentBookRecords.insert(newRecord)
+        bookingDelegate?.didUpdateBookRecord()
     }
 
     func deleteBookRecord(_ bookRecord: BookRecord) {
         bookingStorage.deleteBookRecord(record: bookRecord, completion: {
-            self.currentBookRecords.remove(bookRecord)
-            self.activitiesDelegate?.didDeleteBookRecord()
+            self.didDeleteBookRecord(bookRecord)
         })
+    }
+
+    private func didDeleteBookRecord(_ bookRecord: BookRecord) {
+        currentBookRecords.remove(bookRecord)
+        activitiesDelegate?.didDeleteBookRecord()
     }
 }
 
