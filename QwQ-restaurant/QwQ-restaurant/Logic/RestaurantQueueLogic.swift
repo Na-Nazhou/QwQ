@@ -12,8 +12,9 @@ protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
 protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDelegate {
     var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
 
-    var queueStorage: RestaurantQueueStorage { get set }
-    var restaurantQueue: RestaurantQueue { get set }
+    var queueStorage: RestaurantQueueStorage { get }
+    var restaurantQueue: RestaurantQueue { get }
+    var restaurantWaiting: RestaurantQueue { get }
 
     /// Loads the active queue records of the restaurant.
     func fetchQueue()

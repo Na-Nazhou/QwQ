@@ -10,10 +10,10 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     private var restaurant: Restaurant
-    var queueStorage: RestaurantQueueStorage
+    private(set) var queueStorage: RestaurantQueueStorage
 
-    var restaurantQueue = RestaurantQueue()
-    var restaurantWaiting = RestaurantQueue()
+    private(set) var restaurantQueue = RestaurantQueue()
+    private(set) var restaurantWaiting = RestaurantQueue()
     var queueRecords: [QueueRecord] {
         return Array(restaurantQueue.queue)
     }
@@ -79,7 +79,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     func serveCustomer(record: QueueRecord) {
-        //TODO like rejectCustomer
+        //TODO like rejectCustomerrestau
     }
 
     func rejectCustomer(record: QueueRecord) {
