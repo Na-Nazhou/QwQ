@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
-        // RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
+        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
     }
