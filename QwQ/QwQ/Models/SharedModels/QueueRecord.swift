@@ -19,7 +19,7 @@ struct QueueRecord: Record {
         startTime.toDateStringWithoutTime()
     }
 
-    init(restaurant: Restaurant,customer: Customer,
+    init(restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
         self.init(id: "0", restaurant: restaurant, customer: customer,

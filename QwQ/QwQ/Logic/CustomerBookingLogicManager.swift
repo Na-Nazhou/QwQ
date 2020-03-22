@@ -44,7 +44,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    wheelchairFriendly: wheelchairFriendly,
                                    time: time)
 
-        bookingStorage.addBookRecord(record: newRecord,
+        bookingStorage.addBookRecord(newRecord: newRecord,
                                      completion: { self.didAddBookRecord(newRecord: &newRecord, id: $0)
 
         })
@@ -53,6 +53,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     private func didAddBookRecord(newRecord: inout BookRecord, id: String) {
         newRecord.id = id
         currentBookRecords.insert(newRecord)
+
+        // AddListener
         bookingDelegate?.didAddBookRecord()
     }
 
@@ -62,33 +64,37 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         babyChairQuantity: Int,
                         wheelchairFriendly: Bool) {
         // Check conflicts
-        var newRecord = BookRecord(restaurant: oldRecord.restaurant,
+        let newRecord = BookRecord(id: oldRecord.id,
+                                   restaurant: oldRecord.restaurant,
                                    customer: customer,
                                    groupSize: groupSize,
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly,
                                    time: time)
-        bookingStorage.updateBookRecord(old: oldRecord, new: newRecord, completion: {
-            self.didUpdateBookRecord(oldRecord: oldRecord, newRecord: &newRecord)
+        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
+            self.bookingDelegate?.didUpdateBookRecord()
         })
-    }
-
-    private func didUpdateBookRecord(oldRecord: BookRecord, newRecord: inout BookRecord) {
-        newRecord.id = oldRecord.id
-        currentBookRecords.remove(oldRecord)
-        currentBookRecords.insert(newRecord)
-        bookingDelegate?.didUpdateBookRecord()
     }
 
     func deleteBookRecord(_ bookRecord: BookRecord) {
         bookingStorage.deleteBookRecord(record: bookRecord, completion: {
-            self.didDeleteBookRecord(bookRecord)
+            self.activitiesDelegate?.didDeleteBookRecord()
         })
     }
 
-    private func didDeleteBookRecord(_ bookRecord: BookRecord) {
-        currentBookRecords.remove(bookRecord)
-        activitiesDelegate?.didDeleteBookRecord()
+    func didUpdateBookRecord(_ record: BookRecord) {
+        // TODO
+    }
+
+    private func customerDidUpdateBookRecord(oldRecord: BookRecord, newRecord: inout BookRecord) {
+        currentBookRecords.remove(oldRecord)
+        currentBookRecords.insert(newRecord)
+        activitiesDelegate?.didUpdateActiveRecords()
+    }
+
+    func didDeleteActiveBookRecord(_ record: BookRecord) {
+        currentBookRecords.remove(record)
+        activitiesDelegate?.didUpdateActiveRecords()
     }
 }
 

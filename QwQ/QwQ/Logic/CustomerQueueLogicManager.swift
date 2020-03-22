@@ -39,10 +39,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         })
     }
 
-    func canQueue(for restaurant: Restaurant) -> Bool {
-        restaurant.isQueueOpen && currentQueueRecord == nil
-    }
-
     func fetchQueueHistory() {
         queueStorage.loadQueueHistory(customer: customer, completion: {
             guard $0 != nil else {
@@ -54,6 +50,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             }
             self.activitiesDelegate?.didLoadNewHistoryRecords()
         })
+    }
+
+    func canQueue(for restaurant: Restaurant) -> Bool {
+        restaurant.isQueueOpen && currentQueueRecord == nil
     }
 
     func enqueue(to restaurant: Restaurant,
@@ -110,11 +110,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         })
     }
 
-    private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        currentQueueRecord = record
-        activitiesDelegate?.didUpdateQueueRecord()
-    }
-
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
         guard let record = currentQueueRecord,
             queueRecord.id == record.id else {
@@ -151,10 +146,16 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
+    private func customerDidUpdateQueueRecord(record: QueueRecord) {
+        currentQueueRecord = record
+        activitiesDelegate?.didUpdateActiveRecords()
+    }
+
     func didDeleteActiveQueueRecord() {
         assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
         queueStorage.removeListener()
         currentQueueRecord = nil
+        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     private func addAsHistoryRecord(_ record: QueueRecord) {

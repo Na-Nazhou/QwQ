@@ -14,13 +14,22 @@ class FBBookingStorage: CustomerBookingStorage {
 
     weak var logicDelegate: BookingStorageSyncDelegate?
 
-    func addBookRecord(record: BookRecord, completion: @escaping (String) -> Void) {
-        db.collection(Constants.bookingsDirectory).document(record.restaurant.uid).setData([:], merge: true)
-        let newRecordRef = db.collection(Constants.bookingsDirectory)
+    private var listener: ListenerRegistration?
+
+    private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
+        db.collection(Constants.bookingsDirectory)
             .document(record.restaurant.uid)
             .collection(record.date)
+            .document(record.id)
+    }
+
+    func addBookRecord(newRecord: BookRecord, completion: @escaping (_ id: String) -> Void) {
+               //create document if it doesn't exist (non-existent container) db.collection(Constants.bookingsDirectory).document(record.restaurant.uid).setData([:], merge: true)
+        let newRecordRef = db.collection(Constants.bookingsDirectory)
+            .document(newRecord.restaurant.uid)
+            .collection(newRecord.date)
             .document()
-        newRecordRef.setData(record.dictionary) { (error) in
+        newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -29,12 +38,9 @@ class FBBookingStorage: CustomerBookingStorage {
         }
     }
 
-    func updateBookRecord(old: BookRecord, new: BookRecord, completion: @escaping () -> Void) {
-        db.collection(Constants.bookingsDirectory)
-            .document(new.restaurant.uid)
-            .collection(old.date)
-            .document(old.id)
-            .setData(new.dictionary) { (error) in
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void) {
+        let oldDocRef = getBookRecordDocument(record: oldRecord)
+        oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -44,11 +50,8 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func deleteBookRecord(record: BookRecord, completion: @escaping () -> Void) {
-        db.collection(Constants.bookingsDirectory)
-            .document(record.restaurant.uid)
-            .collection(record.date)
-            .document(record.id)
-            .delete { (error) in
+        let docRef = getBookRecordDocument(record: record)
+        docRef.delete { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -57,9 +60,9 @@ class FBBookingStorage: CustomerBookingStorage {
             }
     }
 
-    func loadActiveBookRecords(customer: Customer, completion: @escaping ([BookRecord]) -> Void) {
+    func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
     }
 
-    func loadBookHistory(customer: Customer, completion: @escaping ([BookRecord]) -> Void) {
+    func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
     }
 }

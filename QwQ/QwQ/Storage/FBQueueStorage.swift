@@ -8,7 +8,6 @@ class FBQueueStorage: CustomerQueueStorage {
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
 
     private var listener: ListenerRegistration?
-    private var isFirstResponse = true
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
         db.collection(Constants.queuesDirectory)
@@ -73,9 +72,9 @@ class FBQueueStorage: CustomerQueueStorage {
                     }
                     queueSnapshot!.documents.forEach {
                         self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                            queueRecData: $0.data(), docId: $0.documentID,
+                            docRef: $0,
                             ofRestaurantId: document.documentID, forCustomerId: customer.uid,
-                            isRecordToTake: { !$0.isHistoryRecord }, completion: completion)
+                            where: { !$0.isHistoryRecord }, completion: completion)
                     }
                 }
             }
@@ -92,7 +91,8 @@ class FBQueueStorage: CustomerQueueStorage {
             }
             for document in querySnapshot!.documents {
                 for numDaysAgo in 0...6 {
-                    let rQueue = self.db.collection(Constants.queuesDirectory).document(document.documentID)
+                    let rQueue = self.db.collection(Constants.queuesDirectory)
+                        .document(document.documentID)
                         .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
                     rQueue.getDocuments { (queueSnapshot, err) in
                         if let err = err {
@@ -104,9 +104,9 @@ class FBQueueStorage: CustomerQueueStorage {
                         }
                         queueSnapshot!.documents.forEach {
                             self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                                queueRecData: $0.data(), docId: $0.documentID,
+                                docRef: $0,
                                 ofRestaurantId: document.documentID, forCustomerId: customer.uid,
-                                isRecordToTake: { $0.isHistoryRecord }, completion: completion)
+                                where: { $0.isHistoryRecord }, completion: completion)
                         }
                     }
                 }
@@ -115,10 +115,15 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
     private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-        queueRecData: [String: Any], docId: String,
+        docRef: DocumentSnapshot,
         ofRestaurantId rId: String, forCustomerId cid: String,
-        isRecordToTake condition: @escaping ((QueueRecord) -> Bool), completion: @escaping (QueueRecord?) -> Void) {
-        guard let qCid = (queueRecData["customer"] as? String), qCid == cid else {
+        where condition: @escaping (QueueRecord) -> Bool,
+        completion: @escaping (QueueRecord?) -> Void) {
+
+        let docId = docRef.documentID
+        guard let queueRecData = docRef.data(),
+            let qCid = (queueRecData["customer"] as? String),
+            qCid == cid else {
             return
         }
 
@@ -136,7 +141,8 @@ class FBQueueStorage: CustomerQueueStorage {
             FBProfileStorage.getCustomerInfo(
                 completion: { customer in
                 guard let rec = QueueRecord(dictionary: qData,
-                                            customer: customer, restaurant: restaurant, id: qid) else {
+                                            customer: customer, restaurant: restaurant,
+                                            id: qid) else {
                     return
                 }
                 completion(rec)
@@ -158,11 +164,6 @@ class FBQueueStorage: CustomerQueueStorage {
                 return
             }
 
-//            if self.isFirstResponse {
-//                self.isFirstResponse = false
-//                return
-//            }
-
             guard !qRecDocument.metadata.hasPendingWrites else {
                 return
             }
@@ -171,14 +172,16 @@ class FBQueueStorage: CustomerQueueStorage {
                 self.queueModificationLogicDelegate?.didDeleteActiveQueueRecord()
                 return
             }
-            self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                queueRecData: qRecData, docId: qRecDocument.documentID,
-                ofRestaurantId: record.restaurant.uid, forCustomerId: record.customer.uid,
-                isRecordToTake: { _ in true }, completion: {
-                assert($0 != nil, "qRecord data should be valid.")
-                self.queueModificationLogicDelegate?.didUpdateQueueRecord($0!)
-                })
+
+            guard let newRecord = QueueRecord(dictionary: qRecData,
+                                              customer: record.customer,
+                                              restaurant: record.restaurant,
+                                              id: record.id) else {
+                                            print("Error")
+                                            return
             }
+            self.queueModificationLogicDelegate?.didUpdateQueueRecord(newRecord)
+        }
     }
     
     func removeListener() {
@@ -188,6 +191,5 @@ class FBQueueStorage: CustomerQueueStorage {
 
         listener?.remove()
         listener = nil
-        isFirstResponse = true
     }
 }

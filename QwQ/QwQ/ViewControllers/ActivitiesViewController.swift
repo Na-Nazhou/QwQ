@@ -78,7 +78,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.reloadData()
     }
     
-    func didUpdateQueueRecord() {
+    func didUpdateActiveRecords() {
         if isActive {
             activitiesCollectionView.reloadData()
         }
