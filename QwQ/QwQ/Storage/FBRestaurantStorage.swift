@@ -1,21 +1,10 @@
 import FirebaseFirestore
+
 class FBRestaurantStorage: RestaurantStorage {
 
-    let db: Firestore
+    let db = Firestore.firestore()
 
     weak var logicDelegate: RestaurantStorageSyncDelegate?
-
-    init() {
-        self.db = Firestore.firestore()
-    }
-
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-        logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
-    }
-
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
-        logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
-    }
 
     func loadAllRestaurants(completion: @escaping (Restaurant) -> Void) {
         db.collection(Constants.restaurantsDirectory).getDocuments { (restaurantsSnapshot, err) in

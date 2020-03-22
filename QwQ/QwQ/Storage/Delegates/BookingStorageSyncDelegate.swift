@@ -9,7 +9,3 @@
 protocol BookingStorageSyncDelegate: AnyObject {
 
 }
-
-protocol BookingStorageSync {
-
-}

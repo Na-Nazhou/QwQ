@@ -12,6 +12,8 @@ class FBBookingStorage: CustomerBookingStorage {
 
     let db = Firestore.firestore()
 
+    weak var logicDelegate: BookingStorageSyncDelegate?
+
     func addBookRecord(record: BookRecord, completion: @escaping (String) -> Void) {
         db.collection(Constants.bookingsDirectory).document(record.restaurant.uid).setData([:], merge: true)
         let newRecordRef = db.collection(Constants.bookingsDirectory)

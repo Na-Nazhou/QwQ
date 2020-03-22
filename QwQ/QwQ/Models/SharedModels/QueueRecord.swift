@@ -19,7 +19,7 @@ struct QueueRecord: Record {
         startTime.toDateStringWithoutTime()
     }
 
-    init(restaurant: Restaurant, customer: Customer,
+    init(restaurant: Restaurant,customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
         self.init(id: "0", restaurant: restaurant, customer: customer,
@@ -71,15 +71,12 @@ struct QueueRecord: Record {
 
 extension QueueRecord: Hashable {
     static func == (lhs: QueueRecord, rhs: QueueRecord) -> Bool {
-        lhs.restaurant == rhs.restaurant
-            && lhs.customer == rhs.customer
-            && lhs.startTime == rhs.startTime
+        lhs.id == rhs.id
+
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.restaurant)
-        hasher.combine(self.customer)
-        hasher.combine(self.startTime)
+        hasher.combine(self.id)
     }
 }
 

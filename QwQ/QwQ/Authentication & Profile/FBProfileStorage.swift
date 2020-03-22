@@ -56,9 +56,7 @@ class FBProfileStorage: ProfileStorage {
             }
 
             errorHandler(ProfileError.IncorrectUserType)
-            Auth.logout(completion: {
-                return
-            }, errorHandler: errorHandler)
+            Auth.logout(completion: {}, errorHandler: errorHandler)
         }
     }
 

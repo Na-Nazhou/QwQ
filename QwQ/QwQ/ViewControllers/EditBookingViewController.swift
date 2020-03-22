@@ -26,8 +26,7 @@ class EditBookingViewController: UIViewController, BookingDelegate {
     
     // TODO
     @IBAction private func handleSubmit(_ sender: Any) {
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
-                let groupSizeText = groupSizeTextField.text,
+        guard let groupSizeText = groupSizeTextField.text,
                 let babyChairQueantityText = babyChairQuantityTextField.text,
                 let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
                 let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
@@ -52,6 +51,9 @@ class EditBookingViewController: UIViewController, BookingDelegate {
         }
 
         // Create a new book record
+        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+            return
+        }
         CustomerBookingLogicManager.shared()
             .addBookRecord(to: restaurant,
                            at: datePicker.date,

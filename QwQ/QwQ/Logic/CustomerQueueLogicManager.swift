@@ -10,21 +10,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
-
-    var currentQueueRecord: QueueRecord? {
-        didSet {
-            if let rec = currentQueueRecord {
-                activitiesDelegate?.didUpdateQueueRecord()
-
-                if let old = oldValue, old == rec {
-                    return
-                }
-
-                print("qlogic adding listener")
-                queueStorage.listenOnlyToCurrentRecord(rec)
-            }
-        }
-    }
+    var currentQueueRecord: QueueRecord?
 
     private var queueHistory = CustomerQueueHistory()
     var pastQueueRecords: [QueueRecord] {
@@ -45,7 +31,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func loadQueueRecord() {
         queueStorage.loadQueueRecord(customer: customer, completion: {
-            self.currentQueueRecord = $0
+            guard let queueRecord = $0 else {
+                return
+            }
+            self.currentQueueRecord = queueRecord
+            self.queueStorage.listenOnlyToCurrentRecord(queueRecord)
         })
     }
 
@@ -82,7 +72,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: startTime)
 
-        queueStorage.addQueueRecord(record: newRecord,
+        queueStorage.addQueueRecord(newRecord: newRecord,
                                     completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
 
         })
@@ -91,35 +81,38 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
         newRecord.id = id
         currentQueueRecord = newRecord
+
+        queueStorage.listenOnlyToCurrentRecord(newRecord)
         queueDelegate?.didAddQueueRecord()
     }
 
     func editQueueRecord(with groupSize: Int,
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool) {
-        guard let old = currentQueueRecord else {
+        guard let oldRecord = currentQueueRecord else {
             // Check if there is any change
             // Check the queue record is not admitted yet
             return
         }
-        // Cannot update the restaurant, startTime
+        // Cannot update the restaurant, startTime, etc
         // Reset startTime (??)
 
-        var new = QueueRecord(restaurant: old.restaurant,
-                              customer: customer,
-                              groupSize: groupSize,
-                              babyChairQuantity: babyChairQuantity,
-                              wheelchairFriendly: wheelchairFriendly,
-                              startTime: old.startTime)
+        let newRecord = QueueRecord(id: oldRecord.id,
+                                    restaurant: oldRecord.restaurant,
+                                    customer: customer,
+                                    groupSize: groupSize,
+                                    babyChairQuantity: babyChairQuantity,
+                                    wheelchairFriendly: wheelchairFriendly,
+                                    startTime: oldRecord.startTime)
 
-        queueStorage.updateQueueRecord(old: old, new: new,
-                                       completion: { self.didUpdateQueueRecord(old: old, new: &new) })
+        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
+            self.queueDelegate?.didUpdateQueueRecord()
+        })
     }
 
-    private func didUpdateQueueRecord(old: QueueRecord, new: inout QueueRecord) {
-        new.id = old.id
-        self.currentQueueRecord = new
-        self.queueDelegate?.didUpdateQueueRecord()
+    private func customerDidUpdateQueueRecord(record: QueueRecord) {
+        currentQueueRecord = record
+        activitiesDelegate?.didUpdateQueueRecord()
     }
 
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
@@ -128,11 +121,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
-        queueStorage.deleteQueueRecord(record: record,
-                                       completion: {  })
+        queueStorage.deleteQueueRecord(record: record, completion: {
+            self.activitiesDelegate?.didDeleteQueueRecord()
+        })
     }
 
-    func queueRecordDidUpdate(_ record: QueueRecord) {
+    func didUpdateQueueRecord(_ record: QueueRecord) {
         assert(currentQueueRecord != nil, "current queue record should exist to trigger udpate.")
         assert(currentQueueRecord! == record, "Should only receive update for current queue record.")
         let modification = record.changeType(from: currentQueueRecord!)
@@ -143,30 +137,24 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             print("\ndetected admission\n")
         case .serve:
             addAsHistoryRecord(record)
-            removeActiveRecord()
+            didDeleteActiveQueueRecord()
             print("\ndetected service\n")
         case .reject:
             addAsHistoryRecord(record)
-            removeActiveRecord()
+            didDeleteActiveQueueRecord()
             print("\ndetected rejection\n")
         case .customerUpdate:
-            currentQueueRecord = record
+            customerDidUpdateQueueRecord(record: record)
             print("\ndetected regular modif\n")
         case .none:
             assert(false, "Modification should be something")
         }
     }
 
-    func customerDidDeleteActiveQueueRecord() {
+    func didDeleteActiveQueueRecord() {
         assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
-        removeActiveRecord()
-    }
-
-    private func removeActiveRecord() {
         queueStorage.removeListener()
-
         currentQueueRecord = nil
-        activitiesDelegate?.didDeleteQueueRecord()
     }
 
     private func addAsHistoryRecord(_ record: QueueRecord) {

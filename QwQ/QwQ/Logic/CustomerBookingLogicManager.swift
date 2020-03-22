@@ -95,8 +95,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 extension CustomerBookingLogicManager {
     private static var bookingLogic: CustomerBookingLogicManager?
 
-    /// Returns shared customer queue logic manager for the logged in application. If it does not exist,
-    /// a queue logic manager is initiailised with the given customer identity to share.
+    /// Returns shared customer booking logic manager for the logged in application. If it does not exist,
+    /// a booking logic manager is initiailised with the given customer identity to share.
     static func shared(for customerIdentity: Customer? = nil) -> CustomerBookingLogicManager {
         if let logic = bookingLogic {
             return logic

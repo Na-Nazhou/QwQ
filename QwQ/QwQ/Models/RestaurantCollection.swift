@@ -1,5 +1,6 @@
 class RestaurantCollection {
     private(set) var restaurants = Set<Restaurant>()
+
     var size: Int {
         restaurants.count
     }
