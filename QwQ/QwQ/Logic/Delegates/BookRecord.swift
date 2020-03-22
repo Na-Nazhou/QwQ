@@ -22,6 +22,10 @@ struct BookRecord: Record {
         time.toDateStringWithoutTime()
     }
 
+    var formattedTime: String {
+        time.toString()
+    }
+
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?

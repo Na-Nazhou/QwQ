@@ -15,7 +15,7 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet private var deleteButton: UIButton!
     @IBOutlet private var editButton: UIButton!
-    @IBOutlet private var estimatedTimeLabel: UILabel!
+    @IBOutlet private var timeLabel: UILabel!
     @IBOutlet private var queueBookImageView: UIImageView!
     
     @IBAction private func handleDelete(_ sender: Any) {
@@ -34,13 +34,13 @@ class ActivityCell: UICollectionViewCell {
         if let queueRecord = record as? QueueRecord {
             queueBookImageView.image = UIImage(named: "c-queue-icon")
             // TODO
-            estimatedTimeLabel.text = "Estimated time: 00:00"
+            timeLabel.text = "Estimated time: 00:00"
         }
 
         if let bookRecord = record as? BookRecord {
             queueBookImageView.image = UIImage(named: "c-book-icon")
             // TODO
-            estimatedTimeLabel.text = bookRecord.date
+            timeLabel.text = bookRecord.formattedTime
         }
 
         if record.isHistoryRecord {
