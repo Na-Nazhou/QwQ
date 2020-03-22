@@ -14,6 +14,7 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
 
     // View Controllers
     var bookingDelegate: BookingDelegate? { get set }
+    var activitiesDelegate: ActivitiesDelegate? { get set }
 
     func addBookRecord(to restaurant: Restaurant,
                        at time: Date,

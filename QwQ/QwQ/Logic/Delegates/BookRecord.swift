@@ -37,15 +37,11 @@ struct BookRecord: Record {
 
 extension BookRecord: Hashable {
     static func == (lhs: BookRecord, rhs: BookRecord) -> Bool {
-        lhs.restaurant == rhs.restaurant
-            && lhs.customer == rhs.customer
-            && lhs.time == rhs.time
+        lhs.id == rhs.id
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.restaurant)
-        hasher.combine(self.customer)
-        hasher.combine(self.time)
+        hasher.combine(id)
     }
 }
 

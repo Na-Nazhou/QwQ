@@ -30,6 +30,7 @@
 		6101D796242760A900ACBCC9 /* CustomerHistoryLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101D795242760A900ACBCC9 /* CustomerHistoryLogic.swift */; };
 		6101D79A2427B49800ACBCC9 /* CustomerBookingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101D7992427B49800ACBCC9 /* CustomerBookingHistory.swift */; };
 		6101D79C2427B4E100ACBCC9 /* CustomerRecordHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101D79B2427B4E100ACBCC9 /* CustomerRecordHistory.swift */; };
+		6101D79E242800D800ACBCC9 /* CustomerHistoryLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101D79D242800D800ACBCC9 /* CustomerHistoryLogicManager.swift */; };
 		613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */; };
 		613267FC241F220D00B770B6 /* RestaurantDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267FA241F220C00B770B6 /* RestaurantDelegate.swift */; };
 		6148054A24227CE2003D6D44 /* FBRestaurantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148054924227CE2003D6D44 /* FBRestaurantStorage.swift */; };
@@ -139,6 +140,7 @@
 		6101D795242760A900ACBCC9 /* CustomerHistoryLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerHistoryLogic.swift; sourceTree = "<group>"; };
 		6101D7992427B49800ACBCC9 /* CustomerBookingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerBookingHistory.swift; sourceTree = "<group>"; };
 		6101D79B2427B4E100ACBCC9 /* CustomerRecordHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRecordHistory.swift; sourceTree = "<group>"; };
+		6101D79D242800D800ACBCC9 /* CustomerHistoryLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerHistoryLogicManager.swift; sourceTree = "<group>"; };
 		613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogicManager.swift; sourceTree = "<group>"; };
 		613267FA241F220C00B770B6 /* RestaurantDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDelegate.swift; sourceTree = "<group>"; };
 		6148054924227CE2003D6D44 /* FBRestaurantStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBRestaurantStorage.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				6148054B24228798003D6D44 /* CustomerBookingLogic.swift */,
 				6148054D242287AB003D6D44 /* CustomerBookingLogicManager.swift */,
 				6101D795242760A900ACBCC9 /* CustomerHistoryLogic.swift */,
+				6101D79D242800D800ACBCC9 /* CustomerHistoryLogicManager.swift */,
 			);
 			name = Logic;
 			path = QwQ/Logic;
@@ -851,6 +854,7 @@
 				5C25BEAD2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */,
 				7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */,
+				6101D79E242800D800ACBCC9 /* CustomerHistoryLogicManager.swift in Sources */,
 				7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */,
 				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
 				7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */,

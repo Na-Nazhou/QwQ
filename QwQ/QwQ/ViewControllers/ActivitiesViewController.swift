@@ -64,6 +64,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             isActive = true
         case 1:
             CustomerQueueLogicManager.shared().fetchQueueHistory()
+            CustomerBookingLogicManager.shared().fetchBookingHistory()
             isActive = false
         default:
             return
@@ -71,7 +72,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.reloadData()
     }
 
-    func didLoadNewHistoryRecords() {
+    func didUpdateHistoryRecords() {
         if isActive {
             return
         }

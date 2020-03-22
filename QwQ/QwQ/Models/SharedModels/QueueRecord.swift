@@ -55,16 +55,11 @@ struct QueueRecord: Record {
         let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
         
-        self.id = id
-        self.restaurant = restaurant
-        self.customer = customer
-        self.groupSize = groupSize
-        self.babyChairQuantity = babyChairQuantity
-        self.wheelchairFriendly = wheelchairFriendly
-        self.startTime = startTime
-        self.admitTime = admitTime
-        self.serveTime = serveTime
-        self.rejectTime = rejectTime
+        self.init(id: id, restaurant: restaurant, customer: customer,
+                  groupSize: groupSize, babyChairQuantity: babyChairQuantity,
+                  wheelchairFriendly: wheelchairFriendly,
+                  startTime: startTime, admitTime: admitTime,
+                  serveTime: serveTime, rejectTime: rejectTime)
     }
 
 }
@@ -72,11 +67,10 @@ struct QueueRecord: Record {
 extension QueueRecord: Hashable {
     static func == (lhs: QueueRecord, rhs: QueueRecord) -> Bool {
         lhs.id == rhs.id
-
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
+        hasher.combine(id)
     }
 }
 
@@ -116,6 +110,9 @@ extension QueueRecord {
 
     func completelyIdentical(to other: QueueRecord) -> Bool {
         other == self
+            && other.restaurant == restaurant
+            && other.customer == customer
+            && other.startTime == startTime
             && other.groupSize == groupSize
             && other.babyChairQuantity == babyChairQuantity
             && other.wheelchairFriendly == wheelchairFriendly
@@ -126,6 +123,7 @@ extension QueueRecord {
 }
 
 extension QueueRecord {
+
     func changeType(from old: QueueRecord) -> QueueRecordModificationType? {
         if self.id != old.id {
             // not valid comparison

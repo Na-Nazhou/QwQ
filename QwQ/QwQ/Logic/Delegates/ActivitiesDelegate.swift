@@ -7,7 +7,7 @@
 
 protocol ActivitiesDelegate: AnyObject {
 
-    func didLoadNewHistoryRecords()
+    func didUpdateHistoryRecords()
 
     func didUpdateActiveRecords()
 

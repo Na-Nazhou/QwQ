@@ -17,10 +17,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         Array(queueHistory.history)
     }
 
-    private init(customer: Customer) {
+    private init(customer: Customer, queueStorage: CustomerQueueStorage) {
         self.customer = customer
-        queueStorage = FBQueueStorage()
+        self.queueStorage = queueStorage
         loadQueueRecord()
+
         fetchQueueHistory()
     }
 
@@ -48,7 +49,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             if !didAddNew {
                 return
             }
-            self.activitiesDelegate?.didLoadNewHistoryRecords()
+            self.activitiesDelegate?.didUpdateHistoryRecords()
         })
     }
 
@@ -160,7 +161,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func addAsHistoryRecord(_ record: QueueRecord) {
         if queueHistory.addToHistory(record) {
-            activitiesDelegate?.didLoadNewHistoryRecords()
+            activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
 }
@@ -170,14 +171,15 @@ extension CustomerQueueLogicManager {
 
     /// Returns shared customer queue logic manager for the logged in application. If it does not exist,
     /// a queue logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil) -> CustomerQueueLogicManager {
+    static func shared(for customerIdentity: Customer? = nil, with storage: CustomerQueueStorage? = nil) -> CustomerQueueLogicManager {
         if let logic = queueLogic {
             return logic
         }
 
         assert(customerIdentity != nil,
                "Customer identity must be given non-nil to make the customer's queue logic manager.")
-        let logic = CustomerQueueLogicManager(customer: customerIdentity!)
+        assert(storage != nil, "Queue storage must be given non-nil")
+        let logic = CustomerQueueLogicManager(customer: customerIdentity!, queueStorage: storage!)
         logic.queueStorage.queueModificationLogicDelegate = logic
 
         queueLogic = logic

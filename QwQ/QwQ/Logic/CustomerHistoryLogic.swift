@@ -8,12 +8,16 @@
 import Foundation
 
 // TODO
-protocol CustomerHistoryLogic {
+protocol CustomerHistoryLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
 
     // Storage
-    var queueingStorage: CustomerQueueStorage { get set }
+    var queueStorage: CustomerQueueStorage { get set }
     var bookingStorage: CustomerBookingStorage { get set }
 
     // View Controllers
     var activitiesDelegate: ActivitiesDelegate? { get set }
+
+    func fetchActiveRecords()
+
+    func fetchHistoryRecords()
 }

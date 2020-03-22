@@ -24,7 +24,8 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func addBookRecord(newRecord: BookRecord, completion: @escaping (_ id: String) -> Void) {
-               //create document if it doesn't exist (non-existent container) db.collection(Constants.bookingsDirectory).document(record.restaurant.uid).setData([:], merge: true)
+        //create document if it doesn't exist (non-existent container)
+        db.collection(Constants.bookingsDirectory).document(newRecord.restaurant.uid).setData([:], merge: true)
         let newRecordRef = db.collection(Constants.bookingsDirectory)
             .document(newRecord.restaurant.uid)
             .collection(newRecord.date)
@@ -46,7 +47,7 @@ class FBBookingStorage: CustomerBookingStorage {
                     return
                 }
                 completion()
-            }
+        }
     }
 
     func deleteBookRecord(record: BookRecord, completion: @escaping () -> Void) {
@@ -57,7 +58,7 @@ class FBBookingStorage: CustomerBookingStorage {
                     return
                 }
                 completion()
-            }
+        }
     }
 
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {

@@ -86,6 +86,6 @@ extension Restaurant {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.uid)
+        hasher.combine(uid)
     }
 }

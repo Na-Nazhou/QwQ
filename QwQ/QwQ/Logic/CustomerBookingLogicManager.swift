@@ -29,9 +29,13 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         Array(bookingHistory)
     }
 
-    private init(customer: Customer) {
+    private init(customer: Customer, bookingStorage: CustomerBookingStorage) {
         self.customer = customer
-        bookingStorage = FBBookingStorage()
+        self.bookingStorage = bookingStorage
+    }
+
+    func fetchBookingHistory() {
+        
     }
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,
@@ -73,12 +77,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    time: time)
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
             self.bookingDelegate?.didUpdateBookRecord()
+            // To remove this: (let listener handle this)
+            self.customerDidUpdateBookRecord(record: newRecord)
         })
     }
 
-    func deleteBookRecord(_ bookRecord: BookRecord) {
-        bookingStorage.deleteBookRecord(record: bookRecord, completion: {
+    func deleteBookRecord(_ record: BookRecord) {
+        bookingStorage.deleteBookRecord(record: record, completion: {
             self.activitiesDelegate?.didDeleteBookRecord()
+            // To remove this: (let listener handle this)
+            self.didDeleteActiveBookRecord(record)
         })
     }
 
@@ -86,9 +94,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         // TODO
     }
 
-    private func customerDidUpdateBookRecord(oldRecord: BookRecord, newRecord: inout BookRecord) {
-        currentBookRecords.remove(oldRecord)
-        currentBookRecords.insert(newRecord)
+    private func customerDidUpdateBookRecord(record: BookRecord) {
+        currentBookRecords.remove(record)
+        currentBookRecords.insert(record)
         activitiesDelegate?.didUpdateActiveRecords()
     }
 
@@ -103,14 +111,17 @@ extension CustomerBookingLogicManager {
 
     /// Returns shared customer booking logic manager for the logged in application. If it does not exist,
     /// a booking logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil) -> CustomerBookingLogicManager {
+    static func shared(for customerIdentity: Customer? = nil,
+                       with storage: CustomerBookingStorage? = nil) -> CustomerBookingLogicManager {
         if let logic = bookingLogic {
             return logic
         }
 
         assert(customerIdentity != nil,
                "Customer identity must be given non-nil to make the customer's booking logic manager.")
-        let logic = CustomerBookingLogicManager(customer: customerIdentity!)
+        assert(storage != nil,
+               "Booking storage must be given non-nil")
+        let logic = CustomerBookingLogicManager(customer: customerIdentity!, bookingStorage: storage!)
 
         bookingLogic = logic
         return logic
