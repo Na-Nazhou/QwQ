@@ -13,7 +13,7 @@ struct Constants {
     // MARK: Tab bar settings
     static let barTintColor = UIColor(red: 255 / 255, green: 255 / 255, blue: 255 / 255, alpha: 1)
     static let tintColor = UIColor(red: 244 / 255, green: 107 / 255, blue: 116 / 255, alpha: 1)
-    static let tabBarFont = UIFont(name: "Comfortaa-Regular", size: 30)
+    static let tabBarFont = UIFont(name: "Comfortaa-Regular", size: 20)
     static let tabBarHeight = CGFloat(60)
     
     // MARK: Profile settings
@@ -59,6 +59,7 @@ struct Constants {
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
+    static let activityCellHeight = CGFloat(300)
     
     // MARK: Segmented control settings
     static let segmentedControlTitles = ["Active", "History"]
@@ -71,7 +72,7 @@ struct Constants {
     static let segmentedControlLayerBorderColor = UIColor(white: 1.0, alpha: 0.5).cgColor
     static let segmentedControlLayerBorderWidth = CGFloat(2)
     static let segmentedControlLabelFrame = CGRect(x: 0, y: 0, width: 70, height: 40)
-    static let segmentedControlLabelFont = UIFont(name: "Comfortaa-Regular", size: 30)
+    static let segmentedControlLabelFont = UIFont(name: "Comfortaa-Regular", size: 20)
     static let segmentedControlAnimationDuration = 0.5
     static let segmentedControlAnimationDelay = 0.0
     
