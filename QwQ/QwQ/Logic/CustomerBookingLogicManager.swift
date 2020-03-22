@@ -18,8 +18,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     var customer: Customer
 
-    // TODO
-    var currentBookRecords = [BookRecord]()
+    var currentBookRecords = Set<BookRecord>()
+    var activeBookRecords: [BookRecord] {
+        Array(currentBookRecords)
+    }
 
     // TODO
     var pastBookRecords: [BookRecord] {
@@ -48,21 +50,33 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     private func didAddBookRecord(newRecord: inout BookRecord, id: String) {
         newRecord.id = id
-        currentBookRecords.append(newRecord)
+        currentBookRecords.insert(newRecord)
         bookingDelegate?.didAddBookRecord()
     }
 
-    func editBookRecord(at time: Date,
+    func editBookRecord(oldRecord: BookRecord,
+                        at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
                         wheelchairFriendly: Bool) {
-        // TODO
-        bookingDelegate?.didUpdateBookRecord()
+        let newRecord = BookRecord(restaurant: oldRecord.restaurant,
+                                   customer: customer,
+                                   groupSize: groupSize,
+                                   babyChairQuantity: babyChairQuantity,
+                                   wheelchairFriendly: wheelchairFriendly,
+                                   time: time)
+        bookingStorage.updateBookRecord(old: oldRecord, new: newRecord, completion: {
+            self.currentBookRecords.remove(oldRecord)
+            self.currentBookRecords.insert(newRecord)
+            self.bookingDelegate?.didUpdateBookRecord()
+        })
     }
 
     func deleteBookRecord(_ bookRecord: BookRecord) {
-        // TODO
-        activitiesDelegate?.didDeleteBookRecord()
+        bookingStorage.deleteBookRecord(record: bookRecord, completion: {
+            self.currentBookRecords.remove(bookRecord)
+            self.activitiesDelegate?.didDeleteBookRecord()
+        })
     }
 }
 

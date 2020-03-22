@@ -41,9 +41,10 @@ class EditBookingViewController: UIViewController, BookingDelegate {
         spinner = showSpinner(onView: view)
         
         // Edit existing book record
-        if bookRecord != nil {
+        if let bookRecord = bookRecord {
             CustomerBookingLogicManager.shared()
-                .editBookRecord(at: datePicker.date,
+                .editBookRecord(oldRecord: bookRecord,
+                                at: datePicker.date,
                                 with: groupSize,
                                 babyChairQuantity: babyChairQuantity,
                                 wheelchairFriendly: wheelchairFriendlySwitch.isOn)

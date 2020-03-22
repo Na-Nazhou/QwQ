@@ -27,7 +27,7 @@ class FBBookingStorage: CustomerBookingStorage {
         }
     }
 
-    func updateBookRecord(old: BookRecord, new: QueueRecord, completion: @escaping () -> Void) {
+    func updateBookRecord(old: BookRecord, new: BookRecord, completion: @escaping () -> Void) {
         db.collection(Constants.bookingsDirectory)
             .document(new.restaurant.uid)
             .collection(old.date)

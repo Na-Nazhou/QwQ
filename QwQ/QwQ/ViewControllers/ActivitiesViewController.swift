@@ -26,7 +26,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     // TODO: refactor
     var activeRecords: [Record] {
-        var records: [Record] = CustomerBookingLogicManager.shared().currentBookRecords
+        var records: [Record] = CustomerBookingLogicManager.shared().activeBookRecords
         if let activeQueueRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
             records.append(activeQueueRecord)
         }

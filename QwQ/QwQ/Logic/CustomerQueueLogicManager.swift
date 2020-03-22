@@ -91,8 +91,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                               groupSize: groupSize,
                               babyChairQuantity: babyChairQuantity,
                               wheelchairFriendly: wheelchairFriendly,
-                              startTime: old.startTime,
-                              admitTime: nil)
+                              startTime: old.startTime)
 
         queueStorage.updateQueueRecord(old: old, new: new,
                                        completion: { self.didUpdateQueueRecord(old: old, new: &new) })

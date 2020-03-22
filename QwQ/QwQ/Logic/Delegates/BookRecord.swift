@@ -31,6 +31,20 @@ struct BookRecord: Record {
     }
 }
 
+extension BookRecord: Hashable {
+    static func == (lhs: BookRecord, rhs: BookRecord) -> Bool {
+        lhs.restaurant == rhs.restaurant
+            && lhs.customer == rhs.customer
+            && lhs.time == rhs.time
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.restaurant)
+        hasher.combine(self.customer)
+        hasher.combine(self.time)
+    }
+}
+
 extension BookRecord {
     var dictionary: [String: Any] {
         var data = [String: Any]()
