@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditBookingViewController: UIViewController {
+class EditBookingViewController: UIViewController, BookingDelegate {
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var groupSizeTextField: UITextField!
@@ -15,9 +15,10 @@ class EditBookingViewController: UIViewController {
     @IBOutlet private var datePicker: UIDatePicker!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var restaurantNameLabel: UILabel!
+
+    var spinner: UIView?
     
     var bookRecord: BookRecord?
-    var spinner: UIView?
 
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -37,26 +38,38 @@ class EditBookingViewController: UIViewController {
                     return
             }
 
-//        spinner = showSpinner(onView: view)
+        spinner = showSpinner(onView: view)
         
         // Edit existing book record
         if bookRecord != nil {
-            // TODO
+            CustomerBookingLogicManager.shared()
+                .editBookRecord(at: datePicker.date,
+                                with: groupSize,
+                                babyChairQuantity: babyChairQuantity,
+                                wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+            return
         }
 
         // Create a new book record
-        // TODO
+        CustomerBookingLogicManager.shared()
+            .addBookRecord(to: restaurant,
+                           at: datePicker.date,
+                           with: groupSize,
+                           babyChairQuantity: babyChairQuantity,
+                           wheelchairFriendly: wheelchairFriendlySwitch.isOn)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        CustomerBookingLogicManager.shared().bookingDelegate = self
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         setUpViews()
     }
@@ -67,7 +80,8 @@ class EditBookingViewController: UIViewController {
             restaurantNameLabel.text = bookRecord.restaurant.name
             nameTextField.text = bookRecord.customer.name
             contactTextField.text = bookRecord.customer.contact
-            
+
+            datePicker.date = bookRecord.time
             groupSizeTextField.text = String(bookRecord.groupSize)
             babyChairQuantityTextField.text = String(bookRecord.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
@@ -80,6 +94,12 @@ class EditBookingViewController: UIViewController {
             // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+
+            // TODO: allow restaurants to set this
+            let minDate = Date()
+            datePicker.minimumDate = minDate
+            datePicker.date = minDate
+
             wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
             babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }

@@ -64,7 +64,7 @@ class FBAuthenticator: Authenticator {
     }
 
     static func getUIDOfCurrentUser() -> String? {
-        return Auth.auth().currentUser?.uid
+        Auth.auth().currentUser?.uid
     }
 
 }

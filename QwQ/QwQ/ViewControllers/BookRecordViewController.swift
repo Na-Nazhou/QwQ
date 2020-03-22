@@ -37,10 +37,10 @@ class BookRecordViewController: UIViewController {
         nameLabel.text = bookRecord.restaurant.name
         contactLabel.text = bookRecord.restaurant.contact
         locationLabel.text = bookRecord.restaurant.address
+
+        datePicker.date = bookRecord.time
         groupSizeLabel.text = String(bookRecord.groupSize)
         babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
-
-        // TODO
     }
 }

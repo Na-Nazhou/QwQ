@@ -8,6 +8,8 @@
 protocol ActivitiesDelegate: AnyObject {
 
     func didDeleteQueueRecord()
-    func didLoadNewRecords()
 
+    func didDeleteBookRecord()
+
+    func didLoadNewRecords()
 }

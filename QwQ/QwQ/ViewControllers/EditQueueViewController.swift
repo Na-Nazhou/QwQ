@@ -41,6 +41,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             .editQueueRecord(with: groupSize,
                              babyChairQuantity: babyChairQuantity,
                              wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+            return
         }
 
         // Create a new queue record
@@ -64,8 +65,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         self.hideKeyboardWhenTappedAround()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         setUpViews()
     }

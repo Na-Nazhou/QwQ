@@ -24,12 +24,13 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     var isActive = true
 
+    // TODO: refactor
     var activeRecords: [Record] {
+        var records: [Record] = CustomerBookingLogicManager.shared().currentBookRecords
         if let activeQueueRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
-            return [activeQueueRecord]
-        } else {
-            return []
+            records.append(activeQueueRecord)
         }
+        return records
     }
 
     var historyRecords: [Record] {
@@ -43,6 +44,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.delegate = self
 
         CustomerQueueLogicManager.shared().activitiesDelegate = self
+        CustomerBookingLogicManager.shared().activitiesDelegate = self
 
         setUpSegmentedControl()
     }
@@ -84,6 +86,18 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
                 self.activitiesCollectionView.reloadData()
             })
     }
+
+    func didDeleteBookRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.bookRecordDeleteSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.navigationController?.popViewController(animated: true)
+                self.activitiesCollectionView.reloadData()
+            })
+    }
 }
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -111,7 +125,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.spinner = self.showSpinner(onView: self.view)
                 CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
             }
-            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-queue-icon"))
         }
 
         if let bookRecord = record as? BookRecord {
@@ -119,9 +132,9 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
             }
             activityCell.deleteAction = {
-                // TODO
+                 self.spinner = self.showSpinner(onView: self.view)
+                CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
             }
-            activityCell.queueBookImageView = UIImageView(image: UIImage(named: "c-book-icon"))
         }
 
         return activityCell

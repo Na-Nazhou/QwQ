@@ -119,8 +119,6 @@
 		6148055B2422A388003D6D44 /* BookRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecord.swift; sourceTree = "<group>"; };
 		6148055D2422A3B7003D6D44 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
-		7E35B6DC241F58E7001C5862 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
-		7E35B6DD241F58E7001C5862 /* FBAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthenticator.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -264,15 +262,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		7E6B1E22241F7E9600BFBDCB /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				7E35B6DC241F58E7001C5862 /* Authenticator.swift */,
-				7E35B6DD241F58E7001C5862 /* FBAuthenticator.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		7E72B14F241C93FE00C1EE72 = {
 			isa = PBXGroup;
 			children = (
@@ -281,7 +270,6 @@
 				7E72B17C241C940500C1EE72 /* QwQ-restaurantUITests */,
 				7E72B159241C93FE00C1EE72 /* Products */,
 				41ADCBC5BE55487B385B375E /* Pods */,
-				7E6B1E22241F7E9600BFBDCB /* Recovered References */,
 				51E84BB6014D852B4AF369EF /* Frameworks */,
 			);
 			sourceTree = "<group>";

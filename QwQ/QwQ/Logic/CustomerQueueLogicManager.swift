@@ -11,9 +11,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     var customer: Customer
     var currentQueueRecord: QueueRecord?
+
     private var queueHistory = CustomerQueueHistory()
     var pastQueueRecords: [QueueRecord] {
-        return Array(queueHistory.history)
+        Array(queueHistory.history)
     }
 
     private init(customer: Customer) {
@@ -60,8 +61,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     groupSize: groupSize,
                                     babyChairQuantity: babyChairQuantity,
                                     wheelchairFriendly: wheelchairFriendly,
-                                    startTime: startTime,
-                                    admitTime: nil)
+                                    startTime: startTime)
 
         queueStorage.addQueueRecord(record: newRecord,
                                     completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
@@ -71,8 +71,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
         newRecord.id = id
-        self.currentQueueRecord = newRecord
-        self.queueDelegate?.didAddQueueRecord()
+        currentQueueRecord = newRecord
+        queueDelegate?.didAddQueueRecord()
     }
 
     func editQueueRecord(with groupSize: Int,

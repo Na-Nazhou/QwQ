@@ -10,14 +10,10 @@ import Foundation
 
 class FBQueueStorage: CustomerQueueStorage {
 
-    let db: Firestore
+    let db = Firestore.firestore()
 
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
     weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
-
-    init() {
-        self.db = Firestore.firestore()
-    }
 
     func addQueueRecord(record: QueueRecord, completion: @escaping (String) -> Void) {
         // Attach listener
@@ -28,7 +24,7 @@ class FBQueueStorage: CustomerQueueStorage {
             .document(record.restaurant.uid)
             .collection(record.startDate)
             .document()
-        newQueueRecordRef.setData(QueueRecord.queueRecordToDictionary(record)) { (error) in
+        newQueueRecordRef.setData(record.dictionary) { (error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -42,7 +38,7 @@ class FBQueueStorage: CustomerQueueStorage {
             .document(new.restaurant.uid)
             .collection(old.startDate)
             .document(old.id)
-            .setData(QueueRecord.queueRecordToDictionary(new)) { (error) in
+            .setData(new.dictionary) { (error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -85,10 +81,11 @@ class FBQueueStorage: CustomerQueueStorage {
                         print("Error getting documents: \(err)")
                     }
                     self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                        queueSnapshot: queueSnapshot!, ofRestaurantId: document.documentID,
+                        queueSnapshot: queueSnapshot!,
+                        ofRestaurantId: document.documentID,
                         forCustomer: customer,
-                        isRecordToTake: { !$0.isHistoryRecord
-                        }, completion: completion)
+                        isRecordToTake: { !$0.isHistoryRecord },
+                        completion: completion)
                 }
             }
         }
