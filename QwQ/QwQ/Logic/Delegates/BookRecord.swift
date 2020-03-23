@@ -26,12 +26,37 @@ struct BookRecord: Record {
         time.toString()
     }
 
-    var admitTime: Date?
-    var serveTime: Date?
-    var rejectTime: Date?
+    let admitTime: Date?
+    let serveTime: Date?
+    let rejectTime: Date?
 
     var isHistoryRecord: Bool {
         admitTime != nil || rejectTime != nil
+    }
+
+    init(restaurant: Restaurant, customer: Customer, time: Date,
+         groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
+         admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+        self.init(id: "0", restaurant: restaurant, customer: customer, time: time,
+                  groupSize: groupSize, babyChairQuantity: babyChairQuantity,
+                  wheelchairFriendly: wheelchairFriendly,
+                  admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime)
+    }
+
+    init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
+         groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
+         admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+        self.id = id
+        self.restaurant = restaurant
+        self.customer = customer
+        self.groupSize = groupSize
+        self.babyChairQuantity = babyChairQuantity
+        self.wheelchairFriendly = wheelchairFriendly
+        self.time = time
+
+        self.admitTime = admitTime
+        self.serveTime = serveTime
+        self.rejectTime = rejectTime
     }
 }
 

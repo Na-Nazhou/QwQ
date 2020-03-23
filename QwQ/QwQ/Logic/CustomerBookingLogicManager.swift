@@ -43,10 +43,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         // Check conflicts
         var newRecord = BookRecord(restaurant: restaurant,
                                    customer: customer,
+                                   time: time,
                                    groupSize: groupSize,
                                    babyChairQuantity: babyChairQuantity,
-                                   wheelchairFriendly: wheelchairFriendly,
-                                   time: time)
+                                   wheelchairFriendly: wheelchairFriendly)
 
         bookingStorage.addBookRecord(newRecord: newRecord,
                                      completion: { self.didAddBookRecord(newRecord: &newRecord, id: $0)
@@ -71,10 +71,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         let newRecord = BookRecord(id: oldRecord.id,
                                    restaurant: oldRecord.restaurant,
                                    customer: customer,
+                                   time: time,
                                    groupSize: groupSize,
                                    babyChairQuantity: babyChairQuantity,
-                                   wheelchairFriendly: wheelchairFriendly,
-                                   time: time)
+                                   wheelchairFriendly: wheelchairFriendly)
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
             self.bookingDelegate?.didUpdateBookRecord()
             // To remove this: (let listener handle this)

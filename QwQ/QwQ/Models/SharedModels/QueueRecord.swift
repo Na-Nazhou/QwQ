@@ -11,9 +11,10 @@ struct QueueRecord: Record {
     let wheelchairFriendly: Bool
 
     let startTime: Date
-    var admitTime: Date?
-    var serveTime: Date?
-    var rejectTime: Date?
+
+    let admitTime: Date?
+    let serveTime: Date?
+    let rejectTime: Date?
 
     var startDate: String {
         startTime.toDateStringWithoutTime()

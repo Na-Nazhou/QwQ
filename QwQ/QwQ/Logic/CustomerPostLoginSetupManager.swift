@@ -5,7 +5,9 @@ class CustomerPostLoginSetupManager {
         let bookingStorage = FBBookingStorage()
         _ = CustomerQueueLogicManager.shared(for: customer, with: queueStorage)
         _ = CustomerBookingLogicManager.shared(for: customer, with: bookingStorage)
-        _ = CustomerHistoryLogicManager.shared(for: customer, queueStorage: queueStorage, bookingStorage: bookingStorage)
+        _ = CustomerHistoryLogicManager.shared(for: customer,
+                                               queueStorage: queueStorage,
+                                               bookingStorage: bookingStorage)
         _ = RestaurantLogicManager.shared(for: customer)
     }
 
