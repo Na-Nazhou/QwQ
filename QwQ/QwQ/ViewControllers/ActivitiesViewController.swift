@@ -127,7 +127,8 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let record = records[indexPath.row]
         activityCell.setUpView(record: record)
-        if let queueRecord = record as? QueueRecord {
+        if let queueRecord = record as? QueueRecord,
+            queueRecord.isUnadmittedQueueingRecord {
             activityCell.editAction = {
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
             }

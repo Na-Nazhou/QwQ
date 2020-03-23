@@ -8,6 +8,7 @@ class FBQueueStorage: CustomerQueueStorage {
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
 
     private var listener: ListenerRegistration?
+    private var isFirstResponse = true
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
         db.collection(Constants.queuesDirectory)
@@ -168,6 +169,11 @@ class FBQueueStorage: CustomerQueueStorage {
                 return
             }
 
+            if self.isFirstResponse {
+                self.isFirstResponse = false
+                return
+            }
+
             guard let qRecData = qRecDocument.data() else {
                 self.queueModificationLogicDelegate?.didDeleteActiveQueueRecord()
                 return
@@ -191,5 +197,6 @@ class FBQueueStorage: CustomerQueueStorage {
 
         listener?.remove()
         listener = nil
+        isFirstResponse = true
     }
 }

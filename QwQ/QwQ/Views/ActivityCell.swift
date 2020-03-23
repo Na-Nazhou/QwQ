@@ -35,6 +35,10 @@ class ActivityCell: UICollectionViewCell {
             queueBookImageView.image = UIImage(named: "c-queue-icon")
             // TODO
             timeLabel.text = "Estimated time: 00:00"
+            if queueRecord.isWaitingRecord {
+                timeLabel.text = "Your table is ready"
+                disableEditAndDelete()
+            }
         }
 
         if let bookRecord = record as? BookRecord {
@@ -45,11 +49,26 @@ class ActivityCell: UICollectionViewCell {
 
         // Hide edit and delete buttons if it is history record
         if record.isHistoryRecord {
-            editButton.isHidden = true
-            deleteButton.isHidden = true
+            hideEditAndDelete()
         } else {
-            editButton.isHidden = false
-            deleteButton.isHidden = false
+            showEditAndDelete()
         }
+    }
+
+    private func disableEditAndDelete() {
+        editButton.isEnabled = false
+        editButton.alpha = 0.5
+        deleteButton.isEnabled = false
+        deleteButton.alpha = 0.5
+    }
+
+    private func hideEditAndDelete() {
+        editButton.isHidden = true
+        deleteButton.isHidden = true
+    }
+
+    private func showEditAndDelete() {
+        editButton.isHidden = false
+        deleteButton.isHidden = false
     }
 }
