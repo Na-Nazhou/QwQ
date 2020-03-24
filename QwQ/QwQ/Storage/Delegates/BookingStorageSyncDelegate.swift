@@ -10,4 +10,7 @@ protocol BookingStorageSyncDelegate: AnyObject {
     func didDeleteBookRecord(_ record: BookRecord)
 
     func didUpdateBookRecord(_ record: BookRecord)
+
+    // Customer actions synced from other devices -- TODO?
+    //    func didAddBookRecord(newRecord: BookRecord)
 }

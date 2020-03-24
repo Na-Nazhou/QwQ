@@ -1,6 +1,11 @@
 /// Represents the univeral queue storage sync protocol.
 protocol QueueStorageSync {
     var queueModificationLogicDelegate: QueueStorageSyncDelegate? { get set }
+
+    // MARK: - Listeners
+    func registerListener(for record: QueueRecord)
+
+    func removeListener(for record: QueueRecord)
 }
 
 protocol CustomerQueueStorage: QueueStorageSync {
@@ -16,12 +21,7 @@ protocol CustomerQueueStorage: QueueStorageSync {
 
     // MARK: - Query
     /// Calls  completion handler when it finds customer's active queue record.
-    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
+    func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 
     func loadQueueHistory(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
-    
-    // MARK: - Listeners
-    func registerListener(for record: QueueRecord)
-
-    func removeListener()
 }

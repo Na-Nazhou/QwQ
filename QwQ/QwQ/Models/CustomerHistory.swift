@@ -1,22 +1,25 @@
-class CustomerHistory<T: Record & Hashable> {
-    private(set) var history = Set<T>()
+//
+//  CustomerRecordHistory.swift
+//  QwQ
+//
+//  Created by Nazhou Na on 22/3/20.
+//
 
-    var size: Int {
-        history.count
+class CustomerHistory {
+
+    var queueHistory: RecordHistory<QueueRecord>
+    var bookingHistory: RecordHistory<BookRecord>
+
+    var historyRecords: [Record] {
+        var records = [Record]()
+        records.append(contentsOf: Array(queueHistory.history))
+        records.append(contentsOf: Array(bookingHistory.history))
+        return records
     }
 
-    func addToHistory(_ queueRecord: T) -> Bool {
-        let (isNew, _) = history.insert(queueRecord)
-        return isNew
-    }
-
-    func addToHistory(_ records: [T]) -> Bool {
-        let origSize = size
-        history = history.union(Set(records))
-        return size > origSize
-    }
-    
-    func resetHistory() {
-        history.removeAll()
+    init(queueHistory: RecordHistory<QueueRecord>,
+         bookingHistory: RecordHistory<BookRecord>) {
+        self.queueHistory = queueHistory
+        self.bookingHistory = bookingHistory
     }
 }

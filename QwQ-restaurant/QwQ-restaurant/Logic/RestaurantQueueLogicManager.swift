@@ -169,7 +169,6 @@ extension RestaurantQueueLogicManager {
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
         let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
         logic.queueStorage.queueModificationLogicDelegate = logic
-        logic.queueStorage.queueStatusLogicDelegate = logic
 
         queueLogic = logic
         return logic

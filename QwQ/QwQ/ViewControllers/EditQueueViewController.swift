@@ -17,9 +17,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
 
     var spinner: UIView?
 
-    var queueRecord: QueueRecord? {
-        CustomerQueueLogicManager.shared().currentQueueRecord
-    }
+    var queueRecord: QueueRecord? 
     
     @IBAction private func handleSubmit(_ sender: Any) {
         guard let groupSizeText = groupSizeTextField.text,
@@ -27,19 +25,21 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
             let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
                 showMessage(title: Constants.errorTitle,
-                            message: "Invalid data",
+                            message: "Missing fields",
                             buttonText: Constants.okayTitle,
                             buttonAction: nil)
                 return
         }
 
         spinner = showSpinner(onView: view)
+
         // Edit existing queue record
-        if queueRecord != nil {
+        if let queueRecord = queueRecord {
             CustomerQueueLogicManager.shared()
-            .editQueueRecord(with: groupSize,
-                             babyChairQuantity: babyChairQuantity,
-                             wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+                .editQueueRecord(oldRecord: queueRecord,
+                                 with: groupSize,
+                                 babyChairQuantity: babyChairQuantity,
+                                 wheelchairFriendly: wheelchairFriendlySwitch.isOn)
             return
         }
 
@@ -74,7 +74,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     }
 
     private func setUpViews() {
-        // Editing an existing queue record
+        // Set up an existing queue record
         if let queueRecord = queueRecord {
             restaurantNameLabel.text = queueRecord.restaurant.name
             nameTextField.text = queueRecord.customer.name

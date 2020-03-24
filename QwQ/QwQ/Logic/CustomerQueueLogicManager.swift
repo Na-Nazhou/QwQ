@@ -25,7 +25,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
-    private var queueHistory = CustomerHistory<QueueRecord>()
+    private var queueHistory = RecordHistory<QueueRecord>()
     var pastQueueRecords: [QueueRecord] {
         Array(queueHistory.history)
     }
@@ -33,18 +33,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private init(customer: Customer, queueStorage: CustomerQueueStorage) {
         self.customer = customer
         self.queueStorage = queueStorage
-        loadQueueRecord()
 
+        loadQueueRecord()
         fetchQueueHistory()
     }
 
     deinit {
         print("\n\tDEINITING\n")
-        queueStorage.removeListener()
+        if let record = currentQueueRecord {
+            queueStorage.removeListener(for: record)
+        }
     }
 
     private func loadQueueRecord() {
-        queueStorage.loadQueueRecord(customer: customer, completion: {
+        queueStorage.loadActiveQueueRecords(customer: customer, completion: {
             guard let queueRecord = $0 else {
                 return
             }
@@ -57,7 +59,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             guard $0 != nil else {
                 return
             }
-            let didAddNew = self.queueHistory.addToHistory($0!)
+            let didAddNew = self.queueHistory.add($0!)
             if !didAddNew {
                 return
             }
@@ -98,10 +100,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         queueDelegate?.didAddQueueRecord()
     }
 
-    func editQueueRecord(with groupSize: Int,
+    func editQueueRecord(oldRecord: QueueRecord,
+                         with groupSize: Int,
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool) {
-        guard let oldRecord = currentQueueRecord else {
+        guard oldRecord == currentQueueRecord else {
             // Check if there is any change
             // Check the queue record is not admitted yet
             return
@@ -129,7 +132,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         queueStorage.deleteQueueRecord(record: record, completion: {
-            self.activitiesDelegate?.didDeleteQueueRecord()
+            self.activitiesDelegate?.didDeleteRecord()
         })
     }
 
@@ -163,14 +166,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func didDeleteQueueRecord(_ record: QueueRecord) {
-        assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
-        queueStorage.removeListener()
+        assert(currentQueueRecord == record)
+
+        queueStorage.removeListener(for: record)
         currentQueueRecord = nil
         activitiesDelegate?.didUpdateActiveRecords()
     }
 
     private func addAsHistoryRecord(_ record: QueueRecord) {
-        if queueHistory.addToHistory(record) {
+        if queueHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }

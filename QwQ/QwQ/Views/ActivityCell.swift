@@ -36,7 +36,9 @@ class ActivityCell: UICollectionViewCell {
         case .pendingAdmission:
             enableEdit()
             if let queueRecord = record as? QueueRecord {
-                statusLabel.text = "Estimated time: 00:00"
+                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+
+                // TODO: display estimated time instead
             }
             if let bookRecord = record as? BookRecord {
                 statusLabel.text = "Time: \(bookRecord.formattedTime)"

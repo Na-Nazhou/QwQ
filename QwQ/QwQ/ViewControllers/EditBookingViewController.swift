@@ -23,15 +23,14 @@ class EditBookingViewController: UIViewController, BookingDelegate {
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
-    // TODO
+
     @IBAction private func handleSubmit(_ sender: Any) {
         guard let groupSizeText = groupSizeTextField.text,
                 let babyChairQueantityText = babyChairQuantityTextField.text,
                 let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
                 let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
                     showMessage(title: Constants.errorTitle,
-                                message: "Invalid data",
+                                message: "Missing fields",
                                 buttonText: Constants.okayTitle,
                                 buttonAction: nil)
                     return
@@ -78,7 +77,7 @@ class EditBookingViewController: UIViewController, BookingDelegate {
     }
     
     private func setUpViews() {
-        // Editing an existing book record
+        // Set up an existing book record
         if let bookRecord = bookRecord {
             restaurantNameLabel.text = bookRecord.restaurant.name
             nameTextField.text = bookRecord.customer.name

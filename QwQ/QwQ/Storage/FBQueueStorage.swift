@@ -56,7 +56,7 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
     // MARK: - Storage data retrieval
-    func loadQueueRecord(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
+    func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
 
         db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
             if let err = err {
@@ -155,7 +155,7 @@ class FBQueueStorage: CustomerQueueStorage {
     // MARK: - Listeners
     func registerListener(for record: QueueRecord) {
         //remove any listeners
-        removeListener()
+        removeListener(for: record)
 
         //add listener
         let docRef = getQueueRecordDocument(record: record)
@@ -186,7 +186,7 @@ class FBQueueStorage: CustomerQueueStorage {
         }
     }
     
-    func removeListener() {
+    func removeListener(for record: QueueRecord) {
         guard listener != nil else {
             return
         }

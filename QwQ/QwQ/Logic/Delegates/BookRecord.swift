@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct BookRecord: Record {
-    var id = "0"
+    var id: String
     let restaurant: Restaurant
     let customer: Customer
 
@@ -33,6 +33,28 @@ struct BookRecord: Record {
 
     var isHistoryRecord: Bool {
         admitTime != nil || rejectTime != nil
+    }
+
+    var dictionary: [String: Any] {
+        var data = [String: Any]()
+        data["restaurant"] = restaurant.uid
+        data["customer"] = customer.uid
+        data["groupSize"] = groupSize
+        data["babyChairQuantity"] = babyChairQuantity
+        data["wheelchairFriendly"] = wheelchairFriendly
+        data["time"] = time
+
+        if let admitTime = admitTime {
+            data["admitTime"] = admitTime
+        }
+        if let serveTime = serveTime {
+            data["serveTime"] = serveTime
+        }
+        if let rejectTime = rejectTime {
+            data["rejectTime"] = rejectTime
+        }
+
+        return data
     }
 
     init(restaurant: Restaurant, customer: Customer, time: Date,
@@ -60,7 +82,7 @@ struct BookRecord: Record {
         self.rejectTime = rejectTime
     }
 
-    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String = "0") {
+    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
         guard let groupSize = dictionary["groupSize"] as? Int,
             let babyChairQuantity = dictionary["babyChairQuantity"] as? Int,
             let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
@@ -76,7 +98,8 @@ struct BookRecord: Record {
                   groupSize: groupSize,
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
-                  admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime)
+                  admitTime: admitTime, serveTime: serveTime,
+                  rejectTime: rejectTime)
     }
 }
 
@@ -87,28 +110,5 @@ extension BookRecord: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-}
-
-extension BookRecord {
-    var dictionary: [String: Any] {
-        var data = [String: Any]()
-        data["customer"] = customer.uid
-        data["groupSize"] = groupSize
-        data["babyChairQuantity"] = babyChairQuantity
-        data["wheelchairFriendly"] = wheelchairFriendly
-        data["time"] = time
-
-        if let admitTime = admitTime {
-            data["admitTime"] = admitTime
-        }
-        if let serveTime = serveTime {
-            data["serveTime"] = serveTime
-        }
-        if let rejectTime = rejectTime {
-            data["rejectTime"] = rejectTime
-        }
-
-        return data
     }
 }

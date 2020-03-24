@@ -15,6 +15,8 @@ class QueueRecordViewController: UIViewController {
     @IBOutlet private var babyChairQuantityLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
+
+    typealias Profile = FBProfileStorage
     
     var queueRecord: QueueRecord?
 
@@ -36,6 +38,7 @@ class QueueRecordViewController: UIViewController {
         nameLabel.text = queueRecord.restaurant.name
         contactLabel.text = queueRecord.restaurant.contact
         locationLabel.text = queueRecord.restaurant.address
+        Profile.getCustomerProfilePic(uid: queueRecord.restaurant.uid, placeholder: profileImageView)
 
         groupSizeLabel.text = String(queueRecord.groupSize)
         babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)

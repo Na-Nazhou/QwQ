@@ -8,12 +8,11 @@
 import FirebaseFirestore
 
 class FBQueueStorage: RestaurantQueueStorage {
-    let db: Firestore
+    let db = Firestore.firestore()
+
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
-    weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
     
     init(restaurant: Restaurant) {
-        self.db = Firestore.firestore()
         attachListenerOnRestaurantQueue(restaurant: restaurant)
     }
 
