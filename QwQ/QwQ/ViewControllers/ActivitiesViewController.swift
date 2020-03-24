@@ -149,7 +149,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             // TODO: fix
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
-                    editBookingViewController.bookRecord = bookRecord
+                    editBookingViewController.record = bookRecord
             }
         default:
             // No need to to anything for editQueueSelectedSegue

@@ -7,18 +7,25 @@
 
 import UIKit
 
-class EditQueueViewController: UIViewController, QueueDelegate {
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var contactTextField: UITextField!
-    @IBOutlet private var groupSizeTextField: UITextField!
-    @IBOutlet private var babyChairQuantityTextField: UITextField!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet private var restaurantNameLabel: UILabel!
+class EditQueueViewController: UIViewController, QueueDelegate, RecordViewController {
+
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var contactTextField: UITextField!
+    @IBOutlet var groupSizeTextField: UITextField!
+    @IBOutlet var babyChairQuantityTextField: UITextField!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet var restaurantNameLabel: UILabel!
 
     var spinner: UIView?
 
+    var record: Record?
+
     var queueRecord: QueueRecord? {
         CustomerQueueLogicManager.shared().currentQueueRecord
+    }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction private func handleSubmit(_ sender: Any) {
@@ -49,10 +56,6 @@ class EditQueueViewController: UIViewController, QueueDelegate {
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
     }
 
     override func viewDidLoad() {
