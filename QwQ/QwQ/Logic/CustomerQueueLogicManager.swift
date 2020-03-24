@@ -25,9 +25,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
-    private var queueHistory = RecordHistory<QueueRecord>()
+    private var queueHistory = RecordCollection<QueueRecord>()
     var pastQueueRecords: [QueueRecord] {
-        Array(queueHistory.history)
+        queueHistory.records
     }
 
     private init(customer: Customer, queueStorage: CustomerQueueStorage) {

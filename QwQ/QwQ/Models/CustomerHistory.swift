@@ -7,18 +7,18 @@
 
 class CustomerHistory {
 
-    var queueHistory: RecordHistory<QueueRecord>
-    var bookingHistory: RecordHistory<BookRecord>
+    var queueHistory: RecordCollection<QueueRecord>
+    var bookingHistory: RecordCollection<BookRecord>
 
     var historyRecords: [Record] {
         var records = [Record]()
-        records.append(contentsOf: Array(queueHistory.history))
-        records.append(contentsOf: Array(bookingHistory.history))
+        records.append(contentsOf: queueHistory.records)
+        records.append(contentsOf: bookingHistory.records)
         return records
     }
 
-    init(queueHistory: RecordHistory<QueueRecord>,
-         bookingHistory: RecordHistory<BookRecord>) {
+    init(queueHistory: RecordCollection<QueueRecord>,
+         bookingHistory: RecordCollection<BookRecord>) {
         self.queueHistory = queueHistory
         self.bookingHistory = bookingHistory
     }
