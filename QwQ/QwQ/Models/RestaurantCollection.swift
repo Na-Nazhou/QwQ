@@ -1,5 +1,6 @@
 class RestaurantCollection {
     private(set) var restaurants = Set<Restaurant>()
+
     var size: Int {
         restaurants.count
     }
@@ -20,9 +21,20 @@ class RestaurantCollection {
         return removed != nil
     }
 
-    func update(_ restaurant: Restaurant) {
-        restaurants.remove(restaurant)
+    func update(into restaurant: Restaurant) -> RestaurantModification {
+        let old = restaurants.remove(restaurant)
+        assert(old != nil, "Update should only be called if restaurant already existed.")
+
         restaurants.insert(restaurant)
+
+        return RestaurantCollection.findModificationBetween(old: old!, new: restaurant)
+    }
+
+    static func findModificationBetween(old: Restaurant, new: Restaurant) -> RestaurantModification {
+        if old.isQueueOpen == new.isQueueOpen {
+            return .changedProfileDetails
+        }
+        return .changedQueueStatus
     }
     
     func reset() {

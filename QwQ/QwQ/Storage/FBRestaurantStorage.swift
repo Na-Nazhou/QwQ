@@ -1,12 +1,12 @@
 import FirebaseFirestore
+
 class FBRestaurantStorage: RestaurantStorage {
 
-    let db: Firestore
+    let db = Firestore.firestore()
 
     weak var logicDelegate: RestaurantStorageSyncDelegate?
 
     init() {
-        self.db = Firestore.firestore()
         attachListenerOnRestaurants()
     }
 
@@ -26,25 +26,12 @@ class FBRestaurantStorage: RestaurantStorage {
                     case .added:
                         self.logicDelegate?.didAddNewRestaurant(restaurant: restaurant)
                     case .modified:
-                        if restaurant.isQueueOpen {
-                            self.restaurantDidOpenQueue(restaurant: restaurant)
-                        } else {
-                            self.restaurantDidCloseQueue(restaurant: restaurant)
-                        }
-                        //TODO: add more things to observe if needed
+                        self.logicDelegate?.restaurantDidModifyProfile(restaurant: restaurant)
                     case .removed:
                         self.logicDelegate?.didRemoveRestaurant(restaurant: restaurant)
                     }
                 }
             }
-    }
-
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-        logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
-    }
-
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
-        logicDelegate?.restaurantDidOpenQueue(restaurant: restaurant)
     }
 
     func loadAllRestaurants(completion: @escaping (Restaurant) -> Void) {

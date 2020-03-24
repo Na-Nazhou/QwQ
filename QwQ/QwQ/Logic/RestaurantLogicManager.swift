@@ -1,5 +1,4 @@
 class RestaurantLogicManager: RestaurantLogic {
-    
     // Storage
     private(set) var restaurantStorage: RestaurantStorage
     
@@ -9,6 +8,7 @@ class RestaurantLogicManager: RestaurantLogic {
     
     var customer: Customer
     var currentRestaurant: Restaurant?
+
     private var restaurantCollection = RestaurantCollection()
     var restaurants: [Restaurant] {
         Array(restaurantCollection.restaurants)
@@ -28,22 +28,22 @@ class RestaurantLogicManager: RestaurantLogic {
         })
     }
     
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-    
-        restaurantCollection.update(restaurant)
-        
-        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
-        
-        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: true)
-        
+    func restaurantDidModifyProfile(restaurant: Restaurant) {
+        switch restaurantCollection.update(into: restaurant) {
+        case .changedProfileDetails:
+            break
+        case .changedQueueStatus:
+            didChangeQueueStatus(restaurant: restaurant)
+        }
     }
     
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
-       
-        restaurantCollection.update(restaurant)
-        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
+    func didChangeQueueStatus(restaurant: Restaurant) {
+        if restaurant == currentRestaurant {
+            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: restaurant.isQueueOpen)
+        }
         
-        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: false)
+        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: restaurant.isQueueOpen)
+        
     }
 
     func didAddNewRestaurant(restaurant: Restaurant) {

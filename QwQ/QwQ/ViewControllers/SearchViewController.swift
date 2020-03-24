@@ -96,7 +96,7 @@ extension SearchViewController: PopoverContentControllerDelegate {
 
 extension SearchViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+        .none
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController
@@ -107,7 +107,7 @@ extension SearchViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(
         _ popoverPresentationController: UIPopoverPresentationController
     ) -> Bool {
-        return true
+        true
     }
 }
 

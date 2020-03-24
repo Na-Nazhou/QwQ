@@ -22,8 +22,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
     }
     
     @IBAction private func handleSubmit(_ sender: Any) {
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
-            let groupSizeText = groupSizeTextField.text,
+        guard let groupSizeText = groupSizeTextField.text,
             let babyChairQueantityText = babyChairQuantityTextField.text,
             let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
             let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
@@ -41,9 +40,13 @@ class EditQueueViewController: UIViewController, QueueDelegate {
             .editQueueRecord(with: groupSize,
                              babyChairQuantity: babyChairQuantity,
                              wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+            return
         }
 
-        // Create a new queue record
+         // Create a new queue record
+        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+            return
+        }
         CustomerQueueLogicManager.shared()
             .enqueue(to: restaurant,
                      with: groupSize,
@@ -64,8 +67,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         self.hideKeyboardWhenTappedAround()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         setUpViews()
     }

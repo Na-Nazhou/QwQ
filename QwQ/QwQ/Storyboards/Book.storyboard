@@ -181,7 +181,6 @@
                         <outlet property="locationLabel" destination="let-Bm-Cpo" id="BkN-vO-SwE"/>
                         <outlet property="nameLabel" destination="okI-rC-P4j" id="SXI-5m-e0d"/>
                         <outlet property="profileImageView" destination="fDC-nP-cUE" id="bnq-Hx-ggr"/>
-                        <outlet property="restaurantNameLabel" destination="YEg-We-lhr" id="cvj-td-BoB"/>
                         <outlet property="wheelchairFriendlySwitch" destination="l7p-xA-heJ" id="Lxp-bR-6uv"/>
                     </connections>
                 </viewController>
