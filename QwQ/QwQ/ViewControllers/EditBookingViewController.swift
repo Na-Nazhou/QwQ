@@ -7,19 +7,6 @@
 
 import UIKit
 
-<<<<<<< Updated upstream
-class EditBookingViewController: UIViewController {
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var contactTextField: UITextField!
-    @IBOutlet private var groupSizeTextField: UITextField!
-    @IBOutlet private var babyChairQuantityTextField: UITextField!
-    @IBOutlet private var datePicker: UIDatePicker!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet private var restaurantNameLabel: UILabel!
-    
-    var bookRecord: BookRecord?
-    var spinner: UIView?
-=======
 class EditBookingViewController: UIViewController, BookingDelegate, RecordViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var contactTextField: UITextField!
@@ -32,7 +19,6 @@ class EditBookingViewController: UIViewController, BookingDelegate, RecordViewCo
     var spinner: UIView?
     
     var record: Record?
->>>>>>> Stashed changes
 
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -40,8 +26,7 @@ class EditBookingViewController: UIViewController, BookingDelegate, RecordViewCo
     
     // TODO
     @IBAction private func handleSubmit(_ sender: Any) {
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant,
-                let groupSizeText = groupSizeTextField.text,
+        guard let groupSizeText = groupSizeTextField.text,
                 let babyChairQueantityText = babyChairQuantityTextField.text,
                 let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
                 let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
@@ -52,13 +37,9 @@ class EditBookingViewController: UIViewController, BookingDelegate, RecordViewCo
                     return
             }
 
-//        spinner = showSpinner(onView: view)
+        spinner = showSpinner(onView: view)
         
         // Edit existing book record
-<<<<<<< Updated upstream
-        if bookRecord != nil {
-            // TODO
-=======
         if let bookRecord = record as? BookRecord {
             CustomerBookingLogicManager.shared()
                 .editBookRecord(oldRecord: bookRecord,
@@ -67,43 +48,40 @@ class EditBookingViewController: UIViewController, BookingDelegate, RecordViewCo
                                 babyChairQuantity: babyChairQuantity,
                                 wheelchairFriendly: wheelchairFriendlySwitch.isOn)
             return
->>>>>>> Stashed changes
         }
 
         // Create a new book record
-        // TODO
+        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+            return
+        }
+        CustomerBookingLogicManager.shared()
+            .addBookRecord(to: restaurant,
+                           at: datePicker.date,
+                           with: groupSize,
+                           babyChairQuantity: babyChairQuantity,
+                           wheelchairFriendly: wheelchairFriendlySwitch.isOn)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        CustomerBookingLogicManager.shared().bookingDelegate = self
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         setUpViews()
     }
     
     private func setUpViews() {
         // Editing an existing book record
-<<<<<<< Updated upstream
-        if let bookRecord = bookRecord {
-            restaurantNameLabel.text = bookRecord.restaurant.name
-            nameTextField.text = bookRecord.customer.name
-            contactTextField.text = bookRecord.customer.contact
-            
-            groupSizeTextField.text = String(bookRecord.groupSize)
-            babyChairQuantityTextField.text = String(bookRecord.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
-=======
         if let bookRecord = record as? BookRecord {
             setUpRecordView()
             datePicker.date = bookRecord.time
-
->>>>>>> Stashed changes
         } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return
@@ -113,6 +91,12 @@ class EditBookingViewController: UIViewController, BookingDelegate, RecordViewCo
             // Autofill the name and contact
             nameTextField.text = CustomerQueueLogicManager.shared().customer.name
             contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+
+            // TODO: allow restaurants to set this
+            let minDate = Date()
+            datePicker.minimumDate = minDate
+            datePicker.date = minDate
+
             wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
             babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }

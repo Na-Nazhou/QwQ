@@ -22,7 +22,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         spinner = showSpinner(onView: view)
-        Auth.checkIfAlreadyLoggedIn(completion: authCompleted, failure: notYetLoggedIn)
+        if Auth.checkIfAlreadyLoggedIn() {
+            authCompleted()
+        } else {
+            removeSpinner(spinner)
+        }
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -70,10 +74,6 @@ class LoginViewController: UIViewController {
     private func authCompleted() {
         Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
                                 errorHandler: handleError(error:))
-    }
-
-    private func notYetLoggedIn() {
-        removeSpinner(spinner)
     }
 
     private func getCustomerInfoComplete(customer: Customer) {

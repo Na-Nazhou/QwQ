@@ -9,7 +9,7 @@ import UIKit
 
 class PopoverContentController: UIViewController {
     let sortCriteria = ["Car", "Bike", "Bus", "Van", "bicycle"]
-    var delegate:PopoverContentControllerDelegate?
+    var delegate: PopoverContentControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class PopoverContentController: UIViewController {
 
 extension PopoverContentController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortCriteria.count
+        sortCriteria.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,6 +41,6 @@ extension PopoverContentController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-protocol PopoverContentControllerDelegate: class {
-    func popoverContent(controller:PopoverContentController, didselectItem name:String)
+protocol PopoverContentControllerDelegate: AnyObject {
+    func popoverContent(controller: PopoverContentController, didselectItem name: String)
 }

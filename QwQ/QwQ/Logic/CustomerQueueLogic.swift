@@ -6,6 +6,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
 
     // View Controllers
     var queueDelegate: QueueDelegate? { get set }
+    var activitiesDelegate: ActivitiesDelegate? { get set }
 
     var currentQueueRecord: QueueRecord? { get set }
 

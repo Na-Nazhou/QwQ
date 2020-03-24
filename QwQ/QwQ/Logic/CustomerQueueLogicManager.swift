@@ -10,27 +10,46 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
-    var currentQueueRecord: QueueRecord?
-    private var queueHistory = CustomerQueueHistory()
-    var pastQueueRecords: [QueueRecord] {
-        return Array(queueHistory.history)
+    var currentQueueRecord: QueueRecord? {
+        didSet {
+            if let rec = currentQueueRecord {
+                activitiesDelegate?.didUpdateActiveRecords()
+
+                if let old = oldValue, old == rec {
+                    return
+                }
+
+                print("qlogic adding listener")
+                queueStorage.listenOnlyToCurrentRecord(rec)
+            }
+        }
     }
 
-    private init(customer: Customer) {
+    private var queueHistory = CustomerQueueHistory()
+    var pastQueueRecords: [QueueRecord] {
+        Array(queueHistory.history)
+    }
+
+    private init(customer: Customer, queueStorage: CustomerQueueStorage) {
         self.customer = customer
-        queueStorage = FBQueueStorage()
+        self.queueStorage = queueStorage
         loadQueueRecord()
+
         fetchQueueHistory()
+    }
+
+    deinit {
+        print("\n\tDEINITING\n")
+        queueStorage.removeListener()
     }
 
     private func loadQueueRecord() {
         queueStorage.loadQueueRecord(customer: customer, completion: {
-            self.currentQueueRecord = $0
+            guard let queueRecord = $0 else {
+                return
+            }
+            self.currentQueueRecord = queueRecord
         })
-    }
-
-    func canQueue(for restaurant: Restaurant) -> Bool {
-        restaurant.isQueueOpen && currentQueueRecord == nil
     }
 
     func fetchQueueHistory() {
@@ -42,8 +61,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             if !didAddNew {
                 return
             }
-            self.activitiesDelegate?.didLoadNewRecords()
+            self.activitiesDelegate?.didUpdateHistoryRecords()
         })
+    }
+
+    func canQueue(for restaurant: Restaurant) -> Bool {
+        restaurant.isQueueOpen && currentQueueRecord == nil
     }
 
     func enqueue(to restaurant: Restaurant,
@@ -60,10 +83,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     groupSize: groupSize,
                                     babyChairQuantity: babyChairQuantity,
                                     wheelchairFriendly: wheelchairFriendly,
-                                    startTime: startTime,
-                                    admitTime: nil)
+                                    startTime: startTime)
 
-        queueStorage.addQueueRecord(record: newRecord,
+        queueStorage.addQueueRecord(newRecord: newRecord,
                                     completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
 
         })
@@ -71,37 +93,33 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
         newRecord.id = id
-        self.currentQueueRecord = newRecord
-        self.queueDelegate?.didAddQueueRecord()
+        currentQueueRecord = newRecord
+
+        queueDelegate?.didAddQueueRecord()
     }
 
     func editQueueRecord(with groupSize: Int,
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool) {
-        guard let old = currentQueueRecord else {
+        guard let oldRecord = currentQueueRecord else {
             // Check if there is any change
             // Check the queue record is not admitted yet
             return
         }
-        // Cannot update the restaurant, startTime
+        // Cannot update the restaurant, startTime, etc
         // Reset startTime (??)
 
-        var new = QueueRecord(restaurant: old.restaurant,
-                              customer: customer,
-                              groupSize: groupSize,
-                              babyChairQuantity: babyChairQuantity,
-                              wheelchairFriendly: wheelchairFriendly,
-                              startTime: old.startTime,
-                              admitTime: nil)
+        let newRecord = QueueRecord(id: oldRecord.id,
+                                    restaurant: oldRecord.restaurant,
+                                    customer: customer,
+                                    groupSize: groupSize,
+                                    babyChairQuantity: babyChairQuantity,
+                                    wheelchairFriendly: wheelchairFriendly,
+                                    startTime: oldRecord.startTime)
 
-        queueStorage.updateQueueRecord(old: old, new: new,
-                                       completion: { self.didUpdateQueueRecord(old: old, new: &new) })
-    }
-
-    private func didUpdateQueueRecord(old: QueueRecord, new: inout QueueRecord) {
-        new.id = old.id
-        self.currentQueueRecord = new
-        self.queueDelegate?.didUpdateQueueRecord()
+        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
+            self.queueDelegate?.didUpdateQueueRecord()
+        })
     }
 
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
@@ -110,33 +128,51 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
-        queueStorage.deleteQueueRecord(record: record,
-                                       completion: { self.didDeleteQueueRecord() })
+        queueStorage.deleteQueueRecord(record: record, completion: {
+            self.activitiesDelegate?.didDeleteQueueRecord()
+        })
     }
 
-    private func didDeleteQueueRecord() {
+    func didUpdateQueueRecord(_ record: QueueRecord) {
+        assert(currentQueueRecord != nil, "current queue record should exist to trigger udpate.")
+        assert(currentQueueRecord! == record, "Should only receive update for current queue record.")
+        let modification = record.changeType(from: currentQueueRecord!)
+        switch modification {
+        case .admit:
+            // call some (activites) delegate to display admission status
+            currentQueueRecord = record //tent.
+            print("\ndetected admission\n")
+        case .serve:
+            addAsHistoryRecord(record)
+            didDeleteActiveQueueRecord()
+            print("\ndetected service\n")
+        case .reject:
+            addAsHistoryRecord(record)
+            didDeleteActiveQueueRecord()
+            print("\ndetected rejection\n")
+        case .customerUpdate:
+            customerDidUpdateQueueRecord(record: record)
+            print("\ndetected regular modif\n")
+        case .none:
+            assert(false, "Modification should be something")
+        }
+    }
+
+    private func customerDidUpdateQueueRecord(record: QueueRecord) {
+        currentQueueRecord = record
+    }
+
+    func didDeleteActiveQueueRecord() {
+        assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
+        queueStorage.removeListener()
         currentQueueRecord = nil
-        activitiesDelegate?.didDeleteQueueRecord()
+        activitiesDelegate?.didUpdateActiveRecords()
     }
 
-    func restaurantDidAdmitCustomer(record: QueueRecord) {
-        guard currentQueueRecord != nil, record.customer == customer else {
-            return
+    private func addAsHistoryRecord(_ record: QueueRecord) {
+        if queueHistory.addToHistory(record) {
+            activitiesDelegate?.didUpdateHistoryRecords()
         }
-
-        // Notify customer
-
-        currentQueueRecord?.admitTime = record.admitTime
-    }
-
-    func restaurantDidRejectCustomer(record: QueueRecord) {
-        guard currentQueueRecord != nil, record.customer == customer else {
-            return
-        }
-
-        // Notify customer
-
-        currentQueueRecord?.rejectTime = record.rejectTime
     }
 }
 
@@ -145,14 +181,16 @@ extension CustomerQueueLogicManager {
 
     /// Returns shared customer queue logic manager for the logged in application. If it does not exist,
     /// a queue logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil) -> CustomerQueueLogicManager {
+    static func shared(for customerIdentity: Customer? = nil,
+                       with storage: CustomerQueueStorage? = nil) -> CustomerQueueLogicManager {
         if let logic = queueLogic {
             return logic
         }
 
         assert(customerIdentity != nil,
                "Customer identity must be given non-nil to make the customer's queue logic manager.")
-        let logic = CustomerQueueLogicManager(customer: customerIdentity!)
+        assert(storage != nil, "Queue storage must be given non-nil")
+        let logic = CustomerQueueLogicManager(customer: customerIdentity!, queueStorage: storage!)
         logic.queueStorage.queueModificationLogicDelegate = logic
 
         queueLogic = logic
