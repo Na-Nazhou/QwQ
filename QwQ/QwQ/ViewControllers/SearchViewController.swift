@@ -66,7 +66,10 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
     
     func restaurantCollectionDidLoadNewRestaurant() {
-        //TODO: change to filtering based on new array of restaurants.
+        restaurantCollectionView.reloadData()
+    }
+
+    func restaurantCollectionDidRemoveRestaurant() {
         restaurantCollectionView.reloadData()
     }
     

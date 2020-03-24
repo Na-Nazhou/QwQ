@@ -14,6 +14,16 @@ class RestaurantCollection {
         restaurants = restaurants.union(Set(restaurant))
         return size > origSize
     }
+
+    func remove(_ restaurant: Restaurant) -> Bool {
+        let removed = restaurants.remove(restaurant)
+        return removed != nil
+    }
+
+    func update(_ restaurant: Restaurant) {
+        restaurants.remove(restaurant)
+        restaurants.insert(restaurant)
+    }
     
     func reset() {
         restaurants.removeAll()

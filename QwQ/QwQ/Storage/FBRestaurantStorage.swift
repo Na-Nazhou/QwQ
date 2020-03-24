@@ -7,6 +7,36 @@ class FBRestaurantStorage: RestaurantStorage {
 
     init() {
         self.db = Firestore.firestore()
+        attachListenerOnRestaurants()
+    }
+
+    private func attachListenerOnRestaurants() {
+        db.collection(Constants.restaurantsDirectory)
+            .addSnapshotListener { (restaurantsSnapshot, err) in
+                if let err = err {
+                    print("Error fetching documents: \(err)")
+                    return
+                }
+                restaurantsSnapshot!.documentChanges.forEach { diff in
+                    guard let restaurant = Restaurant(dictionary: diff.document.data()) else {
+                        assert(false, "Restaurant data should always be valid! ?")
+                        return
+                    }
+                    switch diff.type {
+                    case .added:
+                        self.logicDelegate?.didAddNewRestaurant(restaurant: restaurant)
+                    case .modified:
+                        if restaurant.isQueueOpen {
+                            self.restaurantDidOpenQueue(restaurant: restaurant)
+                        } else {
+                            self.restaurantDidCloseQueue(restaurant: restaurant)
+                        }
+                        //TODO: add more things to observe if needed
+                    case .removed:
+                        self.logicDelegate?.didRemoveRestaurant(restaurant: restaurant)
+                    }
+                }
+            }
     }
 
     func restaurantDidOpenQueue(restaurant: Restaurant) {

@@ -10,4 +10,5 @@ protocol SearchDelegate: AnyObject {
 
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool)
     func restaurantCollectionDidLoadNewRestaurant()
+    func restaurantCollectionDidRemoveRestaurant()
 }
