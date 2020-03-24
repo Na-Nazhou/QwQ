@@ -10,7 +10,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
-    var currentQueueRecord: QueueRecord?
+    var currentQueueRecord: QueueRecord? {
+        didSet {
+            if let rec = currentQueueRecord {
+                activitiesDelegate?.didUpdateActiveRecords()
+
+                if let old = oldValue, old == rec {
+                    return
+                }
+
+                print("qlogic adding listener")
+                queueStorage.listenOnlyToCurrentRecord(rec)
+            }
+        }
+    }
 
     private var queueHistory = CustomerQueueHistory()
     var pastQueueRecords: [QueueRecord] {
@@ -36,7 +49,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                 return
             }
             self.currentQueueRecord = queueRecord
-            self.queueStorage.listenOnlyToCurrentRecord(queueRecord)
         })
     }
 
@@ -83,7 +95,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         newRecord.id = id
         currentQueueRecord = newRecord
 
-        queueStorage.listenOnlyToCurrentRecord(newRecord)
         queueDelegate?.didAddQueueRecord()
     }
 
@@ -149,7 +160,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
         currentQueueRecord = record
-        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     func didDeleteActiveQueueRecord() {
@@ -171,7 +181,8 @@ extension CustomerQueueLogicManager {
 
     /// Returns shared customer queue logic manager for the logged in application. If it does not exist,
     /// a queue logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil, with storage: CustomerQueueStorage? = nil) -> CustomerQueueLogicManager {
+    static func shared(for customerIdentity: Customer? = nil,
+                       with storage: CustomerQueueStorage? = nil) -> CustomerQueueLogicManager {
         if let logic = queueLogic {
             return logic
         }
