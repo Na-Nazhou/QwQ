@@ -15,6 +15,7 @@ struct QueueRecord: Record {
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
+    //TODO: var customerRejectTime: Date?
 
     var startDate: String {
         startTime.toDateStringWithoutTime()
@@ -110,28 +111,5 @@ extension QueueRecord {
             && other.admitTime == admitTime
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
-    }
-}
-
-extension QueueRecord {
-    func changeType(from old: QueueRecord) -> QueueRecordModificationType? {
-        if self.id != old.id {
-            // not valid comparison
-            return nil
-        }
-
-        if self.admitTime != nil {
-            if old.admitTime == nil {
-                return .admit
-            }
-            if self.serveTime != nil {
-                return .serve
-            }
-            if self.rejectTime != nil {
-                return .reject
-            }
-            assert(false, "No valid modification detected: Customer update should not be allowed after admission.")
-        }
-        return .customerUpdate
     }
 }

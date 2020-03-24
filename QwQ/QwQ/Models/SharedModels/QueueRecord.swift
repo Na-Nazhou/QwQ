@@ -97,18 +97,6 @@ extension QueueRecord {
         return data
     }
 
-    var isHistoryRecord: Bool {
-        serveTime != nil || rejectTime != nil
-    }
-    
-    var isWaitingRecord: Bool {
-        serveTime == nil && admitTime != nil && rejectTime == nil
-    }
-
-    var isUnadmittedQueueingRecord: Bool {
-        admitTime == nil
-    }
-
     func completelyIdentical(to other: QueueRecord) -> Bool {
         other == self
             && other.restaurant == restaurant
@@ -120,29 +108,5 @@ extension QueueRecord {
             && other.admitTime == admitTime
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
-    }
-}
-
-extension QueueRecord {
-
-    func changeType(from old: QueueRecord) -> QueueRecordModificationType? {
-        if self.id != old.id {
-            // not valid comparison
-            return nil
-        }
-
-        if self.admitTime != nil {
-            if old.admitTime == nil {
-                return .admit
-            }
-            if self.serveTime != nil {
-                return .serve
-            }
-            if self.rejectTime != nil {
-                return .reject
-            }
-            assert(false, "No valid modification detected: Customer update should not be allowed after admission.")
-        }
-        return .customerUpdate
     }
 }

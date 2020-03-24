@@ -23,7 +23,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         Array(currentBookRecords)
     }
 
-    // TODO
     private var bookingHistory = CustomerHistory<BookRecord>()
     var pastBookRecords: [BookRecord] {
         Array(bookingHistory.history)
@@ -86,7 +85,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         bookingStorage.deleteBookRecord(record: record, completion: {
             self.activitiesDelegate?.didDeleteBookRecord()
             // To remove this: (let listener handle this)
-            self.didDeleteActiveBookRecord(record)
+            self.didDeleteBookRecord(record)
         })
     }
 
@@ -100,7 +99,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         activitiesDelegate?.didUpdateActiveRecords()
     }
 
-    func didDeleteActiveBookRecord(_ record: BookRecord) {
+    func didDeleteBookRecord(_ record: BookRecord) {
         currentBookRecords.remove(record)
         activitiesDelegate?.didUpdateActiveRecords()
     }

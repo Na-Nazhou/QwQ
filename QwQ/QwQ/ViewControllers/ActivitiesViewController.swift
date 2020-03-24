@@ -129,7 +129,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         activityCell.setUpView(record: record)
         if let queueRecord = record as? QueueRecord {
             activityCell.editAction = {
-                if queueRecord.isUnadmittedQueueingRecord {
+                if record.isPendingAdmission {
                     self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
                 }
             }
@@ -141,7 +141,9 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let bookRecord = record as? BookRecord {
             activityCell.editAction = {
-                self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
+                if record.isPendingAdmission {
+                    self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
+                }
             }
             activityCell.deleteAction = {
                  self.spinner = self.showSpinner(onView: self.view)

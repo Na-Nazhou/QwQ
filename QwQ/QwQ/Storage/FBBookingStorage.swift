@@ -14,7 +14,7 @@ class FBBookingStorage: CustomerBookingStorage {
 
     weak var logicDelegate: BookingStorageSyncDelegate?
 
-    private var listener: ListenerRegistration?
+    private var listenerMap = [BookRecord: ListenerRegistration]()
     private var isFirstResponse = true
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
@@ -74,7 +74,7 @@ class FBBookingStorage: CustomerBookingStorage {
 
         //add listener
         let docRef = getBookRecordDocument(record: record)
-        listener = docRef.addSnapshotListener { (qRecSnapshot, err) in
+        let listener = docRef.addSnapshotListener { (qRecSnapshot, err) in
             guard let qRecDocument = qRecSnapshot, err == nil else {
                 print("Error fetching document: \(err!)!")
                 return
@@ -86,7 +86,7 @@ class FBBookingStorage: CustomerBookingStorage {
             }
 
             guard let qRecData = qRecDocument.data() else {
-            self.logicDelegate?.didDeleteActiveBookRecord(record)
+                self.logicDelegate?.didDeleteBookRecord(record)
                 return
             }
 
@@ -99,6 +99,7 @@ class FBBookingStorage: CustomerBookingStorage {
             }
             self.logicDelegate?.didUpdateBookRecord(newRecord)
         }
+        listenerMap[record] = listener
 
     }
 

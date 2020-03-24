@@ -171,7 +171,7 @@ class FBQueueStorage: CustomerQueueStorage {
             }
 
             guard let qRecData = qRecDocument.data() else {
-                self.queueModificationLogicDelegate?.didDeleteActiveQueueRecord()
+                self.queueModificationLogicDelegate?.didDeleteQueueRecord(record)
                 return
             }
 

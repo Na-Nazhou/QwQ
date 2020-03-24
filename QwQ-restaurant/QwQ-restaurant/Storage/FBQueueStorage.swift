@@ -21,8 +21,10 @@ class FBQueueStorage: RestaurantQueueStorage {
         //listen to restaurant's queue document for 'today'
         //assuming users will restart app everyday
         let today = Date().toDateStringWithoutTime()
-        db.collection(Constants.queuesDirectory).document(restaurant.uid)
-            .collection(today).addSnapshotListener { (queueSnapshot, err) in
+        db.collection(Constants.queuesDirectory)
+            .document(restaurant.uid)
+            .collection(today)
+            .addSnapshotListener { (queueSnapshot, err) in
                 if let err = err {
                     print("Error fetching documents: \(err)")
                     return
@@ -67,7 +69,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         //listen to restaurant's profile
     }
 
-    private func getUpdateType(of rec: QueueRecord) -> QueueRecordModificationType {
+    private func getUpdateType(of rec: QueueRecord) -> RecordModificationType {
         if rec.admitTime == nil {
             print("\n\tmodif is update!\n")
             return .customerUpdate

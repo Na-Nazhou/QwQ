@@ -29,30 +29,30 @@ class QueueRecordCell: UICollectionViewCell {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        if let queueRecord = record as? QueueRecord {
+        switch record.status {
+        case .pendingAdmission:
+            if let queueRecord = record as? QueueRecord {
+                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+            }
+            if let bookRecord = record as? BookRecord {
+                statusLabel.text = "Time: \(bookRecord.formattedTime)"
+            }
+        case .admitted:
+            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+        case .served:
+            statusLabel.text = "Served at: \(record.serveTime!.toString())"
+        case .rejected:
+            statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+        default:
+            assert(false)
+        }
+
+        if record as? QueueRecord != nil {
             queueBookImageView.image = UIImage(named: "c-queue-icon")
-            statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-
-            if queueRecord.isWaitingRecord {
-                assert(queueRecord.admitTime != nil, "Admit time cannot be nil")
-                statusLabel.text = "Admitted at: \(queueRecord.admitTime!.toString())"
-            }
         }
 
-        if let bookRecord = record as? BookRecord {
+        if record as? BookRecord != nil {
             queueBookImageView.image = UIImage(named: "c-book-icon")
-            statusLabel.text = "Booking time: \(bookRecord.formattedTime)"
-        }
-
-        // Hide edit and delete buttons if it is history record
-        if record.isHistoryRecord {
-            if let serveTime = record.serveTime {
-                statusLabel.text = "Served at: \(serveTime.toString())"
-            }
-
-            if let rejectTime = record.rejectTime {
-                statusLabel.text = "Rejected at: \(rejectTime.toString())"
-            }
         }
     }
 }

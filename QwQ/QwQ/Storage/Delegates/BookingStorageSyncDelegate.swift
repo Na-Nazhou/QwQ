@@ -7,7 +7,7 @@
 
 protocol BookingStorageSyncDelegate: AnyObject {
 
-    func didDeleteActiveBookRecord(_ record: BookRecord)
+    func didDeleteBookRecord(_ record: BookRecord)
 
     func didUpdateBookRecord(_ record: BookRecord)
 }

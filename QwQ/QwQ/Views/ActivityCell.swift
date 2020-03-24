@@ -26,41 +26,44 @@ class ActivityCell: UICollectionViewCell {
         editAction?()
     }
 
-    // TODO: take in record protocol instead
     func setUpView(record: Record) {
         nameLabel.text = record.restaurant.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        if let queueRecord = record as? QueueRecord {
-            queueBookImageView.image = UIImage(named: "c-queue-icon")
-            // TODO
+        disableEdit()
 
-            if queueRecord.isWaitingRecord {
-                assert(queueRecord.admitTime != nil, "Admit time cannot be nil")
-                statusLabel.text = "Admitted at: \(queueRecord.admitTime!.toString())"
-                disableEdit()
-            } else {
+        switch record.status {
+        case .pendingAdmission:
+            enableEdit()
+            if let queueRecord = record as? QueueRecord {
                 statusLabel.text = "Estimated time: 00:00"
-                enableEdit()
             }
+            if let bookRecord = record as? BookRecord {
+                statusLabel.text = "Time: \(bookRecord.formattedTime)"
+            }
+        case .admitted:
+            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+        case .served:
+            statusLabel.text = "Served at: \(record.serveTime!.toString())"
+            hideEditAndDelete()
+        case .rejected:
+            statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+
+        default:
+            assert(false)
         }
 
-        if let bookRecord = record as? BookRecord {
+        if record as? QueueRecord != nil {
+            queueBookImageView.image = UIImage(named: "c-queue-icon")
+        }
+
+        if record as? BookRecord != nil {
             queueBookImageView.image = UIImage(named: "c-book-icon")
-            // TODO
-            statusLabel.text = "Time: \(bookRecord.formattedTime)"
         }
 
         // Hide edit and delete buttons if it is history record
         if record.isHistoryRecord {
             hideEditAndDelete()
-            if let serveTime = record.serveTime {
-                statusLabel.text = "Served at: \(serveTime.toString())"
-            }
-
-            if let rejectTime = record.rejectTime {
-                statusLabel.text = "Rejected at: \(rejectTime.toString())"
-            }
         } else {
             showEditAndDelete()
         }

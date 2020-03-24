@@ -144,11 +144,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             print("\ndetected admission\n")
         case .serve:
             addAsHistoryRecord(record)
-            didDeleteActiveQueueRecord()
+            didDeleteQueueRecord(record)
             print("\ndetected service\n")
         case .reject:
             addAsHistoryRecord(record)
-            didDeleteActiveQueueRecord()
+            didDeleteQueueRecord(record)
             print("\ndetected rejection\n")
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
@@ -162,7 +162,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         currentQueueRecord = record
     }
 
-    func didDeleteActiveQueueRecord() {
+    func didDeleteQueueRecord(_ record: QueueRecord) {
         assert(currentQueueRecord != nil, "There should exist an active queue record to remove.")
         queueStorage.removeListener()
         currentQueueRecord = nil
