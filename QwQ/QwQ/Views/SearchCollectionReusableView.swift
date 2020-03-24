@@ -9,5 +9,4 @@ import UIKit
 
 class SearchCollectionReusableView: UICollectionReusableView {
     @IBOutlet private var searchBar: UISearchBar!
-    
 }

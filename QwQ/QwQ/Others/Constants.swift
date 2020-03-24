@@ -42,7 +42,7 @@ struct Constants {
     static let showImagePickerTitle = "Choose your image"
 
     // MARK: Queue record
-    static let restaurantUnavailableMessage = "This restaurant is currently not open!"
+    static let restaurantUnavailableMessage = "This restaurant queue is currently not open!"
     static let multipleQueueRecordsMessage = "You have an existing queue record."
     static let queueRecordCreateSuccessMessage = "You have created a new queue record."
     static let queueRecordUpdateSuccessMessage = "Your queue record has been updated."
@@ -71,6 +71,7 @@ struct Constants {
     static let customersDirectory = "customers"
     static let restaurantsDirectory = "restaurants"
     static let queuesDirectory = "queues"
+    static let bookingsDirectory = "bookings"
     
     // MARK: Collection view settings
     static let restaurantReuseIdentifier = "restaurantCell"

@@ -56,11 +56,11 @@ class FBAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        return Auth.auth().currentUser != nil
+        Auth.auth().currentUser != nil
     }
 
     static func getUIDOfCurrentUser() -> String? {
-        return Auth.auth().currentUser?.uid
+        Auth.auth().currentUser?.uid
     }
 
 }

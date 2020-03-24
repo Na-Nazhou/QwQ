@@ -5,11 +5,9 @@
 //  Created by Nazhou Na on 19/3/20.
 //
 
-// TODO
 protocol BookingStorageSyncDelegate: AnyObject {
 
-}
+    func didDeleteActiveBookRecord(_ record: BookRecord)
 
-protocol BookingStorageSync {
-
+    func didUpdateBookRecord(_ record: BookRecord)
 }

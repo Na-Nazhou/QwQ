@@ -17,16 +17,6 @@ class RestaurantCell: UICollectionViewCell {
         queueAction?()
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    // MARK: Codable
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address

@@ -1,5 +1,6 @@
 class CustomerQueueHistory {
     private(set) var history = Set<QueueRecord>()
+
     var size: Int {
         history.count
     }

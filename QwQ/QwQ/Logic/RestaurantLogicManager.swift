@@ -9,6 +9,7 @@ class RestaurantLogicManager: RestaurantLogic {
     
     var customer: Customer
     var currentRestaurant: Restaurant?
+
     private var restaurantCollection = RestaurantCollection()
     var restaurants: [Restaurant] {
         Array(restaurantCollection.restaurants)
