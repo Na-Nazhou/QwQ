@@ -72,4 +72,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         //TODO
     }
 
+    func restaurantDidUpdate(restaurant: Restaurant) {
+        // TODO
+    }
+
 }

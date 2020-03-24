@@ -8,6 +8,8 @@
 /// Protocol for delegate of restaurant logic presentation to follow.
 protocol SearchDelegate: AnyObject {
 
+    func restaurantDidUpdate(restaurant: Restaurant)
+
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool)
 
     func restaurantCollectionDidLoadNewRestaurant()

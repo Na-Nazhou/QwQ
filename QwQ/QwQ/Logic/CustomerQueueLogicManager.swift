@@ -20,12 +20,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                 }
 
                 print("qlogic adding listener")
-                queueStorage.listenOnlyToCurrentRecord(rec)
+                queueStorage.registerListener(for: rec)
             }
         }
     }
 
-    private var queueHistory = CustomerQueueHistory()
+    private var queueHistory = CustomerHistory<QueueRecord>()
     var pastQueueRecords: [QueueRecord] {
         Array(queueHistory.history)
     }
@@ -124,7 +124,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
         guard let record = currentQueueRecord,
-            queueRecord.id == record.id else {
+            queueRecord == record else {
             return
         }
 

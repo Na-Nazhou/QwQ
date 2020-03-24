@@ -15,6 +15,7 @@ class FBBookingStorage: CustomerBookingStorage {
     weak var logicDelegate: BookingStorageSyncDelegate?
 
     private var listener: ListenerRegistration?
+    private var isFirstResponse = true
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
         db.collection(Constants.bookingsDirectory)
@@ -65,5 +66,43 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
+    }
+
+    func registerListener(for record: BookRecord) {
+        // remove listener (if any)
+        removeListener(for: record)
+
+        //add listener
+        let docRef = getBookRecordDocument(record: record)
+        listener = docRef.addSnapshotListener { (qRecSnapshot, err) in
+            guard let qRecDocument = qRecSnapshot, err == nil else {
+                print("Error fetching document: \(err!)!")
+                return
+            }
+
+            if self.isFirstResponse {
+                self.isFirstResponse = false
+                return
+            }
+
+            guard let qRecData = qRecDocument.data() else {
+            self.logicDelegate?.didDeleteActiveBookRecord(record)
+                return
+            }
+
+            guard let newRecord = BookRecord(dictionary: qRecData,
+                                             customer: record.customer,
+                                             restaurant: record.restaurant,
+                                             id: record.id) else {
+                                                print("Error")
+                                                return
+            }
+            self.logicDelegate?.didUpdateBookRecord(newRecord)
+        }
+
+    }
+
+    func removeListener(for record: BookRecord) {
+
     }
 }

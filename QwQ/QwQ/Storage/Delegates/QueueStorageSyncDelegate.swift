@@ -6,5 +6,5 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func didUpdateQueueRecord(_ record: QueueRecord)
 
     // Customer actions synced from other devices -- TODO?
-//    func queueRecordDidGetAdded(rec: QueueRecord)
+//    func didAddQueueRecord(newRecord: QueueRecord)
 }

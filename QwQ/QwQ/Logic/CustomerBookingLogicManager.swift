@@ -24,9 +24,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     // TODO
-    private var bookingHistory = Set<BookRecord>()
+    private var bookingHistory = CustomerHistory<BookRecord>()
     var pastBookRecords: [BookRecord] {
-        Array(bookingHistory)
+        Array(bookingHistory.history)
     }
 
     private init(customer: Customer, bookingStorage: CustomerBookingStorage) {

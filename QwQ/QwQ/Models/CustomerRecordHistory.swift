@@ -7,8 +7,8 @@
 
 class CustomerRecordHistory {
 
-    var queueHistory: CustomerQueueHistory
-    var bookingHistory: CustomerBookingHistory
+    var queueHistory: CustomerHistory<QueueRecord>
+    var bookingHistory: CustomerHistory<BookRecord>
 
     var historyRecords: [Record] {
         var records = [Record]()
@@ -17,8 +17,8 @@ class CustomerRecordHistory {
         return records
     }
 
-    init(queueHistory: CustomerQueueHistory,
-         bookingHistory: CustomerBookingHistory) {
+    init(queueHistory: CustomerHistory<QueueRecord>,
+         bookingHistory: CustomerHistory<BookRecord>) {
         self.queueHistory = queueHistory
         self.bookingHistory = bookingHistory
     }

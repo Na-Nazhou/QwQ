@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct BookRecord: Record {
     var id = "0"
@@ -57,6 +58,25 @@ struct BookRecord: Record {
         self.admitTime = admitTime
         self.serveTime = serveTime
         self.rejectTime = rejectTime
+    }
+
+    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String = "0") {
+        guard let groupSize = dictionary["groupSize"] as? Int,
+            let babyChairQuantity = dictionary["babyChairQuantity"] as? Int,
+            let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
+            let time = (dictionary["time"] as? Timestamp)?.dateValue() else {
+                return nil
+        }
+        let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
+        let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
+        let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
+
+        self.init(id: id, restaurant: restaurant, customer: customer,
+                  time: time,
+                  groupSize: groupSize,
+                  babyChairQuantity: babyChairQuantity,
+                  wheelchairFriendly: wheelchairFriendly,
+                  admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime)
     }
 }
 

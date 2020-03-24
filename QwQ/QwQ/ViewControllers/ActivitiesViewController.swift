@@ -127,10 +127,11 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let record = records[indexPath.row]
         activityCell.setUpView(record: record)
-        if let queueRecord = record as? QueueRecord,
-            queueRecord.isUnadmittedQueueingRecord {
+        if let queueRecord = record as? QueueRecord {
             activityCell.editAction = {
-                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                if queueRecord.isUnadmittedQueueingRecord {
+                    self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                }
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)

@@ -1,5 +1,5 @@
 class RestaurantLogicManager: RestaurantLogic {
-    
+
     // Storage
     private(set) var restaurantStorage: RestaurantStorage
     
@@ -27,6 +27,11 @@ class RestaurantLogicManager: RestaurantLogic {
                 self.searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
             }
         })
+    }
+
+    func didUpdateRestaurant(restaurant: Restaurant) {
+        restaurantDelegate?.restaurantDidUpdate(restaurant: restaurant)
+        searchDelegate?.restaurantDidUpdate(restaurant: restaurant)
     }
     
     func restaurantDidOpenQueue(restaurant: Restaurant) {

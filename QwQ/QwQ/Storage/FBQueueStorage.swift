@@ -153,7 +153,7 @@ class FBQueueStorage: CustomerQueueStorage {
     }
 
     // MARK: - Listeners
-    func listenOnlyToCurrentRecord(_ record: QueueRecord) {
+    func registerListener(for record: QueueRecord) {
         //remove any listeners
         removeListener()
 
@@ -162,10 +162,6 @@ class FBQueueStorage: CustomerQueueStorage {
         listener = docRef.addSnapshotListener { (qRecSnapshot, err) in
             guard let qRecDocument = qRecSnapshot, err == nil else {
                 print("Error fetching document: \(err!)!")
-                return
-            }
-
-            guard !qRecDocument.metadata.hasPendingWrites else {
                 return
             }
 

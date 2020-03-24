@@ -96,7 +96,7 @@ extension Restaurant {
 
 extension Restaurant {
     static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
-        return lhs.uid == rhs.uid
+        lhs.uid == rhs.uid
     }
 
     func hash(into hasher: inout Hasher) {

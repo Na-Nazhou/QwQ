@@ -15,14 +15,14 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     private(set) var restaurantQueue = RestaurantQueue()
     private(set) var restaurantWaiting = RestaurantQueue()
     var queueRecords: [QueueRecord] {
-        return Array(restaurantQueue.queue)
+        Array(restaurantQueue.queue)
     }
     var waitingRecords: [QueueRecord] {
-        return Array(restaurantWaiting.queue)
+        Array(restaurantWaiting.queue)
     }
     
     var isQueueOpen: Bool {
-        return restaurant.isQueueOpen
+        restaurant.isQueueOpen
     }
 
     func fetchQueue() {
@@ -182,8 +182,9 @@ extension RestaurantQueueLogicManager {
 
 extension RestaurantQueueLogicManager {
     private func currentTime() -> Date {
-        return Date()
+        Date()
     }
+
     private func updateAdmitTime(queueRecord: QueueRecord) -> QueueRecord {
         var updatedRec = queueRecord
         updatedRec.admitTime = currentTime()

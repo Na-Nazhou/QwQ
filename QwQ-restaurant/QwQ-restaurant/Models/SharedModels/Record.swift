@@ -12,11 +12,12 @@ protocol Record {
     var restaurant: Restaurant { get }
     var customer: Customer { get }
 
-    var groupSize: Int { get set }
-    var babyChairQuantity: Int { get set }
-    var wheelchairFriendly: Bool { get set }
+    var groupSize: Int { get }
+    var babyChairQuantity: Int { get }
+    var wheelchairFriendly: Bool { get }
 
     var admitTime: Date? { get set }
+    var serveTime: Date? { get set }
     var rejectTime: Date? { get set }
 
     var isHistoryRecord: Bool { get }

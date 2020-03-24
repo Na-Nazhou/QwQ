@@ -45,7 +45,7 @@ struct Customer: User {
 
 extension Customer {
     static func == (lhs: Customer, rhs: Customer) -> Bool {
-        return lhs.uid == rhs.uid
+        lhs.uid == rhs.uid
     }
     
     func hash(into hasher: inout Hasher) {

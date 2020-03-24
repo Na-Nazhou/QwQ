@@ -27,18 +27,6 @@ class CustomerHistoryLogicManager: CustomerHistoryLogic {
 
     func fetchHistoryRecords() {
     }
-
-    func didDeleteActiveQueueRecord() {
-    }
-
-    func didUpdateQueueRecord(_ record: QueueRecord) {
-    }
-
-    func didDeleteActiveBookRecord(_ record: BookRecord) {
-    }
-
-    func didUpdateBookRecord(_ record: BookRecord) {
-    }
 }
 
 extension CustomerHistoryLogicManager {

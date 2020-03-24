@@ -131,7 +131,7 @@ class FBQueueStorage: RestaurantQueueStorage {
           .document(record.restaurant.uid)
           .collection(record.startDate)
           .document(record.id)
-          .setData(QueueRecord.queueRecordToDictionary(record))
+            .setData(record.dictionary)
     }
     
     func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {

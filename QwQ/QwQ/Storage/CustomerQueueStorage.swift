@@ -21,7 +21,7 @@ protocol CustomerQueueStorage: QueueStorageSync {
     func loadQueueHistory(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
     
     // MARK: - Listeners
-    func listenOnlyToCurrentRecord(_ rec: QueueRecord)
+    func registerListener(for record: QueueRecord)
 
     func removeListener()
 }

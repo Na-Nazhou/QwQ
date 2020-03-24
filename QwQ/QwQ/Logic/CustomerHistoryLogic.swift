@@ -8,7 +8,7 @@
 import Foundation
 
 // TODO
-protocol CustomerHistoryLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
+protocol CustomerHistoryLogic {
 
     // Storage
     var queueStorage: CustomerQueueStorage { get set }
