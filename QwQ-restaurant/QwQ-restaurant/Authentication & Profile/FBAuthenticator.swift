@@ -58,6 +58,14 @@ class FBAuthenticator: Authenticator {
         }
     }
 
+    static func changePassword(_ password: String, errorHandler: @escaping (Error) -> Void) {
+        Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        })
+    }
+
     static func checkIfAlreadyLoggedIn() -> Bool {
         Auth.auth().currentUser != nil
     }

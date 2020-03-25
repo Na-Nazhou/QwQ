@@ -15,8 +15,6 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet private var recordCollectionView: UICollectionView!
     
     @IBOutlet private var openCloseButton: UIButton!
-    let openTitle = "OPEN"
-    let closeTitle = "CLOSE"
 
     var spinner: UIView?
 
@@ -41,7 +39,24 @@ class ActivitiesViewController: UIViewController {
     var historyRecords: [Record] {
         []
     }
-    
+
+    @IBAction private func handleOpenClose(_ sender: UIButton) {
+        guard let title = sender.currentTitle?.uppercased() else {
+            assert(false, "open close button title should not be nil")
+            return
+        }
+        switch title {
+        case Constants.buttonTextToOpenQueue:
+            openQueue()
+            RestaurantQueueLogicManager.shared().openQueue()
+        case Constants.buttonTextToCloseQueue:
+            closeQueue()
+            RestaurantQueueLogicManager.shared().closeQueue()
+        default:
+            assert(false, "open close button title should be either open or close.")
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,37 +71,10 @@ class ActivitiesViewController: UIViewController {
         filtered = records
 
         if RestaurantQueueLogicManager.shared().isQueueOpen {
-            closeQueue()
+            openQueue()
         } else {
-            openQueue()
-        }
-    }
-
-    @IBAction private func handleOpenClose(_ sender: UIButton) {
-        guard let title = sender.currentTitle?.uppercased() else {
-            assert(false, "open close button title should not be nil")
-            return
-        }
-        switch title {
-        case openTitle:
             closeQueue()
-            RestaurantQueueLogicManager.shared().openQueue()
-        case closeTitle:
-            openQueue()
-            RestaurantQueueLogicManager.shared().closeQueue()
-        default:
-            assert(false, "open close button title should be either open or close.")
         }
-    }
-
-    private func openQueue() {
-        openCloseButton.setTitle(openTitle, for: .normal)
-        openCloseButton.backgroundColor = .systemGreen
-    }
-
-    private func closeQueue() {
-        openCloseButton.setTitle(closeTitle, for: .normal)
-        openCloseButton.backgroundColor = .systemRed
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,6 +93,17 @@ class ActivitiesViewController: UIViewController {
             return
         }
     }
+
+    private func openQueue() {
+        openCloseButton.setTitle(Constants.buttonTextToCloseQueue, for: .normal)
+        openCloseButton.backgroundColor = .systemRed
+    }
+
+    private func closeQueue() {
+        openCloseButton.setTitle(Constants.buttonTextToOpenQueue, for: .normal)
+        openCloseButton.backgroundColor = .systemGreen
+    }
+
 }
 
 extension ActivitiesViewController: UISearchBarDelegate {

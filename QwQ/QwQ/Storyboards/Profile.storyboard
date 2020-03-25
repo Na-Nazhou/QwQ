@@ -258,7 +258,7 @@
                                                     <constraint firstAttribute="width" secondItem="A4P-Oj-FAp" secondAttribute="height" multiplier="207:60" id="OuD-aU-kKG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="10"/>

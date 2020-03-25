@@ -177,13 +177,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="EIt-7S-tb5" kind="relationship" relationship="viewControllers" id="8Lo-0i-yHN"/>
-                        <segue destination="B7R-25-xWy" kind="relationship" relationship="viewControllers" id="geg-cd-Up8"/>
+                        <segue destination="EIt-7S-tb5" kind="relationship" relationship="viewControllers" id="wHL-AF-qqp"/>
+                        <segue destination="dpc-zQ-j02" kind="relationship" relationship="viewControllers" id="BzQ-oE-4Il"/>
+                        <segue destination="B7R-25-xWy" kind="relationship" relationship="viewControllers" id="26N-6t-ejA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="102"/>
+            <point key="canvasLocation" x="1967" y="142"/>
         </scene>
         <!--Activities-->
         <scene sceneID="UBO-CK-qMg">
@@ -203,7 +204,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egv-4c-Mv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2497" y="181"/>
+            <point key="canvasLocation" x="2509" y="214"/>
+        </scene>
+        <!--Statistics-->
+        <scene sceneID="CIU-Sy-L4c">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Statistics" id="dpc-zQ-j02" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="n5s-UU-7lT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N4U-LJ-Ssj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2502" y="142"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="pzF-pP-bbx">
@@ -389,11 +400,22 @@
                         <outlet property="nameTextField" destination="1cL-Sc-r32" id="FFK-68-7w5"/>
                         <outlet property="passwordTextField" destination="2ba-Kg-7qM" id="Dr8-qg-GHk"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="signupCompleted" id="y5a-2U-37J"/>
+                        <segue destination="bNV-Dr-4g9" kind="show" identifier="emailNotVerified" id="PeX-wD-bBX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="885.61151079136698" y="871.85929648241211"/>
+        </scene>
+        <!--EmailVerification-->
+        <scene sceneID="SAN-6o-gEP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EmailVerification" id="bNV-Dr-4g9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8ub-GK-Ya9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERj-hT-JWv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1422" y="835"/>
         </scene>
     </scenes>
     <resources>
@@ -403,6 +425,6 @@
         <image name="r-logo" width="487" height="558"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="23e-ha-7lb"/>
+        <segue reference="y5a-2U-37J"/>
     </inferredMetricsTieBreakers>
 </document>

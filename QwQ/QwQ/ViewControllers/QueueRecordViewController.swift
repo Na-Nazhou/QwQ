@@ -20,7 +20,10 @@ class QueueRecordViewController: UIViewController, RecordViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         setUpViews()
     }
     

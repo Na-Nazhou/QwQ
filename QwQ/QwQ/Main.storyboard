@@ -88,8 +88,12 @@
                                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pn9-Tr-2we"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jK-Jf-8eI">
+                                                <rect key="frame" x="0.0" y="153.66666666666663" width="254.66666666666666" height="0.0"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
-                                                <rect key="frame" x="0.0" y="153.66666666666663" width="254.66666666666666" height="75.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="163.66666666666663" width="254.66666666666666" height="65.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                 <state key="normal" title="Or Sign Up">
                                                     <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,6 +147,7 @@
                     <navigationItem key="navigationItem" id="qxR-Zv-WeF"/>
                     <connections>
                         <outlet property="emailTextField" destination="qMP-nu-B0d" id="pMT-tQ-om5"/>
+                        <outlet property="facebookButton" destination="7jK-Jf-8eI" id="ayP-ip-Nc9"/>
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="DyT-1C-uja"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="cpb-gv-3Uj"/>
                     </connections>
@@ -403,11 +408,22 @@
                         <outlet property="nameTextField" destination="1cL-Sc-r32" id="7TV-3l-NRF"/>
                         <outlet property="passwordTextField" destination="rwb-2f-QC1" id="HKB-3L-tre"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="signupCompleted" id="Rpy-6d-C2D"/>
+                        <segue destination="4lH-FC-esn" kind="show" identifier="emailNotVerified" id="C5C-KK-0VI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="886" y="856"/>
+        </scene>
+        <!--EmailVerification-->
+        <scene sceneID="h5w-qn-JaR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EmailVerification" id="4lH-FC-esn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="kF5-VZ-ob0"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1QR-kh-7Tm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1562" y="821"/>
         </scene>
     </scenes>
     <resources>

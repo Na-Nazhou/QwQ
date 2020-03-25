@@ -15,7 +15,8 @@ class LoginViewController: UIViewController {
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-
+    @IBOutlet weak var facebookButton: UIView!
+    
     var spinner: UIView?
 
     override func viewDidLoad() {

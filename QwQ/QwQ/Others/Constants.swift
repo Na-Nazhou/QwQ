@@ -60,6 +60,7 @@ struct Constants {
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
+    static let emailNotVerifiedSegue = "emailNotVerified"
     static let restaurantSelectedSegue = "restaurantSelected"
     static let queueSelectedSegue = "queueSelected"
     static let bookSelectedSegue = "bookSelected"

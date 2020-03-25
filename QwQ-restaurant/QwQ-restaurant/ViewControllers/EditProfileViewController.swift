@@ -17,6 +17,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
 
+    typealias Auth = FBAuthenticator
     typealias Profile = FBProfileStorage
 
     var uid: String?
@@ -82,18 +83,23 @@ class EditProfileViewController: UIViewController {
             return
         }
 
-        let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
-                                    address: address, menu: menu, isRestaurantOpen: isRestaurantOpen)
-
         spinner = showSpinner(onView: view)
-
-        Profile.updateRestaurantInfo(restaurant: restaurant,
-                                     completion: updateComplete,
-                                     errorHandler: handleError(error:))
 
         if let image = image {
             Profile.updateRestaurantProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
+
+        if let password = newPasswordTextField.text {
+            changePassword(password)
+        }
+
+        let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
+                                    address: address, menu: menu, isRestaurantOpen: isRestaurantOpen,
+                                    queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime)
+
+        Profile.updateRestaurantInfo(restaurant: restaurant,
+                                     completion: updateComplete,
+                                     errorHandler: handleError(error:))
     }
 
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
@@ -112,6 +118,14 @@ class EditProfileViewController: UIViewController {
         setUpProfileImageView(uid: restaurant.uid)
 
         removeSpinner(spinner)
+    }
+
+    private func changePassword(_ password: String) {
+        let trimmedPassword = password.trimmingCharacters(in: .newlines)
+        guard !trimmedPassword.isEmpty else {
+            return
+        }
+        Auth.changePassword(password, errorHandler: handleError(error:))
     }
 
     private func updateComplete() {

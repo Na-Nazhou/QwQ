@@ -51,8 +51,10 @@ struct Constants {
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
+    static let emailNotVerifiedSegue = "emailNotVerified"
     static let queueRecordSelectedSegue = "queueRecordSelected"
     static let bookRecordSelectedSegue = "bookRecordSelected"
+    static let statisticsSelectedSegue = "statisticsSelected"
     static let logoutSegue = "logout"
 
     // MARK: Storage settings
@@ -65,6 +67,7 @@ struct Constants {
     static let queueRecordReuseIdentifier = "queueRecordCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let activityCellHeight = CGFloat(300)
+    static let statisticsReuseIdentifier = "statisticsCell"
     
     // MARK: Segmented control settings
     static let segmentedControlTitles = ["Active", "History"]
@@ -85,4 +88,8 @@ struct Constants {
     static let spinnerViewBackgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
     static let spinnerViewFrame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
     static let spinnerViewColor = UIColor.white
+    
+    // MARK: Restaurant queue activities settings
+    static let buttonTextToOpenQueue = "CLICK TO OPEN"
+    static let buttonTextToCloseQueue = "CLICK TO CLOSE"
 }
