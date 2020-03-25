@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIViewController {
-
     func showMessage(title: String, message: String, buttonText: String,
                      buttonAction: ((UIAlertAction) -> Void)? = nil) {
         let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -18,5 +17,4 @@ extension UIViewController {
 
         self.present(message, animated: true)
     }
-    
 }

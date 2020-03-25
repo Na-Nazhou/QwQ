@@ -20,7 +20,7 @@ class FBQueueStorage: RestaurantQueueStorage {
     private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
         // listen to restaurant's queue document for 'today'
         // assuming users will restart app everyday
-        let today = Date().toDateStringWithoutTime()
+        let today = Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat)
         db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
             .collection(today)
@@ -163,7 +163,7 @@ class FBQueueStorage: RestaurantQueueStorage {
                                   completion: @escaping (QueueRecord?) -> Void) {
         db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
-            .collection(Date().toDateStringWithoutTime())
+            .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
             .getDocuments { (queueSnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")

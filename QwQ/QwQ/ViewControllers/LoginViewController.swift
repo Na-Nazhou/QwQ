@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet weak var facebookButton: UIView!
+    @IBOutlet private var facebookButton: UIButton!
     
     var spinner: UIView?
 
@@ -34,7 +34,6 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction private func loginButton(_ sender: Any) {
-
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -66,7 +65,6 @@ class LoginViewController: UIViewController {
         Auth.login(authDetails: authDetails, completion: authCompleted, errorHandler: handleError(error:))
 
         spinner = showSpinner(onView: view)
-
     }
 
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {

@@ -88,4 +88,10 @@ struct Constants {
     // MARK: Restaurant queue activities settings
     static let buttonTextToOpenQueue = "CLICK TO OPEN"
     static let buttonTextToCloseQueue = "CLICK TO CLOSE"
+    
+    // MARK: Record settings
+    static let recordDateFormat = "ddMMyyyy"
+    
+    // MARK: Statistics settings
+    static let statisticsDateFormat = "dd/MM/yyyy"
 }

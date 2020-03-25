@@ -1,6 +1,6 @@
 //
-//  UIViewController+handleBack.swift
-//  QwQ-restaurant
+//  UICollectionView+handleBack.swift
+//  QwQ
 //
 //  Created by Tan Su Yee on 25/3/20.
 //

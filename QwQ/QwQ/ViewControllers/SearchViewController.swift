@@ -10,8 +10,11 @@ import UIKit
 class SearchViewController: UIViewController, SearchDelegate {
     
     private var filter: (Restaurant) -> Bool = { _ in true }
+    private var sorter: (Restaurant, Restaurant) -> Bool = { _, _  in true }
     private var filtered: [Restaurant] {
-        restaurants.filter(filter)
+        var finalRestaurants = restaurants.filter(filter)
+        finalRestaurants.sort(by: sorter)
+        return finalRestaurants
     }
     private var searchActive: Bool = false
     private let searchController = UISearchController(searchResultsController: nil)
@@ -90,7 +93,26 @@ class SearchViewController: UIViewController, SearchDelegate {
 
 extension SearchViewController: PopoverContentControllerDelegate {
     func popoverContent(controller: PopoverContentController, didselectItem name: String) {
-        print("\(name)")
+        switch name {
+        case Constants.sortCriteria[0]:
+            handleSortByName()
+        case Constants.sortCriteria[1]:
+            handleSortByLocation()
+        default:
+            break
+        }
+    }
+    
+    private func handleSortByName() {
+        sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
+            restaurant.name < otherRestaurant.name
+        }
+    }
+    
+    private func handleSortByLocation() {
+        sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
+            restaurant.address < otherRestaurant.address
+        }
     }
 }
 
