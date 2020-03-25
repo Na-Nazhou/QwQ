@@ -11,31 +11,35 @@ import Foundation
 
 class ActivitiesViewController: UIViewController {
 
-    var filtered: [Record] = []
-    var records: [Record] {
-        RestaurantQueueLogicManager.shared().queueRecords
-    }
-    
     @IBOutlet private var searchBarController: UISearchBar!
-    @IBOutlet private var queueRecordCollectionView: UICollectionView!
+    @IBOutlet private var recordCollectionView: UICollectionView!
     
     @IBOutlet private var openCloseButton: UIButton!
+    let openTitle = "OPEN"
+    let closeTitle = "CLOSE"
 
-    @IBAction private func handleOpenClose(_ sender: UIButton) {
-        guard let title = sender.currentTitle?.uppercased() else {
-            assert(false, "open close button title should not be nil")
-            return
+    var spinner: UIView?
+
+    var filtered: [Record] = []
+
+    var records: [Record] {
+        if isActive {
+            return activeRecords
+        } else {
+            return historyRecords
         }
-        switch title {
-        case "OPEN":
-            closeQueue()
-            RestaurantQueueLogicManager.shared().openQueue()
-        case "CLOSE":
-            openQueue()
-            RestaurantQueueLogicManager.shared().closeQueue()
-        default:
-            assert(false, "open close button title should be either open or close.")
-        }
+    }
+
+    var isActive = true
+
+    // TODO: refactor
+    var activeRecords: [Record] {
+        // TODO: get both queue records and booking records
+        RestaurantQueueLogicManager.shared().queueRecords
+    }
+
+    var historyRecords: [Record] {
+        []
     }
     
     override func viewDidLoad() {
@@ -43,10 +47,11 @@ class ActivitiesViewController: UIViewController {
         
         self.hideKeyboardWhenTappedAround()
         
-        queueRecordCollectionView.delegate = self
-        queueRecordCollectionView.dataSource = self
+        recordCollectionView.delegate = self
+        recordCollectionView.dataSource = self
 
         RestaurantQueueLogicManager.shared().presentationDelegate = self
+        // TODO: set delegate for BookingLogicManager
         
         filtered = records
 
@@ -56,7 +61,34 @@ class ActivitiesViewController: UIViewController {
             openQueue()
         }
     }
-    
+
+    @IBAction private func handleOpenClose(_ sender: UIButton) {
+        guard let title = sender.currentTitle?.uppercased() else {
+            assert(false, "open close button title should not be nil")
+            return
+        }
+        switch title {
+        case openTitle:
+            closeQueue()
+            RestaurantQueueLogicManager.shared().openQueue()
+        case closeTitle:
+            openQueue()
+            RestaurantQueueLogicManager.shared().closeQueue()
+        default:
+            assert(false, "open close button title should be either open or close.")
+        }
+    }
+
+    private func openQueue() {
+        openCloseButton.setTitle(openTitle, for: .normal)
+        openCloseButton.backgroundColor = .systemGreen
+    }
+
+    private func closeQueue() {
+        openCloseButton.setTitle(closeTitle, for: .normal)
+        openCloseButton.backgroundColor = .systemRed
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.queueRecordSelectedSegue:
@@ -73,23 +105,12 @@ class ActivitiesViewController: UIViewController {
             return
         }
     }
-
-    private func openQueue() {
-        openCloseButton.setTitle("OPEN", for: .normal)
-        openCloseButton.backgroundColor = .systemGreen
-    }
-
-    private func closeQueue() {
-        openCloseButton.setTitle("CLOSE", for: .normal)
-        openCloseButton.backgroundColor = .systemRed
-    }
-    
 }
 
 extension ActivitiesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if !(searchBar.text?.isEmpty)! {
-            self.queueRecordCollectionView?.reloadData()
+            self.recordCollectionView?.reloadData()
         }
     }
 
@@ -127,32 +148,52 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             .dequeueReusableCell(withReuseIdentifier: Constants.queueRecordReuseIdentifier,
                                  for: indexPath)
         
-        guard let queueRecordCell = cell as? QueueRecordCell else {
+        guard let recordCell = cell as? RecordCell else {
             return cell
         }
         
         let record = filtered[indexPath.row]
-        
-        queueRecordCell.setUpView(record: record)
-        
-        queueRecordCell.admitAction = {
-            guard let qRec = record as? QueueRecord else {
-                assert(false, "Considering only queue recs and no bookings; TODO")
-                return
+        recordCell.setUpView(record: record)
+
+        if let queueRecord = record as? QueueRecord {
+            recordCell.admitAction = {
+                RestaurantQueueLogicManager.shared().admitCustomer(record: queueRecord)
+                // To remove
+                self.didAdmitCustomer()
             }
-            RestaurantQueueLogicManager.shared().admitCustomer(record: qRec)
-            self.showMessage(title: Constants.admitCustomerTitle,
-                             message: Constants.admitCustomerMessage,
-                             buttonText: Constants.okayTitle)
+
+            if queueRecord.isAdmitted {
+                recordCell.rejectAction = {
+                    RestaurantQueueLogicManager.shared().rejectCustomer(record: queueRecord)
+                    // To remove
+                    self.didRejectCustomer()
+                }
+
+                recordCell.serveAction = {
+                    RestaurantQueueLogicManager.shared().serveCustomer(record: queueRecord)
+                    // To remove
+                    self.didServeCustomer()
+                }
+            }
         }
-        queueRecordCell.removeAction = {
-            //TODO allow only at waiting list and link to logic
-            self.showMessage(title: Constants.removeCustomerTitle,
-                             message: Constants.removeCustomerMessage,
-                             buttonText: Constants.okayTitle)
+
+        if let bookRecord = record as? BookRecord {
+            recordCell.admitAction = {
+
+            }
+
+            if bookRecord.isAdmitted {
+                recordCell.rejectAction = {
+                    //TODO allow only at waiting list and link to logic
+                }
+
+                recordCell.serveAction = {
+
+                }
+            }
         }
-        
-        return queueRecordCell
+
+        return recordCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -167,6 +208,28 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 }
 
 extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
+    func didAdmitCustomer() {
+        showMessage(title: Constants.admitCustomerTitle,
+                    message: Constants.admitCustomerMessage,
+                    buttonText: Constants.okayTitle)
+        didUpdateQueue()
+    }
+
+    func didServeCustomer() {
+        showMessage(title: Constants.serveCustomerTitle,
+                    message: Constants.serveCustomerMessage,
+                    buttonText: Constants.okayTitle)
+        didUpdateQueue()
+
+    }
+
+    func didRejectCustomer() {
+        showMessage(title: Constants.rejectCustomerTitle,
+                    message: Constants.rejectCustomerMessage,
+                    buttonText: Constants.okayTitle)
+        didUpdateQueue()
+    }
+    
     func restaurantDidChangeQueueStatus(toIsOpen: Bool) {
         if toIsOpen {
             openQueue()
@@ -175,39 +238,27 @@ extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
         }
     }
 
-    func didAddRecordToQueue(record: QueueRecord) {
-        tempUpdateFiltered()
+    func didUpdateQueue() {
+        if isActive {
+            filtered = records
+            recordCollectionView.reloadData()
+        }
     }
 
-    func didRemoveRecordFromQueue(record: QueueRecord) {
-        tempUpdateFiltered()
-    }
-
-    func didUpdateRecordInQueue(to new: QueueRecord) {
-        tempUpdateFiltered()
-    }
-
-    func didAddRecordToWaiting(toWaiting record: QueueRecord) {
-        //TODO to waiting list
-        tempUpdateFiltered()
-    }
-
-    func didRemoveRecordFromWaiting(record: QueueRecord) {
-        //TODO
-        tempUpdateFiltered()
-    }
-
-    private func tempUpdateFiltered() {
+    func didUpdateWaitingList() {
+        if isActive {
+            return
+        }
         filtered = records
-        queueRecordCollectionView.reloadData()
+        recordCollectionView.reloadData()
     }
 }
 
 extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-    CGSize(width: self.view.frame.width * 0.9, height: Constants.activityCellHeight)
-  }
+        CGSize(width: self.view.frame.width * 0.9, height: Constants.activityCellHeight)
+    }
 }

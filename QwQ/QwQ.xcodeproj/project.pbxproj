@@ -18,7 +18,6 @@
 		5C1A419924236D2800D1140B /* FBRestaurantInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A419824236D2800D1140B /* FBRestaurantInfoStorage.swift */; };
 		5C25BEAD2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25BEAC2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift */; };
 		5C2CB12A24247966003AFC6C /* ProfileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CB12924247966003AFC6C /* ProfileError.swift */; };
-		5C4B573E242B36DE007E4240 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4B573D242B36DE007E4240 /* RecordViewController.swift */; };
 		5C59E91D2422134A004DFEB7 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD082418E503002B88E3 /* ProfileStorage.swift */; };
 		5C6DA5D0241A1799001CABC3 /* FBQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */; };
 		5C843AA7242A1B1F00BD9CEF /* EditRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */; };
@@ -51,6 +50,7 @@
 		61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */; };
 		61C742FD242B3C12005818A1 /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FA242B3C11005818A1 /* RecordModification.swift */; };
 		61C742FE242B3C12005818A1 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FB242B3C11005818A1 /* Collection.swift */; };
+		61C74302242B4A1F005818A1 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C74301242B4A1F005818A1 /* RecordViewController.swift */; };
 		7E1137FE24233B1F006984BB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FD24233B1F006984BB /* PopoverContentController.swift */; };
 		7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E56AF9A2421F513002E9BAC /* Activities.storyboard */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
@@ -132,7 +132,6 @@
 		5C1A419824236D2800D1140B /* FBRestaurantInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBRestaurantInfoStorage.swift; sourceTree = "<group>"; };
 		5C25BEAC2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+checkCacheThenSetImage.swift"; sourceTree = "<group>"; };
 		5C2CB12924247966003AFC6C /* ProfileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileError.swift; sourceTree = "<group>"; };
-		5C4B573D242B36DE007E4240 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBQueueStorage.swift; sourceTree = "<group>"; };
 		5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordViewController.swift; sourceTree = "<group>"; };
 		5C9411DA2423C11B0093D92D /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -164,6 +163,7 @@
 		61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollection.swift; sourceTree = "<group>"; };
 		61C742FA242B3C11005818A1 /* RecordModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModification.swift; sourceTree = "<group>"; };
 		61C742FB242B3C11005818A1 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		61C74301242B4A1F005818A1 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		77A36B7A1787A33D24691785 /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		7E1137FD24233B1F006984BB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
 		7E56AF9A2421F513002E9BAC /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
@@ -323,11 +323,9 @@
 		61B2EAA22418BAA400B88018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */,
 				61ACB7F7242A7C7D002A1F47 /* CustomerHistory.swift */,
 				61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */,
-				61C742FB242B3C11005818A1 /* Collection.swift */,
-				61C742FA242B3C11005818A1 /* RecordModification.swift */,
+				61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */,
 				D462D6992429F914002309A5 /* RestaurantModification.swift */,
 				D4494EAB241B241800BD0780 /* SharedModels */,
 			);
@@ -411,8 +409,8 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C4B573D242B36DE007E4240 /* RecordViewController.swift */,
 				5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */,
+				61C74301242B4A1F005818A1 /* RecordViewController.swift */,
 				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
 				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
@@ -472,10 +470,12 @@
 		D4494EAB241B241800BD0780 /* SharedModels */ = {
 			isa = PBXGroup;
 			children = (
+				61C742FB242B3C11005818A1 /* Collection.swift */,
 				D4EA85CD241B29CC009EB85B /* User.swift */,
 				D4EA85CC241B29CB009EB85B /* Customer.swift */,
 				D4EA85CE241B29CC009EB85B /* Restaurant.swift */,
 				61480555242290B1003D6D44 /* Record.swift */,
+				61C742FA242B3C11005818A1 /* RecordModification.swift */,
 				D4EA85CB241B29CB009EB85B /* QueueRecord.swift */,
 				617B62E0241F3C0F0010AB30 /* BookRecord.swift */,
 			);
@@ -824,6 +824,7 @@
 				61ACB7F9242A7C7E002A1F47 /* CustomerHistory.swift in Sources */,
 				7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
+				61C74302242B4A1F005818A1 /* RecordViewController.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSyncDelegate.swift in Sources */,
 				7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */,
@@ -856,7 +857,6 @@
 				D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */,
 				617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */,
 				61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */,
-				5C4B573E242B36DE007E4240 /* RecordViewController.swift in Sources */,
 				D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */,
 				613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */,
 				7EC7E6502418B6C300C2F9BB /* SceneDelegate.swift in Sources */,

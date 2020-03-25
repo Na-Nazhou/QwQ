@@ -2,9 +2,9 @@ import Foundation
 class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     // Storage
-    var queueStorage: RestaurantQueueStorage
+    private(set) var queueStorage: RestaurantQueueStorage
 
-    // View controller
+    // View Controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
     private init(restaurant: Restaurant) {
@@ -17,13 +17,11 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     private var restaurant: Restaurant
 
-    private(set) var restaurantQueue = RestaurantQueue()
-    private(set) var restaurantWaiting = RestaurantQueue()
-    var queueRecords: [QueueRecord] {
-        Array(restaurantQueue.queue)
-    }
-    var waitingRecords: [QueueRecord] {
-        Array(restaurantWaiting.queue)
+    private(set) var queue = RestaurantQueue()
+    private(set) var waiting = RestaurantQueue()
+
+    var queueRecords: [Record] {
+        Array(queue.queue)
     }
     
     var isQueueOpen: Bool {
@@ -36,9 +34,9 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
             if $0 == nil {
                 return
             }
-            let didAddNew = self.restaurantQueue.addToQueue($0!)
+            let didAddNew = self.queue.addToQueue($0!)
             if didAddNew {
-                self.presentationDelegate?.didAddRecordToQueue(record: $0!)
+                self.presentationDelegate?.didUpdateQueue()
             }
         })
     }
@@ -48,39 +46,53 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
             if $0 == nil {
                 return
             }
-            let didAddNew = self.restaurantQueue.addToWaiting($0!)
+            let didAddNew = self.queue.addToWaiting($0!)
             if didAddNew {
-                self.presentationDelegate?.didAddRecordToWaiting(toWaiting: $0!)
+                self.presentationDelegate?.didUpdateQueue()
             }
         })
     }
 
+    func didAddQueueRecord(_ record: QueueRecord) {
+        self.presentationDelegate?.didUpdateQueue()
+    }
+
+    func didUpdateQueueRecord(_ record: QueueRecord) {
+        self.presentationDelegate?.didUpdateQueue()
+    }
+
+    func didDeleteQueueRecord(_ record: QueueRecord) {
+        self.presentationDelegate?.didUpdateQueue()
+    }
+
     func openQueue() {
-        assert(!restaurant.isQueueOpen, "Queue should be closed to open.")
         let time = currentTime()
-        restaurant.queueOpenTime = time
-        queueStorage.openQueue(of: restaurant, at: time)
+        var new = restaurant
+        new.queueOpenTime = time
+
+        queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
     }
 
     func closeQueue() {
-        assert(restaurant.isQueueOpen, "Queue should be open to close.")
         let time = currentTime()
-        restaurant.queueCloseTime = time
-        queueStorage.closeQueue(of: restaurant, at: time)
+        var new = restaurant
+        new.queueCloseTime = time
+        queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
     }
 
     func admitCustomer(record: QueueRecord) {
         // Set the serveTime of the queue record
         let admittedRecord = updateAdmitTime(queueRecord: record)
-        queueStorage.admitCustomer(record: admittedRecord)
-        if restaurantQueue.removeFromQueue(record) {
-            presentationDelegate?.didRemoveRecordFromQueue(record: record)
-        }
-        if restaurantQueue.addToWaiting(record) {
-            presentationDelegate?.didAddRecordToWaiting(toWaiting: record)
-        }
+        queueStorage.updateRecord(oldRecord: record, newRecord: admittedRecord, completion: {
+            if self.queue.removeFromQueue(record) {
+                self.presentationDelegate?.didUpdateQueue()
+            }
+            if self.queue.addToWaiting(record) {
+                self.presentationDelegate?.didUpdateQueue()
+            }
 
-        notifyCustomerOfAdmission(record: admittedRecord)
+            self.notifyCustomerOfAdmission(record: admittedRecord)
+        })
     }
 
     func serveCustomer(record: QueueRecord) {
@@ -121,42 +133,6 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         }
         presentationDelegate?.restaurantDidChangeQueueStatus(toIsOpen: false)
     }
-
-    func customerDidJoinQueue(with record: QueueRecord) {
-        if restaurantQueue.addToQueue(record) {
-            presentationDelegate?.didAddRecordToQueue(record: record)
-        }
-        // TODO: notify/alert that customer had joined queue
-    }
-
-    func customerDidUpdateQueueRecord(to new: QueueRecord) {
-        let (didUpdate, old) = restaurantQueue.updateRecInQueue(to: new)
-        if didUpdate {
-            presentationDelegate?.didUpdateRecordInQueue(to: new)
-        }
-        // TODO: notify/alert that customer had made changes
-    }
-
-    func customerDidWithdrawQueue(record: QueueRecord) {
-        // delete the queue record from the current queue
-        presentationDelegate?.didRemoveRecordFromQueue(record: record)
-        // TODO: notify/alert that customer had quit queue
-    }
-
-    func restaurantDidAdmitCustomer(record: QueueRecord) {
-        presentationDelegate?.didRemoveRecordFromQueue(record: record)
-        presentationDelegate?.didAddRecordToWaiting(toWaiting: record)
-    }
-
-    func restaurantDidServeCustomer(record: QueueRecord) {
-        presentationDelegate?.didAddRecordToWaiting(toWaiting: record)
-    }
-
-    func restaurantDidRejectCustomer(record: QueueRecord) {
-        presentationDelegate?.didRemoveRecordFromWaiting(record: record)
-        //TODO: add back to end of queue? remove completely?
-    }
-
 }
 
 extension RestaurantQueueLogicManager {
@@ -173,7 +149,7 @@ extension RestaurantQueueLogicManager {
         assert(restaurantIdentity != nil,
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
         let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
-        logic.queueStorage.queueModificationLogicDelegate = logic
+        logic.queueStorage.logicDelegate = logic
 
         queueLogic = logic
         return logic

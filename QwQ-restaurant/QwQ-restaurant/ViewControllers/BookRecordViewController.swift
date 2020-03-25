@@ -15,9 +15,6 @@ class BookRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
 
-    typealias Profile = FBProfileStorage
-
-
     var record: Record?
 
     @IBAction private func handleAdmit(_ sender: Any) {
@@ -41,5 +38,7 @@ class BookRecordViewController: UIViewController, RecordViewController {
             return
         }
         setUpRecordView()
+
+        // TODO: time label
     }
 }
