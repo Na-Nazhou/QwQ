@@ -69,7 +69,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         //listen to restaurant's profile
     }
 
-    private func getUpdateType(of rec: QueueRecord) -> RecordModificationType {
+    private func getUpdateType(of rec: QueueRecord) -> RecordModification {
         if rec.admitTime == nil {
             print("\n\tmodif is update!\n")
             return .customerUpdate
@@ -105,7 +105,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         
         db.collection("restaurants")
             .document(restaurant.uid)
-            .setData(Restaurant.restaurantToDictionary(updatedRestaurant))
+            .setData(updatedRestaurant.dictionary)
     }
 
     func closeQueue(of restaurant: Restaurant, at time: Date) {
@@ -113,7 +113,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         updatedRestaurant.queueCloseTime = time
         db.collection("restaurants")
             .document(restaurant.uid)
-            .setData(Restaurant.restaurantToDictionary(updatedRestaurant))
+            .setData(updatedRestaurant.dictionary)
     }
     
     // Record admit time already updated before being passed in.

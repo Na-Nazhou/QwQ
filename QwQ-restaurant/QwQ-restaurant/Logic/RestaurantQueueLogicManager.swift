@@ -1,5 +1,10 @@
 import Foundation
 class RestaurantQueueLogicManager: RestaurantQueueLogic {
+
+    // Storage
+    var queueStorage: RestaurantQueueStorage
+
+    // View controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
     private init(restaurant: Restaurant) {

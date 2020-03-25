@@ -27,4 +27,3 @@ class Collection<T: Hashable> {
         elements.removeAll()
     }
 }
-
