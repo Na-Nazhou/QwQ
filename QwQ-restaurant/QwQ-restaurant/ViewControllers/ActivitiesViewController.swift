@@ -27,11 +27,11 @@ class ActivitiesViewController: UIViewController {
             return
         }
         switch title {
-        case "OPEN":
-            closeQueue()
-            RestaurantQueueLogicManager.shared().openQueue()
-        case "CLOSE":
+        case Constants.buttonTextToOpenQueue:
             openQueue()
+            RestaurantQueueLogicManager.shared().openQueue()
+        case Constants.buttonTextToCloseQueue:
+            closeQueue()
             RestaurantQueueLogicManager.shared().closeQueue()
         default:
             assert(false, "open close button title should be either open or close.")
@@ -51,9 +51,9 @@ class ActivitiesViewController: UIViewController {
         filtered = records
 
         if RestaurantQueueLogicManager.shared().isQueueOpen {
-            closeQueue()
-        } else {
             openQueue()
+        } else {
+            closeQueue()
         }
     }
     
@@ -75,13 +75,13 @@ class ActivitiesViewController: UIViewController {
     }
 
     private func openQueue() {
-        openCloseButton.setTitle("OPEN", for: .normal)
-        openCloseButton.backgroundColor = .systemGreen
+        openCloseButton.setTitle(Constants.buttonTextToCloseQueue, for: .normal)
+        openCloseButton.backgroundColor = .systemRed
     }
 
     private func closeQueue() {
-        openCloseButton.setTitle("CLOSE", for: .normal)
-        openCloseButton.backgroundColor = .systemRed
+        openCloseButton.setTitle(Constants.buttonTextToOpenQueue, for: .normal)
+        openCloseButton.backgroundColor = .systemGreen
     }
     
 }

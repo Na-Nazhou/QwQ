@@ -107,19 +107,11 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     }
 
     // MARK: - sync from global db update
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-        if restaurant != self.restaurant {
-            //all endpoints get notified, but if does not pertain to itself, nothing is done.
-            return
+    func restaurantDidPossiblyChangeQueueStatus(restaurant: Restaurant) {
+        if self.restaurant.isQueueOpen != restaurant.isQueueOpen {
+            presentationDelegate?.restaurantDidChangeQueueStatus(toIsOpen: restaurant.isQueueOpen)
         }
-        presentationDelegate?.restaurantDidChangeQueueStatus(toIsOpen: true)
-    }
-
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
-        if restaurant != self.restaurant {
-            return
-        }
-        presentationDelegate?.restaurantDidChangeQueueStatus(toIsOpen: false)
+        self.restaurant = restaurant
     }
 
     func customerDidJoinQueue(with record: QueueRecord) {

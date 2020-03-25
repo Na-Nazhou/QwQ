@@ -8,4 +8,6 @@ protocol QueueStorageSyncDelegate: AnyObject {
     func restaurantDidServeCustomer(record: QueueRecord)
     // Supposing restaurant can only kick customers from waiting list and not the queue itself
     func restaurantDidRejectCustomer(record: QueueRecord)
+
+    func restaurantDidPossiblyChangeQueueStatus(restaurant: Restaurant)
 }

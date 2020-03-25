@@ -14,10 +14,10 @@ class FBQueueStorage: RestaurantQueueStorage {
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
     
     init(restaurant: Restaurant) {
-        attachListenerOnRestaurantQueue(restaurant: restaurant)
+        attachListenerOnRestaurantAndQueue(restaurant: restaurant)
     }
 
-    private func attachListenerOnRestaurantQueue(restaurant: Restaurant) {
+    private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
         //listen to restaurant's queue document for 'today'
         //assuming users will restart app everyday
         let today = Date().toDateStringWithoutTime()
@@ -67,6 +67,20 @@ class FBQueueStorage: RestaurantQueueStorage {
             }
         
         //listen to restaurant's profile
+        db.collection(Constants.restaurantsDirectory).document(restaurant.uid)
+            .addSnapshotListener { (profileSnapshot, err) in
+                if let err = err {
+                    print("Error fetching document: \(err)")
+                    return
+                }
+                guard let profileData = profileSnapshot!.data(),
+                    let updatedRestaurant = Restaurant(dictionary: profileData) else {
+                    assert(false, "document should be of correct format(fields) of a restaurant!")
+                    return
+                }
+                // regardless of change, contact delegate it has changed.
+                self.queueModificationLogicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
+            }
     }
 
     private func getUpdateType(of rec: QueueRecord) -> RecordModification {
