@@ -7,18 +7,18 @@
 
 import UIKit
 
-class EditBookingViewController: UIViewController, BookingDelegate {
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var contactTextField: UITextField!
-    @IBOutlet private var groupSizeTextField: UITextField!
-    @IBOutlet private var babyChairQuantityTextField: UITextField!
-    @IBOutlet private var datePicker: UIDatePicker!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet private var restaurantNameLabel: UILabel!
+class EditBookingViewController: UIViewController, BookingDelegate, EditRecordViewController {
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var contactTextField: UITextField!
+    @IBOutlet var groupSizeTextField: UITextField!
+    @IBOutlet var babyChairQuantityTextField: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet var restaurantNameLabel: UILabel!
 
     var spinner: UIView?
     
-    var bookRecord: BookRecord?
+    var record: Record?
 
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -39,7 +39,7 @@ class EditBookingViewController: UIViewController, BookingDelegate {
         spinner = showSpinner(onView: view)
         
         // Edit existing book record
-        if let bookRecord = bookRecord {
+        if let bookRecord = record as? BookRecord {
             CustomerBookingLogicManager.shared()
                 .editBookRecord(oldRecord: bookRecord,
                                 at: datePicker.date,
@@ -77,16 +77,10 @@ class EditBookingViewController: UIViewController, BookingDelegate {
     }
     
     private func setUpViews() {
-        // Set up an existing book record
-        if let bookRecord = bookRecord {
-            restaurantNameLabel.text = bookRecord.restaurant.name
-            nameTextField.text = bookRecord.customer.name
-            contactTextField.text = bookRecord.customer.contact
-
+        // Editing an existing book record
+        if let bookRecord = record as? BookRecord {
+            setUpRecordView()
             datePicker.date = bookRecord.time
-            groupSizeTextField.text = String(bookRecord.groupSize)
-            babyChairQuantityTextField.text = String(bookRecord.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
         } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return

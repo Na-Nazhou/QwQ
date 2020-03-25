@@ -7,17 +7,22 @@
 
 import UIKit
 
-class EditQueueViewController: UIViewController, QueueDelegate {
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var contactTextField: UITextField!
-    @IBOutlet private var groupSizeTextField: UITextField!
-    @IBOutlet private var babyChairQuantityTextField: UITextField!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet private var restaurantNameLabel: UILabel!
+class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewController {
+
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var contactTextField: UITextField!
+    @IBOutlet var groupSizeTextField: UITextField!
+    @IBOutlet var babyChairQuantityTextField: UITextField!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet var restaurantNameLabel: UILabel!
 
     var spinner: UIView?
 
-    var queueRecord: QueueRecord? 
+    var record: Record?
+
+    @IBAction private func handleBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
     @IBAction private func handleSubmit(_ sender: Any) {
         guard let groupSizeText = groupSizeTextField.text,
@@ -34,7 +39,7 @@ class EditQueueViewController: UIViewController, QueueDelegate {
         spinner = showSpinner(onView: view)
 
         // Edit existing queue record
-        if let queueRecord = queueRecord {
+        if let queueRecord = record as? QueueRecord {
             CustomerQueueLogicManager.shared()
                 .editQueueRecord(oldRecord: queueRecord,
                                  with: groupSize,
@@ -52,10 +57,6 @@ class EditQueueViewController: UIViewController, QueueDelegate {
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
     }
 
     override func viewDidLoad() {
@@ -75,14 +76,8 @@ class EditQueueViewController: UIViewController, QueueDelegate {
 
     private func setUpViews() {
         // Set up an existing queue record
-        if let queueRecord = queueRecord {
-            restaurantNameLabel.text = queueRecord.restaurant.name
-            nameTextField.text = queueRecord.customer.name
-            contactTextField.text = queueRecord.customer.contact
-
-            groupSizeTextField.text = String(queueRecord.groupSize)
-            babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+        if let queueRecord = record as? QueueRecord {
+            setUpRecordView()
         } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return

@@ -7,17 +7,17 @@
 
 import UIKit
 
-class QueueRecordViewController: UIViewController {
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var contactLabel: UILabel!
-    @IBOutlet private var groupSizeLabel: UILabel!
-    @IBOutlet private var babyChairQuantityLabel: UILabel!
-    @IBOutlet private var profileImageView: UIImageView!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
+class QueueRecordViewController: UIViewController, DisplayRecordViewController {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var contactLabel: UILabel!
+    @IBOutlet var groupSizeLabel: UILabel!
+    @IBOutlet var babyChairQuantityLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+    
+    var record: Record?
 
     typealias Profile = FBProfileStorage
-
-    var queueRecord: QueueRecord?
     
     @IBAction private func handleAdmit(_ sender: Any) {
         showMessage(title: Constants.admitCustomerTitle,
@@ -35,18 +35,14 @@ class QueueRecordViewController: UIViewController {
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
+
     private func setUpViews() {
-        guard let queueRecord = queueRecord else {
+        guard let queueRecord = record as? QueueRecord else {
             return
         }
+        setUpRecordView()
 
-        nameLabel.text = queueRecord.customer.name
-        contactLabel.text = queueRecord.customer.contact
         Profile.getRestaurantProfilePic(uid: queueRecord.customer.uid, placeholder: profileImageView)
-
-        groupSizeLabel.text = String(queueRecord.groupSize)
-        babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)
-        wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
     }
+
 }
