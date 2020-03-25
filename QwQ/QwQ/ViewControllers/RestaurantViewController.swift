@@ -71,9 +71,4 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {
         //TODO
     }
-
-    func restaurantDidUpdate(restaurant: Restaurant) {
-        // TODO
-    }
-
 }

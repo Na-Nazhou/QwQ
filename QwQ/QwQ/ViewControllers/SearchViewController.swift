@@ -62,10 +62,6 @@ class SearchViewController: UIViewController, SearchDelegate {
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
         restaurantCollectionView.reloadData()
     }
-
-    func restaurantDidUpdate(restaurant: Restaurant) {
-        restaurantCollectionView.reloadData()
-    }
     
     func restaurantCollectionDidLoadNewRestaurant() {
         //TODO: change to filtering based on new array of restaurants.
