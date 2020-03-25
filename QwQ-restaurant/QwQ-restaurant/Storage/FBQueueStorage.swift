@@ -8,6 +8,7 @@
 import FirebaseFirestore
 
 class FBQueueStorage: RestaurantQueueStorage {
+
     let db = Firestore.firestore()
 
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
@@ -87,7 +88,8 @@ class FBQueueStorage: RestaurantQueueStorage {
 
     private func getQueueRecordAndComplete(
         data: [String: Any], ofQid qid: String, forCid cid: String,
-        atRestaurant restaurant: Restaurant, completion: @escaping (QueueRecord) -> Void) {
+        atRestaurant restaurant: Restaurant,
+        completion: @escaping (QueueRecord) -> Void) {
         FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
             guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: qid) else {
                 return
@@ -136,11 +138,11 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
     
     func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isUnadmittedQueueingRecord }, completion: completion)
+        loadQueueRecords(of: restaurant, where: { $0.isPendingAdmission }, completion: completion)
     }
     
     func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isWaitingRecord }, completion: completion)
+        loadQueueRecords(of: restaurant, where: { $0.isAdmitted }, completion: completion)
     }
     
     private func loadQueueRecords(of restaurant: Restaurant, where condition: @escaping (QueueRecord) -> Bool,

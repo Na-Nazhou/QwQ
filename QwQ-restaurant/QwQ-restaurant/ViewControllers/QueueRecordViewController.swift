@@ -14,7 +14,9 @@ class QueueRecordViewController: UIViewController {
     @IBOutlet private var babyChairQuantityLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    
+
+    typealias Profile = FBProfileStorage
+
     var queueRecord: QueueRecord?
     
     @IBAction private func handleAdmit(_ sender: Any) {
@@ -41,6 +43,8 @@ class QueueRecordViewController: UIViewController {
 
         nameLabel.text = queueRecord.customer.name
         contactLabel.text = queueRecord.customer.contact
+        Profile.getRestaurantProfilePic(uid: queueRecord.customer.uid, placeholder: profileImageView)
+
         groupSizeLabel.text = String(queueRecord.groupSize)
         babyChairQuantityLabel.text = String(queueRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly

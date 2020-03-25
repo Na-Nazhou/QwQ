@@ -21,6 +21,27 @@ struct QueueRecord: Record {
         startTime.toDateStringWithoutTime()
     }
 
+    var dictionary: [String: Any] {
+        var data = [String: Any]()
+        data["customer"] = customer.uid
+        data["groupSize"] = groupSize
+        data["babyChairQuantity"] = babyChairQuantity
+        data["wheelchairFriendly"] = wheelchairFriendly
+        data["startTime"] = startTime
+
+        if let admitTime = admitTime {
+            data["admitTime"] = admitTime
+        }
+        if let serveTime = serveTime {
+            data["serveTime"] = serveTime
+        }
+        if let rejectTime = rejectTime {
+            data["rejectTime"] = rejectTime
+        }
+
+        return data
+    }
+
     init(id: String, restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
@@ -63,41 +84,6 @@ extension QueueRecord: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-}
-
-extension QueueRecord {
-    var dictionary: [String: Any] {
-        var data = [String: Any]()
-        data["customer"] = customer.uid
-        data["groupSize"] = groupSize
-        data["babyChairQuantity"] = babyChairQuantity
-        data["wheelchairFriendly"] = wheelchairFriendly
-        data["startTime"] = startTime
-
-        if let admitTime = admitTime {
-            data["admitTime"] = admitTime
-        }
-        if let serveTime = serveTime {
-            data["serveTime"] = serveTime
-        }
-        if let rejectTime = rejectTime {
-            data["rejectTime"] = rejectTime
-        }
-
-        return data
-    }
-
-    var isHistoryRecord: Bool {
-        serveTime != nil || rejectTime != nil
-    }
-
-    var isWaitingRecord: Bool {
-        serveTime == nil && admitTime != nil && rejectTime == nil
-    }
-
-    var isUnadmittedQueueingRecord: Bool {
-        admitTime == nil
     }
 
     func completelyIdentical(to other: QueueRecord) -> Bool {

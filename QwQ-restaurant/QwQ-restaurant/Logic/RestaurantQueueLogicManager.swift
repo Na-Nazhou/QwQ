@@ -4,13 +4,13 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     private init(restaurant: Restaurant) {
         self.restaurant = restaurant
+
         queueStorage = FBQueueStorage(restaurant: restaurant)
         fetchQueue()
         fetchWaiting()
     }
 
     private var restaurant: Restaurant
-    private(set) var queueStorage: RestaurantQueueStorage
 
     private(set) var restaurantQueue = RestaurantQueue()
     private(set) var restaurantWaiting = RestaurantQueue()

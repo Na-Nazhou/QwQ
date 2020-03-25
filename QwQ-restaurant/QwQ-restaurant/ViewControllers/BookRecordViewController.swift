@@ -14,7 +14,9 @@ class BookRecordViewController: UIViewController {
     @IBOutlet private var babyChairQuantityLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    
+
+    typealias Profile = FBProfileStorage
+
     var bookRecord: BookRecord?
     
     @IBAction private func handleAdmit(_ sender: Any) {
@@ -40,10 +42,11 @@ class BookRecordViewController: UIViewController {
 
         nameLabel.text = bookRecord.customer.name
         contactLabel.text = bookRecord.customer.contact
+        Profile.getRestaurantProfilePic(uid: bookRecord.customer.uid, placeholder: profileImageView)
+
+        // TODO: time
         groupSizeLabel.text = String(bookRecord.groupSize)
         babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
         wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
-
-        // TODO
     }
 }

@@ -66,31 +66,12 @@ struct Restaurant: User {
                 return nil
         }
 
-        self.uid = uid
-        self.name = name
-        self.email = email
-        self.contact = contact
-        self.address = address
-        self.menu = menu
-        self.isRestaurantOpen = isRestaurantOpen
-        self.queueOpenTime = (dictionary["queueOpenTime"] as? Timestamp)?.dateValue()
-        self.queueCloseTime = (dictionary["queueCloseTime"] as? Timestamp)?.dateValue()
-    }
-}
+        let queueOpenTime = (dictionary["queueOpenTime"] as? Timestamp)?.dateValue()
+        let queueCloseTime = (dictionary["queueCloseTime"] as? Timestamp)?.dateValue()
 
-extension Restaurant {
-    static func restaurantToDictionary(_ restaurant: Restaurant) -> [String: Any] {
-        var data = [String: Any]()
-        data["uid"] = restaurant.uid
-        data["name"] = restaurant.name
-        data["email"] = restaurant.email
-        data["contact"] = restaurant.contact
-        data["address"] = restaurant.address
-        data["menu"] = restaurant.menu
-        data["isRestaurantOpen"] = restaurant.isRestaurantOpen
-        data["queueOpenTime"] = restaurant.queueOpenTime
-        data["queueCloseTime"] = restaurant.queueCloseTime
-        return data
+        self.init(uid: uid, name: name, email: email, contact: contact, address: address,
+                  menu: menu, isRestaurantOpen: isRestaurantOpen, queueOpenTime: queueOpenTime,
+                  queueCloseTime: queueCloseTime)
     }
 }
 
@@ -100,6 +81,6 @@ extension Restaurant {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.uid)
+        hasher.combine(uid)
     }
 }

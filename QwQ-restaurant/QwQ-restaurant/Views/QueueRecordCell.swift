@@ -35,7 +35,7 @@ class QueueRecordCell: UICollectionViewCell {
                 statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
             }
             if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Time: \(bookRecord.formattedTime)"
+                statusLabel.text = "Time: \(bookRecord.time.toString())"
             }
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"

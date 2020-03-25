@@ -23,16 +23,30 @@ struct BookRecord: Record {
         time.toDateStringWithoutTime()
     }
 
-    var formattedTime: String {
-        time.toString()
-    }
-
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
 
-    var isHistoryRecord: Bool {
-        admitTime != nil || rejectTime != nil
+    var dictionary: [String: Any] {
+        var data = [String: Any]()
+        data["customer"] = customer.uid
+        data["restaurant"] = restaurant.uid
+        data["groupSize"] = groupSize
+        data["babyChairQuantity"] = babyChairQuantity
+        data["wheelchairFriendly"] = wheelchairFriendly
+        data["time"] = time
+
+        if let admitTime = admitTime {
+            data["admitTime"] = admitTime
+        }
+        if let serveTime = serveTime {
+            data["serveTime"] = serveTime
+        }
+        if let rejectTime = rejectTime {
+            data["rejectTime"] = rejectTime
+        }
+
+        return data
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
@@ -78,28 +92,5 @@ extension BookRecord: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-}
-
-extension BookRecord {
-    var dictionary: [String: Any] {
-        var data = [String: Any]()
-        data["customer"] = customer.uid
-        data["groupSize"] = groupSize
-        data["babyChairQuantity"] = babyChairQuantity
-        data["wheelchairFriendly"] = wheelchairFriendly
-        data["time"] = time
-
-        if let admitTime = admitTime {
-            data["admitTime"] = admitTime
-        }
-        if let serveTime = serveTime {
-            data["serveTime"] = serveTime
-        }
-        if let rejectTime = rejectTime {
-            data["rejectTime"] = rejectTime
-        }
-
-        return data
     }
 }
