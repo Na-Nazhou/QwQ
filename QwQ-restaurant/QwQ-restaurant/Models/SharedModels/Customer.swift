@@ -36,16 +36,13 @@ struct Customer: User {
                 return nil
         }
 
-        self.uid = uid
-        self.name = name
-        self.email = email
-        self.contact = contact
+        self.init(uid: uid, name: name, email: email, contact: contact)
     }
 }
 
 extension Customer {
     static func == (lhs: Customer, rhs: Customer) -> Bool {
-        return lhs.uid == rhs.uid
+        lhs.uid == rhs.uid
     }
     
     func hash(into hasher: inout Hasher) {

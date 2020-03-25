@@ -18,23 +18,55 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     var customer: Customer
 
+    // TODO: change to record collection
     private var currentBookRecords = Set<BookRecord>()
     var activeBookRecords: [BookRecord] {
         Array(currentBookRecords)
     }
 
-    // TODO
-    private var bookingHistory = Set<BookRecord>()
+    private var bookingHistory = RecordCollection<BookRecord>()
     var pastBookRecords: [BookRecord] {
-        Array(bookingHistory)
+        bookingHistory.records
     }
 
     private init(customer: Customer, bookingStorage: CustomerBookingStorage) {
         self.customer = customer
         self.bookingStorage = bookingStorage
+
+        fetchActiveBookRecords()
+        fetchBookingHistory()
+    }
+
+    deinit {
+        print("\n\tDEINITING\n")
+        for record in currentBookRecords {
+            bookingStorage.removeListener(for: record)
+        }
+    }
+
+    func fetchActiveBookRecords() {
+        bookingStorage.loadActiveBookRecords(customer: customer, completion: {
+            guard let bookRecord = $0 else {
+                return
+            }
+
+            self.currentBookRecords.insert(bookRecord)
+            self.bookingStorage.registerListener(for: bookRecord)
+            self.activitiesDelegate?.didUpdateActiveRecords()
+        })
     }
 
     func fetchBookingHistory() {
+        bookingStorage.loadBookHistory(customer: customer, completion: {
+             guard $0 != nil else {
+                 return
+             }
+             let didAddNew = self.bookingHistory.add($0!)
+             if !didAddNew {
+                 return
+             }
+             self.activitiesDelegate?.didUpdateHistoryRecords()
+         })
         
     }
 
@@ -58,7 +90,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         newRecord.id = id
         currentBookRecords.insert(newRecord)
 
-        // AddListener
+        bookingStorage.registerListener(for: newRecord)
         bookingDelegate?.didAddBookRecord()
     }
 
@@ -77,21 +109,40 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    wheelchairFriendly: wheelchairFriendly)
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
             self.bookingDelegate?.didUpdateBookRecord()
-            // To remove this: (let listener handle this)
-            self.customerDidUpdateBookRecord(record: newRecord)
         })
     }
 
     func deleteBookRecord(_ record: BookRecord) {
         bookingStorage.deleteBookRecord(record: record, completion: {
-            self.activitiesDelegate?.didDeleteBookRecord()
-            // To remove this: (let listener handle this)
-            self.didDeleteActiveBookRecord(record)
+            self.activitiesDelegate?.didDeleteRecord()
         })
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
-        // TODO
+        print("\nDid update book record\n")
+        guard let oldRecord = activeBookRecords.first(where: { $0 == record }) else {
+            return
+        }
+        let modification = record.changeType(from: oldRecord)
+        switch modification {
+        case .admit:
+            // call some (activites) delegate to display admission status
+            customerDidUpdateBookRecord(record: record) //tent.
+            print("\ndetected admission\n")
+        case .serve:
+            addAsHistoryRecord(record)
+            didDeleteBookRecord(record)
+            print("\ndetected service\n")
+        case .reject:
+            addAsHistoryRecord(record)
+            didDeleteBookRecord(record)
+            print("\ndetected rejection\n")
+        case .customerUpdate:
+            customerDidUpdateBookRecord(record: record)
+            print("\ndetected regular modif\n")
+        case .none:
+            assert(false, "Modification should be something")
+        }
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
@@ -100,9 +151,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         activitiesDelegate?.didUpdateActiveRecords()
     }
 
-    func didDeleteActiveBookRecord(_ record: BookRecord) {
+    func didDeleteBookRecord(_ record: BookRecord) {
+        bookingStorage.removeListener(for: record)
         currentBookRecords.remove(record)
         activitiesDelegate?.didUpdateActiveRecords()
+    }
+
+    private func addAsHistoryRecord(_ record: BookRecord) {
+        if bookingHistory.add(record) {
+            activitiesDelegate?.didUpdateHistoryRecords()
+        }
     }
 }
 
@@ -122,6 +180,7 @@ extension CustomerBookingLogicManager {
         assert(storage != nil,
                "Booking storage must be given non-nil")
         let logic = CustomerBookingLogicManager(customer: customerIdentity!, bookingStorage: storage!)
+        logic.bookingStorage.logicDelegate = logic
 
         bookingLogic = logic
         return logic

@@ -15,7 +15,7 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet private var deleteButton: UIButton!
     @IBOutlet private var editButton: UIButton!
-    @IBOutlet private var timeLabel: UILabel!
+    @IBOutlet private var statusLabel: UILabel!
     @IBOutlet private var queueBookImageView: UIImageView!
     
     @IBAction private func handleDelete(_ sender: Any) {
@@ -26,25 +26,41 @@ class ActivityCell: UICollectionViewCell {
         editAction?()
     }
 
-    // TODO: take in record protocol instead
     func setUpView(record: Record) {
         nameLabel.text = record.restaurant.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        if let queueRecord = record as? QueueRecord {
-            queueBookImageView.image = UIImage(named: "c-queue-icon")
-            // TODO
-            timeLabel.text = "Estimated time: 00:00"
-            if queueRecord.isWaitingRecord {
-                timeLabel.text = "Your table is ready"
-                disableEditAndDelete()
+        disableEdit()
+
+        switch record.status {
+        case .pendingAdmission:
+            enableEdit()
+            if let queueRecord = record as? QueueRecord {
+                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+
+                // TODO: display estimated time instead
             }
+            if let bookRecord = record as? BookRecord {
+                statusLabel.text = "Time: \(bookRecord.time.toString())"
+            }
+        case .admitted:
+            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+        case .served:
+            statusLabel.text = "Served at: \(record.serveTime!.toString())"
+            hideEditAndDelete()
+        case .rejected:
+            statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+
+        default:
+            assert(false)
         }
 
-        if let bookRecord = record as? BookRecord {
+        if record as? QueueRecord != nil {
+            queueBookImageView.image = UIImage(named: "c-queue-icon")
+        }
+
+        if record as? BookRecord != nil {
             queueBookImageView.image = UIImage(named: "c-book-icon")
-            // TODO
-            timeLabel.text = bookRecord.formattedTime
         }
 
         // Hide edit and delete buttons if it is history record
@@ -55,11 +71,14 @@ class ActivityCell: UICollectionViewCell {
         }
     }
 
-    private func disableEditAndDelete() {
+    private func disableEdit() {
         editButton.isEnabled = false
         editButton.alpha = 0.5
-        deleteButton.isEnabled = false
-        deleteButton.alpha = 0.5
+    }
+
+    private func enableEdit() {
+        editButton.isEnabled = true
+        editButton.alpha = 1
     }
 
     private func hideEditAndDelete() {

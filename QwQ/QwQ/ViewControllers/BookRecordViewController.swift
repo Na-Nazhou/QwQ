@@ -7,17 +7,18 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController {
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var contactLabel: UILabel!
-    @IBOutlet private var groupSizeLabel: UILabel!
-    @IBOutlet private var locationLabel: UILabel!
-    @IBOutlet private var babyChairQuantityLabel: UILabel!
-    @IBOutlet private var profileImageView: UIImageView!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet private var datePicker: UIDatePicker!
+class BookRecordViewController: UIViewController, DisplayRecordViewController {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var contactLabel: UILabel!
+    @IBOutlet var groupSizeLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var babyChairQuantityLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+    @IBOutlet var datePicker: UIDatePicker!
 
-    var bookRecord: BookRecord?
+    var record: Record?
+    typealias Profile = FBProfileStorage
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +31,12 @@ class BookRecordViewController: UIViewController {
     }
     
     private func setUpViews() {
-        guard let bookRecord = bookRecord else {
+        guard let bookRecord = record as? BookRecord else {
             return
         }
-
-        nameLabel.text = bookRecord.restaurant.name
-        contactLabel.text = bookRecord.restaurant.contact
-        locationLabel.text = bookRecord.restaurant.address
-
+        setUpRecordView()
         datePicker.date = bookRecord.time
-        groupSizeLabel.text = String(bookRecord.groupSize)
-        babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
-        wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
+
+        Profile.getCustomerProfilePic(uid: bookRecord.restaurant.uid, placeholder: profileImageView)
     }
 }

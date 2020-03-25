@@ -7,16 +7,19 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController {
-    @IBOutlet private var nameLabel: UILabel!
-    @IBOutlet private var contactLabel: UILabel!
-    @IBOutlet private var groupSizeLabel: UILabel!
-    @IBOutlet private var babyChairQuantityLabel: UILabel!
-    @IBOutlet private var profileImageView: UIImageView!
-    @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
-    
-    var bookRecord: BookRecord?
-    
+class BookRecordViewController: UIViewController, DisplayRecordViewController {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var contactLabel: UILabel!
+    @IBOutlet var groupSizeLabel: UILabel!
+    @IBOutlet var babyChairQuantityLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+
+    typealias Profile = FBProfileStorage
+
+
+    var record: Record?
+
     @IBAction private func handleAdmit(_ sender: Any) {
         showMessage(title: Constants.admitCustomerTitle,
                     message: Constants.admitCustomerMessage,
@@ -34,16 +37,11 @@ class BookRecordViewController: UIViewController {
     }
     
     private func setUpViews() {
-        guard let bookRecord = bookRecord else {
+        guard let bookRecord = record as? BookRecord else {
             return
         }
+        setUpRecordView()
 
-        nameLabel.text = bookRecord.customer.name
-        contactLabel.text = bookRecord.customer.contact
-        groupSizeLabel.text = String(bookRecord.groupSize)
-        babyChairQuantityLabel.text = String(bookRecord.babyChairQuantity)
-        wheelchairFriendlySwitch.isOn = bookRecord.wheelchairFriendly
-
-        // TODO
+        Profile.getRestaurantProfilePic(uid: bookRecord.customer.uid, placeholder: profileImageView)
     }
 }

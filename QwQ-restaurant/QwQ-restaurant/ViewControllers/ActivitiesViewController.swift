@@ -62,12 +62,12 @@ class ActivitiesViewController: UIViewController {
         case Constants.queueRecordSelectedSegue:
         if let queueRecord = sender as? QueueRecord,
             let queueRecordViewController = segue.destination as? QueueRecordViewController {
-            queueRecordViewController.queueRecord = queueRecord
+            queueRecordViewController.record = queueRecord
         }
         case Constants.bookRecordSelectedSegue:
         if let bookRecord = sender as? BookRecord,
             let bookRecordViewController = segue.destination as? BookRecordViewController {
-                bookRecordViewController.bookRecord = bookRecord
+                bookRecordViewController.record = bookRecord
         }
         default:
             return
@@ -203,12 +203,11 @@ extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
     }
 }
 
-extension ActivitiesViewController : UICollectionViewDelegateFlowLayout {
-  //1
+extension ActivitiesViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-    return CGSize(width: self.view.frame.width * 0.9, height: Constants.activityCellHeight)
+    CGSize(width: self.view.frame.width * 0.9, height: Constants.activityCellHeight)
   }
 }

@@ -15,7 +15,8 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
                  babyChairQuantity: Int,
                  wheelchairFriendly: Bool)
 
-    func editQueueRecord(with groupSize: Int,
+    func editQueueRecord(oldRecord: QueueRecord,
+                         with groupSize: Int,
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool)
 
