@@ -8,9 +8,9 @@
 import UIKit
 
 class StatisticsCell: UITableViewCell {
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var avgRestaurantWaitingTimeLabel: UILabel!
-    @IBOutlet weak var avgCustomerWaitingTimeLabel: UILabel!
+    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet private var avgRestaurantWaitingTimeLabel: UILabel!
+    @IBOutlet private var avgCustomerWaitingTimeLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -42,6 +42,7 @@
 		7E11380024234828006984BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FF24234828006984BB /* SegmentedControl.swift */; };
 		7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821B242B48530019A8A2 /* EmailVerification.storyboard */; };
 		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
+		7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
@@ -136,6 +137,7 @@
 		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7E42821B242B48530019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
 				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
 				5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */,
+				7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */,
 				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
 				5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */,
 				D453E3A7242368A0005FA25F /* Date+Extensions.swift */,
@@ -738,6 +741,7 @@
 				5C44BB552422141A0012EC59 /* RestaurantPostLoginSetupManager.swift in Sources */,
 				6148055A2422A1EF003D6D44 /* Authenticator.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantQueueLogic.swift in Sources */,
+				7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */,
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
 				5C4B5740242B3AB1007E4240 /* DisplayRecordViewController.swift in Sources */,
 				5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */,

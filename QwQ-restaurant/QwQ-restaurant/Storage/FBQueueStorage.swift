@@ -18,8 +18,8 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
 
     private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
-        //listen to restaurant's queue document for 'today'
-        //assuming users will restart app everyday
+        // listen to restaurant's queue document for 'today'
+        // assuming users will restart app everyday
         let today = Date().toDateStringWithoutTime()
         db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
@@ -33,12 +33,12 @@ class FBQueueStorage: RestaurantQueueStorage {
                     var completion: (QueueRecord) -> Void
                     switch diff.type {
                     case .added:
-                        //customerDidJoinQueue
+                        // customerDidJoinQueue
                         print("\n\tfound new q\n")
                         completion = { self.queueModificationLogicDelegate?.customerDidJoinQueue(with: $0) }
                     case .modified:
-                        //customerDidUpdateInfo
-                        //or restaurantDidChangeCustomerQueueStatus
+                        // customerDidUpdateInfo
+                        // or restaurantDidChangeCustomerQueueStatus
                         completion = {
                             switch self.getUpdateType(of: $0) {
                             case .admit:
@@ -66,7 +66,7 @@ class FBQueueStorage: RestaurantQueueStorage {
                 }
             }
         
-        //listen to restaurant's profile
+        // listen to restaurant's profile
         db.collection(Constants.restaurantsDirectory).document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {

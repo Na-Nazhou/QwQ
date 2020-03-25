@@ -15,5 +15,6 @@ class EmailVerificationViewController: UIViewController {
     }
     
     @IBAction func handleBack(_ sender: Any) {
+        handleBack()
     }
 }

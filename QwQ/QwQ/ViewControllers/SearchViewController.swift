@@ -185,3 +185,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
     }
 }
+
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
+  }
+}

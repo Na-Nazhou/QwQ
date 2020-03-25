@@ -15,8 +15,24 @@ class StatisticsDetailsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
     
+    @IBAction func handleBack(_ sender: Any) {
+        handleBack()
+    }
+    
+    var statisticsDetails: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpViews()
+    }
+    
+    private func setUpViews() {
+        queueCancellationRateLabel.text = "\(statisticsDetails)%"
+        bookingCancellationRateLabel.text = "\(statisticsDetails)%"
+        numberOfCustomersLabel.text = "\(statisticsDetails)"
+        avgWaitingTimeRestaurantLabel.text = "\(statisticsDetails) mins"
+        avgWaitingTimeCustomerLabel.text = "\(statisticsDetails) mins"
+        dateLabel.text = "\(statisticsDetails)"
     }
 }
-
