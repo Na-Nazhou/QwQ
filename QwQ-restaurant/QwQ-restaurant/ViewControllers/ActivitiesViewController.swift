@@ -62,12 +62,12 @@ class ActivitiesViewController: UIViewController {
         case Constants.queueRecordSelectedSegue:
         if let queueRecord = sender as? QueueRecord,
             let queueRecordViewController = segue.destination as? QueueRecordViewController {
-            queueRecordViewController.queueRecord = queueRecord
+            queueRecordViewController.record = queueRecord
         }
         case Constants.bookRecordSelectedSegue:
         if let bookRecord = sender as? BookRecord,
             let bookRecordViewController = segue.destination as? BookRecordViewController {
-                bookRecordViewController.bookRecord = bookRecord
+                bookRecordViewController.record = bookRecord
         }
         default:
             return

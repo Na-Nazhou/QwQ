@@ -21,6 +21,8 @@
 		5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
 		5C4A54FF241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
 		5C4A5500241E0A780054C926 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */; };
+		5C4B5740242B3AB1007E4240 /* DisplayRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4B573F242B3AB1007E4240 /* DisplayRecordViewController.swift */; };
+		5C4B5742242B3AC7007E4240 /* EditRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4B5741242B3AC7007E4240 /* EditRecordViewController.swift */; };
 		5C9D9B5F242222310019B7EE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5D242222310019B7EE /* AlertService.swift */; };
 		5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */; };
 		5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */; };
@@ -107,6 +109,8 @@
 		5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Spinner.swift"; sourceTree = "<group>"; };
 		5C44C9B2241DD0390097C006 /* ValidationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationUtilities.swift; sourceTree = "<group>"; };
 		5C4A54FD241E0A780054C926 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5C4B573F242B3AB1007E4240 /* DisplayRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRecordViewController.swift; sourceTree = "<group>"; };
+		5C4B5741242B3AC7007E4240 /* EditRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordViewController.swift; sourceTree = "<group>"; };
 		5C9D9B5D242222310019B7EE /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
 		5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowMessage.swift"; sourceTree = "<group>"; };
@@ -351,6 +355,8 @@
 		7E72B194241C962100C1EE72 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C4B573F242B3AB1007E4240 /* DisplayRecordViewController.swift */,
+				5C4B5741242B3AC7007E4240 /* EditRecordViewController.swift */,
 				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
 				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
 				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
@@ -702,6 +708,7 @@
 				6148055A2422A1EF003D6D44 /* Authenticator.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantQueueLogic.swift in Sources */,
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
+				5C4B5740242B3AB1007E4240 /* DisplayRecordViewController.swift in Sources */,
 				5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */,
 				5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
@@ -714,6 +721,7 @@
 				5C2CB12E242484A7003AFC6C /* AuthDetails.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
+				5C4B5742242B3AC7007E4240 /* EditRecordViewController.swift in Sources */,
 				7E11380024234828006984BB /* SegmentedControl.swift in Sources */,
 				5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */,
