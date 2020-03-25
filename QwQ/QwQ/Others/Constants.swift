@@ -78,7 +78,7 @@ struct Constants {
     static let restaurantReuseIdentifier = "restaurantCell"
     static let activitiesReuseIdentifier = "activityCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
-    static let restaurantCellHeight = CGFloat(300)
+    static let restaurantCellHeight = CGFloat(270)
     
     // MARK: Popover content settings
     static let popoverContentControllerIdentifier = "PopoverContentController"

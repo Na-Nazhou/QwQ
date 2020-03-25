@@ -43,6 +43,8 @@
 		7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821B242B48530019A8A2 /* EmailVerification.storyboard */; };
 		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
 		7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */; };
+		7E428226242B94F00019A8A2 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428225242B94EF0019A8A2 /* Statistics.swift */; };
+		7E428228242B9AB10019A8A2 /* Date+formatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428227242B9AB10019A8A2 /* Date+formatDate.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
@@ -138,6 +140,8 @@
 		7E42821B242B48530019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
+		7E428225242B94EF0019A8A2 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		7E428227242B9AB10019A8A2 /* Date+formatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+formatDate.swift"; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
 				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
+				7E428227242B9AB10019A8A2 /* Date+formatDate.swift */,
 				5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */,
 				7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */,
 				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
@@ -428,6 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				61ACB7FB242A9539002A1F47 /* Collection.swift */,
+				7E428225242B94EF0019A8A2 /* Statistics.swift */,
 				D4EA85EA241B2C65009EB85B /* RestaurantQueue.swift */,
 				D4EA85EB241B2C65009EB85B /* SharedModels */,
 			);
@@ -745,6 +751,7 @@
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
 				5C4B5740242B3AB1007E4240 /* DisplayRecordViewController.swift in Sources */,
 				5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */,
+				7E428226242B94F00019A8A2 /* Statistics.swift in Sources */,
 				5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
@@ -769,6 +776,7 @@
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
 				D440FC16241F9D1100606681 /* FBQueueStorage.swift in Sources */,
 				D4EA85F0241B2C65009EB85B /* RestaurantQueue.swift in Sources */,
+				7E428228242B9AB10019A8A2 /* Date+formatDate.swift in Sources */,
 				5C2CB133242484D8003AFC6C /* ProfileError.swift in Sources */,
 				7E72B1A0241CA54600C1EE72 /* ActivitiesViewController.swift in Sources */,
 				7E7F7DCF2422597300A080E5 /* SearchCollectionReusableView.swift in Sources */,

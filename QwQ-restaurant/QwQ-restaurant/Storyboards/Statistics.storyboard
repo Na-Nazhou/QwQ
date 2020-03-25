@@ -140,8 +140,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="avgCustomerWaitingTimeLabel" destination="5bE-Qv-4yT" id="B8h-sv-TeC"/>
-                                                    <outlet property="avgRestaurantWaitingTimeLabel" destination="MuE-Cj-jrB" id="Sbr-Sd-erh"/>
+                                                    <outlet property="avgWaitingTimeCustomerLabel" destination="5bE-Qv-4yT" id="Jry-N1-wKt"/>
+                                                    <outlet property="avgWaitingTimeRestaurantLabel" destination="MuE-Cj-jrB" id="Bph-aS-hsC"/>
                                                     <outlet property="dateLabel" destination="jJN-DX-Vv5" id="Wmn-wd-w24"/>
                                                 </connections>
                                             </tableViewCell>

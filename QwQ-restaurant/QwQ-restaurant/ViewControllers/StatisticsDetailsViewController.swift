@@ -15,11 +15,11 @@ class StatisticsDetailsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
     
-    var statisticsDetails: String?
+    var statisticsDetails: Statistics?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +28,15 @@ class StatisticsDetailsViewController: UIViewController {
     }
     
     private func setUpViews() {
-        queueCancellationRateLabel.text = "\(statisticsDetails)%"
-        bookingCancellationRateLabel.text = "\(statisticsDetails)%"
-        numberOfCustomersLabel.text = "\(statisticsDetails)"
-        avgWaitingTimeRestaurantLabel.text = "\(statisticsDetails) mins"
-        avgWaitingTimeCustomerLabel.text = "\(statisticsDetails) mins"
-        dateLabel.text = "\(statisticsDetails)"
+        guard let details = statisticsDetails else {
+            return
+        }
+        
+        queueCancellationRateLabel.text = "\(details.queueCancellationRate ?? 0)%"
+        bookingCancellationRateLabel.text = "\(details.bookingCancellationRate ?? 0)%"
+        numberOfCustomersLabel.text = "\(details.numberOfCustomers ?? 0)"
+        avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant ?? 0) mins"
+        avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer ?? 0) mins"
+        dateLabel.text = "\(details.date ?? Date())"
     }
 }

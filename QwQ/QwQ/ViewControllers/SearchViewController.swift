@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, SearchDelegate {
 
 extension SearchViewController: PopoverContentControllerDelegate {
     func popoverContent(controller: PopoverContentController, didselectItem name: String) {
-        print("pop")
+        print("\(name)")
     }
 }
 
@@ -146,7 +146,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filtered.count
-        //restaurants.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -185,7 +184,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
     }
 }
-
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,

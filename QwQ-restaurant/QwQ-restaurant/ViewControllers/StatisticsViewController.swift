@@ -12,7 +12,9 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
     
-    var statistics: [String] = ["1"]
+    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
+                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
+                                               avgWaitingTimeCustomer: 4, date: Date())]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,7 @@ class StatisticsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statisticsDetailsViewController = segue.destination as? StatisticsDetailsViewController,
-            let statisticsDetails = sender as? String {
+            let statisticsDetails = sender as? Statistics {
             statisticsDetailsViewController.statisticsDetails = statisticsDetails
         }
     }
