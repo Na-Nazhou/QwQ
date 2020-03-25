@@ -33,7 +33,7 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
     }
     
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
 
     private func setUpViews() {
@@ -44,5 +44,4 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
 
         Profile.getRestaurantProfilePic(uid: queueRecord.customer.uid, placeholder: profileImageView)
     }
-
 }

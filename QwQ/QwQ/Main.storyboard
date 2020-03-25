@@ -88,12 +88,20 @@
                                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pn9-Tr-2we"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7jK-Jf-8eI">
-                                                <rect key="frame" x="0.0" y="153.66666666666663" width="254.66666666666666" height="0.0"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXc-4s-JUU">
+                                                <rect key="frame" x="0.0" y="153.66666666666663" width="254.66666666666666" height="45.666666666666657"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="vXc-4s-JUU" secondAttribute="height" multiplier="250:45" id="Zeo-Vr-Yfi"/>
+                                                </constraints>
+                                                <state key="normal" image="facebook-button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
-                                                <rect key="frame" x="0.0" y="163.66666666666663" width="254.66666666666666" height="65.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="209.33333333333337" width="254.66666666666666" height="19.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                 <state key="normal" title="Or Sign Up">
                                                     <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,7 +155,7 @@
                     <navigationItem key="navigationItem" id="qxR-Zv-WeF"/>
                     <connections>
                         <outlet property="emailTextField" destination="qMP-nu-B0d" id="pMT-tQ-om5"/>
-                        <outlet property="facebookButton" destination="7jK-Jf-8eI" id="ayP-ip-Nc9"/>
+                        <outlet property="facebookButton" destination="vXc-4s-JUU" id="bgj-hC-3Ka"/>
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="DyT-1C-uja"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="cpb-gv-3Uj"/>
                     </connections>
@@ -369,7 +377,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-7f-CkB">
-                                <rect key="frame" x="15" y="26" width="33" height="33"/>
+                                <rect key="frame" x="15" y="44" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="C4F-7f-CkB" secondAttribute="height" multiplier="1:1" id="zXJ-4Q-sub"/>
                                 </constraints>
@@ -395,7 +403,7 @@
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="j1s-hW-szC"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="pi1-Yq-Lwx"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.3" id="pu8-51-zW7"/>
-                            <constraint firstItem="Tp8-pK-s1o" firstAttribute="top" secondItem="C4F-7f-CkB" secondAttribute="bottom" constant="-15" id="qKn-pS-6R7"/>
+                            <constraint firstItem="Tp8-pK-s1o" firstAttribute="top" secondItem="C4F-7f-CkB" secondAttribute="top" id="qKn-pS-6R7"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="top" secondItem="qZx-fA-huR" secondAttribute="top" id="wti-Qq-gnO"/>
                             <constraint firstItem="2t0-jl-ydk" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" constant="15" id="xUq-Lk-bAl"/>
                         </constraints>
@@ -413,7 +421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="856"/>
+            <point key="canvasLocation" x="885.50724637681162" y="855.80357142857144"/>
         </scene>
         <!--EmailVerification-->
         <scene sceneID="h5w-qn-JaR">
@@ -428,11 +436,12 @@
     </scenes>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
+        <image name="facebook-button" width="569" height="88"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="login-background" width="2048" height="2732"/>
         <image name="logo" width="364" height="416"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rpy-6d-C2D"/>
+        <segue reference="cpb-gv-3Uj"/>
     </inferredMetricsTieBreakers>
 </document>

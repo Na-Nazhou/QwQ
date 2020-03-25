@@ -20,7 +20,7 @@ struct BookRecord: Record {
     let time: Date
 
     var date: String {
-        time.toDateStringWithoutTime()
+        Date.getFormattedDate(date: time, format: Constants.recordDateFormat)
     }
 
     let admitTime: Date?

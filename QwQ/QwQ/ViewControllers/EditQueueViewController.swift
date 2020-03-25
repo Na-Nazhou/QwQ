@@ -21,7 +21,7 @@ class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewCo
     var record: Record?
 
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
     
     @IBAction private func handleSubmit(_ sender: Any) {
