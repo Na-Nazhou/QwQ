@@ -8,12 +8,12 @@
 import FirebaseFirestore
 
 class FBQueueStorage: RestaurantQueueStorage {
-    let db: Firestore
+
+    let db = Firestore.firestore()
+
     weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
-    weak var queueStatusLogicDelegate: QueueOpenCloseSyncDelegate?
     
     init(restaurant: Restaurant) {
-        self.db = Firestore.firestore()
         attachListenerOnRestaurantQueue(restaurant: restaurant)
     }
 
@@ -21,8 +21,10 @@ class FBQueueStorage: RestaurantQueueStorage {
         //listen to restaurant's queue document for 'today'
         //assuming users will restart app everyday
         let today = Date().toDateStringWithoutTime()
-        db.collection(Constants.queuesDirectory).document(restaurant.uid)
-            .collection(today).addSnapshotListener { (queueSnapshot, err) in
+        db.collection(Constants.queuesDirectory)
+            .document(restaurant.uid)
+            .collection(today)
+            .addSnapshotListener { (queueSnapshot, err) in
                 if let err = err {
                     print("Error fetching documents: \(err)")
                     return
@@ -67,7 +69,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         //listen to restaurant's profile
     }
 
-    private func getUpdateType(of rec: QueueRecord) -> QueueRecordModificationType {
+    private func getUpdateType(of rec: QueueRecord) -> RecordModification {
         if rec.admitTime == nil {
             print("\n\tmodif is update!\n")
             return .customerUpdate
@@ -86,7 +88,8 @@ class FBQueueStorage: RestaurantQueueStorage {
 
     private func getQueueRecordAndComplete(
         data: [String: Any], ofQid qid: String, forCid cid: String,
-        atRestaurant restaurant: Restaurant, completion: @escaping (QueueRecord) -> Void) {
+        atRestaurant restaurant: Restaurant,
+        completion: @escaping (QueueRecord) -> Void) {
         FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
             guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: qid) else {
                 return
@@ -102,7 +105,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         
         db.collection("restaurants")
             .document(restaurant.uid)
-            .setData(Restaurant.restaurantToDictionary(updatedRestaurant))
+            .setData(updatedRestaurant.dictionary)
     }
 
     func closeQueue(of restaurant: Restaurant, at time: Date) {
@@ -110,7 +113,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         updatedRestaurant.queueCloseTime = time
         db.collection("restaurants")
             .document(restaurant.uid)
-            .setData(Restaurant.restaurantToDictionary(updatedRestaurant))
+            .setData(updatedRestaurant.dictionary)
     }
     
     // Record admit time already updated before being passed in.
@@ -131,15 +134,15 @@ class FBQueueStorage: RestaurantQueueStorage {
           .document(record.restaurant.uid)
           .collection(record.startDate)
           .document(record.id)
-          .setData(QueueRecord.queueRecordToDictionary(record))
+            .setData(record.dictionary)
     }
     
     func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isUnadmittedQueueingRecord }, completion: completion)
+        loadQueueRecords(of: restaurant, where: { $0.isPendingAdmission }, completion: completion)
     }
     
     func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isWaitingRecord }, completion: completion)
+        loadQueueRecords(of: restaurant, where: { $0.isAdmitted }, completion: completion)
     }
     
     private func loadQueueRecords(of restaurant: Restaurant, where condition: @escaping (QueueRecord) -> Bool,

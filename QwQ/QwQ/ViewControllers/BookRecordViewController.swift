@@ -17,6 +17,8 @@ class BookRecordViewController: UIViewController {
     @IBOutlet private var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet private var datePicker: UIDatePicker!
 
+    typealias Profile = FBProfileStorage
+
     var bookRecord: BookRecord?
 
     override func viewDidLoad() {
@@ -37,6 +39,7 @@ class BookRecordViewController: UIViewController {
         nameLabel.text = bookRecord.restaurant.name
         contactLabel.text = bookRecord.restaurant.contact
         locationLabel.text = bookRecord.restaurant.address
+        Profile.getCustomerProfilePic(uid: bookRecord.restaurant.uid, placeholder: profileImageView)
 
         datePicker.date = bookRecord.time
         groupSizeLabel.text = String(bookRecord.groupSize)

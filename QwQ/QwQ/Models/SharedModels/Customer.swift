@@ -36,10 +36,7 @@ struct Customer: User {
                 return nil
         }
 
-        self.uid = uid
-        self.name = name
-        self.email = email
-        self.contact = contact
+        self.init(uid: uid, name: name, email: email, contact: contact)
     }
 }
 

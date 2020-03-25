@@ -55,6 +55,7 @@ struct Constants {
     static let customersDirectory = "customers"
     static let restaurantsDirectory = "restaurants"
     static let queuesDirectory = "queues"
+    static let bookingsDirectory = "bookings"
     
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"

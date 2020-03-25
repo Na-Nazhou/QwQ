@@ -7,6 +7,11 @@
 
 protocol BookingStorageSync {
     var logicDelegate: BookingStorageSyncDelegate? { get set }
+
+    // MARK: - Listeners
+    func registerListener(for record: BookRecord)
+
+    func removeListener(for record: BookRecord)
 }
 
 protocol CustomerBookingStorage: BookingStorageSync {
@@ -24,4 +29,5 @@ protocol CustomerBookingStorage: BookingStorageSync {
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void)
 
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void)
+
 }

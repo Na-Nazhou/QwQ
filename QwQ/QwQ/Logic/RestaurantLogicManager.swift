@@ -1,4 +1,5 @@
 class RestaurantLogicManager: RestaurantLogic {
+
     // Storage
     private(set) var restaurantStorage: RestaurantStorage
     
@@ -9,7 +10,7 @@ class RestaurantLogicManager: RestaurantLogic {
     var customer: Customer
     var currentRestaurant: Restaurant?
 
-    private var restaurantCollection = RestaurantCollection()
+    private var restaurantCollection = Collection<Restaurant>()
     var restaurants: [Restaurant] {
         Array(restaurantCollection.restaurants)
     }
