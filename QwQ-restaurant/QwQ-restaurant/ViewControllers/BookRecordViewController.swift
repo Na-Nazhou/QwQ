@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, DisplayRecordViewController {
+class BookRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
@@ -41,7 +41,5 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
             return
         }
         setUpRecordView()
-
-        Profile.getRestaurantProfilePic(uid: bookRecord.customer.uid, placeholder: profileImageView)
     }
 }

@@ -136,7 +136,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
             }
             activityCell.deleteAction = {
-                 self.spinner = self.showSpinner(onView: self.view)
+                self.spinner = self.showSpinner(onView: self.view)
                 CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
             }
         }
@@ -168,8 +168,8 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
         case Constants.editQueueSelectedSegue:
             if let queueRecord = sender as? QueueRecord,
-            let editQueueViewController = segue.destination as? EditQueueViewController {
-                editQueueViewController.record = queueRecord
+                let editQueueViewController = segue.destination as? EditQueueViewController {
+                    editQueueViewController.record = queueRecord
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
@@ -177,7 +177,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                     editBookingViewController.record = bookRecord
             }
         default:
-            // No need to to anything for editQueueSelectedSegue
             return
         }
     }

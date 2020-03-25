@@ -7,7 +7,7 @@
 
 import UIKit
 
-class QueueRecordViewController: UIViewController, DisplayRecordViewController {
+class QueueRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
@@ -16,8 +16,6 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
     
     var record: Record?
-
-    typealias Profile = FBProfileStorage
     
     @IBAction private func handleAdmit(_ sender: Any) {
         showMessage(title: Constants.admitCustomerTitle,
@@ -41,8 +39,6 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
             return
         }
         setUpRecordView()
-
-        Profile.getRestaurantProfilePic(uid: queueRecord.customer.uid, placeholder: profileImageView)
     }
 
 }
