@@ -52,6 +52,8 @@
 		61C742FD242B3C12005818A1 /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FA242B3C11005818A1 /* RecordModification.swift */; };
 		61C742FE242B3C12005818A1 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FB242B3C11005818A1 /* Collection.swift */; };
 		7E1137FE24233B1F006984BB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FD24233B1F006984BB /* PopoverContentController.swift */; };
+		7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */; };
+		7E428222242B4CB60019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */; };
 		7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E56AF9A2421F513002E9BAC /* Activities.storyboard */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
@@ -166,6 +168,8 @@
 		61C742FB242B3C11005818A1 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		77A36B7A1787A33D24691785 /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		7E1137FD24233B1F006984BB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
+		7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
+		7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E56AF9A2421F513002E9BAC /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -422,6 +426,7 @@
 				7EE6D020241E202A00C1465E /* EditBookingViewController.swift */,
 				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
 				7EFB6975242213470073E535 /* QueueRecordViewController.swift */,
+				7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */,
 				7EFB6977242215B60073E535 /* BookRecordViewController.swift */,
 				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
 				5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */,
@@ -452,6 +457,7 @@
 				7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */,
 				7EFB696D242210110073E535 /* EditBook.storyboard */,
 				7EFB6971242213000073E535 /* Queue.storyboard */,
+				7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */,
 				7EFB69732422130C0073E535 /* Book.storyboard */,
 				7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */,
 				7E56AF9A2421F513002E9BAC /* Activities.storyboard */,
@@ -639,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EDC5E5B24220E880053CA1D /* EditQueue.storyboard in Resources */,
+				7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */,
 				7EFB696E242210110073E535 /* EditBook.storyboard in Resources */,
 				5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */,
 				7EFB69742422130C0073E535 /* Book.storyboard in Resources */,
@@ -824,6 +831,7 @@
 				61ACB7F9242A7C7E002A1F47 /* CustomerHistory.swift in Sources */,
 				7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
+				7E428222242B4CB60019A8A2 /* EmailVerificationViewController.swift in Sources */,
 				5C11FD0E2418E652002B88E3 /* FBAuthenticator.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSyncDelegate.swift in Sources */,
 				7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */,

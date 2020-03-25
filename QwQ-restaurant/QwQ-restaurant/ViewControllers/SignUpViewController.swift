@@ -97,5 +97,4 @@ class SignUpViewController: UIViewController {
         }
         return false
     }
-    
 }
