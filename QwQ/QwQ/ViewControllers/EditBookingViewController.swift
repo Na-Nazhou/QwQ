@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditBookingViewController: UIViewController, BookingDelegate, RecordViewController {
+class EditBookingViewController: UIViewController, BookingDelegate, EditRecordViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var contactTextField: UITextField!
     @IBOutlet var groupSizeTextField: UITextField!

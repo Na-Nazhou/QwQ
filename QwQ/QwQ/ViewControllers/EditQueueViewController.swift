@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditQueueViewController: UIViewController, QueueDelegate, RecordViewController {
+class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewController {
 
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var contactTextField: UITextField!

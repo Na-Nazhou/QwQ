@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol RecordViewController: UIViewController {
+protocol EditRecordViewController: UIViewController {
     var nameTextField: UITextField! { get set }
     var contactTextField: UITextField! { get set }
     var groupSizeTextField: UITextField! { get set }
@@ -19,7 +19,7 @@ protocol RecordViewController: UIViewController {
 
 }
 
-extension RecordViewController {
+extension EditRecordViewController {
     func setUpRecordView() {
         if let record = record {
             restaurantNameLabel.text = record.restaurant.name

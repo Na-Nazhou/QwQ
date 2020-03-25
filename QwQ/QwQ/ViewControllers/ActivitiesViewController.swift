@@ -166,12 +166,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         case Constants.queueSelectedSegue:
             if let queueRecord = sender as? QueueRecord,
                 let queueRecordViewController = segue.destination as? QueueRecordViewController {
-                    queueRecordViewController.queueRecord = queueRecord
+                    queueRecordViewController.record = queueRecord
             }
         case Constants.bookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
                 let bookRecordViewController = segue.destination as? BookRecordViewController {
-                    bookRecordViewController.bookRecord = bookRecord
+                    bookRecordViewController.record = bookRecord
             }
         case Constants.editBookSelectedSegue:
             // TODO: fix
