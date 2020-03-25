@@ -169,7 +169,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         case Constants.editQueueSelectedSegue:
             if let queueRecord = sender as? QueueRecord,
             let editQueueViewController = segue.destination as? EditQueueViewController {
-                editQueueViewController.queueRecord = queueRecord
+                editQueueViewController.record = queueRecord
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
