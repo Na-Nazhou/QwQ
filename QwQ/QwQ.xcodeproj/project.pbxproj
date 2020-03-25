@@ -1077,7 +1077,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCD784D72EAB4030587C1643 /* Pods-QwQTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQTests/Info.plist;
@@ -1099,7 +1098,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D0318B0E46CAA8DE65D0C755 /* Pods-QwQTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQTests/Info.plist;
@@ -1121,7 +1119,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE50533A0E3EE9D7717A3EA9 /* Pods-QwQ-QwQUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1141,7 +1138,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8AC79080FE960B1271A60697 /* Pods-QwQ-QwQUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

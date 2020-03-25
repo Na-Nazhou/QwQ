@@ -20,6 +20,8 @@ protocol Authenticator {
 
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void)
 
+    static func changePassword(_ password: String, errorHandler: @escaping (Error) -> Void)
+
     static func checkIfAlreadyLoggedIn() -> Bool
 
     static func getUIDOfCurrentUser() -> String?
