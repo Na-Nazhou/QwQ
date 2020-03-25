@@ -22,7 +22,7 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpViews()
     }
     
     @IBAction private func handleBack(_ sender: Any) {

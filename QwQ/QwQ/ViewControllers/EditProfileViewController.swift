@@ -14,7 +14,8 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
-    
+
+    typealias Auth = FBAuthenticator
     typealias Profile = FBProfileStorage
 
     var uid: String?
@@ -73,14 +74,19 @@ class EditProfileViewController: UIViewController {
             return
         }
 
-        let customer = Customer(uid: uid, name: name, email: email, contact: contact)
-
         spinner = showSpinner(onView: view)
-        Profile.updateCustomerInfo(customer: customer, completion: updateComplete, errorHandler: handleError(error:))
 
         if let image = image {
             Profile.updateCustomerProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
+
+        if let password = newPasswordTextField.text {
+            changePassword(password)
+        }
+
+        let customer = Customer(uid: uid, name: name, email: email, contact: contact)
+
+        Profile.updateCustomerInfo(customer: customer, completion: updateComplete, errorHandler: handleError(error:))
     }
 
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
@@ -96,6 +102,14 @@ class EditProfileViewController: UIViewController {
         setUpProfileImageView(uid: customer.uid)
         
         removeSpinner(spinner)
+    }
+
+    private func changePassword(_ password: String) {
+        let trimmedPassword = password.trimmingCharacters(in: .newlines)
+        guard !trimmedPassword.isEmpty else {
+            return
+        }
+        Auth.changePassword(password, errorHandler: handleError(error:))
     }
 
     private func updateComplete() {
