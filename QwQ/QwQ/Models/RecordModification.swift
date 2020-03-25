@@ -6,7 +6,7 @@ enum RecordStatus: Int {
     case invalid
 }
 
-enum RecordModificationType {
+enum RecordModification: Int {
     case customerUpdate
     case admit
     case reject

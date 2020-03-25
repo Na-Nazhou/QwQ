@@ -8,7 +8,5 @@
 /// Protocol for delegate of restaurant logic presentation to follow.
 protocol RestaurantDelegate: AnyObject {
 
-    func restaurantDidUpdate(restaurant: Restaurant)
-
     func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool)
 }

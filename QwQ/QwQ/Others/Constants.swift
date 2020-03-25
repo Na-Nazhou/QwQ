@@ -44,10 +44,10 @@ struct Constants {
     // MARK: Queue record
     static let restaurantUnavailableMessage = "This restaurant queue is currently not open!"
     static let multipleQueueRecordsMessage = "You have an existing queue record."
+    static let recordDeleteSuccessMessage = "Your record has been deleted."
 
     static let queueRecordCreateSuccessMessage = "You have created a new queue record."
     static let queueRecordUpdateSuccessMessage = "Your queue record has been updated."
-    static let recordDeleteSuccessMessage = "Your queue record has been deleted."
 
     // MARK: Book record
     static let bookRecordCreateSuccessMessage = "You have created a book record."

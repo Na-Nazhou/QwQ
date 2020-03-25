@@ -41,7 +41,7 @@ class ActivityCell: UICollectionViewCell {
                 // TODO: display estimated time instead
             }
             if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Time: \(bookRecord.formattedTime)"
+                statusLabel.text = "Time: \(bookRecord.time.toString())"
             }
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"

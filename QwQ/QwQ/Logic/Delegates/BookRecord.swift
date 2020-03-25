@@ -23,17 +23,9 @@ struct BookRecord: Record {
         time.toDateStringWithoutTime()
     }
 
-    var formattedTime: String {
-        time.toString()
-    }
-
     let admitTime: Date?
     let serveTime: Date?
     let rejectTime: Date?
-
-    var isHistoryRecord: Bool {
-        admitTime != nil || rejectTime != nil
-    }
 
     var dictionary: [String: Any] {
         var data = [String: Any]()

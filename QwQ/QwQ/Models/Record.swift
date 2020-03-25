@@ -60,7 +60,7 @@ extension Record {
         return .invalid
     }
 
-    func changeType(from old: Record) -> RecordModificationType? {
+    func changeType(from old: Record) -> RecordModification? {
         if self.id != old.id {
             // not valid comparison
             return nil

@@ -28,11 +28,6 @@ class RestaurantLogicManager: RestaurantLogic {
             }
         })
     }
-
-    func didUpdateRestaurant(restaurant: Restaurant) {
-        restaurantDelegate?.restaurantDidUpdate(restaurant: restaurant)
-        searchDelegate?.restaurantDidUpdate(restaurant: restaurant)
-    }
     
     func restaurantDidOpenQueue(restaurant: Restaurant) {
         assert(restaurant.isQueueOpen,
