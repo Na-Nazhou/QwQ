@@ -35,6 +35,8 @@
 		6148055E2422A3B7003D6D44 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148055D2422A3B7003D6D44 /* Record.swift */; };
 		688B3DA4658AA94AF24E5878 /* Pods_QwQ_restaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA10592489DDE11A8686C67 /* Pods_QwQ_restaurantTests.framework */; };
 		7E11380024234828006984BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FF24234828006984BB /* SegmentedControl.swift */; };
+		7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821B242B48530019A8A2 /* EmailVerification.storyboard */; };
+		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
@@ -53,6 +55,10 @@
 		7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */; };
 		7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */; };
 		7E7F7DCF2422597300A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */; };
+		7EAC34D1242B30E90088D00F /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC34D0242B30E90088D00F /* StatisticsViewController.swift */; };
+		7EAC34D3242B32290088D00F /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EAC34D2242B32290088D00F /* Statistics.storyboard */; };
+		7EAC34D5242B3A8F0088D00F /* StatisticsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */; };
+		7EAC34D7242B3D110088D00F /* StatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC34D6242B3D110088D00F /* StatisticsCell.swift */; };
 		7EE6D023241E393A00C1465E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D022241E393A00C1465E /* EditProfileViewController.swift */; };
 		7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */; };
 		7EE6D02F241E3CAA00C1465E /* QueueRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */; };
@@ -120,6 +126,8 @@
 		6148055B2422A388003D6D44 /* BookRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecord.swift; sourceTree = "<group>"; };
 		6148055D2422A3B7003D6D44 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		7E42821B242B48530019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
+		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +151,10 @@
 		7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordViewController.swift; sourceTree = "<group>"; };
 		7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
+		7EAC34D0242B30E90088D00F /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		7EAC34D2242B32290088D00F /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
+		7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsDetailsViewController.swift; sourceTree = "<group>"; };
+		7EAC34D6242B3D110088D00F /* StatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCell.swift; sourceTree = "<group>"; };
 		7EE6D022241E393A00C1465E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordViewController.swift; sourceTree = "<group>"; };
 		7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordCell.swift; sourceTree = "<group>"; };
@@ -331,6 +343,8 @@
 			children = (
 				7E72B18E241C95F000C1EE72 /* Activities.storyboard */,
 				7EFB6979242218280073E535 /* Book.storyboard */,
+				7EAC34D2242B32290088D00F /* Statistics.storyboard */,
+				7E42821B242B48530019A8A2 /* EmailVerification.storyboard */,
 				7EFB697B2422183C0073E535 /* Queue.storyboard */,
 				7E72B18F241C95F000C1EE72 /* Profile.storyboard */,
 			);
@@ -341,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				7EE6D02E241E3CAA00C1465E /* QueueRecordCell.swift */,
+				7EAC34D6242B3D110088D00F /* StatisticsCell.swift */,
 				7E53E2C1241F74990047C40F /* ProfileImageView.swift */,
 				7E1137FF24234828006984BB /* SegmentedControl.swift */,
 				7E7F7DCE2422597200A080E5 /* SearchCollectionReusableView.swift */,
@@ -356,6 +371,9 @@
 				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
 				7EE6D022241E393A00C1465E /* EditProfileViewController.swift */,
 				7EE6D03B241E5AE400C1465E /* HomeViewController.swift */,
+				7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */,
+				7EAC34D0242B30E90088D00F /* StatisticsViewController.swift */,
+				7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */,
 				7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */,
 				7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */,
 				7E72B19F241CA54600C1EE72 /* ActivitiesViewController.swift */,
@@ -542,8 +560,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */,
+				7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */,
 				7EFB697A242218280073E535 /* Book.storyboard in Resources */,
 				7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */,
+				7EAC34D3242B32290088D00F /* Statistics.storyboard in Resources */,
 				6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */,
 				7E72B168241C940500C1EE72 /* LaunchScreen.storyboard in Resources */,
 				7E72B191241C95F000C1EE72 /* Profile.storyboard in Resources */,
@@ -708,9 +728,13 @@
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
 				D4D329CD2426184300F2A5A5 /* QueueRecordModificationType.swift in Sources */,
 				7E53E2BA241F60A60047C40F /* (null) in Sources */,
+				7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				5C2CB13524248918003AFC6C /* UIViewController+Spinner.swift in Sources */,
 				614805592422A1EF003D6D44 /* FBAuthenticator.swift in Sources */,
+				7EAC34D1242B30E90088D00F /* StatisticsViewController.swift in Sources */,
+				7EAC34D7242B3D110088D00F /* StatisticsCell.swift in Sources */,
+				7EAC34D5242B3A8F0088D00F /* StatisticsDetailsViewController.swift in Sources */,
 				5C2CB12E242484A7003AFC6C /* AuthDetails.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,

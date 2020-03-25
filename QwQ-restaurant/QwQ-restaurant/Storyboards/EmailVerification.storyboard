@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lYg-p9-V66">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Bold.ttf">
+            <string>Comfortaa-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Email Verification View Controller-->
+        <scene sceneID="TOP-O9-n3R">
+            <objects>
+                <viewController id="lYg-p9-V66" customClass="EmailVerificationViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LGF-3Z-y1B">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="voD-eH-qhQ">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email-background" translatesAutoresizingMaskIntoConstraints="NO" id="geZ-8n-pae">
+                                <rect key="frame" x="0.0" y="469.5" width="834.00000000000011" height="704.5"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4mg-J0-cIo">
+                                <rect key="frame" x="20" y="342.5" width="794" height="309.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Almost done!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zb-Bp-QQ6">
+                                        <rect key="frame" x="255" y="0.0" width="284" height="70"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="70"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A verification email has been send to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXN-Mu-dHp">
+                                        <rect key="frame" x="10.5" y="90" width="773.5" height="45"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHH-Ud-fjK">
+                                        <rect key="frame" x="338.5" y="155" width="117" height="45"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your email and follow the link to activate your account!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzM-I6-fd2">
+                                        <rect key="frame" x="29.5" y="220" width="735" height="89.5"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E56-8H-e3h">
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="E56-8H-e3h" secondAttribute="height" multiplier="1:1" id="SCR-Dj-jto"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="lYg-p9-V66" eventType="touchUpInside" id="tad-oV-dSF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="geZ-8n-pae" firstAttribute="leading" secondItem="kJM-Oh-ZA8" secondAttribute="leading" id="1uh-1w-scy"/>
+                            <constraint firstItem="voD-eH-qhQ" firstAttribute="leading" secondItem="LGF-3Z-y1B" secondAttribute="leading" id="7V4-M2-nSV"/>
+                            <constraint firstItem="kJM-Oh-ZA8" firstAttribute="top" secondItem="E56-8H-e3h" secondAttribute="top" constant="-30" id="BaU-W9-6g0"/>
+                            <constraint firstItem="4mg-J0-cIo" firstAttribute="leading" secondItem="kJM-Oh-ZA8" secondAttribute="leading" constant="20" id="FEs-e7-JAg"/>
+                            <constraint firstItem="kJM-Oh-ZA8" firstAttribute="leading" secondItem="E56-8H-e3h" secondAttribute="leading" constant="-20" id="FUO-XP-yNd"/>
+                            <constraint firstItem="4mg-J0-cIo" firstAttribute="centerY" secondItem="LGF-3Z-y1B" secondAttribute="centerY" constant="-100" id="Rd4-e5-ZZs"/>
+                            <constraint firstItem="geZ-8n-pae" firstAttribute="height" secondItem="voD-eH-qhQ" secondAttribute="height" multiplier="0.6" id="Zkh-3P-1jZ"/>
+                            <constraint firstAttribute="trailing" secondItem="voD-eH-qhQ" secondAttribute="trailing" id="Zlu-MK-rJ2"/>
+                            <constraint firstItem="voD-eH-qhQ" firstAttribute="top" secondItem="LGF-3Z-y1B" secondAttribute="top" id="dFb-k7-egU"/>
+                            <constraint firstItem="kJM-Oh-ZA8" firstAttribute="bottom" secondItem="geZ-8n-pae" secondAttribute="bottom" id="foC-eS-Y6T"/>
+                            <constraint firstAttribute="bottom" secondItem="voD-eH-qhQ" secondAttribute="bottom" constant="20" id="gXp-rh-i0J"/>
+                            <constraint firstItem="4mg-J0-cIo" firstAttribute="trailing" secondItem="kJM-Oh-ZA8" secondAttribute="trailing" constant="-20" id="ieV-o4-CPV"/>
+                            <constraint firstItem="geZ-8n-pae" firstAttribute="trailing" secondItem="kJM-Oh-ZA8" secondAttribute="trailing" id="lhp-ue-VFK"/>
+                            <constraint firstItem="E56-8H-e3h" firstAttribute="width" secondItem="kJM-Oh-ZA8" secondAttribute="width" multiplier="0.05" id="pX5-8q-9Ki"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kJM-Oh-ZA8"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailLabel" destination="UHH-Ud-fjK" id="Gmd-Kc-Gmr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E6l-fm-8KJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.97122302158274" y="45.7286432160804"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="email-background" width="498" height="567"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+    </resources>
+</document>

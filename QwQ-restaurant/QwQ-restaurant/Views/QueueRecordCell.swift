@@ -29,8 +29,6 @@ class QueueRecordCell: UICollectionViewCell {
         super.init(frame: frame)
     }
 
-    // MARK: Codable
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
