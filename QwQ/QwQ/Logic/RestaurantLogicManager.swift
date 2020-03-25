@@ -1,5 +1,4 @@
 class RestaurantLogicManager: RestaurantLogic {
-    
     // Storage
     private(set) var restaurantStorage: RestaurantStorage
     
@@ -29,27 +28,34 @@ class RestaurantLogicManager: RestaurantLogic {
         })
     }
     
-    func restaurantDidOpenQueue(restaurant: Restaurant) {
-        assert(restaurant.isQueueOpen,
-               "Updated restaurant (passed in as argument) should be open.")
-        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
-               "current restaurant should be the updated restaurant.")
-        
-        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: true)
-        
-        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: true)
-        
+    func restaurantDidModifyProfile(restaurant: Restaurant) {
+        switch restaurantCollection.update(into: restaurant) {
+        case .changedProfileDetails:
+            break
+        case .changedQueueStatus:
+            didChangeQueueStatus(restaurant: restaurant)
+        }
     }
     
-    func restaurantDidCloseQueue(restaurant: Restaurant) {
-        assert(!restaurant.isQueueOpen,
-               "Updated restaurant (passed in as argument) should be closed.")
-        assert(self.currentRestaurant != nil && self.currentRestaurant!.uid == restaurant.uid,
-               "current restaurant should be the updated restaurant.")
+    func didChangeQueueStatus(restaurant: Restaurant) {
+        if restaurant == currentRestaurant {
+            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: restaurant.isQueueOpen)
+        }
         
-        restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: false)
+        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: restaurant.isQueueOpen)
         
-        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: false)
+    }
+
+    func didAddNewRestaurant(restaurant: Restaurant) {
+        if restaurantCollection.add(restaurant) {
+            searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
+        }
+    }
+
+    func didRemoveRestaurant(restaurant: Restaurant) {
+        if restaurantCollection.remove(restaurant) {
+            searchDelegate?.restaurantCollectionDidRemoveRestaurant()
+        }
     }
 }
 
