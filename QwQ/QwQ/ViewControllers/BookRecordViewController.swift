@@ -18,6 +18,7 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var datePicker: UIDatePicker!
 
     var record: Record?
+    typealias Profile = FBProfileStorage
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,5 +36,7 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
         }
         setUpRecordView()
         datePicker.date = bookRecord.time
+
+        Profile.getCustomerProfilePic(uid: bookRecord.restaurant.uid, placeholder: profileImageView)
     }
 }

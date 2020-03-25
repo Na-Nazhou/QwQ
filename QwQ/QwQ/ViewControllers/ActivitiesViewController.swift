@@ -34,7 +34,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     var historyRecords: [Record] {
-        CustomerQueueLogicManager.shared().pastQueueRecords
+        let bookRecords = CustomerBookingLogicManager.shared().pastBookRecords
+        let queueRecords = CustomerQueueLogicManager.shared().pastQueueRecords
+        return bookRecords + queueRecords
     }
     
     override func viewDidLoad() {
@@ -85,23 +87,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
 
-    func didDeleteQueueRecord() {
+    func didDeleteRecord() {
         removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
-            message: Constants.queueRecordDeleteSuccessMessage,
-            buttonText: Constants.okayTitle,
-            buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
-                self.activitiesCollectionView.reloadData()
-            })
-    }
-
-    func didDeleteBookRecord() {
-        removeSpinner(spinner)
-        showMessage(
-            title: Constants.successTitle,
-            message: Constants.bookRecordDeleteSuccessMessage,
+            message: Constants.recordDeleteSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)
@@ -127,10 +117,11 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let record = records[indexPath.row]
         activityCell.setUpView(record: record)
-        if let queueRecord = record as? QueueRecord,
-            queueRecord.isUnadmittedQueueingRecord {
+        if let queueRecord = record as? QueueRecord {
             activityCell.editAction = {
-                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                if record.isPendingAdmission {
+                    self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                }
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
@@ -140,7 +131,9 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let bookRecord = record as? BookRecord {
             activityCell.editAction = {
-                self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
+                if record.isPendingAdmission {
+                    self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: bookRecord)
+                }
             }
             activityCell.deleteAction = {
                  self.spinner = self.showSpinner(onView: self.view)
@@ -173,8 +166,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 let bookRecordViewController = segue.destination as? BookRecordViewController {
                     bookRecordViewController.record = bookRecord
             }
+        case Constants.editQueueSelectedSegue:
+            if let queueRecord = sender as? QueueRecord,
+            let editQueueViewController = segue.destination as? EditQueueViewController {
+                editQueueViewController.queueRecord = queueRecord
+        }
         case Constants.editBookSelectedSegue:
-            // TODO: fix
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord

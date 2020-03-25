@@ -1,28 +1,33 @@
 import Foundation
 class RestaurantQueueLogicManager: RestaurantQueueLogic {
+
+    // Storage
+    var queueStorage: RestaurantQueueStorage
+
+    // View controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
     private init(restaurant: Restaurant) {
         self.restaurant = restaurant
+
         queueStorage = FBQueueStorage(restaurant: restaurant)
         fetchQueue()
         fetchWaiting()
     }
 
     private var restaurant: Restaurant
-    private(set) var queueStorage: RestaurantQueueStorage
 
     private(set) var restaurantQueue = RestaurantQueue()
     private(set) var restaurantWaiting = RestaurantQueue()
     var queueRecords: [QueueRecord] {
-        return Array(restaurantQueue.queue)
+        Array(restaurantQueue.queue)
     }
     var waitingRecords: [QueueRecord] {
-        return Array(restaurantWaiting.queue)
+        Array(restaurantWaiting.queue)
     }
     
     var isQueueOpen: Bool {
-        return restaurant.isQueueOpen
+        restaurant.isQueueOpen
     }
 
     func fetchQueue() {
@@ -169,7 +174,6 @@ extension RestaurantQueueLogicManager {
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
         let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
         logic.queueStorage.queueModificationLogicDelegate = logic
-        logic.queueStorage.queueStatusLogicDelegate = logic
 
         queueLogic = logic
         return logic
@@ -182,8 +186,9 @@ extension RestaurantQueueLogicManager {
 
 extension RestaurantQueueLogicManager {
     private func currentTime() -> Date {
-        return Date()
+        Date()
     }
+
     private func updateAdmitTime(queueRecord: QueueRecord) -> QueueRecord {
         var updatedRec = queueRecord
         updatedRec.admitTime = currentTime()

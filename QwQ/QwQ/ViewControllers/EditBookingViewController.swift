@@ -23,15 +23,14 @@ class EditBookingViewController: UIViewController, BookingDelegate, EditRecordVi
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
-    // TODO
+
     @IBAction private func handleSubmit(_ sender: Any) {
         guard let groupSizeText = groupSizeTextField.text,
                 let babyChairQueantityText = babyChairQuantityTextField.text,
                 let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
                 let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
                     showMessage(title: Constants.errorTitle,
-                                message: "Invalid data",
+                                message: "Missing fields",
                                 buttonText: Constants.okayTitle,
                                 buttonAction: nil)
                     return

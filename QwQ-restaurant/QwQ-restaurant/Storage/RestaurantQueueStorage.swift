@@ -1,4 +1,10 @@
 import Foundation
+
+/// Represents the univeral queue storage sync protocol.
+protocol QueueStorageSync {
+    var queueModificationLogicDelegate: QueueStorageSyncDelegate? { get set }
+}
+
 protocol RestaurantQueueStorage: QueueStorageSync {
 
     // MARK: - Modifier

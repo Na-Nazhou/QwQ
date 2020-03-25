@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 
 struct QueueRecord: Record {
-    var id = "0"
+    var id: String
     let restaurant: Restaurant
     let customer: Customer
 
@@ -18,6 +18,27 @@ struct QueueRecord: Record {
 
     var startDate: String {
         startTime.toDateStringWithoutTime()
+    }
+
+    var dictionary: [String: Any] {
+        var data = [String: Any]()
+        data["customer"] = customer.uid
+        data["groupSize"] = groupSize
+        data["babyChairQuantity"] = babyChairQuantity
+        data["wheelchairFriendly"] = wheelchairFriendly
+        data["startTime"] = startTime
+
+        if let admitTime = admitTime {
+            data["admitTime"] = admitTime
+        }
+        if let serveTime = serveTime {
+            data["serveTime"] = serveTime
+        }
+        if let rejectTime = rejectTime {
+            data["rejectTime"] = rejectTime
+        }
+
+        return data
     }
 
     init(restaurant: Restaurant, customer: Customer,
@@ -45,7 +66,7 @@ struct QueueRecord: Record {
         self.rejectTime = rejectTime
     }
 
-    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String = "0") {
+    init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
         guard let groupSize = dictionary["groupSize"] as? Int,
             let babyChairQuantity = dictionary["babyChairQuantity"] as? Int,
             let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
@@ -76,39 +97,6 @@ extension QueueRecord: Hashable {
 }
 
 extension QueueRecord {
-    var dictionary: [String: Any] {
-        var data = [String: Any]()
-        data["customer"] = customer.uid
-        data["groupSize"] = groupSize
-        data["babyChairQuantity"] = babyChairQuantity
-        data["wheelchairFriendly"] = wheelchairFriendly
-        data["startTime"] = startTime
-
-        if let admitTime = admitTime {
-            data["admitTime"] = admitTime
-        }
-        if let serveTime = serveTime {
-            data["serveTime"] = serveTime
-        }
-        if let rejectTime = rejectTime {
-            data["rejectTime"] = rejectTime
-        }
-
-        return data
-    }
-
-    var isHistoryRecord: Bool {
-        serveTime != nil || rejectTime != nil
-    }
-    
-    var isWaitingRecord: Bool {
-        serveTime == nil && admitTime != nil && rejectTime == nil
-    }
-
-    var isUnadmittedQueueingRecord: Bool {
-        admitTime == nil
-    }
-
     func completelyIdentical(to other: QueueRecord) -> Bool {
         other == self
             && other.restaurant == restaurant
@@ -120,29 +108,5 @@ extension QueueRecord {
             && other.admitTime == admitTime
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
-    }
-}
-
-extension QueueRecord {
-
-    func changeType(from old: QueueRecord) -> QueueRecordModificationType? {
-        if self.id != old.id {
-            // not valid comparison
-            return nil
-        }
-
-        if self.admitTime != nil {
-            if old.admitTime == nil {
-                return .admit
-            }
-            if self.serveTime != nil {
-                return .serve
-            }
-            if self.rejectTime != nil {
-                return .reject
-            }
-            assert(false, "No valid modification detected: Customer update should not be allowed after admission.")
-        }
-        return .customerUpdate
     }
 }

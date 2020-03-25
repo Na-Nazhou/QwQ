@@ -15,17 +15,26 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var babyChairQuantityLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
-    
+
+    typealias Profile = FBProfileStorage
+
     var record: Record?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpRecordView()
     }
     
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
+
+    private func setUpViews() {
+        guard let queueRecord = record as? QueueRecord else {
+            return
+        }
+        setUpRecordView()
+
+        Profile.getCustomerProfilePic(uid: queueRecord.restaurant.uid, placeholder: profileImageView)
+    }
 }

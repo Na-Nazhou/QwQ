@@ -1,15 +1,4 @@
-protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
-    func restaurantDidChangeQueueStatus(toIsOpen: Bool)
-
-    func didAddRecordToQueue(record: QueueRecord)
-    func didRemoveRecordFromQueue(record: QueueRecord)
-    func didUpdateRecordInQueue(to new: QueueRecord)
-
-    func didAddRecordToWaiting(toWaiting record: QueueRecord)
-    func didRemoveRecordFromWaiting(record: QueueRecord)
-}
-
-protocol RestaurantQueueLogic: QueueStorageSyncDelegate, QueueOpenCloseSyncDelegate {
+protocol RestaurantQueueLogic: QueueStorageSyncDelegate {
     var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
 
     var queueStorage: RestaurantQueueStorage { get }

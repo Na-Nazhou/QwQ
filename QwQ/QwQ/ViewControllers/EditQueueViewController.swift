@@ -20,10 +20,6 @@ class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewCo
 
     var record: Record?
 
-    var queueRecord: QueueRecord? {
-        CustomerQueueLogicManager.shared().currentQueueRecord
-    }
-
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -34,19 +30,21 @@ class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewCo
             let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
             let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
                 showMessage(title: Constants.errorTitle,
-                            message: "Invalid data",
+                            message: "Missing fields",
                             buttonText: Constants.okayTitle,
                             buttonAction: nil)
                 return
         }
 
         spinner = showSpinner(onView: view)
+
         // Edit existing queue record
-        if queueRecord != nil {
+        if let queueRecord = record as? QueueRecord {
             CustomerQueueLogicManager.shared()
-            .editQueueRecord(with: groupSize,
-                             babyChairQuantity: babyChairQuantity,
-                             wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+                .editQueueRecord(oldRecord: queueRecord,
+                                 with: groupSize,
+                                 babyChairQuantity: babyChairQuantity,
+                                 wheelchairFriendly: wheelchairFriendlySwitch.isOn)
             return
         }
 
@@ -77,15 +75,9 @@ class EditQueueViewController: UIViewController, QueueDelegate, EditRecordViewCo
     }
 
     private func setUpViews() {
-        // Editing an existing queue record
-        if let queueRecord = queueRecord {
-            restaurantNameLabel.text = queueRecord.restaurant.name
-            nameTextField.text = queueRecord.customer.name
-            contactTextField.text = queueRecord.customer.contact
-
-            groupSizeTextField.text = String(queueRecord.groupSize)
-            babyChairQuantityTextField.text = String(queueRecord.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = queueRecord.wheelchairFriendly
+        // Set up an existing queue record
+        if let queueRecord = record as? QueueRecord {
+            setUpRecordView()
         } else {
             guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
                 return
