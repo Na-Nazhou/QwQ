@@ -14,6 +14,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
+    typealias Profile = FBProfileStorage
     typealias Auth = FBAuthenticator
 
     var spinner: UIView?
@@ -73,8 +74,14 @@ class SignUpViewController: UIViewController {
     }
 
     private func authCompleted() {
-        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+        Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
+                                errorHandler: handleError(error:))
+    }
+
+    private func getCustomerInfoComplete(customer: Customer) {
+        CustomerPostLoginSetupManager.setUp(asIdentity: customer)
         removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
     private func handleError(error: Error) {

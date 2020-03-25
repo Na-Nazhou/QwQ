@@ -36,6 +36,7 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
         }
         setUpRecordView()
         datePicker.date = bookRecord.time
+        datePicker.isEnabled = false
 
         Profile.getCustomerProfilePic(uid: bookRecord.restaurant.uid, placeholder: profileImageView)
     }

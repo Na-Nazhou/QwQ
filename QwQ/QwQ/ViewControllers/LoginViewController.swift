@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class LoginViewController: UIViewController {
 
@@ -15,7 +16,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet weak var facebookButton: UIView!
+    @IBOutlet private var facebookButton: UIView!
     
     var spinner: UIView?
 
@@ -28,6 +29,9 @@ class LoginViewController: UIViewController {
         } else {
             removeSpinner(spinner)
         }
+
+        let loginButton = FBLoginButton(permissions: [ .publicProfile, .email ])
+        facebookButton.addSubview(loginButton)
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
