@@ -1,5 +1,5 @@
 class Collection<T: Hashable> {
-    private(set) var elements = Set<T>()
+    var elements = Set<T>()
 
     var size: Int {
         elements.count
@@ -14,6 +14,11 @@ class Collection<T: Hashable> {
         let origSize = size
         elements = elements.union(Set(newElements))
         return size > origSize
+    }
+
+    func remove(_ element: T) -> Bool {
+        let removed = elements.remove(element)
+        return removed != nil
     }
     
     func reset() {
