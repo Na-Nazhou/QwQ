@@ -7,21 +7,20 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, RecordViewController {
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var contactLabel: UILabel!
-    @IBOutlet var groupSizeLabel: UILabel!
-    @IBOutlet var babyChairQuantityLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+class BookRecordViewController: RecordViewController {
+
     @IBOutlet var datePicker: UIDatePicker!
-    @IBOutlet var actionButton: UIButton!
+    
+    override func setUpViews() {
+        super.setUpViews()
+        guard let bookRecord = record as? BookRecord else {
+            return
+        }
 
-    var record: Record?
+        datePicker.date = bookRecord.time
+    }
 
-    var spinner: UIView?
-
-    @IBAction private func handleAdmit(_ sender: Any) {
+    @IBAction override func handleAdmit(_ sender: Any) {
         guard let bookRecord = record as? BookRecord else {
             return
         }
@@ -31,7 +30,7 @@ class BookRecordViewController: UIViewController, RecordViewController {
                            completion: self.didUpdateRecord)
     }
 
-    @IBAction private func handleServe(_ sender: Any) {
+    @IBAction override func handleServe(_ sender: Any) {
         guard let bookRecord = record as? BookRecord else {
             return
         }
@@ -42,53 +41,14 @@ class BookRecordViewController: UIViewController, RecordViewController {
 
     }
 
-    func didUpdateRecord() {
-        removeSpinner(spinner)
-        handleBack()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpViews()
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
-    }
-    
-    private func setUpViews() {
-        guard let bookRecord = record as? BookRecord else {
+    // TODO
+    @IBAction override func handleReject(_ sender: Any) {
+        guard let queueRecord = record as? BookRecord else {
             return
         }
-    
-        setUpRecordView()
-        datePicker.date = bookRecord.time
-
-        if bookRecord.isPendingAdmission {
-            setUpAdmitButton()
-        }
-
-        if bookRecord.isAdmitted {
-            setUpServeButton()
-        }
-
-        if bookRecord.isHistoryRecord {
-            hideActionButton()
-        }
-    }
-
-    private func setUpAdmitButton() {
-        actionButton.setTitle("ADMIT", for: .normal)
-        actionButton.addTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
-    }
-
-    private func setUpServeButton() {
-        actionButton.setTitle("SERVE", for: .normal)
-        actionButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
-    }
-
-    private func hideActionButton() {
-        actionButton.isHidden = true
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantQueueLogicManager.shared()
+            .rejectCustomer(record: queueRecord,
+                            completion: self.didUpdateRecord)
     }
 }
