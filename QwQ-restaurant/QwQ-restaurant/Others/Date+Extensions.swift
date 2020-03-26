@@ -9,8 +9,10 @@ import Foundation
 
 extension Date {
     func getDateOf(daysBeforeDate numDays: Int) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: self)
         let dayComponent = DateComponents(day: -numDays)
-        let date = Calendar.current.date(byAdding: dayComponent, to: self) ?? self
+        let date = calendar.date(byAdding: dayComponent, to: startOfDay) ?? self
         return date
     }
 
