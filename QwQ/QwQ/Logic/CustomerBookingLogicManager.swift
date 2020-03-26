@@ -13,7 +13,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     var bookingStorage: CustomerBookingStorage
 
     // View controller
-    weak var bookingDelegate: BookingDelegate?
+    weak var bookingDelegate: RecordDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
@@ -91,7 +91,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         currentBookRecords.insert(newRecord)
 
         bookingStorage.registerListener(for: newRecord)
-        bookingDelegate?.didAddBookRecord()
+        bookingDelegate?.didAddRecord()
     }
 
     func editBookRecord(oldRecord: BookRecord,
@@ -108,7 +108,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly)
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
-            self.bookingDelegate?.didUpdateBookRecord()
+            self.bookingDelegate?.didUpdateRecord()
         })
     }
 

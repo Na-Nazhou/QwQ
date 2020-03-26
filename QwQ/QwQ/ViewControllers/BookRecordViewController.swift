@@ -7,33 +7,16 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, RecordViewController {
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var contactLabel: UILabel!
-    @IBOutlet var groupSizeLabel: UILabel!
-    @IBOutlet var locationLabel: UILabel!
-    @IBOutlet var babyChairQuantityLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+class BookRecordViewController: RecordViewController {
+
     @IBOutlet var datePicker: UIDatePicker!
-
-    var record: Record?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpViews()
-    }
     
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
-    }
-    
-    private func setUpViews() {
+    override func setUpViews() {
+        super.setUpViews()
+
         guard let bookRecord = record as? BookRecord else {
             return
         }
-        setUpRecordView()
         datePicker.date = bookRecord.time
     }
 }

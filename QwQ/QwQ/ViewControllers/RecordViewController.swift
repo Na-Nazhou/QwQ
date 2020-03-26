@@ -7,20 +7,28 @@
 
 import UIKit
 
-protocol RecordViewController: UIViewController {
-    var nameLabel: UILabel! { get set }
-    var contactLabel: UILabel! { get set }
-    var locationLabel: UILabel! { get set }
-    var groupSizeLabel: UILabel! { get set }
-    var babyChairQuantityLabel: UILabel! { get set }
-    var profileImageView: UIImageView! { get set }
-    var wheelchairFriendlySwitch: UISwitch! { get set }
+class RecordViewController: UIViewController {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var contactLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var groupSizeLabel: UILabel!
+    @IBOutlet var babyChairQuantityLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
 
-    var record: Record? { get set }
-}
+    var record: Record?
 
-extension RecordViewController {
-    func setUpRecordView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setUpViews()
+    }
+
+    @IBAction func handleBack(_ sender: Any) {
+        handleBack()
+    }
+
+    func setUpViews() {
         if let record = record {
             nameLabel.text = record.restaurant.name
             contactLabel.text = record.restaurant.contact
@@ -31,5 +39,4 @@ extension RecordViewController {
             FBProfileStorage.getCustomerProfilePic(uid: record.restaurant.uid, placeholder: profileImageView)
         }
     }
-
 }

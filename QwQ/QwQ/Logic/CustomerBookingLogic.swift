@@ -13,7 +13,7 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
     var bookingStorage: CustomerBookingStorage { get set }
 
     // View Controllers
-    var bookingDelegate: BookingDelegate? { get set }
+    var bookingDelegate: RecordDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
     func addBookRecord(to restaurant: Restaurant,
