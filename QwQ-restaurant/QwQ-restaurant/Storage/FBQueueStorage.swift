@@ -18,9 +18,9 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
 
     private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
-        //listen to restaurant's queue document for 'today'
-        //assuming users will restart app everyday
-        let today = Date().toDateStringWithoutTime()
+        // listen to restaurant's queue document for 'today'
+        // assuming users will restart app everyday
+        let today = Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat)
         db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
             .collection(today)
@@ -34,7 +34,7 @@ class FBQueueStorage: RestaurantQueueStorage {
                     switch diff.type {
                     case .added:
                         print("\n\tfound new q\n")
-                        completion = { self.logicDelegate?.didUpdateQueueRecord($0) }
+                        completion = { self.logicDelegate?.didAddQueueRecord($0) }
                     case .modified:
                         completion = { self.logicDelegate?.didUpdateQueueRecord($0) }
                     case .removed:
@@ -52,7 +52,6 @@ class FBQueueStorage: RestaurantQueueStorage {
                 }
             }
 
-        //listen to restaurant's profile
         db.collection(Constants.restaurantsDirectory).document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {
@@ -65,7 +64,7 @@ class FBQueueStorage: RestaurantQueueStorage {
                     return
                 }
                 // regardless of change, contact delegate it has changed.
-                self.queueModificationLogicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
+                self.logicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
             }
     }
 
@@ -88,7 +87,7 @@ class FBQueueStorage: RestaurantQueueStorage {
             .document(oldRecord.id)
             .setData(newRecord.dictionary) { _ in
                 completion()
-        }
+            }
     }
 
     func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant) {
@@ -110,7 +109,7 @@ class FBQueueStorage: RestaurantQueueStorage {
                                   completion: @escaping (QueueRecord?) -> Void) {
         db.collection(Constants.queuesDirectory)
             .document(restaurant.uid)
-            .collection(Date().toDateStringWithoutTime())
+            .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
             .getDocuments { (queueSnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -122,7 +121,8 @@ class FBQueueStorage: RestaurantQueueStorage {
                     }
                     FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
                         guard let rec = QueueRecord(dictionary: document.data(),
-                                                    customer: customer, restaurant: restaurant,
+                                                    customer: customer,
+                                                    restaurant: restaurant,
                                                     id: document.documentID) else {
                                                         return
                         }

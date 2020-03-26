@@ -8,7 +8,7 @@
 import UIKit
 
 class PopoverContentController: UIViewController {
-    let sortCriteria = ["Car", "Bike", "Bus", "Van", "bicycle"]
+    let sortCriteria = Constants.sortCriteria
     var delegate: PopoverContentControllerDelegate?
     
     override func viewDidLoad() {

@@ -66,7 +66,7 @@ class FBQueueStorage: CustomerQueueStorage {
             for document in querySnapshot!.documents {
                 let restaurantQueuesToday = self.db.collection(Constants.queuesDirectory)
                     .document(document.documentID)
-                    .collection(Date().toDateStringWithoutTime())
+                    .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
                 restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
                     if let err = err {
                         print("Error getting documents: \(err)")
@@ -94,7 +94,8 @@ class FBQueueStorage: CustomerQueueStorage {
                 for numDaysAgo in 0...6 {
                     let rQueue = self.db.collection(Constants.queuesDirectory)
                         .document(document.documentID)
-                        .collection(Date().getDateOf(daysBeforeDate: numDaysAgo).toDateStringWithoutTime())
+                        .collection(Date.getFormattedDate(date: Date().getDateOf(daysBeforeDate: numDaysAgo),
+                                                          format: Constants.recordDateFormat))
                     rQueue.getDocuments { (queueSnapshot, err) in
                         if let err = err {
                             print("Error getting documents: \(err)")

@@ -21,7 +21,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     private(set) var waiting = RestaurantQueue()
 
     var queueRecords: [Record] {
-        Array(queue.queue)
+        queue.queue.records
     }
     
     var isQueueOpen: Bool {
@@ -77,6 +77,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         let time = currentTime()
         var new = restaurant
         new.queueCloseTime = time
+
         queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
     }
 

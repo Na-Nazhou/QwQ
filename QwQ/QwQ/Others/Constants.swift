@@ -78,11 +78,13 @@ struct Constants {
     static let restaurantReuseIdentifier = "restaurantCell"
     static let activitiesReuseIdentifier = "activityCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
+    static let restaurantCellHeight = CGFloat(270)
     
     // MARK: Popover content settings
     static let popoverContentControllerIdentifier = "PopoverContentController"
     static let popoverContentControllerOffset = CGFloat(20)
     static let popoverContentReuseIdentifier = "popoverContentCell"
+    static let sortCriteria = ["Name", "Location"]
     
     // MARK: Segmented control settings
     static let segmentedControlTitles = ["Active", "History"]
@@ -103,4 +105,7 @@ struct Constants {
     static let spinnerViewBackgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
     static let spinnerViewFrame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
     static let spinnerViewColor = UIColor.white
+    
+    // MARK: Record settings
+    static let recordDateFormat = "ddMMyyyy"
 }

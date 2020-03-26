@@ -17,7 +17,7 @@ struct QueueRecord: Record {
     let rejectTime: Date?
 
     var startDate: String {
-        startTime.toDateStringWithoutTime()
+        Date.getFormattedDate(date: startTime, format: Constants.recordDateFormat)
     }
 
     var dictionary: [String: Any] {

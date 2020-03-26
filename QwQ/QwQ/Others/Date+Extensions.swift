@@ -8,12 +8,6 @@
 import Foundation
 
 extension Date {
-    func toDateStringWithoutTime() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "ddMMyyyy"
-        return formatter.string(from: self)
-    }
-
     func getDateOf(daysBeforeDate numDays: Int) -> Date {
         let dayComponent = DateComponents(day: -numDays)
         let date = Calendar.current.date(byAdding: dayComponent, to: self) ?? self
@@ -24,5 +18,11 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         return formatter.string(from: self)
+    }
+    
+    static func getFormattedDate(date: Date, format: String) -> String {
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = format
+        return dateformat.string(from: date)
     }
 }

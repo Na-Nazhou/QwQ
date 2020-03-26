@@ -10,7 +10,6 @@ import FirebaseStorage
 import SDWebImage
 
 extension UIImageView {
-
     func checkCacheThenSetImage(with reference: StorageReference, placeholder: UIImage? = nil) {
         sd_setImage(with: reference, placeholderImage: placeholder) { [weak self] image, _, _, _ in
             reference.getMetadata { metadata, _ in
@@ -28,5 +27,4 @@ extension UIImageView {
             }
         }
     }
-
 }

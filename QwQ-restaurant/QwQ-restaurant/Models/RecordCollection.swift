@@ -19,6 +19,7 @@ class RecordCollection<T: Record & Hashable>: Collection<T> {
             assert(false, "Update should mean record already existed.")
             return (true, nil)
         }
-        return (!rec.completelyIdentical(to: old!), old)
+        // TODO
+        return (true, old)
     }
 }

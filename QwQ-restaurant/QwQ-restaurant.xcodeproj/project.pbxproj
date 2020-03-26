@@ -36,17 +36,19 @@
 		6148055E2422A3B7003D6D44 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148055D2422A3B7003D6D44 /* Record.swift */; };
 		61ACB7E7242A5AEB002A1F47 /* QueueStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7E6242A5AEB002A1F47 /* QueueStorageSyncDelegate.swift */; };
 		61ACB7EA242A5C9D002A1F47 /* RestaurantQueueLogicPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7E9242A5C9D002A1F47 /* RestaurantQueueLogicPresentationDelegate.swift */; };
-		61ACB7FC242A9539002A1F47 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7FB242A9539002A1F47 /* Collection.swift */; };
 		61ACB7FE242B1C3A002A1F47 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */; };
 		61ACB800242B277D002A1F47 /* RestaurantBookingLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7FF242B277D002A1F47 /* RestaurantBookingLogic.swift */; };
 		61ACB802242B2795002A1F47 /* RestaurantBookingLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB801242B2795002A1F47 /* RestaurantBookingLogicManager.swift */; };
 		61ACB804242B27AE002A1F47 /* RestaurantBookingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB803242B27AE002A1F47 /* RestaurantBookingStorage.swift */; };
 		61ACB806242B27BB002A1F47 /* FBBookingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB805242B27BB002A1F47 /* FBBookingStorage.swift */; };
 		61ACB808242B27DA002A1F47 /* BookingStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB807242B27DA002A1F47 /* BookingStorageSyncDelegate.swift */; };
+		61C868AA242C562000CC6B9A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C868A9242C561F00CC6B9A /* Collection.swift */; };
 		7E11380024234828006984BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FF24234828006984BB /* SegmentedControl.swift */; };
 		7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821B242B48530019A8A2 /* EmailVerification.storyboard */; };
 		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
-		7E53E2BA241F60A60047C40F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */; };
+		7E428226242B94F00019A8A2 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428225242B94EF0019A8A2 /* Statistics.swift */; };
+		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
@@ -138,16 +140,18 @@
 		6148055D2422A3B7003D6D44 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		61ACB7E6242A5AEB002A1F47 /* QueueStorageSyncDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueStorageSyncDelegate.swift; sourceTree = "<group>"; };
 		61ACB7E9242A5C9D002A1F47 /* RestaurantQueueLogicPresentationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogicPresentationDelegate.swift; sourceTree = "<group>"; };
-		61ACB7FB242A9539002A1F47 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollection.swift; sourceTree = "<group>"; };
 		61ACB7FF242B277D002A1F47 /* RestaurantBookingLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantBookingLogic.swift; sourceTree = "<group>"; };
 		61ACB801242B2795002A1F47 /* RestaurantBookingLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantBookingLogicManager.swift; path = "/Users/nazhouna/Documents/NUS/Y2S2/CS3217/2020-fp-qwq/QwQ-restaurant/QwQ-restaurant/Logic/RestaurantBookingLogicManager.swift"; sourceTree = "<absolute>"; };
 		61ACB803242B27AE002A1F47 /* RestaurantBookingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantBookingStorage.swift; sourceTree = "<group>"; };
 		61ACB805242B27BB002A1F47 /* FBBookingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBBookingStorage.swift; sourceTree = "<group>"; };
 		61ACB807242B27DA002A1F47 /* BookingStorageSyncDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingStorageSyncDelegate.swift; sourceTree = "<group>"; };
+		61C868A9242C561F00CC6B9A /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7E42821B242B48530019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
+		7E428225242B94EF0019A8A2 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -388,7 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				7EE6D02E241E3CAA00C1465E /* RecordCell.swift */,
-				7EE6D02E241E3CAA00C1465E /* RecordCell.swift */,
 				7EAC34D6242B3D110088D00F /* StatisticsCell.swift */,
 				7E53E2C1241F74990047C40F /* ProfileImageView.swift */,
 				7E1137FF24234828006984BB /* SegmentedControl.swift */,
@@ -425,6 +428,7 @@
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
 				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
 				5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */,
+				7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */,
 				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
 				5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */,
 				D453E3A7242368A0005FA25F /* Date+Extensions.swift */,
@@ -436,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */,
+				7E428225242B94EF0019A8A2 /* Statistics.swift */,
 				D4EA85EA241B2C65009EB85B /* RestaurantQueue.swift */,
 				D4EA85EB241B2C65009EB85B /* SharedModels */,
 			);
@@ -445,10 +450,10 @@
 		D4EA85EB241B2C65009EB85B /* SharedModels */ = {
 			isa = PBXGroup;
 			children = (
-				61ACB7FB242A9539002A1F47 /* Collection.swift */,
 				D4EA85ED241B2C65009EB85B /* User.swift */,
 				7EE6D032241E3EAC00C1465E /* Customer.swift */,
 				D4EA85EF241B2C65009EB85B /* Restaurant.swift */,
+				61C868A9242C561F00CC6B9A /* Collection.swift */,
 				6148055D2422A3B7003D6D44 /* Record.swift */,
 				D4D329CC2426184300F2A5A5 /* RecordModification.swift */,
 				D4EA85EE241B2C65009EB85B /* QueueRecord.swift */,
@@ -756,14 +761,17 @@
 				D4EA85F8241B2CA7009EB85B /* RestaurantQueueLogic.swift in Sources */,
 				61ACB800242B277D002A1F47 /* RestaurantBookingLogic.swift in Sources */,
 				61ACB804242B27AE002A1F47 /* RestaurantBookingStorage.swift in Sources */,
+				7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */,
 				7E72B1A2241CA55100C1EE72 /* ProfileViewController.swift in Sources */,
 				5C4B5740242B3AB1007E4240 /* RecordViewController.swift in Sources */,
 				5C1A419524236BEF00D1140B /* CustomerInfoStorage.swift in Sources */,
+				61C868AA242C562000CC6B9A /* Collection.swift in Sources */,
+				7E428226242B94F00019A8A2 /* Statistics.swift in Sources */,
 				5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,
 				D4D329CD2426184300F2A5A5 /* RecordModification.swift in Sources */,
-				7E53E2BA241F60A60047C40F /* BuildFile in Sources */,
+				7E53E2BA241F60A60047C40F /* (null) in Sources */,
 				7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				5C2CB13524248918003AFC6C /* UIViewController+Spinner.swift in Sources */,
@@ -777,7 +785,6 @@
 				7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */,
 				7E11380024234828006984BB /* SegmentedControl.swift in Sources */,
 				5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
-				61ACB7FC242A9539002A1F47 /* Collection.swift in Sources */,
 				7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */,
 				7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */,
 				D440FC16241F9D1100606681 /* FBQueueStorage.swift in Sources */,

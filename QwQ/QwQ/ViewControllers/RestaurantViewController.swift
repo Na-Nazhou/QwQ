@@ -53,7 +53,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
     
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
     
     private func setUpViews() {

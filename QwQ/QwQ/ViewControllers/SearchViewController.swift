@@ -10,8 +10,11 @@ import UIKit
 class SearchViewController: UIViewController, SearchDelegate {
     
     private var filter: (Restaurant) -> Bool = { _ in true }
+    private var sorter: (Restaurant, Restaurant) -> Bool = { _, _  in true }
     private var filtered: [Restaurant] {
-        restaurants.filter(filter)
+        var finalRestaurants = restaurants.filter(filter)
+        finalRestaurants.sort(by: sorter)
+        return finalRestaurants
     }
     private var searchActive: Bool = false
     private let searchController = UISearchController(searchResultsController: nil)
@@ -90,7 +93,26 @@ class SearchViewController: UIViewController, SearchDelegate {
 
 extension SearchViewController: PopoverContentControllerDelegate {
     func popoverContent(controller: PopoverContentController, didselectItem name: String) {
-        print("pop")
+        switch name {
+        case Constants.sortCriteria[0]:
+            handleSortByName()
+        case Constants.sortCriteria[1]:
+            handleSortByLocation()
+        default:
+            break
+        }
+    }
+    
+    private func handleSortByName() {
+        sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
+            restaurant.name < otherRestaurant.name
+        }
+    }
+    
+    private func handleSortByLocation() {
+        sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
+            restaurant.address < otherRestaurant.address
+        }
     }
 }
 
@@ -146,7 +168,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filtered.count
-        //restaurants.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -184,4 +205,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
     }
+}
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
+  }
 }

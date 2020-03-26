@@ -20,15 +20,12 @@ class QueueRecordViewController: UIViewController, RecordViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
 
-=======
->>>>>>> master
         setUpViews()
     }
     
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
 
     private func setUpViews() {
