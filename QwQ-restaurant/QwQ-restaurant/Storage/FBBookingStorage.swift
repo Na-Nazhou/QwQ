@@ -21,8 +21,14 @@ class FBBookingStorage: RestaurantBookingStorage {
     private func registerListenerForBooking(restaurant: Restaurant) {
         // listen to restaurant's queue document for 'today'
         // assuming users will restart app everyday
+        let date = Date() // current date or replace with a specific date
+        let calendar = Calendar.current
+        let startTime = calendar.startOfDay(for: date)
+        let endTime = calendar.date(byAdding: .day, value: 1, to: startTime)!
         db.collection(Constants.bookingsDirectory)
             .whereField("restaurant", isEqualTo: restaurant.uid)
+            .whereField("time", isGreaterThanOrEqualTo: startTime)
+            .whereField("time", isLessThanOrEqualTo: endTime)
             .addSnapshotListener { (queueSnapshot, err) in
                 if let err = err {
                     print("Error fetching documents: \(err)")

@@ -218,9 +218,9 @@ extension RestaurantQueueLogicManager {
     }
 
     func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord,
-                           completion: @escaping () -> Void) {
+                          completion: @escaping () -> Void) {
         bookingStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
-                                  completion: completion)
+                                    completion: completion)
     }
 
     func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {

@@ -6,9 +6,7 @@
 //
 
 protocol BookingStorageSync {
-
     var logicDelegate: BookingStorageSyncDelegate? { get set }
-
 }
 
 protocol RestaurantBookingStorage: BookingStorageSync {
