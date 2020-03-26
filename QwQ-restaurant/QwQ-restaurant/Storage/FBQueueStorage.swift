@@ -101,34 +101,4 @@ class FBQueueStorage: RestaurantQueueStorage {
             .document(old.uid)
             .setData(new.dictionary)
     }
-    
-    private func loadQueueRecords(of restaurant: Restaurant,
-                                  where condition: @escaping (QueueRecord) -> Bool,
-                                  completion: @escaping (QueueRecord?) -> Void) {
-        db.collection(Constants.queuesDirectory)
-            .document(restaurant.uid)
-            .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
-            .getDocuments { (queueSnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                    return
-                }
-                for document in queueSnapshot!.documents {
-                    guard let cid = document.data()["customer"] as? String else {
-                        return
-                    }
-                    FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-                        guard let rec = QueueRecord(dictionary: document.data(),
-                                                    customer: customer,
-                                                    restaurant: restaurant,
-                                                    id: document.documentID) else {
-                                                        return
-                        }
-                        if condition(rec) {
-                            completion(rec)
-                        }
-                    }, errorHandler: nil)
-                }
-            }
-    }
 }

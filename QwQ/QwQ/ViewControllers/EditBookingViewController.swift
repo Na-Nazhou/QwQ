@@ -7,24 +7,11 @@
 
 import UIKit
 
-class EditBookingViewController: UIViewController, BookingDelegate, EditRecordViewController {
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var contactTextField: UITextField!
-    @IBOutlet var groupSizeTextField: UITextField!
-    @IBOutlet var babyChairQuantityTextField: UITextField!
+class EditBookingViewController: EditRecordViewController, RecordDelegate {
+
     @IBOutlet var datePicker: UIDatePicker!
-    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
-    @IBOutlet var restaurantNameLabel: UILabel!
 
-    var spinner: UIView?
-    
-    var record: Record?
-
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
-    }
-
-    @IBAction private func handleSubmit(_ sender: Any) {
+    @IBAction override func handleSubmit(_ sender: Any) {
         guard let groupSizeText = groupSizeTextField.text,
                 let babyChairQueantityText = babyChairQuantityTextField.text,
                 let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
@@ -65,72 +52,18 @@ class EditBookingViewController: UIViewController, BookingDelegate, EditRecordVi
         super.viewDidLoad()
 
         CustomerBookingLogicManager.shared().bookingDelegate = self
-        
-        self.registerObserversForKeyboard()
-        self.hideKeyboardWhenTappedAround()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setUpViews()
-    }
-    
-    private func setUpViews() {
+
+    override func setUpViews() {
+        super.setUpViews()
         // Editing an existing book record
         if let bookRecord = record as? BookRecord {
-            setUpRecordView()
             datePicker.date = bookRecord.time
         } else {
-            guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
-                return
-            }
-            restaurantNameLabel.text = restaurant.name
-            
-            // Autofill the name and contact
-            nameTextField.text = CustomerQueueLogicManager.shared().customer.name
-            contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
-
             // TODO: allow restaurants to set this
             let minDate = Date()
             datePicker.minimumDate = minDate
             datePicker.date = minDate
-
-            wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
-            babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }
-        
-        // Disable name and contact fields
-        nameTextField.isEnabled = false
-        contactTextField.isEnabled = false
-    }
-    
-    // TODO: go to activities view controller instead
-    func goBack() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func didAddBookRecord() {
-        removeSpinner(spinner)
-        showMessage(
-            title: Constants.successTitle,
-            message: Constants.bookRecordCreateSuccessMessage,
-            buttonText: Constants.okayTitle,
-            buttonAction: {_ in
-                self.goBack()
-            }
-        )
-    }
-    
-    func didUpdateBookRecord() {
-        removeSpinner(spinner)
-        showMessage(
-            title: Constants.successTitle,
-            message: Constants.bookRecordUpdateSuccessMessage,
-            buttonText: Constants.okayTitle,
-            buttonAction: {_ in
-                self.goBack()
-            }
-        )
     }
 }

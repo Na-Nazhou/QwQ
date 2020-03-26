@@ -16,9 +16,9 @@ protocol Record {
     var babyChairQuantity: Int { get }
     var wheelchairFriendly: Bool { get }
 
-    var admitTime: Date? { get }
-    var serveTime: Date? { get }
-    var rejectTime: Date? { get }
+    var admitTime: Date? { get set }
+    var serveTime: Date? { get set }
+    var rejectTime: Date? { get set }
 }
 
 extension Record {

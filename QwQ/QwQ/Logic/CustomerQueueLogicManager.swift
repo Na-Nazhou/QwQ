@@ -6,7 +6,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     var queueStorage: CustomerQueueStorage
 
     // View Controller
-    weak var queueDelegate: QueueDelegate?
+    weak var queueDelegate: RecordDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
@@ -97,7 +97,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         newRecord.id = id
         currentQueueRecord = newRecord
 
-        queueDelegate?.didAddQueueRecord()
+        queueDelegate?.didAddRecord()
     }
 
     func editQueueRecord(oldRecord: QueueRecord,
@@ -121,7 +121,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     startTime: oldRecord.startTime)
 
         queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
-            self.queueDelegate?.didUpdateQueueRecord()
+            self.queueDelegate?.didUpdateRecord()
         })
     }
 

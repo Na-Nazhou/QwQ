@@ -56,8 +56,12 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
+        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTimestamp = Timestamp(date: startTime)
+        print(startTime.toString())
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
+            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -74,8 +78,12 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
+        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTimestamp = Timestamp(date: startTime)
+        print(startTime.toString())
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
+            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                 print("Error getting documents: \(err)")
