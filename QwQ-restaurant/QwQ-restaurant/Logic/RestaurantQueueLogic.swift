@@ -1,12 +1,8 @@
-protocol RestaurantQueueLogic: QueueStorageSyncDelegate {
+protocol RestaurantQueueLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
     var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
 
     var queueStorage: RestaurantQueueStorage { get }
 
-    /// Loads the active queue records of the restaurant.
-    func fetchCurrent()
-    /// Loads the list of customers the restaurant is waiting to turn up after being admitted.
-    func fetchWaiting()
     /// Opens queue anfethadd registers the opening time of the restaurant as the current time.
     func openQueue()
     /// Closes queue and registers the closing time of the restaurant as the current time.

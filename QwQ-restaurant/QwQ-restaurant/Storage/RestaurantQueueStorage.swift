@@ -13,9 +13,4 @@ protocol RestaurantQueueStorage: QueueStorageSync {
 
     func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
                       completion: @escaping () -> Void)
-
-    // MARK: - Query
-    func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void)
-    func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void)
-    func loadHistory(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void)
 }

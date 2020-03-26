@@ -236,8 +236,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="dME-ra-9SM"/>
                     <connections>
+                        <outlet property="actionButton" destination="fKg-B1-LeK" id="bze-iP-Qvw"/>
                         <outlet property="babyChairQuantityLabel" destination="CRN-iu-bho" id="hOg-R4-7Wc"/>
                         <outlet property="contactLabel" destination="C1t-JD-k3u" id="QUW-aW-Fvs"/>
+                        <outlet property="datePicker" destination="Egu-Av-Wkh" id="fdb-yg-4wD"/>
                         <outlet property="groupSizeLabel" destination="vEM-qQ-X16" id="e6z-6P-2a7"/>
                         <outlet property="nameLabel" destination="6pF-OP-fhU" id="ufK-6R-bgR"/>
                         <outlet property="profileImageView" destination="maW-6S-1mc" id="4hD-xd-rsX"/>

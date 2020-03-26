@@ -12,5 +12,6 @@ protocol BookingStorageSync {
 }
 
 protocol RestaurantBookingStorage: BookingStorageSync {
-    
+    func updateRecord(oldRecord: BookRecord, newRecord: BookRecord,
+                      completion: @escaping () -> Void)
 }
