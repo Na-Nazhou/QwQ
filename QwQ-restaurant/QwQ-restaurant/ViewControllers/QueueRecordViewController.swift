@@ -15,6 +15,7 @@ class QueueRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet var actionButton: UIButton!
+
     var record: Record?
 
     var spinner: UIView?
@@ -24,9 +25,9 @@ class QueueRecordViewController: UIViewController, RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantQueueLogicManager.shared().admitCustomer(record: queueRecord, completion: {
-            self.didUpdateQueueRecord()
-        })
+        RestaurantQueueLogicManager.shared()
+            .admitCustomer(record: queueRecord,
+                           completion: self.didUpdateQueueRecord)
     }
 
     @IBAction private func handleServe(_ sender: Any) {
@@ -34,9 +35,9 @@ class QueueRecordViewController: UIViewController, RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantQueueLogicManager.shared().serveCustomer(record: queueRecord, completion: {
-            self.didUpdateQueueRecord()
-        })
+        RestaurantQueueLogicManager.shared()
+            .serveCustomer(record: queueRecord,
+                           completion: self.didUpdateQueueRecord)
 
     }
 
@@ -46,9 +47,9 @@ class QueueRecordViewController: UIViewController, RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantQueueLogicManager.shared().rejectCustomer(record: queueRecord, completion: {
-            self.didUpdateQueueRecord()
-        })
+        RestaurantQueueLogicManager.shared()
+            .rejectCustomer(record: queueRecord,
+                            completion: self.didUpdateQueueRecord)
 
     }
 
