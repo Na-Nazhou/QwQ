@@ -1,5 +1,5 @@
 import Foundation
-class RestaurantQueueLogicManager: RestaurantQueueLogic {
+class RestaurantQueueLogicManager: RestaurantRecordLogic {
 
     // Storage
     private(set) var queueStorage: RestaurantQueueStorage
@@ -24,15 +24,45 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
     private(set) var historyBookings = RecordCollection<BookRecord>()
 
     var currentRecords: [Record] {
-        currentQueue.records + currentBookings.records
+        (currentQueue.records + currentBookings.records).sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if let queueRecord1 = record1 as? QueueRecord {
+                time1 = queueRecord1.startTime
+            } else {
+                time1 = (record1 as? BookRecord)!.time
+            }
+            if let queueRecord2 = record2 as? QueueRecord {
+                time2 = queueRecord2.startTime
+            } else {
+                time2 = (record2 as? BookRecord)!.time
+            }
+            return time1 > time2
+        })
     }
 
     var waitingRecords: [Record] {
-        waitingQueue.records + waitingBookings.records
+        (waitingQueue.records + waitingBookings.records).sorted(by: { record1, record2 in
+            record1.admitTime! > record2.admitTime!
+        })
     }
 
     var historyRecords: [Record] {
-        historyQueue.records + historyBookings.records
+        (historyQueue.records + historyBookings.records).sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if record1.isServed {
+                time1 = record1.serveTime!
+            } else {
+                time1 = record1.rejectTime!
+            }
+            if record2.isServed {
+                time2 = record2.serveTime!
+            } else {
+                time2 = record2.rejectTime!
+            }
+            return time1 > time2
+        })
     }
     
     var isQueueOpen: Bool {

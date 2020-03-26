@@ -1,4 +1,4 @@
-protocol RestaurantQueueLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
+protocol RestaurantRecordLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
     var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
 
     var queueStorage: RestaurantQueueStorage { get }

@@ -43,27 +43,11 @@ class ActivitiesViewController: UIViewController {
     }
 
     var waitingRecords: [Record] {
-        RestaurantQueueLogicManager.shared().waitingRecords.sorted(by: { record1, record2 in
-            record1.admitTime! > record2.admitTime!
-        })
+        RestaurantQueueLogicManager.shared().waitingRecords
     }
 
     var historyRecords: [Record] {
-        RestaurantQueueLogicManager.shared().historyRecords.sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if record1.isServed {
-                time1 = record1.serveTime!
-            } else {
-                time1 = record1.rejectTime!
-            }
-            if record2.isServed {
-                time2 = record2.serveTime!
-            } else {
-                time2 = record2.rejectTime!
-            }
-            return time1 > time2
-        })
+        RestaurantQueueLogicManager.shared().historyRecords
     }
 
     override func viewDidLoad() {
@@ -75,7 +59,6 @@ class ActivitiesViewController: UIViewController {
         recordCollectionView.dataSource = self
 
         RestaurantQueueLogicManager.shared().presentationDelegate = self
-        // TODO: set delegate for BookingLogicManager
         
         filtered = records
         setUpSegmentedControl()

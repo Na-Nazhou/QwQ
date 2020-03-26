@@ -36,7 +36,21 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     var historyRecords: [Record] {
         let bookRecords = CustomerBookingLogicManager.shared().pastBookRecords
         let queueRecords = CustomerQueueLogicManager.shared().pastQueueRecords
-        return bookRecords + queueRecords
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if record1.isServed {
+                time1 = record1.serveTime!
+            } else {
+                time1 = record1.rejectTime!
+            }
+            if record2.isServed {
+                time2 = record2.serveTime!
+            } else {
+                time2 = record2.rejectTime!
+            }
+            return time1 > time2
+        })
     }
     
     override func viewDidLoad() {

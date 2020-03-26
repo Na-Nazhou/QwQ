@@ -42,9 +42,11 @@ class RecordCell: UICollectionViewCell {
         case .pendingAdmission:
             if let queueRecord = record as? QueueRecord {
                 statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+                timeLabel.text = "00:00"
             }
             if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Time: \(bookRecord.time.toString())"
+                statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
+                timeLabel.text = bookRecord.time.getFormattedTime()
             }
             timeLabel.textColor = .systemGreen
             setUpAdmitButton()
@@ -52,7 +54,11 @@ class RecordCell: UICollectionViewCell {
             showButtons()
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-            timeLabel.text = record.admitTime!.getFormattedTime()
+            if let bookRecord = record as? BookRecord {
+                timeLabel.text = bookRecord.time.getFormattedTime()
+            } else {
+                timeLabel.text = record.admitTime!.getFormattedTime()
+            }
             timeLabel.textColor = .systemGreen
             enableReject()
             showButtons()
