@@ -46,19 +46,26 @@ class RecordCell: UICollectionViewCell {
             if let bookRecord = record as? BookRecord {
                 statusLabel.text = "Time: \(bookRecord.time.toString())"
             }
+            timeLabel.textColor = .systemGreen
             setUpAdmitButton()
             disableReject()
             showButtons()
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+            timeLabel.text = record.admitTime!.getFormattedTime()
+            timeLabel.textColor = .systemGreen
             enableReject()
             showButtons()
             setUpServeButton()
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
+            timeLabel.text = record.serveTime!.getFormattedTime()
+            timeLabel.textColor = .systemGreen
             hideButtons()
         case .rejected:
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+            timeLabel.text = record.rejectTime!.getFormattedTime()
+            timeLabel.textColor = .systemGray
             hideButtons()
         default:
             assert(false)

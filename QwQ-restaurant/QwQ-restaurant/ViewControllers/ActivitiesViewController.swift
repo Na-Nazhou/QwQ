@@ -44,11 +44,27 @@ class ActivitiesViewController: UIViewController {
     }
 
     var waitingRecords: [Record] {
-        RestaurantQueueLogicManager.shared().waitingRecords
+        RestaurantQueueLogicManager.shared().waitingRecords.sorted(by: { record1, record2 in
+            record1.admitTime! > record2.admitTime!
+        })
     }
 
     var historyRecords: [Record] {
-        RestaurantQueueLogicManager.shared().historyRecords
+        RestaurantQueueLogicManager.shared().historyRecords.sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if record1.isServed {
+                time1 = record1.serveTime!
+            } else {
+                time1 = record1.rejectTime!
+            }
+            if record2.isServed {
+                time2 = record2.serveTime!
+            } else {
+                time2 = record2.rejectTime!
+            }
+            return time1 > time2
+        })
     }
 
     override func viewDidLoad() {
@@ -193,19 +209,22 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let queueRecord = record as? QueueRecord {
             recordCell.admitAction = {
-                self.spinner = self.showSpinner(onView: self.view)
-                RestaurantQueueLogicManager.shared().admitCustomer(record: queueRecord)
+                RestaurantQueueLogicManager.shared()
+                    .admitCustomer(record: queueRecord,
+                                   completion: self.didUpdateQueueRecord)
             }
 
             if queueRecord.isAdmitted {
                 recordCell.rejectAction = {
-                    self.spinner = self.showSpinner(onView: self.view)
-                    RestaurantQueueLogicManager.shared().rejectCustomer(record: queueRecord)
+                    RestaurantQueueLogicManager.shared()
+                        .rejectCustomer(record: queueRecord,
+                                        completion: self.didUpdateQueueRecord)
                 }
 
                 recordCell.serveAction = {
-                    self.spinner = self.showSpinner(onView: self.view)
-                    RestaurantQueueLogicManager.shared().serveCustomer(record: queueRecord)
+                    RestaurantQueueLogicManager.shared()
+                        .serveCustomer(record: queueRecord,
+                                       completion: self.didUpdateQueueRecord)
                 }
             }
         }
@@ -228,7 +247,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         return recordCell
     }
-    
+
+    func didUpdateQueueRecord() {
+        filtered = records
+        recordCollectionView.reloadData()
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let record = records[indexPath.row]
         if let queueRecord = record as? QueueRecord {
@@ -242,24 +266,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
 
-    func didAdmitCustomer() {
-        removeSpinner(spinner)
-        self.filtered = self.records
-        self.recordCollectionView.reloadData()
-    }
-
-    func didServeCustomer() {
-        removeSpinner(spinner)
-        self.filtered = self.records
-        self.recordCollectionView.reloadData()
-    }
-
-    func didRejectCustomer() {
-        removeSpinner(spinner)
-        self.filtered = self.records
-        self.recordCollectionView.reloadData()
-    }
-    
     func restaurantDidChangeQueueStatus(toIsOpen: Bool) {
         if toIsOpen {
             openQueue()
@@ -267,7 +273,6 @@ extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
             closeQueue()
         }
     }
-
     func didUpdateCurrentList() {
         if selectedIndex == 0 {
             self.filtered = self.records

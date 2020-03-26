@@ -15,9 +15,11 @@ extension Date {
     }
 
     func toString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        return formatter.string(from: self)
+        Self.getFormattedDate(date: self, format: "yyyy-MM-dd HH:mm")
+    }
+
+    func getFormattedTime() -> String {
+        Self.getFormattedDate(date: self, format: "HH:mm")
     }
     
     static func getFormattedDate(date: Date, format: String) -> String {

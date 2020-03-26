@@ -130,32 +130,32 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
     }
 
-    func admitCustomer(record: QueueRecord) {
+    func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         // Set the serveTime of the queue record
         var new = record
         new.admitTime = currentTime()
 
         queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
-            self.presentationDelegate?.didAdmitCustomer()
+            completion()
             self.notifyCustomerOfAdmission(record: new)
         })
     }
 
-    func serveCustomer(record: QueueRecord) {
+    func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         var new = record
         new.serveTime = currentTime()
 
         queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
-            self.presentationDelegate?.didServeCustomer()
+            completion()
         })
     }
 
-    func rejectCustomer(record: QueueRecord) {
+    func rejectCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         var new = record
         new.rejectTime = currentTime()
 
         queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
-            self.presentationDelegate?.didRejectCustomer()
+            completion()
         })
     }
 
