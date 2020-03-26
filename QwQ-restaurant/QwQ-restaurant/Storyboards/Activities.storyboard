@@ -76,7 +76,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueRecordCell" id="lhN-ab-ua4" customClass="RecordCell" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="-198" y="50" width="770" height="235"/>
+                                        <rect key="frame" x="12" y="50" width="770" height="235"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
                                             <rect key="frame" x="0.0" y="0.0" width="770" height="235"/>
@@ -148,9 +148,6 @@
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
-                                                                    <connections>
-                                                                        <action selector="handleAdmit:" destination="lhN-ab-ua4" eventType="touchUpInside" id="Dsu-58-tUo"/>
-                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8B-GC-KIy">
                                                                     <rect key="frame" x="385" y="0.0" width="385" height="70.5"/>
@@ -161,9 +158,6 @@
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
-                                                                    <connections>
-                                                                        <action selector="handleReject:" destination="lhN-ab-ua4" eventType="touchUpInside" id="A38-le-6EU"/>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -237,6 +231,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nln-qZ-h8h"/>
                     <connections>
+                        <outlet property="currentWaitingControl" destination="iOb-bP-BmU" id="0Vo-XD-5pU"/>
                         <outlet property="openCloseButton" destination="Shz-l6-QAq" id="8c3-kl-HrW"/>
                         <outlet property="recordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
                         <segue destination="nN2-Nh-xwu" kind="show" identifier="queueRecordSelected" id="bsd-c0-28c"/>

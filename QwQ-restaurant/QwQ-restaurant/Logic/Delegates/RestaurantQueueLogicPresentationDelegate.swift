@@ -5,6 +5,7 @@ protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
     func didRejectCustomer()
     func didServeCustomer()
 
-    func didUpdateQueue()
+    func didUpdateCurrentList()
     func didUpdateWaitingList()
+    func didUpdateHistoryList()
 }

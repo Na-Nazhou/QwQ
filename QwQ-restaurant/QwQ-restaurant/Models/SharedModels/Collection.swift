@@ -28,6 +28,11 @@ class Collection<T: Hashable> {
         return removed != nil
     }
 
+    func update(to new: T) {
+        elements.remove(new)
+        elements.insert(new)
+    }
+
     func reset() {
         elements.removeAll()
     }

@@ -11,58 +11,107 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         self.restaurant = restaurant
 
         queueStorage = FBQueueStorage(restaurant: restaurant)
-        fetchQueue()
+        fetchCurrent()
         fetchWaiting()
+        fetchHistory()
     }
 
     private var restaurant: Restaurant
+    private(set) var current = RecordCollection<QueueRecord>()
+    private(set) var waiting = RecordCollection<QueueRecord>()
+    private(set) var history = RecordCollection<QueueRecord>()
 
-    private(set) var queue = RestaurantQueue()
-    private(set) var waiting = RestaurantQueue()
+    var currentRecords: [Record] {
+        current.records
+    }
 
-    var queueRecords: [Record] {
-        queue.queue.records
+    var waitingRecords: [Record] {
+        waiting.records
+    }
+
+    var historyRecords: [Record] {
+        history.records
     }
     
     var isQueueOpen: Bool {
         restaurant.isQueueOpen
     }
 
-    func fetchQueue() {
+    func fetchCurrent() {
         // Fetch the current queue from db
-        queueStorage.loadQueue(of: restaurant, completion: {
-            if $0 == nil {
-                return
-            }
-            let didAddNew = self.queue.addToQueue($0!)
-            if didAddNew {
-                self.presentationDelegate?.didUpdateQueue()
-            }
-        })
+        queueStorage.loadQueue(of: restaurant, completion: {_ in })
     }
 
     func fetchWaiting() {
-        queueStorage.loadWaitingList(of: restaurant, completion: {
-            if $0 == nil {
-                return
-            }
-            let didAddNew = self.queue.addToWaiting($0!)
-            if didAddNew {
-                self.presentationDelegate?.didUpdateQueue()
-            }
-        })
+        queueStorage.loadWaitingList(of: restaurant, completion: {_ in })
+    }
+
+    func fetchHistory() {
+        queueStorage.loadHistory(of: restaurant, completion: {_ in })
     }
 
     func didAddQueueRecord(_ record: QueueRecord) {
-        self.presentationDelegate?.didUpdateQueue()
+        if record.isPendingAdmission {
+            if addRecord(record, to: current) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+        }
+
+        if record.isAdmitted {
+            if addRecord(record, to: waiting) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+
+        if record.isHistoryRecord {
+            if addRecord(record, to: history) {
+                self.presentationDelegate?.didUpdateHistoryList()
+            }
+        }
+    }
+
+    func addRecord(_ record: QueueRecord, to list: RecordCollection<QueueRecord>) -> Bool {
+        list.add(record)
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
-        self.presentationDelegate?.didUpdateQueue()
+        if record.isPendingAdmission {
+            current.update(to: record)
+            self.presentationDelegate?.didUpdateCurrentList()
+        }
+
+        if record.isAdmitted {
+            if self.current.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+            if self.waiting.add(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+
+        if record.isHistoryRecord {
+            if self.waiting.remove(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+
+            if self.history.add(record) {
+                self.presentationDelegate?.didUpdateHistoryList()
+            }
+        }
     }
 
     func didDeleteQueueRecord(_ record: QueueRecord) {
-        self.presentationDelegate?.didUpdateQueue()
+        if record.isPendingAdmission {
+            if self.current.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+        }
+
+        if record.isAdmitted {
+            if self.waiting.remove(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
     }
 
     func openQueue() {
@@ -83,27 +132,31 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     func admitCustomer(record: QueueRecord) {
         // Set the serveTime of the queue record
-        let admittedRecord = updateAdmitTime(queueRecord: record)
-        queueStorage.updateRecord(oldRecord: record, newRecord: admittedRecord, completion: {
-            if self.queue.removeFromQueue(record) {
-                self.presentationDelegate?.didUpdateQueue()
-            }
-            if self.queue.addToWaiting(record) {
-                self.presentationDelegate?.didUpdateQueue()
-            }
+        var new = record
+        new.admitTime = currentTime()
 
-            self.notifyCustomerOfAdmission(record: admittedRecord)
+        queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            self.presentationDelegate?.didAdmitCustomer()
+            self.notifyCustomerOfAdmission(record: new)
         })
     }
 
     func serveCustomer(record: QueueRecord) {
-        //TODO like rejectCustomerrestau
+        var new = record
+        new.serveTime = currentTime()
+
+        queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            self.presentationDelegate?.didServeCustomer()
+        })
     }
 
     func rejectCustomer(record: QueueRecord) {
-        //TODO: when remove is allowed only at waiting list
-        // then allow reject at waiting list
-        // to be consistent with customer app model
+        var new = record
+        new.rejectTime = currentTime()
+
+        queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            self.presentationDelegate?.didRejectCustomer()
+        })
     }
 
     func notifyCustomerOfAdmission(record: QueueRecord) {
@@ -156,11 +209,5 @@ extension RestaurantQueueLogicManager {
 extension RestaurantQueueLogicManager {
     private func currentTime() -> Date {
         Date()
-    }
-
-    private func updateAdmitTime(queueRecord: QueueRecord) -> QueueRecord {
-        var updatedRec = queueRecord
-        updatedRec.admitTime = currentTime()
-        return updatedRec
     }
 }

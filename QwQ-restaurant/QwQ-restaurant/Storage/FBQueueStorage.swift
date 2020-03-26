@@ -36,23 +36,26 @@ class FBQueueStorage: RestaurantQueueStorage {
                         print("\n\tfound new q\n")
                         completion = { self.logicDelegate?.didAddQueueRecord($0) }
                     case .modified:
+                        print("\n\tfound update q\n")
                         completion = { self.logicDelegate?.didUpdateQueueRecord($0) }
                     case .removed:
                         print("\n\tcustomer deleted q themselves!\n")
                         completion = { self.logicDelegate?.didDeleteQueueRecord($0) }
                     }
 
-                    guard let customer = diff.document.data()["customer"] as? String else {
+                    guard let customerUID = diff.document.data()["customer"] as? String else {
                         assert(false, "all docs, including removed ones, should contain non empty data..?")
                         return
                     }
                     self.makeQueueRecord(
-                        data: diff.document.data(), ofQid: diff.document.documentID,
-                        forCid: customer, atRestaurant: restaurant, completion: completion)
+                        data: diff.document.data(), id: diff.document.documentID,
+                        customerUID: customerUID, restaurant: restaurant,
+                        completion: completion)
                 }
             }
 
-        db.collection(Constants.restaurantsDirectory).document(restaurant.uid)
+        db.collection(Constants.restaurantsDirectory)
+            .document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {
                     print("Error fetching document: \(err)")
@@ -69,11 +72,11 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
 
     private func makeQueueRecord(
-        data: [String: Any], ofQid qid: String, forCid cid: String,
-        atRestaurant restaurant: Restaurant,
+        data: [String: Any], id: String, customerUID: String,
+        restaurant: Restaurant,
         completion: @escaping (QueueRecord) -> Void) {
-        FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: qid) else {
+        FBCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: id) else {
                 return
             }
             completion(rec)
@@ -86,7 +89,7 @@ class FBQueueStorage: RestaurantQueueStorage {
             .collection(oldRecord.startDate)
             .document(oldRecord.id)
             .setData(newRecord.dictionary) { _ in
-                completion()
+                    completion()
             }
     }
 
@@ -102,6 +105,10 @@ class FBQueueStorage: RestaurantQueueStorage {
     
     func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
         loadQueueRecords(of: restaurant, where: { $0.isAdmitted }, completion: completion)
+    }
+
+    func loadHistory(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
+        loadQueueRecords(of: restaurant, where: { $0.isHistoryRecord }, completion: completion)
     }
     
     private func loadQueueRecords(of restaurant: Restaurant,

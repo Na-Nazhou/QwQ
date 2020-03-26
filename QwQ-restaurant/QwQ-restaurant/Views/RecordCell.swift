@@ -36,7 +36,6 @@ class RecordCell: UICollectionViewCell {
     func setUpView(record: Record) {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
-        setUpAdmitButton()
         setUpRejectButton()
 
         switch record.status {
@@ -47,6 +46,7 @@ class RecordCell: UICollectionViewCell {
             if let bookRecord = record as? BookRecord {
                 statusLabel.text = "Time: \(bookRecord.time.toString())"
             }
+            setUpAdmitButton()
             disableReject()
             showButtons()
         case .admitted:
@@ -95,13 +95,17 @@ class RecordCell: UICollectionViewCell {
 
     private func setUpAdmitButton() {
         leftButton.setTitle("ADMIT", for: .normal)
+        leftButton.addTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
     }
 
     private func setUpServeButton() {
         leftButton.setTitle("SERVE", for: .normal)
+        leftButton.removeTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
+        leftButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
     }
 
     private func setUpRejectButton() {
         rightButton.setTitle("REJECT", for: .normal)
+        rightButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
     }
 }

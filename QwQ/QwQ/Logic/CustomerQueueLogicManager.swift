@@ -195,7 +195,7 @@ extension CustomerQueueLogicManager {
                "Customer identity must be given non-nil to make the customer's queue logic manager.")
         assert(storage != nil, "Queue storage must be given non-nil")
         let logic = CustomerQueueLogicManager(customer: customerIdentity!, queueStorage: storage!)
-        logic.queueStorage.queueModificationLogicDelegate = logic
+        logic.queueStorage.logicDelegate = logic
 
         queueLogic = logic
         return logic
