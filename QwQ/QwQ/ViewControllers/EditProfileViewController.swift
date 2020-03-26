@@ -38,7 +38,7 @@ class EditProfileViewController: UIViewController {
     }
 
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
 
     @IBAction private func saveButton(_ sender: Any) {

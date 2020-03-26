@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
     
     @IBAction private func submitButton(_ sender: Any) {

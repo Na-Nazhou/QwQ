@@ -27,7 +27,7 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
     }
     
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
     
     private func setUpViews() {
