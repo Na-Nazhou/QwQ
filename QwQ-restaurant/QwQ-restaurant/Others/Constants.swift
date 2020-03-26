@@ -39,10 +39,14 @@ struct Constants {
     static let chooseFromPhotoLibraryTitle = "Choose from Library"
     static let chooseFromCameraTitle = "Take from Camera"
     static let showImagePickerTitle = "Choose your image"
+
+    // MARK: Record
     static let admitCustomerTitle = "Admit Customer"
     static let admitCustomerMessage = "The customer has been notified."
-    static let removeCustomerTitle = "Remove Customer"
-    static let removeCustomerMessage = "The customer has been removed from queue."
+    static let serveCustomerTitle = "Serve Customer"
+    static let serveCustomerMessage = "The customer has been served."
+    static let rejectCustomerTitle = "Reject Customer"
+    static let rejectCustomerMessage = "The customer has been rejected."
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -66,7 +70,7 @@ struct Constants {
     static let statisticsReuseIdentifier = "statisticsCell"
     
     // MARK: Segmented control settings
-    static let segmentedControlTitles = ["Active", "History"]
+    static let segmentedControlTitles = ["Current", "Waiting", "History"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white

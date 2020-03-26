@@ -98,6 +98,33 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
                 self.activitiesCollectionView.reloadData()
             })
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.queueSelectedSegue:
+            if let queueRecord = sender as? QueueRecord,
+                let queueRecordViewController = segue.destination as? QueueRecordViewController {
+                    queueRecordViewController.record = queueRecord
+            }
+        case Constants.bookSelectedSegue:
+            if let bookRecord = sender as? BookRecord,
+                let bookRecordViewController = segue.destination as? BookRecordViewController {
+                    bookRecordViewController.record = bookRecord
+            }
+        case Constants.editQueueSelectedSegue:
+            if let queueRecord = sender as? QueueRecord,
+                let editQueueViewController = segue.destination as? EditQueueViewController {
+                    editQueueViewController.record = queueRecord
+        }
+        case Constants.editBookSelectedSegue:
+            if let bookRecord = sender as? BookRecord,
+                let editBookingViewController = segue.destination as? EditBookingViewController {
+                    editBookingViewController.record = bookRecord
+            }
+        default:
+            return
+        }
+    }
 }
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -136,7 +163,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
             }
             activityCell.deleteAction = {
-                 self.spinner = self.showSpinner(onView: self.view)
+                self.spinner = self.showSpinner(onView: self.view)
                 CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
             }
         }
@@ -151,34 +178,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         if let bookRecord = record as? BookRecord {
             performSegue(withIdentifier: Constants.bookSelectedSegue, sender: bookRecord)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case Constants.queueSelectedSegue:
-            if let queueRecord = sender as? QueueRecord,
-                let queueRecordViewController = segue.destination as? QueueRecordViewController {
-                    queueRecordViewController.record = queueRecord
-            }
-        case Constants.bookSelectedSegue:
-            if let bookRecord = sender as? BookRecord,
-                let bookRecordViewController = segue.destination as? BookRecordViewController {
-                    bookRecordViewController.record = bookRecord
-            }
-        case Constants.editQueueSelectedSegue:
-            if let queueRecord = sender as? QueueRecord,
-            let editQueueViewController = segue.destination as? EditQueueViewController {
-                editQueueViewController.record = queueRecord
-        }
-        case Constants.editBookSelectedSegue:
-            if let bookRecord = sender as? BookRecord,
-                let editBookingViewController = segue.destination as? EditBookingViewController {
-                    editBookingViewController.record = bookRecord
-            }
-        default:
-            // No need to to anything for editQueueSelectedSegue
-            return
         }
     }
 }

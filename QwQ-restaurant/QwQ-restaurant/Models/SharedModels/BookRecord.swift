@@ -93,4 +93,17 @@ extension BookRecord: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+
+    func completelyIdentical(to other: BookRecord) -> Bool {
+        other == self
+            && other.restaurant == restaurant
+            && other.customer == customer
+            && other.time == time
+            && other.groupSize == groupSize
+            && other.babyChairQuantity == babyChairQuantity
+            && other.wheelchairFriendly == wheelchairFriendly
+            && other.admitTime == admitTime
+            && other.serveTime == serveTime
+            && other.rejectTime == rejectTime
+    }
 }

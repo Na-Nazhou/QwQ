@@ -8,13 +8,13 @@
 import UIKit
 
 class EmailVerificationViewController: UIViewController {
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
 }

@@ -7,16 +7,13 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, DisplayRecordViewController {
+class BookRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
     @IBOutlet var babyChairQuantityLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
-
-    typealias Profile = FBProfileStorage
-
 
     var record: Record?
 
@@ -42,6 +39,6 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
         }
         setUpRecordView()
 
-        Profile.getRestaurantProfilePic(uid: bookRecord.customer.uid, placeholder: profileImageView)
+        // TODO: time label
     }
 }

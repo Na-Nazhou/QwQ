@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, DisplayRecordViewController {
+class BookRecordViewController: UIViewController, RecordViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
@@ -18,7 +18,6 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var datePicker: UIDatePicker!
 
     var record: Record?
-    typealias Profile = FBProfileStorage
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,5 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
         }
         setUpRecordView()
         datePicker.date = bookRecord.time
-
-        Profile.getCustomerProfilePic(uid: bookRecord.restaurant.uid, placeholder: profileImageView)
     }
 }

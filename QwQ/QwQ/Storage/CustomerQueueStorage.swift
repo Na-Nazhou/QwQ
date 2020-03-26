@@ -1,6 +1,6 @@
 /// Represents the univeral queue storage sync protocol.
 protocol QueueStorageSync {
-    var queueModificationLogicDelegate: QueueStorageSyncDelegate? { get set }
+    var logicDelegate: QueueStorageSyncDelegate? { get set }
 
     // MARK: - Listeners
     func registerListener(for record: QueueRecord)

@@ -75,7 +75,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueRecordCell" id="lhN-ab-ua4" customClass="QueueRecordCell" customModule="QwQ_restaurant" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueRecordCell" id="lhN-ab-ua4" customClass="RecordCell" customModule="QwQ_restaurant" customModuleProvider="target">
                                         <rect key="frame" x="12" y="50" width="770" height="235"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
@@ -142,28 +142,22 @@
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pi5-Gp-cFO">
                                                                     <rect key="frame" x="0.0" y="0.0" width="385" height="70.5"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                                                    <state key="normal" title="ADMIT">
+                                                                    <state key="normal">
                                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
-                                                                    <connections>
-                                                                        <action selector="handleAdmit:" destination="lhN-ab-ua4" eventType="touchUpInside" id="Dsu-58-tUo"/>
-                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8B-GC-KIy">
                                                                     <rect key="frame" x="385" y="0.0" width="385" height="70.5"/>
                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                                                    <state key="normal" title="REMOVE">
+                                                                    <state key="normal">
                                                                         <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
                                                                     <variation key="heightClass=regular-widthClass=regular">
                                                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                     </variation>
-                                                                    <connections>
-                                                                        <action selector="handleRemove:" destination="lhN-ab-ua4" eventType="touchUpInside" id="A38-le-6EU"/>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -181,10 +175,12 @@
                                         <size key="customSize" width="770" height="235"/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="fd7-Ic-Js3" id="co0-NY-2u1"/>
-                                            <outlet property="estimatedTimeLabel" destination="GuN-wS-FeJ" id="1Tu-wZ-lhs"/>
+                                            <outlet property="leftButton" destination="pi5-Gp-cFO" id="rT5-TI-7m9"/>
                                             <outlet property="nameLabel" destination="ez4-f4-NMI" id="Vl1-g0-Skx"/>
                                             <outlet property="queueBookImageView" destination="R3t-Sr-Zzk" id="bEi-eC-BUf"/>
+                                            <outlet property="rightButton" destination="s8B-GC-KIy" id="70o-SG-8me"/>
                                             <outlet property="statusLabel" destination="Y8R-LE-lBm" id="mAP-dm-haT"/>
+                                            <outlet property="timeLabel" destination="GuN-wS-FeJ" id="1Tu-wZ-lhs"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -235,8 +231,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nln-qZ-h8h"/>
                     <connections>
+                        <outlet property="currentWaitingControl" destination="iOb-bP-BmU" id="0Vo-XD-5pU"/>
                         <outlet property="openCloseButton" destination="Shz-l6-QAq" id="8c3-kl-HrW"/>
-                        <outlet property="queueRecordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
+                        <outlet property="recordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
                         <segue destination="nN2-Nh-xwu" kind="show" identifier="queueRecordSelected" id="bsd-c0-28c"/>
                         <segue destination="6p9-lG-Adi" kind="show" identifier="bookRecordSelected" id="1s6-DV-fT0"/>
                     </connections>
