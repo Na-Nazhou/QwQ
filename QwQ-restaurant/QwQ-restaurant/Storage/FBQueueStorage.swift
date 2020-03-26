@@ -14,10 +14,11 @@ class FBQueueStorage: RestaurantQueueStorage {
     weak var logicDelegate: QueueStorageSyncDelegate?
     
     init(restaurant: Restaurant) {
-        attachListenerOnRestaurantAndQueue(restaurant: restaurant)
+        registerListenerForQueue(restaurant: restaurant)
+        registerListenerForRestaurant(restaurant: restaurant)
     }
 
-    private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
+    private func registerListenerForQueue(restaurant: Restaurant) {
         // listen to restaurant's queue document for 'today'
         // assuming users will restart app everyday
         let today = Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat)
@@ -53,7 +54,9 @@ class FBQueueStorage: RestaurantQueueStorage {
                         completion: completion)
                 }
             }
+    }
 
+    private func registerListenerForRestaurant(restaurant: Restaurant) {
         db.collection(Constants.restaurantsDirectory)
             .document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
@@ -63,8 +66,8 @@ class FBQueueStorage: RestaurantQueueStorage {
                 }
                 guard let profileData = profileSnapshot!.data(),
                     let updatedRestaurant = Restaurant(dictionary: profileData) else {
-                    assert(false, "document should be of correct format(fields) of a restaurant!")
-                    return
+                        assert(false, "document should be of correct format(fields) of a restaurant!")
+                        return
                 }
                 // regardless of change, contact delegate it has changed.
                 self.logicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
@@ -97,18 +100,6 @@ class FBQueueStorage: RestaurantQueueStorage {
         db.collection(Constants.restaurantsDirectory)
             .document(old.uid)
             .setData(new.dictionary)
-    }
-
-    func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isPendingAdmission }, completion: completion)
-    }
-    
-    func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isAdmitted }, completion: completion)
-    }
-
-    func loadHistory(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isHistoryRecord }, completion: completion)
     }
     
     private func loadQueueRecords(of restaurant: Restaurant,

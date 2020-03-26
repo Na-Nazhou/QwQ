@@ -39,7 +39,6 @@ class ActivitiesViewController: UIViewController {
 
     // TODO: refactor
     var currentRecords: [Record] {
-        // TODO: get both queue records and booking records
         RestaurantQueueLogicManager.shared().currentRecords
     }
 
@@ -89,9 +88,10 @@ class ActivitiesViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         filtered = records
         recordCollectionView.reloadData()
+
+        super.viewWillAppear(animated)
     }
 
     private func setUpSegmentedControl() {
@@ -102,16 +102,6 @@ class ActivitiesViewController: UIViewController {
         selectedIndex = sender.selectedIndex
         filtered = records
         recordCollectionView.reloadData()
-        switch sender.selectedIndex {
-        case 0:
-            RestaurantQueueLogicManager.shared().fetchCurrent()
-        case 1:
-            RestaurantQueueLogicManager.shared().fetchWaiting()
-        case 2:
-            RestaurantQueueLogicManager.shared().fetchHistory()
-        default:
-            return
-        }
     }
 
     @IBAction private func handleOpenClose(_ sender: UIButton) {
@@ -211,36 +201,42 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             recordCell.admitAction = {
                 RestaurantQueueLogicManager.shared()
                     .admitCustomer(record: queueRecord,
-                                   completion: self.didUpdateQueueRecord)
+                                   completion: self.didUpdateRecord)
             }
 
             if queueRecord.isAdmitted {
                 recordCell.rejectAction = {
                     RestaurantQueueLogicManager.shared()
                         .rejectCustomer(record: queueRecord,
-                                        completion: self.didUpdateQueueRecord)
+                                        completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
                     RestaurantQueueLogicManager.shared()
                         .serveCustomer(record: queueRecord,
-                                       completion: self.didUpdateQueueRecord)
+                                       completion: self.didUpdateRecord)
                 }
             }
         }
 
         if let bookRecord = record as? BookRecord {
             recordCell.admitAction = {
-
+                RestaurantQueueLogicManager.shared()
+                    .admitCustomer(record: bookRecord,
+                                   completion: self.didUpdateRecord)
             }
 
             if bookRecord.isAdmitted {
                 recordCell.rejectAction = {
-                    //TODO allow only at waiting list and link to logic
+                    RestaurantQueueLogicManager.shared()
+                        .rejectCustomer(record: bookRecord,
+                                        completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
-
+                    RestaurantQueueLogicManager.shared()
+                        .serveCustomer(record: bookRecord,
+                                       completion: self.didUpdateRecord)
                 }
             }
         }
@@ -248,7 +244,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         return recordCell
     }
 
-    func didUpdateQueueRecord() {
+    func didUpdateRecord() {
         filtered = records
         recordCollectionView.reloadData()
     }

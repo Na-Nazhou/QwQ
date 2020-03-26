@@ -3,6 +3,7 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     // Storage
     private(set) var queueStorage: RestaurantQueueStorage
+    private(set) var bookingStorage: RestaurantBookingStorage
 
     // View Controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
@@ -11,90 +12,78 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         self.restaurant = restaurant
 
         queueStorage = FBQueueStorage(restaurant: restaurant)
-        fetchCurrent()
-        fetchWaiting()
-        fetchHistory()
+        bookingStorage = FBBookingStorage(restaurant: restaurant)
     }
 
     private var restaurant: Restaurant
-    private(set) var current = RecordCollection<QueueRecord>()
-    private(set) var waiting = RecordCollection<QueueRecord>()
-    private(set) var history = RecordCollection<QueueRecord>()
+    private(set) var currentQueue = RecordCollection<QueueRecord>()
+    private(set) var waitingQueue = RecordCollection<QueueRecord>()
+    private(set) var historyQueue = RecordCollection<QueueRecord>()
+    private(set) var currentBookings = RecordCollection<BookRecord>()
+    private(set) var waitingBookings = RecordCollection<BookRecord>()
+    private(set) var historyBookings = RecordCollection<BookRecord>()
 
     var currentRecords: [Record] {
-        current.records
+        currentQueue.records + currentBookings.records
     }
 
     var waitingRecords: [Record] {
-        waiting.records
+        waitingQueue.records + waitingBookings.records
     }
 
     var historyRecords: [Record] {
-        history.records
+        historyQueue.records + historyBookings.records
     }
     
     var isQueueOpen: Bool {
         restaurant.isQueueOpen
     }
 
-    func fetchCurrent() {
-        // Fetch the current queue from db
-        queueStorage.loadQueue(of: restaurant, completion: {_ in })
-    }
-
-    func fetchWaiting() {
-        queueStorage.loadWaitingList(of: restaurant, completion: {_ in })
-    }
-
-    func fetchHistory() {
-        queueStorage.loadHistory(of: restaurant, completion: {_ in })
-    }
-
     func didAddQueueRecord(_ record: QueueRecord) {
         if record.isPendingAdmission {
-            if addRecord(record, to: current) {
+            if addRecord(record, to: currentQueue) {
                 self.presentationDelegate?.didUpdateCurrentList()
             }
         }
 
         if record.isAdmitted {
-            if addRecord(record, to: waiting) {
+            if addRecord(record, to: waitingQueue) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
         }
 
         if record.isHistoryRecord {
-            if addRecord(record, to: history) {
+            if addRecord(record, to: historyQueue) {
                 self.presentationDelegate?.didUpdateHistoryList()
             }
         }
     }
 
-    func addRecord(_ record: QueueRecord, to list: RecordCollection<QueueRecord>) -> Bool {
+    func addRecord<T: Record>(_ record: T, to list: RecordCollection<T>) -> Bool {
         list.add(record)
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
         if record.isPendingAdmission {
-            current.update(to: record)
+            currentQueue.update(to: record)
             self.presentationDelegate?.didUpdateCurrentList()
         }
 
         if record.isAdmitted {
-            if self.current.remove(record) {
+            if self.currentQueue.remove(record) {
                 self.presentationDelegate?.didUpdateCurrentList()
             }
-            if self.waiting.add(record) {
+            if self.waitingQueue.add(record) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
         }
 
         if record.isHistoryRecord {
-            if self.waiting.remove(record) {
+            if self.waitingQueue.remove(record) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
 
-            if self.history.add(record) {
+            if self.historyQueue.add(record) {
                 self.presentationDelegate?.didUpdateHistoryList()
             }
         }
@@ -102,13 +91,73 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
 
     func didDeleteQueueRecord(_ record: QueueRecord) {
         if record.isPendingAdmission {
-            if self.current.remove(record) {
+            if self.currentQueue.remove(record) {
                 self.presentationDelegate?.didUpdateCurrentList()
             }
         }
 
         if record.isAdmitted {
-            if self.waiting.remove(record) {
+            if self.waitingQueue.remove(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+    }
+
+    func didAddBookRecord(_ record: BookRecord) {
+        if record.isPendingAdmission {
+            if addRecord(record, to: currentBookings) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+        }
+
+        if record.isAdmitted {
+            if addRecord(record, to: waitingBookings) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+
+        if record.isHistoryRecord {
+            if addRecord(record, to: historyBookings) {
+                self.presentationDelegate?.didUpdateHistoryList()
+            }
+        }
+    }
+
+    func didUpdateBookRecord(_ record: BookRecord) {
+        if record.isPendingAdmission {
+            currentBookings.update(to: record)
+            self.presentationDelegate?.didUpdateCurrentList()
+        }
+
+        if record.isAdmitted {
+            if self.currentBookings.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+            if self.waitingBookings.add(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+
+        if record.isHistoryRecord {
+            if self.waitingBookings.remove(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+
+            if self.historyBookings.add(record) {
+                self.presentationDelegate?.didUpdateHistoryList()
+            }
+        }
+    }
+
+    func didDeleteBookRecord(_ record: BookRecord) {
+        if record.isPendingAdmission {
+            if self.currentBookings.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+        }
+
+        if record.isAdmitted {
+            if self.waitingBookings.remove(record) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
         }
@@ -141,6 +190,16 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         })
     }
 
+    func admitCustomer(record: BookRecord, completion: @escaping () -> Void) {
+        // Set the serveTime of the queue record
+        var new = record
+        new.admitTime = currentTime()
+
+        bookingStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            completion()
+        })
+    }
+
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         var new = record
         new.serveTime = currentTime()
@@ -150,11 +209,29 @@ class RestaurantQueueLogicManager: RestaurantQueueLogic {
         })
     }
 
+    func serveCustomer(record: BookRecord, completion: @escaping () -> Void) {
+        var new = record
+        new.serveTime = currentTime()
+
+        bookingStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            completion()
+        })
+    }
+
     func rejectCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         var new = record
         new.rejectTime = currentTime()
 
         queueStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
+            completion()
+        })
+    }
+
+    func rejectCustomer(record: BookRecord, completion: @escaping () -> Void) {
+        var new = record
+        new.rejectTime = currentTime()
+
+        bookingStorage.updateRecord(oldRecord: record, newRecord: new, completion: {
             completion()
         })
     }
@@ -196,6 +273,7 @@ extension RestaurantQueueLogicManager {
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
         let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
         logic.queueStorage.logicDelegate = logic
+        logic.bookingStorage.logicDelegate = logic
 
         queueLogic = logic
         return logic
