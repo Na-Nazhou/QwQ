@@ -13,9 +13,9 @@ protocol RestaurantQueueLogic: QueueStorageSyncDelegate {
     func closeQueue()
 
     /// Dequeues and admits customer.
-    func admitCustomer(record: QueueRecord)
-    func serveCustomer(record: QueueRecord)
-    func rejectCustomer(record: QueueRecord)
+    func admitCustomer(record: QueueRecord, completion: @escaping () -> Void)
+    func serveCustomer(record: QueueRecord, completion: @escaping () -> Void)
+    func rejectCustomer(record: QueueRecord, completion: @escaping () -> Void)
 
     /// Notifies customer every 5 min while customer is in admitted state.
     func notifyCustomerOfAdmission(record: QueueRecord)

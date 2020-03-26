@@ -194,18 +194,18 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         if let queueRecord = record as? QueueRecord {
             recordCell.admitAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                RestaurantQueueLogicManager.shared().admitCustomer(record: queueRecord)
+                RestaurantQueueLogicManager.shared().admitCustomer(record: queueRecord, completion: self.didAdmitCustomer)
             }
 
             if queueRecord.isAdmitted {
                 recordCell.rejectAction = {
                     self.spinner = self.showSpinner(onView: self.view)
-                    RestaurantQueueLogicManager.shared().rejectCustomer(record: queueRecord)
+                    RestaurantQueueLogicManager.shared().rejectCustomer(record: queueRecord, completion: self.didRejectCustomer)
                 }
 
                 recordCell.serveAction = {
                     self.spinner = self.showSpinner(onView: self.view)
-                    RestaurantQueueLogicManager.shared().serveCustomer(record: queueRecord)
+                    RestaurantQueueLogicManager.shared().serveCustomer(record: queueRecord, completion: self.didServeCustomer)
                 }
             }
         }
