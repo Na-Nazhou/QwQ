@@ -84,7 +84,7 @@
 		D4EA85F3241B2C65009EB85B /* QueueRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85EE241B2C65009EB85B /* QueueRecord.swift */; };
 		D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85EF241B2C65009EB85B /* Restaurant.swift */; };
 		D4EA85F8241B2CA7009EB85B /* RestaurantRecordLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85F6241B2CA7009EB85B /* RestaurantRecordLogic.swift */; };
-		D4EA85F9241B2CA7009EB85B /* RestaurantQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85F7241B2CA7009EB85B /* RestaurantQueueLogicManager.swift */; };
+		D4EA85F9241B2CA7009EB85B /* RestaurantRecordLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85F7241B2CA7009EB85B /* RestaurantRecordLogicManager.swift */; };
 		D4EA8601241B2CC6009EB85B /* RestaurantQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85FD241B2CC5009EB85B /* RestaurantQueueStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -191,7 +191,7 @@
 		D4EA85EE241B2C65009EB85B /* QueueRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
 		D4EA85EF241B2C65009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		D4EA85F6241B2CA7009EB85B /* RestaurantRecordLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRecordLogic.swift; sourceTree = "<group>"; };
-		D4EA85F7241B2CA7009EB85B /* RestaurantQueueLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueueLogicManager.swift; sourceTree = "<group>"; };
+		D4EA85F7241B2CA7009EB85B /* RestaurantRecordLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRecordLogicManager.swift; sourceTree = "<group>"; };
 		D4EA85FD241B2CC5009EB85B /* RestaurantQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorage.swift; sourceTree = "<group>"; };
 		F2BC3A00FE4D7C8792332F26 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,7 +461,7 @@
 				D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */,
 				61ACB7E8242A5C79002A1F47 /* Delegates */,
 				D4EA85F6241B2CA7009EB85B /* RestaurantRecordLogic.swift */,
-				D4EA85F7241B2CA7009EB85B /* RestaurantQueueLogicManager.swift */,
+				D4EA85F7241B2CA7009EB85B /* RestaurantRecordLogicManager.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -799,7 +799,7 @@
 				D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */,
 				7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */,
 				5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */,
-				D4EA85F9241B2CA7009EB85B /* RestaurantQueueLogicManager.swift in Sources */,
+				D4EA85F9241B2CA7009EB85B /* RestaurantRecordLogicManager.swift in Sources */,
 				5C2CB131242484D0003AFC6C /* AuthError.swift in Sources */,
 				5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */,
 				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,

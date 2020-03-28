@@ -304,7 +304,7 @@ Chicken Risotto
 Pancake</string>
                                                                     <attributes>
                                                                         <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="17"/>
+                                                                        <font key="NSFont" size="17" name="Comfortaa-Regular"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -326,8 +326,8 @@ Pancake</string>
                                                             <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" metaFont="system" size="25"/>
-                                                                    <font key="NSOriginalFont" metaFont="system" size="25"/>
+                                                                    <font key="NSFont" size="25" name="Comfortaa-Regular"/>
+                                                                    <font key="NSOriginalFont" size="25" name="Comfortaa-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -338,7 +338,7 @@ Pancake</string>
                                                                 <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                                     <attributes>
                                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                        <font key="NSFont" metaFont="system" size="17"/>
+                                                                        <font key="NSFont" size="17" name="Comfortaa-Regular"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>

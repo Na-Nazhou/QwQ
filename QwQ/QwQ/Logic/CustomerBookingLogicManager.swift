@@ -113,6 +113,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     func deleteBookRecord(_ record: BookRecord) {
+
+        if record.isAdmitted {
+            var newRecord = record
+            newRecord.withdrawTime = Date()
+            bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord, completion: {
+                self.activitiesDelegate?.didDeleteRecord()
+            })
+            return
+        }
+
         bookingStorage.deleteBookRecord(record: record, completion: {
             self.activitiesDelegate?.didDeleteRecord()
         })
@@ -137,6 +147,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             addAsHistoryRecord(record)
             didDeleteBookRecord(record)
             print("\ndetected rejection\n")
+        case .withdraw:
+            addAsHistoryRecord(record)
+            didDeleteBookRecord(record)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
             print("\ndetected regular modif\n")

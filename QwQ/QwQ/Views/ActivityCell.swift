@@ -50,6 +50,8 @@ class ActivityCell: UICollectionViewCell {
             hideEditAndDelete()
         case .rejected:
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+        case .withdrawn:
+            statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
         default:
             assert(false)
         }
