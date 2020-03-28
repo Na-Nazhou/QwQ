@@ -9,6 +9,8 @@ import UIKit
 
 protocol ProfileStorage {
 
+    static var currentUID: String? { get set }
+
     // MARK: - Customer Creation Methods
 
     static func createInitialCustomerProfile(uid: String,

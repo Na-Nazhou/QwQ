@@ -35,6 +35,8 @@ struct Constants {
     static let missingEmailMessage = "Please provide a valid email."
     static let missingPasswordTitle = "Error - Missing Password"
     static let missingPasswordMessage = "Please provide a valid password."
+    static let loginCancelledMessage = "The login process with Facebook was cancelled."
+    static let fbLoginPermissionsMessage = "Please grant profile and email access with Facebook to continue."
 
     // MARK: Profile photo
     static let chooseFromPhotoLibraryTitle = "Choose from Library"

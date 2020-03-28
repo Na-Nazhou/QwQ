@@ -7,18 +7,17 @@
 //
 
 import UIKit
+import FacebookCore
 import FacebookLogin
 
 class LoginViewController: UIViewController {
 
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    @IBOutlet private var facebookButton: UIButton!
-    
     var spinner: UIView?
 
     override func viewDidLoad() {
@@ -30,9 +29,6 @@ class LoginViewController: UIViewController {
         } else {
             removeSpinner(spinner)
         }
-
-        let loginButton = FBLoginButton(permissions: [ .publicProfile, .email ])
-        facebookButton.addSubview(loginButton)
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
@@ -71,7 +67,7 @@ class LoginViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
     }
-
+    
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
     }
 

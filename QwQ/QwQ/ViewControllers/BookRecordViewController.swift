@@ -18,7 +18,7 @@ class BookRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var datePicker: UIDatePicker!
 
     var record: Record?
-    typealias Profile = FBProfileStorage
+    typealias Profile = FIRProfileStorage
 
     override func viewDidLoad() {
         super.viewDidLoad()

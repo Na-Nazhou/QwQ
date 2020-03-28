@@ -139,8 +139,8 @@ class FBQueueStorage: CustomerQueueStorage {
     private func makeQueueRecordAndComplete(qData: [String: Any],
                                             qid: String, cid: String, rid: String,
                                             completion: @escaping (QueueRecord) -> Void) {
-        FBRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
-            FBProfileStorage.getCustomerInfo(
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
+            FIRProfileStorage.getCustomerInfo(
                 completion: { customer in
                 guard let rec = QueueRecord(dictionary: qData,
                                             customer: customer, restaurant: restaurant,

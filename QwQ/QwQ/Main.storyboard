@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uXK-ad-Mgw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uXK-ad-Mgw">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,6 +99,9 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="ivB-EJ-al3" kind="show" id="yEn-Z8-nU6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
                                                 <rect key="frame" x="0.0" y="209.33333333333337" width="254.66666666666666" height="19.666666666666657"/>
@@ -155,7 +158,6 @@
                     <navigationItem key="navigationItem" id="qxR-Zv-WeF"/>
                     <connections>
                         <outlet property="emailTextField" destination="qMP-nu-B0d" id="pMT-tQ-om5"/>
-                        <outlet property="facebookButton" destination="vXc-4s-JUU" id="bgj-hC-3Ka"/>
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="DyT-1C-uja"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="cpb-gv-3Uj"/>
                     </connections>
@@ -433,7 +435,71 @@
             </objects>
             <point key="canvasLocation" x="1562" y="821"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="2Di-24-pV0">
+            <objects>
+                <viewController id="ivB-EJ-al3" customClass="FBLoginViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v3f-eN-7sa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThF-tu-U41">
+                                <rect key="frame" x="169" y="138" width="76" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please fill in the following fields:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvc-pb-y6x">
+                                <rect key="frame" x="86" y="212" width="243" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="123" translatesAutoresizingMaskIntoConstraints="NO" id="6E1-v3-scF">
+                                <rect key="frame" x="80" y="348" width="254" height="348"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nbE-vD-KhD">
+                                        <rect key="frame" x="0.0" y="0.0" width="254" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FqL-xF-Rru">
+                                        <rect key="frame" x="0.0" y="157" width="254" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-tJ-BH0">
+                                        <rect key="frame" x="0.0" y="314" width="254" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="f02-JU-Zly" firstAttribute="trailing" secondItem="6E1-v3-scF" secondAttribute="trailing" constant="80" id="OXl-AV-EaX"/>
+                            <constraint firstItem="6E1-v3-scF" firstAttribute="leading" secondItem="f02-JU-Zly" secondAttribute="leading" constant="80" id="W25-31-tp0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="f02-JU-Zly"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4cf-An-bPc"/>
+                    <connections>
+                        <outlet property="contactTextField" destination="FqL-xF-Rru" id="oze-X3-Jzh"/>
+                        <outlet property="emailTextField" destination="e6f-tJ-BH0" id="naZ-NY-Alx"/>
+                        <outlet property="nameTextField" destination="nbE-vD-KhD" id="UeO-Er-Kml"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZYd-VO-nD6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1834.7826086956522" y="-238.39285714285714"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cpb-gv-3Uj"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
         <image name="facebook-button" width="569" height="88"/>
@@ -441,7 +507,4 @@
         <image name="login-background" width="2048" height="2732"/>
         <image name="logo" width="364" height="416"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="cpb-gv-3Uj"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol Authenticator {
-
+    
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
                        completion: @escaping () -> Void,
@@ -23,7 +23,5 @@ protocol Authenticator {
     static func changePassword(_ password: String, errorHandler: @escaping (Error) -> Void)
 
     static func checkIfAlreadyLoggedIn() -> Bool
-
-    static func getUIDOfCurrentUser() -> String?
 
 }

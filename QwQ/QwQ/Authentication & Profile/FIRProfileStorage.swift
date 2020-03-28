@@ -1,5 +1,5 @@
 //
-//  FBProfileStorage.swift
+//  FIRProfileStorage.swift
 //  QwQ
 //
 //  Created by Daniel Wong on 14/3/20.
@@ -10,9 +10,11 @@ import FirebaseStorage
 import FirebaseUI
 import SDWebImage
 
-class FBProfileStorage: ProfileStorage {
+class FIRProfileStorage: ProfileStorage {
 
-    typealias Auth = FBAuthenticator
+    typealias Auth = FIRAuthenticator
+
+    static var currentUID: String?
 
     static let dbRef = Firestore.firestore().collection("customers")
     static let storageRef = Storage.storage().reference().child("profile-pics")
@@ -36,7 +38,7 @@ class FBProfileStorage: ProfileStorage {
 
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
                                 errorHandler: @escaping (Error) -> Void) {
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
@@ -72,7 +74,7 @@ class FBProfileStorage: ProfileStorage {
     static func updateCustomerInfo(customer: Customer,
                                    completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }

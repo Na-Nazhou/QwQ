@@ -14,8 +14,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     var spinner: UIView?
 

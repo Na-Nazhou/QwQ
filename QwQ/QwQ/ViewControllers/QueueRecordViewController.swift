@@ -16,7 +16,7 @@ class QueueRecordViewController: UIViewController, DisplayRecordViewController {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
 
-    typealias Profile = FBProfileStorage
+    typealias Profile = FIRProfileStorage
 
     var record: Record?
 
