@@ -1,18 +1,16 @@
-//
-//  FBBookingStorage.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 22/3/20.
-//
-
 import FirebaseFirestore
 import Foundation
 
 class FBBookingStorage: CustomerBookingStorage {
+    // MARK: Storage as singleton
+    static let shared = FBBookingStorage()
 
-    let db = Firestore.firestore()
+    private init() {}
 
-    weak var logicDelegate: BookingStorageSyncDelegate?
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
+
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listenerMap = [BookRecord: ListenerRegistration]()
 
@@ -134,7 +132,7 @@ class FBBookingStorage: CustomerBookingStorage {
             }
 
             guard let bookRecordData = doc.data() else {
-                self.logicDelegate?.didDeleteBookRecord(record)
+                self.delegateWork {  $0.didDeleteBookRecord(record) }
                 return
             }
 
@@ -145,7 +143,7 @@ class FBBookingStorage: CustomerBookingStorage {
                                                 print("Error")
                                                 return
             }
-            self.logicDelegate?.didUpdateBookRecord(newRecord)
+            self.delegateWork {  $0.didUpdateBookRecord(newRecord) }
         }
         listenerMap[record] = listener
     }
@@ -153,5 +151,22 @@ class FBBookingStorage: CustomerBookingStorage {
     func removeListener(for record: BookRecord) {
         listenerMap[record]?.remove()
         listenerMap[record] = nil
+    }
+
+    func registerDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.add(del)
+    }
+
+    func unregisterDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (BookingStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? BookingStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
     }
 }

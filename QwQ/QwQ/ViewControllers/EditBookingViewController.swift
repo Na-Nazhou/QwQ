@@ -9,6 +9,8 @@ import UIKit
 
 class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
+    let bookingLogicManager = CustomerBookingLogicManager()
+
     @IBOutlet var datePicker: UIDatePicker!
 
     @IBAction override func handleSubmit(_ sender: Any) {
@@ -23,8 +25,7 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         
         // Edit existing book record
         if let bookRecord = record as? BookRecord {
-            if CustomerBookingLogicManager.shared()
-                .editBookRecord(oldRecord: bookRecord,
+            if bookingLogicManager.editBookRecord(oldRecord: bookRecord,
                                 at: datePicker.date,
                                 with: groupSize,
                                 babyChairQuantity: babyChairQuantity,
@@ -39,8 +40,7 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
             return
         }
 
-        if CustomerBookingLogicManager.shared()
-            .addBookRecord(to: restaurant,
+        if bookingLogicManager.addBookRecord(to: restaurant,
                            at: datePicker.date,
                            with: groupSize,
                            babyChairQuantity: babyChairQuantity,
@@ -51,8 +51,7 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        CustomerBookingLogicManager.shared().bookingDelegate = self
+        bookingLogicManager.bookingDelegate = self
     }
 
     override func setUpViews() {

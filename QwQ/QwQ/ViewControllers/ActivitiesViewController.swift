@@ -15,6 +15,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     var spinner: UIView?
 
     let queueLogicManager = CustomerQueueLogicManager()
+    let bookingLogicManager = CustomerBookingLogicManager()
 
     var records: [Record] {
         if isActive {
@@ -32,13 +33,13 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     // TODO: refactor
     var activeRecords: [Record] {
-        var records: [Record] = CustomerBookingLogicManager.shared().activeBookRecords
+        var records: [Record] = bookingLogicManager.activeBookRecords
         records += queueLogicManager.currentQueueRecords
         return records
     }
 
     var historyRecords: [Record] {
-        let bookRecords = CustomerBookingLogicManager.shared().pastBookRecords
+        let bookRecords = bookingLogicManager.pastBookRecords
         let queueRecords = queueLogicManager.pastQueueRecords
         return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             let time1: Date
@@ -68,7 +69,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.delegate = self
 
         queueLogicManager.activitiesDelegate = self
-        CustomerBookingLogicManager.shared().activitiesDelegate = self
+        bookingLogicManager.activitiesDelegate = self
 
         setUpSegmentedControl()
     }
@@ -178,7 +179,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
+                self.bookingLogicManager.deleteBookRecord(bookRecord)
             }
         }
 

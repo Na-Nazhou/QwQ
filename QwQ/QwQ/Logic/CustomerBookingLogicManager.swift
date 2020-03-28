@@ -1,14 +1,6 @@
-//
-//  CustomerBookingLogicManager.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 19/3/20.
-//
-
 import Foundation
 
 class CustomerBookingLogicManager: CustomerBookingLogic {
-
     // Storage
     var bookingStorage: CustomerBookingStorage
 
@@ -16,32 +8,39 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     weak var bookingDelegate: BookingDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
-    var customer: Customer
+    private let customerActivity: CustomerActivity
+    private var customer: Customer {
+        customerActivity.customer
+    }
 
-    // TODO: change to record collection
-    private var currentBookRecords = RecordCollection<BookRecord>()
     var activeBookRecords: [BookRecord] {
-        currentBookRecords.records
+        customerActivity.currentBookings.records
     }
-
-    private var bookingHistory = RecordCollection<BookRecord>()
     var pastBookRecords: [BookRecord] {
-        bookingHistory.records
+        customerActivity.bookingHistory.records
     }
 
-    private init(customer: Customer, bookingStorage: CustomerBookingStorage) {
-        self.customer = customer
+    convenience init() {
+        self.init(customerActivity: CustomerActivity.shared(),
+                  bookingStorage: FBBookingStorage.shared)
+    }
+
+    // Constructor to provide flexibility for testing.
+    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage) {
+        self.customerActivity = customerActivity
         self.bookingStorage = bookingStorage
+
+        self.bookingStorage.registerDelegate(self)
 
         fetchActiveBookRecords()
         fetchBookingHistory()
     }
 
     deinit {
-        print("\n\tDEINITING\n")
         for record in activeBookRecords {
             bookingStorage.removeListener(for: record)
         }
+        bookingStorage.unregisterDelegate(self)
     }
 
     func fetchActiveBookRecords() {
@@ -176,23 +175,23 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
         if record.isActiveRecord {
-            currentBookRecords.update(record)
+            customerActivity.currentBookings.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
     func didAddBookRecord(_ record: BookRecord) {
-        if record.isActiveRecord && currentBookRecords.add(record) {
+        if record.isActiveRecord && customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
 
-        if record.isHistoryRecord && bookingHistory.add(record) {
+        if record.isHistoryRecord && customerActivity.bookingHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
 
     func didAdmitBookRecord(_ record: BookRecord) {
-        guard currentBookRecords.remove(record) else {
+        guard customerActivity.currentBookings.remove(record) else {
             return
         }
 
@@ -201,48 +200,25 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             bookingStorage.deleteBookRecord(record: otherRecord, completion: {})
         }
 
-        if currentBookRecords.add(record) {
+        if customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
     func didDeleteBookRecord(_ record: BookRecord) {
+        removeFromCurrent(record)
+    }
+
+    private func removeFromCurrent(_ record: BookRecord) {
         bookingStorage.removeListener(for: record)
-        if currentBookRecords.remove(record) {
+        if customerActivity.currentBookings.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
     private func addAsHistoryRecord(_ record: BookRecord) {
-        if bookingHistory.add(record) {
+        if customerActivity.bookingHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
-    }
-}
-
-extension CustomerBookingLogicManager {
-    private static var bookingLogic: CustomerBookingLogicManager?
-
-    /// Returns shared customer booking logic manager for the logged in application. If it does not exist,
-    /// a booking logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil,
-                       with storage: CustomerBookingStorage? = nil) -> CustomerBookingLogicManager {
-        if let logic = bookingLogic {
-            return logic
-        }
-
-        assert(customerIdentity != nil,
-               "Customer identity must be given non-nil to make the customer's booking logic manager.")
-        assert(storage != nil,
-               "Booking storage must be given non-nil")
-        let logic = CustomerBookingLogicManager(customer: customerIdentity!, bookingStorage: storage!)
-        logic.bookingStorage.logicDelegate = logic
-
-        bookingLogic = logic
-        return logic
-    }
-
-    static func deinitShared() {
-        bookingLogic = nil
     }
 }

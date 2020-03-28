@@ -1,7 +1,6 @@
 import Foundation
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
-
     // Storage
     var queueStorage: CustomerQueueStorage
 
@@ -38,7 +37,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     deinit {
-        for record in customerActivity.currentQueues.records {
+        for record in currentQueueRecords {
             queueStorage.removeListener(for: record)
         }
         queueStorage.unregisterDelegate(self)
@@ -182,7 +181,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        customerActivity.currentQueues.update(record)
+        if record.isActiveRecord {
+            customerActivity.currentQueues.update(record)
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
     }
 
     func didDeleteQueueRecord(_ record: QueueRecord) {

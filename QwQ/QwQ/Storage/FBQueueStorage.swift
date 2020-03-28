@@ -10,8 +10,7 @@ class FBQueueStorage: CustomerQueueStorage {
     // MARK: Storage capabilities
     private let db = Firestore.firestore()
 
-    var logicDelegates = NSHashTable<AnyObject>.weakObjects()
-    //QueueStorageSyncDelegate?
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listeners: [QueueRecord: ListenerRegistration] = [:]
 
