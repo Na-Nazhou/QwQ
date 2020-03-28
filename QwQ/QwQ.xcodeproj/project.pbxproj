@@ -53,7 +53,7 @@
 		7E1137FE24233B1F006984BB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FD24233B1F006984BB /* PopoverContentController.swift */; };
 		7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */; };
 		7E428222242B4CB60019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */; };
-		7E42822A242BA0EE0019A8A2 /* UICollectionView+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428229242BA0EE0019A8A2 /* UICollectionView+handleBack.swift */; };
+		7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */; };
 		7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E56AF9A2421F513002E9BAC /* Activities.storyboard */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
@@ -171,7 +171,7 @@
 		7E1137FD24233B1F006984BB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
 		7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
-		7E428229242BA0EE0019A8A2 /* UICollectionView+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+handleBack.swift"; sourceTree = "<group>"; };
+		7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E56AF9A2421F513002E9BAC /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 				5C25BEAC2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift */,
 				7EE6D012241D290F00C1465E /* UIViewController+dismissKeyboard.swift */,
 				5C9D9B5B24221D2F0019B7EE /* UIViewController+ShowMessage.swift */,
-				7E428229242BA0EE0019A8A2 /* UICollectionView+handleBack.swift */,
+				7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */,
 				6148056624232B87003D6D44 /* UIViewController+Spinner.swift */,
 				7EE6D014241D2BEC00C1465E /* Constants.swift */,
 				7EE6D016241DB57F00C1465E /* AlertService.swift */,
@@ -858,7 +858,7 @@
 				7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */,
 				5C9411E12423D1E30093D92D /* AuthDetails.swift in Sources */,
 				7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */,
-				7E42822A242BA0EE0019A8A2 /* UICollectionView+handleBack.swift in Sources */,
+				7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */,
 				7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */,
 				7E1137FE24233B1F006984BB /* PopoverContentController.swift in Sources */,
 				5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */,

@@ -35,11 +35,11 @@ class EditProfileViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        spinner = showSpinner(onView: view)
         Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                   errorHandler: handleError(error:))
-        spinner = showSpinner(onView: view)
+        super.viewWillAppear(animated)
     }
 
     @IBAction private func handleBack(_ sender: Any) {

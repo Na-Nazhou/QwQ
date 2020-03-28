@@ -22,7 +22,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
 
-    var isActive = true
+    var selectedIndex = 0
+
+    var isActive: Bool {
+        selectedIndex == 0
+    }
 
     // TODO: refactor
     var activeRecords: [Record] {
@@ -75,16 +79,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        switch sender.selectedIndex {
-        case 0:
-            isActive = true
-        case 1:
-            CustomerQueueLogicManager.shared().fetchQueueHistory()
-            CustomerBookingLogicManager.shared().fetchBookingHistory()
-            isActive = false
-        default:
-            return
-        }
+        selectedIndex = sender.selectedIndex
         activitiesCollectionView.reloadData()
     }
 
@@ -158,6 +153,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let record = records[indexPath.row]
         activityCell.setUpView(record: record)
+        
         if let queueRecord = record as? QueueRecord {
             activityCell.editAction = {
                 if record.isPendingAdmission {

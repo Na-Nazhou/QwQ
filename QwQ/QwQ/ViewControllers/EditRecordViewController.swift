@@ -12,6 +12,20 @@ class EditRecordViewController: UIViewController {
 
     var record: Record?
 
+    var groupSize: Int? {
+        guard let groupSizeText = groupSizeTextField.text else {
+            return nil
+        }
+        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+    }
+
+    var babyChairQuantity: Int? {
+        guard let babyChairQuantityText = babyChairQuantityTextField.text else {
+            return nil
+        }
+        return Int(babyChairQuantityText.trimmingCharacters(in: .newlines))
+    }
+
     @IBAction func handleBack(_ sender: Any) {
         handleBack()
     }
@@ -59,7 +73,7 @@ class EditRecordViewController: UIViewController {
         contactTextField.isEnabled = false
     }
 
-    // TODO: go to activities view controller instead
+     // TODO: go to activities view controller instead
      func goBack() {
          self.navigationController?.popViewController(animated: true)
      }
@@ -85,4 +99,23 @@ class EditRecordViewController: UIViewController {
                  self.goBack()
              })
      }
+
+    func checkRecordDetails() -> Bool {
+        guard let groupSize = groupSize,
+            let babyChairQuantity = babyChairQuantity else {
+                showMessage(title: Constants.errorTitle,
+                            message: "Missing fields",
+                            buttonText: Constants.okayTitle)
+                return false
+        }
+
+        if groupSize < babyChairQuantity {
+            showMessage(title: Constants.errorTitle,
+                        message: "Group size must be greater than baby chair quantity!",
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
+        return true
+    }
 }

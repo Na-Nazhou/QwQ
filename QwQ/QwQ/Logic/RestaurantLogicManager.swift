@@ -17,16 +17,7 @@ class RestaurantLogicManager: RestaurantLogic {
     
     private init(customer: Customer) {
         self.customer = customer
-        restaurantStorage = FBRestaurantStorage()
-        restaurantStorage.logicDelegate = self
-    }
-    
-    func fetchRestaurants() {
-        restaurantStorage.loadAllRestaurants(completion: {
-            if self.restaurantCollection.add($0) {
-                self.searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
-            }
-        })
+        self.restaurantStorage = FBRestaurantStorage()
     }
     
     func restaurantDidModifyProfile(restaurant: Restaurant) {
@@ -40,14 +31,15 @@ class RestaurantLogicManager: RestaurantLogic {
     
     func didChangeQueueStatus(restaurant: Restaurant) {
         if restaurant == currentRestaurant {
-            restaurantDelegate?.restaurantDidSetQueueStatus(toIsOpen: restaurant.isQueueOpen)
+            currentRestaurant = restaurant
+            restaurantDelegate?.restaurantDidUpdate()
         }
         
         searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: restaurant.isQueueOpen)
         
     }
 
-    func didAddNewRestaurant(restaurant: Restaurant) {
+    func didAddRestaurant(restaurant: Restaurant) {
         if restaurantCollection.add(restaurant) {
             searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
         }
