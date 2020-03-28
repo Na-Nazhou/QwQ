@@ -9,6 +9,8 @@ import UIKit
 
 class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
+    let queueLogicManager = CustomerQueueLogicManager()
+
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
             return
@@ -21,7 +23,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
         // Edit existing queue record
         if let queueRecord = record as? QueueRecord {
-            CustomerQueueLogicManager.shared()
+            queueLogicManager
                 .editQueueRecord(oldRecord: queueRecord,
                                  with: groupSize,
                                  babyChairQuantity: babyChairQuantity,
@@ -35,7 +37,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
             return
         }
         
-        if CustomerQueueLogicManager.shared()
+        if queueLogicManager
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
@@ -46,7 +48,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CustomerQueueLogicManager.shared().queueDelegate = self
+        queueLogicManager.queueDelegate = self
     }
 
     func didFindRestaurantQueueClosed() {

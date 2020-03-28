@@ -62,8 +62,8 @@ class EditRecordViewController: UIViewController {
             restaurantNameLabel.text = restaurant.name
 
             // Autofill the name and contact
-            nameTextField.text = CustomerQueueLogicManager.shared().customer.name
-            contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+            nameTextField.text = CustomerActivity.shared().customer.name
+            contactTextField.text = CustomerActivity.shared().customer.contact
             wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
             babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }

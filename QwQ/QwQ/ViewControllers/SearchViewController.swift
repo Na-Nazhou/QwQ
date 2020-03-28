@@ -19,6 +19,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     private var searchActive: Bool = false
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private let queueLogicManager = CustomerQueueLogicManager()
     private var restaurants: [Restaurant] {
         RestaurantLogicManager.shared().restaurants
     }
@@ -190,12 +191,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 return
             }
             
-            if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
+            if self.queueLogicManager.canQueue(for: restaurant) {
                 self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
-            } else {
-                self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.multipleQueueRecordsMessage,
-                                 buttonText: Constants.okayTitle)
             }
         }
         return restaurantCell

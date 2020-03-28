@@ -31,6 +31,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.customerActivity = customerActivity
         self.queueStorage = queueStorage
 
+        self.queueStorage.registerDelegate(self)
+
         loadQueueRecord()
         fetchQueueHistory()
     }
@@ -39,7 +41,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         for record in customerActivity.currentQueues.records {
             queueStorage.removeListener(for: record)
         }
-        queueStorage.logicDelegate = nil
+        queueStorage.unregisterDelegate(self)
     }
 
     private func loadQueueRecord() {

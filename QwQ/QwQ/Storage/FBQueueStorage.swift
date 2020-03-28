@@ -10,7 +10,8 @@ class FBQueueStorage: CustomerQueueStorage {
     // MARK: Storage capabilities
     private let db = Firestore.firestore()
 
-    weak var logicDelegate: QueueStorageSyncDelegate?
+    var logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    //QueueStorageSyncDelegate?
 
     private var listeners: [QueueRecord: ListenerRegistration] = [:]
 
@@ -174,7 +175,7 @@ class FBQueueStorage: CustomerQueueStorage {
 
             guard let data = snapshot.data() else {
                 assert(false, "At this stage, we should not allow deletion of any records.")
-                self.logicDelegate?.didDeleteQueueRecord(record)
+                self.delegateWork { $0.didDeleteQueueRecord(record) }
                 return
             }
 
@@ -185,12 +186,29 @@ class FBQueueStorage: CustomerQueueStorage {
                                             print("Error")
                                             return
             }
-            self.logicDelegate?.didUpdateQueueRecord(newRecord)
+            self.delegateWork { $0.didUpdateQueueRecord(newRecord) }
         }
     }
     
     func removeListener(for record: QueueRecord) {
         listeners[record]?.remove()
         listeners[record] = nil
+    }
+
+    func registerDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.add(del)
+    }
+
+    func unregisterDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (QueueStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? QueueStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
     }
 }

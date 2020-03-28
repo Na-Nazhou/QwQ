@@ -17,6 +17,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    let queueLogicManager = CustomerQueueLogicManager()
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
     }
@@ -41,12 +42,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
             return
         }
 
-        if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
+        if queueLogicManager.canQueue(for: restaurant) {
             performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
-        } else {
-            showMessage(title: Constants.errorTitle,
-                        message: Constants.multipleQueueRecordsMessage,
-                        buttonText: Constants.okayTitle)
         }
     }
 
