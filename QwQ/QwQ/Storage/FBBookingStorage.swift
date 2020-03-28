@@ -12,10 +12,12 @@ class FBBookingStorage: CustomerBookingStorage {
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
-    private var listenerMap = [BookRecord: ListenerRegistration]()
+    private var listeners = [BookRecord: ListenerRegistration]()
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
         db.collection(Constants.bookingsDirectory)
+            .document(record.restaurant.uid)
+            .collection(record.date)
             .document(record.id)
     }
 
@@ -132,7 +134,8 @@ class FBBookingStorage: CustomerBookingStorage {
             }
 
             guard let bookRecordData = doc.data() else {
-                self.delegateWork {  $0.didDeleteBookRecord(record) }
+                assert(false, "At this stage, we should not allow deletion of any records.")
+                self.delegateWork { $0.didDeleteBookRecord(record) }
                 return
             }
 
@@ -143,14 +146,14 @@ class FBBookingStorage: CustomerBookingStorage {
                                                 print("Error")
                                                 return
             }
-            self.delegateWork {  $0.didUpdateBookRecord(newRecord) }
+            self.delegateWork { $0.didUpdateBookRecord(newRecord) }
         }
-        listenerMap[record] = listener
+        listeners[record] = listener
     }
 
     func removeListener(for record: BookRecord) {
-        listenerMap[record]?.remove()
-        listenerMap[record] = nil
+        listeners[record]?.remove()
+        listeners[record] = nil
     }
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {

@@ -89,6 +89,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         bookingStorage.registerListener(for: newRecord)
 
         bookingDelegate?.didAddRecord()
+        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     func editBookRecord(oldRecord: BookRecord,
@@ -110,6 +111,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
             self.bookingDelegate?.didUpdateRecord()
+            self.activitiesDelegate?.didUpdateActiveRecords()
         })
         return true
     }
