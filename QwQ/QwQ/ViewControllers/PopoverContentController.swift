@@ -9,7 +9,7 @@ import UIKit
 
 class PopoverContentController: UIViewController {
     let sortCriteria = Constants.sortCriteria
-    var delegate: PopoverContentControllerDelegate?
+    weak var delegate: PopoverContentControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

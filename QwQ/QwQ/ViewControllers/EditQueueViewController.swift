@@ -33,7 +33,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         }
 
          // Create a new queue record
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+        guard let restaurant = restaurant else {
             return
         }
         

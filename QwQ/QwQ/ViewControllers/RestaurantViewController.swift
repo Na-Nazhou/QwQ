@@ -17,9 +17,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
-    let queueLogicManager = CustomerQueueLogicManager()
+    private let queueLogicManager = CustomerQueueLogicManager()
+    var restaurantLogicManager: RestaurantLogicManager!
     var restaurant: Restaurant? {
-        RestaurantLogicManager.shared().currentRestaurant
+        restaurantLogicManager.currentRestaurant
     }
     
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         
         setUpViews()
 
-        RestaurantLogicManager.shared().restaurantDelegate = self
+        restaurantLogicManager.restaurantDelegate = self
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
@@ -75,5 +76,17 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     func restaurantDidUpdate() {
         setUpViews()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.editQueueSelectedSegue
+            || segue.identifier == Constants.editBookSelectedSegue {
+            guard let editVC = segue.destination as? EditRecordViewController, let restaurant = restaurant else {
+                assert(false,
+                       "Destination should be editRecordVC and restaurant should not be nil.")
+                return
+            }
+            editVC.restaurant = restaurant
+        }
     }
 }

@@ -20,8 +20,10 @@ class SearchViewController: UIViewController, SearchDelegate {
     private let searchController = UISearchController(searchResultsController: nil)
     
     private let queueLogicManager = CustomerQueueLogicManager()
+    private let restaurantLogicManager = RestaurantLogicManager()
+
     private var restaurants: [Restaurant] {
-        RestaurantLogicManager.shared().restaurants
+        restaurantLogicManager.restaurants
     }
     
     @IBOutlet private var restaurantCollectionView: UICollectionView!
@@ -61,7 +63,7 @@ class SearchViewController: UIViewController, SearchDelegate {
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
         
-        RestaurantLogicManager.shared().searchDelegate = self
+        restaurantLogicManager.searchDelegate = self
     }
     
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
@@ -80,13 +82,25 @@ class SearchViewController: UIViewController, SearchDelegate {
         if segue.identifier == Constants.restaurantSelectedSegue {
             if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
                 let row = indexPaths[0].item
-                RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
+                restaurantLogicManager.currentRestaurant = restaurants[row]
             }
+
+            guard let rVC = segue.destination as? RestaurantViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            rVC.restaurantLogicManager = restaurantLogicManager
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,
             let restaurant = sender as? Restaurant {
-            RestaurantLogicManager.shared().currentRestaurant = restaurant
+            restaurantLogicManager.currentRestaurant = restaurant
+
+            guard let editVC = segue.destination as? EditRecordViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            editVC.restaurant = restaurant
         }
     }
 }

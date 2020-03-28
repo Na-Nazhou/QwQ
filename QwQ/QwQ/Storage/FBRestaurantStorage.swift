@@ -1,16 +1,19 @@
 import FirebaseFirestore
 
 class FBRestaurantStorage: RestaurantStorage {
+    // MARK: Storage as singleton
+    static let shared = FBRestaurantStorage()
 
-    let db = Firestore.firestore()
-
-    weak var logicDelegate: RestaurantStorageSyncDelegate?
-
-    private var listener: ListenerRegistration?
-
-    init() {
+    private init() {
         attachListenerOnRestaurants()
     }
+
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
+
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+
+    private var listener: ListenerRegistration?
 
     deinit {
         listener?.remove()
@@ -30,13 +33,30 @@ class FBRestaurantStorage: RestaurantStorage {
                     }
                     switch diff.type {
                     case .added:
-                        self.logicDelegate?.didAddRestaurant(restaurant: restaurant)
+                        self.delegateWork { $0.didAddRestaurant(restaurant: restaurant) }
                     case .modified:
-                        self.logicDelegate?.restaurantDidModifyProfile(restaurant: restaurant)
+                        self.delegateWork { $0.restaurantDidModifyProfile(restaurant: restaurant) }
                     case .removed:
-                        self.logicDelegate?.didRemoveRestaurant(restaurant: restaurant)
+                        self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
                     }
                 }
             }
+    }
+
+    func registerDelegate(_ del: RestaurantStorageSyncDelegate) {
+        logicDelegates.add(del)
+    }
+
+    func unregisterDelegate(_ del: RestaurantStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (RestaurantStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? RestaurantStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
     }
 }

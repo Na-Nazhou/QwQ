@@ -36,7 +36,7 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
 
         // Create a new book record
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+        guard let restaurant = restaurant else {
             return
         }
 

@@ -10,6 +10,7 @@ class EditRecordViewController: UIViewController {
 
     var spinner: UIView?
 
+    var restaurant: Restaurant?
     var record: Record?
 
     var groupSize: Int? {
@@ -56,7 +57,7 @@ class EditRecordViewController: UIViewController {
             babyChairQuantityTextField.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         } else {
-            guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+            guard let restaurant = restaurant else {
                 return
             }
             restaurantNameLabel.text = restaurant.name
