@@ -21,6 +21,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         customerActivity.queueHistory.records
     }
 
+    convenience init() {
+        self.init(customerActivity: CustomerActivity.shared(),
+                  queueStorage: FBQueueStorage.shared)
+    }
+
+    // Constructor to provide flexibility for testing.
     init(customerActivity: CustomerActivity, queueStorage: CustomerQueueStorage) {
         self.customerActivity = customerActivity
         self.queueStorage = queueStorage
@@ -113,13 +119,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                          with groupSize: Int,
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool) {
-        guard oldRecord == currentQueueRecord else {
-            // Check if there is any change
-            // Check the queue record is not admitted yet
+        guard currentQueueRecords.contains(oldRecord) else {
+            // not even current; cannot edit
             return
         }
-        // Cannot update the restaurant, startTime, etc
-        // Reset startTime (??)
 
         let newRecord = QueueRecord(id: oldRecord.id,
                                     restaurant: oldRecord.restaurant,
@@ -135,23 +138,16 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
-        guard let record = currentQueueRecord,
-            queueRecord == record else {
+        guard currentQueueRecords.contains(queueRecord) else {
             return
         }
 
-        if queueRecord.isAdmitted {
-            var newRecord = queueRecord
-            newRecord.withdrawTime = Date()
-            queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
-                self.activitiesDelegate?.didDeleteRecord()
-            })
-            return
-        }
-
-        queueStorage.deleteQueueRecord(record: record, completion: {
+        var newRecord = queueRecord
+        newRecord.withdrawTime = Date()
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
             self.activitiesDelegate?.didDeleteRecord()
         })
+        // we dont allow true deletion of any info from db.
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
@@ -166,15 +162,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             print("\ndetected admission\n")
         case .serve:
             addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            removeFromCurrent(record)
             print("\ndetected service\n")
         case .reject:
             addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            removeFromCurrent(record)
             print("\ndetected rejection\n")
         case .withdraw:
             addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            removeFromCurrent(record)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
             print("\ndetected regular modif\n")
@@ -184,19 +180,22 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        currentQueueRecord = record
+        customerActivity.currentQueues.update(record)
     }
 
     func didDeleteQueueRecord(_ record: QueueRecord) {
-        assert(currentQueueRecord == record)
+        removeFromCurrent(record)
+    }
 
+    private func removeFromCurrent(_ record: QueueRecord) {
         queueStorage.removeListener(for: record)
-        currentQueueRecord = nil
-        activitiesDelegate?.didUpdateActiveRecords()
+        if customerActivity.currentQueues.remove(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
     }
 
     private func addAsHistoryRecord(_ record: QueueRecord) {
-        if queueHistory.add(record) {
+        if customerActivity.queueHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }

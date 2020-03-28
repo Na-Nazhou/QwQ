@@ -3,11 +3,7 @@ import Foundation
 
 class FBQueueStorage: CustomerQueueStorage {
     // MARK: Storage as singleton
-    private static var singleton = FBQueueStorage()
-    
-    static var shared: FBQueueStorage {
-        singleton
-    }
+    static let shared = FBQueueStorage()
 
     private init() {}
 

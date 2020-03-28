@@ -17,7 +17,7 @@ class CustomerActivity {
     }
 
     // MARK: Properties
-    let customer: Customer
+    private(set) var customer: Customer
 
     var currentQueues: RecordCollection<QueueRecord>
     var currentBookings: RecordCollection<BookRecord>
@@ -38,5 +38,12 @@ class CustomerActivity {
         currentBookings = RecordCollection<BookRecord>()
         queueHistory = RecordCollection<QueueRecord>()
         bookingHistory = RecordCollection<BookRecord>()
+    }
+}
+
+extension CustomerActivity {
+    func updateCustomer(_ updated: Customer) {
+        assert(customer == updated, "Customer id should be the same to update.")
+        customer = updated
     }
 }

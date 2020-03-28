@@ -1,23 +1,23 @@
+////
+////  CustomerHistoryLogic.swift
+////  QwQ
+////
+////  Created by Nazhou Na on 22/3/20.
+////
 //
-//  CustomerHistoryLogic.swift
-//  QwQ
+//import Foundation
 //
-//  Created by Nazhou Na on 22/3/20.
+//// TODO
+//protocol CustomerHistoryLogic {
 //
-
-import Foundation
-
-// TODO
-protocol CustomerHistoryLogic {
-
-    // Storage
-    var queueStorage: CustomerQueueStorage { get set }
-    var bookingStorage: CustomerBookingStorage { get set }
-
-    // View Controllers
-    var activitiesDelegate: ActivitiesDelegate? { get set }
-
-    func fetchActiveRecords()
-
-    func fetchHistoryRecords()
-}
+//    // Storage
+//    var queueStorage: CustomerQueueStorage { get set }
+//    var bookingStorage: CustomerBookingStorage { get set }
+//
+//    // View Controllers
+//    var activitiesDelegate: ActivitiesDelegate? { get set }
+//
+//    func fetchActiveRecords()
+//
+//    func fetchHistoryRecords()
+//}
