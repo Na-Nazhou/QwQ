@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditBookingViewController: EditRecordViewController, RecordDelegate {
+class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
     @IBOutlet var datePicker: UIDatePicker!
 
@@ -17,20 +17,20 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
         }
 
         guard let groupSize = groupSize,
-                       let babyChairQuantity = babyChairQuantity  else {
+            let babyChairQuantity = babyChairQuantity  else {
                     return
-            }
-
-        spinner = showSpinner(onView: view)
+        }
         
         // Edit existing book record
         if let bookRecord = record as? BookRecord {
-            CustomerBookingLogicManager.shared()
+            if CustomerBookingLogicManager.shared()
                 .editBookRecord(oldRecord: bookRecord,
                                 at: datePicker.date,
                                 with: groupSize,
                                 babyChairQuantity: babyChairQuantity,
-                                wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+                                wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+                spinner = showSpinner(onView: view)
+            }
             return
         }
 
@@ -39,12 +39,14 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
             return
         }
 
-        CustomerBookingLogicManager.shared()
+        if CustomerBookingLogicManager.shared()
             .addBookRecord(to: restaurant,
                            at: datePicker.date,
                            with: groupSize,
                            babyChairQuantity: babyChairQuantity,
-                           wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+                           wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+            spinner = showSpinner(onView: view)
+        }
     }
     
     override func viewDidLoad() {
@@ -56,8 +58,9 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
     override func setUpViews() {
         super.setUpViews()
 
-        let minDate = Date()
+        let minDate = Calendar.current.date(byAdding: .hour, value: 2, to: Date())!
         datePicker.minimumDate = minDate
+        datePicker.minuteInterval = 15
 
         // Editing an existing book record
         if let bookRecord = record as? BookRecord {
@@ -65,5 +68,11 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
         } else {
             datePicker.date = minDate
         }
+    }
+
+    func didFindExistingRecord() {
+        showMessage(title: Constants.errorTitle,
+                    message: "You have an existing booking at the same time at this restaurant already!",
+                    buttonText: Constants.okayTitle)
     }
 }

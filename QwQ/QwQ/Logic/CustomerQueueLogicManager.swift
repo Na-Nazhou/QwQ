@@ -6,7 +6,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     var queueStorage: CustomerQueueStorage
 
     // View Controller
-    weak var queueDelegate: RecordDelegate?
+    weak var queueDelegate: QueueDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
@@ -74,9 +74,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
                  babyChairQuantity: Int,
-                 wheelchairFriendly: Bool) {
-        guard canQueue(for: restaurant) else {
-            return
+                 wheelchairFriendly: Bool) -> Bool {
+        guard currentQueueRecord == nil else {
+            return false
         }
 
         let startTime = Date()
@@ -87,10 +87,25 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: startTime)
 
+        if !checkRestaurantQueue(for: newRecord) {
+            return false
+        }
+
         queueStorage.addQueueRecord(newRecord: newRecord,
                                     completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
 
         })
+        return true
+    }
+
+    private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
+        if !record.restaurant.isQueueOpen {
+            print("Queue closed")
+            queueDelegate?.didFindRestaurantQueueClosed()
+            return false
+        }
+
+        return true
     }
 
     private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
@@ -137,7 +152,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
                 self.activitiesDelegate?.didDeleteRecord()
             })
-            return 
+            return
         }
 
         queueStorage.deleteQueueRecord(record: record, completion: {

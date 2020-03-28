@@ -5,7 +5,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
     var queueStorage: CustomerQueueStorage { get set }
 
     // View Controllers
-    var queueDelegate: RecordDelegate? { get set }
+    var queueDelegate: QueueDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
     var currentQueueRecord: QueueRecord? { get set }
@@ -13,7 +13,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
                  babyChairQuantity: Int,
-                 wheelchairFriendly: Bool)
+                 wheelchairFriendly: Bool) -> Bool
 
     func editQueueRecord(oldRecord: QueueRecord,
                          with groupSize: Int,

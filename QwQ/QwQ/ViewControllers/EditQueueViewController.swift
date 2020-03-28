@@ -7,15 +7,15 @@
 
 import UIKit
 
-class EditQueueViewController: EditRecordViewController, RecordDelegate {
+class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
             return
         }
 
-         guard let groupSize = groupSize,
-                       let babyChairQuantity = babyChairQuantity  else {
+        guard let groupSize = groupSize,
+            let babyChairQuantity = babyChairQuantity  else {
                 return
         }
 
@@ -34,24 +34,24 @@ class EditQueueViewController: EditRecordViewController, RecordDelegate {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
             return
         }
-
-        if !restaurant.isQueueOpen {
-                   showMessage(title: Constants.errorTitle,
-                               message: Constants.restaurantUnavailableMessage,
-                               buttonText: Constants.okayTitle)
-                   return
-        }
         
-        CustomerQueueLogicManager.shared()
+        if CustomerQueueLogicManager.shared()
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
-                     wheelchairFriendly: wheelchairFriendlySwitch.isOn)
-        spinner = showSpinner(onView: view)
+                     wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+            spinner = showSpinner(onView: view)
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         CustomerQueueLogicManager.shared().queueDelegate = self
+    }
+
+    func didFindRestaurantQueueClosed() {
+        showMessage(title: Constants.errorTitle,
+                    message: Constants.restaurantUnavailableMessage,
+                    buttonText: Constants.okayTitle)
     }
 }

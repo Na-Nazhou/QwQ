@@ -11,3 +11,13 @@ protocol RecordDelegate: AnyObject {
 
     func didUpdateRecord()
 }
+
+protocol QueueDelegate: RecordDelegate {
+
+    func didFindRestaurantQueueClosed()
+}
+
+protocol BookingDelegate: RecordDelegate {
+
+    func didFindExistingRecord()
+}

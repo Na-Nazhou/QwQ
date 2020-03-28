@@ -100,7 +100,7 @@ struct BookRecord: Record {
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime)
+                  rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
 }
 

@@ -13,20 +13,20 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
     var bookingStorage: CustomerBookingStorage { get set }
 
     // View Controllers
-    var bookingDelegate: RecordDelegate? { get set }
+    var bookingDelegate: BookingDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
     func addBookRecord(to restaurant: Restaurant,
                        at time: Date,
                        with groupSize: Int,
                        babyChairQuantity: Int,
-                       wheelchairFriendly: Bool)
+                       wheelchairFriendly: Bool) -> Bool
 
     func editBookRecord(oldRecord: BookRecord,
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool)
+                        wheelchairFriendly: Bool) -> Bool
 
     func deleteBookRecord(_ bookRecord: BookRecord)
 }
