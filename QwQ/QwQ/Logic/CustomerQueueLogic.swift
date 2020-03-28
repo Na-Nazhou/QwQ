@@ -8,7 +8,8 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
     var queueDelegate: QueueDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
-    var currentQueueRecord: QueueRecord? { get set }
+    var currentQueueRecords: [QueueRecord] { get }
+    var pastQueueRecords: [QueueRecord] { get }
 
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,

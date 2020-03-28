@@ -2,13 +2,21 @@ import FirebaseFirestore
 import Foundation
 
 class FBQueueStorage: CustomerQueueStorage {
+    // MARK: Storage as singleton
+    private static var singleton = FBQueueStorage()
+    
+    static var shared: FBQueueStorage {
+        singleton
+    }
 
-    let db = Firestore.firestore()
+    private init() {}
+
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
 
     weak var logicDelegate: QueueStorageSyncDelegate?
 
-    private var listener: ListenerRegistration?
-    private var isFirstResponse = true
+    private var listeners: [QueueRecord: ListenerRegistration] = [:]
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
         db.collection(Constants.queuesDirectory)
@@ -161,23 +169,15 @@ class FBQueueStorage: CustomerQueueStorage {
 
     // MARK: - Listeners
     func registerListener(for record: QueueRecord) {
-        //remove any listeners
-        removeListener(for: record)
-
-        //add listener
         let docRef = getQueueRecordDocument(record: record)
-        listener = docRef.addSnapshotListener { (snapshot, err) in
+        listeners[record] = docRef.addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 print("Error fetching document: \(err!)!")
                 return
             }
 
-            if self.isFirstResponse {
-                self.isFirstResponse = false
-                return
-            }
-
             guard let data = snapshot.data() else {
+                assert(false, "At this stage, we should not allow deletion of any records.")
                 self.logicDelegate?.didDeleteQueueRecord(record)
                 return
             }
@@ -194,12 +194,7 @@ class FBQueueStorage: CustomerQueueStorage {
     }
     
     func removeListener(for record: QueueRecord) {
-        guard listener != nil else {
-            return
-        }
-
-        listener?.remove()
-        listener = nil
-        isFirstResponse = true
+        listeners[record]?.remove()
+        listeners[record] = nil
     }
 }

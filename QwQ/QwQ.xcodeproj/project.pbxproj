@@ -45,7 +45,7 @@
 		617B62E1241F3C0F0010AB30 /* BookRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62E0241F3C0F0010AB30 /* BookRecord.swift */; };
 		617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */; };
 		61ACB7F0242A72E3002A1F47 /* Collection+Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */; };
-		61ACB7F9242A7C7E002A1F47 /* CustomerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F7242A7C7D002A1F47 /* CustomerHistory.swift */; };
+		61ACB7F9242A7C7E002A1F47 /* CustomerActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */; };
 		61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */; };
 		61C742FD242B3C12005818A1 /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FA242B3C11005818A1 /* RecordModification.swift */; };
 		61C742FE242B3C12005818A1 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C742FB242B3C11005818A1 /* Collection.swift */; };
@@ -162,7 +162,7 @@
 		617B62E0241F3C0F0010AB30 /* BookRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookRecord.swift; path = QwQ/Logic/Delegates/BookRecord.swift; sourceTree = SOURCE_ROOT; };
 		617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidationUtilities.swift; path = QwQ/Others/Utilities/ValidationUtilities.swift; sourceTree = "<group>"; };
 		61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Restaurant.swift"; sourceTree = "<group>"; };
-		61ACB7F7242A7C7D002A1F47 /* CustomerHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerHistory.swift; sourceTree = "<group>"; };
+		61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerActivity.swift; sourceTree = "<group>"; };
 		61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollection.swift; sourceTree = "<group>"; };
 		61C742FA242B3C11005818A1 /* RecordModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModification.swift; sourceTree = "<group>"; };
 		61C742FB242B3C11005818A1 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 		61B2EAA22418BAA400B88018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				61ACB7F7242A7C7D002A1F47 /* CustomerHistory.swift */,
+				61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */,
 				61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */,
 				61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */,
 				D462D6992429F914002309A5 /* RestaurantModification.swift */,
@@ -502,10 +502,10 @@
 			children = (
 				6101D7982427A81400ACBCC9 /* Delegates */,
 				D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */,
-				5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */,
 				6148054F242287F1003D6D44 /* CustomerBookingStorage.swift */,
-				6101D79324271B6E00ACBCC9 /* FBBookingStorage.swift */,
 				D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */,
+				5C6DA5CF241A1799001CABC3 /* FBQueueStorage.swift */,
+				6101D79324271B6E00ACBCC9 /* FBBookingStorage.swift */,
 				6148054924227CE2003D6D44 /* FBRestaurantStorage.swift */,
 			);
 			path = Storage;
@@ -827,7 +827,7 @@
 				D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */,
 				7EE6D017241DB57F00C1465E /* AlertService.swift in Sources */,
 				6101D796242760A900ACBCC9 /* CustomerHistoryLogic.swift in Sources */,
-				61ACB7F9242A7C7E002A1F47 /* CustomerHistory.swift in Sources */,
+				61ACB7F9242A7C7E002A1F47 /* CustomerActivity.swift in Sources */,
 				7EDC5E59242206AB0053CA1D /* ProfileImageView.swift in Sources */,
 				7EC7E694241B383400C2F9BB /* ProfileViewController.swift in Sources */,
 				61C74302242B4A1F005818A1 /* RecordViewController.swift in Sources */,
