@@ -45,13 +45,17 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             let time2: Date
             if record1.isServed {
                 time1 = record1.serveTime!
-            } else {
+            } else if record1.isRejected {
                 time1 = record1.rejectTime!
+            } else {
+                time1 = record1.withdrawTime!
             }
             if record2.isServed {
                 time2 = record2.serveTime!
-            } else {
+            } else if record2.isRejected {
                 time2 = record2.rejectTime!
+            } else {
+                time2 = record2.withdrawTime!
             }
             return time1 > time2
         })

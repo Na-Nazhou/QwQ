@@ -131,6 +131,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
+        if queueRecord.isAdmitted {
+            var newRecord = queueRecord
+            newRecord.withdrawTime = Date()
+            queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
+                self.activitiesDelegate?.didDeleteRecord()
+            })
+            return 
+        }
+
         queueStorage.deleteQueueRecord(record: record, completion: {
             self.activitiesDelegate?.didDeleteRecord()
         })
@@ -153,6 +162,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             addAsHistoryRecord(record)
             didDeleteQueueRecord(record)
             print("\ndetected rejection\n")
+        case .withdraw:
+            addAsHistoryRecord(record)
+            didDeleteQueueRecord(record)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
             print("\ndetected regular modif\n")

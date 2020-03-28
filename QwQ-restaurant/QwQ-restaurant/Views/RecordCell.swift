@@ -73,6 +73,11 @@ class RecordCell: UICollectionViewCell {
             timeLabel.text = record.rejectTime!.getFormattedTime()
             timeLabel.textColor = .systemGray
             hideButtons()
+        case .withdrawn:
+            statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
+            timeLabel.text = record.withdrawTime!.getFormattedTime()
+            timeLabel.textColor = .systemGray
+            hideButtons()
         default:
             assert(false)
         }

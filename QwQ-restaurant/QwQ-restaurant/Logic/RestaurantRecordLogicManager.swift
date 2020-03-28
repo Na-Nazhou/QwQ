@@ -1,5 +1,5 @@
 import Foundation
-class RestaurantQueueLogicManager: RestaurantRecordLogic {
+class RestaurantRecordLogicManager: RestaurantRecordLogic {
 
     // Storage
     private(set) var queueStorage: RestaurantQueueStorage
@@ -53,13 +53,17 @@ class RestaurantQueueLogicManager: RestaurantRecordLogic {
             let time2: Date
             if record1.isServed {
                 time1 = record1.serveTime!
-            } else {
+            } else if record1.isRejected {
                 time1 = record1.rejectTime!
+            } else {
+                time1 = record1.withdrawTime!
             }
             if record2.isServed {
                 time2 = record2.serveTime!
-            } else {
+            } else if record2.isRejected {
                 time2 = record2.rejectTime!
+            } else {
+                time2 = record2.withdrawTime!
             }
             return time1 > time2
         })
@@ -107,7 +111,7 @@ class RestaurantQueueLogicManager: RestaurantRecordLogic {
     }
 }
 
-extension RestaurantQueueLogicManager {
+extension RestaurantRecordLogicManager {
     func didAddRecord<T: Record>(_ record: T,
                                  currentList: RecordCollection<T>,
                                  waitingList: RecordCollection<T>,
@@ -171,12 +175,6 @@ extension RestaurantQueueLogicManager {
         if record.isPendingAdmission {
             if currentList.remove(record) {
                 self.presentationDelegate?.didUpdateCurrentList()
-            }
-        }
-
-        if record.isAdmitted {
-            if waitingList.remove(record) {
-                self.presentationDelegate?.didUpdateWaitingList()
             }
         }
     }
@@ -270,20 +268,20 @@ extension RestaurantQueueLogicManager {
     }
 }
 
-extension RestaurantQueueLogicManager {
+extension RestaurantRecordLogicManager {
     // Singleton created upon successful login
-    private static var queueLogic: RestaurantQueueLogicManager?
+    private static var queueLogic: RestaurantRecordLogicManager?
 
     /// Returns shared restaurant queue logic manager for the logged in application. If it does not exist,
     /// a queue logic manager is initiailised with the given restaurant identity to share.
-    static func shared(for restaurantIdentity: Restaurant? = nil) -> RestaurantQueueLogicManager {
+    static func shared(for restaurantIdentity: Restaurant? = nil) -> RestaurantRecordLogicManager {
         if let logic = queueLogic {
             return logic
         }
 
         assert(restaurantIdentity != nil,
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
-        let logic = RestaurantQueueLogicManager(restaurant: restaurantIdentity!)
+        let logic = RestaurantRecordLogicManager(restaurant: restaurantIdentity!)
         logic.queueStorage.logicDelegate = logic
         logic.bookingStorage.logicDelegate = logic
 
@@ -296,7 +294,7 @@ extension RestaurantQueueLogicManager {
     }
 }
 
-extension RestaurantQueueLogicManager {
+extension RestaurantRecordLogicManager {
     private func currentTime() -> Date {
         Date()
     }
