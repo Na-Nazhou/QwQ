@@ -61,7 +61,6 @@ class SearchViewController: UIViewController, SearchDelegate {
         restaurantCollectionView.dataSource = self
         
         RestaurantLogicManager.shared().searchDelegate = self
-        RestaurantLogicManager.shared().fetchRestaurants()
     }
     
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {

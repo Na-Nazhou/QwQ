@@ -56,8 +56,11 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
+        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTimestamp = Timestamp(date: startTime)
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
+            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -74,8 +77,11 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
+        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTimestamp = Timestamp(date: startTime)
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
+            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                 print("Error getting documents: \(err)")
@@ -120,7 +126,6 @@ class FBBookingStorage: CustomerBookingStorage {
         removeListener(for: record)
 
         //add listener
-       print("Adding listener for \(record)")
         let docRef = getBookRecordDocument(record: record)
         let listener = docRef.addSnapshotListener { (snapshot, err) in
             guard let doc = snapshot, err == nil else {

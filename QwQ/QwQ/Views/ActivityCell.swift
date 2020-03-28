@@ -41,7 +41,7 @@ class ActivityCell: UICollectionViewCell {
                 // TODO: display estimated time instead
             }
             if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Time: \(bookRecord.time.toString())"
+                statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
             }
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
@@ -50,7 +50,8 @@ class ActivityCell: UICollectionViewCell {
             hideEditAndDelete()
         case .rejected:
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
-
+        case .withdrawn:
+            statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
         default:
             assert(false)
         }

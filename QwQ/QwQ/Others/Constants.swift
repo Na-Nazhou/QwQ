@@ -47,13 +47,8 @@ struct Constants {
     static let restaurantUnavailableMessage = "This restaurant queue is currently not open!"
     static let multipleQueueRecordsMessage = "You have an existing queue record."
     static let recordDeleteSuccessMessage = "Your record has been deleted."
-
-    static let queueRecordCreateSuccessMessage = "You have created a new queue record."
-    static let queueRecordUpdateSuccessMessage = "Your queue record has been updated."
-
-    // MARK: Book record
-    static let bookRecordCreateSuccessMessage = "You have created a book record."
-    static let bookRecordUpdateSuccessMessage = "This book record has been updated."
+    static let recordCreateSuccessMessage = "You have created a record."
+    static let recordUpdateSuccessMessage = "Your record has been updated."
     
     // MARK: Record settings
     static let defaultWheelchairFriendly = false

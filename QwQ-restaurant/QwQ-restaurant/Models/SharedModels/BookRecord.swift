@@ -26,6 +26,7 @@ struct BookRecord: Record {
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
+    let withdrawTime: Date?
 
     var dictionary: [String: Any] {
         var data = [String: Any]()
@@ -45,13 +46,16 @@ struct BookRecord: Record {
         if let rejectTime = rejectTime {
             data["rejectTime"] = rejectTime
         }
+        if let withdrawTime = withdrawTime {
+            data["withdrawTime"] = withdrawTime
+        }
 
         return data
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
-         admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+         admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil, withdrawTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -63,6 +67,7 @@ struct BookRecord: Record {
         self.admitTime = admitTime
         self.serveTime = serveTime
         self.rejectTime = rejectTime
+        self.withdrawTime = withdrawTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -75,13 +80,14 @@ struct BookRecord: Record {
         let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
         let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
+        let withdrawTime = (dictionary["withdrawTime"] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   time: time,
                   groupSize: groupSize,
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
-                  admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime)
+                  admitTime: admitTime, serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
 }
 
@@ -92,5 +98,19 @@ extension BookRecord: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+
+    func completelyIdentical(to other: BookRecord) -> Bool {
+        other == self
+            && other.restaurant == restaurant
+            && other.customer == customer
+            && other.time == time
+            && other.groupSize == groupSize
+            && other.babyChairQuantity == babyChairQuantity
+            && other.wheelchairFriendly == wheelchairFriendly
+            && other.admitTime == admitTime
+            && other.serveTime == serveTime
+            && other.rejectTime == rejectTime
+            && other.withdrawTime == withdrawTime
     }
 }

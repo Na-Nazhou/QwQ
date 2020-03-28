@@ -15,7 +15,7 @@ struct QueueRecord: Record {
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
-    //TODO: var customerRejectTime: Date?
+    let withdrawTime: Date?
 
     var startDate: String {
         Date.getFormattedDate(date: startTime, format: Constants.recordDateFormat)
@@ -38,13 +38,17 @@ struct QueueRecord: Record {
         if let rejectTime = rejectTime {
             data["rejectTime"] = rejectTime
         }
+        if let withdrawTime = withdrawTime {
+            data["withdrawTime"] = withdrawTime
+        }
 
         return data
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
-         startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil) {
+         startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
+         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -52,9 +56,11 @@ struct QueueRecord: Record {
         self.babyChairQuantity = babyChairQuantity
         self.wheelchairFriendly = wheelchairFriendly
         self.startTime = startTime
+
         self.admitTime = admitTime
         self.serveTime = serveTime
         self.rejectTime = rejectTime
+        self.withdrawTime = withdrawTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -67,12 +73,13 @@ struct QueueRecord: Record {
         let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
         let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
+        let withdrawTime = (dictionary["withdrawTime"] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
-                  serveTime: serveTime, rejectTime: rejectTime)
+                  serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
 
 }
@@ -97,5 +104,6 @@ extension QueueRecord: Hashable {
             && other.admitTime == admitTime
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
+            && other.withdrawTime == withdrawTime
     }
 }

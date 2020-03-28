@@ -2,6 +2,6 @@
 protocol RestaurantStorageSyncDelegate: AnyObject {
     func restaurantDidModifyProfile(restaurant: Restaurant)
 
-    func didAddNewRestaurant(restaurant: Restaurant)
+    func didAddRestaurant(restaurant: Restaurant)
     func didRemoveRestaurant(restaurant: Restaurant)
 }

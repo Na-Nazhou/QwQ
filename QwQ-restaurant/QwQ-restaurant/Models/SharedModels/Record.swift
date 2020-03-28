@@ -16,15 +16,16 @@ protocol Record {
     var babyChairQuantity: Int { get }
     var wheelchairFriendly: Bool { get }
 
-    var admitTime: Date? { get }
-    var serveTime: Date? { get }
-    var rejectTime: Date? { get }
+    var admitTime: Date? { get set }
+    var serveTime: Date? { get set }
+    var rejectTime: Date? { get set }
+    var withdrawTime: Date? { get }
 }
 
 extension Record {
 
     var isHistoryRecord: Bool {
-        status == .served || status == .rejected
+        status == .served || status == .rejected || status == .withdrawn
     }
 
     var isActiveRecord: Bool {
@@ -43,6 +44,10 @@ extension Record {
         status == .rejected
     }
 
+    var isWithdrawn: Bool {
+        status == .withdrawn
+    }
+
     var isPendingAdmission: Bool {
         status == .pendingAdmission
     }
@@ -50,12 +55,14 @@ extension Record {
     var status: RecordStatus {
         if admitTime == nil {
             return .pendingAdmission
-        } else if serveTime == nil && rejectTime == nil {
+        } else if admitTime != nil && withdrawTime == nil && rejectTime == nil && serveTime == nil {
             return .admitted
-        } else if serveTime != nil {
-            return .served
+        } else if withdrawTime != nil {
+            return .withdrawn
         } else if rejectTime != nil {
             return .rejected
+        } else if serveTime != nil {
+            return .served
         }
         return .invalid
     }
@@ -76,6 +83,10 @@ extension Record {
 
         if old.status == .admitted && self.status == .rejected {
             return .reject
+        }
+
+        if old.status == .admitted && self.status == .withdrawn {
+            return .withdraw
         }
 
         // TODO

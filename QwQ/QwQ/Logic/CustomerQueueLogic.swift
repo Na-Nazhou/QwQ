@@ -13,7 +13,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
                  babyChairQuantity: Int,
-                 wheelchairFriendly: Bool)
+                 wheelchairFriendly: Bool) -> Bool
 
     func editQueueRecord(oldRecord: QueueRecord,
                          with groupSize: Int,

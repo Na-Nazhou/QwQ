@@ -11,13 +11,14 @@ class FBQueueStorage: RestaurantQueueStorage {
 
     let db = Firestore.firestore()
 
-    weak var queueModificationLogicDelegate: QueueStorageSyncDelegate?
+    weak var logicDelegate: QueueStorageSyncDelegate?
     
     init(restaurant: Restaurant) {
-        attachListenerOnRestaurantAndQueue(restaurant: restaurant)
+        registerListenerForQueue(restaurant: restaurant)
+        registerListenerForRestaurant(restaurant: restaurant)
     }
 
-    private func attachListenerOnRestaurantAndQueue(restaurant: Restaurant) {
+    private func registerListenerForQueue(restaurant: Restaurant) {
         // listen to restaurant's queue document for 'today'
         // assuming users will restart app everyday
         let today = Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat)
@@ -33,41 +34,31 @@ class FBQueueStorage: RestaurantQueueStorage {
                     var completion: (QueueRecord) -> Void
                     switch diff.type {
                     case .added:
-                        // customerDidJoinQueue
                         print("\n\tfound new q\n")
-                        completion = { self.queueModificationLogicDelegate?.customerDidJoinQueue(with: $0) }
+                        completion = { self.logicDelegate?.didAddQueueRecord($0) }
                     case .modified:
-                        // customerDidUpdateInfo
-                        // or restaurantDidChangeCustomerQueueStatus
-                        completion = {
-                            switch self.getUpdateType(of: $0) {
-                            case .admit:
-                                self.queueModificationLogicDelegate?.restaurantDidAdmitCustomer(record: $0)
-                            case .reject:
-                                self.queueModificationLogicDelegate?.restaurantDidRejectCustomer(record: $0)
-                            case .serve:
-                                self.queueModificationLogicDelegate?.restaurantDidServeCustomer(record: $0)
-                            case .customerUpdate:
-                                self.queueModificationLogicDelegate?.customerDidUpdateQueueRecord(to: $0)
-                            }
-                        }
+                        print("\n\tfound update q\n")
+                        completion = { self.logicDelegate?.didUpdateQueueRecord($0) }
                     case .removed:
-                        //customerDidQuitQueue
                         print("\n\tcustomer deleted q themselves!\n")
-                        completion = { self.queueModificationLogicDelegate?.customerDidWithdrawQueue(record: $0) }
+                        completion = { self.logicDelegate?.didDeleteQueueRecord($0) }
                     }
-                    guard let customer = diff.document.data()["customer"] as? String else {
+
+                    guard let customerUID = diff.document.data()["customer"] as? String else {
                         assert(false, "all docs, including removed ones, should contain non empty data..?")
                         return
                     }
-                    self.getQueueRecordAndComplete(
-                        data: diff.document.data(), ofQid: diff.document.documentID,
-                        forCid: customer, atRestaurant: restaurant, completion: completion)
+                    self.makeQueueRecord(
+                        data: diff.document.data(), id: diff.document.documentID,
+                        customerUID: customerUID, restaurant: restaurant,
+                        completion: completion)
                 }
             }
-        
-        // listen to restaurant's profile
-        db.collection(Constants.restaurantsDirectory).document(restaurant.uid)
+    }
+
+    private func registerListenerForRestaurant(restaurant: Restaurant) {
+        db.collection(Constants.restaurantsDirectory)
+            .document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {
                     print("Error fetching document: \(err)")
@@ -75,147 +66,39 @@ class FBQueueStorage: RestaurantQueueStorage {
                 }
                 guard let profileData = profileSnapshot!.data(),
                     let updatedRestaurant = Restaurant(dictionary: profileData) else {
-                    assert(false, "document should be of correct format(fields) of a restaurant!")
-                    return
+                        assert(false, "document should be of correct format(fields) of a restaurant!")
+                        return
                 }
                 // regardless of change, contact delegate it has changed.
-                self.queueModificationLogicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
+                self.logicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
             }
     }
 
-    private func getUpdateType(of rec: QueueRecord) -> RecordModification {
-        if rec.admitTime == nil {
-            print("\n\tmodif is update!\n")
-            return .customerUpdate
-        }
-        if rec.serveTime != nil {
-            print("\n\tmodif is serve!\n")
-            return .serve
-        }
-        if rec.rejectTime != nil {
-            print("\n\tmodif is reject!\n")
-            return .reject
-        }
-        print("\n\tmodif is admit!?\n")
-        return .admit
-    }
-
-    private func getQueueRecordAndComplete(
-        data: [String: Any], ofQid qid: String, forCid cid: String,
-        atRestaurant restaurant: Restaurant,
+    private func makeQueueRecord(
+        data: [String: Any], id: String, customerUID: String,
+        restaurant: Restaurant,
         completion: @escaping (QueueRecord) -> Void) {
-        FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: qid) else {
+        FBCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: id) else {
                 return
             }
             completion(rec)
             }, errorHandler: nil)
     }
 
-    // Time should have been checked to be valid before passing in.
-    func openQueue(of restaurant: Restaurant, at time: Date) {
-        var updatedRestaurant = restaurant
-        updatedRestaurant.queueOpenTime = time
-        
-        db.collection("restaurants")
-            .document(restaurant.uid)
-            .setData(updatedRestaurant.dictionary)
-    }
-
-    func closeQueue(of restaurant: Restaurant, at time: Date) {
-        var updatedRestaurant = restaurant
-        updatedRestaurant.queueCloseTime = time
-        db.collection("restaurants")
-            .document(restaurant.uid)
-            .setData(updatedRestaurant.dictionary)
-    }
-    
-    // Record admit time already updated before being passed in.
-    func admitCustomer(record: QueueRecord) {
-        updateRecord(record: record)
-    }
-    
-    func serveCustomer(record: QueueRecord) {
-        updateRecord(record: record)
-    }
-    
-    func rejectCustomer(record: QueueRecord) {
-        updateRecord(record: record)
-    }
-
-    private func updateRecord(record: QueueRecord) {
-        db.collection("queues")
-          .document(record.restaurant.uid)
-          .collection(record.startDate)
-          .document(record.id)
-            .setData(record.dictionary)
-    }
-    
-    func loadQueue(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isPendingAdmission }, completion: completion)
-    }
-    
-    func loadWaitingList(of restaurant: Restaurant, completion: @escaping (QueueRecord?) -> Void) {
-        loadQueueRecords(of: restaurant, where: { $0.isAdmitted }, completion: completion)
-    }
-    
-    private func loadQueueRecords(of restaurant: Restaurant, where condition: @escaping (QueueRecord) -> Bool,
-                                  completion: @escaping (QueueRecord?) -> Void) {
+    func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
         db.collection(Constants.queuesDirectory)
-            .document(restaurant.uid)
-            .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
-            .getDocuments { (queueSnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                    return
-                }
-                for document in queueSnapshot!.documents {
-                    guard let cid = document.data()["customer"] as? String else {
-                        return
-                    }
-                    FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-                        guard let rec = QueueRecord(dictionary: document.data(),
-                                                    customer: customer, restaurant: restaurant,
-                                                    id: document.documentID) else {
-                                                        return
-                        }
-                        if condition(rec) {
-                            completion(rec)
-                        }
-                    }, errorHandler: nil)
-                }
+            .document(oldRecord.restaurant.uid)
+            .collection(oldRecord.startDate)
+            .document(oldRecord.id)
+            .setData(newRecord.dictionary) { _ in
+                    completion()
             }
     }
-    
-    func didDetectNewQueueRecord(record: QueueRecord) {
-        queueModificationLogicDelegate?.customerDidJoinQueue(with: record)
-    }
-    
-    func didDetectQueueRecordUpdate(new: QueueRecord) {
-        queueModificationLogicDelegate?.customerDidUpdateQueueRecord(to: new)
-    }
-    
-    func didDetectWithdrawnQueueRecord(record: QueueRecord) {
-        
-    }
-    
-    func didDetectAdmissionOfCustomer(record: QueueRecord) {
-        
-    }
-    
-    func didDetectServiceOfCustomer(record: QueueRecord) {
-        
-    }
-    
-    func didDetectRejectionOfCustomer(record: QueueRecord) {
-        
-    }
-    
-    func didDetectOpenQueue(restaurant: Restaurant) {
-        
-    }
-    
-    func didDetectCloseQueue(restaurant: Restaurant) {
-        
+
+    func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant) {
+        db.collection(Constants.restaurantsDirectory)
+            .document(old.uid)
+            .setData(new.dictionary)
     }
 }

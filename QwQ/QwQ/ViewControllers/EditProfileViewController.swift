@@ -30,11 +30,11 @@ class EditProfileViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
         Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
                                 errorHandler: handleError(error:))
         spinner = showSpinner(onView: view)
+        super.viewWillAppear(animated)
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -100,7 +100,7 @@ class EditProfileViewController: UIViewController {
         self.emailTextField.text = customer.email
 
         setUpProfileImageView(uid: customer.uid)
-        
+
         removeSpinner(spinner)
     }
 

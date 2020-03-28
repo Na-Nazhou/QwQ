@@ -22,7 +22,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
 
-    var isActive = true
+    var selectedIndex = 0
+
+    var isActive: Bool {
+        selectedIndex == 0
+    }
 
     // TODO: refactor
     var activeRecords: [Record] {
@@ -36,7 +40,25 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     var historyRecords: [Record] {
         let bookRecords = CustomerBookingLogicManager.shared().pastBookRecords
         let queueRecords = CustomerQueueLogicManager.shared().pastQueueRecords
-        return bookRecords + queueRecords
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if record1.isServed {
+                time1 = record1.serveTime!
+            } else if record1.isRejected {
+                time1 = record1.rejectTime!
+            } else {
+                time1 = record1.withdrawTime!
+            }
+            if record2.isServed {
+                time2 = record2.serveTime!
+            } else if record2.isRejected {
+                time2 = record2.rejectTime!
+            } else {
+                time2 = record2.withdrawTime!
+            }
+            return time1 > time2
+        })
     }
     
     override func viewDidLoad() {
@@ -61,16 +83,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        switch sender.selectedIndex {
-        case 0:
-            isActive = true
-        case 1:
-            CustomerQueueLogicManager.shared().fetchQueueHistory()
-            CustomerBookingLogicManager.shared().fetchBookingHistory()
-            isActive = false
-        default:
-            return
-        }
+        selectedIndex = sender.selectedIndex
         activitiesCollectionView.reloadData()
     }
 
@@ -98,6 +111,33 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
                 self.activitiesCollectionView.reloadData()
             })
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.queueSelectedSegue:
+            if let queueRecord = sender as? QueueRecord,
+                let queueRecordViewController = segue.destination as? QueueRecordViewController {
+                    queueRecordViewController.record = queueRecord
+            }
+        case Constants.bookSelectedSegue:
+            if let bookRecord = sender as? BookRecord,
+                let bookRecordViewController = segue.destination as? BookRecordViewController {
+                    bookRecordViewController.record = bookRecord
+            }
+        case Constants.editQueueSelectedSegue:
+            if let queueRecord = sender as? QueueRecord,
+                let editQueueViewController = segue.destination as? EditQueueViewController {
+                    editQueueViewController.record = queueRecord
+        }
+        case Constants.editBookSelectedSegue:
+            if let bookRecord = sender as? BookRecord,
+                let editBookingViewController = segue.destination as? EditBookingViewController {
+                    editBookingViewController.record = bookRecord
+            }
+        default:
+            return
+        }
+    }
 }
 
 extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -117,6 +157,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let record = records[indexPath.row]
         activityCell.setUpView(record: record)
+        
         if let queueRecord = record as? QueueRecord {
             activityCell.editAction = {
                 if record.isPendingAdmission {
@@ -136,7 +177,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
             }
             activityCell.deleteAction = {
-                 self.spinner = self.showSpinner(onView: self.view)
+                self.spinner = self.showSpinner(onView: self.view)
                 CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
             }
         }
@@ -151,34 +192,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         if let bookRecord = record as? BookRecord {
             performSegue(withIdentifier: Constants.bookSelectedSegue, sender: bookRecord)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case Constants.queueSelectedSegue:
-            if let queueRecord = sender as? QueueRecord,
-                let queueRecordViewController = segue.destination as? QueueRecordViewController {
-                    queueRecordViewController.record = queueRecord
-            }
-        case Constants.bookSelectedSegue:
-            if let bookRecord = sender as? BookRecord,
-                let bookRecordViewController = segue.destination as? BookRecordViewController {
-                    bookRecordViewController.record = bookRecord
-            }
-        case Constants.editQueueSelectedSegue:
-            if let queueRecord = sender as? QueueRecord,
-            let editQueueViewController = segue.destination as? EditQueueViewController {
-                editQueueViewController.record = queueRecord
-        }
-        case Constants.editBookSelectedSegue:
-            if let bookRecord = sender as? BookRecord,
-                let editBookingViewController = segue.destination as? EditBookingViewController {
-                    editBookingViewController.record = bookRecord
-            }
-        default:
-            // No need to to anything for editQueueSelectedSegue
-            return
         }
     }
 }

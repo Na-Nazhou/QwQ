@@ -74,9 +74,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,
                  babyChairQuantity: Int,
-                 wheelchairFriendly: Bool) {
-        guard canQueue(for: restaurant) else {
-            return
+                 wheelchairFriendly: Bool) -> Bool {
+        guard currentQueueRecord == nil else {
+            return false
         }
 
         let startTime = Date()
@@ -87,17 +87,32 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: startTime)
 
+        if !checkRestaurantQueue(for: newRecord) {
+            return false
+        }
+
         queueStorage.addQueueRecord(newRecord: newRecord,
                                     completion: { self.didAddQueueRecord(newRecord: &newRecord, id: $0)
 
         })
+        return true
+    }
+
+    private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
+        if !record.restaurant.isQueueOpen {
+            print("Queue closed")
+            queueDelegate?.didFindRestaurantQueueClosed()
+            return false
+        }
+
+        return true
     }
 
     private func didAddQueueRecord(newRecord: inout QueueRecord, id: String) {
         newRecord.id = id
         currentQueueRecord = newRecord
 
-        queueDelegate?.didAddQueueRecord()
+        queueDelegate?.didAddRecord()
     }
 
     func editQueueRecord(oldRecord: QueueRecord,
@@ -121,13 +136,22 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     startTime: oldRecord.startTime)
 
         queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
-            self.queueDelegate?.didUpdateQueueRecord()
+            self.queueDelegate?.didUpdateRecord()
         })
     }
 
     func deleteQueueRecord(_ queueRecord: QueueRecord) {
         guard let record = currentQueueRecord,
             queueRecord == record else {
+            return
+        }
+
+        if queueRecord.isAdmitted {
+            var newRecord = queueRecord
+            newRecord.withdrawTime = Date()
+            queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
+                self.activitiesDelegate?.didDeleteRecord()
+            })
             return
         }
 
@@ -153,6 +177,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             addAsHistoryRecord(record)
             didDeleteQueueRecord(record)
             print("\ndetected rejection\n")
+        case .withdraw:
+            addAsHistoryRecord(record)
+            didDeleteQueueRecord(record)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
             print("\ndetected regular modif\n")
@@ -195,7 +222,7 @@ extension CustomerQueueLogicManager {
                "Customer identity must be given non-nil to make the customer's queue logic manager.")
         assert(storage != nil, "Queue storage must be given non-nil")
         let logic = CustomerQueueLogicManager(customer: customerIdentity!, queueStorage: storage!)
-        logic.queueStorage.queueModificationLogicDelegate = logic
+        logic.queueStorage.logicDelegate = logic
 
         queueLogic = logic
         return logic

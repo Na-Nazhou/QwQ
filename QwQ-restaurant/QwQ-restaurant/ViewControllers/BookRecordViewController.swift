@@ -7,41 +7,48 @@
 
 import UIKit
 
-class BookRecordViewController: UIViewController, DisplayRecordViewController {
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var contactLabel: UILabel!
-    @IBOutlet var groupSizeLabel: UILabel!
-    @IBOutlet var babyChairQuantityLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
+class BookRecordViewController: RecordViewController {
 
-    typealias Profile = FBProfileStorage
-
-
-    var record: Record?
-
-    @IBAction private func handleAdmit(_ sender: Any) {
-        showMessage(title: Constants.admitCustomerTitle,
-                    message: Constants.admitCustomerMessage,
-                    buttonText: Constants.okayTitle)
-    }
+    @IBOutlet var datePicker: UIDatePicker!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpViews()
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
-    }
-    
-    private func setUpViews() {
+    override func setUpViews() {
+        super.setUpViews()
         guard let bookRecord = record as? BookRecord else {
             return
         }
-        setUpRecordView()
 
-        Profile.getRestaurantProfilePic(uid: bookRecord.customer.uid, placeholder: profileImageView)
+        datePicker.date = bookRecord.time
+    }
+
+    @IBAction override func handleAdmit(_ sender: Any) {
+        guard let bookRecord = record as? BookRecord else {
+            return
+        }
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .admitCustomer(record: bookRecord,
+                           completion: self.didUpdateRecord)
+    }
+
+    @IBAction override func handleServe(_ sender: Any) {
+        guard let bookRecord = record as? BookRecord else {
+            return
+        }
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .serveCustomer(record: bookRecord,
+                           completion: self.didUpdateRecord)
+
+    }
+
+    // TODO
+    @IBAction override func handleReject(_ sender: Any) {
+        guard let queueRecord = record as? BookRecord else {
+            return
+        }
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .rejectCustomer(record: queueRecord,
+                            completion: self.didUpdateRecord)
     }
 }

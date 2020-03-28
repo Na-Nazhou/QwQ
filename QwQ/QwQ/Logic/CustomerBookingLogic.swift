@@ -20,13 +20,13 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
                        at time: Date,
                        with groupSize: Int,
                        babyChairQuantity: Int,
-                       wheelchairFriendly: Bool)
+                       wheelchairFriendly: Bool) -> Bool
 
     func editBookRecord(oldRecord: BookRecord,
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool)
+                        wheelchairFriendly: Bool) -> Bool
 
     func deleteBookRecord(_ bookRecord: BookRecord)
 }

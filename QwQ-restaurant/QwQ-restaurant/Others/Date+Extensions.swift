@@ -9,15 +9,19 @@ import Foundation
 
 extension Date {
     func getDateOf(daysBeforeDate numDays: Int) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: self)
         let dayComponent = DateComponents(day: -numDays)
-        let date = Calendar.current.date(byAdding: dayComponent, to: self) ?? self
+        let date = calendar.date(byAdding: dayComponent, to: startOfDay) ?? self
         return date
     }
 
     func toString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        return formatter.string(from: self)
+        Self.getFormattedDate(date: self, format: "yyyy-MM-dd HH:mm")
+    }
+
+    func getFormattedTime() -> String {
+        Self.getFormattedDate(date: self, format: "HH:mm")
     }
     
     static func getFormattedDate(date: Date, format: String) -> String {

@@ -16,6 +16,11 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
+    func update(_ element: T) {
+        elements.remove(element)
+        elements.insert(element)
+    }
+
     func remove(_ element: T) -> Bool {
         let removed = elements.remove(element)
         return removed != nil

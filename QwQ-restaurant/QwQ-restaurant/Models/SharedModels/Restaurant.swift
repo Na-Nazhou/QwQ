@@ -1,5 +1,6 @@
 import FirebaseFirestore
 import Foundation
+
 struct Restaurant: User {
     let uid: String
     let name: String

@@ -7,41 +7,37 @@
 
 import UIKit
 
-class QueueRecordViewController: UIViewController, DisplayRecordViewController {
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var contactLabel: UILabel!
-    @IBOutlet var groupSizeLabel: UILabel!
-    @IBOutlet var babyChairQuantityLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var wheelchairFriendlySwitch: UISwitch!
-    
-    var record: Record?
+class QueueRecordViewController: RecordViewController {
 
-    typealias Profile = FBProfileStorage
-    
-    @IBAction private func handleAdmit(_ sender: Any) {
-        showMessage(title: Constants.admitCustomerTitle,
-                    message: Constants.admitCustomerMessage,
-                    buttonText: Constants.okayTitle,
-                    buttonAction: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpViews()
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
+    @IBAction override func handleAdmit(_ sender: Any) {
+        guard let bookRecord = record as? QueueRecord else {
+            return
+        }
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .admitCustomer(record: bookRecord,
+                           completion: self.didUpdateRecord)
     }
 
-    private func setUpViews() {
+    @IBAction override func handleServe(_ sender: Any) {
+        guard let bookRecord = record as? QueueRecord else {
+            return
+        }
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .serveCustomer(record: bookRecord,
+                           completion: self.didUpdateRecord)
+
+    }
+
+    // TODO
+    @IBAction override func handleReject(_ sender: Any) {
         guard let queueRecord = record as? QueueRecord else {
             return
         }
-        setUpRecordView()
-
-        Profile.getRestaurantProfilePic(uid: queueRecord.customer.uid, placeholder: profileImageView)
+        self.spinner = self.showSpinner(onView: self.view)
+        RestaurantRecordLogicManager.shared()
+            .rejectCustomer(record: queueRecord,
+                            completion: self.didUpdateRecord)
     }
 }

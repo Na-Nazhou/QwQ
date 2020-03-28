@@ -134,6 +134,7 @@
                                         <connections>
                                             <outlet property="locationLabel" destination="fd7-Ic-Js3" id="ueo-Ds-gg8"/>
                                             <outlet property="nameLabel" destination="ez4-f4-NMI" id="RCM-aw-wpt"/>
+                                            <outlet property="queueButton" destination="S7v-Q3-PNf" id="Usa-ig-GFF"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -260,10 +261,10 @@
                                         <rect key="frame" x="20" y="20" width="377.5" height="548"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fBM-ob-2ch">
-                                                <rect key="frame" x="20" y="20" width="428.5" height="474.5"/>
+                                                <rect key="frame" x="20" y="20" width="405.5" height="488.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwe-wW-PaA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="428.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="405.5" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="ncZ-Zs-6RM"/>
                                                         </constraints>
@@ -275,7 +276,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2x-y3-4IH">
-                                                        <rect key="frame" x="0.0" y="65" width="428.5" height="171"/>
+                                                        <rect key="frame" x="0.0" y="65" width="405.5" height="183"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">Hawaiian Pizza (S/M/L)
@@ -311,7 +312,7 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmW-dT-K5i">
-                                                        <rect key="frame" x="0.0" y="251" width="428.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="263" width="405.5" height="50"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -320,7 +321,7 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nad-DH-dLq">
-                                                        <rect key="frame" x="0.0" y="316" width="428.5" height="28.5"/>
+                                                        <rect key="frame" x="0.0" y="328" width="405.5" height="30.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                                 <attributes>
@@ -345,10 +346,10 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="94T-Eg-RBn">
-                                                        <rect key="frame" x="0.0" y="359.5" width="428.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="373.5" width="405.5" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beQ-Qn-Prc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -357,7 +358,7 @@ Pancake</string>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0K-Me-Win">
-                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="50"/>
+                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -365,10 +366,10 @@ Pancake</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-1I-378">
-                                                        <rect key="frame" x="0.0" y="424.5" width="428.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="438.5" width="405.5" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBR-yY-bSO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -377,7 +378,7 @@ Pancake</string>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPw-7L-wOq">
-                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="50"/>
+                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -465,11 +466,13 @@ Pancake</string>
                     </view>
                     <navigationItem key="navigationItem" id="oaR-MC-pKJ"/>
                     <connections>
+                        <outlet property="bookButton" destination="oNk-e5-0yg" id="Kh6-3q-hO6"/>
                         <outlet property="contactLabel" destination="j0K-Me-Win" id="Rdn-Di-si9"/>
                         <outlet property="emailLabel" destination="tPw-7L-wOq" id="gwa-l8-hP9"/>
                         <outlet property="locationLabel" destination="nad-DH-dLq" id="5Vm-Ys-d70"/>
                         <outlet property="menuLabel" destination="U2x-y3-4IH" id="WHb-fr-ybi"/>
                         <outlet property="nameLabel" destination="vFV-E1-Kcm" id="lfM-tx-Wfh"/>
+                        <outlet property="queueButton" destination="UUD-DO-NV8" id="JKE-Yx-V3c"/>
                         <segue destination="lJC-Jw-heQ" kind="show" identifier="editQueueSelected" id="IfD-L4-uNp"/>
                         <segue destination="GkK-8M-Jcl" kind="show" identifier="editBookSelected" id="saL-Vy-eML"/>
                     </connections>
