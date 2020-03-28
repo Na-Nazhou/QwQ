@@ -14,6 +14,8 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var locationLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
+    @IBOutlet private var queueButton: UIButton!
+    @IBOutlet private var bookButton: UIButton!
 
     var restaurant: Restaurant? {
         RestaurantLogicManager.shared().currentRestaurant
@@ -66,9 +68,15 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         locationLabel.text = restaurant.address
         contactLabel.text = restaurant.contact
         emailLabel.text = restaurant.email
+
+        if restaurant.isQueueOpen {
+            queueButton.alpha = 1
+        } else {
+            queueButton.alpha = 0.5
+        }
     }
 
-    func restaurantDidSetQueueStatus(toIsOpen isOpen: Bool) {
-        //TODO
+    func restaurantDidUpdate() {
+        setUpViews()
     }
 }

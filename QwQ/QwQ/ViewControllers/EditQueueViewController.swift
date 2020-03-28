@@ -10,18 +10,14 @@ import UIKit
 class EditQueueViewController: EditRecordViewController, RecordDelegate {
 
     @IBAction override func handleSubmit(_ sender: Any) {
-        guard let groupSizeText = groupSizeTextField.text,
-            let babyChairQueantityText = babyChairQuantityTextField.text,
-            let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
-            let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
-                showMessage(title: Constants.errorTitle,
-                            message: "Missing fields",
-                            buttonText: Constants.okayTitle,
-                            buttonAction: nil)
-                return
+        guard super.checkRecordDetails() else {
+            return
         }
 
-        spinner = showSpinner(onView: view)
+         guard let groupSize = groupSize,
+                       let babyChairQuantity = babyChairQuantity  else {
+                return
+        }
 
         // Edit existing queue record
         if let queueRecord = record as? QueueRecord {
@@ -30,6 +26,7 @@ class EditQueueViewController: EditRecordViewController, RecordDelegate {
                                  with: groupSize,
                                  babyChairQuantity: babyChairQuantity,
                                  wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+            spinner = showSpinner(onView: view)
             return
         }
 
@@ -37,11 +34,20 @@ class EditQueueViewController: EditRecordViewController, RecordDelegate {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
             return
         }
+
+        if !restaurant.isQueueOpen {
+                   showMessage(title: Constants.errorTitle,
+                               message: Constants.restaurantUnavailableMessage,
+                               buttonText: Constants.okayTitle)
+                   return
+        }
+        
         CustomerQueueLogicManager.shared()
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+        spinner = showSpinner(onView: view)
     }
 
     override func viewDidLoad() {

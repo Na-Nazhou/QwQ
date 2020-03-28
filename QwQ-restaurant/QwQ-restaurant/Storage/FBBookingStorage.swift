@@ -14,8 +14,14 @@ class FBBookingStorage: RestaurantBookingStorage {
 
     weak var logicDelegate: BookingStorageSyncDelegate?
 
+    private var listener: ListenerRegistration?
+
     init(restaurant: Restaurant) {
         registerListenerForBooking(restaurant: restaurant)
+    }
+
+    deinit {
+        listener?.remove()
     }
 
     private func registerListenerForBooking(restaurant: Restaurant) {
@@ -26,7 +32,7 @@ class FBBookingStorage: RestaurantBookingStorage {
         let calendar = Calendar.current
         let startTime = calendar.startOfDay(for: date)
         let startTimestamp = Timestamp(date: startTime)
-        db.collection(Constants.bookingsDirectory)
+        listener = db.collection(Constants.bookingsDirectory)
             .whereField("restaurant", isEqualTo: restaurant.uid)
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .addSnapshotListener { (queueSnapshot, err) in

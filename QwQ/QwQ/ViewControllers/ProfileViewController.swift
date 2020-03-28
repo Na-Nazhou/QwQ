@@ -20,11 +20,11 @@ class ProfileViewController: UIViewController {
 
     var spinner: UIView?
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
         Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
                                 errorHandler: handleError(error:))
+        super.viewWillAppear(animated)
     }
 
     @IBAction private func logoutButton(_ sender: Any) {

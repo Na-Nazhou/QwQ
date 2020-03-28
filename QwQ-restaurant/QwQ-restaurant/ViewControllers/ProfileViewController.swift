@@ -23,11 +23,11 @@ class ProfileViewController: UIViewController {
 
     var spinner: UIView?
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
         Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                   errorHandler: handleError(error:))
+        super.viewWillAppear(animated)
     }
 
     @IBAction private func logoutButton(_ sender: Any) {

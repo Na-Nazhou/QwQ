@@ -12,6 +12,7 @@ class RestaurantCell: UICollectionViewCell {
     
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
+    @IBOutlet private var queueButton: UIButton!
 
     @IBAction private func handleQueueTap(sender: Any?) {
         queueAction?()
@@ -20,5 +21,13 @@ class RestaurantCell: UICollectionViewCell {
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
+
+        if restaurant.isQueueOpen {
+            queueButton.isEnabled = true
+            queueButton.alpha = 1
+        } else {
+            queueButton.isEnabled = false
+            queueButton.alpha = 0.5
+        }
     }
 }

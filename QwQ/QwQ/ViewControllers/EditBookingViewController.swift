@@ -12,14 +12,12 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
     @IBOutlet var datePicker: UIDatePicker!
 
     @IBAction override func handleSubmit(_ sender: Any) {
-        guard let groupSizeText = groupSizeTextField.text,
-                let babyChairQueantityText = babyChairQuantityTextField.text,
-                let groupSize = Int(groupSizeText.trimmingCharacters(in: .newlines)),
-                let babyChairQuantity = Int(babyChairQueantityText.trimmingCharacters(in: .newlines)) else {
-                    showMessage(title: Constants.errorTitle,
-                                message: "Missing fields",
-                                buttonText: Constants.okayTitle,
-                                buttonAction: nil)
+        guard super.checkRecordDetails() else {
+            return
+        }
+
+        guard let groupSize = groupSize,
+                       let babyChairQuantity = babyChairQuantity  else {
                     return
             }
 
@@ -40,6 +38,7 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
         guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
             return
         }
+
         CustomerBookingLogicManager.shared()
             .addBookRecord(to: restaurant,
                            at: datePicker.date,
@@ -56,13 +55,14 @@ class EditBookingViewController: EditRecordViewController, RecordDelegate {
 
     override func setUpViews() {
         super.setUpViews()
+
+        let minDate = Date()
+        datePicker.minimumDate = minDate
+
         // Editing an existing book record
         if let bookRecord = record as? BookRecord {
             datePicker.date = bookRecord.time
         } else {
-            // TODO: allow restaurants to set this
-            let minDate = Date()
-            datePicker.minimumDate = minDate
             datePicker.date = minDate
         }
     }
