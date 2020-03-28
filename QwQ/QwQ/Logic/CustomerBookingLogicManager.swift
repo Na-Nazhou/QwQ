@@ -13,15 +13,15 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     var bookingStorage: CustomerBookingStorage
 
     // View controller
-    weak var bookingDelegate: RecordDelegate?
+    weak var bookingDelegate: BookingDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
     var customer: Customer
 
     // TODO: change to record collection
-    private var currentBookRecords = Set<BookRecord>()
+    private var currentBookRecords = RecordCollection<BookRecord>()
     var activeBookRecords: [BookRecord] {
-        Array(currentBookRecords)
+        currentBookRecords.records
     }
 
     private var bookingHistory = RecordCollection<BookRecord>()
@@ -39,7 +39,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     deinit {
         print("\n\tDEINITING\n")
-        for record in currentBookRecords {
+        for record in activeBookRecords {
             bookingStorage.removeListener(for: record)
         }
     }
@@ -50,29 +50,23 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                 return
             }
 
-            self.currentBookRecords.insert(bookRecord)
             self.bookingStorage.registerListener(for: bookRecord)
-            self.activitiesDelegate?.didUpdateActiveRecords()
         })
     }
 
     func fetchBookingHistory() {
         bookingStorage.loadBookHistory(customer: customer, completion: {
-             guard $0 != nil else {
+             guard let record = $0 else {
                  return
              }
-             let didAddNew = self.bookingHistory.add($0!)
-             if !didAddNew {
-                 return
-             }
-             self.activitiesDelegate?.didUpdateHistoryRecords()
+            self.didAddBookRecord(record)
          })
         
     }
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,
-                       with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) {
-        // Check conflicts
+                       with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) -> Bool {
+
         var newRecord = BookRecord(restaurant: restaurant,
                                    customer: customer,
                                    time: time,
@@ -80,17 +74,21 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly)
 
+        if !checkExistingRecords(against: newRecord) {
+            return false
+        }
+
         bookingStorage.addBookRecord(newRecord: newRecord,
                                      completion: { self.didAddBookRecord(newRecord: &newRecord, id: $0)
 
         })
+        return true
     }
 
     private func didAddBookRecord(newRecord: inout BookRecord, id: String) {
         newRecord.id = id
-        currentBookRecords.insert(newRecord)
-
         bookingStorage.registerListener(for: newRecord)
+
         bookingDelegate?.didAddRecord()
     }
 
@@ -98,8 +96,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool) {
-        // Check conflicts
+                        wheelchairFriendly: Bool) -> Bool {
         let newRecord = BookRecord(id: oldRecord.id,
                                    restaurant: oldRecord.restaurant,
                                    customer: customer,
@@ -107,13 +104,30 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    groupSize: groupSize,
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly)
+
+        if !checkExistingRecords(against: newRecord) {
+            return false
+        }
+
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
             self.bookingDelegate?.didUpdateRecord()
         })
+        return true
+    }
+
+    private func checkExistingRecords(against record: BookRecord) -> Bool {
+        if activeBookRecords.contains(where: {
+            $0.restaurant == record.restaurant &&
+                $0.time == record.time
+        }) {
+            bookingDelegate?.didFindExistingRecord()
+            return false
+        }
+
+        return true
     }
 
     func deleteBookRecord(_ record: BookRecord) {
-
         if record.isAdmitted {
             var newRecord = record
             newRecord.withdrawTime = Date()
@@ -131,13 +145,15 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     func didUpdateBookRecord(_ record: BookRecord) {
         print("\nDid update book record\n")
         guard let oldRecord = activeBookRecords.first(where: { $0 == record }) else {
+            print("\ndetected new\n")
+            didAddBookRecord(record)
             return
         }
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
             // call some (activites) delegate to display admission status
-            customerDidUpdateBookRecord(record: record) //tent.
+            didAdmitBookRecord(record)
             print("\ndetected admission\n")
         case .serve:
             addAsHistoryRecord(record)
@@ -159,15 +175,42 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
-        currentBookRecords.remove(record)
-        currentBookRecords.insert(record)
-        activitiesDelegate?.didUpdateActiveRecords()
+        if record.isActiveRecord {
+            currentBookRecords.update(record)
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
+    }
+
+    func didAddBookRecord(_ record: BookRecord) {
+        if record.isActiveRecord && currentBookRecords.add(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
+
+        if record.isHistoryRecord && bookingHistory.add(record) {
+            activitiesDelegate?.didUpdateHistoryRecords()
+        }
+    }
+
+    func didAdmitBookRecord(_ record: BookRecord) {
+        guard currentBookRecords.remove(record) else {
+            return
+        }
+
+        // Delete other bookings at the same time
+        for otherRecord in activeBookRecords where otherRecord.time == record.time {
+            bookingStorage.deleteBookRecord(record: otherRecord, completion: {})
+        }
+
+        if currentBookRecords.add(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
     }
 
     func didDeleteBookRecord(_ record: BookRecord) {
         bookingStorage.removeListener(for: record)
-        currentBookRecords.remove(record)
-        activitiesDelegate?.didUpdateActiveRecords()
+        if currentBookRecords.remove(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
     }
 
     private func addAsHistoryRecord(_ record: BookRecord) {
