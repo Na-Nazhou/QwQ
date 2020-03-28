@@ -76,7 +76,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                  babyChairQuantity: Int,
                  wheelchairFriendly: Bool) -> Bool {
         let startTime = Date()
-        var newRecord = QueueRecord(restaurant: restaurant,
+        let newRecord = QueueRecord(restaurant: restaurant,
                                     customer: customer,
                                     groupSize: groupSize,
                                     babyChairQuantity: babyChairQuantity,
@@ -88,7 +88,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         queueStorage.addQueueRecord(newRecord: newRecord,
-                                    completion: { self.didAddQueueRecord(newRecord: newRecord, withUpdatedId: $0)
+                                    completion: {
+                                        self.didAddQueueRecord(newRecord: newRecord, withUpdatedId: $0)
 
         })
         return true
@@ -112,6 +113,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                    "Added queue record should already have legit id.")
             return
         }
+        queueStorage.registerListener(for: updatedIdRec)
         queueDelegate?.didAddRecord()
         activitiesDelegate?.didUpdateActiveRecords()
     }
