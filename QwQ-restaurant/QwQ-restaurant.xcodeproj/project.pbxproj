@@ -307,6 +307,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7E6EBCD12430A12D0058D19A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
+				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
+				7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7E6EBCD22430A1360058D19A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
+				7EE6D022241E393A00C1465E /* EditProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7E6EBCD32430A13D0058D19A /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				7EAC34D0242B30E90088D00F /* StatisticsViewController.swift */,
+				7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		7E6EBCD42430A1460058D19A /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				5C4B573F242B3AB1007E4240 /* RecordViewController.swift */,
+				7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */,
+				7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
 		7E72B14F241C93FE00C1EE72 = {
 			isa = PBXGroup;
 			children = (
@@ -397,17 +435,11 @@
 		7E72B194241C962100C1EE72 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
-				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
-				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
-				7EE6D022241E393A00C1465E /* EditProfileViewController.swift */,
+				7E6EBCD12430A12D0058D19A /* Authentication */,
+				7E6EBCD22430A1360058D19A /* Profile */,
 				7EE6D03B241E5AE400C1465E /* HomeViewController.swift */,
-				7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */,
-				7EAC34D0242B30E90088D00F /* StatisticsViewController.swift */,
-				7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */,
-				5C4B573F242B3AB1007E4240 /* RecordViewController.swift */,
-				7E7F7DC824221C6D00A080E5 /* BookRecordViewController.swift */,
-				7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */,
+				7E6EBCD32430A13D0058D19A /* Statistics */,
+				7E6EBCD42430A1460058D19A /* Records */,
 				7E72B19F241CA54600C1EE72 /* ActivitiesViewController.swift */,
 			);
 			path = ViewControllers;

@@ -9,7 +9,6 @@ import FirebaseFirestore
 import Foundation
 
 class FBBookingStorage: RestaurantBookingStorage {
-
     let db = Firestore.firestore()
 
     weak var logicDelegate: BookingStorageSyncDelegate?
