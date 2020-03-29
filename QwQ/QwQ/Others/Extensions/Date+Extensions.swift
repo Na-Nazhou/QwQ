@@ -27,4 +27,11 @@ extension Date {
         dateformat.dateFormat = format
         return dateformat.string(from: date)
     }
+
+    static func getCurrentTime() -> Date {
+        let calendar = Calendar.current
+        let currentTime = calendar.date(bySetting: .second, value: 0, of: Date())!
+        print(currentTime)
+        return currentTime
+    }
 }

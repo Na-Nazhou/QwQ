@@ -19,15 +19,15 @@ class FBRestaurantStorage: RestaurantStorage {
     deinit {
         listener?.remove()
     }
-
+    
     private func attachListenerOnRestaurants() {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
-                    log: Log.activeQueueRetrievalError,
-                    type: .error,
-                    String(describing: err))
+                           log: Log.activeQueueRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
                 snapshot!.documentChanges.forEach { diff in
@@ -44,7 +44,7 @@ class FBRestaurantStorage: RestaurantStorage {
                         self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
                     }
                 }
-            }
+        }
     }
 
     func registerDelegate(_ del: RestaurantStorageSyncDelegate) {

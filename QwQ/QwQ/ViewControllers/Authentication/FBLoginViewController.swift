@@ -26,6 +26,8 @@ class FBLoginViewController: UIViewController {
     }
 
     @IBAction private func handleBack(_ sender: Any) {
+        let loginManager = LoginManager()
+        loginManager.logOut()
         handleBack()
     }
     
@@ -98,8 +100,10 @@ class FBLoginViewController: UIViewController {
             if !declinedPermissions.isEmpty {
                 showMessage(title: Constants.errorTitle,
                             message: Constants.fbLoginPermissionsMessage,
-                            buttonText: Constants.okayTitle)
-                returnToLogin(nil)
+                            buttonText: Constants.okayTitle,
+                            buttonAction: returnToLogin(_:))
+                let loginManager = LoginManager()
+                loginManager.logOut()
                 return
             }
             authCompleted()
@@ -131,6 +135,7 @@ class FBLoginViewController: UIViewController {
                     self.removeSpinner(self.spinner)
                     self.nameTextField.text = name
                     self.emailTextField.text = email
+                    self.emailTextField.isEnabled = false
                 }
             }
         }

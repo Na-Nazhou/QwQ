@@ -74,11 +74,6 @@ class EditRecordViewController: UIViewController {
         contactTextField.isEnabled = false
     }
 
-     // TODO: go to activities view controller instead
-     func goBack() {
-         self.navigationController?.popViewController(animated: true)
-     }
-
      func didAddRecord() {
          removeSpinner(spinner)
          showMessage(
@@ -86,7 +81,7 @@ class EditRecordViewController: UIViewController {
              message: Constants.recordCreateSuccessMessage,
              buttonText: Constants.okayTitle,
              buttonAction: {_ in
-                 self.goBack()
+                 self.handleBack()
              })
      }
 
@@ -97,7 +92,7 @@ class EditRecordViewController: UIViewController {
              message: Constants.recordUpdateSuccessMessage,
              buttonText: Constants.okayTitle,
              buttonAction: {_ in
-                 self.goBack()
+                 self.handleBack()
              })
      }
 

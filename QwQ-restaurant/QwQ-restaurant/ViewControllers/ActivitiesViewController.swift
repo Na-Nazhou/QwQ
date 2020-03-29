@@ -69,12 +69,6 @@ class ActivitiesViewController: UIViewController {
             closeQueue()
         }
     }
-    
-    override func viewDidLayoutSubviews() {
-        currentWaitingControl.layer.cornerRadius = view.frame.height / 2
-        currentWaitingControl.layer.borderColor = Constants.segmentedControlLayerBorderColor
-        currentWaitingControl.layer.borderWidth = Constants.segmentedControlLayerBorderWidth
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         filtered = records
