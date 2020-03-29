@@ -26,6 +26,8 @@ class FBLoginViewController: UIViewController {
     }
 
     @IBAction private func handleBack(_ sender: Any) {
+        let loginManager = LoginManager()
+        loginManager.logOut()
         handleBack()
     }
     
@@ -133,6 +135,7 @@ class FBLoginViewController: UIViewController {
                     self.removeSpinner(self.spinner)
                     self.nameTextField.text = name
                     self.emailTextField.text = email
+                    self.emailTextField.isEnabled = false
                 }
             }
         }
