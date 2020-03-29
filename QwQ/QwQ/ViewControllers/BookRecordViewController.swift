@@ -10,7 +10,7 @@ import UIKit
 class BookRecordViewController: RecordViewController {
 
     @IBOutlet var datePicker: UIDatePicker!
-    
+
     override func setUpViews() {
         super.setUpViews()
 

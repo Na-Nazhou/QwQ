@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class ProfileViewController: UIViewController {
 
@@ -15,8 +16,8 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet private var profileImageView: UIImageView!
     
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     var spinner: UIView?
 
@@ -28,13 +29,23 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction private func logoutButton(_ sender: Any) {
-        Auth.logout(completion: {
-            self.logoutComplete()
-        }) { (error) in
-            self.showMessage(title: Constants.errorTitle,
-                             message: error.localizedDescription,
-                             buttonText: Constants.okayTitle)
+        guard let authType = Profile.currentAuthType else {
+            return
         }
+        if authType == AuthTypes.Firebase {
+            Auth.logout(completion: {
+                self.logoutComplete()
+            }) { (error) in
+                self.showMessage(title: Constants.errorTitle,
+                                 message: error.localizedDescription,
+                                 buttonText: Constants.okayTitle)
+            }
+        } else if authType == AuthTypes.Facebook {
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            logoutComplete()
+        }
+
     }
 
     private func getCustomerInfoComplete(customer: Customer) {
@@ -42,7 +53,7 @@ class ProfileViewController: UIViewController {
         self.contactLabel.text = customer.contact
         self.emailLabel.text = customer.email
         
-        Profile.getCustomerProfilePic(uid: customer.uid, placeholder: profileImageView)
+        Profile.getCustomerProfilePic(uid: customer.email, placeholder: profileImageView)
 
         removeSpinner(spinner)
     }
