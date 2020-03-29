@@ -1,4 +1,5 @@
 import Foundation
+import os.log
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
 
@@ -19,7 +20,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                     return
                 }
 
-                print("qlogic adding listener")
+                os_log("qlogic adding listener", log: Log.qLogicAddListener, type: .info)
                 queueStorage.registerListener(for: rec)
             }
         }
@@ -39,7 +40,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     deinit {
-        print("\n\tDEINITING\n")
+        os_log("DEINITING", log: Log.deinitLogic, type: .info)
         if let record = currentQueueRecord {
             queueStorage.removeListener(for: record)
         }
@@ -100,11 +101,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
         if !record.restaurant.isQueueOpen {
-            print("Queue closed")
+            os_log("Queue is closed", log: Log.closeQueue, type: .info)
             queueDelegate?.didFindRestaurantQueueClosed()
             return false
         }
 
+        os_log("Queue is open", log: Log.openQueue, type: .info)
+        
         return true
     }
 
@@ -164,25 +167,27 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         assert(currentQueueRecord != nil, "current queue record should exist to trigger udpate.")
         assert(currentQueueRecord! == record, "Should only receive update for current queue record.")
         let modification = record.changeType(from: currentQueueRecord!)
+        os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
         switch modification {
         case .admit:
             // call some (activites) delegate to display admission status
             currentQueueRecord = record //tent.
-            print("\ndetected admission\n")
+            os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             addAsHistoryRecord(record)
             didDeleteQueueRecord(record)
-            print("\ndetected service\n")
+            os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
             didDeleteQueueRecord(record)
-            print("\ndetected rejection\n")
+            os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
             didDeleteQueueRecord(record)
+            os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
-            print("\ndetected regular modif\n")
+            os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .none:
             assert(false, "Modification should be something")
         }

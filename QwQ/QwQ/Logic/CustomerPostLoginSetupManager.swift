@@ -1,5 +1,4 @@
 class CustomerPostLoginSetupManager {
-
     static func setUp(asIdentity customer: Customer) {
         let queueStorage = FBQueueStorage()
         let bookingStorage = FBBookingStorage()

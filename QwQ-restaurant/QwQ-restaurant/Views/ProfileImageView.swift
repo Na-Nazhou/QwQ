@@ -21,9 +21,13 @@ class ProfileImageView: UIImageView {
     func commonInit() {
         layer.borderWidth = Constants.profileBorderWidth
         layer.masksToBounds = false
+        contentMode = .scaleAspectFill
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         layer.borderColor = Constants.profileBorderColor
         layer.cornerRadius = frame.height / 2
-        contentMode = .scaleAspectFill
         clipsToBounds = true
     }
 }
