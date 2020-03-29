@@ -2,29 +2,29 @@ import FirebaseFirestore
 import os.log
 
 class FBRestaurantStorage: RestaurantStorage {
-
+    
     let db = Firestore.firestore()
-
+    
     weak var logicDelegate: RestaurantStorageSyncDelegate?
-
+    
     private var listener: ListenerRegistration?
-
+    
     init() {
         attachListenerOnRestaurants()
     }
-
+    
     deinit {
         listener?.remove()
     }
-
+    
     private func attachListenerOnRestaurants() {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
-                    log: Log.activeQueueRetrievalError,
-                    type: .error,
-                    String(describing: err))
+                           log: Log.activeQueueRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
                 snapshot!.documentChanges.forEach { diff in
@@ -41,6 +41,6 @@ class FBRestaurantStorage: RestaurantStorage {
                         self.logicDelegate?.didRemoveRestaurant(restaurant: restaurant)
                     }
                 }
-            }
+        }
     }
 }

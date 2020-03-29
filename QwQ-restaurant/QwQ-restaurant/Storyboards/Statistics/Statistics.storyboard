@@ -147,20 +147,20 @@
                                     <constraint firstItem="ecw-VN-LnU" firstAttribute="height" secondItem="o0B-6z-6Fi" secondAttribute="height" id="cbu-qH-GZI"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X0D-KV-F7p">
-                                <rect key="frame" x="208.5" y="50" width="417" height="186.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X0D-KV-F7p">
+                                <rect key="frame" x="208.5" y="80.5" width="417" height="126"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCC-dj-KBc">
-                                        <rect key="frame" x="107.5" y="0.0" width="202" height="39.5"/>
-                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-T1-FqF">
+                                        <rect key="frame" x="114.5" y="0.0" width="188" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mV0-me-qhw" customClass="SegmentedControl" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="59.5" width="417" height="127"/>
+                                        <rect key="frame" x="0.0" y="61" width="417" height="65"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="MoQ-ae-1Sa"/>
+                                            <constraint firstAttribute="height" constant="65" id="ipg-62-bEB"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -178,7 +178,6 @@
                             <constraint firstItem="mV0-me-qhw" firstAttribute="width" secondItem="PGb-Sg-99I" secondAttribute="width" multiplier="0.5" id="cOo-w5-iTn"/>
                             <constraint firstItem="X0D-KV-F7p" firstAttribute="centerY" secondItem="VK6-MZ-IIW" secondAttribute="centerY" id="e4K-NP-d3k"/>
                             <constraint firstItem="Vu3-q2-trj" firstAttribute="leading" secondItem="PGb-Sg-99I" secondAttribute="leading" constant="20" id="eqd-zY-WW3"/>
-                            <constraint firstItem="X0D-KV-F7p" firstAttribute="top" secondItem="PGb-Sg-99I" secondAttribute="top" constant="50" id="kOQ-h5-4A6"/>
                             <constraint firstItem="C07-My-DLE" firstAttribute="height" secondItem="PGb-Sg-99I" secondAttribute="height" multiplier="0.0500443" id="sgf-wF-SS0"/>
                             <constraint firstItem="VK6-MZ-IIW" firstAttribute="trailing" secondItem="PGb-Sg-99I" secondAttribute="trailing" id="xq0-s6-oG0"/>
                             <constraint firstItem="o0B-6z-6Fi" firstAttribute="height" secondItem="PGb-Sg-99I" secondAttribute="height" multiplier="0.05" id="z5R-p0-DPj"/>
