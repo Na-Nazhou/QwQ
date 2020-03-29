@@ -26,12 +26,6 @@ class StatisticsViewController: UIViewController {
         statisticsTableView.dataSource = self
     }
     
-    override func viewDidLayoutSubviews() {
-        statisticsControl.layer.cornerRadius = view.frame.height / 2
-        statisticsControl.layer.borderColor = Constants.segmentedControlLayerBorderColor
-        statisticsControl.layer.borderWidth = Constants.segmentedControlLayerBorderWidth
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statisticsDetailsViewController = segue.destination as? StatisticsDetailsViewController,
             let statisticsDetails = sender as? Statistics {
