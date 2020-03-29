@@ -19,7 +19,7 @@ class FBBookingStorage: CustomerBookingStorage {
     private var listener: ListenerRegistration?
 
     deinit {
-        listener?.remove()
+        removeListener()
     }
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
@@ -55,8 +55,8 @@ class FBBookingStorage: CustomerBookingStorage {
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        bookingDb.whereField("customer", isEqualTo: customer.uid)
-            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
+        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
@@ -78,8 +78,8 @@ class FBBookingStorage: CustomerBookingStorage {
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        bookingDb.whereField("customer", isEqualTo: customer.uid)
-            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
+        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
@@ -101,7 +101,7 @@ class FBBookingStorage: CustomerBookingStorage {
     private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
 
         guard let data = document.data(),
-            let rid = data["restaurant"] as? String else {
+            let rid = data[Constants.restaurantKey] as? String else {
                 os_log("Error getting rid from Book Record document.",
                        log: Log.ridError, type: .error)
             return
@@ -129,7 +129,7 @@ class FBBookingStorage: CustomerBookingStorage {
         removeListener()
 
         //add listener
-        listener = bookingDb.whereField("customer", isEqualTo: customer.uid)
+        listener = bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
@@ -141,7 +141,7 @@ class FBBookingStorage: CustomerBookingStorage {
                         self.delegateWork { $0.didUpdateBookRecord(record) }
                     }
                 }
-        }
+            }
     }
 
     func removeListener() {

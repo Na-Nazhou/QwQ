@@ -19,7 +19,7 @@ class FBQueueStorage: CustomerQueueStorage {
     private var listener: ListenerRegistration?
 
     deinit {
-        listener?.remove()
+        removeListener()
     }
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
