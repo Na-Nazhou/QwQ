@@ -58,7 +58,6 @@
 		7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */; };
 		7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E56AF9A2421F513002E9BAC /* Activities.storyboard */; };
 		7E6EBCC1243086E60058D19A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EBCC0243086E60058D19A /* Log.swift */; };
-		7E6EBCC42430952F0058D19A /* FBLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EBCC32430952F0058D19A /* FBLogin.storyboard */; };
 		7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */; };
 		7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B14D241B8C7D00C1EE72 /* Main.storyboard */; };
 		7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */; };
@@ -147,7 +146,7 @@
 		5C9411E02423D1E30093D92D /* AuthDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDetails.swift; sourceTree = "<group>"; };
 		5C9D9B5B24221D2F0019B7EE /* UIViewController+ShowMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowMessage.swift"; sourceTree = "<group>"; };
 		5CA15947241C9F9400835102 /* FIRProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRProfileStorage.swift; sourceTree = "<group>"; };
-		5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = QwQ/ViewControllers/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = QwQ/ViewControllers/Profile/EditProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginViewController.swift; sourceTree = "<group>"; };
 		5CF9DB5724308196003B257B /* AuthTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTypes.swift; sourceTree = "<group>"; };
 		6101D79324271B6E00ACBCC9 /* FBBookingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBBookingStorage.swift; sourceTree = "<group>"; };
@@ -180,7 +179,6 @@
 		7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E56AF9A2421F513002E9BAC /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
 		7E6EBCC0243086E60058D19A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		7E6EBCC32430952F0058D19A /* FBLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FBLogin.storyboard; sourceTree = "<group>"; };
 		7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7E72B14D241B8C7D00C1EE72 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -371,7 +369,6 @@
 		7E6EBCDA2430A7E10058D19A /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				7E6EBCC32430952F0058D19A /* FBLogin.storyboard */,
 				7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */,
 			);
 			path = Authentication;
@@ -381,6 +378,39 @@
 			isa = PBXGroup;
 			children = (
 				7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7E6EBCE02430A85B0058D19A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
+				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
+				5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */,
+				7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7E6EBCE12430A8770058D19A /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */,
+				61C74301242B4A1F005818A1 /* RecordViewController.swift */,
+				7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */,
+				7EE6D020241E202A00C1465E /* EditBookingViewController.swift */,
+				7EFB6975242213470073E535 /* QueueRecordViewController.swift */,
+				7EFB6977242215B60073E535 /* BookRecordViewController.swift */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		7E6EBCE22430A8850058D19A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
+				5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -462,22 +492,13 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */,
-				61C74301242B4A1F005818A1 /* RecordViewController.swift */,
-				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
-				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
-				5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */,
+				7E6EBCE12430A8770058D19A /* Records */,
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
 				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
-				7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */,
 				7E1137FD24233B1F006984BB /* PopoverContentController.swift */,
-				7EE6D020241E202A00C1465E /* EditBookingViewController.swift */,
+				7E6EBCE22430A8850058D19A /* Profile */,
 				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
-				7EFB6975242213470073E535 /* QueueRecordViewController.swift */,
-				7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */,
-				7EFB6977242215B60073E535 /* BookRecordViewController.swift */,
-				7EC7E693241B383400C2F9BB /* ProfileViewController.swift */,
-				5CE17B4D241CEDDF00A04B8B /* EditProfileViewController.swift */,
+				7E6EBCE02430A85B0058D19A /* Authentication */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -698,7 +719,6 @@
 				7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
 				7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */,
-				7E6EBCC42430952F0058D19A /* FBLogin.storyboard in Resources */,
 				5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */,
 				7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */,
 				5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */,
