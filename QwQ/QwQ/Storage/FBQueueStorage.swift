@@ -10,32 +10,25 @@ class FBQueueStorage: CustomerQueueStorage {
 
     // MARK: Storage capabilities
     private let db = Firestore.firestore()
+    private var queuesDb: CollectionReference {
+        db.collection(Constants.queuesDirectory)
+    }
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
-    private var listeners = [QueueRecord: ListenerRegistration]()
+    private var listener: ListenerRegistration?
 
     deinit {
-        for record in listeners.keys {
-            removeListener(for: record)
-        }
+        listener?.remove()
     }
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
-        db.collection(Constants.queuesDirectory)
-            .document(record.restaurant.uid)
-            .collection(record.startDate)
-            .document(record.id)
+        queuesDb.document(record.id)
     }
 
     func addQueueRecord(newRecord: QueueRecord, completion: @escaping (_ id: String) -> Void) {
-        //create document if it doesn't exist (non-existent container)
-        db.collection(Constants.queuesDirectory).document(newRecord.restaurant.uid).setData([:], merge: true)
-        let newQueueRecordRef = db.collection(Constants.queuesDirectory)
-            .document(newRecord.restaurant.uid)
-            .collection(newRecord.startDate)
-            .document()
-        newQueueRecordRef.setData(newRecord.dictionary) { (error) in
+        let newRecordRef = queuesDb.document()
+        newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
                 os_log("Error adding queue record",
                        log: Log.addQueueRecordError,
@@ -43,7 +36,7 @@ class FBQueueStorage: CustomerQueueStorage {
                        error.localizedDescription)
                 return
             }
-            completion(newQueueRecordRef.documentID)
+            completion(newRecordRef.documentID)
         }
     }
 
@@ -77,30 +70,21 @@ class FBQueueStorage: CustomerQueueStorage {
 
     // MARK: - Storage data retrieval
     func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
-
-        db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
+        os_log("Loading all active queue records (regardless of date); old ones shouldve been made history though.",
+               log: Log.loadActivity, type: .info)
+        queuesDb.whereField("customer", isEqualTo: customer.uid)
+            //.whereField("startTime", isEqualTo: Date().toString())
+            .getDocuments { (recordsSnapshot, err) in
             if let err = err {
                 os_log("Error getting documents",
                        log: Log.activeQueueRetrievalError,
                        type: .error, String(describing: err))
                 return
             }
-            for document in querySnapshot!.documents {
-                let restaurantQueuesToday = self.db.collection(Constants.queuesDirectory)
-                    .document(document.documentID)
-                    .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
-                restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
-                    if let err = err {
-                        os_log("Error getting documents",
-                               log: Log.activeQueueRetrievalError,
-                               type: .error,
-                               String(describing: err))
-                    }
-                    queueSnapshot!.documents.forEach {
-                        self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                            docSnapshot: $0,
-                            restaurantUID: document.documentID, forCustomerId: customer.uid,
-                            where: { !$0.isHistoryRecord }, completion: completion)
+            recordsSnapshot!.documents.forEach {
+                self.makeQueueRecord(document: $0) { record in
+                    if record.isActiveRecord {
+                        completion(record)
                     }
                 }
             }
@@ -110,121 +94,69 @@ class FBQueueStorage: CustomerQueueStorage {
     /// Searches for the customer's queue records in the past week (7 days) and
     /// calls the completion handler when records are found.
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
-        db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
+        queuesDb.whereField("customer", isEqualTo: customer.uid)
+            .getDocuments { (recordsSnapshot, err) in
             if let err = err {
                 os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
                 return
             }
-            for document in querySnapshot!.documents {
-                for numDaysAgo in 0...6 {
-                    let rQueue = self.db.collection(Constants.queuesDirectory)
-                        .document(document.documentID)
-                        .collection(Date.getFormattedDate(date: Date().getDateOf(daysBeforeDate: numDaysAgo),
-                                                          format: Constants.recordDateFormat))
-                    rQueue.getDocuments { (queueSnapshot, err) in
-                        if let err = err {
-                            os_log("Error getting documents",
-                                   log: Log.queueRetrievalError,
-                                   type: .error,
-                                   String(describing: err))
-                            return
-                        }
-                        if queueSnapshot!.isEmpty {
-                            return
-                        }
-                        queueSnapshot!.documents.forEach {
-                            self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-                                docSnapshot: $0,
-                                restaurantUID: document.documentID,
-                                forCustomerId: customer.uid,
-                                where: { $0.isHistoryRecord }, completion: completion)
+                recordsSnapshot!.documents.forEach {
+                    self.makeQueueRecord(document: $0) { record in
+                        if record.isHistoryRecord {
+                            completion(record)
                         }
                     }
                 }
-            }
         }
     }
 
-    private func triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
-        docSnapshot: DocumentSnapshot,
-        restaurantUID: String, forCustomerId cid: String,
-        where condition: @escaping (QueueRecord) -> Bool,
-        completion: @escaping (QueueRecord?) -> Void) {
-
-        let docId = docSnapshot.documentID
-        guard let data = docSnapshot.data(),
-            let customerUID = (data["customer"] as? String),
-            customerUID == cid else {
+    private func makeQueueRecord(document: DocumentSnapshot,
+                                 completion: @escaping (QueueRecord) -> Void) {
+        guard let data = document.data(), let rid = data["restaurant"] as? String else {
+            os_log("Error getting rid from Queue Record document.",
+                   log: Log.ridError, type: .error)
             return
         }
+        let qid = document.documentID
 
-        makeQueueRecord(data: data,
-                        id: docId,
-                        customerUID: customerUID,
-                        restaurantUID: restaurantUID) { record in
-            if condition(record) {
-                completion(record)
-            }
-        }
-    }
-
-    private func makeQueueRecord(data: [String: Any],
-                                 id: String,
-                                 customerUID: String,
-                                 restaurantUID: String,
-                                 completion: @escaping (QueueRecord) -> Void) {
-        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: restaurantUID, completion: { restaurant in
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
             FIRProfileStorage.getCustomerInfo(
                 completion: { customer in
                 guard let rec = QueueRecord(dictionary: data,
-                                            customer: customer, restaurant: restaurant,
-                                            id: id) else {
-                    return
-                }
-                completion(rec)
-                }, errorHandler: { _ in })
-
+                                            customer: customer,
+                                            restaurant: restaurant,
+                                            id: qid) else {
+                                                os_log("Couldn't create queue record. Likely a document is deleted but it's not supposed to.",
+                                                       log: Log.createQueueRecordError, type: .info)
+                                                return
+                    }
+                    completion(rec)
+            }, errorHandler: { _ in })
         }, errorHandler: nil)
     }
 
     // MARK: - Listeners
-    func registerListener(for record: QueueRecord) {
-//        removeListener(for: record)
-        if listeners[record] != nil {
-            //already registered
-            print("\n\tALREAY REGISTERED\n")
-            return
-        }
+    func registerListener(for customer: Customer) {
+        removeListener()
 
-        let docRef = getQueueRecordDocument(record: record)
-        listeners[record] = docRef.addSnapshotListener { (snapshot, err) in
+        listener = queuesDb.whereField("customer", isEqualTo: customer.uid)
+            .addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
                 return
             }
 
-            guard let data = snapshot.data() else {
-                assert(false, "At this stage, we should not allow deletion of any records.")
-                self.delegateWork { $0.didDeleteQueueRecord(record) }
-                return
-            }
-
-            guard let newRecord = QueueRecord(dictionary: data,
-                                              customer: record.customer,
-                                              restaurant: record.restaurant,
-                                              id: record.id) else {
-                                            os_log("Error creating queue record",
-                                                   log: Log.createQueueRecordError,
-                                                   type: .error, String(describing: err))
-                                            return
-            }
-            self.delegateWork { $0.didUpdateQueueRecord(newRecord) }
+                snapshot.documents.forEach {
+                    self.makeQueueRecord(document: $0) { record in
+                        self.delegateWork { $0.didUpdateQueueRecord(record) }
+                    }
+                }
         }
     }
 
-    func removeListener(for record: QueueRecord) {
-        listeners[record]?.remove()
-        listeners[record] = nil
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     func registerDelegate(_ del: QueueStorageSyncDelegate) {

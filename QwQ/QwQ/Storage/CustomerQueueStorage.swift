@@ -9,9 +9,9 @@ protocol QueueStorageSync {
     func unregisterDelegate(_ del: QueueStorageSyncDelegate)
 
     // MARK: - Listeners
-    func registerListener(for record: QueueRecord)
+    func registerListener(for customer: Customer)
 
-    func removeListener(for record: QueueRecord)
+    func removeListener()
 }
 
 protocol CustomerQueueStorage: QueueStorageSync {

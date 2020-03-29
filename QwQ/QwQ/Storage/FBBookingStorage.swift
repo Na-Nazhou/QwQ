@@ -10,25 +10,24 @@ class FBBookingStorage: CustomerBookingStorage {
 
     // MARK: Storage capabilities
     private let db = Firestore.firestore()
+    private var bookingDb: CollectionReference {
+        db.collection(Constants.bookingsDirectory)
+    }
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
-    private var listeners = [BookRecord: ListenerRegistration]()
+    private var listener: ListenerRegistration?
 
     deinit {
-        for record in listeners.keys {
-            removeListener(for: record)
-        }
+        listener?.remove()
     }
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
-        db.collection(Constants.bookingsDirectory)
-            .document(record.id)
+        bookingDb.document(record.id)
     }
 
     func addBookRecord(newRecord: BookRecord, completion: @escaping (_ id: String) -> Void) {
-        let newRecordRef = db.collection(Constants.bookingsDirectory)
-            .document()
+        let newRecordRef = bookingDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
                 os_log("Error adding book record",
@@ -72,8 +71,7 @@ class FBBookingStorage: CustomerBookingStorage {
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        db.collection(Constants.bookingsDirectory)
-            .whereField("customer", isEqualTo: customer.uid)
+        bookingDb.whereField("customer", isEqualTo: customer.uid)
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
@@ -96,8 +94,7 @@ class FBBookingStorage: CustomerBookingStorage {
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        db.collection(Constants.bookingsDirectory)
-            .whereField("customer", isEqualTo: customer.uid)
+        bookingDb.whereField("customer", isEqualTo: customer.uid)
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
@@ -121,7 +118,8 @@ class FBBookingStorage: CustomerBookingStorage {
 
         guard let data = document.data(),
             let rid = data["restaurant"] as? String else {
-                os_log("Error getting rid", log: Log.ridError, type: .error)
+                os_log("Error getting rid from Book Record document.",
+                       log: Log.ridError, type: .error)
             return
         }
 
@@ -134,6 +132,8 @@ class FBBookingStorage: CustomerBookingStorage {
                                                customer: customer,
                                                restaurant: restaurant,
                                                id: bid) else {
+                                                   os_log("Couldn't create book record. Likely a document is deleted but it's not supposed to.",
+                                                          log: Log.createBookRecordError, type: .info)
                                                 return
                     }
                     completion(rec)
@@ -141,46 +141,28 @@ class FBBookingStorage: CustomerBookingStorage {
         }, errorHandler: nil)
     }
 
-    func registerListener(for record: BookRecord) {
-        if listeners[record] != nil {
-            print("\n\t already registered")
-            //already registered
-            return
-        }
+    func registerListener(for customer: Customer) {
+        removeListener()
 
         //add listener
-        let docRef = getBookRecordDocument(record: record)
-        let listener = docRef.addSnapshotListener { (snapshot, err) in
-            guard let doc = snapshot, err == nil else {
+        listener = bookingDb.whereField("customer", isEqualTo: customer.uid)
+            .addSnapshotListener { (snapshot, err) in
+            guard let snapshot = snapshot, err == nil else {
                 os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
                 return
             }
 
-            guard let bookRecordData = doc.data() else {
-                print("docref got prob?")
-//                assert(false, "At this stage, we should not allow deletion of any records.")
-                self.delegateWork { $0.didDeleteBookRecord(record) }
-                return
-            }
-
-            guard let newRecord = BookRecord(dictionary: bookRecordData,
-                                             customer: record.customer,
-                                             restaurant: record.restaurant,
-                                             id: record.id) else {
-                                                os_log("Error creating book record",
-                                                       log: Log.createBookRecordError,
-                                                       type: .error,
-                                                       String(describing: err))
-                                                return
-            }
-            self.delegateWork { $0.didUpdateBookRecord(newRecord) }
+                snapshot.documents.forEach {
+                    self.makeBookRecord(document: $0) { record in
+                        self.delegateWork { $0.didUpdateBookRecord(record) }
+                    }
+                }
         }
-        listeners[record] = listener
     }
 
-    func removeListener(for record: BookRecord) {
-        listeners[record]?.remove()
-        listeners[record] = nil
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {

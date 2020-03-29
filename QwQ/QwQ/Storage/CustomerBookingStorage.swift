@@ -8,9 +8,9 @@ protocol BookingStorageSync {
     func unregisterDelegate(_ del: BookingStorageSyncDelegate)
 
     // MARK: - Listeners
-    func registerListener(for record: BookRecord)
+    func registerListener(for customer: Customer)
 
-    func removeListener(for record: BookRecord)
+    func removeListener()
 }
 
 protocol CustomerBookingStorage: BookingStorageSync {
