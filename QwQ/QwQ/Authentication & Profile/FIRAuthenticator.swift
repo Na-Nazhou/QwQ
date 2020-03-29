@@ -1,5 +1,5 @@
 //
-//  FBAuthenticator.swift
+//  FIRAuthenticator.swift
 //  QwQ
 //
 //  Created by Daniel Wong on 11/3/20.
@@ -7,9 +7,9 @@
 
 import FirebaseAuth
 
-class FBAuthenticator: Authenticator {
+class FIRAuthenticator: Authenticator {
 
-    typealias Profile = FBProfileStorage
+    typealias Profile = FIRProfileStorage
 
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
@@ -28,9 +28,9 @@ class FBAuthenticator: Authenticator {
                                                  signupDetails: signupDetails,
                                                  authDetails: authDetails,
                                                  errorHandler: errorHandler)
-            FBAuthenticator.login(authDetails: authDetails,
-                                  completion: completion,
-                                  errorHandler: errorHandler)
+            FIRAuthenticator.login(authDetails: authDetails,
+                                   completion: completion,
+                                   errorHandler: errorHandler)
         }
     }
 
@@ -42,6 +42,8 @@ class FBAuthenticator: Authenticator {
                 errorHandler(error)
                 return
             }
+            Profile.currentUID = authDetails.email
+            Profile.currentAuthType = AuthTypes.Firebase
             completion()
         }
     }
@@ -49,6 +51,7 @@ class FBAuthenticator: Authenticator {
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void) {
         do {
             try Auth.auth().signOut()
+            Profile.currentUID = nil
             completion()
         } catch {
             errorHandler(AuthError.SignOutError)
@@ -64,11 +67,12 @@ class FBAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        Auth.auth().currentUser != nil
-    }
-
-    static func getUIDOfCurrentUser() -> String? {
-        Auth.auth().currentUser?.uid
+        guard let user = Auth.auth().currentUser else {
+            return false
+        }
+        Profile.currentUID = user.email
+        Profile.currentAuthType = AuthTypes.Firebase
+        return true
     }
 
 }

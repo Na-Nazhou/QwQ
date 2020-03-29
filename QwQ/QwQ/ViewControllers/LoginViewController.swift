@@ -7,24 +7,28 @@
 //
 
 import UIKit
+import FacebookLogin
+import FacebookCore
 
 class LoginViewController: UIViewController {
 
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet private var facebookButton: UIButton!
-    
+
     var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         spinner = showSpinner(onView: view)
+
         if Auth.checkIfAlreadyLoggedIn() {
             authCompleted()
+        } else if AccessToken.current != nil {
+            fbAlreadyLoggedIn()
         } else {
             removeSpinner(spinner)
         }
@@ -66,8 +70,28 @@ class LoginViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
     }
-
+    
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+    }
+
+    private func fbAlreadyLoggedIn() {
+        let connection = GraphRequestConnection()
+        let request = GraphRequest(graphPath: "/me", parameters: ["fields": "email"])
+
+        connection.add(request) { (_, result, error) in
+            if let error = error {
+                self.showMessage(title: Constants.errorTitle,
+                                 message: error.localizedDescription,
+                                 buttonText: Constants.errorTitle)
+            }
+
+            if let result = result as? [String: String], let email = result["email"] {
+                Profile.currentUID = email
+                Profile.currentAuthType = AuthTypes.Facebook
+                self.authCompleted()
+            }
+        }
+        connection.start()
     }
 
     private func authCompleted() {

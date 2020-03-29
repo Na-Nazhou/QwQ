@@ -6,7 +6,6 @@ protocol QueueStorageSync {
 }
 
 protocol RestaurantQueueStorage: QueueStorageSync {
-
     // MARK: - Modifier
     func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant)
 

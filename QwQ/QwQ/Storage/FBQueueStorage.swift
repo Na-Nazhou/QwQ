@@ -1,5 +1,6 @@
 import FirebaseFirestore
 import Foundation
+import os.log
 
 class FBQueueStorage: CustomerQueueStorage {
     // MARK: Storage as singleton
@@ -30,7 +31,10 @@ class FBQueueStorage: CustomerQueueStorage {
             .document()
         newQueueRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
-                print(error.localizedDescription)
+                os_log("Error adding queue record",
+                       log: Log.addQueueRecordError,
+                       type: .error,
+                       error.localizedDescription)
                 return
             }
             completion(newQueueRecordRef.documentID)
@@ -41,7 +45,10 @@ class FBQueueStorage: CustomerQueueStorage {
         let oldDocRef = getQueueRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    os_log("Error updating queue record",
+                           log: Log.updateQueueRecordError,
+                           type: .error,
+                           error.localizedDescription)
                     return
                 }
                 completion()
@@ -52,7 +59,10 @@ class FBQueueStorage: CustomerQueueStorage {
         let docRef = getQueueRecordDocument(record: record)
         docRef.delete { (error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    os_log("Error deleting queue record",
+                           log: Log.deleteQueueRecordError,
+                           type: .error,
+                           error.localizedDescription)
                     return
                 }
             completion()
@@ -64,7 +74,9 @@ class FBQueueStorage: CustomerQueueStorage {
 
         db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
+                os_log("Error getting documents",
+                       log: Log.activeQueueRetrievalError,
+                       type: .error, String(describing: err))
                 return
             }
             for document in querySnapshot!.documents {
@@ -73,7 +85,10 @@ class FBQueueStorage: CustomerQueueStorage {
                     .collection(Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat))
                 restaurantQueuesToday.getDocuments { (queueSnapshot, err) in
                     if let err = err {
-                        print("Error getting documents: \(err)")
+                        os_log("Error getting documents",
+                               log: Log.activeQueueRetrievalError,
+                               type: .error,
+                               String(describing: err))
                     }
                     queueSnapshot!.documents.forEach {
                         self.triggerCompletionIfRecordWithConditionFoundInRestaurantQueues(
@@ -91,7 +106,7 @@ class FBQueueStorage: CustomerQueueStorage {
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
         db.collection(Constants.queuesDirectory).getDocuments { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
+                os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
                 return
             }
             for document in querySnapshot!.documents {
@@ -102,7 +117,10 @@ class FBQueueStorage: CustomerQueueStorage {
                                                           format: Constants.recordDateFormat))
                     rQueue.getDocuments { (queueSnapshot, err) in
                         if let err = err {
-                            print("Error getting documents: \(err)")
+                            os_log("Error getting documents",
+                                   log: Log.queueRetrievalError,
+                                   type: .error,
+                                   String(describing: err))
                             return
                         }
                         if queueSnapshot!.isEmpty {
@@ -149,8 +167,8 @@ class FBQueueStorage: CustomerQueueStorage {
                                  customerUID: String,
                                  restaurantUID: String,
                                  completion: @escaping (QueueRecord) -> Void) {
-        FBRestaurantInfoStorage.getRestaurantFromUID(uid: restaurantUID, completion: { restaurant in
-            FBProfileStorage.getCustomerInfo(
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: restaurantUID, completion: { restaurant in
+            FIRProfileStorage.getCustomerInfo(
                 completion: { customer in
                 guard let rec = QueueRecord(dictionary: data,
                                             customer: customer, restaurant: restaurant,
@@ -159,7 +177,7 @@ class FBQueueStorage: CustomerQueueStorage {
                 }
                 completion(rec)
                 }, errorHandler: { _ in })
-            
+
         }, errorHandler: nil)
     }
 
@@ -175,7 +193,7 @@ class FBQueueStorage: CustomerQueueStorage {
         let docRef = getQueueRecordDocument(record: record)
         listeners[record] = docRef.addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
-                print("Error fetching document: \(err!)!")
+                os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
                 return
             }
 
@@ -189,13 +207,15 @@ class FBQueueStorage: CustomerQueueStorage {
                                               customer: record.customer,
                                               restaurant: record.restaurant,
                                               id: record.id) else {
-                                            print("Error")
+                                            os_log("Error creating queue record",
+                                                   log: Log.createQueueRecordError,
+                                                   type: .error, String(describing: err))
                                             return
             }
             self.delegateWork { $0.didUpdateQueueRecord(newRecord) }
         }
     }
-    
+
     func removeListener(for record: QueueRecord) {
         listeners[record]?.remove()
         listeners[record] = nil

@@ -8,7 +8,6 @@
 import FirebaseFirestore
 
 class FBQueueStorage: RestaurantQueueStorage {
-
     let db = Firestore.firestore()
 
     weak var logicDelegate: QueueStorageSyncDelegate?

@@ -18,6 +18,8 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
     private var searchActive: Bool = false
     private let searchController = UISearchController(searchResultsController: nil)
+    private var selectionState = SelectionState.selectOne
+    private var selectedRestaurants: [Restaurant] = []
     
     private let queueLogicManager = CustomerQueueLogicManager()
     private let restaurantLogicManager = RestaurantLogicManager()
@@ -26,7 +28,43 @@ class SearchViewController: UIViewController, SearchDelegate {
         restaurantLogicManager.restaurants
     }
     
+    @IBOutlet private var selectButton: UIButton!
     @IBOutlet private var restaurantCollectionView: UICollectionView!
+    @IBOutlet private var queueButton: UIButton!
+    @IBOutlet private var bookButton: UIButton!
+    
+    enum SelectionState {
+        case selectOne
+        case selectAll
+    }
+    
+    @IBAction private func handleBook(_ sender: Any) {
+        if selectionState == .selectAll {
+            let items = restaurantCollectionView.indexPathsForSelectedItems
+        }
+    }
+    
+    @IBAction private func handleQueue(_ sender: Any) {
+        if selectionState == .selectOne {
+            let items = restaurantCollectionView.indexPathsForSelectedItems
+        }
+    }
+    
+    @IBAction private func handleSelect(_ sender: Any) {
+        if selectionState == .selectOne {
+            queueButton.setTitle(Constants.queueButtonTitle, for: .normal)
+            bookButton.setTitle(Constants.bookButtonTitle, for: .normal)
+            selectButton.setTitle(Constants.selectOneText, for: .normal)
+            selectionState = .selectAll
+            restaurantCollectionView.allowsMultipleSelection = true
+        } else {
+            queueButton.setTitle("", for: .normal)
+            bookButton.setTitle("", for: .normal)
+            selectButton.setTitle(Constants.selectAllText, for: .normal)
+            selectionState = .selectOne
+            restaurantCollectionView.allowsMultipleSelection = false
+        }
+    }
     
     @IBAction private func handleSort(_ sender: Any) {
         // Get the button frame
@@ -213,7 +251,26 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
+        if selectionState == .selectAll {
+            let cell = collectionView.cellForItem(at: indexPath)
+            if cell?.isSelected == true {
+                selectedRestaurants.append(filtered[indexPath.item])
+                cell?.backgroundColor = Constants.selectedRestaurantColor
+                print(selectedRestaurants)
+            }
+        } else if selectionState == .selectOne {
+            performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let restaurantToBeRemoved = filtered[indexPath.item]
+        selectedRestaurants = selectedRestaurants.filter {
+            $0 != restaurantToBeRemoved
+        }
+        cell?.backgroundColor = Constants.deselectRestaurantColor
+        print(selectedRestaurants)
     }
 }
 

@@ -1,5 +1,6 @@
 import FirebaseFirestore
 import Foundation
+import os.log
 
 class FBBookingStorage: CustomerBookingStorage {
     // MARK: Storage as singleton
@@ -24,7 +25,10 @@ class FBBookingStorage: CustomerBookingStorage {
             .document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
-                print(error.localizedDescription)
+                os_log("Error adding book record",
+                       log: Log.addBookRecordError,
+                       type: .error,
+                       error.localizedDescription)
                 return
             }
             completion(newRecordRef.documentID)
@@ -35,7 +39,10 @@ class FBBookingStorage: CustomerBookingStorage {
         let oldDocRef = getBookRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    os_log("Error updating book record",
+                           log: Log.updateBookRecordError,
+                           type: .error,
+                           error.localizedDescription)
                     return
                 }
                 completion()
@@ -46,7 +53,10 @@ class FBBookingStorage: CustomerBookingStorage {
         let docRef = getBookRecordDocument(record: record)
         docRef.delete { (error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    os_log("Error deleting book record",
+                           log: Log.deleteBookRecordError,
+                           type: .error,
+                           error.localizedDescription)
                     return
                 }
                 completion()
@@ -61,7 +71,10 @@ class FBBookingStorage: CustomerBookingStorage {
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    os_log("Error getting documents",
+                           log: Log.activeBookRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
                 for document in querySnapshot!.documents {
@@ -82,7 +95,10 @@ class FBBookingStorage: CustomerBookingStorage {
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
-                print("Error getting documents: \(err)")
+                    os_log("Error getting documents",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
                 for document in querySnapshot!.documents {
@@ -99,14 +115,14 @@ class FBBookingStorage: CustomerBookingStorage {
 
         guard let data = document.data(),
             let rid = data["restaurant"] as? String else {
-            print("Error getting rid")
+                os_log("Error getting rid", log: Log.ridError, type: .error)
             return
         }
 
         let bid = document.documentID
 
-        FBRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
-            FBProfileStorage.getCustomerInfo(
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
+            FIRProfileStorage.getCustomerInfo(
                 completion: { customer in
                     guard let rec = BookRecord(dictionary: data,
                                                customer: customer,
@@ -130,7 +146,7 @@ class FBBookingStorage: CustomerBookingStorage {
         let docRef = getBookRecordDocument(record: record)
         let listener = docRef.addSnapshotListener { (snapshot, err) in
             guard let doc = snapshot, err == nil else {
-                print("Error fetching document: \(err!)!")
+                os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
                 return
             }
 
@@ -145,7 +161,10 @@ class FBBookingStorage: CustomerBookingStorage {
                                              customer: record.customer,
                                              restaurant: record.restaurant,
                                              id: record.id) else {
-                                                print("Error")
+                                                os_log("Error creating book record",
+                                                       log: Log.createBookRecordError,
+                                                       type: .error,
+                                                       String(describing: err))
                                                 return
             }
             self.delegateWork { $0.didUpdateBookRecord(newRecord) }

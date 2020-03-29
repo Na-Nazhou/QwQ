@@ -23,23 +23,23 @@ struct QueueRecord: Record {
 
     var dictionary: [String: Any] {
         var data = [String: Any]()
-        data["customer"] = customer.uid
-        data["groupSize"] = groupSize
-        data["babyChairQuantity"] = babyChairQuantity
-        data["wheelchairFriendly"] = wheelchairFriendly
-        data["startTime"] = startTime
+        data[Constants.customerKey] = customer.uid
+        data[Constants.groupSizeKey] = groupSize
+        data[Constants.babyChairQuantityKey] = babyChairQuantity
+        data[Constants.wheelChairFriendlyKey] = wheelchairFriendly
+        data[Constants.startTimeKey] = startTime
 
         if let admitTime = admitTime {
-            data["admitTime"] = admitTime
+            data[Constants.admitTimeKey] = admitTime
         }
         if let serveTime = serveTime {
-            data["serveTime"] = serveTime
+            data[Constants.serveTimeKey] = serveTime
         }
         if let rejectTime = rejectTime {
-            data["rejectTime"] = rejectTime
+            data[Constants.rejectTimeKey] = rejectTime
         }
         if let withdrawTime = withdrawTime {
-            data["withdrawTime"] = withdrawTime
+            data[Constants.withdrawTimeKey] = withdrawTime
         }
 
         return data
@@ -64,24 +64,23 @@ struct QueueRecord: Record {
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
-        guard let groupSize = dictionary["groupSize"] as? Int,
-            let babyChairQuantity = dictionary["babyChairQuantity"] as? Int,
-            let wheelchairFriendly = dictionary["wheelchairFriendly"] as? Bool,
-            let startTime = (dictionary["startTime"] as? Timestamp)?.dateValue() else {
+        guard let groupSize = dictionary[Constants.groupSizeKey] as? Int,
+            let babyChairQuantity = dictionary[Constants.babyChairQuantityKey] as? Int,
+            let wheelchairFriendly = dictionary[Constants.wheelChairFriendlyKey] as? Bool,
+            let startTime = (dictionary[Constants.startTimeKey] as? Timestamp)?.dateValue() else {
                 return nil
         }
-        let admitTime = (dictionary["admitTime"] as? Timestamp)?.dateValue()
-        let serveTime = (dictionary["serveTime"] as? Timestamp)?.dateValue()
-        let rejectTime = (dictionary["rejectTime"] as? Timestamp)?.dateValue()
-        let withdrawTime = (dictionary["withdrawTime"] as? Timestamp)?.dateValue()
-
+        let admitTime = (dictionary[Constants.admitTimeKey] as? Timestamp)?.dateValue()
+        let serveTime = (dictionary[Constants.serveTimeKey] as? Timestamp)?.dateValue()
+        let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
+        let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
+        
         self.init(id: id, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
                   serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
-
 }
 
 extension QueueRecord: Hashable {

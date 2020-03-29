@@ -1,4 +1,5 @@
 import Foundation
+import os.log
 
 class CustomerBookingLogicManager: CustomerBookingLogic {
     // Storage
@@ -37,6 +38,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     deinit {
+        os_log("DEINITING", log: Log.deinitLogic, type: .info)
         for record in activeBookRecords {
             bookingStorage.removeListener(for: record)
         }
@@ -148,9 +150,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
-        print("\nDid update book record\n")
+        os_log("Did update book record", log: Log.updateBookRecord, type: .info)
         guard let oldRecord = activeBookRecords.first(where: { $0 == record }) else {
-            print("\ndetected new\n")
+            os_log("Detected new book record", log: Log.newBookRecord, type: .info)
             didAddBookRecord(record)
             return
         }
@@ -159,21 +161,22 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         case .admit:
             // call some (activites) delegate to display admission status
             didAdmitBookRecord(record)
-            print("\ndetected admission\n")
+            os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             addAsHistoryRecord(record)
             didDeleteBookRecord(record)
-            print("\ndetected service\n")
+            os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
             didDeleteBookRecord(record)
-            print("\ndetected rejection\n")
+            os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
             didDeleteBookRecord(record)
+            os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
-            print("\ndetected regular modif\n")
+            os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .none:
             assert(false, "Modification should be something")
         }

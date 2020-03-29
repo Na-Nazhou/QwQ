@@ -11,22 +11,22 @@ class EditProfileViewController: UIViewController {
 
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
+    @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
-    @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
 
     typealias Auth = FBAuthenticator
     typealias Profile = FBProfileStorage
 
-    var uid: String?
-    var isRestaurantOpen: Bool?
+    private var uid: String?
+    private var isRestaurantOpen: Bool?
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
-    var image: UIImage?
+    private var image: UIImage?
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +114,8 @@ class EditProfileViewController: UIViewController {
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
         self.isRestaurantOpen = restaurant.isRestaurantOpen
+        self.queueOpenTime = restaurant.queueOpenTime
+        self.queueCloseTime = restaurant.queueCloseTime
 
         setUpProfileImageView(uid: restaurant.uid)
 

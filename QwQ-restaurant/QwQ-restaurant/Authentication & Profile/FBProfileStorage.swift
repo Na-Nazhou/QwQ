@@ -11,7 +11,6 @@ import FirebaseUI
 import SDWebImage
 
 class FBProfileStorage: ProfileStorage {
-
     typealias Auth = FBAuthenticator
 
     static let dbRef = Firestore.firestore().collection("restaurants")

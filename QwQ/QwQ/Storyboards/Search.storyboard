@@ -25,11 +25,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="15" y="59" width="384" height="67"/>
+                                <rect key="frame" x="15" y="61.5" width="384" height="108"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="26"/>
-                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=compact-widthClass=compact">
@@ -42,7 +42,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ldv-Z2-Nal">
                                         <rect key="frame" x="0.0" y="36" width="384" height="31"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7M-CU-rAI">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7M-CU-rAI">
                                                 <rect key="frame" x="0.0" y="0.0" width="121.5" height="31"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuT-bb-DAT">
@@ -61,12 +61,57 @@
                                                     <action selector="handleSort:" destination="unC-H2-shI" eventType="touchUpInside" id="Aow-1K-t5A"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT4-OI-qoK">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HT4-OI-qoK">
                                                 <rect key="frame" x="262.5" y="0.0" width="121.5" height="31"/>
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-k1-Kn8">
+                                        <rect key="frame" x="0.0" y="77" width="384" height="31"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gg-1j-RDw">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="31"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="handleQueue:" destination="unC-H2-shI" eventType="touchUpInside" id="LcN-t4-OtZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvq-pT-3Ef">
+                                                <rect key="frame" x="96" y="0.0" width="192" height="31"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                <state key="normal" title="SELECT ALL">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="handleSelect:" destination="unC-H2-shI" eventType="touchUpInside" id="blp-BP-hj8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkq-4p-fO4">
+                                                <rect key="frame" x="288" y="0.0" width="96" height="31"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="handleBook:" destination="unC-H2-shI" eventType="touchUpInside" id="cw3-kA-ym5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5gg-1j-RDw" firstAttribute="width" secondItem="Dkq-4p-fO4" secondAttribute="width" id="19G-Un-oOE"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="hvq-pT-3Ef" firstAttribute="width" secondItem="rKm-Fu-FR5" secondAttribute="width" multiplier="0.5" id="bD5-0v-5Un"/>
+                                </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="urr-2m-4eq">
                                 <rect key="frame" x="0.0" y="227.5" width="414" height="585.5"/>
@@ -164,8 +209,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="rKm-Fu-FR5" firstAttribute="centerY" secondItem="nOr-ig-2QA" secondAttribute="centerY" id="6O0-k4-zvi"/>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" constant="15" id="CK8-Nn-fMr"/>
-                            <constraint firstItem="rKm-Fu-FR5" firstAttribute="top" secondItem="r2s-La-V29" secondAttribute="top" constant="15" id="CLd-Cv-LqJ"/>
                             <constraint firstItem="rKm-Fu-FR5" firstAttribute="centerX" secondItem="BKf-ZL-3DJ" secondAttribute="centerX" id="J6Q-Y8-fZk"/>
                             <constraint firstItem="urr-2m-4eq" firstAttribute="leading" secondItem="r2s-La-V29" secondAttribute="leading" id="P8D-OT-ITO"/>
                             <constraint firstItem="urr-2m-4eq" firstAttribute="top" secondItem="nOr-ig-2QA" secondAttribute="bottom" constant="-3" id="PR5-xk-SQh"/>
@@ -181,7 +226,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nln-qZ-h8h"/>
                     <connections>
+                        <outlet property="bookButton" destination="Dkq-4p-fO4" id="B1w-9H-ukJ"/>
+                        <outlet property="queueButton" destination="5gg-1j-RDw" id="JQ1-oM-UqC"/>
                         <outlet property="restaurantCollectionView" destination="urr-2m-4eq" id="x4B-i7-mII"/>
+                        <outlet property="selectButton" destination="hvq-pT-3Ef" id="CBl-Ye-gEF"/>
                         <segue destination="9OI-BT-VJ6" kind="show" identifier="restaurantSelected" id="fqS-VL-dLS"/>
                         <segue destination="lJC-Jw-heQ" kind="show" identifier="editQueueSelected" id="1pS-0G-SKh"/>
                     </connections>
@@ -261,10 +309,10 @@
                                         <rect key="frame" x="20" y="20" width="377.5" height="548"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fBM-ob-2ch">
-                                                <rect key="frame" x="20" y="20" width="405.5" height="488.5"/>
+                                                <rect key="frame" x="20" y="20" width="428.5" height="474.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwe-wW-PaA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="428.5" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="ncZ-Zs-6RM"/>
                                                         </constraints>
@@ -276,7 +324,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2x-y3-4IH">
-                                                        <rect key="frame" x="0.0" y="65" width="405.5" height="183"/>
+                                                        <rect key="frame" x="0.0" y="65" width="428.5" height="171"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">Hawaiian Pizza (S/M/L)
@@ -312,7 +360,7 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmW-dT-K5i">
-                                                        <rect key="frame" x="0.0" y="263" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="251" width="428.5" height="50"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -321,7 +369,7 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nad-DH-dLq">
-                                                        <rect key="frame" x="0.0" y="328" width="405.5" height="30.5"/>
+                                                        <rect key="frame" x="0.0" y="316" width="428.5" height="28.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                                 <attributes>
@@ -346,10 +394,10 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="94T-Eg-RBn">
-                                                        <rect key="frame" x="0.0" y="373.5" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="359.5" width="428.5" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beQ-Qn-Prc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -358,7 +406,7 @@ Pancake</string>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0K-Me-Win">
-                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -366,10 +414,10 @@ Pancake</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-1I-378">
-                                                        <rect key="frame" x="0.0" y="438.5" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="424.5" width="428.5" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBR-yY-bSO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="50"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -378,7 +426,7 @@ Pancake</string>
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPw-7L-wOq">
-                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -539,6 +587,6 @@ Pancake</string>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IfD-L4-uNp"/>
+        <segue reference="1pS-0G-SKh"/>
     </inferredMetricsTieBreakers>
 </document>

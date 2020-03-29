@@ -30,15 +30,15 @@ struct Restaurant: User {
 
     var dictionary: [String: Any] {
         [
-            "uid": uid,
-            "name": name,
-            "email": email,
-            "contact": contact,
-            "address": address,
-            "menu": menu,
-            "isRestaurantOpen": isRestaurantOpen,
-            "queueOpenTime": queueOpenTime as Any,
-            "queueCloseTime": queueCloseTime as Any
+            Constants.uidKey: uid,
+            Constants.nameKey: name,
+            Constants.emailKey: email,
+            Constants.contactKey: contact,
+            Constants.addressKey: address,
+            Constants.menuKey: menu,
+            Constants.isRestaurantOpenKey: isRestaurantOpen,
+            Constants.queueOpenTimeKey: queueOpenTime as Any,
+            Constants.queueCloseTimeKey: queueCloseTime as Any
         ]
     }
 
@@ -56,20 +56,20 @@ struct Restaurant: User {
     }
 
     init?(dictionary: [String: Any]) {
-        guard let uid = dictionary["uid"] as? String,
-            let name = dictionary["name"] as? String,
-            let email = dictionary["email"] as? String,
-            let contact = dictionary["contact"] as? String,
-            let address = dictionary["address"] as? String,
-            let menu = dictionary["menu"] as? String,
-            let isRestaurantOpen = dictionary["isRestaurantOpen"] as? Bool
-        else {
+        guard let uid = dictionary[Constants.uidKey] as? String,
+            let name = dictionary[Constants.nameKey] as? String,
+            let email = dictionary[Constants.emailKey] as? String,
+            let contact = dictionary[Constants.contactKey] as? String,
+            let address = dictionary[Constants.addressKey] as? String,
+            let menu = dictionary[Constants.menuKey] as? String,
+            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool
+            else {
                 return nil
         }
 
-        let queueOpenTime = (dictionary["queueOpenTime"] as? Timestamp)?.dateValue()
-        let queueCloseTime = (dictionary["queueCloseTime"] as? Timestamp)?.dateValue()
-
+        let queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
+        let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
+        
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
                   menu: menu, isRestaurantOpen: isRestaurantOpen, queueOpenTime: queueOpenTime,
                   queueCloseTime: queueCloseTime)

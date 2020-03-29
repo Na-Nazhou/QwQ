@@ -11,6 +11,7 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeRestaurantLabel: UILabel!
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
+    @IBOutlet private var statisticsControl: SegmentedControl!
     
     var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
                                                numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
@@ -19,8 +20,16 @@ class StatisticsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        statisticsControl.items = Constants.segmentedControlStatisticsTitles
+        
         statisticsTableView.delegate = self
         statisticsTableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        statisticsControl.layer.cornerRadius = view.frame.height / 2
+        statisticsControl.layer.borderColor = Constants.segmentedControlLayerBorderColor
+        statisticsControl.layer.borderWidth = Constants.segmentedControlLayerBorderWidth
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

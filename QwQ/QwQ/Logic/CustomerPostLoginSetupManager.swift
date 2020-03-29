@@ -1,5 +1,4 @@
 class CustomerPostLoginSetupManager {
-
     static func setUp(asIdentity customer: Customer) {
         _ = CustomerActivity.shared(for: customer)
     }

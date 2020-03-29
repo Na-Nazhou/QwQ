@@ -1,4 +1,5 @@
 import FirebaseFirestore
+import os.log
 
 class FBRestaurantStorage: RestaurantStorage {
     // MARK: Storage as singleton
@@ -23,7 +24,10 @@ class FBRestaurantStorage: RestaurantStorage {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
                 if let err = err {
-                    print("Error fetching documents: \(err)")
+                    os_log("Error getting documents",
+                    log: Log.activeQueueRetrievalError,
+                    type: .error,
+                    String(describing: err))
                     return
                 }
                 snapshot!.documentChanges.forEach { diff in

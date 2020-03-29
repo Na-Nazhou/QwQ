@@ -1,4 +1,5 @@
 import Foundation
+import os.log
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
     // Storage
@@ -37,6 +38,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     deinit {
+        os_log("DEINITING", log: Log.deinitLogic, type: .info)
         for record in currentQueueRecords {
             queueStorage.removeListener(for: record)
         }
@@ -98,11 +100,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
         if !record.restaurant.isQueueOpen {
-            print("Queue closed")
+            os_log("Queue is closed", log: Log.closeQueue, type: .info)
             queueDelegate?.didFindRestaurantQueueClosed()
             return false
         }
 
+        os_log("Queue is open", log: Log.openQueue, type: .info)
+        
         return true
     }
 
@@ -162,25 +166,27 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                "Record in which update is detected should be an existing current queue record. "
         + "Perhaps customer did not listen to newly added queue record.")
         let modification = record.changeType(from: customerActivity.currentQueues.getOriginalElement(of: record))
+        os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
         switch modification {
         case .admit:
             // call some (activites) delegate to display admission status
-            customerActivity.currentQueues.update(record) //tent.
-            print("\ndetected admission\n")
+            customerDidUpdateQueueRecord(record: record) //tent.
+            os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            print("\ndetected service\n")
+            didDeleteQueueRecord(record)
+            os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            print("\ndetected rejection\n")
+            didDeleteQueueRecord(record)
+            os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
-            removeFromCurrent(record)
+            didDeleteQueueRecord(record)
+            os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
-            print("\ndetected regular modif for record id \(record.id)\n")
+            os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .none:
             assert(false, "Modification should be something")
         }

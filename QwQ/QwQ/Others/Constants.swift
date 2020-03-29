@@ -35,6 +35,8 @@ struct Constants {
     static let missingEmailMessage = "Please provide a valid email."
     static let missingPasswordTitle = "Error - Missing Password"
     static let missingPasswordMessage = "Please provide a valid password."
+    static let loginCancelledMessage = "The login process with Facebook was cancelled."
+    static let fbLoginPermissionsMessage = "Please grant profile and email access with Facebook to continue."
 
     // MARK: Profile photo
     static let chooseFromPhotoLibraryTitle = "Choose from Library"
@@ -62,6 +64,7 @@ struct Constants {
     static let editQueueSelectedSegue = "editQueueSelected"
     static let editBookSelectedSegue = "editBookSelected"
     static let logoutSegue = "logout"
+    static let fbLoginCompletedSegue = "fbLoginComplete"
 
     // MARK: Storage settings
     static let customersDirectory = "customers"
@@ -74,6 +77,8 @@ struct Constants {
     static let activitiesReuseIdentifier = "activityCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let restaurantCellHeight = CGFloat(270)
+    static let selectedRestaurantColor = UIColor(red: 239 / 255, green: 240 / 255, blue: 241 / 255, alpha: 1)
+    static let deselectRestaurantColor = UIColor.clear
     
     // MARK: Popover content settings
     static let popoverContentControllerIdentifier = "PopoverContentController"
@@ -103,4 +108,32 @@ struct Constants {
     
     // MARK: Record settings
     static let recordDateFormat = "ddMMyyyy"
+    
+    // MARK: Button settings
+    static let selectOneText = "SELECT ONE"
+    static let selectAllText = "SELECT ALL"
+    static let queueButtonTitle = "QUEUE"
+    static let bookButtonTitle = "BOOK"
+    
+    // MARK: Model settings
+    static let uidKey = "uid"
+    static let nameKey = "name"
+    static let emailKey = "email"
+    static let contactKey = "contact"
+    static let addressKey = "address"
+    static let menuKey = "menu"
+    static let isRestaurantOpenKey = "isRestaurantOpen"
+    static let queueOpenTimeKey = "queueOpenTime"
+    static let queueCloseTimeKey = "queueCloseTime"
+    static let customerKey = "customer"
+    static let restaurantKey = "restaurant"
+    static let groupSizeKey = "groupSize"
+    static let babyChairQuantityKey = "babyChairQuantity"
+    static let wheelChairFriendlyKey = "wheelChairFriendly"
+    static let startTimeKey = "startTime"
+    static let admitTimeKey = "admitTime"
+    static let serveTimeKey = "serveTime"
+    static let rejectTimeKey = "rejectTime"
+    static let withdrawTimeKey = "withdrawTime"
+    static let timeKey = "time"
 }

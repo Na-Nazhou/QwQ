@@ -23,7 +23,6 @@ protocol Record {
 }
 
 extension Record {
-
     var isHistoryRecord: Bool {
         status == .served || status == .rejected || status == .withdrawn
     }

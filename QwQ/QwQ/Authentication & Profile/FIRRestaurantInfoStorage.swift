@@ -1,5 +1,5 @@
 //
-//  FBRestaurantInfoStorage.swift
+//  FIRRestaurantInfoStorage.swift
 //  QwQ
 //
 //  Created by Daniel Wong on 19/3/20.
@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FBRestaurantInfoStorage: RestaurantInfoStorage {
+class FIRRestaurantInfoStorage: RestaurantInfoStorage {
 
     static func getRestaurantFromUID(uid: String,
                                      completion: @escaping (Restaurant) -> Void,
