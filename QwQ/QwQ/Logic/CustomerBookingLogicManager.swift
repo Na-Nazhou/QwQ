@@ -38,31 +38,37 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     deinit {
-        os_log("DEINITING", log: Log.deinitLogic, type: .info)
-        for record in activeBookRecords {
-            bookingStorage.removeListener(for: record)
-        }
+        os_log("DEINITING booking lm", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 
     func fetchActiveBookRecords() {
+        if !activeBookRecords.isEmpty {
+            os_log("Active book records already loaded.", log: Log.loadActivity, type: .info)
+            return //already loaded, no need to reload.
+        }
         bookingStorage.loadActiveBookRecords(customer: customer, completion: {
             guard let bookRecord = $0 else {
                 return
             }
 
-            self.bookingStorage.registerListener(for: bookRecord)
+            self.didAddBookRecord(bookRecord)
         })
     }
 
     func fetchBookingHistory() {
+        if !pastBookRecords.isEmpty {
+            os_log("History book records already loaded.", log: Log.loadActivity, type: .info)
+            return
+        }
         bookingStorage.loadBookHistory(customer: customer, completion: {
              guard let record = $0 else {
                  return
              }
-            self.didAddBookRecord(record)
+            if self.customerActivity.bookingHistory.add(record) {
+                self.activitiesDelegate?.didUpdateHistoryRecords()
+            }
          })
-        
     }
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,

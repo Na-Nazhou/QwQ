@@ -24,6 +24,7 @@ struct Log {
     static let updateBookRecord = OSLog(subsystem: subsystem, category: "updateRecord")
     static let updateQueueRecord = OSLog(subsystem: subsystem, category: "updateRecord")
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
+    static let loadActivity = OSLog(subsystem: subsystem, category: "loadActivity")
     
     // MARK: FBError
     static let addQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")

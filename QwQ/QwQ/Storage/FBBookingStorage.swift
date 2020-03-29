@@ -15,6 +15,12 @@ class FBBookingStorage: CustomerBookingStorage {
 
     private var listeners = [BookRecord: ListenerRegistration]()
 
+    deinit {
+        for record in listeners.keys {
+            removeListener(for: record)
+        }
+    }
+
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
         db.collection(Constants.bookingsDirectory)
             .document(record.id)

@@ -33,25 +33,20 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         self.queueStorage.registerDelegate(self)
 
-        loadActiveQueueRecords()
+        fetchActiveQueueRecords()
         fetchQueueHistory()
     }
 
     deinit {
-        os_log("DEINITING", log: Log.deinitLogic, type: .info)
-        for record in currentQueueRecords {
-            queueStorage.removeListener(for: record)
-        }
+        os_log("DEINITING queue lm", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 
-    private func loadActiveQueueRecords() {
-        print("\tfetching active qrecs")
+    private func fetchActiveQueueRecords() {
         if !currentQueueRecords.isEmpty {
-            print("\tbut realised already loaded?")
+            os_log("Active queue records already loaded.", log: Log.loadActivity, type: .info)
             return //already loaded, no need to reload.
         }
-        print("\tso loading.")
         queueStorage.loadActiveQueueRecords(customer: customer, completion: {
             guard let queueRecord = $0 else {
                 return
@@ -59,13 +54,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             if self.customerActivity.currentQueues.add(queueRecord) {
                 self.activitiesDelegate?.didUpdateActiveRecords()
                 self.queueStorage.registerListener(for: queueRecord)
-                print("registed listener for loaded active qrec \(queueRecord.id)")
             }
         })
     }
 
     func fetchQueueHistory() {
         if !pastQueueRecords.isEmpty {
+            os_log("History queue records already loaded", log: Log.loadActivity, type: .info)
             return
         }
         queueStorage.loadQueueHistory(customer: customer, completion: {
@@ -122,14 +117,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func didAddQueueRecord(newRecord: QueueRecord, withUpdatedId id: String) {
         var updatedIdRec = newRecord
         updatedIdRec.id = id
-        print("in did ad qrec")
         guard customerActivity.currentQueues.add(updatedIdRec) else {
-            print("but alr added?")
             assert(updatedIdRec.id == customerActivity.currentQueues.getOriginalElement(of: updatedIdRec).id,
                    "Added queue record should already have legit id.")
             return
         }
-        print("adding listener for added qrec")
         self.queueStorage.registerListener(for: updatedIdRec)
         queueDelegate?.didAddRecord()
         activitiesDelegate?.didUpdateActiveRecords()

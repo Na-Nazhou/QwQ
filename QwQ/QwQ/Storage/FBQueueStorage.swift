@@ -15,6 +15,12 @@ class FBQueueStorage: CustomerQueueStorage {
 
     private var listeners = [QueueRecord: ListenerRegistration]()
 
+    deinit {
+        for record in listeners.keys {
+            removeListener(for: record)
+        }
+    }
+
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
         db.collection(Constants.queuesDirectory)
             .document(record.restaurant.uid)
