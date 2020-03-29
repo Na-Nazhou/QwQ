@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class ProfileViewController: UIViewController {
 
@@ -28,13 +29,23 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction private func logoutButton(_ sender: Any) {
-        Auth.logout(completion: {
-            self.logoutComplete()
-        }) { (error) in
-            self.showMessage(title: Constants.errorTitle,
-                             message: error.localizedDescription,
-                             buttonText: Constants.okayTitle)
+        guard let authType = Profile.currentAuthType else {
+            return
         }
+        if authType == AuthTypes.Firebase {
+            Auth.logout(completion: {
+                self.logoutComplete()
+            }) { (error) in
+                self.showMessage(title: Constants.errorTitle,
+                                 message: error.localizedDescription,
+                                 buttonText: Constants.okayTitle)
+            }
+        } else if authType == AuthTypes.Facebook {
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            logoutComplete()
+        }
+
     }
 
     private func getCustomerInfoComplete(customer: Customer) {
