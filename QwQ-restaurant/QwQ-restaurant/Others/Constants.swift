@@ -70,7 +70,8 @@ struct Constants {
     static let statisticsReuseIdentifier = "statisticsCell"
     
     // MARK: Segmented control settings
-    static let segmentedControlTitles = ["Current", "Waiting", "History"]
+    static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
+    static let segmentedControlStatisticsTitles = ["30 days", "3 months", "1 year"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white

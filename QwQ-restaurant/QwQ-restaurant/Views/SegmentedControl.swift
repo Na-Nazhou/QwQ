@@ -1,8 +1,8 @@
 //
 //  SegmentedControl.swift
-//  QwQ-restaurant
+//  QwQ
 //
-//  Created by Tan Su Yee on 19/3/20.
+//  Created by Tan Su Yee on 18/3/20.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ class SegmentedControl: UIControl {
     private var labels = [UILabel]()
     var thumbView = UIView()
     
-    var items = Constants.segmentedControlTitles {
+    var items: [String] = ["First", "Second"] {
         didSet {
             setupLabels()
         }
