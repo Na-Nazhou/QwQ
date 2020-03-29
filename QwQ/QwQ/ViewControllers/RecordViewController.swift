@@ -24,7 +24,7 @@ class RecordViewController: UIViewController {
         setUpViews()
     }
 
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
 
@@ -36,7 +36,7 @@ class RecordViewController: UIViewController {
             groupSizeLabel.text = String(record.groupSize)
             babyChairQuantityLabel.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
-            FBProfileStorage.getCustomerProfilePic(uid: record.restaurant.uid, placeholder: profileImageView)
+            FIRProfileStorage.getCustomerProfilePic(uid: record.restaurant.email, placeholder: profileImageView)
         }
     }
 }
