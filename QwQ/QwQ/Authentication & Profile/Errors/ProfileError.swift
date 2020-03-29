@@ -9,7 +9,7 @@ import Foundation
 
 enum ProfileError: Error {
     case NotSignedIn
-    case IncorrectUserType
+    case UserProfileNotFound
     case UIImageNotFound
     case NoImageSelected
 }
@@ -19,7 +19,7 @@ extension ProfileError: LocalizedError {
         switch self {
         case .NotSignedIn:
             return "You are not signed in."
-        case .IncorrectUserType:
+        case .UserProfileNotFound:
             return "Please check that you are logging into the correct app."
         case .UIImageNotFound:
             return "An error occured while trying to initialise the profile photo."

@@ -43,6 +43,7 @@ class FIRAuthenticator: Authenticator {
                 return
             }
             Profile.currentUID = authDetails.email
+            Profile.currentAuthType = AuthTypes.Firebase
             completion()
         }
     }
@@ -66,7 +67,12 @@ class FIRAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        Auth.auth().currentUser != nil
+        guard let user = Auth.auth().currentUser else {
+            return false
+        }
+        Profile.currentUID = user.email
+        Profile.currentAuthType = AuthTypes.Firebase
+        return true
     }
 
 }

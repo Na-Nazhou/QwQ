@@ -10,6 +10,7 @@ import UIKit
 protocol ProfileStorage {
 
     static var currentUID: String? { get set }
+    static var currentAuthType: AuthTypes? { get set }
 
     // MARK: - Customer Creation Methods
 

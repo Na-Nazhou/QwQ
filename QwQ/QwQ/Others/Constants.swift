@@ -64,6 +64,7 @@ struct Constants {
     static let editQueueSelectedSegue = "editQueueSelected"
     static let editBookSelectedSegue = "editBookSelected"
     static let logoutSegue = "logout"
+    static let fbLoginCompletedSegue = "fbLoginComplete"
 
     // MARK: Storage settings
     static let customersDirectory = "customers"

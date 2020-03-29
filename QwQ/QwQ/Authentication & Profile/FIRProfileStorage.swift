@@ -15,6 +15,7 @@ class FIRProfileStorage: ProfileStorage {
     typealias Auth = FIRAuthenticator
 
     static var currentUID: String?
+    static var currentAuthType: AuthTypes?
 
     static let dbRef = Firestore.firestore().collection("customers")
     static let storageRef = Storage.storage().reference().child("profile-pics")
@@ -57,7 +58,7 @@ class FIRProfileStorage: ProfileStorage {
                 }
             }
 
-            errorHandler(ProfileError.IncorrectUserType)
+            errorHandler(ProfileError.UserProfileNotFound)
             Auth.logout(completion: {}, errorHandler: errorHandler)
         }
     }
