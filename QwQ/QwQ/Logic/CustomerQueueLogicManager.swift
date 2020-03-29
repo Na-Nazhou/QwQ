@@ -46,6 +46,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func loadActiveQueueRecords() {
+        print("\tfetching active qrecs")
+        if !currentQueueRecords.isEmpty {
+            print("\tbut realised already loaded?")
+            return //already loaded, no need to reload.
+        }
+        print("\tso loading.")
         queueStorage.loadActiveQueueRecords(customer: customer, completion: {
             guard let queueRecord = $0 else {
                 return
@@ -59,6 +65,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func fetchQueueHistory() {
+        if !pastQueueRecords.isEmpty {
+            return
+        }
         queueStorage.loadQueueHistory(customer: customer, completion: {
             guard $0 != nil else {
                 return

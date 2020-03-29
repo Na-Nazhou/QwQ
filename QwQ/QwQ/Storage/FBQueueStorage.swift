@@ -13,7 +13,7 @@ class FBQueueStorage: CustomerQueueStorage {
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
-    private var listeners: [QueueRecord: ListenerRegistration] = [:]
+    private var listeners = [QueueRecord: ListenerRegistration]()
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
         db.collection(Constants.queuesDirectory)
