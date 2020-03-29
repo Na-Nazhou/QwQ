@@ -14,10 +14,10 @@ struct Customer: User {
 
     var dictionary: [String: Any] {
         [
-            "uid": uid,
-            "name": name,
-            "email": email,
-            "contact": contact
+            Constants.uidKey: uid,
+            Constants.nameKey: name,
+            Constants.emailKey: email,
+            Constants.contactKey: contact
         ]
     }
 
@@ -29,10 +29,10 @@ struct Customer: User {
     }
 
     init?(dictionary: [String: Any]) {
-        guard let uid = dictionary["uid"] as? String,
-            let name = dictionary["name"] as? String,
-            let email = dictionary["email"] as? String,
-            let contact = dictionary["contact"] as? String else {
+        guard let uid = dictionary[Constants.uidKey] as? String,
+            let name = dictionary[Constants.nameKey] as? String,
+            let email = dictionary[Constants.emailKey] as? String,
+            let contact = dictionary[Constants.contactKey] as? String else {
                 return nil
         }
 

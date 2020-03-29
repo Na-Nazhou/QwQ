@@ -6,7 +6,6 @@
 //
 
 class CustomerHistory {
-
     var queueHistory: RecordCollection<QueueRecord>
     var bookingHistory: RecordCollection<BookRecord>
 
