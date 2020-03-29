@@ -26,7 +26,7 @@ class FBBookingStorage: CustomerBookingStorage {
         bookingDb.document(record.id)
     }
 
-    func addBookRecord(newRecord: BookRecord, completion: @escaping (_ id: String) -> Void) {
+    func addBookRecord(newRecord: BookRecord) {
         let newRecordRef = bookingDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
@@ -36,11 +36,10 @@ class FBBookingStorage: CustomerBookingStorage {
                        error.localizedDescription)
                 return
             }
-            completion(newRecordRef.documentID)
         }
     }
 
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void) {
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord) {
         let oldDocRef = getBookRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
@@ -50,21 +49,6 @@ class FBBookingStorage: CustomerBookingStorage {
                            error.localizedDescription)
                     return
                 }
-                completion()
-        }
-    }
-
-    func deleteBookRecord(record: BookRecord, completion: @escaping () -> Void) {
-        let docRef = getBookRecordDocument(record: record)
-        docRef.delete { (error) in
-                if let error = error {
-                    os_log("Error deleting book record",
-                           log: Log.deleteBookRecordError,
-                           type: .error,
-                           error.localizedDescription)
-                    return
-                }
-                completion()
         }
     }
 

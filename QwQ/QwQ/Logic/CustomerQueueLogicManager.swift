@@ -51,10 +51,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             guard let queueRecord = $0 else {
                 return
             }
-            if self.customerActivity.currentQueues.add(queueRecord) {
-                self.activitiesDelegate?.didUpdateActiveRecords()
-                self.queueStorage.registerListener(for: queueRecord)
-            }
+            self.didAddQueueRecord(queueRecord)
         })
     }
 
@@ -64,18 +61,19 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
         queueStorage.loadQueueHistory(customer: customer, completion: {
-            guard $0 != nil else {
+            guard let record = $0 else {
                 return
             }
-            if self.customerActivity.queueHistory.add($0!) {
-                self.activitiesDelegate?.didUpdateHistoryRecords()
-            }
+            self.didAddQueueRecord(record)
         })
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
         // add any other queueing restrictions here
         restaurant.isQueueOpen
+            && currentQueueRecords.reduce(true) { result, record in
+                result && record.restaurant == restaurant
+        }
     }
 
     func enqueue(to restaurant: Restaurant,
@@ -94,11 +92,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return false
         }
 
-        queueStorage.addQueueRecord(newRecord: newRecord,
-                                    completion: {
-                                        self.didAddQueueRecord(newRecord: newRecord, withUpdatedId: $0)
-
-        })
+        queueStorage.addQueueRecord(newRecord: newRecord)
         return true
     }
 
@@ -112,19 +106,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         os_log("Queue is open", log: Log.openQueue, type: .info)
         
         return true
-    }
-
-    private func didAddQueueRecord(newRecord: QueueRecord, withUpdatedId id: String) {
-        var updatedIdRec = newRecord
-        updatedIdRec.id = id
-        guard customerActivity.currentQueues.add(updatedIdRec) else {
-            assert(updatedIdRec.id == customerActivity.currentQueues.getOriginalElement(of: updatedIdRec).id,
-                   "Added queue record should already have legit id.")
-            return
-        }
-        self.queueStorage.registerListener(for: updatedIdRec)
-        queueDelegate?.didAddRecord()
-        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     func editQueueRecord(oldRecord: QueueRecord,
@@ -144,68 +125,77 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: oldRecord.startTime)
 
-        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
-            self.queueDelegate?.didUpdateRecord()
-        })
+        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord)
     }
 
-    func deleteQueueRecord(_ queueRecord: QueueRecord) {
-        guard currentQueueRecords.contains(queueRecord) else {
-            return
-        }
-
+    func withdrawQueueRecord(_ queueRecord: QueueRecord) {
         var newRecord = queueRecord
         newRecord.withdrawTime = Date()
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: {
-            self.activitiesDelegate?.didDeleteRecord()
-        })
-        // we dont allow true deletion of any info from db.
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord)
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
-        assert(currentQueueRecords.contains(record),
-               "Record in which update is detected should be an existing current queue record. "
-        + "Perhaps customer did not listen to newly added queue record.")
-        let modification = record.changeType(from: customerActivity.currentQueues.getOriginalElement(of: record))
         os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
+        guard let oldRecord = currentQueueRecords.first(where: { $0 == record }) else {
+            os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
+            didAddQueueRecord(record)
+            return
+        }
+        let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
-            // call some (activites) delegate to display admission status
-            customerDidUpdateQueueRecord(record: record) //tent.
+            didAdmitQueueRecord(record)
             os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
-            addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            didServeQueueRecord(record)
             os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            removeFromCurrent(record)
             os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
-            didDeleteQueueRecord(record)
+            removeFromCurrent(record)
             os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
-            customerDidUpdateQueueRecord(record: record)
+            didUpdateQueueRecord(record: record)
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .none:
             assert(false, "Modification should be something")
         }
     }
 
-    private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        if record.isActiveRecord {
-            customerActivity.currentQueues.update(record)
+    private func didAddQueueRecord(_ record: QueueRecord) {
+        if record.isActiveRecord && customerActivity.currentQueues.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
+        }
+        if record.isHistoryRecord && customerActivity.queueHistory.add(record) {
+            activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
 
-    func didDeleteQueueRecord(_ record: QueueRecord) {
+    private func didAdmitQueueRecord(_ record: QueueRecord) {
+        // tent
+        didUpdateQueueRecord(record: record)
+    }
+
+    private func didServeQueueRecord(_ record: QueueRecord) {
+        // TODO: auto withdraw all other active queues (in case of late sync,
+        // withdraw those whose starttime <= record.servetime
+
+        addAsHistoryRecord(record)
         removeFromCurrent(record)
     }
 
+    private func didUpdateQueueRecord(record: QueueRecord) {
+        if record.isActiveRecord {
+            customerActivity.currentQueues.update(record)
+            activitiesDelegate?.didUpdateActiveRecords()
+            queueDelegate?.didUpdateRecord()
+        }
+    }
+
     private func removeFromCurrent(_ record: QueueRecord) {
-        queueStorage.removeListener(for: record)
         if customerActivity.currentQueues.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }

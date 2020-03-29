@@ -65,9 +65,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
              guard let record = $0 else {
                  return
              }
-            if self.customerActivity.bookingHistory.add(record) {
-                self.activitiesDelegate?.didUpdateHistoryRecords()
-            }
+
+            self.didAddBookRecord(record)
          })
     }
 
@@ -85,23 +84,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.addBookRecord(newRecord: newRecord,
-                                     completion: { self.didAddBookRecord(newRecord: newRecord, withUpdatedId: $0)
-
-        })
+        bookingStorage.addBookRecord(newRecord: newRecord)
         return true
-    }
-
-    private func didAddBookRecord(newRecord: BookRecord, withUpdatedId id: String) {
-        var updatedIdRec = newRecord
-        updatedIdRec.id = id
-        guard customerActivity.currentBookings.add(updatedIdRec) else {
-            return
-        }
-        bookingStorage.registerListener(for: newRecord)
-
-        bookingDelegate?.didAddRecord()
-        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     func editBookRecord(oldRecord: BookRecord,
@@ -121,10 +105,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
-            self.bookingDelegate?.didUpdateRecord()
-            self.activitiesDelegate?.didUpdateActiveRecords()
-        })
+        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord)
         return true
     }
 
@@ -140,19 +121,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         return true
     }
 
-    func deleteBookRecord(_ record: BookRecord) {
-        if record.isAdmitted {
-            var newRecord = record
-            newRecord.withdrawTime = Date()
-            bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord, completion: {
-                self.activitiesDelegate?.didDeleteRecord()
-            })
-            return
-        }
-
-        bookingStorage.deleteBookRecord(record: record, completion: {
-            self.activitiesDelegate?.didDeleteRecord()
-        })
+    func withdrawBookRecord(_ record: BookRecord) {
+        var newRecord = record
+        newRecord.withdrawTime = Date()
+        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord)
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
@@ -165,20 +137,19 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
-            // call some (activites) delegate to display admission status
             didAdmitBookRecord(record)
             os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
@@ -192,10 +163,11 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         if record.isActiveRecord {
             customerActivity.currentBookings.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
+            bookingDelegate?.didUpdateRecord()
         }
     }
 
-    func didAddBookRecord(_ record: BookRecord) {
+    private func didAddBookRecord(_ record: BookRecord) {
         if record.isActiveRecord && customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
@@ -205,14 +177,14 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
-    func didAdmitBookRecord(_ record: BookRecord) {
+    private func didAdmitBookRecord(_ record: BookRecord) {
         guard customerActivity.currentBookings.remove(record) else {
             return
         }
 
         // Delete other bookings at the same time
         for otherRecord in activeBookRecords where otherRecord.time == record.time {
-            bookingStorage.deleteBookRecord(record: otherRecord, completion: {})
+            withdrawBookRecord(otherRecord)
         }
 
         if customerActivity.currentBookings.add(record) {
@@ -220,12 +192,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
-    func didDeleteBookRecord(_ record: BookRecord) {
-        removeFromCurrent(record)
-    }
-
     private func removeFromCurrent(_ record: BookRecord) {
-        bookingStorage.removeListener(for: record)
         if customerActivity.currentBookings.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }

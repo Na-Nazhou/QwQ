@@ -21,5 +21,5 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
                          babyChairQuantity: Int,
                          wheelchairFriendly: Bool)
 
-    func deleteQueueRecord(_ queueRecord: QueueRecord)
+    func withdrawQueueRecord(_ queueRecord: QueueRecord)
 }

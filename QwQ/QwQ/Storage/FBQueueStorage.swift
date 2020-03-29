@@ -26,7 +26,7 @@ class FBQueueStorage: CustomerQueueStorage {
         queuesDb.document(record.id)
     }
 
-    func addQueueRecord(newRecord: QueueRecord, completion: @escaping (_ id: String) -> Void) {
+    func addQueueRecord(newRecord: QueueRecord) {
         let newRecordRef = queuesDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
@@ -36,11 +36,10 @@ class FBQueueStorage: CustomerQueueStorage {
                        error.localizedDescription)
                 return
             }
-            completion(newRecordRef.documentID)
         }
     }
 
-    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
+    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord) {
         let oldDocRef = getQueueRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
@@ -50,21 +49,6 @@ class FBQueueStorage: CustomerQueueStorage {
                            error.localizedDescription)
                     return
                 }
-                completion()
-        }
-    }
-
-    func deleteQueueRecord(record: QueueRecord, completion: @escaping () -> Void) {
-        let docRef = getQueueRecordDocument(record: record)
-        docRef.delete { (error) in
-                if let error = error {
-                    os_log("Error deleting queue record",
-                           log: Log.deleteQueueRecordError,
-                           type: .error,
-                           error.localizedDescription)
-                    return
-                }
-            completion()
         }
     }
 
@@ -72,7 +56,7 @@ class FBQueueStorage: CustomerQueueStorage {
     func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
         os_log("Loading all active queue records (regardless of date); old ones shouldve been made history though.",
                log: Log.loadActivity, type: .info)
-        queuesDb.whereField("customer", isEqualTo: customer.uid)
+        queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
             //.whereField("startTime", isEqualTo: Date().toString())
             .getDocuments { (recordsSnapshot, err) in
             if let err = err {
@@ -88,13 +72,13 @@ class FBQueueStorage: CustomerQueueStorage {
                     }
                 }
             }
-        }
+            }
     }
 
     /// Searches for the customer's queue records in the past week (7 days) and
     /// calls the completion handler when records are found.
     func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
-        queuesDb.whereField("customer", isEqualTo: customer.uid)
+        queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
             .getDocuments { (recordsSnapshot, err) in
             if let err = err {
                 os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
@@ -107,12 +91,12 @@ class FBQueueStorage: CustomerQueueStorage {
                         }
                     }
                 }
-        }
+            }
     }
 
     private func makeQueueRecord(document: DocumentSnapshot,
                                  completion: @escaping (QueueRecord) -> Void) {
-        guard let data = document.data(), let rid = data["restaurant"] as? String else {
+        guard let data = document.data(), let rid = data[Constants.restaurantKey] as? String else {
             os_log("Error getting rid from Queue Record document.",
                    log: Log.ridError, type: .error)
             return
@@ -126,12 +110,12 @@ class FBQueueStorage: CustomerQueueStorage {
                                             customer: customer,
                                             restaurant: restaurant,
                                             id: qid) else {
-                                                os_log("Couldn't create queue record. Likely a document is deleted but it's not supposed to.",
+                                                os_log("Cannot create queue record. Maybe accidentally deleted.",
                                                        log: Log.createQueueRecordError, type: .info)
                                                 return
                     }
                     completion(rec)
-            }, errorHandler: { _ in })
+                }, errorHandler: { _ in })
         }, errorHandler: nil)
     }
 
@@ -139,7 +123,7 @@ class FBQueueStorage: CustomerQueueStorage {
     func registerListener(for customer: Customer) {
         removeListener()
 
-        listener = queuesDb.whereField("customer", isEqualTo: customer.uid)
+        listener = queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
@@ -151,7 +135,7 @@ class FBQueueStorage: CustomerQueueStorage {
                         self.delegateWork { $0.didUpdateQueueRecord(record) }
                     }
                 }
-        }
+            }
     }
 
     func removeListener() {

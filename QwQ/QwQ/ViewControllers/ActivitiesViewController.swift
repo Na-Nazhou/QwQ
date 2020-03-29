@@ -167,7 +167,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.queueLogicManager.deleteQueueRecord(queueRecord)
+                self.queueLogicManager.withdrawQueueRecord(queueRecord)
             }
         }
 
@@ -179,7 +179,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.bookingLogicManager.deleteBookRecord(bookRecord)
+                self.bookingLogicManager.withdrawBookRecord(bookRecord)
             }
         }
 

@@ -41,10 +41,10 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
 
         if bookingLogicManager.addBookRecord(to: restaurant,
-                           at: datePicker.date,
-                           with: groupSize,
-                           babyChairQuantity: babyChairQuantity,
-                           wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+                                             at: datePicker.date,
+                                             with: groupSize,
+                                             babyChairQuantity: babyChairQuantity,
+                                             wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
         }
     }
