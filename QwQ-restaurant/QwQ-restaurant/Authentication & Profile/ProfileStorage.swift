@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ProfileStorage {
-    
     // MARK: - Restaurant Creation Methods
     
     static func createInitialRestaurantProfile(uid: String,

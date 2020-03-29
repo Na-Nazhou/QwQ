@@ -24,12 +24,25 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="DhZ-hD-LWP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw6-yj-Epa">
-                                <rect key="frame" x="108" y="95.5" width="198.5" height="39.5"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LtW-f4-P8e">
+                                <rect key="frame" x="87" y="58.5" width="240" height="114"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw6-yj-Epa">
+                                        <rect key="frame" x="55" y="0.0" width="130.5" height="57"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-DD-Q5f" customClass="SegmentedControl" customModule="QwQ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="57" width="240" height="57"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="5uI-lV-wK3"/>
+                                            <constraint firstAttribute="width" constant="240" id="t16-8D-E74"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gMT-pe-MMR">
                                 <rect key="frame" x="15" y="238" width="384" height="560"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -126,26 +139,17 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-DD-Q5f" customClass="SegmentedControl" customModule="QwQ" customModuleProvider="target">
-                                <rect key="frame" x="87" y="155" width="240" height="57"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="57" id="5uI-lV-wK3"/>
-                                    <constraint firstAttribute="width" constant="240" id="t16-8D-E74"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="R4T-DD-Q5f" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="4rh-y1-LuQ"/>
+                            <constraint firstItem="LtW-f4-P8e" firstAttribute="width" secondItem="Agy-ft-Iet" secondAttribute="width" multiplier="0.57971" id="1dz-K7-cFz"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" id="AgO-JZ-gTU"/>
                             <constraint firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="top" id="Hq8-MR-Cnn"/>
-                            <constraint firstItem="R4T-DD-Q5f" firstAttribute="top" secondItem="dw6-yj-Epa" secondAttribute="bottom" constant="20" id="QYm-5D-eMN"/>
+                            <constraint firstItem="LtW-f4-P8e" firstAttribute="centerY" secondItem="DhZ-hD-LWP" secondAttribute="centerY" id="ISd-Dj-GvH"/>
+                            <constraint firstItem="LtW-f4-P8e" firstAttribute="centerX" secondItem="Agy-ft-Iet" secondAttribute="centerX" id="QJy-H7-xIc"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="trailing" secondItem="Agy-ft-Iet" secondAttribute="trailing" id="TYo-ON-NhY"/>
-                            <constraint firstItem="dw6-yj-Epa" firstAttribute="centerY" secondItem="DhZ-hD-LWP" secondAttribute="centerY" id="dwW-1x-Hdk"/>
                             <constraint firstItem="DhZ-hD-LWP" firstAttribute="height" secondItem="Agy-ft-Iet" secondAttribute="height" multiplier="0.3" id="fNH-aj-q4I"/>
                             <constraint firstItem="gMT-pe-MMR" firstAttribute="leading" secondItem="Agy-ft-Iet" secondAttribute="leading" constant="15" id="jSd-Tl-ml1"/>
-                            <constraint firstItem="dw6-yj-Epa" firstAttribute="centerX" secondItem="5fZ-AD-hlT" secondAttribute="centerX" id="ntS-yi-6Cb"/>
                             <constraint firstItem="Agy-ft-Iet" firstAttribute="trailing" secondItem="gMT-pe-MMR" secondAttribute="trailing" constant="15" id="rGs-2w-deD"/>
                             <constraint firstItem="gMT-pe-MMR" firstAttribute="top" secondItem="DhZ-hD-LWP" secondAttribute="bottom" constant="7.5" id="vOu-Lh-vXn"/>
                             <constraint firstItem="Agy-ft-Iet" firstAttribute="bottom" secondItem="gMT-pe-MMR" secondAttribute="bottom" constant="15" id="xwv-a3-ZEh"/>
@@ -227,7 +231,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="c-book-icon" width="980" height="980"/>
+        <image name="c-book-icon" width="682" height="626"/>
         <image name="gradient-background" width="2048" height="2732"/>
         <image name="person.3" catalog="system" width="72" height="35"/>
     </resources>

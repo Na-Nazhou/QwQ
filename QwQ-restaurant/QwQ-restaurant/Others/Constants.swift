@@ -99,4 +99,26 @@ struct Constants {
     
     // MARK: Statistics settings
     static let statisticsDateFormat = "dd/MM/yyyy"
+    
+    // MARK: Model settings
+    static let uidKey = "uid"
+    static let nameKey = "name"
+    static let emailKey = "email"
+    static let contactKey = "contact"
+    static let addressKey = "address"
+    static let menuKey = "menu"
+    static let isRestaurantOpenKey = "isRestaurantOpen"
+    static let queueOpenTimeKey = "queueOpenTime"
+    static let queueCloseTimeKey = "queueCloseTime"
+    static let customerKey = "customer"
+    static let restaurantKey = "restaurant"
+    static let groupSizeKey = "groupSize"
+    static let babyChairQuantityKey = "babyChairQuantity"
+    static let wheelChairFriendlyKey = "wheelChairFriendly"
+    static let startTimeKey = "startTime"
+    static let admitTimeKey = "admitTime"
+    static let serveTimeKey = "serveTime"
+    static let rejectTimeKey = "rejectTime"
+    static let withdrawTimeKey = "withdrawTime"
+    static let timeKey = "time"
 }

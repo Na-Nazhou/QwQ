@@ -6,7 +6,6 @@
 //
 
 extension Collection where T == Restaurant {
-
     var restaurants: Set<Restaurant> {
         elements
     }

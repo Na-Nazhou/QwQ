@@ -9,7 +9,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FBAuthenticator: Authenticator {
-    
     typealias Profile = FBProfileStorage
     
     static func signup(signupDetails: SignupDetails,

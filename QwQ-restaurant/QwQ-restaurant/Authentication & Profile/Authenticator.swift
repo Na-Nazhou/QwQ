@@ -6,7 +6,6 @@
 //
 
 protocol Authenticator {
-
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
                        completion: @escaping () -> Void,

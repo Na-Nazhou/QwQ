@@ -6,9 +6,7 @@
 //
 
 protocol CustomerInfoStorage {
-
     static func getCustomerFromUID(uid: String,
                                    completion: @escaping (Customer) -> Void,
                                    errorHandler: ((Error) -> Void)?)
-
 }
