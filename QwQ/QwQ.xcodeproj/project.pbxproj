@@ -357,6 +357,34 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7E6EBCD92430A7D30058D19A /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */,
+				7EFB696D242210110073E535 /* EditBook.storyboard */,
+				7EFB6971242213000073E535 /* Queue.storyboard */,
+				7EFB69732422130C0073E535 /* Book.storyboard */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		7E6EBCDA2430A7E10058D19A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7E6EBCC32430952F0058D19A /* FBLogin.storyboard */,
+				7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7E6EBCDE2430A8090058D19A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		7E72B199241C9CC700C1EE72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,13 +499,9 @@
 			isa = PBXGroup;
 			children = (
 				7E7F7DD02422659F00A080E5 /* Search.storyboard */,
-				7EDC5E5A24220E880053CA1D /* EditQueue.storyboard */,
-				7EFB696D242210110073E535 /* EditBook.storyboard */,
-				7E6EBCC32430952F0058D19A /* FBLogin.storyboard */,
-				7EFB6971242213000073E535 /* Queue.storyboard */,
-				7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */,
-				7EFB69732422130C0073E535 /* Book.storyboard */,
-				7EC7E68B241B2FC800C2F9BB /* Profile.storyboard */,
+				7E6EBCD92430A7D30058D19A /* Records */,
+				7E6EBCDA2430A7E10058D19A /* Authentication */,
+				7E6EBCDE2430A8090058D19A /* Profile */,
 				7E56AF9A2421F513002E9BAC /* Activities.storyboard */,
 			);
 			path = Storyboards;

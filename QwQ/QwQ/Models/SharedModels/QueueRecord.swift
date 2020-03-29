@@ -93,7 +93,6 @@ struct QueueRecord: Record {
                   startTime: startTime, admitTime: admitTime,
                   serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
-
 }
 
 extension QueueRecord: Hashable {

@@ -360,6 +360,39 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7E6EBCD82430A7C00058D19A /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB6979242218280073E535 /* Book.storyboard */,
+				7EFB697B2422183C0073E535 /* Queue.storyboard */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		7E6EBCDB2430A7EE0058D19A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7E42821B242B48530019A8A2 /* EmailVerification.storyboard */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7E6EBCDC2430A7F80058D19A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7E72B18F241C95F000C1EE72 /* Profile.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7E6EBCDD2430A7FE0058D19A /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				7EAC34D2242B32290088D00F /* Statistics.storyboard */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		7E72B14F241C93FE00C1EE72 = {
 			isa = PBXGroup;
 			children = (
@@ -426,11 +459,10 @@
 			isa = PBXGroup;
 			children = (
 				7E72B18E241C95F000C1EE72 /* Activities.storyboard */,
-				7EFB6979242218280073E535 /* Book.storyboard */,
-				7EAC34D2242B32290088D00F /* Statistics.storyboard */,
-				7E42821B242B48530019A8A2 /* EmailVerification.storyboard */,
-				7EFB697B2422183C0073E535 /* Queue.storyboard */,
-				7E72B18F241C95F000C1EE72 /* Profile.storyboard */,
+				7E6EBCD82430A7C00058D19A /* Records */,
+				7E6EBCDD2430A7FE0058D19A /* Statistics */,
+				7E6EBCDC2430A7F80058D19A /* Profile */,
+				7E6EBCDB2430A7EE0058D19A /* Authentication */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

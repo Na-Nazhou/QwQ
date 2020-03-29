@@ -63,7 +63,8 @@ struct Restaurant: User {
             let contact = dictionary[Constants.contactKey] as? String,
             let address = dictionary[Constants.addressKey] as? String,
             let menu = dictionary[Constants.menuKey] as? String,
-            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool else {
+            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool
+            else {
                 return nil
         }
 

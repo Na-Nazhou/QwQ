@@ -10,11 +10,11 @@ struct Restaurant: User {
     let address: String
     let menu: String
 
-    let isRestaurantOpen: Bool
+    var isRestaurantOpen: Bool
 
     //previous recorded times
-    let queueOpenTime: Date?
-    let queueCloseTime: Date?
+    var queueOpenTime: Date?
+    var queueCloseTime: Date?
 
     var isQueueOpen: Bool {
         guard let queueOpenTime = queueOpenTime else {
@@ -42,9 +42,8 @@ struct Restaurant: User {
         ]
     }
 
-    init(uid: String, name: String, email: String, contact: String,
-         address: String, menu: String, isRestaurantOpen: Bool,
-         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
+    init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
+         isRestaurantOpen: Bool, queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
         self.uid = uid
         self.name = name
         self.email = email
@@ -63,20 +62,17 @@ struct Restaurant: User {
             let contact = dictionary[Constants.contactKey] as? String,
             let address = dictionary[Constants.addressKey] as? String,
             let menu = dictionary[Constants.menuKey] as? String,
-            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool else {
+            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool
+            else {
                 return nil
         }
 
-        self.uid = uid
-        self.name = name
-        self.email = email
-        self.contact = contact
-
-        self.address = address
-        self.menu = menu
-        self.isRestaurantOpen = isRestaurantOpen
-        self.queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
-        self.queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
+        let queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
+        let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
+        
+        self.init(uid: uid, name: name, email: email, contact: contact, address: address,
+                  menu: menu, isRestaurantOpen: isRestaurantOpen, queueOpenTime: queueOpenTime,
+                  queueCloseTime: queueCloseTime)
     }
 }
 
