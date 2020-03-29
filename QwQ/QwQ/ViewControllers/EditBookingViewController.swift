@@ -58,9 +58,14 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
     override func setUpViews() {
         super.setUpViews()
 
-        let minDate = Calendar.current.date(byAdding: .hour, value: 2, to: Date())!
+        let calendar = Calendar.current
+        let minuteInterval = 15
+        let twoHoursLater = calendar.date(byAdding: .hour, value: 2, to: Date.getCurrentTime())!
+        let offset = minuteInterval - calendar.component(.minute, from: twoHoursLater) % minuteInterval
+        let minDate = calendar.date(byAdding: .minute, value: offset, to: twoHoursLater)!
+
         datePicker.minimumDate = minDate
-        datePicker.minuteInterval = 15
+        datePicker.minuteInterval = minuteInterval
 
         // Editing an existing book record
         if let bookRecord = record as? BookRecord {

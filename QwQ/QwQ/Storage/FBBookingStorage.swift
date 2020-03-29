@@ -66,7 +66,7 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
-        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
@@ -90,7 +90,7 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
-        let startTime = Date().getDateOf(daysBeforeDate: 6)
+        let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
         db.collection(Constants.bookingsDirectory)
             .whereField("customer", isEqualTo: customer.uid)
