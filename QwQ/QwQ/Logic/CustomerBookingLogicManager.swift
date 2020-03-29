@@ -66,7 +66,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     func addBookRecord(to restaurant: Restaurant, at time: Date,
                        with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) -> Bool {
 
-        var newRecord = BookRecord(restaurant: restaurant,
+        let newRecord = BookRecord(restaurant: restaurant,
                                    customer: customer,
                                    time: time,
                                    groupSize: groupSize,
@@ -78,14 +78,18 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
 
         bookingStorage.addBookRecord(newRecord: newRecord,
-                                     completion: { self.didAddBookRecord(newRecord: &newRecord, id: $0)
+                                     completion: { self.didAddBookRecord(newRecord: newRecord, withUpdatedId: $0)
 
         })
         return true
     }
 
-    private func didAddBookRecord(newRecord: inout BookRecord, id: String) {
-        newRecord.id = id
+    private func didAddBookRecord(newRecord: BookRecord, withUpdatedId id: String) {
+        var updatedIdRec = newRecord
+        updatedIdRec.id = id
+        guard customerActivity.currentBookings.add(updatedIdRec) else {
+            return
+        }
         bookingStorage.registerListener(for: newRecord)
 
         bookingDelegate?.didAddRecord()

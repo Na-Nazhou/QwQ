@@ -165,6 +165,13 @@ class FBQueueStorage: CustomerQueueStorage {
 
     // MARK: - Listeners
     func registerListener(for record: QueueRecord) {
+//        removeListener(for: record)
+        if listeners[record] != nil {
+            //already registered
+            print("\n\tALREAY REGISTERED\n")
+            return
+        }
+
         let docRef = getQueueRecordDocument(record: record)
         listeners[record] = docRef.addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {

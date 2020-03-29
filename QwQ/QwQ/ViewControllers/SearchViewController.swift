@@ -62,7 +62,7 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
-        
+
         restaurantLogicManager.searchDelegate = self
     }
     

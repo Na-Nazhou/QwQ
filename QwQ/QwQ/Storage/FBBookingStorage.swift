@@ -16,8 +16,6 @@ class FBBookingStorage: CustomerBookingStorage {
 
     private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
         db.collection(Constants.bookingsDirectory)
-            .document(record.restaurant.uid)
-            .collection(record.date)
             .document(record.id)
     }
 
@@ -122,8 +120,11 @@ class FBBookingStorage: CustomerBookingStorage {
     }
 
     func registerListener(for record: BookRecord) {
-        // remove listener (if any)
-        removeListener(for: record)
+        if listeners[record] != nil {
+            print("\n\t already registered")
+            //already registered
+            return
+        }
 
         //add listener
         let docRef = getBookRecordDocument(record: record)
@@ -134,7 +135,8 @@ class FBBookingStorage: CustomerBookingStorage {
             }
 
             guard let bookRecordData = doc.data() else {
-                assert(false, "At this stage, we should not allow deletion of any records.")
+                print("docref got prob?")
+//                assert(false, "At this stage, we should not allow deletion of any records.")
                 self.delegateWork { $0.didDeleteBookRecord(record) }
                 return
             }

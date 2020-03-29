@@ -32,7 +32,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         self.queueStorage.registerDelegate(self)
 
-        loadQueueRecord()
+        loadActiveQueueRecords()
         fetchQueueHistory()
     }
 
@@ -43,7 +43,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         queueStorage.unregisterDelegate(self)
     }
 
-    private func loadQueueRecord() {
+    private func loadActiveQueueRecords() {
         queueStorage.loadActiveQueueRecords(customer: customer, completion: {
             guard let queueRecord = $0 else {
                 return
@@ -51,6 +51,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             if self.customerActivity.currentQueues.add(queueRecord) {
                 self.activitiesDelegate?.didUpdateActiveRecords()
                 self.queueStorage.registerListener(for: queueRecord)
+                print("registed listener for loaded active qrec \(queueRecord.id)")
             }
         })
     }
@@ -108,12 +109,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func didAddQueueRecord(newRecord: QueueRecord, withUpdatedId id: String) {
         var updatedIdRec = newRecord
         updatedIdRec.id = id
+        print("in did ad qrec")
         guard customerActivity.currentQueues.add(updatedIdRec) else {
+            print("but alr added?")
             assert(updatedIdRec.id == customerActivity.currentQueues.getOriginalElement(of: updatedIdRec).id,
                    "Added queue record should already have legit id.")
             return
         }
-        queueStorage.registerListener(for: updatedIdRec)
+        print("adding listener for added qrec")
+        self.queueStorage.registerListener(for: updatedIdRec)
         queueDelegate?.didAddRecord()
         activitiesDelegate?.didUpdateActiveRecords()
     }
@@ -176,7 +180,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             removeFromCurrent(record)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
-            print("\ndetected regular modif\n")
+            print("\ndetected regular modif for record id \(record.id)\n")
         case .none:
             assert(false, "Modification should be something")
         }
