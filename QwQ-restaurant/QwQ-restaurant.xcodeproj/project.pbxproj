@@ -48,6 +48,7 @@
 		7E428226242B94F00019A8A2 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428225242B94EF0019A8A2 /* Statistics.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
+		7E6EBCD72430A2E70058D19A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EBCD62430A2E70058D19A /* Log.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
 		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
@@ -148,6 +149,7 @@
 		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E428225242B94EF0019A8A2 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		7E6EBCD62430A2E70058D19A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = "/Users/tansuyee/Documents/Projects/2020-fp-qwq/QwQ-restaurant/QwQ-restaurant/Others/Utilities/Log.swift"; sourceTree = "<absolute>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -345,6 +347,19 @@
 			path = Records;
 			sourceTree = "<group>";
 		};
+		7E6EBCD52430A2CB0058D19A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
+				5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */,
+				7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */,
+				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
+				5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */,
+				D453E3A7242368A0005FA25F /* Date+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7E72B14F241C93FE00C1EE72 = {
 			isa = PBXGroup;
 			children = (
@@ -451,13 +466,9 @@
 				61326804241F28FF00B770B6 /* Fonts */,
 				5C44C9B1241DD02F0097C006 /* Utilities */,
 				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
+				7E6EBCD62430A2E70058D19A /* Log.swift */,
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
-				5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */,
-				5C2CB13424248918003AFC6C /* UIViewController+Spinner.swift */,
-				7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */,
-				5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */,
-				5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */,
-				D453E3A7242368A0005FA25F /* Date+Extensions.swift */,
+				7E6EBCD52430A2CB0058D19A /* Extensions */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -781,6 +792,7 @@
 			files = (
 				5C44BB552422141A0012EC59 /* RestaurantPostLoginSetupManager.swift in Sources */,
 				6148055A2422A1EF003D6D44 /* Authenticator.swift in Sources */,
+				7E6EBCD72430A2E70058D19A /* Log.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantRecordLogic.swift in Sources */,
 				61ACB804242B27AE002A1F47 /* RestaurantBookingStorage.swift in Sources */,
 				7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */,

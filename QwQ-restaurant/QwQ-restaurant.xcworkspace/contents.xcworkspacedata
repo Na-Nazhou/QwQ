@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/tansuyee/Documents/Projects/2020-fp-qwq/QwQ-restaurant/QwQ-restaurant/Others/Utilities/Log.swift">
+   </FileRef>
+   <FileRef
       location = "group:QwQ-restaurant.xcodeproj">
    </FileRef>
    <FileRef
