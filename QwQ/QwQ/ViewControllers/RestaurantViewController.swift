@@ -86,12 +86,12 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.editQueueSelectedSegue
             || segue.identifier == Constants.editBookSelectedSegue {
-            guard let editVC = segue.destination as? EditRecordViewController, let restaurant = restaurant else {
+            guard let editVC = segue.destination as? EditRecordViewController else {
                 assert(false,
                        "Destination should be editRecordVC and restaurant should not be nil.")
                 return
             }
-            editVC.restaurant = restaurant
+            editVC.restaurantLogicManager = restaurantLogicManager
         }
     }
 }
