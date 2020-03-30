@@ -72,8 +72,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         // add any other queueing restrictions here
         restaurant.isQueueOpen
             && currentQueueRecords.reduce(true) { result, record in
-                result && record.restaurant == restaurant
-        }
+                result && record.restaurant != restaurant
+            }
     }
 
     func enqueue(to restaurant: Restaurant,
