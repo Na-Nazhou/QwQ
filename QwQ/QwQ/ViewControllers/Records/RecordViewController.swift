@@ -36,7 +36,7 @@ class RecordViewController: UIViewController {
             groupSizeLabel.text = String(record.groupSize)
             babyChairQuantityLabel.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
-            FIRProfileStorage.getCustomerProfilePic(uid: record.restaurant.email, placeholder: profileImageView)
+            FIRProfileStorage.getCustomerProfilePic(uid: record.restaurant.uid, placeholder: profileImageView)
         }
     }
 }

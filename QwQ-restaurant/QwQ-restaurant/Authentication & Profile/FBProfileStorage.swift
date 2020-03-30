@@ -26,7 +26,10 @@ class FBProfileStorage: ProfileStorage {
             .setData(["uid": uid,
                       "name": signupDetails.name,
                       "contact": signupDetails.contact,
-                      "email": authDetails.email]) { (error) in
+                      "email": authDetails.email,
+                      "address": "",
+                      "menu": "",
+                      "isRestaurantOpen": false]) { (error) in
             if let error = error {
                 errorHandler(error)
             }
