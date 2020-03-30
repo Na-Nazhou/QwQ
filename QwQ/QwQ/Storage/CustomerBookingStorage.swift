@@ -16,10 +16,10 @@ protocol BookingStorageSync {
 protocol CustomerBookingStorage: BookingStorageSync {
      // MARK: - Modifier
     /// Insert a book record
-    func addBookRecord(newRecord: BookRecord)
+    func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void)
 
     /// Update a book record (can only update groupSize, babyCount, wheelchairCount, and arrival time)
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord)
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void)
 
     // MARK: - Query
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void)

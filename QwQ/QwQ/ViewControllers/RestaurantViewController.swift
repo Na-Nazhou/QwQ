@@ -43,9 +43,14 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
             return
         }
 
-        if queueLogicManager.canQueue(for: restaurant) {
-            performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
+        if !queueLogicManager.canQueue(for: restaurant) {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.alreadyQueuedRestaurantMessage,
+                        buttonText: Constants.okayTitle)
+            return
         }
+
+        performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
     }
 
     @IBAction private func handleBookTap(_ sender: Any) {

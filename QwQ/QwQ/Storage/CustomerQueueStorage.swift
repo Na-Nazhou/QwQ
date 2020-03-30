@@ -17,10 +17,10 @@ protocol QueueStorageSync {
 protocol CustomerQueueStorage: QueueStorageSync {
     // MARK: - Modifier
     /// Insert a queue record
-    func addQueueRecord(newRecord: QueueRecord)
+    func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void)
 
     /// Update a queue record (can only update groupSize, babyCount, wheelchairCount)
-    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord)
+    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void)
 
     // MARK: - Query
     /// Calls  completion handler when it finds customer's active queue record.

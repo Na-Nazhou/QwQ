@@ -132,13 +132,15 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         if segue.identifier == Constants.editQueueSelectedSegue,
             let restaurant = sender as? Restaurant {
-            restaurantLogicManager.currentRestaurant = restaurant
+            if restaurantLogicManager.currentRestaurant != restaurant {
+                restaurantLogicManager.currentRestaurant = restaurant
+            } // otherwise it is the most updated copy of restaurant
 
             guard let editVC = segue.destination as? EditRecordViewController else {
                 assert(false, "Wrong way of doing this")
                 return
             }
-            editVC.restaurant = restaurant
+            editVC.restaurantLogicManager = restaurantLogicManager
         }
     }
 }
@@ -242,10 +244,16 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                  buttonText: Constants.okayTitle)
                 return
             }
-            
-            if self.queueLogicManager.canQueue(for: restaurant) {
-                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
+
+
+            if !self.queueLogicManager.canQueue(for: restaurant) {
+                self.showMessage(title: Constants.errorTitle,
+                            message: Constants.alreadyQueuedRestaurantMessage,
+                            buttonText: Constants.okayTitle)
+                return
             }
+
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
         }
         return restaurantCell
     }

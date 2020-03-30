@@ -10,7 +10,10 @@ class EditRecordViewController: UIViewController {
 
     var spinner: UIView?
 
-    var restaurant: Restaurant?
+    var restaurantLogicManager: RestaurantLogicManager?
+    var restaurant: Restaurant? {
+        restaurantLogicManager?.currentRestaurant
+    }
     var record: Record?
 
     var groupSize: Int? {

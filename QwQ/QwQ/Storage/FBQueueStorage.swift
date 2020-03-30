@@ -26,7 +26,7 @@ class FBQueueStorage: CustomerQueueStorage {
         queuesDb.document(record.id)
     }
 
-    func addQueueRecord(newRecord: QueueRecord) {
+    func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void) {
         let newRecordRef = queuesDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
@@ -36,10 +36,11 @@ class FBQueueStorage: CustomerQueueStorage {
                        error.localizedDescription)
                 return
             }
+            completion()
         }
     }
 
-    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord) {
+    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
         let oldDocRef = getQueueRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
@@ -49,6 +50,7 @@ class FBQueueStorage: CustomerQueueStorage {
                            error.localizedDescription)
                     return
                 }
+            completion()
         }
     }
 

@@ -92,7 +92,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return false
         }
 
-        queueStorage.addQueueRecord(newRecord: newRecord)
+        queueStorage.addQueueRecord(newRecord: newRecord) {
+            self.queueDelegate?.didAddRecord()
+        }
         return true
     }
 
@@ -125,13 +127,17 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     wheelchairFriendly: wheelchairFriendly,
                                     startTime: oldRecord.startTime)
 
-        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord)
+        queueStorage.updateQueueRecord(oldRecord: oldRecord, newRecord: newRecord) {
+            self.queueDelegate?.didUpdateRecord()
+        }
     }
 
     func withdrawQueueRecord(_ queueRecord: QueueRecord) {
         var newRecord = queueRecord
         newRecord.withdrawTime = Date()
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord)
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
+            // TODO: self.queueDelegate?.didWithdrawRecord()
+        }
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
@@ -191,7 +197,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if record.isActiveRecord {
             customerActivity.currentQueues.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
-            queueDelegate?.didUpdateRecord()
+            //queueDelegate?.didUpdateRecord()
         }
     }
 

@@ -84,7 +84,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.addBookRecord(newRecord: newRecord)
+        bookingStorage.addBookRecord(newRecord: newRecord) {
+            self.bookingDelegate?.didAddRecord()
+        }
         return true
     }
 
@@ -105,7 +107,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord)
+        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord) {
+            self.bookingDelegate?.didUpdateRecord()
+        }
         return true
     }
 
@@ -124,7 +128,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     func withdrawBookRecord(_ record: BookRecord) {
         var newRecord = record
         newRecord.withdrawTime = Date()
-        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord)
+        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord) {
+            //TODO: self.bookingDelegate?.didWithdrawRecord()
+            // note that mass withdrawal should not fire copmletion for each...?
+        }
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
@@ -163,7 +170,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         if record.isActiveRecord {
             customerActivity.currentBookings.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
-            bookingDelegate?.didUpdateRecord()
         }
     }
 
@@ -184,7 +190,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         // Delete other bookings at the same time
         for otherRecord in activeBookRecords where otherRecord.time == record.time {
-            withdrawBookRecord(otherRecord)
+            withdrawBookRecord(otherRecord) // TODO: note completion in withdraw
         }
 
         if customerActivity.currentBookings.add(record) {

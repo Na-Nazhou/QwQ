@@ -33,7 +33,11 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         }
 
          // Create a new queue record
-        guard let restaurant = restaurant else {
+        guard let restaurant = restaurant, restaurant.isQueueOpen else {
+            // restaurant queue closed while customer was slowly putting q info.
+            showMessage(title: Constants.errorTitle,
+            message: Constants.restaurantUnavailableMessage,
+            buttonText: Constants.okayTitle)
             return
         }
         

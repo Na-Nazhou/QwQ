@@ -26,7 +26,7 @@ class FBBookingStorage: CustomerBookingStorage {
         bookingDb.document(record.id)
     }
 
-    func addBookRecord(newRecord: BookRecord) {
+    func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void) {
         let newRecordRef = bookingDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
@@ -36,10 +36,11 @@ class FBBookingStorage: CustomerBookingStorage {
                        error.localizedDescription)
                 return
             }
+            completion()
         }
     }
 
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord) {
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void) {
         let oldDocRef = getBookRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
@@ -49,6 +50,7 @@ class FBBookingStorage: CustomerBookingStorage {
                            error.localizedDescription)
                     return
                 }
+            completion()
         }
     }
 

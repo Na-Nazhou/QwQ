@@ -44,7 +44,8 @@ struct Constants {
     static let showImagePickerTitle = "Choose your image"
 
     // MARK: Queue record
-    static let restaurantUnavailableMessage = "This restaurant queue is currently not open!"
+    static let restaurantUnavailableMessage = "This restaurant queue is closed!"
+    static let alreadyQueuedRestaurantMessage = "You are already in the queue for this restaurant."
     static let alreadyAdmittedMessage = "You are already admitted to a restaurant."
     static let recordDeleteSuccessMessage = "Your record has been deleted."
     static let recordCreateSuccessMessage = "You have created a record."
