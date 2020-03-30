@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kRC-BI-9Xg">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kRC-BI-9Xg">
+    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,138 +17,164 @@
             <objects>
                 <viewController id="4U3-GB-OQD" customClass="StatisticsViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aek-U3-4Mt">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="VK6-MZ-IIW">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="286.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="267"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vu3-q2-trj">
-                                <rect key="frame" x="20" y="306.5" width="794" height="842.5"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6g-XE-OBg">
+                                <rect key="frame" x="0.0" y="267" width="834" height="795"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C07-My-DLE">
-                                        <rect key="frame" x="0.0" y="0.0" width="794" height="56.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GB9-8b-PXM">
+                                        <rect key="frame" x="0.0" y="0.0" width="834" height="794"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (restaurant)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0B-6z-6Fi">
-                                                <rect key="frame" x="0.0" y="0.0" width="387" height="56.5"/>
-                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odf-aQ-wmK">
-                                                <rect key="frame" x="407" y="11.5" width="387" height="33.5"/>
-                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gz3-en-IAF">
-                                        <rect key="frame" x="0.0" y="76.5" width="794" height="56.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (customer)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecw-VN-LnU">
-                                                <rect key="frame" x="0.0" y="0.0" width="387" height="56.5"/>
-                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb1-3F-4qT">
-                                                <rect key="frame" x="407" y="11.5" width="387" height="33.5"/>
-                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x5d-Xv-RqK">
-                                        <rect key="frame" x="0.0" y="153" width="794" height="689.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="statisticsCell" rowHeight="150" id="zgN-Bp-Oqh" customClass="StatisticsCell" customModule="QwQ_restaurant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="794" height="150"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zgN-Bp-Oqh" id="cWi-ni-6J3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="794" height="150"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PuD-ME-Kjc">
-                                                            <rect key="frame" x="15" y="11" width="764" height="128"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="15/02/2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJN-DX-Vv5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
-                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v5W-ad-9u5">
-                                                                    <rect key="frame" x="382" y="0.0" width="382" height="128"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vu3-q2-trj">
+                                                <rect key="frame" x="20" y="20" width="794" height="754"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C07-My-DLE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="794" height="35"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (restaurant)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0B-6z-6Fi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="387" height="35"/>
+                                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odf-aQ-wmK">
+                                                                <rect key="frame" x="407" y="0.5" width="387" height="33.5"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gz3-en-IAF">
+                                                        <rect key="frame" x="0.0" y="55" width="794" height="35"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (customer)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecw-VN-LnU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="387" height="35"/>
+                                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb1-3F-4qT">
+                                                                <rect key="frame" x="407" y="0.5" width="387" height="33.5"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x5d-Xv-RqK">
+                                                        <rect key="frame" x="0.0" y="110" width="794" height="644"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="statisticsCell" rowHeight="150" id="zgN-Bp-Oqh" customClass="StatisticsCell" customModule="QwQ_restaurant" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="794" height="150"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zgN-Bp-Oqh" id="cWi-ni-6J3">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="794" height="150"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-tW-IYZ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="74"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PuD-ME-Kjc">
+                                                                            <rect key="frame" x="15" y="11" width="764" height="128"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average restaurant waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-uS-ZNE">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="74"/>
-                                                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuE-Cj-jrB">
-                                                                                    <rect key="frame" x="206" y="0.0" width="176" height="74"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="15/02/2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJN-DX-Vv5">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
                                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v5W-ad-9u5">
+                                                                                    <rect key="frame" x="382" y="0.0" width="382" height="128"/>
+                                                                                    <subviews>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-tW-IYZ">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="74"/>
+                                                                                            <subviews>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average restaurant waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-uS-ZNE">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="74"/>
+                                                                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuE-Cj-jrB">
+                                                                                                    <rect key="frame" x="206" y="0.0" width="176" height="74"/>
+                                                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                            </subviews>
+                                                                                        </stackView>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Dq3-VV-51D">
+                                                                                            <rect key="frame" x="0.0" y="74" width="382" height="54"/>
+                                                                                            <subviews>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average customer waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW6-DZ-FlH">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="191" height="54"/>
+                                                                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bE-Qv-4yT">
+                                                                                                    <rect key="frame" x="191" y="0.0" width="191" height="54"/>
+                                                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                            </subviews>
+                                                                                        </stackView>
+                                                                                    </subviews>
+                                                                                </stackView>
                                                                             </subviews>
-                                                                        </stackView>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Dq3-VV-51D">
-                                                                            <rect key="frame" x="0.0" y="74" width="382" height="54"/>
-                                                                            <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average customer waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW6-DZ-FlH">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="191" height="54"/>
-                                                                                    <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bE-Qv-4yT">
-                                                                                    <rect key="frame" x="191" y="0.0" width="191" height="54"/>
-                                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="161" id="Whz-ul-b5g"/>
+                                                                                <constraint firstAttribute="height" constant="50" id="aT2-85-I58"/>
+                                                                            </constraints>
                                                                         </stackView>
                                                                     </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="161" id="Whz-ul-b5g"/>
-                                                                <constraint firstAttribute="height" constant="50" id="aT2-85-I58"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="PuD-ME-Kjc" secondAttribute="bottom" id="HYc-sC-TDh"/>
-                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="top" secondItem="cWi-ni-6J3" secondAttribute="topMargin" id="rJ8-Ul-Da2"/>
-                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="leading" secondItem="cWi-ni-6J3" secondAttribute="leadingMargin" id="svJ-8M-9YG"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="PuD-ME-Kjc" secondAttribute="trailing" id="xMc-H8-dH0"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="avgWaitingTimeCustomerLabel" destination="5bE-Qv-4yT" id="Jry-N1-wKt"/>
-                                                    <outlet property="avgWaitingTimeRestaurantLabel" destination="MuE-Cj-jrB" id="Bph-aS-hsC"/>
-                                                    <outlet property="dateLabel" destination="jJN-DX-Vv5" id="Wmn-wd-w24"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottomMargin" secondItem="PuD-ME-Kjc" secondAttribute="bottom" id="HYc-sC-TDh"/>
+                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="top" secondItem="cWi-ni-6J3" secondAttribute="topMargin" id="rJ8-Ul-Da2"/>
+                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="leading" secondItem="cWi-ni-6J3" secondAttribute="leadingMargin" id="svJ-8M-9YG"/>
+                                                                        <constraint firstAttribute="trailingMargin" secondItem="PuD-ME-Kjc" secondAttribute="trailing" id="xMc-H8-dH0"/>
+                                                                    </constraints>
+                                                                </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="avgWaitingTimeCustomerLabel" destination="5bE-Qv-4yT" id="Jry-N1-wKt"/>
+                                                                    <outlet property="avgWaitingTimeRestaurantLabel" destination="MuE-Cj-jrB" id="Bph-aS-hsC"/>
+                                                                    <outlet property="dateLabel" destination="jJN-DX-Vv5" id="Wmn-wd-w24"/>
+                                                                </connections>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="gz3-en-IAF" firstAttribute="height" secondItem="C07-My-DLE" secondAttribute="height" id="NN3-0w-LEE"/>
+                                                    <constraint firstItem="ecw-VN-LnU" firstAttribute="height" secondItem="o0B-6z-6Fi" secondAttribute="height" id="cbu-qH-GZI"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Vu3-q2-trj" secondAttribute="trailing" constant="20" id="25H-o9-eWC"/>
+                                            <constraint firstItem="Vu3-q2-trj" firstAttribute="top" secondItem="GB9-8b-PXM" secondAttribute="top" constant="20" id="B2G-HK-3qD"/>
+                                            <constraint firstItem="Vu3-q2-trj" firstAttribute="leading" secondItem="GB9-8b-PXM" secondAttribute="leading" constant="20" id="XMf-EH-RXP"/>
+                                            <constraint firstAttribute="bottom" secondItem="Vu3-q2-trj" secondAttribute="bottom" constant="20" id="au6-V9-VTu"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="gz3-en-IAF" firstAttribute="height" secondItem="C07-My-DLE" secondAttribute="height" id="NN3-0w-LEE"/>
-                                    <constraint firstItem="ecw-VN-LnU" firstAttribute="height" secondItem="o0B-6z-6Fi" secondAttribute="height" id="cbu-qH-GZI"/>
+                                    <constraint firstItem="GB9-8b-PXM" firstAttribute="bottom" secondItem="Pct-wV-sDM" secondAttribute="bottom" id="IHJ-8B-vLT"/>
+                                    <constraint firstItem="GB9-8b-PXM" firstAttribute="width" secondItem="wz6-4Q-men" secondAttribute="width" id="QxT-hf-MuN"/>
+                                    <constraint firstItem="GB9-8b-PXM" firstAttribute="leading" secondItem="Pct-wV-sDM" secondAttribute="leading" id="ZuW-BR-RXk"/>
+                                    <constraint firstItem="GB9-8b-PXM" firstAttribute="top" secondItem="Pct-wV-sDM" secondAttribute="top" id="tw2-C3-zmu"/>
+                                    <constraint firstItem="GB9-8b-PXM" firstAttribute="trailing" secondItem="Pct-wV-sDM" secondAttribute="trailing" id="yoj-7U-LzW"/>
                                 </constraints>
-                            </stackView>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Pct-wV-sDM"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="wz6-4Q-men"/>
+                            </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X0D-KV-F7p">
-                                <rect key="frame" x="208.5" y="80.5" width="417" height="126"/>
+                                <rect key="frame" x="208.5" y="70.5" width="417" height="126"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-T1-FqF">
                                         <rect key="frame" x="114.5" y="0.0" width="188" height="41"/>
@@ -169,18 +195,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VK6-MZ-IIW" firstAttribute="top" secondItem="Aek-U3-4Mt" secondAttribute="top" id="4T6-x2-Twx"/>
-                            <constraint firstItem="Vu3-q2-trj" firstAttribute="trailing" secondItem="PGb-Sg-99I" secondAttribute="trailing" constant="-20" id="8aY-is-q7I"/>
+                            <constraint firstItem="O6g-XE-OBg" firstAttribute="bottom" secondItem="PGb-Sg-99I" secondAttribute="bottom" id="8Mj-fV-903"/>
                             <constraint firstItem="VK6-MZ-IIW" firstAttribute="height" secondItem="Aek-U3-4Mt" secondAttribute="height" multiplier="0.24" id="OVm-Eu-9fb"/>
-                            <constraint firstItem="Vu3-q2-trj" firstAttribute="top" secondItem="VK6-MZ-IIW" secondAttribute="bottom" constant="20" id="RBl-Sm-qN6"/>
-                            <constraint firstItem="Vu3-q2-trj" firstAttribute="bottom" secondItem="PGb-Sg-99I" secondAttribute="bottom" constant="20" id="UqD-TP-RG2"/>
+                            <constraint firstItem="O6g-XE-OBg" firstAttribute="trailing" secondItem="PGb-Sg-99I" secondAttribute="trailing" id="UyG-Hb-S0i"/>
                             <constraint firstItem="VK6-MZ-IIW" firstAttribute="leading" secondItem="PGb-Sg-99I" secondAttribute="leading" id="Vqm-Cx-V5V"/>
                             <constraint firstItem="X0D-KV-F7p" firstAttribute="centerX" secondItem="Aek-U3-4Mt" secondAttribute="centerX" id="WwO-si-LNR"/>
                             <constraint firstItem="mV0-me-qhw" firstAttribute="width" secondItem="PGb-Sg-99I" secondAttribute="width" multiplier="0.5" id="cOo-w5-iTn"/>
                             <constraint firstItem="X0D-KV-F7p" firstAttribute="centerY" secondItem="VK6-MZ-IIW" secondAttribute="centerY" id="e4K-NP-d3k"/>
-                            <constraint firstItem="Vu3-q2-trj" firstAttribute="leading" secondItem="PGb-Sg-99I" secondAttribute="leading" constant="20" id="eqd-zY-WW3"/>
-                            <constraint firstItem="C07-My-DLE" firstAttribute="height" secondItem="PGb-Sg-99I" secondAttribute="height" multiplier="0.0500443" id="sgf-wF-SS0"/>
+                            <constraint firstItem="PGb-Sg-99I" firstAttribute="leading" secondItem="O6g-XE-OBg" secondAttribute="leading" id="gZe-v8-dPJ"/>
                             <constraint firstItem="VK6-MZ-IIW" firstAttribute="trailing" secondItem="PGb-Sg-99I" secondAttribute="trailing" id="xq0-s6-oG0"/>
-                            <constraint firstItem="o0B-6z-6Fi" firstAttribute="height" secondItem="PGb-Sg-99I" secondAttribute="height" multiplier="0.05" id="z5R-p0-DPj"/>
+                            <constraint firstItem="O6g-XE-OBg" firstAttribute="top" secondItem="VK6-MZ-IIW" secondAttribute="bottom" id="ymv-IT-BFF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PGb-Sg-99I"/>
                     </view>
@@ -202,14 +226,14 @@
             <objects>
                 <viewController id="Lhu-O3-hbc" customClass="StatisticsDetailsViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nAQ-cL-4TD">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="cPL-MM-fVX">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="271"/>
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="255"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="j2a-IA-kfo">
-                                <rect key="frame" x="235.5" y="86" width="363" height="99"/>
+                                <rect key="frame" x="235.5" y="78" width="363" height="99"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-JX-Zmi">
                                         <rect key="frame" x="0.0" y="0.0" width="363" height="39.5"/>
@@ -236,19 +260,19 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZD2-AM-x5n">
-                                <rect key="frame" x="20" y="291" width="794" height="858"/>
+                                <rect key="frame" x="20" y="275" width="794" height="807"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Xup-rt-ct1">
-                                        <rect key="frame" x="0.0" y="0.0" width="794" height="171.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="794" height="161.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Queue cancellation rate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmH-9X-m2c">
-                                                <rect key="frame" x="0.0" y="68.5" width="387" height="35"/>
+                                                <rect key="frame" x="0.0" y="63" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvv-wA-beB">
-                                                <rect key="frame" x="407" y="69" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -256,16 +280,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kfY-t5-rcw">
-                                        <rect key="frame" x="0.0" y="171.5" width="794" height="171.5"/>
+                                        <rect key="frame" x="0.0" y="161.5" width="794" height="161"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booking cancellation rate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxa-Jk-zHn">
-                                                <rect key="frame" x="0.0" y="68.5" width="387" height="35"/>
+                                                <rect key="frame" x="0.0" y="63" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hps-34-CDq">
-                                                <rect key="frame" x="407" y="69" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -273,16 +297,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SA5-5Z-d6t">
-                                        <rect key="frame" x="0.0" y="343" width="794" height="172"/>
+                                        <rect key="frame" x="0.0" y="322.5" width="794" height="161.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of customers per day" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdc-cS-aXr">
-                                                <rect key="frame" x="0.0" y="68.5" width="387" height="35"/>
+                                                <rect key="frame" x="0.0" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StK-Rg-f89">
-                                                <rect key="frame" x="407" y="69" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -290,16 +314,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gns-Le-ivA">
-                                        <rect key="frame" x="0.0" y="515" width="794" height="171.5"/>
+                                        <rect key="frame" x="0.0" y="484" width="794" height="161.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (restaurant)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jc-Qj-uCU">
-                                                <rect key="frame" x="0.0" y="68" width="387" height="35"/>
+                                                <rect key="frame" x="0.0" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVR-wl-6LD">
-                                                <rect key="frame" x="407" y="69" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -307,16 +331,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5Gb-7c-Zma">
-                                        <rect key="frame" x="0.0" y="686.5" width="794" height="171.5"/>
+                                        <rect key="frame" x="0.0" y="645.5" width="794" height="161.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average waiting time (customer)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8b-wF-g5V">
-                                                <rect key="frame" x="0.0" y="68" width="387" height="35"/>
+                                                <rect key="frame" x="0.0" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-09-YWe">
-                                                <rect key="frame" x="407" y="69" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -380,7 +404,7 @@
     </scenes>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
-        <image name="calendar" catalog="system" width="64" height="52"/>
+        <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="gradient-background" width="2048" height="2732"/>
     </resources>
 </document>
