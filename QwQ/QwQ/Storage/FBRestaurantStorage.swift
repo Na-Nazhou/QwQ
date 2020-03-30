@@ -32,8 +32,11 @@ class FBRestaurantStorage: RestaurantStorage {
                 }
                 snapshot!.documentChanges.forEach { diff in
                     guard let restaurant = Restaurant(dictionary: diff.document.data()) else {
-//                        assert(false, "Restaurant data should always be valid! ?")
                         os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error)
+                        return
+                    }
+                    guard restaurant.isValidRestaurant else {
+                        os_log("Restaurant is not validated; ignored.", log: Log.createRestaurantError, type: .info)
                         return
                     }
                     switch diff.type {

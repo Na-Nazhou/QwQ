@@ -19,6 +19,9 @@ struct Constants {
     // MARK: Profile settings
     static let profileBorderWidth = CGFloat(1)
     static let profileBorderColor = UIColor.white.cgColor
+
+    static let welcomeMessage = "Welcome to QwQ!"
+    static let profileSetupMessage = "Please set up your profile in the Profile tab.\n Until then, your restaurant will not be visible to customers."
     
     // MARK: Alert settings
     static let missingFieldsTitle = "Error - Missing Fields"

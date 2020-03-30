@@ -85,6 +85,10 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
         restaurant.isQueueOpen
     }
 
+    var isValidRestaurant: Bool {
+        restaurant.isValidRestaurant
+    }
+
     func openQueue() {
         let time = currentTime()
         var new = restaurant
