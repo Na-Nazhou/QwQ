@@ -13,7 +13,9 @@ class HomeViewController: UITabBarController {
         super.viewDidLoad()
 
         if !RestaurantRecordLogicManager.shared().isValidRestaurant {
-            showMessage(title: Constants.welcomeMessage, message: Constants.profileSetupMessage, buttonText: Constants.okayTitle)
+            showMessage(title: Constants.welcomeMessage,
+                        message: Constants.profileSetupMessage,
+                        buttonText: Constants.okayTitle)
         }
     }
     
