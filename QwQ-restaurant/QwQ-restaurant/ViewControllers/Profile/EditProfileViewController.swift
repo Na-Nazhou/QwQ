@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController {
     private var image: UIImage?
 
     private var spinner: UIView?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

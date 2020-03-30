@@ -68,6 +68,7 @@ struct Constants {
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let activityCellHeight = CGFloat(300)
     static let statisticsReuseIdentifier = "statisticsCell"
+    static let staffReuseIdentifier = "staffCell"
     
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
