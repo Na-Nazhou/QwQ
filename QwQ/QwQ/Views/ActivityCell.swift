@@ -45,6 +45,7 @@ class ActivityCell: UICollectionViewCell {
             }
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+            changeEditToConfirmAdmission()
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
             hideEditAndDelete()
@@ -52,6 +53,9 @@ class ActivityCell: UICollectionViewCell {
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
         case .withdrawn:
             statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
+        case .confirmedAdmission:
+            statusLabel.text = statusLabel.text! + ", Confirmed at: \(record.confirmAdmissionTime!.toString())"
+            disableEdit()
         default:
             assert(false)
         }
@@ -90,5 +94,9 @@ class ActivityCell: UICollectionViewCell {
     private func showEditAndDelete() {
         editButton.isHidden = false
         deleteButton.isHidden = false
+    }
+
+    private func changeEditToConfirmAdmission() {
+        editButton.setTitle("Confirm admission", for: .normal)
     }
 }

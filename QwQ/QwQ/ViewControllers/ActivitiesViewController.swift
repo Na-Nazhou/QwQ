@@ -113,6 +113,12 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             })
     }
 
+    func didConfirmAdmissionOfRecord() {
+        if isActive {
+            activitiesCollectionView.reloadData()
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.queueSelectedSegue:
@@ -164,6 +170,8 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             activityCell.editAction = {
                 if record.isPendingAdmission {
                     self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                } else if record.isAdmitted {
+                    self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
             activityCell.deleteAction = {

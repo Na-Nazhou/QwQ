@@ -133,11 +133,31 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func withdrawQueueRecord(_ queueRecord: QueueRecord) {
+        withdrawQueueRecord(queueRecord) {
+            self.activitiesDelegate?.didWithdrawRecord()
+        }
+    }
+    
+    private func withdrawQueueRecord(_ queueRecord: QueueRecord, completion: @escaping () -> Void) {
         var newRecord = queueRecord
         newRecord.withdrawTime = Date()
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: completion)
+    }
+
+    func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord) {
+        var newRecord = queueRecord
+        let now = Date()
+        newRecord.confirmAdmissionTime = now
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
-            self.activitiesDelegate?.didWithdrawRecord()
-            //self.queueDelegate?.didWithdrawRecord()
+            self.activitiesDelegate?.didConfirmAdmissionOfRecord()
+        }
+        for clashingRecords in currentQueueRecords
+            where clashingRecords != queueRecord
+                && clashingRecords.startTime <= now {
+            withdrawQueueRecord(clashingRecords) {
+                os_log("Confirmation triggered auto withdrawal of a qRec.",
+                       log: Log.confirmedByCustomer, type: .info)
+            }
         }
     }
 
@@ -167,6 +187,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         case .customerUpdate:
             didUpdateQueueRecord(record: record)
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
+        case .confirmAdmission:
+            didConfirmAdmissionOfQueueRecord(record)
         case .none:
             assert(false, "Modification should be something")
         }
@@ -179,6 +201,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if record.isHistoryRecord && customerActivity.queueHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
+    }
+
+    private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
+        // TODO: ?
+        didUpdateQueueRecord(record)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {

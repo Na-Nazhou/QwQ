@@ -136,5 +136,6 @@ struct Constants {
     static let serveTimeKey = "serveTime"
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
+    static let confirmAdmissionTimeKey = "confirmAdmissionTime"
     static let timeKey = "time"
 }

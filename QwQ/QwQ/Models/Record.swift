@@ -20,6 +20,8 @@ protocol Record {
     var serveTime: Date? { get }
     var rejectTime: Date? { get }
     var withdrawTime: Date? { get set }
+
+    var confirmAdmissionTime: Date? { get set }
 }
 
 extension Record {
@@ -33,6 +35,10 @@ extension Record {
 
     var isAdmitted: Bool {
         status == .admitted
+    }
+
+    var isConfirmedAdmission: Bool {
+        status == .confirmedAdmission
     }
 
     var isServed: Bool {
@@ -54,6 +60,8 @@ extension Record {
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
+        } else if confirmAdmissionTime != nil {
+            return .confirmedAdmission //TODO: check if placing is correct
         } else if admitTime == nil {
             return .pendingAdmission
         } else if rejectTime == nil && serveTime == nil {
@@ -80,10 +88,15 @@ extension Record {
             return .admit
         }
 
-        if old.status == .admitted && self.status == .served {
-            return .serve
+        if old.status == .admitted && self.status == .confirmedAdmission {
+            return .confirmAdmission
         }
 
+        if (old.status == .admitted || old.status == .confirmedAdmission)
+            && self.status == .served {
+            return .serve
+        }
+        //TODO: check if these 2 correct; when to allow rejection and service?
         if old.status == .admitted && self.status == .rejected {
             return .reject
         }

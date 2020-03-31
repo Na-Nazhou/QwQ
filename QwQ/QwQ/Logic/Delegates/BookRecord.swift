@@ -27,6 +27,7 @@ struct BookRecord: Record {
     let serveTime: Date?
     let rejectTime: Date?
     var withdrawTime: Date?
+    var confirmAdmissionTime: Date?
 
     var dictionary: [String: Any] {
         var data = [String: Any]()
@@ -49,6 +50,9 @@ struct BookRecord: Record {
         if let withdrawTime = withdrawTime {
             data[Constants.withdrawTimeKey] = withdrawTime
         }
+        if let confirmAdmissionTime = confirmAdmissionTime {
+            data[Constants.confirmAdmissionTimeKey] = confirmAdmissionTime
+        }
 
         return data
     }
@@ -56,18 +60,19 @@ struct BookRecord: Record {
     init(restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
         self.init(id: "0", restaurant: restaurant, customer: customer, time: time,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime, withdrawTime: withdrawTime)
+                  rejectTime: rejectTime, withdrawTime: withdrawTime,
+                  confirmAdmissionTime: confirmAdmissionTime)
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -80,6 +85,7 @@ struct BookRecord: Record {
         self.serveTime = serveTime
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
+        self.confirmAdmissionTime = confirmAdmissionTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -93,6 +99,7 @@ struct BookRecord: Record {
         let serveTime = (dictionary[Constants.serveTimeKey] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
+        let confirmAdmissionTime = (dictionary[Constants.confirmAdmissionTimeKey] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   time: time,
@@ -100,7 +107,8 @@ struct BookRecord: Record {
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime, withdrawTime: withdrawTime)
+                  rejectTime: rejectTime, withdrawTime: withdrawTime,
+                  confirmAdmissionTime: confirmAdmissionTime)
     }
 }
 
@@ -125,5 +133,6 @@ extension BookRecord: Hashable {
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
+            && other.confirmAdmissionTime == confirmAdmissionTime
     }
 }

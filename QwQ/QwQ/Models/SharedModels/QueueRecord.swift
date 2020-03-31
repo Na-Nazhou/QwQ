@@ -16,6 +16,7 @@ struct QueueRecord: Record {
     let serveTime: Date?
     let rejectTime: Date?
     var withdrawTime: Date?
+    var confirmAdmissionTime: Date?
 
     var startDate: String {
         Date.getFormattedDate(date: startTime, format: Constants.recordDateFormat)
@@ -42,6 +43,9 @@ struct QueueRecord: Record {
         if let withdrawTime = withdrawTime {
             data[Constants.withdrawTimeKey] = withdrawTime
         }
+        if let confirmAdmissionTime = confirmAdmissionTime {
+            data[Constants.confirmAdmissionTimeKey] = confirmAdmissionTime
+        }
 
         return data
     }
@@ -49,19 +53,19 @@ struct QueueRecord: Record {
     init(restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
         self.init(id: "0", restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
                   serveTime: serveTime, rejectTime: rejectTime,
-                  withdrawTime: withdrawTime)
+                  withdrawTime: withdrawTime, confirmAdmissionTime: confirmAdmissionTime)
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -74,6 +78,7 @@ struct QueueRecord: Record {
         self.serveTime = serveTime
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
+        self.confirmAdmissionTime = confirmAdmissionTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -87,12 +92,14 @@ struct QueueRecord: Record {
         let serveTime = (dictionary[Constants.serveTimeKey] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
+        let confirmAdmissionTime = (dictionary[Constants.confirmAdmissionTimeKey] as? Timestamp)?.dateValue()
         
         self.init(id: id, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
-                  serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime)
+                  serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime,
+                  confirmAdmissionTime: confirmAdmissionTime)
     }
 }
 
@@ -119,5 +126,6 @@ extension QueueRecord {
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
+            && other.confirmAdmissionTime == confirmAdmissionTime
     }
 }

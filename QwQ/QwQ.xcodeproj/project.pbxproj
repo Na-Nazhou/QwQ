@@ -496,10 +496,10 @@
 			children = (
 				7E6EBCE12430A8770058D19A /* Records */,
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
+				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
 				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
 				7E1137FD24233B1F006984BB /* PopoverContentController.swift */,
 				7E6EBCE22430A8850058D19A /* Profile */,
-				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
 				7E6EBCE02430A85B0058D19A /* Authentication */,
 			);
 			path = ViewControllers;
