@@ -48,6 +48,7 @@
 		7E428226242B94F00019A8A2 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428225242B94EF0019A8A2 /* Statistics.swift */; };
 		7E53E2BA241F60A60047C40F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
+		7E6884A724332B9C00486EB8 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */; };
 		7E6EBCD72430A2E70058D19A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EBCD62430A2E70058D19A /* Log.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
@@ -71,6 +72,7 @@
 		7EAC34D3242B32290088D00F /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EAC34D2242B32290088D00F /* Statistics.storyboard */; };
 		7EAC34D5242B3A8F0088D00F /* StatisticsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */; };
 		7EAC34D7242B3D110088D00F /* StatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC34D6242B3D110088D00F /* StatisticsCell.swift */; };
+		7ECBA5812433274D00CE3340 /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ECBA5802433274D00CE3340 /* ForgotPassword.storyboard */; };
 		7EE6D023241E393A00C1465E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D022241E393A00C1465E /* EditProfileViewController.swift */; };
 		7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */; };
 		7EE6D02F241E3CAA00C1465E /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02E241E3CAA00C1465E /* RecordCell.swift */; };
@@ -151,6 +153,7 @@
 		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E428225242B94EF0019A8A2 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		7E6EBCD62430A2E70058D19A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = "/Users/tansuyee/Documents/Projects/2020-fp-qwq/QwQ-restaurant/QwQ-restaurant/Others/Utilities/Log.swift"; sourceTree = "<absolute>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		7EAC34D2242B32290088D00F /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		7EAC34D4242B3A8E0088D00F /* StatisticsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsDetailsViewController.swift; sourceTree = "<group>"; };
 		7EAC34D6242B3D110088D00F /* StatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCell.swift; sourceTree = "<group>"; };
+		7ECBA5802433274D00CE3340 /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
 		7EE6D022241E393A00C1465E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7EE6D02C241E3AF100C1465E /* QueueRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordViewController.swift; sourceTree = "<group>"; };
 		7EE6D02E241E3CAA00C1465E /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
+				7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */,
 				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
 				7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */,
 			);
@@ -378,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				7E42821B242B48530019A8A2 /* EmailVerification.storyboard */,
+				7ECBA5802433274D00CE3340 /* ForgotPassword.storyboard */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -681,6 +687,7 @@
 				7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */,
 				6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */,
 				7EFB697C2422183C0073E535 /* Queue.storyboard in Resources */,
+				7ECBA5812433274D00CE3340 /* ForgotPassword.storyboard in Resources */,
 				5C4A54FE241E0A780054C926 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -878,6 +885,7 @@
 				D453E3A8242368A0005FA25F /* Date+Extensions.swift in Sources */,
 				61ACB7FE242B1C3A002A1F47 /* RecordCollection.swift in Sources */,
 				D4EA85F3241B2C65009EB85B /* QueueRecord.swift in Sources */,
+				7E6884A724332B9C00486EB8 /* ForgotPasswordViewController.swift in Sources */,
 				5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */,
 				5C1A419324236BE500D1140B /* FBCustomerInfoStorage.swift in Sources */,
 				D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */,

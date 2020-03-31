@@ -19,15 +19,20 @@ struct Constants {
     // MARK: Profile settings
     static let profileBorderWidth = CGFloat(1)
     static let profileBorderColor = UIColor.white.cgColor
+    static let chooseFromPhotoLibraryTitle = "Choose from Library"
+    static let chooseFromCameraTitle = "Take from Camera"
+    static let showImagePickerTitle = "Choose your image"
     
     // MARK: Alert settings
-    static let missingFieldsTitle = "Error - Missing Fields"
-    static let missingFieldsMessage = "Please fill in all the fields!"
+    static let successTitle = "Success"
     static let errorTitle = "Error"
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
-    static let successfulUpdateTitle = "Success"
-    static let successfulUpdateMessage = "Your profile has been updated."
+    
+    // MARK: Signup / Login settings
+    static let missingFieldsTitle = "Error - Missing Fields"
+    static let missingFieldsMessage = "Please fill in all the fields!"
+    static let profileUpdateSuccessMessage = "Your profile has been updated."
     static let invalidEmailTitle = "Error - Invalid Email"
     static let invalidEmailMessage = "Please enter a valid email."
     static let invalidContactTitle = "Error - Invalid Contact"
@@ -36,17 +41,17 @@ struct Constants {
     static let missingEmailMessage = "Please provide a valid email."
     static let missingPasswordTitle = "Error - Missing Password"
     static let missingPasswordMessage = "Please provide a valid password."
-    static let chooseFromPhotoLibraryTitle = "Choose from Library"
-    static let chooseFromCameraTitle = "Take from Camera"
-    static let showImagePickerTitle = "Choose your image"
+    static let resetPasswordTitle = "Reset Password"
+    static let resetPasswordMessage = "Please check your email to reset your password."
 
-    // MARK: Record
+    // MARK: Record settings
     static let admitCustomerTitle = "Admit Customer"
     static let admitCustomerMessage = "The customer has been notified."
     static let serveCustomerTitle = "Serve Customer"
     static let serveCustomerMessage = "The customer has been served."
     static let rejectCustomerTitle = "Reject Customer"
     static let rejectCustomerMessage = "The customer has been rejected."
+    static let recordDateFormat = "ddMMyyyy"
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -94,9 +99,6 @@ struct Constants {
     // MARK: Restaurant queue activities settings
     static let buttonTextToOpenQueue = "CLICK TO OPEN"
     static let buttonTextToCloseQueue = "CLICK TO CLOSE"
-    
-    // MARK: Record settings
-    static let recordDateFormat = "ddMMyyyy"
     
     // MARK: Statistics settings
     static let statisticsDateFormat = "dd/MM/yyyy"

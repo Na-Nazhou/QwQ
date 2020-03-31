@@ -16,6 +16,9 @@ struct Constants {
     // MARK: Profile settings
     static let profileBorderWidth = CGFloat(1)
     static let profileBorderColor = UIColor.white.cgColor
+    static let chooseFromPhotoLibraryTitle = "Choose from Library"
+    static let chooseFromCameraTitle = "Take from Camera"
+    static let showImagePickerTitle = "Choose your image"
     
     // MARK: Alert settings
     static let successTitle = "Success"
@@ -23,7 +26,7 @@ struct Constants {
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
 
-    // MARK: Signup / Profile
+    // MARK: Signup / Login / Profile
     static let profileUpdateSuccessMessage = "Your profile has been updated."
     static let missingFieldsTitle = "Error - Missing Fields"
     static let missingFieldsMessage = "Please fill in all the fields!"
@@ -37,13 +40,10 @@ struct Constants {
     static let missingPasswordMessage = "Please provide a valid password."
     static let loginCancelledMessage = "The login process with Facebook was cancelled."
     static let fbLoginPermissionsMessage = "Please grant profile and email access with Facebook to continue."
+    static let resetPasswordTitle = "Reset Password"
+    static let resetPasswordMessage = "Please check your email to reset your password."
 
-    // MARK: Profile photo
-    static let chooseFromPhotoLibraryTitle = "Choose from Library"
-    static let chooseFromCameraTitle = "Take from Camera"
-    static let showImagePickerTitle = "Choose your image"
-
-    // MARK: Queue record
+    // MARK: Queue record settings
     static let restaurantUnavailableMessage = "This restaurant queue is currently not open!"
     static let multipleQueueRecordsMessage = "You have an existing queue record."
     static let recordDeleteSuccessMessage = "Your record has been deleted."

@@ -181,7 +181,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-fV-mKw">
-                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vB8-fV-mKw" secondAttribute="height" multiplier="1:1" id="Tfj-7I-NaV"/>
                                 </constraints>
@@ -197,7 +197,7 @@
                             <constraint firstItem="fvi-fF-z4O" firstAttribute="height" secondItem="dJC-0y-zyF" secondAttribute="height" multiplier="0.08" id="ADx-51-tva"/>
                             <constraint firstItem="fvi-fF-z4O" firstAttribute="top" secondItem="s17-7R-EFf" secondAttribute="bottom" constant="8" symbolic="YES" id="Bxe-67-kEC"/>
                             <constraint firstItem="dJC-0y-zyF" firstAttribute="trailing" secondItem="fvi-fF-z4O" secondAttribute="trailing" id="Cgy-Nt-363"/>
-                            <constraint firstItem="vB8-fV-mKw" firstAttribute="width" secondItem="dJC-0y-zyF" secondAttribute="width" multiplier="0.0551559" id="GZw-9N-7N1"/>
+                            <constraint firstItem="vB8-fV-mKw" firstAttribute="width" secondItem="dJC-0y-zyF" secondAttribute="width" multiplier="0.05" id="GZw-9N-7N1"/>
                             <constraint firstItem="Kug-GW-lnd" firstAttribute="top" secondItem="dJC-0y-zyF" secondAttribute="top" id="Ky3-dp-nSf"/>
                             <constraint firstItem="vB8-fV-mKw" firstAttribute="top" secondItem="dJC-0y-zyF" secondAttribute="top" constant="30" id="NZP-u7-zfY"/>
                             <constraint firstItem="Kug-GW-lnd" firstAttribute="trailing" secondItem="dJC-0y-zyF" secondAttribute="trailing" id="Nt0-Ld-IPV"/>

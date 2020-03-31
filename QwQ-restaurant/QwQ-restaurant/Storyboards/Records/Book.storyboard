@@ -198,7 +198,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2B-UN-zEU">
-                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h2B-UN-zEU" secondAttribute="height" multiplier="1:1" id="vj8-g1-eJn"/>
                                 </constraints>
@@ -218,7 +218,7 @@
                             <constraint firstItem="EP1-x7-OhS" firstAttribute="centerX" secondItem="n8z-G8-cXX" secondAttribute="centerX" id="CfW-el-MjO"/>
                             <constraint firstItem="v3N-wr-E7l" firstAttribute="top" secondItem="jdd-0L-3dj" secondAttribute="top" id="Fx9-Fg-4fq"/>
                             <constraint firstItem="RbM-Cd-tXc" firstAttribute="trailing" secondItem="jdd-0L-3dj" secondAttribute="trailing" id="LiB-rA-9t3"/>
-                            <constraint firstItem="h2B-UN-zEU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.0551559" id="OIm-bH-eXI"/>
+                            <constraint firstItem="h2B-UN-zEU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.05" id="OIm-bH-eXI"/>
                             <constraint firstItem="h2B-UN-zEU" firstAttribute="leading" secondItem="jdd-0L-3dj" secondAttribute="leading" constant="20" id="PHX-Dt-GEL"/>
                             <constraint firstItem="6pF-OP-fhU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.5" id="Q3Y-ZN-AWe"/>
                             <constraint firstItem="v3N-wr-E7l" firstAttribute="height" secondItem="jdd-0L-3dj" secondAttribute="height" multiplier="0.24" id="Rw8-pP-HOb"/>

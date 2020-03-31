@@ -454,13 +454,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xe5-rj-t0D">
                                 <rect key="frame" x="0.0" y="977" width="834" height="85"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                 <state key="normal" title="SAVE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="iPH-ud-tXI"/>
                                 </connections>
@@ -472,7 +469,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Dg-AB-eAw">
-                                <rect key="frame" x="20" y="20" width="66.5" height="66.5"/>
+                                <rect key="frame" x="20" y="20" width="41.5" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1Dg-AB-eAw" secondAttribute="height" multiplier="1:1" id="CQG-Id-T9e"/>
                                 </constraints>
@@ -507,7 +504,7 @@
                             <constraint firstItem="nzA-vM-KMR" firstAttribute="top" secondItem="54C-SX-OcD" secondAttribute="bottom" constant="38" id="YLw-Wc-MFe"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="top" secondItem="B5G-7X-pWY" secondAttribute="bottom" id="c57-r5-55j"/>
                             <constraint firstItem="nzA-vM-KMR" firstAttribute="width" secondItem="nzA-vM-KMR" secondAttribute="height" multiplier="8:8" id="f1S-4V-tqk"/>
-                            <constraint firstItem="1Dg-AB-eAw" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.08" id="fhm-E3-vo4"/>
+                            <constraint firstItem="1Dg-AB-eAw" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.05" id="fhm-E3-vo4"/>
                             <constraint firstItem="wg1-mI-11x" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.4" id="gL0-lx-c2Q"/>
                             <constraint firstItem="E3a-Bj-mhH" firstAttribute="top" secondItem="1Dg-AB-eAw" secondAttribute="top" constant="-20" id="jaH-Nb-gnW"/>
                             <constraint firstItem="E3a-Bj-mhH" firstAttribute="leading" secondItem="B5G-7X-pWY" secondAttribute="leading" id="lBx-xe-1dC"/>
@@ -581,7 +578,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBQ-Ld-X6z">
-                                <rect key="frame" x="20" y="30" width="66.5" height="66.5"/>
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wBQ-Ld-X6z" secondAttribute="height" id="muC-3Z-FNI"/>
                                 </constraints>
@@ -636,7 +633,7 @@
                             <constraint firstItem="fBc-eP-CId" firstAttribute="trailing" secondItem="LxW-Lg-lOT" secondAttribute="trailing" id="cPQ-Y0-N44"/>
                             <constraint firstItem="wBQ-Ld-X6z" firstAttribute="leading" secondItem="LxW-Lg-lOT" secondAttribute="leading" constant="20" id="ehw-lz-TWk"/>
                             <constraint firstItem="sJP-Jk-9Ar" firstAttribute="width" secondItem="LxW-Lg-lOT" secondAttribute="width" multiplier="0.8" id="fSK-wE-d3h"/>
-                            <constraint firstItem="wBQ-Ld-X6z" firstAttribute="width" secondItem="LxW-Lg-lOT" secondAttribute="width" multiplier="0.08" id="gGo-RC-trU"/>
+                            <constraint firstItem="wBQ-Ld-X6z" firstAttribute="width" secondItem="LxW-Lg-lOT" secondAttribute="width" multiplier="0.05" id="gGo-RC-trU"/>
                             <constraint firstItem="9Iq-qK-6X7" firstAttribute="leading" secondItem="LxW-Lg-lOT" secondAttribute="leading" constant="20" id="ibR-Vq-DG9"/>
                             <constraint firstItem="LxW-Lg-lOT" firstAttribute="bottom" secondItem="9Iq-qK-6X7" secondAttribute="bottom" constant="20" id="juw-Kp-RjU"/>
                             <constraint firstItem="fBc-eP-CId" firstAttribute="leading" secondItem="LxW-Lg-lOT" secondAttribute="leading" id="yiG-1t-wxD"/>
