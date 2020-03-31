@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController {
         self.contactLabel.text = customer.contact
         self.emailLabel.text = customer.email
         
-        Profile.getCustomerProfilePic(uid: customer.email, placeholder: profileImageView)
+        Profile.getCustomerProfilePic(uid: customer.uid, placeholder: profileImageView)
 
         removeSpinner(spinner)
     }

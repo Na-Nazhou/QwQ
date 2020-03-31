@@ -174,16 +174,16 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="wz6-4Q-men"/>
                             </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X0D-KV-F7p">
-                                <rect key="frame" x="208.5" y="70.5" width="417" height="126"/>
+                                <rect key="frame" x="208.5" y="71" width="417" height="124.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ad-T1-FqF">
-                                        <rect key="frame" x="114.5" y="0.0" width="188" height="41"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
+                                        <rect key="frame" x="107.5" y="0.0" width="202" height="39.5"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mV0-me-qhw" customClass="SegmentedControl" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="61" width="417" height="65"/>
+                                        <rect key="frame" x="0.0" y="59.5" width="417" height="65"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="65" id="ipg-62-bEB"/>

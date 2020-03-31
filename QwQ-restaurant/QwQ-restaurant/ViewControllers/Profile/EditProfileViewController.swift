@@ -15,6 +15,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
+
     @IBOutlet private var profileImageView: UIImageView!
 
     typealias Auth = FBAuthenticator
@@ -24,6 +25,7 @@ class EditProfileViewController: UIViewController {
     private var isRestaurantOpen: Bool?
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
+
     private var image: UIImage?
 
     private var spinner: UIView?
@@ -60,13 +62,12 @@ class EditProfileViewController: UIViewController {
                         buttonAction: nil)
             return
         }
-
+        print("1")
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen,
-            let queueOpenTime = queueOpenTime, let queueCloseTime = queueCloseTime else {
+            let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen else {
                 return
         }
-
+        print("2")
         guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,

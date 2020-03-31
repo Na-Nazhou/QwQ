@@ -11,6 +11,12 @@ class HomeViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if !RestaurantRecordLogicManager.shared().isValidRestaurant {
+            showMessage(title: Constants.welcomeMessage,
+                        message: Constants.profileSetupMessage,
+                        buttonText: Constants.okayTitle)
+        }
     }
     
     override func viewDidLayoutSubviews() {
