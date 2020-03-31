@@ -14,7 +14,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
     
-    typealias Auth = FBAuthenticator
+    typealias Auth = FIRAuthenticator
 
     var spinner: UIView?
 
@@ -71,11 +71,15 @@ class SignUpViewController: UIViewController {
         
         Auth.signup(signupDetails: signupDetails,
                     authDetails: authDetails,
-                    completion: authCompleted,
+                    completion: signUpComplete,
                     errorHandler: handleError(error:))
     }
     
-    private func authCompleted() {
+    private func signUpComplete() {
+        /* Email verification code - to be enabled only in production application
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+        return
+        */
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
         removeSpinner(spinner)
     }

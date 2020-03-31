@@ -77,7 +77,7 @@ class FBQueueStorage: RestaurantQueueStorage {
         data: [String: Any], id: String, customerUID: String,
         restaurant: Restaurant,
         completion: @escaping (QueueRecord) -> Void) {
-        FBCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+        FIRCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
             guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: id) else {
                 return
             }
