@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ScY-ma-Ame">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ScY-ma-Ame">
+    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +17,11 @@
             <objects>
                 <viewController id="ScY-ma-Ame" customClass="BookRecordViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n8z-G8-cXX">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="v3N-wr-E7l">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="282"/>
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="267"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -43,7 +43,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-B1-LeK">
-                                <rect key="frame" x="0.0" y="1080" width="834" height="94"/>
+                                <rect key="frame" x="0.0" y="1023" width="834" height="89"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                 <state key="normal" title="ADMIT">
@@ -54,10 +54,10 @@
                                 </variation>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbM-Cd-tXc">
-                                <rect key="frame" x="0.0" y="290" width="834" height="782"/>
+                                <rect key="frame" x="0.0" y="275" width="834" height="740"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="s0A-dG-wX3">
-                                        <rect key="frame" x="15" y="15" width="804" height="752"/>
+                                        <rect key="frame" x="15" y="15" width="804" height="710"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Xhx-o1-16a">
                                                 <rect key="frame" x="0.0" y="0.0" width="804" height="310"/>
@@ -177,8 +177,8 @@
                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                 </variation>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Egu-Av-Wkh">
-                                                <rect key="frame" x="0.0" y="375" width="804" height="377"/>
+                                            <datePicker userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Egu-Av-Wkh">
+                                                <rect key="frame" x="0.0" y="375" width="804" height="335"/>
                                             </datePicker>
                                         </subviews>
                                     </stackView>
@@ -198,7 +198,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2B-UN-zEU">
-                                <rect key="frame" x="20" y="30" width="46" height="46"/>
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h2B-UN-zEU" secondAttribute="height" multiplier="1:1" id="vj8-g1-eJn"/>
                                 </constraints>
@@ -218,7 +218,7 @@
                             <constraint firstItem="EP1-x7-OhS" firstAttribute="centerX" secondItem="n8z-G8-cXX" secondAttribute="centerX" id="CfW-el-MjO"/>
                             <constraint firstItem="v3N-wr-E7l" firstAttribute="top" secondItem="jdd-0L-3dj" secondAttribute="top" id="Fx9-Fg-4fq"/>
                             <constraint firstItem="RbM-Cd-tXc" firstAttribute="trailing" secondItem="jdd-0L-3dj" secondAttribute="trailing" id="LiB-rA-9t3"/>
-                            <constraint firstItem="h2B-UN-zEU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.0551559" id="OIm-bH-eXI"/>
+                            <constraint firstItem="h2B-UN-zEU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.05" id="OIm-bH-eXI"/>
                             <constraint firstItem="h2B-UN-zEU" firstAttribute="leading" secondItem="jdd-0L-3dj" secondAttribute="leading" constant="20" id="PHX-Dt-GEL"/>
                             <constraint firstItem="6pF-OP-fhU" firstAttribute="width" secondItem="jdd-0L-3dj" secondAttribute="width" multiplier="0.5" id="Q3Y-ZN-AWe"/>
                             <constraint firstItem="v3N-wr-E7l" firstAttribute="height" secondItem="jdd-0L-3dj" secondAttribute="height" multiplier="0.24" id="Rw8-pP-HOb"/>

@@ -59,6 +59,8 @@
 		7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */; };
 		7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */; };
 		7E7F7DD12422659F00A080E5 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7F7DD02422659F00A080E5 /* Search.storyboard */; };
+		7EA7B49D2432D08800A6828F /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7B49C2432D08800A6828F /* ForgotPassword.storyboard */; };
+		7EA7B49F2432D3CA00A6828F /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7B49E2432D3CA00A6828F /* ForgotPasswordViewController.swift */; };
 		7EC1F3132421F837005D20CD /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */; };
 		7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC1F3142421FB7F005D20CD /* ActivityCell.swift */; };
 		7EC7E64E2418B6C300C2F9BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7E64D2418B6C300C2F9BB /* AppDelegate.swift */; };
@@ -178,6 +180,8 @@
 		7E7F7DCA2422244100A080E5 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		7E7F7DCC2422447700A080E5 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7E7F7DD02422659F00A080E5 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		7EA7B49C2432D08800A6828F /* ForgotPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
+		7EA7B49E2432D3CA00A6828F /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		7EC1F3142421FB7F005D20CD /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		7EC7E64A2418B6C300C2F9BB /* QwQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QwQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */,
+				7EA7B49C2432D08800A6828F /* ForgotPassword.storyboard */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 			children = (
 				7EC7E691241B379900C2F9BB /* SignUpViewController.swift */,
 				7E72B14B241B8B8700C1EE72 /* LoginViewController.swift */,
+				7EA7B49E2432D3CA00A6828F /* ForgotPasswordViewController.swift */,
 				5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */,
 				7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */,
 			);
@@ -707,6 +713,7 @@
 				7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */,
 				7EFB696E242210110073E535 /* EditBook.storyboard in Resources */,
 				5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */,
+				7EA7B49D2432D08800A6828F /* ForgotPassword.storyboard in Resources */,
 				7EFB69742422130C0073E535 /* Book.storyboard in Resources */,
 				7E7F7DD12422659F00A080E5 /* Search.storyboard in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
@@ -938,6 +945,7 @@
 				7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */,
 				7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */,
 				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
+				7EA7B49F2432D3CA00A6828F /* ForgotPasswordViewController.swift in Sources */,
 				7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

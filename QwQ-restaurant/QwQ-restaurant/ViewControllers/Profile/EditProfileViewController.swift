@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
     private var image: UIImage?
 
     private var spinner: UIView?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,8 +133,8 @@ class EditProfileViewController: UIViewController {
 
     private func updateComplete() {
         removeSpinner(spinner)
-        showMessage(title: Constants.successfulUpdateTitle,
-                    message: Constants.successfulUpdateMessage,
+        showMessage(title: Constants.successTitle,
+                    message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
                     buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
     }
