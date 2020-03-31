@@ -22,6 +22,10 @@ protocol Authenticator {
 
     static func changePassword(_ password: String, errorHandler: @escaping (Error) -> Void)
 
+    static func sendVerificationEmail(errorHandler: @escaping (Error) -> Void)
+
+    static func checkIfEmailVerified() -> Bool
+
     static func checkIfAlreadyLoggedIn() -> Bool
 
 }

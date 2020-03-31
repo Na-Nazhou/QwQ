@@ -74,6 +74,10 @@ class SignUpViewController: UIViewController {
     }
 
     private func authCompleted() {
+        /* Email verification code - to be enabled only in production application
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+        return
+        */
         Profile.getCustomerInfo(completion: getCustomerInfoComplete(customer:),
                                 errorHandler: handleError(error:))
     }

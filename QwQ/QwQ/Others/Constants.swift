@@ -65,6 +65,7 @@ struct Constants {
     static let editBookSelectedSegue = "editBookSelected"
     static let logoutSegue = "logout"
     static let fbLoginCompletedSegue = "fbLoginComplete"
+    static let loginEmailNotVerifiedSegue = "loginEmailNotVerified"
 
     // MARK: Storage settings
     static let customersDirectory = "customers"

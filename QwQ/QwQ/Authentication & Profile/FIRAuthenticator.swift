@@ -66,6 +66,25 @@ class FIRAuthenticator: Authenticator {
         })
     }
 
+    static func sendVerificationEmail(errorHandler: @escaping (Error) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            errorHandler(AuthError.NotSignedIn)
+            return
+        }
+        user.sendEmailVerification { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        }
+    }
+
+    static func checkIfEmailVerified() -> Bool {
+        guard let user = Auth.auth().currentUser else {
+            return false
+        }
+        return user.isEmailVerified
+    }
+
     static func checkIfAlreadyLoggedIn() -> Bool {
         guard let user = Auth.auth().currentUser else {
             return false
