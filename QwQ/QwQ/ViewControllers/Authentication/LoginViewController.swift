@@ -72,6 +72,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+        removeSpinner(spinner)
     }
 
     private func fbAlreadyLoggedIn() {
@@ -99,6 +100,7 @@ class LoginViewController: UIViewController {
         guard Auth.checkIfEmailVerified() else {
             Auth.sendVerificationEmail(errorHandler: handleError(error:))
             performSegue(withIdentifier: Constants.loginEmailNotVerifiedSegue, sender: self)
+            removeSpinner(spinner)
             return
         }
         */

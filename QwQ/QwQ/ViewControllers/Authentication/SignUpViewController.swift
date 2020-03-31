@@ -69,11 +69,11 @@ class SignUpViewController: UIViewController {
 
         Auth.signup(signupDetails: signupDetails,
                     authDetails: authDetails,
-                    completion: authCompleted,
+                    completion: signUpComplete,
                     errorHandler: handleError(error:))
     }
 
-    private func authCompleted() {
+    private func signUpComplete() {
         /* Email verification code - to be enabled only in production application
         performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
         return

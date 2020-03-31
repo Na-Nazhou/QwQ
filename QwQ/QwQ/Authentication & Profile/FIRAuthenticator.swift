@@ -20,17 +20,30 @@ class FIRAuthenticator: Authenticator {
                 errorHandler(error)
                 return
             }
-            guard let result = result else {
+            guard result != nil else {
                 errorHandler(AuthError.AuthResultError)
                 return
             }
-            Profile.createInitialCustomerProfile(uid: result.user.uid,
+            Profile.createInitialCustomerProfile(uid: authDetails.email,
                                                  signupDetails: signupDetails,
                                                  authDetails: authDetails,
                                                  errorHandler: errorHandler)
-            FIRAuthenticator.login(authDetails: authDetails,
-                                   completion: completion,
-                                   errorHandler: errorHandler)
+
+            /* Email verification code, to be enabled only for production.
+            FIRAuthenticator.login(authDetails: authDetails, completion: {
+                guard let user = Auth.auth().currentUser else {
+                    errorHandler(AuthError.AuthResultError)
+                    return
+                }
+                user.sendEmailVerification { (error) in
+                    if let error = error {
+                        errorHandler(error)
+                    }
+                }
+                FIRAuthenticator.logout(completion: completion, errorHandler: errorHandler)
+            }, errorHandler: errorHandler)
+            */
+            completion()
         }
     }
 

@@ -17,6 +17,8 @@ class ForgotPasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.hideKeyboardWhenTappedAround()
     }
 
     @IBAction private func handleResetPassword(_ sender: Any) {

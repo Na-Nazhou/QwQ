@@ -137,9 +137,9 @@
                                 <rect key="frame" x="25" y="150.66666666666666" width="364" height="327.33333333333337"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYn-JQ-gi4">
-                                <rect key="frame" x="157.66666666666666" y="788" width="98.999999999999972" height="28"/>
+                                <rect key="frame" x="154" y="788" width="106" height="28"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
-                                <state key="normal" title="Forgot password">
+                                <state key="normal" title="Forgot password?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -601,7 +601,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="C5C-KK-0VI"/>
+        <segue reference="rmH-AX-mAi"/>
         <segue reference="cpb-gv-3Uj"/>
     </inferredMetricsTieBreakers>
     <resources>
