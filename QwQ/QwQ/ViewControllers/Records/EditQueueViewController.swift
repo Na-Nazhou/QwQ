@@ -61,3 +61,4 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
                     buttonText: Constants.okayTitle)
     }
 }
+

@@ -129,7 +129,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         var newRecord = record
         newRecord.withdrawTime = Date()
         bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord) {
-            //TODO: self.bookingDelegate?.didWithdrawRecord()
+            self.activitiesDelegate?.didWithdrawRecord()
             // note that mass withdrawal should not fire copmletion for each...?
         }
     }
@@ -142,6 +142,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
         let modification = record.changeType(from: oldRecord)
+        print("\n\tModification detected as \(modification)")
         switch modification {
         case .admit:
             didAdmitBookRecord(record)

@@ -99,6 +99,17 @@ class EditRecordViewController: UIViewController {
              })
      }
 
+    func didWithdrawRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordWithdrawSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: { _ in
+                self.handleBack()
+            })
+    }
+
     func checkRecordDetails() -> Bool {
         guard let groupSize = groupSize,
             let babyChairQuantity = babyChairQuantity else {

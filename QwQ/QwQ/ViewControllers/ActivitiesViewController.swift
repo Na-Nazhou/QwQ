@@ -101,11 +101,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
 
-    func didDeleteRecord() {
+    func didWithdrawRecord() {
         removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
-            message: Constants.recordDeleteSuccessMessage,
+            message: Constants.recordWithdrawSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)
@@ -135,7 +135,6 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
-                editBookingViewController.bookingLogicManager = bookingLogicManager
             }
         default:
             return

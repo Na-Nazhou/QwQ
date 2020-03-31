@@ -136,7 +136,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         var newRecord = queueRecord
         newRecord.withdrawTime = Date()
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
-            // TODO: self.queueDelegate?.didWithdrawRecord()
+            self.activitiesDelegate?.didWithdrawRecord()
+            //self.queueDelegate?.didWithdrawRecord()
         }
     }
 
