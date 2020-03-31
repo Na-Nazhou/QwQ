@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var passwordTextField: UITextField!
     
     typealias Auth = FIRAuthenticator
+    typealias Profile = FIRProfileStorage
 
     var spinner: UIView?
 
@@ -80,8 +81,14 @@ class SignUpViewController: UIViewController {
         performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
         return
         */
-        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                  errorHandler: handleError(error:))
+    }
+
+    private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
     private func handleError(error: Error) {
