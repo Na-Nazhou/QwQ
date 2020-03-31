@@ -128,6 +128,7 @@ class SearchViewController: UIViewController, SearchDelegate {
                 return
             }
             rVC.restaurantLogicManager = restaurantLogicManager
+            rVC.queueLogicManager = queueLogicManager
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,
@@ -136,11 +137,12 @@ class SearchViewController: UIViewController, SearchDelegate {
                 restaurantLogicManager.currentRestaurant = restaurant
             } // otherwise it is the most updated copy of restaurant
 
-            guard let editVC = segue.destination as? EditRecordViewController else {
+            guard let editVC = segue.destination as? EditQueueViewController else {
                 assert(false, "Wrong way of doing this")
                 return
             }
             editVC.restaurantLogicManager = restaurantLogicManager
+            editVC.queueLogicManager = queueLogicManager
         }
     }
 }

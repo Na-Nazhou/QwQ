@@ -17,7 +17,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
-    private let queueLogicManager = CustomerQueueLogicManager()
+    var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
     var restaurant: Restaurant? {
         restaurantLogicManager.currentRestaurant
@@ -84,14 +84,22 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.editQueueSelectedSegue
-            || segue.identifier == Constants.editBookSelectedSegue {
-            guard let editVC = segue.destination as? EditRecordViewController else {
+        if segue.identifier == Constants.editQueueSelectedSegue {
+            guard let editQVC = segue.destination as? EditQueueViewController else {
+                assert(false,
+                       "Destination should be editRecordVC.")
+                return
+            }
+            editQVC.queueLogicManager = queueLogicManager
+        }
+        if segue.identifier == Constants.editBookSelectedSegue {
+            guard let editBVC = segue.destination as? EditBookingViewController else {
                 assert(false,
                        "Destination should be editRecordVC and restaurant should not be nil.")
                 return
             }
-            editVC.restaurantLogicManager = restaurantLogicManager
+            editBVC.restaurantLogicManager = restaurantLogicManager
+            return
         }
     }
 }

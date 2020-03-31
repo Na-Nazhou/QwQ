@@ -129,11 +129,13 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let queueRecord = sender as? QueueRecord,
                 let editQueueViewController = segue.destination as? EditQueueViewController {
                     editQueueViewController.record = queueRecord
+                editQueueViewController.queueLogicManager = queueLogicManager
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
+                editBookingViewController.bookingLogicManager = bookingLogicManager
             }
         default:
             return
