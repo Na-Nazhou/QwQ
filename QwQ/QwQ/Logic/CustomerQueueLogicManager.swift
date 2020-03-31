@@ -183,7 +183,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             removeFromCurrent(record)
             os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
-            didUpdateQueueRecord(record: record)
+            customerDidUpdateQueueRecord(record: record)
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .confirmAdmission:
             didConfirmAdmissionOfQueueRecord(record)
@@ -203,12 +203,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
         // TODO: ?
-        didUpdateQueueRecord(record)
+        customerDidUpdateQueueRecord(record: record)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
         // tent
-        didUpdateQueueRecord(record: record)
+        customerDidUpdateQueueRecord(record: record)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
@@ -219,7 +219,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         removeFromCurrent(record)
     }
 
-    private func didUpdateQueueRecord(record: QueueRecord) {
+    private func customerDidUpdateQueueRecord(record: QueueRecord) {
         if record.isActiveRecord {
             customerActivity.currentQueues.update(record)
             activitiesDelegate?.didUpdateActiveRecords()

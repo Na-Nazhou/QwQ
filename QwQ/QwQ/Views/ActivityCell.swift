@@ -46,6 +46,7 @@ class ActivityCell: UICollectionViewCell {
         case .admitted:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
             changeEditToConfirmAdmission()
+            enableEdit()
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
             hideEditAndDelete()
@@ -54,7 +55,8 @@ class ActivityCell: UICollectionViewCell {
         case .withdrawn:
             statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
         case .confirmedAdmission:
-            statusLabel.text = statusLabel.text! + ", Confirmed at: \(record.confirmAdmissionTime!.toString())"
+            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+                + ", Confirmed admission."
             disableEdit()
         default:
             assert(false)
