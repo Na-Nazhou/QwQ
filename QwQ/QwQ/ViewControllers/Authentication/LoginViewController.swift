@@ -14,11 +14,11 @@ class LoginViewController: UIViewController {
 
     typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator
+    
+    var spinner: UIView?
 
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-
-    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
