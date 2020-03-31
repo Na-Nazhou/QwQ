@@ -20,17 +20,30 @@ class FIRAuthenticator: Authenticator {
                 errorHandler(error)
                 return
             }
-            guard let result = result else {
+            guard result != nil else {
                 errorHandler(AuthError.AuthResultError)
                 return
             }
-            Profile.createInitialCustomerProfile(uid: result.user.uid,
+            Profile.createInitialCustomerProfile(uid: authDetails.email,
                                                  signupDetails: signupDetails,
                                                  authDetails: authDetails,
                                                  errorHandler: errorHandler)
-            FIRAuthenticator.login(authDetails: authDetails,
-                                   completion: completion,
-                                   errorHandler: errorHandler)
+
+            /* Email verification code, to be enabled only for production.
+            FIRAuthenticator.login(authDetails: authDetails, completion: {
+                guard let user = Auth.auth().currentUser else {
+                    errorHandler(AuthError.AuthResultError)
+                    return
+                }
+                user.sendEmailVerification { (error) in
+                    if let error = error {
+                        errorHandler(error)
+                    }
+                }
+                FIRAuthenticator.logout(completion: completion, errorHandler: errorHandler)
+            }, errorHandler: errorHandler)
+            */
+            completion()
         }
     }
 
@@ -66,6 +79,25 @@ class FIRAuthenticator: Authenticator {
         })
     }
 
+    static func sendVerificationEmail(errorHandler: @escaping (Error) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            errorHandler(AuthError.NotSignedIn)
+            return
+        }
+        user.sendEmailVerification { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        }
+    }
+
+    static func checkIfEmailVerified() -> Bool {
+        guard let user = Auth.auth().currentUser else {
+            return false
+        }
+        return user.isEmailVerified
+    }
+
     static func checkIfAlreadyLoggedIn() -> Bool {
         guard let user = Auth.auth().currentUser else {
             return false
@@ -73,6 +105,17 @@ class FIRAuthenticator: Authenticator {
         Profile.currentUID = user.email
         Profile.currentAuthType = AuthTypes.Firebase
         return true
+    }
+
+    static func resetPassword(for email: String,
+                              completion: @escaping () -> Void,
+                              errorHandler: @escaping (Error) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+            completion()
+        }
     }
 
 }

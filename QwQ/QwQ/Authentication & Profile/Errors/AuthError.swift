@@ -10,6 +10,7 @@ import Foundation
 enum AuthError: Error {
     case AuthResultError
     case SignOutError
+    case NotSignedIn
 }
 
 extension AuthError: LocalizedError {
@@ -19,6 +20,8 @@ extension AuthError: LocalizedError {
             return "An error occured retrieving the authentication result."
         case .SignOutError:
             return "An error occured while trying to sign out."
+        case .NotSignedIn:
+            return "You are not signed in."
         }
     }
 }

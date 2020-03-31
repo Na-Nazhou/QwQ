@@ -97,7 +97,7 @@ class FBBookingStorage: RestaurantBookingStorage {
         }
 
         let bid = document.documentID
-        FBCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+        FIRCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
                     guard let rec = BookRecord(dictionary: data,
                                                customer: customer,
                                                restaurant: restaurant,

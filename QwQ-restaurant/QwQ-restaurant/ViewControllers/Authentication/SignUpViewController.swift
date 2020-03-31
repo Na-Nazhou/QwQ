@@ -14,7 +14,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
     
-    typealias Auth = FBAuthenticator
+    typealias Auth = FIRAuthenticator
+    typealias Profile = FIRProfileStorage
 
     var spinner: UIView?
 
@@ -71,13 +72,23 @@ class SignUpViewController: UIViewController {
         
         Auth.signup(signupDetails: signupDetails,
                     authDetails: authDetails,
-                    completion: authCompleted,
+                    completion: signUpComplete,
                     errorHandler: handleError(error:))
     }
     
-    private func authCompleted() {
-        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
+    private func signUpComplete() {
+        /* Email verification code - to be enabled only in production application
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+        return
+        */
+        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                  errorHandler: handleError(error:))
+    }
+
+    private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
     private func handleError(error: Error) {

@@ -116,8 +116,8 @@ class FBQueueStorage: RestaurantQueueStorage {
         }
         let qid = document.documentID
 
-        FBCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-            FBProfileStorage.getRestaurantInfo(
+        FIRCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
+            FIRProfileStorage.getRestaurantInfo(
                 completion: { restaurant in
                 guard let rec = QueueRecord(dictionary: data,
                                             customer: customer,
