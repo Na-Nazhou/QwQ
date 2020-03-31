@@ -94,4 +94,14 @@ class FIRAuthenticator: Authenticator {
         return true
     }
 
+    static func resetPassword(for email: String,
+                              completion: @escaping () -> Void,
+                              errorHandler: @escaping (Error) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        }
+    }
+
 }
