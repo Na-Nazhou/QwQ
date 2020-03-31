@@ -17,7 +17,7 @@ struct Restaurant: User {
     let queueCloseTime: Date?
 
     var isValidRestaurant: Bool {
-        return !address.isEmpty && !menu.isEmpty
+        !address.isEmpty && !menu.isEmpty
     }
 
     var isQueueOpen: Bool {

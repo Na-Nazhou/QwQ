@@ -23,7 +23,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
-                  queueStorage: FBQueueStorage.shared)
+                  queueStorage: FIRQueueStorage.shared)
     }
 
     // Constructor to provide flexibility for testing.
@@ -71,9 +71,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     func canQueue(for restaurant: Restaurant) -> Bool {
         // add any other queueing restrictions here
         restaurant.isQueueOpen
-            && currentQueueRecords.reduce(true) { result, record in
-                result && record.restaurant != restaurant
-            }
+            && currentQueueRecords.allSatisfy { $0.restaurant != restaurant }
     }
 
     func enqueue(to restaurant: Restaurant,

@@ -23,7 +23,8 @@ struct Constants {
     static let chooseFromCameraTitle = "Take from Camera"
     static let showImagePickerTitle = "Choose your image"
     static let welcomeMessage = "Welcome to QwQ!"
-    static let profileSetupMessage = "Please set up your profile in the Profile tab.\n Until then, your restaurant will not be visible to customers."
+    static let profileSetupMessage = "Please set up your profile in the Profile tab."
+    + "Until then, your restaurant will not be visible to customers."
 
     // MARK: Alert settings
     static let successTitle = "Success"
