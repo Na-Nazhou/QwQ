@@ -60,16 +60,16 @@ extension Record {
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
-        } else if confirmAdmissionTime != nil {
-            return .confirmedAdmission //TODO: check if placing is correct
-        } else if admitTime == nil {
-            return .pendingAdmission
-        } else if rejectTime == nil && serveTime == nil {
-            return .admitted
-        } else if rejectTime != nil {
+        } else if admitTime != nil && rejectTime != nil {
             return .rejected
-        } else if serveTime != nil {
+        } else if admitTime != nil && serveTime != nil {
             return .served
+        } else if admitTime != nil && confirmAdmissionTime != nil {
+            return .confirmedAdmission
+        } else if admitTime != nil {
+            return .admitted
+        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
+            return .pendingAdmission
         }
         return .invalid
     }
