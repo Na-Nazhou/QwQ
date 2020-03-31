@@ -22,15 +22,16 @@ class ForgotPasswordViewController: UIViewController {
     }
 
     @IBAction private func handleResetPassword(_ sender: Any) {
-        spinner = showSpinner(onView: view)
+        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        guard let email = emailTextField.text else {
+        guard let email = trimmedEmail else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
                         buttonText: Constants.okayTitle)
             return
         }
 
+        spinner = showSpinner(onView: view)
         Auth.resetPassword(for: email, completion: emailSent, errorHandler: handleError(error:))
     }
     

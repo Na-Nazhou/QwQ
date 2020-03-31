@@ -114,6 +114,7 @@ class FIRAuthenticator: Authenticator {
             if let error = error {
                 errorHandler(error)
             }
+            completion()
         }
     }
 
