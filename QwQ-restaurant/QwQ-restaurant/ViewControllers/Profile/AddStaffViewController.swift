@@ -38,7 +38,7 @@ class AddStaffViewController: UIViewController {
         staffTableView.reloadData()
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
     
@@ -52,7 +52,7 @@ class AddStaffViewController: UIViewController {
 
 extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        staffEmails.count
+        return staffEmails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,10 +64,26 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        // let staffEmail = staffEmails[indexPath.row]
-        
-        // staffCell.setUpViews(staffEmail: staffEmail)
+        let staffEmail = staffEmails[indexPath.row]
+        staffCell.setUpViews(staffEmail: staffEmail)
         
         return staffCell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            staffEmails = staffEmails.filter {
+                $0 != staffEmails[indexPath.item]
+            }
+            staffTableView.reloadData()
+        }
+        
+        print(staffEmails)
     }
 }

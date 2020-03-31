@@ -587,22 +587,22 @@
                                     <action selector="handleBack:" destination="uh7-Qf-lX3" eventType="touchUpInside" id="V4r-KH-Pic"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Iq-qK-6X7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Iq-qK-6X7">
                                 <rect key="frame" x="20" y="445" width="794" height="597"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="staffCell" rowHeight="98" id="lIr-VP-IJD" customClass="StaffCell" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="794" height="98"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="staffCell" rowHeight="101" id="lIr-VP-IJD" customClass="StaffCell" customModule="QwQ_restaurant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="794" height="101"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lIr-VP-IJD" id="2rF-pX-t3g">
-                                            <rect key="frame" x="0.0" y="0.0" width="794" height="98"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="794" height="101"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0O5-7K-TGt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="794" height="98"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="794" height="101"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pm-f5-d6I">
-                                                            <rect key="frame" x="0.0" y="0.0" width="794" height="98"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="794" height="101"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -617,6 +617,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="0O5-7K-TGt" secondAttribute="trailing" id="ybz-9N-DNf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="emailLabel" destination="3pm-f5-d6I" id="LUi-Wc-gGu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
