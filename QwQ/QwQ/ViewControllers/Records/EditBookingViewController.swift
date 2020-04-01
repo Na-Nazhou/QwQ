@@ -25,13 +25,12 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         
         // Edit existing book record
         if let bookRecord = record as? BookRecord {
-            if bookingLogicManager.editBookRecord(oldRecord: bookRecord,
-                                                  at: datePicker.date,
-                                                  with: groupSize,
-                                                  babyChairQuantity: babyChairQuantity,
-                                                  wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
-                spinner = showSpinner(onView: view)
-            }
+            bookingLogicManager.editBookRecord(oldRecord: bookRecord,
+                                               at: datePicker.date,
+                                               with: groupSize,
+                                               babyChairQuantity: babyChairQuantity,
+                                               wheelchairFriendly: wheelchairFriendlySwitch.isOn)
+            spinner = showSpinner(onView: view)
             return
         }
 

@@ -94,7 +94,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool) -> Bool {
+                        wheelchairFriendly: Bool) {
         let newRecord = BookRecord(id: oldRecord.id,
                                    restaurant: oldRecord.restaurant,
                                    customer: customer,
@@ -103,14 +103,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly)
 
-        if !checkExistingRecords(against: newRecord) {
-            return false
-        }
-
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord) {
             self.bookingDelegate?.didUpdateRecord()
         }
-        return true
     }
 
     private func checkExistingRecords(against record: BookRecord) -> Bool {
