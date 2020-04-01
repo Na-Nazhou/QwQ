@@ -18,8 +18,8 @@ class EditProfileViewController: UIViewController {
 
     @IBOutlet private var profileImageView: UIImageView!
 
-    typealias Auth = FBAuthenticator
-    typealias Profile = FBProfileStorage
+    typealias Auth = FIRAuthenticator
+    typealias Profile = FIRProfileStorage
 
     private var uid: String?
     private var isRestaurantOpen: Bool?

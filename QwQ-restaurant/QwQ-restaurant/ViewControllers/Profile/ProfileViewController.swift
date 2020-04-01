@@ -18,8 +18,8 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet private var profileImageView: UIImageView!
 
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     var spinner: UIView?
 

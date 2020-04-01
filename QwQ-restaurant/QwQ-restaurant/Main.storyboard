@@ -168,7 +168,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euT-n7-rg9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1169" y="479"/>
+            <point key="canvasLocation" x="886" y="506"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V4T-oO-RXe">
@@ -206,7 +206,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1967" y="142"/>
+            <point key="canvasLocation" x="2453" y="101"/>
         </scene>
         <!--Activities-->
         <scene sceneID="UBO-CK-qMg">
@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885.61151079136698" y="871.85929648241211"/>
+            <point key="canvasLocation" x="1673" y="506"/>
         </scene>
         <!--EmailVerification-->
         <scene sceneID="SAN-6o-gEP">
@@ -437,11 +437,11 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERj-hT-JWv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1422" y="835"/>
+            <point key="canvasLocation" x="1673" y="901"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="23e-ha-7lb"/>
+        <segue reference="y5a-2U-37J"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>

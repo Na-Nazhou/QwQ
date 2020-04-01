@@ -11,5 +11,5 @@ protocol ActivitiesDelegate: AnyObject {
 
     func didUpdateActiveRecords()
     
-    func didDeleteRecord()
+    func didWithdrawRecord()
 }

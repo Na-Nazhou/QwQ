@@ -87,9 +87,11 @@
                     </view>
                     <connections>
                         <outlet property="emailLabel" destination="HcX-2I-thT" id="LcV-f5-fS7"/>
+                        <segue destination="LNe-bY-hOs" kind="unwind" identifier="goToLogin" unwindAction="unwindToLogin:" id="Vt4-GG-lgL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SSe-rf-OTZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="LNe-bY-hOs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="200.00000000000003" y="111.83035714285714"/>
         </scene>

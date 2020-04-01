@@ -47,7 +47,6 @@ opt_in_rules:
   - overridden_super_call
   - override_in_extension
   - pattern_matching_keywords
-  - private_action
   - prohibited_super_call
   - quick_discouraged_call
   - quick_discouraged_focused_test
@@ -81,6 +80,7 @@ disabled_rules:
   - trailing_whitespace
   - private_outlet
   - unavailable_function
+  - private_action
 line_length:
   warning: 120
   error: 150

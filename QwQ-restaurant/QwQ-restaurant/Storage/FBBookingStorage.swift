@@ -7,26 +7,47 @@
 
 import FirebaseFirestore
 import Foundation
+import os.log
 
 class FBBookingStorage: RestaurantBookingStorage {
-    let db = Firestore.firestore()
+    // MARK: Storage as singleton
+    static let shared = FBBookingStorage()
 
-    weak var logicDelegate: BookingStorageSyncDelegate?
+    private init() {}
+
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
+    private var bookingDb: CollectionReference {
+        db.collection(Constants.bookingsDirectory)
+    }
+
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listener: ListenerRegistration?
 
-    init(restaurant: Restaurant) {
-        registerListenerForBooking(restaurant: restaurant)
-    }
-
     deinit {
-        listener?.remove()
+        removeListener()
+    }
+    
+    func registerDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.add(del)
     }
 
-    private func registerListenerForBooking(restaurant: Restaurant) {
-        // listen to restaurant's queue document for 'today'
-        // assuming users will restart app everyday
+    func unregisterDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
 
+    private func delegateWork(doWork: (BookingStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? BookingStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
+    }
+
+    func registerListener(for restaurant: Restaurant) {
+        removeListener()
         let date = Date()
         let calendar = Calendar.current
         let startTime = calendar.startOfDay(for: date)
@@ -44,13 +65,13 @@ class FBBookingStorage: RestaurantBookingStorage {
                     switch diff.type {
                     case .added:
                         print("\n\tfound new b\n")
-                        completion = { self.logicDelegate?.didAddBookRecord($0) }
+                        completion = { record in self.delegateWork { $0.didAddBookRecord(record) } }
                     case .modified:
                         print("\n\tfound update b\n")
-                        completion = { self.logicDelegate?.didUpdateBookRecord($0) }
+                        completion = { record in self.delegateWork { $0.didUpdateBookRecord(record) } }
                     case .removed:
                         print("\n\tcustomer deleted b themselves!\n")
-                        completion = { self.logicDelegate?.didDeleteBookRecord($0) }
+                        completion = { record in self.delegateWork { $0.didDeleteBookRecord(record) } }
                     }
 
                     self.makeBookRecord(
@@ -59,6 +80,11 @@ class FBBookingStorage: RestaurantBookingStorage {
                         completion: completion)
                 }
             }
+    }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     private func makeBookRecord(document: DocumentSnapshot,
@@ -71,7 +97,7 @@ class FBBookingStorage: RestaurantBookingStorage {
         }
 
         let bid = document.documentID
-        FBCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+        FIRCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
                     guard let rec = BookRecord(dictionary: data,
                                                customer: customer,
                                                restaurant: restaurant,

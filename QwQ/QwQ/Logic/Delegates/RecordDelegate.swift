@@ -10,6 +10,8 @@ protocol RecordDelegate: AnyObject {
     func didAddRecord()
 
     func didUpdateRecord()
+
+    func didWithdrawRecord()
 }
 
 protocol QueueDelegate: RecordDelegate {
