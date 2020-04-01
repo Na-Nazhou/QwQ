@@ -1,15 +1,7 @@
-//
-//  CustomerBookingLogicManager.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 19/3/20.
-//
-
 import Foundation
 import os.log
 
 class CustomerBookingLogicManager: CustomerBookingLogic {
-
     // Storage
     var bookingStorage: CustomerBookingStorage
 
@@ -17,58 +9,71 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     weak var bookingDelegate: BookingDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
-    var customer: Customer
+    private let customerActivity: CustomerActivity
+    private var customer: Customer {
+        customerActivity.customer
+    }
 
-    // TODO: change to record collection
-    private var currentBookRecords = RecordCollection<BookRecord>()
     var activeBookRecords: [BookRecord] {
-        currentBookRecords.records
+        customerActivity.currentBookings.records
     }
-
-    private var bookingHistory = RecordCollection<BookRecord>()
     var pastBookRecords: [BookRecord] {
-        bookingHistory.records
+        customerActivity.bookingHistory.records
     }
 
-    private init(customer: Customer, bookingStorage: CustomerBookingStorage) {
-        self.customer = customer
+    convenience init() {
+        self.init(customerActivity: CustomerActivity.shared(),
+                  bookingStorage: FBBookingStorage.shared)
+    }
+
+    // Constructor to provide flexibility for testing.
+    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage) {
+        self.customerActivity = customerActivity
         self.bookingStorage = bookingStorage
+
+        self.bookingStorage.registerDelegate(self)
 
         fetchActiveBookRecords()
         fetchBookingHistory()
     }
 
     deinit {
-        os_log("DEINITING", log: Log.deinitLogic, type: .info)
-        for record in activeBookRecords {
-            bookingStorage.removeListener(for: record)
-        }
+        os_log("DEINITING booking lm", log: Log.deinitLogic, type: .info)
+        bookingStorage.unregisterDelegate(self)
     }
 
     func fetchActiveBookRecords() {
+        if !activeBookRecords.isEmpty {
+            os_log("Active book records already loaded.", log: Log.loadActivity, type: .info)
+            return //already loaded, no need to reload.
+        }
         bookingStorage.loadActiveBookRecords(customer: customer, completion: {
             guard let bookRecord = $0 else {
                 return
             }
 
-            self.bookingStorage.registerListener(for: bookRecord)
+            self.didAddBookRecord(bookRecord)
         })
     }
 
     func fetchBookingHistory() {
+        if !pastBookRecords.isEmpty {
+            os_log("History book records already loaded.", log: Log.loadActivity, type: .info)
+            return
+        }
         bookingStorage.loadBookHistory(customer: customer, completion: {
              guard let record = $0 else {
                  return
              }
+
             self.didAddBookRecord(record)
          })
-        
     }
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,
                        with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) -> Bool {
 
-        var newRecord = BookRecord(restaurant: restaurant,
+        let newRecord = BookRecord(restaurant: restaurant,
                                    customer: customer,
                                    time: time,
                                    groupSize: groupSize,
@@ -79,18 +84,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.addBookRecord(newRecord: newRecord,
-                                     completion: { self.didAddBookRecord(newRecord: &newRecord, id: $0)
-
-        })
+        bookingStorage.addBookRecord(newRecord: newRecord) {
+            self.bookingDelegate?.didAddRecord()
+        }
         return true
-    }
-
-    private func didAddBookRecord(newRecord: inout BookRecord, id: String) {
-        newRecord.id = id
-        bookingStorage.registerListener(for: newRecord)
-
-        bookingDelegate?.didAddRecord()
     }
 
     func editBookRecord(oldRecord: BookRecord,
@@ -110,9 +107,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return false
         }
 
-        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord, completion: {
+        bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord) {
             self.bookingDelegate?.didUpdateRecord()
-        })
+        }
         return true
     }
 
@@ -128,19 +125,13 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         return true
     }
 
-    func deleteBookRecord(_ record: BookRecord) {
-        if record.isAdmitted {
-            var newRecord = record
-            newRecord.withdrawTime = Date()
-            bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord, completion: {
-                self.activitiesDelegate?.didDeleteRecord()
-            })
-            return
+    func withdrawBookRecord(_ record: BookRecord) {
+        var newRecord = record
+        newRecord.withdrawTime = Date()
+        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord) {
+            self.activitiesDelegate?.didWithdrawRecord()
+            // note that mass withdrawal should not fire copmletion for each...?
         }
-
-        bookingStorage.deleteBookRecord(record: record, completion: {
-            self.activitiesDelegate?.didDeleteRecord()
-        })
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
@@ -151,22 +142,22 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
         let modification = record.changeType(from: oldRecord)
+        print("\n\tModification detected as \(modification)")
         switch modification {
         case .admit:
-            // call some (activites) delegate to display admission status
             didAdmitBookRecord(record)
             os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         case .withdraw:
             addAsHistoryRecord(record)
-            didDeleteBookRecord(record)
+            removeFromCurrent(record)
             os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
@@ -178,73 +169,45 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
         if record.isActiveRecord {
-            currentBookRecords.update(record)
+            customerActivity.currentBookings.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
-    func didAddBookRecord(_ record: BookRecord) {
-        if record.isActiveRecord && currentBookRecords.add(record) {
+    private func didAddBookRecord(_ record: BookRecord) {
+        if record.isActiveRecord && customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
 
-        if record.isHistoryRecord && bookingHistory.add(record) {
+        if record.isHistoryRecord && customerActivity.bookingHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
 
-    func didAdmitBookRecord(_ record: BookRecord) {
-        guard currentBookRecords.remove(record) else {
+    private func didAdmitBookRecord(_ record: BookRecord) {
+        guard customerActivity.currentBookings.remove(record) else {
             return
         }
 
         // Delete other bookings at the same time
         for otherRecord in activeBookRecords where otherRecord.time == record.time {
-            bookingStorage.deleteBookRecord(record: otherRecord, completion: {})
+            withdrawBookRecord(otherRecord) // TODO: note completion in withdraw
         }
 
-        if currentBookRecords.add(record) {
+        if customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
-    func didDeleteBookRecord(_ record: BookRecord) {
-        bookingStorage.removeListener(for: record)
-        if currentBookRecords.remove(record) {
+    private func removeFromCurrent(_ record: BookRecord) {
+        if customerActivity.currentBookings.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
 
     private func addAsHistoryRecord(_ record: BookRecord) {
-        if bookingHistory.add(record) {
+        if customerActivity.bookingHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
-    }
-}
-
-extension CustomerBookingLogicManager {
-    private static var bookingLogic: CustomerBookingLogicManager?
-
-    /// Returns shared customer booking logic manager for the logged in application. If it does not exist,
-    /// a booking logic manager is initiailised with the given customer identity to share.
-    static func shared(for customerIdentity: Customer? = nil,
-                       with storage: CustomerBookingStorage? = nil) -> CustomerBookingLogicManager {
-        if let logic = bookingLogic {
-            return logic
-        }
-
-        assert(customerIdentity != nil,
-               "Customer identity must be given non-nil to make the customer's booking logic manager.")
-        assert(storage != nil,
-               "Booking storage must be given non-nil")
-        let logic = CustomerBookingLogicManager(customer: customerIdentity!, bookingStorage: storage!)
-        logic.bookingStorage.logicDelegate = logic
-
-        bookingLogic = logic
-        return logic
-    }
-
-    static func deinitShared() {
-        bookingLogic = nil
     }
 }

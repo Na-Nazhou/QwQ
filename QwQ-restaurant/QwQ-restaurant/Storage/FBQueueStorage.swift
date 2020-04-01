@@ -6,24 +6,64 @@
 //
 
 import FirebaseFirestore
+import os.log
 
 class FBQueueStorage: RestaurantQueueStorage {
-    let db = Firestore.firestore()
+    // MARK: Storage as singleton
+    static let shared = FBQueueStorage()
 
-    weak var logicDelegate: QueueStorageSyncDelegate?
-    
-    init(restaurant: Restaurant) {
-        registerListenerForQueue(restaurant: restaurant)
-        registerListenerForRestaurant(restaurant: restaurant)
+    private init() {}
+
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
+    private var queueDb: CollectionReference {
+        db.collection(Constants.queuesDirectory)
+    }
+    private var restaurantDb: CollectionReference {
+        db.collection(Constants.restaurantsDirectory)
     }
 
-    private func registerListenerForQueue(restaurant: Restaurant) {
-        // listen to restaurant's queue document for 'today'
-        // assuming users will restart app everyday
-        let today = Date.getFormattedDate(date: Date(), format: Constants.recordDateFormat)
-        db.collection(Constants.queuesDirectory)
-            .document(restaurant.uid)
-            .collection(today)
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+
+    private var openCloseListener: ListenerRegistration?
+    private var queueListener: ListenerRegistration?
+
+    deinit {
+        removeListeners()
+    }
+
+    func registerDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.add(del)
+    }
+
+    func unregisterDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (QueueStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? QueueStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
+    }
+
+    func registerListeners(for restaurant: Restaurant) {
+        removeListeners()
+        registerListenerForQueue(of: restaurant)
+        registerListenerForRestaurant(restaurant)
+    }
+
+    func removeListeners() {
+        openCloseListener?.remove()
+        queueListener?.remove()
+        openCloseListener = nil
+        queueListener = nil
+    }
+
+    private func registerListenerForQueue(of restaurant: Restaurant) {
+        queueListener = queueDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .addSnapshotListener { (queueSnapshot, err) in
                 if let err = err {
                     print("Error fetching documents: \(err)")
@@ -34,30 +74,24 @@ class FBQueueStorage: RestaurantQueueStorage {
                     switch diff.type {
                     case .added:
                         print("\n\tfound new q\n")
-                        completion = { self.logicDelegate?.didAddQueueRecord($0) }
+                        completion = { record in self.delegateWork { $0.didAddQueueRecord(record) } }
                     case .modified:
                         print("\n\tfound update q\n")
-                        completion = { self.logicDelegate?.didUpdateQueueRecord($0) }
+                        completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
                     case .removed:
-                        print("\n\tcustomer deleted q themselves!\n")
-                        completion = { self.logicDelegate?.didDeleteQueueRecord($0) }
+                        print("\n\tDetected removal of queue record from db which should not happen.\n")
+                        completion = { _ in }
                     }
 
-                    guard let customerUID = diff.document.data()["customer"] as? String else {
-                        assert(false, "all docs, including removed ones, should contain non empty data..?")
-                        return
-                    }
                     self.makeQueueRecord(
-                        data: diff.document.data(), id: diff.document.documentID,
-                        customerUID: customerUID, restaurant: restaurant,
+                        document: diff.document,
                         completion: completion)
                 }
             }
     }
 
-    private func registerListenerForRestaurant(restaurant: Restaurant) {
-        db.collection(Constants.restaurantsDirectory)
-            .document(restaurant.uid)
+    private func registerListenerForRestaurant(_ restaurant: Restaurant) {
+        openCloseListener = restaurantDb.document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {
                     print("Error fetching document: \(err)")
@@ -69,35 +103,52 @@ class FBQueueStorage: RestaurantQueueStorage {
                         return
                 }
                 // regardless of change, contact delegate it has changed.
-                self.logicDelegate?.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant)
+                self.delegateWork { $0.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant) }
             }
     }
 
-    private func makeQueueRecord(
-        data: [String: Any], id: String, customerUID: String,
-        restaurant: Restaurant,
-        completion: @escaping (QueueRecord) -> Void) {
-        FIRCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
-            guard let rec = QueueRecord(dictionary: data, customer: customer, restaurant: restaurant, id: id) else {
-                return
-            }
-            completion(rec)
-            }, errorHandler: nil)
+    private func makeQueueRecord(document: DocumentSnapshot,
+                                 completion: @escaping (QueueRecord) -> Void) {
+        guard let data = document.data(), let cid = data[Constants.customerKey] as? String else {
+            os_log("Error getting cid from Queue Record document.",
+                   log: Log.cidError, type: .error)
+            return
+        }
+        let qid = document.documentID
+
+        FIRCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
+            FIRProfileStorage.getRestaurantInfo(
+                completion: { restaurant in
+                guard let rec = QueueRecord(dictionary: data,
+                                            customer: customer,
+                                            restaurant: restaurant,
+                                            id: qid) else {
+                                                os_log("Cannot create queue record.",
+                                                       log: Log.createQueueRecordError, type: .info)
+                                                return
+                    }
+                    completion(rec)
+                }, errorHandler: { _ in })
+        }, errorHandler: nil)
+    }
+
+    private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
+        queueDb.document(record.id)
     }
 
     func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
-        db.collection(Constants.queuesDirectory)
-            .document(oldRecord.restaurant.uid)
-            .collection(oldRecord.startDate)
-            .document(oldRecord.id)
-            .setData(newRecord.dictionary) { _ in
-                    completion()
+        let oldDocRef = getQueueRecordDocument(record: oldRecord)
+        oldDocRef.setData(newRecord.dictionary) { error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
             }
+            completion()
+        }
     }
 
     func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant) {
-        db.collection(Constants.restaurantsDirectory)
-            .document(old.uid)
+        restaurantDb.document(old.uid)
             .setData(new.dictionary)
     }
 }

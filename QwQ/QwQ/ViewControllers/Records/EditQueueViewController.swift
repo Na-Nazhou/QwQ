@@ -9,6 +9,8 @@ import UIKit
 
 class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
+    var queueLogicManager: CustomerQueueLogicManager!
+
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
             return
@@ -21,7 +23,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
         // Edit existing queue record
         if let queueRecord = record as? QueueRecord {
-            CustomerQueueLogicManager.shared()
+            queueLogicManager
                 .editQueueRecord(oldRecord: queueRecord,
                                  with: groupSize,
                                  babyChairQuantity: babyChairQuantity,
@@ -31,11 +33,15 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         }
 
          // Create a new queue record
-        guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+        guard let restaurant = restaurant, restaurant.isQueueOpen else {
+            // restaurant queue closed while customer was slowly putting q info.
+            showMessage(title: Constants.errorTitle,
+            message: Constants.restaurantUnavailableMessage,
+            buttonText: Constants.okayTitle)
             return
         }
         
-        if CustomerQueueLogicManager.shared()
+        if queueLogicManager
             .enqueue(to: restaurant,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
@@ -46,7 +52,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CustomerQueueLogicManager.shared().queueDelegate = self
+        queueLogicManager.queueDelegate = self
     }
 
     func didFindRestaurantQueueClosed() {
@@ -55,3 +61,4 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
                     buttonText: Constants.okayTitle)
     }
 }
+

@@ -2,7 +2,13 @@ import Foundation
 
 /// Represents the univeral queue storage sync protocol.
 protocol QueueStorageSync {
-    var logicDelegate: QueueStorageSyncDelegate? { get set }
+    var logicDelegates: NSHashTable<AnyObject> { get }
+
+    func registerDelegate(_ del: QueueStorageSyncDelegate)
+    func unregisterDelegate(_ del: QueueStorageSyncDelegate)
+
+    func registerListeners(for restaurant: Restaurant)
+    func removeListeners()
 }
 
 protocol RestaurantQueueStorage: QueueStorageSync {

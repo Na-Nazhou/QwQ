@@ -17,8 +17,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    var queueLogicManager: CustomerQueueLogicManager!
+    var restaurantLogicManager: RestaurantLogicManager!
     var restaurant: Restaurant? {
-        RestaurantLogicManager.shared().currentRestaurant
+        restaurantLogicManager.currentRestaurant
     }
     
     override func viewDidLoad() {
@@ -26,7 +28,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         
         setUpViews()
 
-        RestaurantLogicManager.shared().restaurantDelegate = self
+        restaurantLogicManager.restaurantDelegate = self
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
@@ -41,13 +43,14 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
             return
         }
 
-        if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
-            performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
-        } else {
+        if !queueLogicManager.canQueue(for: restaurant) {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.multipleQueueRecordsMessage,
+                        message: Constants.alreadyQueuedRestaurantMessage,
                         buttonText: Constants.okayTitle)
+            return
         }
+
+        performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
     }
 
     @IBAction private func handleBookTap(_ sender: Any) {
@@ -78,5 +81,25 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     func restaurantDidUpdate() {
         setUpViews()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.editQueueSelectedSegue {
+            guard let editQVC = segue.destination as? EditQueueViewController else {
+                assert(false,
+                       "Destination should be editRecordVC.")
+                return
+            }
+            editQVC.queueLogicManager = queueLogicManager
+        }
+        if segue.identifier == Constants.editBookSelectedSegue {
+            guard let editBVC = segue.destination as? EditBookingViewController else {
+                assert(false,
+                       "Destination should be editRecordVC and restaurant should not be nil.")
+                return
+            }
+            editBVC.restaurantLogicManager = restaurantLogicManager
+            return
+        }
     }
 }

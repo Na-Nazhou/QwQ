@@ -10,6 +10,10 @@ class EditRecordViewController: UIViewController {
 
     var spinner: UIView?
 
+    var restaurantLogicManager: RestaurantLogicManager?
+    var restaurant: Restaurant? {
+        restaurantLogicManager?.currentRestaurant
+    }
     var record: Record?
 
     var groupSize: Int? {
@@ -56,14 +60,14 @@ class EditRecordViewController: UIViewController {
             babyChairQuantityTextField.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         } else {
-            guard let restaurant = RestaurantLogicManager.shared().currentRestaurant else {
+            guard let restaurant = restaurant else {
                 return
             }
             restaurantNameLabel.text = restaurant.name
 
             // Autofill the name and contact
-            nameTextField.text = CustomerQueueLogicManager.shared().customer.name
-            contactTextField.text = CustomerQueueLogicManager.shared().customer.contact
+            nameTextField.text = CustomerActivity.shared().customer.name
+            contactTextField.text = CustomerActivity.shared().customer.contact
             wheelchairFriendlySwitch.isOn = Constants.defaultWheelchairFriendly
             babyChairQuantityTextField.text = String(Constants.defaultBabyChairQuantity)
         }
@@ -94,6 +98,17 @@ class EditRecordViewController: UIViewController {
                  self.handleBack()
              })
      }
+
+    func didWithdrawRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordWithdrawSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: { _ in
+                self.handleBack()
+            })
+    }
 
     func checkRecordDetails() -> Bool {
         guard let groupSize = groupSize,

@@ -1,23 +1,26 @@
+import Foundation
+
 /// Represents the univeral queue storage sync protocol.
 protocol QueueStorageSync {
-    var logicDelegate: QueueStorageSyncDelegate? { get set }
+    var logicDelegates: NSHashTable<AnyObject> { get }
+
+    func registerDelegate(_ del: QueueStorageSyncDelegate)
+
+    func unregisterDelegate(_ del: QueueStorageSyncDelegate)
 
     // MARK: - Listeners
-    func registerListener(for record: QueueRecord)
+    func registerListener(for customer: Customer)
 
-    func removeListener(for record: QueueRecord)
+    func removeListener()
 }
 
 protocol CustomerQueueStorage: QueueStorageSync {
     // MARK: - Modifier
     /// Insert a queue record
-    func addQueueRecord(newRecord: QueueRecord, completion: @escaping (_ id: String) -> Void)
+    func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void)
 
     /// Update a queue record (can only update groupSize, babyCount, wheelchairCount)
     func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void)
-
-    /// Delete a queue record
-    func deleteQueueRecord(record: QueueRecord, completion: @escaping () -> Void)
 
     // MARK: - Query
     /// Calls  completion handler when it finds customer's active queue record.

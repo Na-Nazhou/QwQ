@@ -8,11 +8,23 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     // View Controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
-    private init(restaurant: Restaurant) {
+    private convenience init(restaurant: Restaurant) {
+        self.init(restaurant: restaurant, queueStorage: FBQueueStorage.shared, bookingStorage: FBBookingStorage.shared)
+    }
+
+    private init(restaurant: Restaurant, queueStorage: RestaurantQueueStorage, bookingStorage: RestaurantBookingStorage) {
         self.restaurant = restaurant
 
-        queueStorage = FBQueueStorage(restaurant: restaurant)
-        bookingStorage = FBBookingStorage(restaurant: restaurant)
+        self.queueStorage = queueStorage
+        self.bookingStorage = bookingStorage
+
+        self.queueStorage.registerDelegate(self)
+        self.bookingStorage.registerDelegate(self)
+    }
+
+    deinit {
+        queueStorage.unregisterDelegate(self)
+        bookingStorage.unregisterDelegate(self)
     }
 
     private var restaurant: Restaurant
@@ -286,9 +298,6 @@ extension RestaurantRecordLogicManager {
         assert(restaurantIdentity != nil,
                "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
         let logic = RestaurantRecordLogicManager(restaurant: restaurantIdentity!)
-        logic.queueStorage.logicDelegate = logic
-        logic.bookingStorage.logicDelegate = logic
-
         queueLogic = logic
         return logic
     }

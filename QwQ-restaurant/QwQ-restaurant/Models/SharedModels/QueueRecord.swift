@@ -28,6 +28,7 @@ struct QueueRecord: Record {
         data[Constants.babyChairQuantityKey] = babyChairQuantity
         data[Constants.wheelChairFriendlyKey] = wheelchairFriendly
         data[Constants.startTimeKey] = startTime
+        data[Constants.restaurantKey] = restaurant.uid
 
         if let admitTime = admitTime {
             data[Constants.admitTimeKey] = admitTime
