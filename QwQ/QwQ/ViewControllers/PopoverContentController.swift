@@ -11,8 +11,11 @@ class PopoverContentController: UIViewController {
     let sortCriteria = Constants.sortCriteria
     weak var delegate: PopoverContentControllerDelegate?
     
+    @IBOutlet private var tableView: PopoverTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.maxHeight = Constants.maxTableHeight
     }
     
     override func viewWillAppear(_ animated: Bool) {

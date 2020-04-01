@@ -87,6 +87,9 @@ struct Constants {
     static let popoverContentControllerOffset = CGFloat(20)
     static let popoverContentReuseIdentifier = "popoverContentCell"
     static let sortCriteria = ["Name", "Location"]
+    static let maxTableHeight = CGFloat(400)
+    static let popoverWidth = CGFloat(80.0)
+    static let popoverHeight = CGFloat(80.0)
     
     // MARK: Segmented control settings
     static let segmentedControlTitles = ["Active", "History"]

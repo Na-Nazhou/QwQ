@@ -48,7 +48,7 @@ class FIRRestaurantStorage: RestaurantStorage {
                         self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
                     }
                 }
-        }
+            }
     }
 
     func registerDelegate(_ del: RestaurantStorageSyncDelegate) {
