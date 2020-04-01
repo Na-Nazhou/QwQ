@@ -2,9 +2,9 @@ import FirebaseFirestore
 import Foundation
 import os.log
 
-class FBQueueStorage: CustomerQueueStorage {
+class FIRQueueStorage: CustomerQueueStorage {
     // MARK: Storage as singleton
-    static let shared = FBQueueStorage()
+    static let shared = FIRQueueStorage()
 
     private init() {}
 

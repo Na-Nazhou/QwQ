@@ -8,9 +8,9 @@
 import FirebaseFirestore
 import os.log
 
-class FBQueueStorage: RestaurantQueueStorage {
+class FIRQueueStorage: RestaurantQueueStorage {
     // MARK: Storage as singleton
-    static let shared = FBQueueStorage()
+    static let shared = FIRQueueStorage()
 
     private init() {}
 
