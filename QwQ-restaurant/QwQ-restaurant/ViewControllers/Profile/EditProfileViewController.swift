@@ -15,7 +15,12 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
-
+    @IBOutlet private var minGroupSizeTextField: UITextField!
+    @IBOutlet private var autoOpenTimeTextField: UITextField!
+    @IBOutlet private var maxGroupSizeTextField: UITextField!
+    @IBOutlet private var autoCloseTimeTextField: UITextField!
+    @IBOutlet private var advanceBookingLimitTextField: UITextField!
+    
     @IBOutlet private var profileImageView: UIImageView!
 
     typealias Auth = FIRAuthenticator
@@ -62,12 +67,12 @@ class EditProfileViewController: UIViewController {
                         buttonAction: nil)
             return
         }
-        print("1")
+        
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
             let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen else {
                 return
         }
-        print("2")
+        
         guard ValidationUtilities.validateEmail(email: email) else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,
