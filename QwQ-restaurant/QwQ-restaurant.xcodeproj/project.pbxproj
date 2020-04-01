@@ -90,6 +90,7 @@
 		D4EA85F8241B2CA7009EB85B /* RestaurantRecordLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85F6241B2CA7009EB85B /* RestaurantRecordLogic.swift */; };
 		D4EA85F9241B2CA7009EB85B /* RestaurantRecordLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85F7241B2CA7009EB85B /* RestaurantRecordLogicManager.swift */; };
 		D4EA8601241B2CC6009EB85B /* RestaurantQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85FD241B2CC5009EB85B /* RestaurantQueueStorage.swift */; };
+		D4F628582431653600C47B67 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F628572431653500C47B67 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +203,7 @@
 		D4EA85F6241B2CA7009EB85B /* RestaurantRecordLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRecordLogic.swift; sourceTree = "<group>"; };
 		D4EA85F7241B2CA7009EB85B /* RestaurantRecordLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRecordLogicManager.swift; sourceTree = "<group>"; };
 		D4EA85FD241B2CC5009EB85B /* RestaurantQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorage.swift; sourceTree = "<group>"; };
+		D4F628572431653500C47B67 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Utilities/Log.swift; sourceTree = "<group>"; };
 		F2BC3A00FE4D7C8792332F26 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -509,7 +511,7 @@
 				61326804241F28FF00B770B6 /* Fonts */,
 				5C44C9B1241DD02F0097C006 /* Utilities */,
 				7E72B19B241C9D4D00C1EE72 /* Constants.swift */,
-				7E6EBCD62430A2E70058D19A /* Log.swift */,
+				D4F628572431653500C47B67 /* Log.swift */,
 				5C9D9B5D242222310019B7EE /* AlertService.swift */,
 				7E6EBCD52430A2CB0058D19A /* Extensions */,
 			);
@@ -855,6 +857,7 @@
 				614805592422A1EF003D6D44 /* FBAuthenticator.swift in Sources */,
 				7EAC34D1242B30E90088D00F /* StatisticsViewController.swift in Sources */,
 				7EAC34D7242B3D110088D00F /* StatisticsCell.swift in Sources */,
+				D4F628582431653600C47B67 /* Log.swift in Sources */,
 				7EAC34D5242B3A8F0088D00F /* StatisticsDetailsViewController.swift in Sources */,
 				5C2CB12E242484A7003AFC6C /* AuthDetails.swift in Sources */,
 				7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */,

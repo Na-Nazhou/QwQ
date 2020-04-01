@@ -52,12 +52,12 @@ extension Record {
     }
 
     var status: RecordStatus {
-        if admitTime == nil {
-            return .pendingAdmission
-        } else if admitTime != nil && withdrawTime == nil && rejectTime == nil && serveTime == nil {
-            return .admitted
-        } else if withdrawTime != nil {
+        if withdrawTime != nil {
             return .withdrawn
+        } else if admitTime == nil {
+            return .pendingAdmission
+        } else if rejectTime == nil && serveTime == nil {
+            return .admitted
         } else if rejectTime != nil {
             return .rejected
         } else if serveTime != nil {
@@ -72,6 +72,10 @@ extension Record {
             return nil
         }
 
+        if status == .withdrawn {
+            return .withdraw
+        }
+
         if old.status == .pendingAdmission && self.status == .admitted {
             return .admit
         }
@@ -82,10 +86,6 @@ extension Record {
 
         if old.status == .admitted && self.status == .rejected {
             return .reject
-        }
-
-        if old.status == .admitted && self.status == .withdrawn {
-            return .withdraw
         }
 
         // TODO

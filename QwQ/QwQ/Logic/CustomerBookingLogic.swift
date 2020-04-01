@@ -1,10 +1,3 @@
-//
-//  CustomerBookingLogic.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 19/3/20.
-//
-
 import Foundation
 
 protocol CustomerBookingLogic: BookingStorageSyncDelegate {
@@ -28,5 +21,5 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
                         babyChairQuantity: Int,
                         wheelchairFriendly: Bool) -> Bool
 
-    func deleteBookRecord(_ bookRecord: BookRecord)
+    func withdrawBookRecord(_ bookRecord: BookRecord)
 }

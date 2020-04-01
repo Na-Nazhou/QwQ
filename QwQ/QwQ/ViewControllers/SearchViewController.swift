@@ -21,8 +21,11 @@ class SearchViewController: UIViewController, SearchDelegate {
     private var selectionState = SelectionState.selectOne
     private var selectedRestaurants: [Restaurant] = []
     
+    private let queueLogicManager = CustomerQueueLogicManager()
+    private let restaurantLogicManager = RestaurantLogicManager()
+
     private var restaurants: [Restaurant] {
-        RestaurantLogicManager.shared().restaurants
+        restaurantLogicManager.restaurants
     }
     
     @IBOutlet private var selectButton: UIButton!
@@ -97,8 +100,8 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
-        
-        RestaurantLogicManager.shared().searchDelegate = self
+
+        restaurantLogicManager.searchDelegate = self
     }
     
     func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
@@ -117,13 +120,29 @@ class SearchViewController: UIViewController, SearchDelegate {
         if segue.identifier == Constants.restaurantSelectedSegue {
             if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
                 let row = indexPaths[0].item
-                RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
+                restaurantLogicManager.currentRestaurant = restaurants[row]
             }
+
+            guard let rVC = segue.destination as? RestaurantViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            rVC.restaurantLogicManager = restaurantLogicManager
+            rVC.queueLogicManager = queueLogicManager
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,
             let restaurant = sender as? Restaurant {
-            RestaurantLogicManager.shared().currentRestaurant = restaurant
+            if restaurantLogicManager.currentRestaurant != restaurant {
+                restaurantLogicManager.currentRestaurant = restaurant
+            } // otherwise it is the most updated copy of restaurant
+
+            guard let editVC = segue.destination as? EditQueueViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            editVC.restaurantLogicManager = restaurantLogicManager
+            editVC.queueLogicManager = queueLogicManager
         }
     }
 }
@@ -227,14 +246,16 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                  buttonText: Constants.okayTitle)
                 return
             }
-            
-            if CustomerQueueLogicManager.shared().canQueue(for: restaurant) {
-                self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
-            } else {
+
+
+            if !self.queueLogicManager.canQueue(for: restaurant) {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.multipleQueueRecordsMessage,
-                                 buttonText: Constants.okayTitle)
+                            message: Constants.alreadyQueuedRestaurantMessage,
+                            buttonText: Constants.okayTitle)
+                return
             }
+
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
         }
         return restaurantCell
     }

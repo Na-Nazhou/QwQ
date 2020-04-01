@@ -1,30 +1,33 @@
-//
-//  FBBookingStorage.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 22/3/20.
-//
-
 import FirebaseFirestore
 import Foundation
 import os.log
 
 class FBBookingStorage: CustomerBookingStorage {
+    // MARK: Storage as singleton
+    static let shared = FBBookingStorage()
 
-    let db = Firestore.firestore()
+    private init() {}
 
-    weak var logicDelegate: BookingStorageSyncDelegate?
-
-    private var listenerMap = [BookRecord: ListenerRegistration]()
-
-    private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
+    // MARK: Storage capabilities
+    private let db = Firestore.firestore()
+    private var bookingDb: CollectionReference {
         db.collection(Constants.bookingsDirectory)
-            .document(record.id)
     }
 
-    func addBookRecord(newRecord: BookRecord, completion: @escaping (_ id: String) -> Void) {
-        let newRecordRef = db.collection(Constants.bookingsDirectory)
-            .document()
+    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+
+    private var listener: ListenerRegistration?
+
+    deinit {
+        removeListener()
+    }
+
+    private func getBookRecordDocument(record: BookRecord) -> DocumentReference {
+        bookingDb.document(record.id)
+    }
+
+    func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void) {
+        let newRecordRef = bookingDb.document()
         newRecordRef.setData(newRecord.dictionary) { (error) in
             if let error = error {
                 os_log("Error adding book record",
@@ -33,7 +36,7 @@ class FBBookingStorage: CustomerBookingStorage {
                        error.localizedDescription)
                 return
             }
-            completion(newRecordRef.documentID)
+            completion()
         }
     }
 
@@ -47,30 +50,15 @@ class FBBookingStorage: CustomerBookingStorage {
                            error.localizedDescription)
                     return
                 }
-                completion()
-        }
-    }
-
-    func deleteBookRecord(record: BookRecord, completion: @escaping () -> Void) {
-        let docRef = getBookRecordDocument(record: record)
-        docRef.delete { (error) in
-                if let error = error {
-                    os_log("Error deleting book record",
-                           log: Log.deleteBookRecordError,
-                           type: .error,
-                           error.localizedDescription)
-                    return
-                }
-                completion()
+            completion()
         }
     }
 
     func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        db.collection(Constants.bookingsDirectory)
-            .whereField("customer", isEqualTo: customer.uid)
-            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
+        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
@@ -92,9 +80,8 @@ class FBBookingStorage: CustomerBookingStorage {
     func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
         let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
         let startTimestamp = Timestamp(date: startTime)
-        db.collection(Constants.bookingsDirectory)
-            .whereField("customer", isEqualTo: customer.uid)
-            .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
+        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
             .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     os_log("Error getting documents",
@@ -116,8 +103,9 @@ class FBBookingStorage: CustomerBookingStorage {
     private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
 
         guard let data = document.data(),
-            let rid = data["restaurant"] as? String else {
-                os_log("Error getting rid", log: Log.ridError, type: .error)
+            let rid = data[Constants.restaurantKey] as? String else {
+                os_log("Error getting rid from Book Record document.",
+                       log: Log.ridError, type: .error)
             return
         }
 
@@ -130,6 +118,8 @@ class FBBookingStorage: CustomerBookingStorage {
                                                customer: customer,
                                                restaurant: restaurant,
                                                id: bid) else {
+                                                   os_log("Couldn't create book record. Likely a document is deleted but it's not supposed to.",
+                                                          log: Log.createBookRecordError, type: .info)
                                                 return
                     }
                     completion(rec)
@@ -137,40 +127,44 @@ class FBBookingStorage: CustomerBookingStorage {
         }, errorHandler: nil)
     }
 
-    func registerListener(for record: BookRecord) {
-        // remove listener (if any)
-        removeListener(for: record)
+    func registerListener(for customer: Customer) {
+        removeListener()
 
         //add listener
-        let docRef = getBookRecordDocument(record: record)
-        let listener = docRef.addSnapshotListener { (snapshot, err) in
-            guard let doc = snapshot, err == nil else {
+        listener = bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+            .addSnapshotListener { (snapshot, err) in
+            guard let snapshot = snapshot, err == nil else {
                 os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
                 return
             }
 
-            guard let bookRecordData = doc.data() else {
-                self.logicDelegate?.didDeleteBookRecord(record)
-                return
+                snapshot.documents.forEach {
+                    self.makeBookRecord(document: $0) { record in
+                        self.delegateWork { $0.didUpdateBookRecord(record) }
+                    }
+                }
             }
-
-            guard let newRecord = BookRecord(dictionary: bookRecordData,
-                                             customer: record.customer,
-                                             restaurant: record.restaurant,
-                                             id: record.id) else {
-                                                os_log("Error creating book record",
-                                                       log: Log.createBookRecordError,
-                                                       type: .error,
-                                                       String(describing: err))
-                                                return
-            }
-            self.logicDelegate?.didUpdateBookRecord(newRecord)
-        }
-        listenerMap[record] = listener
     }
 
-    func removeListener(for record: BookRecord) {
-        listenerMap[record]?.remove()
-        listenerMap[record] = nil
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+
+    func registerDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.add(del)
+    }
+
+    func unregisterDelegate(_ del: BookingStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (BookingStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? BookingStorageSyncDelegate else {
+                continue
+            }
+            doWork(delegate)
+        }
     }
 }

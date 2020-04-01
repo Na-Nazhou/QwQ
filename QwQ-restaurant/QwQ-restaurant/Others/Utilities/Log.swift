@@ -38,5 +38,6 @@ struct Log {
     static let activeBookRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
     static let bookRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
     static let ridError = OSLog(subsystem: subsystem, category: "FBError")
+    static let cidError = OSLog(subsystem: subsystem, category: "FBError")
     static let createBookRecordError = OSLog(subsystem: subsystem, category: "FBError")
 }

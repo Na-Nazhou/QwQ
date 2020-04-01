@@ -24,6 +24,8 @@ struct Log {
     static let updateBookRecord = OSLog(subsystem: subsystem, category: "updateRecord")
     static let updateQueueRecord = OSLog(subsystem: subsystem, category: "updateRecord")
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
+    static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
+    static let loadActivity = OSLog(subsystem: subsystem, category: "loadActivity")
     
     // MARK: FBError
     static let addQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
@@ -39,4 +41,5 @@ struct Log {
     static let bookRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
     static let ridError = OSLog(subsystem: subsystem, category: "FBError")
     static let createBookRecordError = OSLog(subsystem: subsystem, category: "FBError")
+    static let createRestaurantError = OSLog(subsystem: subsystem, category: "FBError")
 }

@@ -14,6 +14,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     var spinner: UIView?
 
+    let queueLogicManager = CustomerQueueLogicManager()
+    let bookingLogicManager = CustomerBookingLogicManager()
+
     var records: [Record] {
         if isActive {
             return activeRecords
@@ -30,16 +33,14 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     // TODO: refactor
     var activeRecords: [Record] {
-        var records: [Record] = CustomerBookingLogicManager.shared().activeBookRecords
-        if let activeQueueRecord = CustomerQueueLogicManager.shared().currentQueueRecord {
-            records.append(activeQueueRecord)
-        }
+        var records: [Record] = bookingLogicManager.activeBookRecords
+        records += queueLogicManager.currentQueueRecords
         return records
     }
 
     var historyRecords: [Record] {
-        let bookRecords = CustomerBookingLogicManager.shared().pastBookRecords
-        let queueRecords = CustomerQueueLogicManager.shared().pastQueueRecords
+        let bookRecords = bookingLogicManager.pastBookRecords
+        let queueRecords = queueLogicManager.pastQueueRecords
         return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
@@ -67,8 +68,8 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.dataSource = self
         activitiesCollectionView.delegate = self
 
-        CustomerQueueLogicManager.shared().activitiesDelegate = self
-        CustomerBookingLogicManager.shared().activitiesDelegate = self
+        queueLogicManager.activitiesDelegate = self
+        bookingLogicManager.activitiesDelegate = self
 
         setUpSegmentedControl()
     }
@@ -100,11 +101,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
 
-    func didDeleteRecord() {
+    func didWithdrawRecord() {
         removeSpinner(spinner)
         showMessage(
             title: Constants.successTitle,
-            message: Constants.recordDeleteSuccessMessage,
+            message: Constants.recordWithdrawSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
                 self.navigationController?.popViewController(animated: true)
@@ -128,6 +129,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let queueRecord = sender as? QueueRecord,
                 let editQueueViewController = segue.destination as? EditQueueViewController {
                     editQueueViewController.record = queueRecord
+                editQueueViewController.queueLogicManager = queueLogicManager
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
@@ -166,7 +168,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                CustomerQueueLogicManager.shared().deleteQueueRecord(queueRecord)
+                self.queueLogicManager.withdrawQueueRecord(queueRecord)
             }
         }
 
@@ -178,7 +180,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                CustomerBookingLogicManager.shared().deleteBookRecord(bookRecord)
+                self.bookingLogicManager.withdrawBookRecord(bookRecord)
             }
         }
 
