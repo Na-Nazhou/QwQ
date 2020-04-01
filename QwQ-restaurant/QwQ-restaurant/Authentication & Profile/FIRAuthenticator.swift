@@ -8,8 +8,8 @@
 import FirebaseAuth
 import FirebaseFirestore
 
-class FBAuthenticator: Authenticator {
-    typealias Profile = FBProfileStorage
+class FIRAuthenticator: Authenticator {
+    typealias Profile = FIRProfileStorage
     
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
@@ -29,9 +29,9 @@ class FBAuthenticator: Authenticator {
                                                    signupDetails: signupDetails,
                                                    authDetails: authDetails,
                                                    errorHandler: errorHandler)
-            FBAuthenticator.login(authDetails: authDetails,
-                                  completion: completion,
-                                  errorHandler: errorHandler)
+            FIRAuthenticator.login(authDetails: authDetails,
+                                   completion: completion,
+                                   errorHandler: errorHandler)
         }
     }
     
@@ -65,11 +65,41 @@ class FBAuthenticator: Authenticator {
         })
     }
 
+    static func sendVerificationEmail(errorHandler: @escaping (Error) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            errorHandler(AuthError.NotSignedIn)
+            return
+        }
+        user.sendEmailVerification { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        }
+    }
+
+    static func checkIfEmailVerified() -> Bool {
+        guard let user = Auth.auth().currentUser else {
+            return false
+        }
+        return user.isEmailVerified
+    }
+
     static func checkIfAlreadyLoggedIn() -> Bool {
         Auth.auth().currentUser != nil
     }
     
     static func getUIDOfCurrentUser() -> String? {
         Auth.auth().currentUser?.uid
+    }
+
+    static func resetPassword(for email: String,
+                              completion: @escaping () -> Void,
+                              errorHandler: @escaping (Error) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+            completion()
+        }
     }
 }

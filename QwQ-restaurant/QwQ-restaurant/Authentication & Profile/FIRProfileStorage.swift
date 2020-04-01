@@ -10,8 +10,8 @@ import FirebaseStorage
 import FirebaseUI
 import SDWebImage
 
-class FBProfileStorage: ProfileStorage {
-    typealias Auth = FBAuthenticator
+class FIRProfileStorage: ProfileStorage {
+    typealias Auth = FIRAuthenticator
 
     static let dbRef = Firestore.firestore().collection("restaurants")
     static let storageRef = Storage.storage().reference().child("profile-pics")
