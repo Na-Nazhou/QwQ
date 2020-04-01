@@ -9,7 +9,9 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
     private convenience init(restaurant: Restaurant) {
-        self.init(restaurant: restaurant, queueStorage: FIRQueueStorage.shared, bookingStorage: FIRBookingStorage.shared)
+        self.init(restaurant: restaurant,
+                  queueStorage: FIRQueueStorage.shared,
+                  bookingStorage: FIRBookingStorage.shared)
     }
 
     private init(restaurant: Restaurant,
