@@ -78,7 +78,7 @@ struct Constants {
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let restaurantCellHeight = CGFloat(270)
     static let selectedRestaurantColor = UIColor(red: 239 / 255, green: 240 / 255, blue: 241 / 255, alpha: 1)
-    static let deselectRestaurantColor = UIColor.clear
+    static let deselectedRestaurantColor = UIColor.clear
     
     // MARK: Popover content settings
     static let popoverContentControllerIdentifier = "PopoverContentController"

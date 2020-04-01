@@ -52,13 +52,19 @@ class SearchViewController: UIViewController, SearchDelegate {
             queueButton.setTitle(Constants.queueButtonTitle, for: .normal)
             bookButton.setTitle(Constants.bookButtonTitle, for: .normal)
             selectButton.setTitle(Constants.selectOneText, for: .normal)
+            
             selectionState = .selectAll
+            
             restaurantCollectionView.allowsMultipleSelection = true
         } else {
             queueButton.setTitle("", for: .normal)
             bookButton.setTitle("", for: .normal)
             selectButton.setTitle(Constants.selectAllText, for: .normal)
+            
             selectionState = .selectOne
+            selectedRestaurants = []
+            
+            restaurantCollectionView.reloadData()
             restaurantCollectionView.allowsMultipleSelection = false
         }
     }
@@ -117,7 +123,7 @@ class SearchViewController: UIViewController, SearchDelegate {
         if segue.identifier == Constants.restaurantSelectedSegue {
             if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
                 let row = indexPaths[0].item
-                RestaurantLogicManager.shared().currentRestaurant = restaurants[row]
+                RestaurantLogicManager.shared().currentRestaurant = filtered[row]
             }
         }
         
@@ -133,8 +139,10 @@ extension SearchViewController: PopoverContentControllerDelegate {
         switch name {
         case Constants.sortCriteria[0]:
             handleSortByName()
+            restaurantCollectionView.reloadData()
         case Constants.sortCriteria[1]:
             handleSortByLocation()
+            restaurantCollectionView.reloadData()
         default:
             break
         }
@@ -217,8 +225,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         }
         
-        let restaurant = filtered[indexPath.row]
+        let restaurant = filtered[indexPath.item]
         
+        restaurantCell.backgroundColor = Constants.deselectedRestaurantColor
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
             if !restaurant.isQueueOpen {
@@ -245,7 +254,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if cell?.isSelected == true {
                 selectedRestaurants.append(filtered[indexPath.item])
                 cell?.backgroundColor = Constants.selectedRestaurantColor
-                print(selectedRestaurants)
             }
         } else if selectionState == .selectOne {
             performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
@@ -258,8 +266,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         selectedRestaurants = selectedRestaurants.filter {
             $0 != restaurantToBeRemoved
         }
-        cell?.backgroundColor = Constants.deselectRestaurantColor
-        print(selectedRestaurants)
+        cell?.backgroundColor = Constants.deselectedRestaurantColor
     }
 }
 
@@ -267,7 +274,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+
     CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
   }
 }
