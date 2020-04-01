@@ -77,29 +77,29 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="794" height="150"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PuD-ME-Kjc">
-                                                                            <rect key="frame" x="15" y="11" width="764" height="128"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PuD-ME-Kjc">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="794" height="150"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="15/02/2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJN-DX-Vv5">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="397" height="150"/>
                                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v5W-ad-9u5">
-                                                                                    <rect key="frame" x="382" y="0.0" width="382" height="128"/>
+                                                                                    <rect key="frame" x="397" y="0.0" width="397" height="150"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-tW-IYZ">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="74"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="397" height="96"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average restaurant waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-uS-ZNE">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="74"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="193.5" height="96"/>
                                                                                                     <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuE-Cj-jrB">
-                                                                                                    <rect key="frame" x="206" y="0.0" width="176" height="74"/>
+                                                                                                    <rect key="frame" x="213.5" y="0.0" width="183.5" height="96"/>
                                                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -107,16 +107,16 @@
                                                                                             </subviews>
                                                                                         </stackView>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Dq3-VV-51D">
-                                                                                            <rect key="frame" x="0.0" y="74" width="382" height="54"/>
+                                                                                            <rect key="frame" x="0.0" y="96" width="397" height="54"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Average customer waiting time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW6-DZ-FlH">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="191" height="54"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="198.5" height="54"/>
                                                                                                     <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="23"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bE-Qv-4yT">
-                                                                                                    <rect key="frame" x="191" y="0.0" width="191" height="54"/>
+                                                                                                    <rect key="frame" x="198.5" y="0.0" width="198.5" height="54"/>
                                                                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -126,17 +126,11 @@
                                                                                     </subviews>
                                                                                 </stackView>
                                                                             </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="161" id="Whz-ul-b5g"/>
-                                                                                <constraint firstAttribute="height" constant="50" id="aT2-85-I58"/>
-                                                                            </constraints>
                                                                         </stackView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottomMargin" secondItem="PuD-ME-Kjc" secondAttribute="bottom" id="HYc-sC-TDh"/>
-                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="top" secondItem="cWi-ni-6J3" secondAttribute="topMargin" id="rJ8-Ul-Da2"/>
-                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="leading" secondItem="cWi-ni-6J3" secondAttribute="leadingMargin" id="svJ-8M-9YG"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="PuD-ME-Kjc" secondAttribute="trailing" id="xMc-H8-dH0"/>
+                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="height" secondItem="cWi-ni-6J3" secondAttribute="height" id="QrW-N8-x2f"/>
+                                                                        <constraint firstItem="PuD-ME-Kjc" firstAttribute="width" secondItem="cWi-ni-6J3" secondAttribute="width" id="Ue1-rq-6mJ"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
                                                                 <connections>
@@ -151,6 +145,7 @@
                                                 <constraints>
                                                     <constraint firstItem="gz3-en-IAF" firstAttribute="height" secondItem="C07-My-DLE" secondAttribute="height" id="NN3-0w-LEE"/>
                                                     <constraint firstItem="ecw-VN-LnU" firstAttribute="height" secondItem="o0B-6z-6Fi" secondAttribute="height" id="cbu-qH-GZI"/>
+                                                    <constraint firstAttribute="bottom" secondItem="x5d-Xv-RqK" secondAttribute="bottom" id="zpu-Xk-FWX"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -233,16 +228,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="255"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="j2a-IA-kfo">
-                                <rect key="frame" x="235.5" y="78" width="363" height="99"/>
+                                <rect key="frame" x="250" y="76.5" width="334.5" height="102"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATISTICS DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PR-JX-Zmi">
-                                        <rect key="frame" x="0.0" y="0.0" width="363" height="39.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334.5" height="41"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/03/2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIX-b2-KjO">
-                                        <rect key="frame" x="114.5" y="59.5" width="134" height="39.5"/>
+                                        <rect key="frame" x="103" y="61" width="128" height="41"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -272,7 +267,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvv-wA-beB">
-                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="63" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -289,7 +284,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hps-34-CDq">
-                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="63" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -306,7 +301,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StK-Rg-f89">
-                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -323,7 +318,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVR-wl-6LD">
-                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -340,7 +335,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grv-09-YWe">
-                                                <rect key="frame" x="407" y="64" width="387" height="33.5"/>
+                                                <rect key="frame" x="407" y="63.5" width="387" height="35"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

@@ -247,7 +247,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="780"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE DETAILS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54C-SX-OcD">
-                                <rect key="frame" x="272" y="39" width="290" height="41"/>
+                                <rect key="frame" x="260" y="40.5" width="314" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -538,7 +538,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="425"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sJP-Jk-9Ar">
-                                <rect key="frame" x="83.5" y="162" width="667" height="101"/>
+                                <rect key="frame" x="83.5" y="142.5" width="667" height="140"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Staff Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEb-aK-870">
                                         <rect key="frame" x="275.5" y="0.0" width="116" height="35"/>
@@ -553,7 +553,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="46"/>
                                                 <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfz-lc-XHX">
                                                 <rect key="frame" x="420" y="0.0" width="110" height="46"/>
@@ -567,6 +567,12 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Af-KY-GLY">
+                                        <rect key="frame" x="266.5" y="121" width="134.5" height="19"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zP0-T6-9go" firstAttribute="width" secondItem="sJP-Jk-9Ar" secondAttribute="width" multiplier="0.6" id="PSw-vZ-m0f"/>
