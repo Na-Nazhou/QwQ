@@ -9,7 +9,7 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
     private convenience init(restaurant: Restaurant) {
-        self.init(restaurant: restaurant, queueStorage: FBQueueStorage.shared, bookingStorage: FBBookingStorage.shared)
+        self.init(restaurant: restaurant, queueStorage: FIRQueueStorage.shared, bookingStorage: FIRBookingStorage.shared)
     }
 
     private init(restaurant: Restaurant, queueStorage: RestaurantQueueStorage, bookingStorage: RestaurantBookingStorage) {
@@ -174,6 +174,10 @@ extension RestaurantRecordLogicManager {
         }
 
         if record.isHistoryRecord {
+            if currentList.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+
             if waitingList.remove(record) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }

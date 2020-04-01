@@ -247,11 +247,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 return
             }
 
-
             if !self.queueLogicManager.canQueue(for: restaurant) {
                 self.showMessage(title: Constants.errorTitle,
-                            message: Constants.alreadyQueuedRestaurantMessage,
-                            buttonText: Constants.okayTitle)
+                                 message: Constants.alreadyQueuedRestaurantMessage,
+                                 buttonText: Constants.okayTitle)
                 return
             }
 

@@ -52,7 +52,7 @@ class AddStaffViewController: UIViewController {
 
 extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return staffEmails.count
+        staffEmails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

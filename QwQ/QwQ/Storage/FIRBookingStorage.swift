@@ -2,9 +2,9 @@ import FirebaseFirestore
 import Foundation
 import os.log
 
-class FBBookingStorage: CustomerBookingStorage {
+class FIRBookingStorage: CustomerBookingStorage {
     // MARK: Storage as singleton
-    static let shared = FBBookingStorage()
+    static let shared = FIRBookingStorage()
 
     private init() {}
 

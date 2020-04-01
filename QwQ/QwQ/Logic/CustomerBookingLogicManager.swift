@@ -23,7 +23,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
-                  bookingStorage: FBBookingStorage.shared)
+                  bookingStorage: FIRBookingStorage.shared)
     }
 
     // Constructor to provide flexibility for testing.
