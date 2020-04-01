@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="79M-BP-VQ2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="79M-BP-VQ2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -287,7 +287,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="oMO-Fa-FG7" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
-                                <rect key="frame" x="145" y="154" width="124" height="124"/>
+                                <rect key="frame" x="145" y="121.5" width="124" height="124.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oMO-Fa-FG7" secondAttribute="height" multiplier="8:8" id="6lr-lR-QEe"/>
                                 </constraints>
@@ -308,7 +308,6 @@
                             <constraint firstItem="oMO-Fa-FG7" firstAttribute="width" secondItem="oMO-Fa-FG7" secondAttribute="height" multiplier="8:8" id="2rN-SY-GmF"/>
                             <constraint firstItem="oMO-Fa-FG7" firstAttribute="centerX" secondItem="no3-1h-BWi" secondAttribute="centerX" id="5dU-XZ-Znr"/>
                             <constraint firstItem="E3a-Bj-mhH" firstAttribute="bottom" secondItem="Xe5-rj-t0D" secondAttribute="bottom" id="9wj-gt-9av"/>
-                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="top" secondItem="54C-SX-OcD" secondAttribute="bottom" constant="63" id="EXY-mz-pIT"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="leading" secondItem="E3a-Bj-mhH" secondAttribute="leading" id="GeA-Gs-ux3"/>
                             <constraint firstItem="Xe5-rj-t0D" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.08" id="HXb-4i-hwi"/>
                             <constraint firstItem="oMO-Fa-FG7" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.3" id="KEa-MR-o7X"/>
@@ -321,6 +320,7 @@
                             <constraint firstItem="10G-MD-hTZ" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.08" id="bCa-Lq-0Fy"/>
                             <constraint firstItem="FtT-b8-3JZ" firstAttribute="width" secondItem="E3a-Bj-mhH" secondAttribute="width" multiplier="0.5" id="c9s-dV-rNd"/>
                             <constraint firstItem="wg1-mI-11x" firstAttribute="height" secondItem="E3a-Bj-mhH" secondAttribute="height" multiplier="0.4" id="gL0-lx-c2Q"/>
+                            <constraint firstItem="oMO-Fa-FG7" firstAttribute="centerY" secondItem="wg1-mI-11x" secondAttribute="centerY" constant="30" id="hS1-s9-Av2"/>
                             <constraint firstItem="wg1-mI-11x" firstAttribute="trailing" secondItem="E3a-Bj-mhH" secondAttribute="trailing" id="mQq-vx-OU4"/>
                             <constraint firstItem="kCI-SM-wzl" firstAttribute="top" secondItem="wg1-mI-11x" secondAttribute="bottom" constant="15" id="nZO-ai-wAs"/>
                             <constraint firstItem="54C-SX-OcD" firstAttribute="centerX" secondItem="wg1-mI-11x" secondAttribute="centerX" id="suW-JX-UPY"/>
@@ -365,9 +365,9 @@
         <image name="back-icon" width="1060" height="1060"/>
         <image name="default-profile-pic" width="435" height="418"/>
         <image name="gradient-background" width="2048" height="2732"/>
-        <image name="person.circle" catalog="system" width="64" height="60"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="profile-background" width="2037" height="1401"/>
-        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
-        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
     </resources>
 </document>

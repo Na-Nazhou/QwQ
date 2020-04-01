@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     
     private let queueLogicManager = CustomerQueueLogicManager()
     private let restaurantLogicManager = RestaurantLogicManager()
-
+    
     private var restaurants: [Restaurant] {
         restaurantLogicManager.restaurants
     }
@@ -106,7 +106,7 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         restaurantCollectionView.delegate = self
         restaurantCollectionView.dataSource = self
-
+        
         restaurantLogicManager.searchDelegate = self
     }
     
@@ -117,7 +117,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     func restaurantCollectionDidLoadNewRestaurant() {
         restaurantCollectionView.reloadData()
     }
-
+    
     func restaurantCollectionDidRemoveRestaurant() {
         restaurantCollectionView.reloadData()
     }
@@ -126,9 +126,9 @@ class SearchViewController: UIViewController, SearchDelegate {
         if segue.identifier == Constants.restaurantSelectedSegue {
             if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
                 let row = indexPaths[0].item
-                restaurantLogicManager.currentRestaurant = restaurants[row]
+                restaurantLogicManager.currentRestaurant = filtered[row]
             }
-
+            
             guard let rVC = segue.destination as? RestaurantViewController else {
                 assert(false, "Wrong way of doing this")
                 return
@@ -142,7 +142,7 @@ class SearchViewController: UIViewController, SearchDelegate {
             if restaurantLogicManager.currentRestaurant != restaurant {
                 restaurantLogicManager.currentRestaurant = restaurant
             } // otherwise it is the most updated copy of restaurant
-
+            
             guard let editVC = segue.destination as? EditQueueViewController else {
                 assert(false, "Wrong way of doing this")
                 return
@@ -255,15 +255,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                  buttonText: Constants.okayTitle)
                 return
             }
-
-
+            
             if !self.queueLogicManager.canQueue(for: restaurant) {
                 self.showMessage(title: Constants.errorTitle,
-                            message: Constants.alreadyQueuedRestaurantMessage,
-                            buttonText: Constants.okayTitle)
+                                 message: Constants.alreadyQueuedRestaurantMessage,
+                                 buttonText: Constants.okayTitle)
                 return
             }
-
+            
             self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
         }
         return restaurantCell
@@ -292,10 +291,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-    CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
-  }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
+    }
 }
