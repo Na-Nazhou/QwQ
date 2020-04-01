@@ -12,7 +12,9 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
         self.init(restaurant: restaurant, queueStorage: FIRQueueStorage.shared, bookingStorage: FIRBookingStorage.shared)
     }
 
-    private init(restaurant: Restaurant, queueStorage: RestaurantQueueStorage, bookingStorage: RestaurantBookingStorage) {
+    private init(restaurant: Restaurant,
+                 queueStorage: RestaurantQueueStorage,
+                 bookingStorage: RestaurantBookingStorage) {
         self.restaurant = restaurant
 
         self.queueStorage = queueStorage
