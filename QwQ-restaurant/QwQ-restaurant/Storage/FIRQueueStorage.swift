@@ -8,9 +8,9 @@
 import FirebaseFirestore
 import os.log
 
-class FBQueueStorage: RestaurantQueueStorage {
+class FIRQueueStorage: RestaurantQueueStorage {
     // MARK: Storage as singleton
-    static let shared = FBQueueStorage()
+    static let shared = FIRQueueStorage()
 
     private init() {}
 
@@ -63,7 +63,8 @@ class FBQueueStorage: RestaurantQueueStorage {
     }
 
     private func registerListenerForQueue(of restaurant: Restaurant) {
-        queueListener = queueDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
+        queueListener = queueDb
+            .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .addSnapshotListener { (queueSnapshot, err) in
                 if let err = err {
                     print("Error fetching documents: \(err)")

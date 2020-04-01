@@ -1,9 +1,9 @@
 import FirebaseFirestore
 import os.log
 
-class FBRestaurantStorage: RestaurantStorage {
+class FIRRestaurantStorage: RestaurantStorage {
     // MARK: Storage as singleton
-    static let shared = FBRestaurantStorage()
+    static let shared = FIRRestaurantStorage()
 
     private init() {
         attachListenerOnRestaurants()

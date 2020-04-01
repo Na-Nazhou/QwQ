@@ -15,10 +15,10 @@ class RestaurantLogicManager: RestaurantLogic {
     }
 
     convenience init() {
-        self.init(storage: FBRestaurantStorage.shared)
+        self.init(storage: FIRRestaurantStorage.shared)
     }
 
-    init(storage: FBRestaurantStorage) {
+    init(storage: FIRRestaurantStorage) {
         self.restaurantStorage = storage
 
         self.restaurantStorage.registerDelegate(self)
