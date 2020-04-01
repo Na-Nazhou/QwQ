@@ -89,8 +89,10 @@ class SearchViewController: UIViewController, SearchDelegate {
             popoverPresentationController.sourceRect = CGRect(
                 x: button!.center.x - Constants.popoverContentControllerOffset,
                 y: buttonFrame.height,
-                width: 80.0,
-                height: 80.0)
+                width: Constants.popoverWidth,
+                height: Constants.popoverHeight
+            )
+            popoverContentController?.preferredContentSize = CGSize(width: 400, height: 400)
             popoverPresentationController.delegate = self
             popoverContentController?.delegate = self
             if let popoverController = popoverContentController {
@@ -287,14 +289,5 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             $0 != restaurantToBeRemoved
         }
         cell?.backgroundColor = Constants.deselectedRestaurantColor
-    }
-}
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        CGSize(width: self.view.frame.width * 0.9, height: Constants.restaurantCellHeight)
     }
 }

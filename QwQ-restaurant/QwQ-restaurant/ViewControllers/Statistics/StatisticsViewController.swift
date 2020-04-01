@@ -36,14 +36,14 @@ class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        statistics.count
+        return statistics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = statisticsTableView
             .dequeueReusableCell(withIdentifier: Constants.statisticsReuseIdentifier,
                                  for: indexPath)
-        
+    
         guard let statisticsCell = cell as? StatisticsCell else {
             return cell
         }
@@ -51,7 +51,7 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
         let statisticsDetails = statistics[indexPath.row]
         
         statisticsCell.setUpViews(statisticsDetail: statisticsDetails)
-        
+    
         return statisticsCell
     }
     

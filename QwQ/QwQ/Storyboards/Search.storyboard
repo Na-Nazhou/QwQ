@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -117,24 +117,24 @@
                                 <rect key="frame" x="0.0" y="227.5" width="414" height="585.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VJt-Vb-yu0">
-                                    <size key="itemSize" width="400" height="193"/>
+                                    <size key="itemSize" width="372" height="159"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="restaurantCell" id="lhN-ab-ua4" customClass="RestaurantCell" customModule="QwQ" customModuleProvider="target">
-                                        <rect key="frame" x="47" y="50" width="320" height="193"/>
+                                        <rect key="frame" x="21" y="50" width="372" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="372" height="159"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-zS-MIV">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="173.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="342" height="159"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-f4-NMI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="58"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -143,7 +143,7 @@
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Ic-Js3">
-                                                            <rect key="frame" x="0.0" y="58" width="290" height="58"/>
+                                                            <rect key="frame" x="0.0" y="53" width="342" height="53"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
                                                             <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
                                                             </variation>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7v-Q3-PNf">
-                                                            <rect key="frame" x="0.0" y="116" width="290" height="57.5"/>
+                                                            <rect key="frame" x="0.0" y="106" width="342" height="53"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                             <state key="normal" title="QUEUE">
                                                                 <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -170,12 +170,12 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="sL4-zS-MIV" secondAttribute="trailing" constant="15" id="Gfx-Vs-QWq"/>
                                                 <constraint firstItem="sL4-zS-MIV" firstAttribute="centerX" secondItem="d5m-QS-HYA" secondAttribute="centerX" id="IS2-Ck-JvG"/>
-                                                <constraint firstItem="sL4-zS-MIV" firstAttribute="height" secondItem="d5m-QS-HYA" secondAttribute="height" multiplier="0.9" id="fW3-0l-FEK"/>
+                                                <constraint firstItem="sL4-zS-MIV" firstAttribute="height" secondItem="d5m-QS-HYA" secondAttribute="height" id="fW3-0l-FEK"/>
                                                 <constraint firstItem="sL4-zS-MIV" firstAttribute="top" secondItem="d5m-QS-HYA" secondAttribute="top" id="nin-jp-GXX"/>
                                                 <constraint firstItem="sL4-zS-MIV" firstAttribute="leading" secondItem="d5m-QS-HYA" secondAttribute="leading" constant="15" id="uCb-Rg-O0V"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="320" height="193"/>
+                                        <size key="customSize" width="372" height="159"/>
                                         <connections>
                                             <outlet property="locationLabel" destination="fd7-Ic-Js3" id="ueo-Ds-gg8"/>
                                             <outlet property="nameLabel" destination="ez4-f4-NMI" id="RCM-aw-wpt"/>
@@ -236,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZd-hd-jF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3697" y="-90"/>
+            <point key="canvasLocation" x="3695.652173913044" y="-90.401785714285708"/>
         </scene>
         <!--EditQueue-->
         <scene sceneID="EIL-ji-Hen">
@@ -532,12 +532,12 @@ Pancake</string>
         <!--Popover Content Controller-->
         <scene sceneID="07l-Y4-BhH">
             <objects>
-                <viewController storyboardIdentifier="PopoverContentController" id="3pq-RI-oLx" customClass="PopoverContentController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopoverContentController" modalPresentationStyle="formSheet" id="3pq-RI-oLx" customClass="PopoverContentController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3gw-cZ-rrP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CuJ-Iv-zNS">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CuJ-Iv-zNS" customClass="PopoverTableView" customModule="QwQ" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
@@ -548,13 +548,15 @@ Pancake</string>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="3ep-tK-ggv" firstAttribute="bottom" secondItem="CuJ-Iv-zNS" secondAttribute="bottom" id="D1c-ah-1Nh"/>
                             <constraint firstItem="CuJ-Iv-zNS" firstAttribute="leading" secondItem="3ep-tK-ggv" secondAttribute="leading" id="Pse-HR-psC"/>
                             <constraint firstItem="3ep-tK-ggv" firstAttribute="trailing" secondItem="CuJ-Iv-zNS" secondAttribute="trailing" id="rFn-MT-ImO"/>
-                            <constraint firstItem="CuJ-Iv-zNS" firstAttribute="top" secondItem="3ep-tK-ggv" secondAttribute="top" id="zLh-nI-ENu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3ep-tK-ggv"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="400"/>
+                    <connections>
+                        <outlet property="tableView" destination="CuJ-Iv-zNS" id="Ufm-fs-FYF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B4O-sD-MY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -580,13 +582,13 @@ Pancake</string>
             <point key="canvasLocation" x="2698.125" y="-87.676056338028175"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1pS-0G-SKh"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
         <image name="food-background" width="2048" height="871"/>
         <image name="gradient-background" width="2048" height="2732"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="1pS-0G-SKh"/>
-    </inferredMetricsTieBreakers>
 </document>

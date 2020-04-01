@@ -119,7 +119,8 @@ class FIRBookingStorage: CustomerBookingStorage {
                                                restaurant: restaurant,
                                                id: bid) else {
                                                    os_log("Couldn't create book record. Likely a document is deleted but it's not supposed to.",
-                                                          log: Log.createBookRecordError, type: .info)
+                                                          log: Log.createBookRecordError,
+                                                          type: .info)
                                                 return
                     }
                     completion(rec)
