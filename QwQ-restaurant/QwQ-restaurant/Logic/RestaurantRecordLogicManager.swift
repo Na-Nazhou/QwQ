@@ -174,6 +174,10 @@ extension RestaurantRecordLogicManager {
         }
 
         if record.isHistoryRecord {
+            if currentList.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+
             if waitingList.remove(record) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
