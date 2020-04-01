@@ -1,5 +1,5 @@
 //
-//  FBRestaurantStorage.swift
+//  FIRCustomerStorage.swift
 //  QwQ-restaurant
 //
 //  Created by Daniel Wong on 19/3/20.
@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FBCustomerInfoStorage: CustomerInfoStorage {
+class FIRCustomerInfoStorage: CustomerInfoStorage {
     static func getCustomerFromUID(uid: String,
                                    completion: @escaping (Customer) -> Void,
                                    errorHandler: ((Error) -> Void)?) {

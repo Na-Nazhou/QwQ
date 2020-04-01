@@ -9,8 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    typealias Profile = FBProfileStorage
-    typealias Auth = FBAuthenticator
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
     
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
@@ -70,6 +70,14 @@ class LoginViewController: UIViewController {
     }
     
     private func authCompleted() {
+        /* Email verification code - to be enabled only in production application
+        guard Auth.checkIfEmailVerified() else {
+            Auth.sendVerificationEmail(errorHandler: handleError(error:))
+            performSegue(withIdentifier: Constants.loginEmailNotVerifiedSegue, sender: self)
+            removeSpinner(spinner)
+            return
+        }
+        */
         Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                   errorHandler: handleError(error:))
     }
