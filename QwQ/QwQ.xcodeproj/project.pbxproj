@@ -11,9 +11,11 @@
 		5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */; };
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
-		5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD062418E375002B88E3 /* GoogleService-Info.plist */; };
 		5C11FD0C2418E63D002B88E3 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0B2418E63D002B88E3 /* Authenticator.swift */; };
 		5C11FD0E2418E652002B88E3 /* FIRAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11FD0D2418E652002B88E3 /* FIRAuthenticator.swift */; };
+		5C18EC282435E26100EAE938 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C18EC272435E26100EAE938 /* GoogleService-Info.plist */; };
+		5C18EC292435E26100EAE938 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C18EC272435E26100EAE938 /* GoogleService-Info.plist */; };
+		5C18EC2A2435E26100EAE938 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C18EC272435E26100EAE938 /* GoogleService-Info.plist */; };
 		5C1A419724236D1C00D1140B /* RestaurantInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A419624236D1C00D1140B /* RestaurantInfoStorage.swift */; };
 		5C1A419924236D2800D1140B /* FIRRestaurantInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A419824236D2800D1140B /* FIRRestaurantInfoStorage.swift */; };
 		5C25BEAD2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25BEAC2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift */; };
@@ -131,11 +133,11 @@
 		5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
-		5C11FD062418E375002B88E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C11FD082418E503002B88E3 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
 		5C11FD0B2418E63D002B88E3 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		5C11FD0D2418E652002B88E3 /* FIRAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRAuthenticator.swift; sourceTree = "<group>"; };
 		5C161100241A2D1E00602245 /* QwQ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QwQ.entitlements; sourceTree = "<group>"; };
+		5C18EC272435E26100EAE938 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C1A419624236D1C00D1140B /* RestaurantInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoStorage.swift; sourceTree = "<group>"; };
 		5C1A419824236D2800D1140B /* FIRRestaurantInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRRestaurantInfoStorage.swift; sourceTree = "<group>"; };
 		5C25BEAC2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+checkCacheThenSetImage.swift"; sourceTree = "<group>"; };
@@ -472,7 +474,7 @@
 				7E72B14D241B8C7D00C1EE72 /* Main.storyboard */,
 				7EC7E6582418B6C900C2F9BB /* LaunchScreen.storyboard */,
 				7EC7E65B2418B6C900C2F9BB /* Info.plist */,
-				5C11FD062418E375002B88E3 /* GoogleService-Info.plist */,
+				5C18EC272435E26100EAE938 /* GoogleService-Info.plist */,
 			);
 			path = QwQ;
 			sourceTree = "<group>";
@@ -721,13 +723,13 @@
 				7E7F7DD12422659F00A080E5 /* Search.storyboard in Resources */,
 				7EC7E65A2418B6C900C2F9BB /* LaunchScreen.storyboard in Resources */,
 				7EC7E68C241B2FC800C2F9BB /* Profile.storyboard in Resources */,
+				5C18EC282435E26100EAE938 /* GoogleService-Info.plist in Resources */,
 				7EC7E6572418B6C900C2F9BB /* Assets.xcassets in Resources */,
 				7E56AF9B2421F513002E9BAC /* Activities.storyboard in Resources */,
 				5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */,
 				7E72B14E241B8C7D00C1EE72 /* Main.storyboard in Resources */,
 				5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */,
 				7EFB6972242213000073E535 /* Queue.storyboard in Resources */,
-				5C11FD072418E375002B88E3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +737,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C18EC292435E26100EAE938 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +745,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C18EC2A2435E26100EAE938 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,7 +1127,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cs3217.qwq.QwQ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cs3217.qwq.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1145,7 +1149,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cs3217.qwq.QwQ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cs3217.qwq.customer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
