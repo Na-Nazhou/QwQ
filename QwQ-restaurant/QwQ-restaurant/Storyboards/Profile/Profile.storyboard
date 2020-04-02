@@ -218,22 +218,22 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zIB-8k-qXX">
                                 <rect key="frame" x="514.5" y="30" width="289.5" height="21"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwe-M6-rc9">
-                                        <rect key="frame" x="0.0" y="0.5" width="61.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title=" Edit" image="square.and.pencil" catalog="system"/>
-                                        <connections>
-                                            <segue destination="uvb-Aq-pGb" kind="show" id="Rrh-8b-VqU"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-TX-cFF">
-                                        <rect key="frame" x="76.5" y="1" width="110" height="19"/>
+                                        <rect key="frame" x="0.0" y="1" width="110" height="19"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Add staff" image="plus.rectangle" catalog="system"/>
                                         <connections>
                                             <segue destination="uh7-Qf-lX3" kind="show" id="Vtc-XU-Kdi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwe-M6-rc9">
+                                        <rect key="frame" x="125" y="0.5" width="61.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Edit" image="square.and.pencil" catalog="system"/>
+                                        <connections>
+                                            <segue destination="uvb-Aq-pGb" kind="show" id="Rrh-8b-VqU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b46-bc-fw5">

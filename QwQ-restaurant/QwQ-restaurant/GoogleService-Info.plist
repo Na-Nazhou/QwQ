@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>631789476990-ok9tq5dbkg05m0c6ecs4v9r0b3veje12.apps.googleusercontent.com</string>
+	<string>631789476990-2bmah45g8jcclh58ljftsdijvdonuk67.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.631789476990-ok9tq5dbkg05m0c6ecs4v9r0b3veje12</string>
+	<string>com.googleusercontent.apps.631789476990-2bmah45g8jcclh58ljftsdijvdonuk67</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBZdBpst6thN4X_ZbTNkNK0ky3Yi9mLsIc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.cs3217.qwq.QwQ-restaurant</string>
+	<string>com.cs3217.qwq.restaurant</string>
 	<key>PROJECT_ID</key>
 	<string>qwq-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:631789476990:ios:4d77f03cb17c444e9d4c2f</string>
+	<string>1:631789476990:ios:789f282a971f4cd49d4c2f</string>
 	<key>DATABASE_URL</key>
 	<string>https://qwq-app.firebaseio.com</string>
 </dict>
