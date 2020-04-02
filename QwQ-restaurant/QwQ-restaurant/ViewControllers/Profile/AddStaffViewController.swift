@@ -83,7 +83,5 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
             }
             staffTableView.reloadData()
         }
-        
-        print(staffEmails)
     }
 }
