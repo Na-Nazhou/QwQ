@@ -19,9 +19,9 @@ protocol Record {
     var admitTime: Date? { get }
     var serveTime: Date? { get }
     var rejectTime: Date? { get }
-    var withdrawTime: Date? { get set }
+    var withdrawTime: Date? { get }
 
-    var confirmAdmissionTime: Date? { get set }
+    var confirmAdmissionTime: Date? { get }
 }
 
 extension Record {
