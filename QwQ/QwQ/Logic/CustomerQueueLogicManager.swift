@@ -149,14 +149,16 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
         }
-        for clashingRecords in currentQueueRecords
-            where clashingRecords != queueRecord
-                && clashingRecords.startTime <= now {
+        for clashingRecords in clashingRecords(with: queueRecord, at: now) {
             withdrawQueueRecord(clashingRecords) {
                 os_log("Confirmation triggered auto withdrawal of a qRec.",
                        log: Log.confirmedByCustomer, type: .info)
             }
         }
+    }
+
+    private func clashingRecords(with record: QueueRecord, at time: Date) -> [QueueRecord] {
+        return currentQueueRecords.filter { $0 != record && $0.startTime <= time }
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
@@ -187,8 +189,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .confirmAdmission:
             didConfirmAdmissionOfQueueRecord(record)
+            os_log("Detected user initiated confirmation", log: Log.confirmedByCustomer, type: .info)
         case .none:
-            assert(false, "Modification should be something")
+//            assert(false, "Modification should be something")
+            os_log("Detected no modification. Perhaps was auto-confirmed?",
+                   log: Log.noModification, type: .info)
         }
     }
 
@@ -208,6 +213,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
         // tent
+        if clashingRecords(with: record, at: record.admitTime!).isEmpty {
+            // auto accept since this is the only active queue
+            confirmAdmissionOfQueueRecord(record)
+            return
+        }
         customerDidUpdateQueueRecord(record: record)
     }
 
