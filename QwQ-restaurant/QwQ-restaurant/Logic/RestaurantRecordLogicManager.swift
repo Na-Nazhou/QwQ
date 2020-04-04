@@ -8,16 +8,16 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     // View Controller
     weak var presentationDelegate: RestaurantQueueLogicPresentationDelegate?
 
-    private convenience init(restaurant: Restaurant) {
-        self.init(restaurant: restaurant,
+    convenience init() {
+        self.init(restaurantActivity: RestaurantActivity.shared(),
                   queueStorage: FIRQueueStorage.shared,
                   bookingStorage: FIRBookingStorage.shared)
     }
 
-    private init(restaurant: Restaurant,
-                 queueStorage: RestaurantQueueStorage,
-                 bookingStorage: RestaurantBookingStorage) {
-        self.restaurant = restaurant
+    init(restaurantActivity: RestaurantActivity,
+         queueStorage: RestaurantQueueStorage,
+         bookingStorage: RestaurantBookingStorage) {
+        self.restaurantActivity = restaurantActivity
 
         self.queueStorage = queueStorage
         self.bookingStorage = bookingStorage
@@ -31,16 +31,14 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
         bookingStorage.unregisterDelegate(self)
     }
 
-    private var restaurant: Restaurant
-    private(set) var currentQueue = RecordCollection<QueueRecord>()
-    private(set) var waitingQueue = RecordCollection<QueueRecord>()
-    private(set) var historyQueue = RecordCollection<QueueRecord>()
-    private(set) var currentBookings = RecordCollection<BookRecord>()
-    private(set) var waitingBookings = RecordCollection<BookRecord>()
-    private(set) var historyBookings = RecordCollection<BookRecord>()
+    private let restaurantActivity: RestaurantActivity
+    private var restaurant: Restaurant {
+        restaurantActivity.restaurant
+    }
+    
 
     var currentRecords: [Record] {
-        (currentQueue.records + currentBookings.records).sorted(by: { record1, record2 in
+        (restaurantActivity.currentQueue.records + restaurantActivity.currentBookings.records).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if let queueRecord1 = record1 as? QueueRecord {
@@ -58,13 +56,14 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     }
 
     var waitingRecords: [Record] {
-        (waitingQueue.records + waitingBookings.records).sorted(by: { record1, record2 in
+        (restaurantActivity.waitingQueue.records + restaurantActivity.waitingBookings.records)
+            .sorted(by: { record1, record2 in
             record1.admitTime! > record2.admitTime!
-        })
+            })
     }
 
     var historyRecords: [Record] {
-        (historyQueue.records + historyBookings.records).sorted(by: { record1, record2 in
+        (restaurantActivity.historyQueue.records + restaurantActivity.historyBookings.records).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if record1.isServed {
@@ -127,7 +126,7 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
         if self.restaurant.isQueueOpen != restaurant.isQueueOpen {
             presentationDelegate?.restaurantDidChangeQueueStatus(toIsOpen: restaurant.isQueueOpen)
         }
-        self.restaurant = restaurant
+        self.restaurantActivity.updateRestaurant(restaurant)
     }
 }
 
@@ -204,33 +203,45 @@ extension RestaurantRecordLogicManager {
     }
 
     func didAddQueueRecord(_ record: QueueRecord) {
-        didAddRecord(record, currentList: currentQueue,
-                     waitingList: waitingQueue, historyList: historyQueue)
+        didAddRecord(record,
+                     currentList: restaurantActivity.currentQueue,
+                     waitingList: restaurantActivity.waitingQueue,
+                     historyList: restaurantActivity.historyQueue)
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
-        didUpdateRecord(record, currentList: currentQueue,
-                        waitingList: waitingQueue, historyList: historyQueue)
+        didUpdateRecord(record,
+                        currentList: restaurantActivity.currentQueue,
+                        waitingList: restaurantActivity.waitingQueue,
+                        historyList: restaurantActivity.historyQueue)
     }
 
     func didDeleteQueueRecord(_ record: QueueRecord) {
-        didDeleteRecord(record, currentList: currentQueue,
-                        waitingList: waitingQueue, historyList: historyQueue)
+        didDeleteRecord(record,
+                        currentList: restaurantActivity.currentQueue,
+                        waitingList: restaurantActivity.waitingQueue,
+                        historyList: restaurantActivity.historyQueue)
     }
 
     func didAddBookRecord(_ record: BookRecord) {
-        didAddRecord(record, currentList: currentBookings,
-                     waitingList: waitingBookings, historyList: historyBookings)
+        didAddRecord(record,
+                     currentList: restaurantActivity.currentBookings,
+                     waitingList: restaurantActivity.waitingBookings,
+                     historyList: restaurantActivity.historyBookings)
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
-        didUpdateRecord(record, currentList: currentBookings,
-                        waitingList: waitingBookings, historyList: historyBookings)
+        didUpdateRecord(record,
+                        currentList: restaurantActivity.currentBookings,
+                        waitingList: restaurantActivity.waitingBookings,
+                        historyList: restaurantActivity.historyBookings)
     }
 
     func didDeleteBookRecord(_ record: BookRecord) {
-        didDeleteRecord(record, currentList: currentBookings,
-                        waitingList: waitingBookings, historyList: historyBookings)
+        didDeleteRecord(record,
+                        currentList: restaurantActivity.currentBookings,
+                        waitingList: restaurantActivity.waitingBookings,
+                        historyList: restaurantActivity.historyBookings)
     }
 
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
@@ -289,29 +300,6 @@ extension RestaurantRecordLogicManager {
             assert(false)
         }
         return new
-    }
-}
-
-extension RestaurantRecordLogicManager {
-    // Singleton created upon successful login
-    private static var queueLogic: RestaurantRecordLogicManager?
-
-    /// Returns shared restaurant queue logic manager for the logged in application. If it does not exist,
-    /// a queue logic manager is initiailised with the given restaurant identity to share.
-    static func shared(for restaurantIdentity: Restaurant? = nil) -> RestaurantRecordLogicManager {
-        if let logic = queueLogic {
-            return logic
-        }
-
-        assert(restaurantIdentity != nil,
-               "Restaurant identity must be given non-nil to make the restaurant's queue logic manager.")
-        let logic = RestaurantRecordLogicManager(restaurant: restaurantIdentity!)
-        queueLogic = logic
-        return logic
-    }
-
-    static func deinitShared() {
-        queueLogic = nil
     }
 }
 
