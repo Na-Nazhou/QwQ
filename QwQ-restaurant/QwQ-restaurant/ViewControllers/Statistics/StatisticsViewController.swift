@@ -30,6 +30,7 @@ class StatisticsViewController: UIViewController {
         statisticsTableView.dataSource = self
 
         statsManager.statsDelegate = self
+        statsManager.loadAllStats(from: Date().getDateOf(daysBeforeDate: 7), to: Date())
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,6 +64,7 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let statisticsDetails = statistics[indexPath.row]
+        print("\n\tTRIGGERED PERFORM SEGUE IN VC \n")
         performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
     }
 }
