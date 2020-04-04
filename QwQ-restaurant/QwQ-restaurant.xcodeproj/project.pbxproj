@@ -25,6 +25,7 @@
 		5C9D9B5F242222310019B7EE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5D242222310019B7EE /* AlertService.swift */; };
 		5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */; };
 		5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */; };
+		5CAD354A2438CFC900245857 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD35492438CFC900245857 /* Staff.swift */; };
 		5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F12421FCBF008DB047 /* ProfileStorage.swift */; };
 		5CE032F62421FCF6008DB047 /* FIRProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */; };
 		6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */; };
@@ -130,6 +131,7 @@
 		5C9D9B5D242222310019B7EE /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
 		5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowMessage.swift"; sourceTree = "<group>"; };
+		5CAD35492438CFC900245857 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		5CE032F12421FCBF008DB047 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
 		5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRProfileStorage.swift; sourceTree = "<group>"; };
 		61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				D4D329CC2426184300F2A5A5 /* RecordModification.swift */,
 				D4EA85EE241B2C65009EB85B /* QueueRecord.swift */,
 				6148055B2422A388003D6D44 /* BookRecord.swift */,
+				5CAD35492438CFC900245857 /* Staff.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				5C1A419324236BE500D1140B /* FIRCustomerInfoStorage.swift in Sources */,
 				D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */,
 				7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */,
+				5CAD354A2438CFC900245857 /* Staff.swift in Sources */,
 				5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */,
 				D4EA85F9241B2CA7009EB85B /* RestaurantRecordLogicManager.swift in Sources */,
 				5C2CB131242484D0003AFC6C /* AuthError.swift in Sources */,
