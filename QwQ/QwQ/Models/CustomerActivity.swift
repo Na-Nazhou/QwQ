@@ -6,7 +6,7 @@ class CustomerActivity {
         if let activity = customerActivity {
             return activity
         }
-        assert(customer != nil, "Customer identity must be given non-nil for it to have a history.")
+        assert(customer != nil, "Customer identity must be given non-nil for it to have an activity.")
         let activity = CustomerActivity(customer: customer!)
         customerActivity = activity
         return activity
