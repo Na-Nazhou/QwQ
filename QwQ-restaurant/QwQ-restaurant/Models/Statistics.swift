@@ -8,7 +8,7 @@
 import Foundation
 
 struct Statistics {
-    let fromDate: Date!
+    let fromDate: Date
     let toDate: Date!
 
     // MARK: Raw stats
