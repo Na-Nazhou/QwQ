@@ -57,7 +57,8 @@ class ActivityCell: UICollectionViewCell {
         case .confirmedAdmission:
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
                 + ", Confirmed admission."
-            disableEdit()
+            changeEditToConfirmed()
+            //disableEdit()
         default:
             assert(false)
         }
@@ -99,6 +100,14 @@ class ActivityCell: UICollectionViewCell {
     }
 
     private func changeEditToConfirmAdmission() {
-        editButton.setTitle("Confirm admission", for: .normal)
+        setEditButtonText(to: "Confirm admission")
+    }
+
+    private func changeEditToConfirmed() {
+        setEditButtonText(to: "Confirmed.")
+    }
+
+    private func setEditButtonText(to title: String) {
+        editButton.setTitle(title, for: .normal)
     }
 }

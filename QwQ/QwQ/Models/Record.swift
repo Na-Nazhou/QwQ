@@ -80,6 +80,10 @@ extension Record {
             return nil
         }
 
+        if old.status == self.status {
+            return .customerUpdate
+        }
+
         if status == .withdrawn {
             return .withdraw
         }
@@ -99,11 +103,6 @@ extension Record {
         //TODO: check if these 2 correct; when to allow rejection and service?
         if old.status == .admitted && self.status == .rejected {
             return .reject
-        }
-
-        // TODO
-        if old.status == self.status {
-            return .customerUpdate
         }
 
         return nil

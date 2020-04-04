@@ -114,9 +114,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     func didConfirmAdmissionOfRecord() {
-        if isActive {
-            activitiesCollectionView.reloadData()
-        }
+        activitiesCollectionView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -141,6 +139,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
+                editBookingViewController.bookingLogicManager = bookingLogicManager
             }
         default:
             return

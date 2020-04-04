@@ -146,9 +146,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         var newRecord = queueRecord
         let now = Date()
         newRecord.confirmAdmissionTime = now
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
-            self.activitiesDelegate?.didConfirmAdmissionOfRecord()
-        }
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {}
         for clashingRecords in clashingRecords(with: queueRecord, at: now) {
             withdrawQueueRecord(clashingRecords) {
                 os_log("Confirmation triggered auto withdrawal of a qRec.",
@@ -164,6 +162,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     func didUpdateQueueRecord(_ record: QueueRecord) {
         os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
         guard let oldRecord = currentQueueRecords.first(where: { $0 == record }) else {
+            if pastQueueRecords.contains(record) {
+                return
+            }
             os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
             didAddQueueRecord(record)
             return
@@ -192,6 +193,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             os_log("Detected user initiated confirmation", log: Log.confirmedByCustomer, type: .info)
         case .none:
 //            assert(false, "Modification should be something")
+            customerDidUpdateQueueRecord(record: record)
             os_log("Detected no modification. Perhaps was auto-confirmed?",
                    log: Log.noModification, type: .info)
         }
@@ -232,9 +234,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
         if record.isActiveRecord {
             customerActivity.currentQueues.update(record)
-            activitiesDelegate?.didUpdateActiveRecords()
-            //queueDelegate?.didUpdateRecord()
+        } else {
+            customerActivity.queueHistory.update(record)
         }
+        activitiesDelegate?.didUpdateActiveRecords()
+        //queueDelegate?.didUpdateRecord()
     }
 
     private func removeFromCurrent(_ record: QueueRecord) {
