@@ -21,7 +21,8 @@ class StatisticsCell: UITableViewCell {
     }
     
     func setUpViews(statisticsDetail: Statistics) {
-        let dateFormat = Date.getFormattedDate(date: statisticsDetail.date, format: Constants.statisticsDateFormat)
+        // TODO: add fromDate
+        let dateFormat = Date.getFormattedDate(date: statisticsDetail.toDate, format: Constants.statisticsDateFormat)
         dateLabel.text = dateFormat
         avgWaitingTimeRestaurantLabel.text = "\(statisticsDetail.avgWaitingTimeRestaurant ?? 0) mins"
         avgWaitingTimeCustomerLabel.text = "\(statisticsDetail.avgWaitingTimeCustomer ?? 0) mins"
