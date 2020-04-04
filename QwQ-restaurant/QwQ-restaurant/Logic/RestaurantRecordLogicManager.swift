@@ -15,8 +15,8 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     }
 
     init(restaurantActivity: RestaurantActivity,
-                 queueStorage: RestaurantQueueStorage,
-                 bookingStorage: RestaurantBookingStorage) {
+         queueStorage: RestaurantQueueStorage,
+         bookingStorage: RestaurantBookingStorage) {
         self.restaurantActivity = restaurantActivity
 
         self.queueStorage = queueStorage
