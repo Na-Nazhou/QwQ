@@ -4,6 +4,7 @@ enum RecordStatus: Int {
     case served
     case rejected
     case withdrawn
+    case confirmedAdmission
     case invalid
 }
 
@@ -13,4 +14,5 @@ enum RecordModification: Int {
     case reject
     case serve
     case withdraw
+    case confirmAdmission
 }

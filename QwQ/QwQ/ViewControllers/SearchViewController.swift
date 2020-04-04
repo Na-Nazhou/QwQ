@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, SearchDelegate {
     private var selectionState = SelectionState.selectOne
     private var selectedRestaurants: [Restaurant] = []
     
+    private let bookingLogicManager = CustomerBookingLogicManager()
     private let queueLogicManager = CustomerQueueLogicManager()
     private let restaurantLogicManager = RestaurantLogicManager()
     
@@ -137,6 +138,7 @@ class SearchViewController: UIViewController, SearchDelegate {
             }
             rVC.restaurantLogicManager = restaurantLogicManager
             rVC.queueLogicManager = queueLogicManager
+            rVC.bookingLogicManager = bookingLogicManager
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,

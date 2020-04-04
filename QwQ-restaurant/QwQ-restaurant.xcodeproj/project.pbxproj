@@ -193,6 +193,7 @@
 		B0A22BA71403205D6A2A2E9A /* Pods_QwQ_restaurantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47A372FA23CCF4227231151 /* Pods_QwQ_restaurant_QwQ_restaurantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant_QwQ_restaurantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D453E3A7242368A0005FA25F /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		D45D465924376A1400AAF1CD /* QwQ-restaurant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "QwQ-restaurant.entitlements"; sourceTree = "<group>"; };
 		D4D329CC2426184300F2A5A5 /* RecordModification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModification.swift; sourceTree = "<group>"; };
 		D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantPostLoginSetupManager.swift; path = "QwQ-restaurant/Logic/RestaurantPostLoginSetupManager.swift"; sourceTree = SOURCE_ROOT; };
 		D4EA85ED241B2C65009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -428,6 +429,7 @@
 		7E72B15A241C93FE00C1EE72 /* QwQ-restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				D45D465924376A1400AAF1CD /* QwQ-restaurant.entitlements */,
 				7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */,
 				7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */,
 				5C44C9AA241DCE7B0097C006 /* Authentication & Profile */,
@@ -1061,6 +1063,7 @@
 			baseConfigurationReference = 4B5974C80E371AE4476EE1EE /* Pods-QwQ-restaurant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "QwQ-restaurant/QwQ-restaurant.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";
@@ -1080,6 +1083,7 @@
 			baseConfigurationReference = 2ABC309F477A6830455E184E /* Pods-QwQ-restaurant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "QwQ-restaurant/QwQ-restaurant.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W76H98A34A;
 				INFOPLIST_FILE = "QwQ-restaurant/Info.plist";

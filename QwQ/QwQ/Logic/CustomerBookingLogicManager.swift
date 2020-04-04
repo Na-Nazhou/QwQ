@@ -129,6 +129,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
+    func confirmAdmissionOfBookRecord(_ record: BookRecord) {
+        //TODO
+    }
+
     func didUpdateBookRecord(_ record: BookRecord) {
         os_log("Did update book record", log: Log.updateBookRecord, type: .info)
         guard let oldRecord = activeBookRecords.first(where: { $0 == record }) else {
@@ -137,7 +141,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
         let modification = record.changeType(from: oldRecord)
-        print("\n\tModification detected as \(modification)")
         switch modification {
         case .admit:
             didAdmitBookRecord(record)
@@ -157,6 +160,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
+        case .confirmAdmission:
+            customerDidConfirmAdmission(record: record)
+            os_log("Detected admission update", log: Log.confirmedByCustomer, type: .info)
         case .none:
             assert(false, "Modification should be something")
         }
@@ -167,6 +173,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             customerActivity.currentBookings.update(record)
             activitiesDelegate?.didUpdateActiveRecords()
         }
+    }
+
+    private func customerDidConfirmAdmission(record: BookRecord) {
+        // TODO
     }
 
     private func didAddBookRecord(_ record: BookRecord) {
