@@ -113,6 +113,10 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             })
     }
 
+    func didConfirmAdmissionOfRecord() {
+        activitiesCollectionView.reloadData()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.queueSelectedSegue:
@@ -135,6 +139,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
+                editBookingViewController.bookingLogicManager = bookingLogicManager
             }
         default:
             return
@@ -164,6 +169,8 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             activityCell.editAction = {
                 if record.isPendingAdmission {
                     self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
+                } else if record.isAdmitted {
+                    self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
             activityCell.deleteAction = {

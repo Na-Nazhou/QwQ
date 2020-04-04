@@ -65,8 +65,6 @@ struct Restaurant: User {
             let name = dictionary[Constants.nameKey] as? String,
             let email = dictionary[Constants.emailKey] as? String,
             let contact = dictionary[Constants.contactKey] as? String,
-            let address = dictionary[Constants.addressKey] as? String,
-            let menu = dictionary[Constants.menuKey] as? String,
             let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool
             else {
                 return nil
@@ -77,9 +75,12 @@ struct Restaurant: User {
         self.email = email
         self.contact = contact
 
+        let address = dictionary[Constants.addressKey] as? String ?? ""
+        let menu = dictionary[Constants.menuKey] as? String ?? ""
         self.address = address
         self.menu = menu
         self.isRestaurantOpen = isRestaurantOpen
+
         self.queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
         self.queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
     }

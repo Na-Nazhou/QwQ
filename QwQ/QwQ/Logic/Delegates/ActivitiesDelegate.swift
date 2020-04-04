@@ -12,4 +12,6 @@ protocol ActivitiesDelegate: AnyObject {
     func didUpdateActiveRecords()
     
     func didWithdrawRecord()
+
+    func didConfirmAdmissionOfRecord()
 }

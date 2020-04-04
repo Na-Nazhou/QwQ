@@ -17,6 +17,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    var bookingLogicManager: CustomerBookingLogicManager!
     var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
     var restaurant: Restaurant? {
@@ -91,6 +92,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                 return
             }
             editQVC.queueLogicManager = queueLogicManager
+            editQVC.restaurantLogicManager = restaurantLogicManager
         }
         if segue.identifier == Constants.editBookSelectedSegue {
             guard let editBVC = segue.destination as? EditBookingViewController else {
@@ -99,6 +101,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                 return
             }
             editBVC.restaurantLogicManager = restaurantLogicManager
+            editBVC.bookingLogicManager = bookingLogicManager
             return
         }
     }

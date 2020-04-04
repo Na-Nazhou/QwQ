@@ -9,7 +9,7 @@ import UIKit
 
 class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
-    let bookingLogicManager = CustomerBookingLogicManager()
+    var bookingLogicManager: CustomerBookingLogicManager!
 
     @IBOutlet var datePicker: UIDatePicker!
 
