@@ -1,5 +1,7 @@
 import Foundation
 class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
+    weak var statsDelegate: StatsPresentationDelegate?
+
     private let storage: RestaurantStatsStorage
     private let restaurantActivity: RestaurantActivity
 
@@ -27,26 +29,32 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     func fetchTotalNumCustomers(from date: Date, to date2: Date) {
-        storage.totalNumCustomers(for: restaurant, from: date, to: date2) { count in
-            self.currentStats.numberOfCustomers += count
+        storage.fetchTotalNumCustomers(for: restaurant, from: date, to: date2) { count in
+            self.currentStats.totalNumCustomers += count
         }
     }
 
-    func avgWaitingTimeForCustomer(from date: Date, to date2: Date) {
-        storage.avgWaitingTimeForCustomer(for: restaurant, from: date, to: date2) { stat in
-            //avg waiting time delegate bla
+    func fetchAvgWaitingTimeForCustomer(from date: Date, to date2: Date) {
+        storage.fetchTotalWaitingTimeForCustomer(for: restaurant, from: date, to: date2) { seconds in
+            self.currentStats.totalWaitingTimeCustomerPOV += seconds
         }
     }
 
-    func queueCancellationRate(from date: Date, to date2: Date) {
-        storage.queueCancellationRate(for: restaurant, from: date, to: date2) { stat in
-            //queue cancellation numbers
+    func fetchAvgWaitingTimeForRestaurant(from date: Date, to date2: Date) {
+        storage.fetchTotalWaitingTimeForRestaurant(for: restaurant, from: date, to: date2) { seconds in
+            self.currentStats.totalWaitingTimeRestaurantPOV += seconds
         }
     }
 
-    func bookingCancellationRate(from date: Date, to date2: Date) {
-        storage.bookingCancellationRate(for: restaurant, from: date, to: date2) { stat in
-            //booking cancellation numbers
+    func fetchQueueCancellationRate(from date: Date, to date2: Date) {
+        storage.fetchQueueCancellationRate(for: restaurant, from: date, to: date2) { count in
+            self.currentStats.totalQueueCancelled += count
+        }
+    }
+
+    func fetchBookingCancellationRate(from date: Date, to date2: Date) {
+        storage.fetchBookingCancellationRate(for: restaurant, from: date, to: date2) { count in
+            self.currentStats.totalBookingCancelled += count
         }
     }
     
