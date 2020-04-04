@@ -13,9 +13,13 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var statisticsTableView: UITableView!
     @IBOutlet private var statisticsControl: SegmentedControl!
     
-    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
-                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
-                                               avgWaitingTimeCustomer: 4, date: Date())]
+//    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
+//                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
+//                                               avgWaitingTimeCustomer: 4, date: Date())]
+    let statsManager = RestaurantStatisticsLogicManager()
+    var statistics: [Statistics] {
+        [statsManager.currentStats]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,9 @@ class StatisticsViewController: UIViewController {
         
         statisticsTableView.delegate = self
         statisticsTableView.dataSource = self
+
+        statsManager.statsDelegate = self
+        statsManager.loadAllStats(from: Date().getDateOf(daysBeforeDate: 7), to: Date())
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,6 +64,15 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let statisticsDetails = statistics[indexPath.row]
+        print("\n\tTRIGGERED PERFORM SEGUE IN VC \n")
         performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
     }
+}
+
+extension StatisticsViewController: StatsPresentationDelegate {
+
+    func statsDidUpdate() {
+        statisticsTableView.reloadData()
+    }
+    
 }

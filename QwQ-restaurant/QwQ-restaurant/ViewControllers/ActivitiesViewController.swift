@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 class ActivitiesViewController: UIViewController {
-
+    // MARK: View properties
     @IBOutlet private var searchBarController: UISearchBar!
 
     @IBOutlet var currentWaitingControl: SegmentedControl!
@@ -19,6 +19,9 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet private var openCloseButton: UIButton!
 
     var spinner: UIView?
+    
+    // MARK: Model properties
+    let recordLogicManager = RestaurantRecordLogicManager()
 
     var filtered: [Record] = []
 
@@ -39,15 +42,15 @@ class ActivitiesViewController: UIViewController {
 
     // TODO: refactor
     var currentRecords: [Record] {
-        RestaurantRecordLogicManager.shared().currentRecords
+        recordLogicManager.currentRecords
     }
 
     var waitingRecords: [Record] {
-        RestaurantRecordLogicManager.shared().waitingRecords
+        recordLogicManager.waitingRecords
     }
 
     var historyRecords: [Record] {
-        RestaurantRecordLogicManager.shared().historyRecords
+        recordLogicManager.historyRecords
     }
 
     override func viewDidLoad() {
@@ -58,12 +61,12 @@ class ActivitiesViewController: UIViewController {
         recordCollectionView.delegate = self
         recordCollectionView.dataSource = self
 
-        RestaurantRecordLogicManager.shared().presentationDelegate = self
+        recordLogicManager.presentationDelegate = self
         
         filtered = records
         setUpSegmentedControl()
 
-        if RestaurantRecordLogicManager.shared().isQueueOpen {
+        if recordLogicManager.isQueueOpen {
             openQueue()
         } else {
             closeQueue()
@@ -96,10 +99,10 @@ class ActivitiesViewController: UIViewController {
         switch title {
         case Constants.buttonTextToOpenQueue:
             openQueue()
-            RestaurantRecordLogicManager.shared().openQueue()
+            recordLogicManager.openQueue()
         case Constants.buttonTextToCloseQueue:
             closeQueue()
-            RestaurantRecordLogicManager.shared().closeQueue()
+            recordLogicManager.closeQueue()
         default:
             assert(false, "open close button title should be either open or close.")
         }
@@ -121,11 +124,13 @@ class ActivitiesViewController: UIViewController {
         if let queueRecord = sender as? QueueRecord,
             let queueRecordViewController = segue.destination as? QueueRecordViewController {
             queueRecordViewController.record = queueRecord
+            queueRecordViewController.recordLogicManager = recordLogicManager
         }
         case Constants.bookRecordSelectedSegue:
         if let bookRecord = sender as? BookRecord,
             let bookRecordViewController = segue.destination as? BookRecordViewController {
                 bookRecordViewController.record = bookRecord
+            bookRecordViewController.recordLogicManager = recordLogicManager
         }
         default:
             return
@@ -183,21 +188,18 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let queueRecord = record as? QueueRecord {
             recordCell.admitAction = {
-                RestaurantRecordLogicManager.shared()
-                    .admitCustomer(record: queueRecord,
+                self.recordLogicManager.admitCustomer(record: queueRecord,
                                    completion: self.didUpdateRecord)
             }
 
             if queueRecord.isAdmitted {
                 recordCell.rejectAction = {
-                    RestaurantRecordLogicManager.shared()
-                        .rejectCustomer(record: queueRecord,
+                    self.recordLogicManager.rejectCustomer(record: queueRecord,
                                         completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
-                    RestaurantRecordLogicManager.shared()
-                        .serveCustomer(record: queueRecord,
+                    self.recordLogicManager.serveCustomer(record: queueRecord,
                                        completion: self.didUpdateRecord)
                 }
             }
@@ -205,21 +207,18 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let bookRecord = record as? BookRecord {
             recordCell.admitAction = {
-                RestaurantRecordLogicManager.shared()
-                    .admitCustomer(record: bookRecord,
+                self.recordLogicManager.admitCustomer(record: bookRecord,
                                    completion: self.didUpdateRecord)
             }
 
             if bookRecord.isAdmitted {
                 recordCell.rejectAction = {
-                    RestaurantRecordLogicManager.shared()
-                        .rejectCustomer(record: bookRecord,
+                    self.recordLogicManager.rejectCustomer(record: bookRecord,
                                         completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
-                    RestaurantRecordLogicManager.shared()
-                        .serveCustomer(record: bookRecord,
+                    self.recordLogicManager.serveCustomer(record: bookRecord,
                                        completion: self.didUpdateRecord)
                 }
             }

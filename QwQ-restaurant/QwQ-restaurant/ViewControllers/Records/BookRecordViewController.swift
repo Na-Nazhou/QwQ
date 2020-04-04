@@ -25,8 +25,7 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantRecordLogicManager.shared()
-            .admitCustomer(record: bookRecord,
+        recordLogicManager.admitCustomer(record: bookRecord,
                            completion: self.didUpdateRecord)
     }
 
@@ -35,8 +34,7 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantRecordLogicManager.shared()
-            .serveCustomer(record: bookRecord,
+        recordLogicManager.serveCustomer(record: bookRecord,
                            completion: self.didUpdateRecord)
 
     }
@@ -47,8 +45,7 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        RestaurantRecordLogicManager.shared()
-            .rejectCustomer(record: queueRecord,
+        recordLogicManager.rejectCustomer(record: queueRecord,
                             completion: self.didUpdateRecord)
     }
 }

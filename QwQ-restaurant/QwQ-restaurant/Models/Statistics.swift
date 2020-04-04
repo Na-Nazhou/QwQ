@@ -8,21 +8,39 @@
 import Foundation
 
 struct Statistics {
-    let queueCancellationRate: Int!
-    let bookingCancellationRate: Int!
-    let numberOfCustomers: Int!
-    let avgWaitingTimeRestaurant: Int!
-    let avgWaitingTimeCustomer: Int!
-    let date: Date!
+    let fromDate: Date
+    let toDate: Date!
+
+    // MARK: Raw stats
+    var totalNumCustomers: Int = 0
+    var totalWaitingTimeCustomerPOV: Int = 0
+    var totalWaitingTimeRestaurantPOV: Int = 0
+    var totalQueueCancelled: Int = 0
+    var totalBookingCancelled: Int = 0
     
-    init(queueCancellationRate: Int, bookingCancellationRate: Int,
-         numberOfCustomers: Int, avgWaitingTimeRestaurant: Int,
-         avgWaitingTimeCustomer: Int, date: Date) {
-        self.queueCancellationRate = queueCancellationRate
-        self.bookingCancellationRate = bookingCancellationRate
-        self.numberOfCustomers = numberOfCustomers
-        self.avgWaitingTimeRestaurant = avgWaitingTimeRestaurant
-        self.avgWaitingTimeCustomer = avgWaitingTimeCustomer
-        self.date = date
+    // MARK: Computed stats
+    var queueCancellationRate: Int {
+        totalQueueCancelled
+    }
+    var bookingCancellationRate: Int {
+        totalBookingCancelled
+    }
+    var numberOfCustomers: Int {
+        totalNumCustomers
+    }
+    var avgWaitingTimeRestaurant: Int {
+        totalNumCustomers == 0
+            ? 0
+            : totalWaitingTimeRestaurantPOV / totalNumCustomers
+    }
+    var avgWaitingTimeCustomer: Int {
+        totalNumCustomers == 0
+            ? 0
+            : totalWaitingTimeCustomerPOV / totalNumCustomers
+    }
+    
+    init(fromDate: Date, toDate: Date) {
+        self.fromDate = fromDate
+        self.toDate = toDate
     }
 }
