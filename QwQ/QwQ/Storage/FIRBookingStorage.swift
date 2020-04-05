@@ -40,7 +40,8 @@ class FIRBookingStorage: CustomerBookingStorage {
         }
     }
 
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void) {
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord,
+                          completion: @escaping () -> Void) {
         let oldDocRef = getBookRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {

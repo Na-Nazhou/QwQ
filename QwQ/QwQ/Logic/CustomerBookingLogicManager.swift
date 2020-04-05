@@ -121,11 +121,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     func withdrawBookRecord(_ record: BookRecord) {
+        withdrawBookRecord(record, completion: {
+            self.activitiesDelegate?.didWithdrawRecord()
+        })
+    }
+
+    private func withdrawBookRecord(_ record: BookRecord, completion: @escaping () -> Void) {
         var newRecord = record
         newRecord.withdrawTime = Date()
         bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord) {
-            self.activitiesDelegate?.didWithdrawRecord()
-            // note that mass withdrawal should not fire copmletion for each...?
+            completion()
         }
     }
 
@@ -144,39 +149,24 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         switch modification {
         case .admit:
             didAdmitBookRecord(record)
-            os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
-            addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            os_log("Detected service", log: Log.serveCustomer, type: .info)
+            didServeBookRecord(record)
         case .reject:
-            addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
+            didRejectBookRecord(record)
         case .withdraw:
-            addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
+            didWithdrawBookRecord(record)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
-            os_log("Detected regular modification", log: Log.regularModification, type: .info)
-        case .confirmAdmission:
-            customerDidConfirmAdmission(record: record)
-            os_log("Detected admission update", log: Log.confirmedByCustomer, type: .info)
-        case .none:
+        default:
             assert(false, "Modification should be something")
         }
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
-        if record.isActiveRecord {
-            customerActivity.currentBookings.update(record)
+        if record.isActiveRecord && customerActivity.currentBookings.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
-    }
-
-    private func customerDidConfirmAdmission(record: BookRecord) {
-        // TODO
+        os_log("Detected regular modification", log: Log.regularModification, type: .info)
     }
 
     private func didAddBookRecord(_ record: BookRecord) {
@@ -196,12 +186,32 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         // Delete other bookings at the same time
         for otherRecord in activeBookRecords where otherRecord.time == record.time {
-            withdrawBookRecord(otherRecord) // TODO: note completion in withdraw
+            withdrawBookRecord(otherRecord, completion: {})
         }
 
         if customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
+
+        os_log("Detected admission", log: Log.admitCustomer, type: .info)
+    }
+
+    private func didServeBookRecord(_ record: BookRecord) {
+        addAsHistoryRecord(record)
+        removeFromCurrent(record)
+        os_log("Detected service", log: Log.serveCustomer, type: .info)
+    }
+
+    private func didRejectBookRecord(_ record: BookRecord) {
+        addAsHistoryRecord(record)
+        removeFromCurrent(record)
+        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
+    }
+
+    private func didWithdrawBookRecord(_ record: BookRecord) {
+        addAsHistoryRecord(record)
+        removeFromCurrent(record)
+        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
     }
 
     private func removeFromCurrent(_ record: BookRecord) {

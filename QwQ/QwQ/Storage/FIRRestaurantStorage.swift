@@ -6,7 +6,7 @@ class FIRRestaurantStorage: RestaurantStorage {
     static let shared = FIRRestaurantStorage()
 
     private init() {
-        attachListenerOnRestaurants()
+        registerListener()
     }
 
     // MARK: Storage capabilities
@@ -17,13 +17,13 @@ class FIRRestaurantStorage: RestaurantStorage {
     private var listener: ListenerRegistration?
 
     deinit {
-        listener?.remove()
+        removeListener()
     }
     
-    private func attachListenerOnRestaurants() {
+    private func registerListener() {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
-                if let err = err {
+                if err == nil {
                     os_log("Error getting documents",
                            log: Log.activeQueueRetrievalError,
                            type: .error,
@@ -43,12 +43,17 @@ class FIRRestaurantStorage: RestaurantStorage {
                     case .added:
                         self.delegateWork { $0.didAddRestaurant(restaurant: restaurant) }
                     case .modified:
-                        self.delegateWork { $0.restaurantDidModifyProfile(restaurant: restaurant) }
+                        self.delegateWork { $0.didUpdateRestaurant(restaurant: restaurant) }
                     case .removed:
                         self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
                     }
                 }
             }
+    }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     func registerDelegate(_ del: RestaurantStorageSyncDelegate) {

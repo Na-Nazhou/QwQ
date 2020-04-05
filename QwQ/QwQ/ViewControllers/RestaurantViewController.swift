@@ -80,7 +80,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         }
     }
 
-    func restaurantDidUpdate() {
+    func didUpdateRestaurant() {
         setUpViews()
     }
 

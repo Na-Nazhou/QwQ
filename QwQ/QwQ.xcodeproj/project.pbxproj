@@ -98,7 +98,6 @@
 		D4494EC3241B24D900BD0780 /* RestaurantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */; };
 		D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */; };
 		D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */; };
-		D462D69A2429F914002309A5 /* RestaurantModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462D6992429F914002309A5 /* RestaurantModification.swift */; };
 		D4AA685924303D8700F739CF /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685724303D8700F739CF /* RecordModification.swift */; };
 		D4AA685A24303D8700F739CF /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685824303D8700F739CF /* Collection.swift */; };
 		D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */; };
@@ -229,7 +228,6 @@
 		D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorage.swift; path = QwQ/Storage/RestaurantStorage.swift; sourceTree = SOURCE_ROOT; };
 		D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueueStorage.swift; path = QwQ/Storage/CustomerQueueStorage.swift; sourceTree = SOURCE_ROOT; };
 		D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorageSyncDelegate.swift; path = QwQ/Storage/Delegates/RestaurantStorageSyncDelegate.swift; sourceTree = SOURCE_ROOT; };
-		D462D6992429F914002309A5 /* RestaurantModification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModification.swift; sourceTree = "<group>"; };
 		D4AA685724303D8700F739CF /* RecordModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordModification.swift; path = QwQ/Models/SharedModels/RecordModification.swift; sourceTree = SOURCE_ROOT; };
 		D4AA685824303D8700F739CF /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = QwQ/Models/SharedModels/Collection.swift; sourceTree = SOURCE_ROOT; };
 		D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerPostLoginSetupManager.swift; path = QwQ/Logic/CustomerPostLoginSetupManager.swift; sourceTree = SOURCE_ROOT; };
@@ -340,7 +338,6 @@
 				61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */,
 				61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */,
 				61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */,
-				D462D6992429F914002309A5 /* RestaurantModification.swift */,
 				D4494EAB241B241800BD0780 /* SharedModels */,
 			);
 			path = Models;
@@ -403,9 +400,9 @@
 			isa = PBXGroup;
 			children = (
 				5C843AA6242A1B1F00BD9CEF /* EditRecordViewController.swift */,
-				61C74301242B4A1F005818A1 /* RecordViewController.swift */,
 				7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */,
 				7EE6D020241E202A00C1465E /* EditBookingViewController.swift */,
+				61C74301242B4A1F005818A1 /* RecordViewController.swift */,
 				7EFB6975242213470073E535 /* QueueRecordViewController.swift */,
 				7EFB6977242215B60073E535 /* BookRecordViewController.swift */,
 			);
@@ -894,7 +891,6 @@
 				61480556242290B1003D6D44 /* Record.swift in Sources */,
 				7E6EBCC1243086E60058D19A /* Log.swift in Sources */,
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
-				D462D69A2429F914002309A5 /* RestaurantModification.swift in Sources */,
 				61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */,
 				7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */,
 				617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */,

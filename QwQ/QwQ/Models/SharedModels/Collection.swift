@@ -16,9 +16,15 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
-    func update(_ element: T) {
-        elements.remove(element)
-        elements.insert(element)
+    @discardableResult
+    func update(_ element: T) -> Bool {
+        if elements.contains(element) {
+            elements.remove(element)
+            elements.insert(element)
+            return true
+        }
+
+        return false
     }
 
     func remove(_ element: T) -> Bool {

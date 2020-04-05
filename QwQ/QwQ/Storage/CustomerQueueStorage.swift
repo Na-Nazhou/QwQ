@@ -23,7 +23,6 @@ protocol CustomerQueueStorage: QueueStorageSync {
     func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void)
 
     // MARK: - Query
-    /// Calls  completion handler when it finds customer's active queue record.
     func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void)
 
     func loadQueueHistory(customer: Customer, completion: @escaping (QueueRecord?) -> Void)

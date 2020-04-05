@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents the univeral booking storage sync protocol.
 protocol BookingStorageSync {
     var logicDelegates: NSHashTable<AnyObject> { get }
 
@@ -14,7 +15,7 @@ protocol BookingStorageSync {
 }
 
 protocol CustomerBookingStorage: BookingStorageSync {
-     // MARK: - Modifier
+    // MARK: - Modifier
     /// Insert a book record
     func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void)
 

@@ -119,6 +119,13 @@ class EditRecordViewController: UIViewController {
                 return false
         }
 
+        if groupSize <= 0 {
+            showMessage(title: Constants.errorTitle,
+                        message: "Group size must be positive",
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
         if groupSize < babyChairQuantity {
             showMessage(title: Constants.errorTitle,
                         message: "Group size must be greater than baby chair quantity!",

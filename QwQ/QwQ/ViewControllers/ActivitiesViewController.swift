@@ -166,10 +166,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         activityCell.setUpView(record: record)
         
         if let queueRecord = record as? QueueRecord {
-            activityCell.editAction = {
-                if record.isPendingAdmission {
+             if record.isPendingAdmission {
+                activityCell.editAction = {
                     self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
-                } else if record.isAdmitted {
+                }
+            } else if record.isAdmitted {
+                activityCell.confirmAction = {
                     self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
@@ -177,6 +179,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.spinner = self.showSpinner(onView: self.view)
                 self.queueLogicManager.withdrawQueueRecord(queueRecord)
             }
+
         }
 
         if let bookRecord = record as? BookRecord {

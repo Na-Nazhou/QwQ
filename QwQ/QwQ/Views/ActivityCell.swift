@@ -10,11 +10,12 @@ import UIKit
 class ActivityCell: UICollectionViewCell {
     var editAction: (() -> Void)?
     var deleteAction: (() -> Void)?
+    var confirmAction: (() -> Void)?
 
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
-    @IBOutlet private var deleteButton: UIButton!
-    @IBOutlet private var editButton: UIButton!
+    @IBOutlet private var leftButton: UIButton!
+    @IBOutlet private var rightButton: UIButton!
     @IBOutlet private var statusLabel: UILabel!
     @IBOutlet private var queueBookImageView: UIImageView!
     
@@ -26,15 +27,20 @@ class ActivityCell: UICollectionViewCell {
         editAction?()
     }
 
+    @IBAction private func handleConfirm(_ sender: Any) {
+        confirmAction?()
+    }
+
     func setUpView(record: Record) {
         nameLabel.text = record.restaurant.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        disableEdit()
+        setUpDeleteButton()
+        enableRightButton()
 
         switch record.status {
         case .pendingAdmission:
-            enableEdit()
+            setUpEditButton()
             if let queueRecord = record as? QueueRecord {
                 statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
 
@@ -44,21 +50,19 @@ class ActivityCell: UICollectionViewCell {
                 statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
             }
         case .admitted:
+            setUpConfirmButton()
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-            changeEditToConfirmAdmission()
-            enableEdit()
+        case .confirmedAdmission:
+            setUpConfirmButton()
+            disableRightButton()
+            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+                + ", Confirmed admission."
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
-            hideEditAndDelete()
         case .rejected:
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
         case .withdrawn:
             statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
-        case .confirmedAdmission:
-            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-                + ", Confirmed admission."
-            changeEditToConfirmed()
-            //disableEdit()
         default:
             assert(false)
         }
@@ -73,41 +77,58 @@ class ActivityCell: UICollectionViewCell {
 
         // Hide edit and delete buttons if it is history record
         if record.isHistoryRecord {
-            hideEditAndDelete()
+            hideActionButtons()
         } else {
-            showEditAndDelete()
+            showActionButtons()
         }
     }
 
-    private func disableEdit() {
-        editButton.isEnabled = false
-        editButton.alpha = 0.5
+    private func disableRightButton() {
+        disableButton(button: rightButton)
     }
 
-    private func enableEdit() {
-        editButton.isEnabled = true
-        editButton.alpha = 1
+    private func enableRightButton() {
+        enableButton(button: rightButton)
     }
 
-    private func hideEditAndDelete() {
-        editButton.isHidden = true
-        deleteButton.isHidden = true
+    private func hideActionButtons() {
+        leftButton.isHidden = true
+        rightButton.isHidden = true
     }
 
-    private func showEditAndDelete() {
-        editButton.isHidden = false
-        deleteButton.isHidden = false
+    private func showActionButtons() {
+        leftButton.isHidden = false
+        rightButton.isHidden = false
     }
 
-    private func changeEditToConfirmAdmission() {
-        setEditButtonText(to: "Confirm admission")
+    private func enableButton(button: UIButton) {
+        button.isEnabled = true
+        button.alpha = 1
     }
 
-    private func changeEditToConfirmed() {
-        setEditButtonText(to: "Confirmed.")
+    private func disableButton(button: UIButton) {
+        button.isEnabled = false
+        button.alpha = 0.5
     }
 
     private func setEditButtonText(to title: String) {
-        editButton.setTitle(title, for: .normal)
+        rightButton.setTitle(title, for: .normal)
+    }
+
+    private func setUpDeleteButton() {
+        leftButton.setTitle("DELETE", for: .normal)
+        leftButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+    }
+
+    private func setUpEditButton() {
+        leftButton.setTitle("EDIT", for: .normal)
+        rightButton.removeTarget(self, action: #selector(handleConfirm), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
+    }
+
+    private func setUpConfirmButton() {
+        rightButton.setTitle("CONFIRM", for: .normal)
+        rightButton.removeTarget(self, action: #selector(handleEdit), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(handleConfirm), for: .touchUpInside)
     }
 }
