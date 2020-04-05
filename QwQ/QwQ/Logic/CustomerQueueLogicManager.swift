@@ -20,6 +20,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     var pastQueueRecords: [QueueRecord] {
         customerActivity.queueHistory.records
     }
+    var queueRecords: [QueueRecord] {
+        customerActivity.queueRecords
+    }
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
@@ -32,40 +35,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.queueStorage = queueStorage
 
         self.queueStorage.registerDelegate(self)
-
-        fetchActiveQueueRecords()
-        fetchQueueHistory()
     }
 
     deinit {
         os_log("DEINITING queue lm", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
-    }
-
-    private func fetchActiveQueueRecords() {
-        if !currentQueueRecords.isEmpty {
-            os_log("Active queue records already loaded.", log: Log.loadActivity, type: .info)
-            return //already loaded, no need to reload.
-        }
-        queueStorage.loadActiveQueueRecords(customer: customer, completion: {
-            guard let queueRecord = $0 else {
-                return
-            }
-            self.didAddQueueRecord(queueRecord)
-        })
-    }
-
-    func fetchQueueHistory() {
-        if !pastQueueRecords.isEmpty {
-            os_log("History queue records already loaded", log: Log.loadActivity, type: .info)
-            return
-        }
-        queueStorage.loadQueueHistory(customer: customer, completion: {
-            guard let record = $0 else {
-                return
-            }
-            self.didAddQueueRecord(record)
-        })
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
@@ -160,15 +134,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
-        os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
-        guard let oldRecord = currentQueueRecords.first(where: { $0 == record }) else {
-            if pastQueueRecords.contains(record) {
-                return
-            }
+        guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
             didAddQueueRecord(record)
             return
         }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -190,7 +161,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
-    private func didAddQueueRecord(_ record: QueueRecord) {
+    func didAddQueueRecord(_ record: QueueRecord) {
         if record.isActiveRecord && customerActivity.currentQueues.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
@@ -200,8 +171,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        os_log("Detected regular modification", log: Log.regularModification, type: .info)
         if record.isActiveRecord && customerActivity.currentQueues.update(record) {
+            os_log("Detected regular modification", log: Log.regularModification, type: .info)
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
@@ -224,9 +195,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func didWithdrawQueuerecord(_ record: QueueRecord) {
+        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {

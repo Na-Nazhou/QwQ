@@ -55,52 +55,6 @@ class FIRBookingStorage: CustomerBookingStorage {
         }
     }
 
-    func loadActiveBookRecords(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
-        let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
-        let startTimestamp = Timestamp(date: startTime)
-        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
-            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
-            .getDocuments { (querySnapshot, err) in
-                if let err = err {
-                    os_log("Error getting documents",
-                           log: Log.activeBookRetrievalError,
-                           type: .error,
-                           String(describing: err))
-                    return
-                }
-                for document in querySnapshot!.documents {
-                    self.makeBookRecord(document: document) {
-                        if !$0.isHistoryRecord {
-                            completion($0)
-                        }
-                    }
-                }
-            }
-    }
-
-    func loadBookHistory(customer: Customer, completion: @escaping (BookRecord?) -> Void) {
-        let startTime = Date.getCurrentTime().getDateOf(daysBeforeDate: 6)
-        let startTimestamp = Timestamp(date: startTime)
-        bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
-            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
-            .getDocuments { (querySnapshot, err) in
-                if let err = err {
-                    os_log("Error getting documents",
-                           log: Log.bookRetrievalError,
-                           type: .error,
-                           String(describing: err))
-                    return
-                }
-                for document in querySnapshot!.documents {
-                    self.makeBookRecord(document: document) {
-                        if $0.isHistoryRecord {
-                            completion($0)
-                        }
-                    }
-                }
-            }
-    }
-
     private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
 
         guard let data = document.data(),
@@ -135,15 +89,25 @@ class FIRBookingStorage: CustomerBookingStorage {
         //add listener
         listener = bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
-            guard let snapshot = snapshot, err == nil else {
-                os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
-                return
-            }
+                guard let snapshot = snapshot, err == nil else {
+                    os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
+                    return
+                }
 
-                snapshot.documents.forEach {
-                    self.makeBookRecord(document: $0) { record in
-                        self.delegateWork { $0.didUpdateBookRecord(record) }
+                snapshot.documentChanges.forEach { diff in
+                    var completion: (BookRecord) -> Void
+                    switch diff.type {
+                    case .added:
+                        completion = { record in self.delegateWork { $0.didAddBookRecord(record) } }
+                    case .modified:
+                        completion = { record in self.delegateWork { $0.didUpdateBookRecord(record) } }
+                    case .removed:
+                        print("\n\tDetected removal of book record from db which should not happen.\n")
+                        completion = { _ in }
                     }
+                    self.makeBookRecord(
+                        document: diff.document,
+                        completion: completion)
                 }
             }
     }

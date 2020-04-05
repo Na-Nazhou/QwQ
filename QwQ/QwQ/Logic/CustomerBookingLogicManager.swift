@@ -20,6 +20,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     var pastBookRecords: [BookRecord] {
         customerActivity.bookingHistory.records
     }
+    var bookRecords: [BookRecord] {
+        customerActivity.bookRecords
+    }
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
@@ -32,42 +35,11 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         self.bookingStorage = bookingStorage
 
         self.bookingStorage.registerDelegate(self)
-
-        fetchActiveBookRecords()
-        fetchBookingHistory()
     }
 
     deinit {
         os_log("DEINITING booking lm", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
-    }
-
-    func fetchActiveBookRecords() {
-        if !activeBookRecords.isEmpty {
-            os_log("Active book records already loaded.", log: Log.loadActivity, type: .info)
-            return //already loaded, no need to reload.
-        }
-        bookingStorage.loadActiveBookRecords(customer: customer, completion: {
-            guard let bookRecord = $0 else {
-                return
-            }
-
-            self.didAddBookRecord(bookRecord)
-        })
-    }
-
-    func fetchBookingHistory() {
-        if !pastBookRecords.isEmpty {
-            os_log("History book records already loaded.", log: Log.loadActivity, type: .info)
-            return
-        }
-        bookingStorage.loadBookHistory(customer: customer, completion: {
-             guard let record = $0 else {
-                 return
-             }
-
-            self.didAddBookRecord(record)
-         })
     }
 
     func addBookRecord(to restaurant: Restaurant, at time: Date,
@@ -139,12 +111,12 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
-        os_log("Did update book record", log: Log.updateBookRecord, type: .info)
-        guard let oldRecord = activeBookRecords.first(where: { $0 == record }) else {
+        guard let oldRecord = bookRecords.first(where: { $0 == record }) else {
             os_log("Detected new book record", log: Log.newBookRecord, type: .info)
             didAddBookRecord(record)
             return
         }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -163,13 +135,14 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
+        print("Customer updated the book record??")
         if record.isActiveRecord && customerActivity.currentBookings.update(record) {
+            os_log("Detected regular modification", log: Log.regularModification, type: .info)
             activitiesDelegate?.didUpdateActiveRecords()
         }
-        os_log("Detected regular modification", log: Log.regularModification, type: .info)
     }
 
-    private func didAddBookRecord(_ record: BookRecord) {
+    func didAddBookRecord(_ record: BookRecord) {
         if record.isActiveRecord && customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }

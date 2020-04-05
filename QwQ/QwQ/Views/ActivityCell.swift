@@ -121,7 +121,7 @@ class ActivityCell: UICollectionViewCell {
     }
 
     private func setUpEditButton() {
-        leftButton.setTitle("EDIT", for: .normal)
+        rightButton.setTitle("EDIT", for: .normal)
         rightButton.removeTarget(self, action: #selector(handleConfirm), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
     }
