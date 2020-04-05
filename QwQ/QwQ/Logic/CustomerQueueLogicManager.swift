@@ -181,8 +181,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
+        os_log("Detected regular modification", log: Log.regularModification, type: .info)
         if record.isActiveRecord && customerActivity.currentQueues.update(record) {
-            os_log("Detected regular modification", log: Log.regularModification, type: .info)
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
@@ -226,9 +226,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
+        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
     }
 
     private func removeFromCurrent(_ record: QueueRecord) {

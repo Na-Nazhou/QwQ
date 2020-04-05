@@ -28,9 +28,15 @@ class Collection<T: Hashable> {
         return removed != nil
     }
 
-    func update(to new: T) {
-        elements.remove(new)
-        elements.insert(new)
+    @discardableResult
+    func update(_ element: T) -> Bool {
+        if elements.contains(element) {
+            elements.remove(element)
+            elements.insert(element)
+            return true
+        }
+
+        return false
     }
 
     func reset() {

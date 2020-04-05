@@ -117,6 +117,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         let modification = record.changeType(from: oldRecord)
         switch modification {
+        case .admit:
+            didAdmitBookRecord(record)
         case .serve:
             didServeBookRecord(record)
         case .reject:
@@ -133,8 +135,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
+        os_log("Detected regular modification", log: Log.regularModification, type: .info)
         if customerActivity.currentBookings.update(record) {
-            os_log("Detected regular modification", log: Log.regularModification, type: .info)
             activitiesDelegate?.didUpdateActiveRecords()
         }
     }
@@ -150,6 +152,21 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
+    private func didAdmitBookRecord(_ record: BookRecord) {
+        os_log("Detected admission", log: Log.admitCustomer, type: .info)
+        guard customerActivity.currentBookings.update(record) else {
+            return
+        }
+
+        activitiesDelegate?.didUpdateActiveRecords()
+
+        // Delete other bookings at the same time
+        for otherRecord in activeBookRecords where otherRecord.time == record.time
+            && otherRecord != record {
+            withdrawBookRecord(otherRecord, completion: {})
+        }
+    }
+
     private func didConfirmAdmission(of record: BookRecord) {
         guard customerActivity.currentBookings.update(record) else {
             return
@@ -162,26 +179,25 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             && otherRecord != record {
             withdrawBookRecord(otherRecord, completion: {})
         }
-
-        os_log("Detected admission", log: Log.admitCustomer, type: .info)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {
+        os_log("Detected service", log: Log.serveCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        os_log("Detected service", log: Log.serveCustomer, type: .info)
+
     }
 
     private func didRejectBookRecord(_ record: BookRecord) {
+        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
     }
 
     private func didWithdrawBookRecord(_ record: BookRecord) {
+        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
     }
 
     private func removeFromCurrent(_ record: BookRecord) {
