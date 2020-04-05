@@ -27,6 +27,7 @@
 		5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */; };
 		5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F12421FCBF008DB047 /* ProfileStorage.swift */; };
 		5CE032F62421FCF6008DB047 /* FIRProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */; };
+		6126DB12243A202100E588A6 /* RecordStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6126DB11243A202100E588A6 /* RecordStatus.swift */; };
 		6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */; };
 		6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */; };
 		6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */; };
@@ -136,6 +137,7 @@
 		5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowMessage.swift"; sourceTree = "<group>"; };
 		5CE032F12421FCBF008DB047 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
 		5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRProfileStorage.swift; sourceTree = "<group>"; };
+		6126DB11243A202100E588A6 /* RecordStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStatus.swift; sourceTree = "<group>"; };
 		61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
@@ -534,10 +536,9 @@
 		D4EA85E9241B2C65009EB85B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */,
+				D4EBA7152438475900FCB66C /* RestaurantActivity.swift */,
 				7E428225242B94EF0019A8A2 /* Statistics.swift */,
 				D4EA85EB241B2C65009EB85B /* SharedModels */,
-				D4EBA7152438475900FCB66C /* RestaurantActivity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -550,9 +551,11 @@
 				D4EA85EF241B2C65009EB85B /* Restaurant.swift */,
 				61C868A9242C561F00CC6B9A /* Collection.swift */,
 				6148055D2422A3B7003D6D44 /* Record.swift */,
+				6126DB11243A202100E588A6 /* RecordStatus.swift */,
 				D4D329CC2426184300F2A5A5 /* RecordModification.swift */,
 				D4EA85EE241B2C65009EB85B /* QueueRecord.swift */,
 				6148055B2422A388003D6D44 /* BookRecord.swift */,
+				61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				7E428226242B94F00019A8A2 /* Statistics.swift in Sources */,
 				5C44C9B3241DD0390097C006 /* ValidationUtilities.swift in Sources */,
 				7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */,
+				6126DB12243A202100E588A6 /* RecordStatus.swift in Sources */,
 				D4EBA71E2438628900FCB66C /* RestaurantStatsStorage.swift in Sources */,
 				D4EBA71C2438624B00FCB66C /* FIRStatsStorage.swift in Sources */,
 				7E72B1A4241CA5A100C1EE72 /* SignUpViewController.swift in Sources */,

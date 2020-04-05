@@ -28,8 +28,7 @@ class FIRProfileStorage: ProfileStorage {
                       "contact": signupDetails.contact,
                       "email": authDetails.email,
                       "address": "",
-                      "menu": "",
-                      "isRestaurantOpen": false]) { (error) in
+                      "menu": ""]) { (error) in
             if let error = error {
                 errorHandler(error)
             }

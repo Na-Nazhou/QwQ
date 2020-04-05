@@ -35,7 +35,21 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     var activeRecords: [Record] {
         var records: [Record] = bookingLogicManager.activeBookRecords
         records += queueLogicManager.currentQueueRecords
-        return records
+        return records.sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if let queueRecord1 = record1 as? QueueRecord {
+                time1 = queueRecord1.startTime
+            } else {
+                time1 = (record1 as? BookRecord)!.time
+            }
+            if let queueRecord2 = record2 as? QueueRecord {
+                time2 = queueRecord2.startTime
+            } else {
+                time2 = (record2 as? BookRecord)!.time
+            }
+            return time1 > time2
+        })
     }
 
     var historyRecords: [Record] {

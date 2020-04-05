@@ -189,18 +189,18 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         if let queueRecord = record as? QueueRecord {
             recordCell.admitAction = {
                 self.recordLogicManager.admitCustomer(record: queueRecord,
-                                   completion: self.didUpdateRecord)
+                                                      completion: self.didUpdateRecord)
             }
 
             if queueRecord.isAdmitted {
                 recordCell.rejectAction = {
                     self.recordLogicManager.rejectCustomer(record: queueRecord,
-                                        completion: self.didUpdateRecord)
+                                                           completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
                     self.recordLogicManager.serveCustomer(record: queueRecord,
-                                       completion: self.didUpdateRecord)
+                                                          completion: self.didUpdateRecord)
                 }
             }
         }
@@ -208,18 +208,18 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         if let bookRecord = record as? BookRecord {
             recordCell.admitAction = {
                 self.recordLogicManager.admitCustomer(record: bookRecord,
-                                   completion: self.didUpdateRecord)
+                                                      completion: self.didUpdateRecord)
             }
 
             if bookRecord.isAdmitted {
                 recordCell.rejectAction = {
                     self.recordLogicManager.rejectCustomer(record: bookRecord,
-                                        completion: self.didUpdateRecord)
+                                                           completion: self.didUpdateRecord)
                 }
 
                 recordCell.serveAction = {
                     self.recordLogicManager.serveCustomer(record: bookRecord,
-                                       completion: self.didUpdateRecord)
+                                                          completion: self.didUpdateRecord)
                 }
             }
         }

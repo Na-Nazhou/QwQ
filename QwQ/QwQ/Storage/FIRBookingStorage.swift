@@ -87,7 +87,8 @@ class FIRBookingStorage: CustomerBookingStorage {
         removeListener()
 
         //add listener
-        listener = bookingDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+        listener = bookingDb
+            .whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
                     os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))

@@ -35,7 +35,6 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
-    
 
     var currentRecords: [Record] {
         (restaurantActivity.currentQueue.records + restaurantActivity.currentBookings.records).sorted(by: { record1, record2 in

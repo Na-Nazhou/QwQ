@@ -17,7 +17,7 @@ class FIRProfileStorage: ProfileStorage {
     static var currentUID: String?
     static var currentAuthType: AuthTypes?
 
-    static let dbRef = Firestore.firestore().collection("customers")
+    static let dbRef = Firestore.firestore().collection(Constants.customersDirectory)
     static let storageRef = Storage.storage().reference().child("profile-pics")
 
     static func createInitialCustomerProfile(uid: String,
@@ -25,12 +25,12 @@ class FIRProfileStorage: ProfileStorage {
                                              authDetails: AuthDetails,
                                              errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
-        db.collection("customers")
+        db.collection(Constants.customersDirectory)
             .document(uid)
-            .setData(["uid": uid,
-                      "name": signupDetails.name,
-                      "contact": signupDetails.contact,
-                      "email": authDetails.email]) { (error) in
+            .setData([Constants.uidKey: uid,
+                      Constants.nameKey: signupDetails.name,
+                      Constants.contactKey: signupDetails.contact,
+                      Constants.emailKey: authDetails.email]) { (error) in
                 if let error = error {
                     errorHandler(error)
                 }

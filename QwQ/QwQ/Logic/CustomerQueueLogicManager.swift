@@ -128,8 +128,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
             completion()
             for record in self.clashingRecords(with: queueRecord) {
-                print("withdrawing")
-                print(record)
                 self.withdrawQueueRecord(record) {
                     os_log("Confirmation triggered auto withdrawal of a qRec.",
                            log: Log.confirmedByCustomer, type: .info)
@@ -149,6 +147,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         let modification = record.changeType(from: oldRecord)
+        print(modification)
+        print(oldRecord.status)
+        print(oldRecord)
+        print(record.status)
+        print(record)
         switch modification {
         case .admit:
             didAdmitQueueRecord(record)

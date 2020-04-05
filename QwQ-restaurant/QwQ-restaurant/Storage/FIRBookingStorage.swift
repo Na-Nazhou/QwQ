@@ -55,12 +55,11 @@ class FIRBookingStorage: RestaurantBookingStorage {
         listener = db.collection(Constants.bookingsDirectory)
             .whereField("restaurant", isEqualTo: restaurant.uid)
             .whereField("time", isGreaterThanOrEqualTo: startTimestamp)
-            .addSnapshotListener { (queueSnapshot, err) in
-                if let err = err {
-                    print("Error fetching documents: \(err)")
+            .addSnapshotListener { (snapshot, err) in
+                guard let snapshot = snapshot, err == nil else {
                     return
                 }
-                queueSnapshot!.documentChanges.forEach { diff in
+                snapshot.documentChanges.forEach { diff in
                     var completion: (BookRecord) -> Void
                     switch diff.type {
                     case .added:
@@ -70,8 +69,8 @@ class FIRBookingStorage: RestaurantBookingStorage {
                         print("\n\tfound update b\n")
                         completion = { record in self.delegateWork { $0.didUpdateBookRecord(record) } }
                     case .removed:
-                        print("\n\tcustomer deleted b themselves!\n")
-                        completion = { record in self.delegateWork { $0.didDeleteBookRecord(record) } }
+                        print("\n\tDetected removal of book record from db which should not happen.\n")
+                        completion = { _ in }
                     }
 
                     self.makeBookRecord(

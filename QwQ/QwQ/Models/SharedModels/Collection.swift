@@ -35,10 +35,4 @@ class Collection<T: Hashable> {
     func reset() {
         elements.removeAll()
     }
-
-    func getOriginalElement(of element: T) -> T {
-        precondition(elements.contains(element), "Given element should exist in the first place.")
-        let (_, orig) = elements.insert(element)
-        return orig
-    }
 }

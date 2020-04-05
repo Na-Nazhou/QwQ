@@ -117,8 +117,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         let modification = record.changeType(from: oldRecord)
         switch modification {
-        case .admit:
-            didAdmitBookRecord(record)
         case .serve:
             didServeBookRecord(record)
         case .reject:
@@ -127,14 +125,15 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             didWithdrawBookRecord(record)
         case .customerUpdate:
             customerDidUpdateBookRecord(record: record)
+        case .confirmAdmission:
+            didConfirmAdmission(of: record)
         default:
             assert(false, "Modification should be something")
         }
     }
 
     private func customerDidUpdateBookRecord(record: BookRecord) {
-        print("Customer updated the book record??")
-        if record.isActiveRecord && customerActivity.currentBookings.update(record) {
+        if customerActivity.currentBookings.update(record) {
             os_log("Detected regular modification", log: Log.regularModification, type: .info)
             activitiesDelegate?.didUpdateActiveRecords()
         }
@@ -151,18 +150,17 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
-    private func didAdmitBookRecord(_ record: BookRecord) {
-        guard customerActivity.currentBookings.remove(record) else {
+    private func didConfirmAdmission(of record: BookRecord) {
+        guard customerActivity.currentBookings.update(record) else {
             return
         }
 
-        // Delete other bookings at the same time
-        for otherRecord in activeBookRecords where otherRecord.time == record.time {
-            withdrawBookRecord(otherRecord, completion: {})
-        }
+        activitiesDelegate?.didUpdateActiveRecords()
 
-        if customerActivity.currentBookings.add(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
+        // Delete other bookings at the same time
+        for otherRecord in activeBookRecords where otherRecord.time == record.time
+            && otherRecord != record {
+            withdrawBookRecord(otherRecord, completion: {})
         }
 
         os_log("Detected admission", log: Log.admitCustomer, type: .info)

@@ -24,7 +24,7 @@ class FIRRestaurantStorage: RestaurantStorage {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
                 guard err == nil else {
-                    os_log("Error getting documents",
+                    os_log("Error getting restaurant documents",
                            log: Log.activeQueueRetrievalError,
                            type: .error,
                            String(describing: err))

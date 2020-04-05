@@ -99,8 +99,7 @@ extension Record {
             return .serve
         }
 
-        //TODO: check if these 2 correct; when to allow rejection and service?
-        if old.status == .admitted && self.status == .rejected {
+        if (old.status == .admitted || old.status == .confirmedAdmission) && self.status == .rejected {
             return .reject
         }
 
