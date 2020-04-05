@@ -96,10 +96,10 @@ extension Record {
             return .confirmAdmission
         }
 
-        if (old.status == .admitted || old.status == .confirmedAdmission)
-            && self.status == .served {
+        if old.status == .confirmedAdmission && self.status == .served {
             return .serve
         }
+
         //TODO: check if these 2 correct; when to allow rejection and service?
         if old.status == .admitted && self.status == .rejected {
             return .reject

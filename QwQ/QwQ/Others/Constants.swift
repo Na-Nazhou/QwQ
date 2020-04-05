@@ -50,6 +50,7 @@ struct Constants {
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
     static let recordCreateSuccessMessage = "You have created a record."
     static let recordUpdateSuccessMessage = "Your record has been updated."
+    static let recordConfirmSuccessMessage = "Your record has been confirmed."
     
     // MARK: Record settings
     static let defaultWheelchairFriendly = false

@@ -112,8 +112,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     func didUpdateBookRecord(_ record: BookRecord) {
         guard let oldRecord = bookRecords.first(where: { $0 == record }) else {
-            os_log("Detected new book record", log: Log.newBookRecord, type: .info)
-            didAddBookRecord(record)
             return
         }
 
@@ -143,6 +141,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     func didAddBookRecord(_ record: BookRecord) {
+        os_log("Detected new book record", log: Log.newBookRecord, type: .info)
         if record.isActiveRecord && customerActivity.currentBookings.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }

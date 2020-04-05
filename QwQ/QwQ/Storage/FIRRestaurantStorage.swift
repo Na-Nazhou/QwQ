@@ -23,7 +23,7 @@ class FIRRestaurantStorage: RestaurantStorage {
     private func registerListener() {
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
-                if err == nil {
+                guard err == nil else {
                     os_log("Error getting documents",
                            log: Log.activeQueueRetrievalError,
                            type: .error,

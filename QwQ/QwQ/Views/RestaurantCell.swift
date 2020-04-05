@@ -21,13 +21,5 @@ class RestaurantCell: UICollectionViewCell {
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
-
-        if restaurant.isQueueOpen {
-            queueButton.isEnabled = true
-            queueButton.alpha = 1
-        } else {
-            queueButton.isEnabled = false
-            queueButton.alpha = 0.5
-        }
     }
 }

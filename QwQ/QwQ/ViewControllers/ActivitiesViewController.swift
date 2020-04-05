@@ -108,13 +108,21 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             message: Constants.recordWithdrawSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.handleBack()
                 self.activitiesCollectionView.reloadData()
             })
     }
 
     func didConfirmAdmissionOfRecord() {
-        activitiesCollectionView.reloadData()
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordConfirmSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+                self.activitiesCollectionView.reloadData()
+            })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -172,6 +180,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
             } else if record.isAdmitted {
                 activityCell.confirmAction = {
+                    self.spinner = self.showSpinner(onView: self.view)
                     self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }

@@ -73,7 +73,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         contactLabel.text = restaurant.contact
         emailLabel.text = restaurant.email
 
-        if restaurant.isQueueOpen {
+        if queueLogicManager.canQueue(for: restaurant) {
             queueButton.alpha = 1
         } else {
             queueButton.alpha = 0.5
