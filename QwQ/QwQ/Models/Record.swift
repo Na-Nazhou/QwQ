@@ -20,7 +20,6 @@ protocol Record {
     var serveTime: Date? { get }
     var rejectTime: Date? { get }
     var withdrawTime: Date? { get }
-
     var confirmAdmissionTime: Date? { get }
 }
 
@@ -92,16 +91,15 @@ extension Record {
             return .admit
         }
 
-        if old.status == .admitted && self.status == .confirmedAdmission {
+        if (old.status == .admitted || old.status == .pendingAdmission) && self.status == .confirmedAdmission {
             return .confirmAdmission
         }
 
-        if (old.status == .admitted || old.status == .confirmedAdmission)
-            && self.status == .served {
+        if old.status == .confirmedAdmission && self.status == .served {
             return .serve
         }
-        //TODO: check if these 2 correct; when to allow rejection and service?
-        if old.status == .admitted && self.status == .rejected {
+
+        if (old.status == .admitted || old.status == .confirmedAdmission) && self.status == .rejected {
             return .reject
         }
 

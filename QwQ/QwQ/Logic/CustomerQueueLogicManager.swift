@@ -20,6 +20,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     var pastQueueRecords: [QueueRecord] {
         customerActivity.queueHistory.records
     }
+    var queueRecords: [QueueRecord] {
+        customerActivity.queueRecords
+    }
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
@@ -32,40 +35,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.queueStorage = queueStorage
 
         self.queueStorage.registerDelegate(self)
-
-        fetchActiveQueueRecords()
-        fetchQueueHistory()
     }
 
     deinit {
         os_log("DEINITING queue lm", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
-    }
-
-    private func fetchActiveQueueRecords() {
-        if !currentQueueRecords.isEmpty {
-            os_log("Active queue records already loaded.", log: Log.loadActivity, type: .info)
-            return //already loaded, no need to reload.
-        }
-        queueStorage.loadActiveQueueRecords(customer: customer, completion: {
-            guard let queueRecord = $0 else {
-                return
-            }
-            self.didAddQueueRecord(queueRecord)
-        })
-    }
-
-    func fetchQueueHistory() {
-        if !pastQueueRecords.isEmpty {
-            os_log("History queue records already loaded", log: Log.loadActivity, type: .info)
-            return
-        }
-        queueStorage.loadQueueHistory(customer: customer, completion: {
-            guard let record = $0 else {
-                return
-            }
-            self.didAddQueueRecord(record)
-        })
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
@@ -104,7 +78,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         os_log("Queue is open", log: Log.openQueue, type: .info)
-        
         return true
     }
 
@@ -139,67 +112,70 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func withdrawQueueRecord(_ queueRecord: QueueRecord, completion: @escaping () -> Void) {
         var newRecord = queueRecord
         newRecord.withdrawTime = Date()
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord, completion: completion)
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord,
+                                       completion: completion)
     }
 
-    func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord) {
-        var newRecord = queueRecord
-        let now = Date()
-        newRecord.confirmAdmissionTime = now
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {}
-        for clashingRecords in clashingRecords(with: queueRecord, at: now) {
-            withdrawQueueRecord(clashingRecords) {
-                os_log("Confirmation triggered auto withdrawal of a qRec.",
-                       log: Log.confirmedByCustomer, type: .info)
-            }
+    private func withdrawQueueRecords(_ queueRecords: [QueueRecord], completion: @escaping () -> Void) {
+        guard !queueRecords.isEmpty else {
+            completion()
+            return
         }
+        let withdrawTime = Date()
+        var newRecords = [QueueRecord]()
+        for record in queueRecords {
+            var newRecord = record
+            newRecord.withdrawTime = withdrawTime
+            newRecords.append(newRecord)
+        }
+        queueStorage.updateQueueRecords(newRecords: newRecords, completion: completion)
     }
 
-    private func clashingRecords(with record: QueueRecord, at time: Date) -> [QueueRecord] {
-        return currentQueueRecords.filter { $0 != record && $0.startTime <= time }
+    func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
+        confirmAdmissionOfQueueRecord(record, completion: {
+            self.activitiesDelegate?.didConfirmAdmissionOfRecord()
+        })
+    }
+
+    private func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord, completion: @escaping () -> Void) {
+        var newRecord = queueRecord
+        newRecord.confirmAdmissionTime = Date()
+        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
+            self.withdrawQueueRecords(self.clashingRecords(with: queueRecord), completion: completion)
+        }
+
+    }
+
+    private func clashingRecords(with record: QueueRecord) -> [QueueRecord] {
+        currentQueueRecords.filter { $0 != record && ($0.isPendingAdmission || $0.isAdmitted) }
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
-        os_log("Did update queue record", log: Log.updateQueueRecord, type: .info)
-        guard let oldRecord = currentQueueRecords.first(where: { $0 == record }) else {
-            if pastQueueRecords.contains(record) {
-                return
-            }
-            os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
-            didAddQueueRecord(record)
+        guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             return
         }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
             didAdmitQueueRecord(record)
-            os_log("Detected admission", log: Log.admitCustomer, type: .info)
         case .serve:
             didServeQueueRecord(record)
-            os_log("Detected service", log: Log.serveCustomer, type: .info)
         case .reject:
-            addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
+            didRejectQueueRecord(record)
         case .withdraw:
-            addAsHistoryRecord(record)
-            removeFromCurrent(record)
-            os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
+            didWithdrawQueuerecord(record)
         case .customerUpdate:
             customerDidUpdateQueueRecord(record: record)
-            os_log("Detected regular modification", log: Log.regularModification, type: .info)
         case .confirmAdmission:
             didConfirmAdmissionOfQueueRecord(record)
-            os_log("Detected user initiated confirmation", log: Log.confirmedByCustomer, type: .info)
-        case .none:
-//            assert(false, "Modification should be something")
-            customerDidUpdateQueueRecord(record: record)
-            os_log("Detected no modification. Perhaps was auto-confirmed?",
-                   log: Log.noModification, type: .info)
+        default:
+            assert(false, "Modification should be something")
         }
     }
 
-    private func didAddQueueRecord(_ record: QueueRecord) {
+    func didAddQueueRecord(_ record: QueueRecord) {
+        os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
         if record.isActiveRecord && customerActivity.currentQueues.add(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
@@ -208,22 +184,44 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
-    private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
-        // TODO: ?
-        customerDidUpdateQueueRecord(record: record)
+    private func customerDidUpdateQueueRecord(record: QueueRecord) {
+        os_log("Detected regular modification", log: Log.regularModification, type: .info)
+        if record.isActiveRecord && customerActivity.currentQueues.update(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
-        // tent
-        if clashingRecords(with: record, at: record.admitTime!).isEmpty {
-            // auto accept since this is the only active queue
-            confirmAdmissionOfQueueRecord(record)
+        os_log("Detected admission", log: Log.admitCustomer, type: .info)
+        guard customerActivity.currentQueues.update(record) else {
             return
         }
-        customerDidUpdateQueueRecord(record: record)
+        activitiesDelegate?.didUpdateActiveRecords()
+
+        // tent
+        if clashingRecords(with: record).isEmpty {
+            // auto accept since this is the only active queue
+            confirmAdmissionOfQueueRecord(record, completion: {})
+            return
+        }
+    }
+
+    private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
+        // TODO: ?
+        os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
+        if customerActivity.currentQueues.update(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
+    }
+
+    private func didWithdrawQueuerecord(_ record: QueueRecord) {
+        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
+        addAsHistoryRecord(record)
+        removeFromCurrent(record)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
+        os_log("Detected service", log: Log.serveCustomer, type: .info)
         // TODO: auto withdraw all other active queues (in case of late sync,
         // withdraw those whose starttime <= record.servetime
 
@@ -231,14 +229,10 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         removeFromCurrent(record)
     }
 
-    private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        if record.isActiveRecord {
-            customerActivity.currentQueues.update(record)
-        } else {
-            customerActivity.queueHistory.update(record)
-        }
-        activitiesDelegate?.didUpdateActiveRecords()
-        //queueDelegate?.didUpdateRecord()
+    private func didRejectQueueRecord(_ record: QueueRecord) {
+        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
+        addAsHistoryRecord(record)
+        removeFromCurrent(record)
     }
 
     private func removeFromCurrent(_ record: QueueRecord) {

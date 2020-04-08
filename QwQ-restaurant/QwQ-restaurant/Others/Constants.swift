@@ -113,7 +113,6 @@ struct Constants {
     static let contactKey = "contact"
     static let addressKey = "address"
     static let menuKey = "menu"
-    static let isRestaurantOpenKey = "isRestaurantOpen"
     static let queueOpenTimeKey = "queueOpenTime"
     static let queueCloseTimeKey = "queueCloseTime"
     static let customerKey = "customer"

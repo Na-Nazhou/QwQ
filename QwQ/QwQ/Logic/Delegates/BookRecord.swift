@@ -60,7 +60,7 @@ struct BookRecord: Record {
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
          rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
-        self.init(id: "0", restaurant: restaurant, customer: customer, time: time,
+        self.init(id: UUID().uuidString, restaurant: restaurant, customer: customer, time: time,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,

@@ -40,7 +40,8 @@ class FIRQueueStorage: CustomerQueueStorage {
         }
     }
 
-    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
+    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
+                           completion: @escaping () -> Void) {
         let oldDocRef = getQueueRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (error) in
                 if let error = error {
@@ -54,51 +55,26 @@ class FIRQueueStorage: CustomerQueueStorage {
         }
     }
 
-    // MARK: - Storage data retrieval
-    func loadActiveQueueRecords(customer: Customer, completion: @escaping (QueueRecord?) -> Void) {
-        os_log("Loading all active queue records (regardless of date); old ones shouldve been made history though.",
-               log: Log.loadActivity, type: .info)
-        queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
-            //.whereField("startTime", isEqualTo: Date().toString())
-            .getDocuments { (recordsSnapshot, err) in
-            if let err = err {
-                os_log("Error getting documents",
-                       log: Log.activeQueueRetrievalError,
-                       type: .error, String(describing: err))
+    func updateQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+        let recordDocPairs = newRecords.map {
+            ($0, getQueueRecordDocument(record: $0))
+        }
+        for (newRecord, docRef) in recordDocPairs {
+            batch.setData(newRecord.dictionary, forDocument: docRef)
+        }
+        batch.commit { err in
+            guard err == nil else {
                 return
             }
-            recordsSnapshot!.documents.forEach {
-                self.makeQueueRecord(document: $0) { record in
-                    if record.isActiveRecord {
-                        completion(record)
-                    }
-                }
-            }
-            }
-    }
-
-    /// Searches for the customer's queue records in the past week (7 days) and
-    /// calls the completion handler when records are found.
-    func loadQueueHistory(customer: Customer, completion:  @escaping (QueueRecord?) -> Void) {
-        queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
-            .getDocuments { (recordsSnapshot, err) in
-            if let err = err {
-                os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
-                return
-            }
-                recordsSnapshot!.documents.forEach {
-                    self.makeQueueRecord(document: $0) { record in
-                        if record.isHistoryRecord {
-                            completion(record)
-                        }
-                    }
-                }
-            }
+            completion()
+        }
     }
 
     private func makeQueueRecord(document: DocumentSnapshot,
                                  completion: @escaping (QueueRecord) -> Void) {
-        guard let data = document.data(), let rid = data[Constants.restaurantKey] as? String else {
+        guard let data = document.data(),
+            let rid = data[Constants.restaurantKey] as? String else {
             os_log("Error getting rid from Queue Record document.",
                    log: Log.ridError, type: .error)
             return
@@ -125,17 +101,28 @@ class FIRQueueStorage: CustomerQueueStorage {
     func registerListener(for customer: Customer) {
         removeListener()
 
-        listener = queuesDb.whereField(Constants.customerKey, isEqualTo: customer.uid)
+        listener = queuesDb
+            .whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
-            guard let snapshot = snapshot, err == nil else {
-                os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
-                return
-            }
+                guard let snapshot = snapshot, err == nil else {
+                    os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
+                    return
+                }
 
-                snapshot.documents.forEach {
-                    self.makeQueueRecord(document: $0) { record in
-                        self.delegateWork { $0.didUpdateQueueRecord(record) }
+                snapshot.documentChanges.forEach { diff in
+                    var completion: (QueueRecord) -> Void
+                    switch diff.type {
+                    case .added:
+                        completion = { record in self.delegateWork { $0.didAddQueueRecord(record) } }
+                    case .modified:
+                        completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
+                    case .removed:
+                        print("\n\tDetected removal of queue record from db which should not happen.\n")
+                        completion = { _ in }
                     }
+                    self.makeQueueRecord(
+                        document: diff.document,
+                        completion: completion)
                 }
             }
     }

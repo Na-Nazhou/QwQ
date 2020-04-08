@@ -8,10 +8,11 @@
 import UIKit
 
 class PopoverContentController: UIViewController {
+
+    @IBOutlet private var tableView: PopoverTableView!
+
     let sortCriteria = Constants.sortCriteria
     weak var delegate: PopoverContentControllerDelegate?
-    
-    @IBOutlet private var tableView: PopoverTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

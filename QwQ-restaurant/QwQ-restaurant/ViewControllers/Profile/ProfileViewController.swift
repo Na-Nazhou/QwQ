@@ -15,9 +15,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var addressLabel: UILabel!
     @IBOutlet private var menuLabel: UILabel!
-    @IBOutlet weak var groupSizeLabel: UILabel!
-    @IBOutlet weak var queueTimingLabel: UILabel!
-    @IBOutlet weak var advanceBookingLimitLabel: UILabel!
+    @IBOutlet private var groupSizeLabel: UILabel!
+    @IBOutlet private var queueTimingLabel: UILabel!
+    @IBOutlet private var advanceBookingLimitLabel: UILabel!
     
     @IBOutlet private var profileImageView: UIImageView!
 

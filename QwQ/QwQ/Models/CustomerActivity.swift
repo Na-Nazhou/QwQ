@@ -25,9 +25,30 @@ class CustomerActivity {
     var queueHistory: RecordCollection<QueueRecord>
     var bookingHistory: RecordCollection<BookRecord>
 
+    var activeRecords: [Record] {
+        var records = [Record]()
+        records.append(contentsOf: currentQueues.records)
+        records.append(contentsOf: currentBookings.records)
+        return records
+    }
+
     var historyRecords: [Record] {
         var records = [Record]()
         records.append(contentsOf: queueHistory.records)
+        records.append(contentsOf: bookingHistory.records)
+        return records
+    }
+
+    var queueRecords: [QueueRecord] {
+        var records = [QueueRecord]()
+        records.append(contentsOf: currentQueues.records)
+        records.append(contentsOf: queueHistory.records)
+        return records
+    }
+
+    var bookRecords: [BookRecord] {
+        var records = [BookRecord]()
+        records.append(contentsOf: currentBookings.records)
         records.append(contentsOf: bookingHistory.records)
         return records
     }

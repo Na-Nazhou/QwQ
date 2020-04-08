@@ -16,9 +16,15 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
-    func update(_ element: T) {
-        elements.remove(element)
-        elements.insert(element)
+    @discardableResult
+    func update(_ element: T) -> Bool {
+        if elements.contains(element) {
+            elements.remove(element)
+            elements.insert(element)
+            return true
+        }
+
+        return false
     }
 
     func remove(_ element: T) -> Bool {
@@ -28,11 +34,5 @@ class Collection<T: Hashable> {
     
     func reset() {
         elements.removeAll()
-    }
-
-    func getOriginalElement(of element: T) -> T {
-        precondition(elements.contains(element), "Given element should exist in the first place.")
-        let (_, orig) = elements.insert(element)
-        return orig
     }
 }

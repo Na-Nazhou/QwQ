@@ -28,34 +28,26 @@ class RestaurantLogicManager: RestaurantLogic {
         restaurantStorage.unregisterDelegate(self)
     }
     
-    func restaurantDidModifyProfile(restaurant: Restaurant) {
-        switch restaurantCollection.update(into: restaurant) {
-        case .changedProfileDetails:
-            break
-        case .changedQueueStatus:
-            didChangeQueueStatus(restaurant: restaurant)
+    func didUpdateRestaurant(restaurant: Restaurant) {
+        if restaurantCollection.update(restaurant) {
+            if restaurant == currentRestaurant {
+                currentRestaurant = restaurant
+                restaurantDelegate?.didUpdateRestaurant()
+            }
+
+            searchDelegate?.didUpdateRestaurantCollection()
         }
-    }
-    
-    func didChangeQueueStatus(restaurant: Restaurant) {
-        if restaurant == currentRestaurant {
-            currentRestaurant = restaurant
-            restaurantDelegate?.restaurantDidUpdate()
-        }
-        
-        searchDelegate?.restaurantDidSetQueueStatus(restaurant: restaurant, toIsOpen: restaurant.isQueueOpen)
-        
     }
 
     func didAddRestaurant(restaurant: Restaurant) {
         if restaurantCollection.add(restaurant) {
-            searchDelegate?.restaurantCollectionDidLoadNewRestaurant()
+            searchDelegate?.didUpdateRestaurantCollection()
         }
     }
 
     func didRemoveRestaurant(restaurant: Restaurant) {
         if restaurantCollection.remove(restaurant) {
-            searchDelegate?.restaurantCollectionDidRemoveRestaurant()
+            searchDelegate?.didUpdateRestaurantCollection()
         }
     }
 }

@@ -27,7 +27,6 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FIRProfileStorage
 
     private var uid: String?
-    private var isRestaurantOpen: Bool?
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
 
@@ -69,7 +68,7 @@ class EditProfileViewController: UIViewController {
         }
         
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu, let isRestaurantOpen = isRestaurantOpen else {
+            let address = trimmedAddress, let menu = trimmedMenu else {
                 return
         }
         
@@ -100,7 +99,7 @@ class EditProfileViewController: UIViewController {
         }
 
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
-                                    address: address, menu: menu, isRestaurantOpen: isRestaurantOpen,
+                                    address: address, menu: menu,
                                     queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime)
 
         Profile.updateRestaurantInfo(restaurant: restaurant,
@@ -119,7 +118,6 @@ class EditProfileViewController: UIViewController {
         self.contactTextField.text = restaurant.contact
         self.addressTextField.text = restaurant.address
         self.menuTextView.text = restaurant.menu
-        self.isRestaurantOpen = restaurant.isRestaurantOpen
         self.queueOpenTime = restaurant.queueOpenTime
         self.queueCloseTime = restaurant.queueCloseTime
 

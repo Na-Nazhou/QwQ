@@ -65,12 +65,12 @@ class FIRQueueStorage: RestaurantQueueStorage {
     private func registerListenerForQueue(of restaurant: Restaurant) {
         queueListener = queueDb
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
-            .addSnapshotListener { (queueSnapshot, err) in
-                if let err = err {
-                    print("Error fetching documents: \(err)")
+            .addSnapshotListener { (snapshot, err) in
+                guard let snapshot = snapshot, err == nil else {
+                    print("Error fetching documents: \(String(describing: err))")
                     return
                 }
-                queueSnapshot!.documentChanges.forEach { diff in
+                snapshot.documentChanges.forEach { diff in
                     var completion: (QueueRecord) -> Void
                     switch diff.type {
                     case .added:
@@ -86,6 +86,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
 
                     self.makeQueueRecord(
                         document: diff.document,
+                        restaurant: restaurant,
                         completion: completion)
                 }
             }
@@ -109,6 +110,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
     }
 
     private func makeQueueRecord(document: DocumentSnapshot,
+                                 restaurant: Restaurant,
                                  completion: @escaping (QueueRecord) -> Void) {
         guard let data = document.data(), let cid = data[Constants.customerKey] as? String else {
             os_log("Error getting cid from Queue Record document.",
@@ -118,8 +120,6 @@ class FIRQueueStorage: RestaurantQueueStorage {
         let qid = document.documentID
 
         FIRCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
-            FIRProfileStorage.getRestaurantInfo(
-                completion: { restaurant in
                 guard let rec = QueueRecord(dictionary: data,
                                             customer: customer,
                                             restaurant: restaurant,
@@ -130,7 +130,6 @@ class FIRQueueStorage: RestaurantQueueStorage {
                     }
                     completion(rec)
                 }, errorHandler: { _ in })
-        }, errorHandler: nil)
     }
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
