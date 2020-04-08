@@ -37,7 +37,9 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     }
 
     var currentRecords: [Record] {
-        (restaurantActivity.currentQueue.records + restaurantActivity.currentBookings.records).sorted(by: { record1, record2 in
+        let bookRecords = restaurantActivity.currentQueue.records
+        let queueRecords = restaurantActivity.currentBookings.records
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if let queueRecord1 = record1 as? QueueRecord {
@@ -55,14 +57,17 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     }
 
     var waitingRecords: [Record] {
-        (restaurantActivity.waitingQueue.records + restaurantActivity.waitingBookings.records)
-            .sorted(by: { record1, record2 in
+        let bookRecords = restaurantActivity.waitingQueue.records
+        let queueRecords = restaurantActivity.waitingBookings.records
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             record1.admitTime! > record2.admitTime!
-            })
+        })
     }
 
     var historyRecords: [Record] {
-        (restaurantActivity.historyQueue.records + restaurantActivity.historyBookings.records).sorted(by: { record1, record2 in
+        let bookRecords = restaurantActivity.historyQueue.records
+        let queueRecords = restaurantActivity.historyBookings.records
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if record1.isServed {
@@ -140,7 +145,7 @@ extension RestaurantRecordLogicManager {
             }
         }
 
-        if record.isAdmitted {
+        if record.isAdmitted || record.isConfirmedAdmission {
             if addRecord(record, to: waitingList) {
                 self.presentationDelegate?.didUpdateWaitingList()
             }
@@ -175,6 +180,18 @@ extension RestaurantRecordLogicManager {
             }
         }
 
+        if record.isConfirmedAdmission {
+            if currentList.remove(record) {
+                self.presentationDelegate?.didUpdateCurrentList()
+            }
+            if waitingList.add(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+            if waitingList.update(record) {
+                self.presentationDelegate?.didUpdateWaitingList()
+            }
+        }
+
         if record.isHistoryRecord {
             if currentList.remove(record) {
                 self.presentationDelegate?.didUpdateCurrentList()
@@ -186,17 +203,6 @@ extension RestaurantRecordLogicManager {
 
             if historyList.add(record) {
                 self.presentationDelegate?.didUpdateHistoryList()
-            }
-        }
-    }
-
-    func didDeleteRecord<T: Record>(_ record: T,
-                                    currentList: RecordCollection<T>,
-                                    waitingList: RecordCollection<T>,
-                                    historyList: RecordCollection<T>) {
-        if record.isPendingAdmission {
-            if currentList.remove(record) {
-                self.presentationDelegate?.didUpdateCurrentList()
             }
         }
     }
@@ -215,13 +221,6 @@ extension RestaurantRecordLogicManager {
                         historyList: restaurantActivity.historyQueue)
     }
 
-    func didDeleteQueueRecord(_ record: QueueRecord) {
-        didDeleteRecord(record,
-                        currentList: restaurantActivity.currentQueue,
-                        waitingList: restaurantActivity.waitingQueue,
-                        historyList: restaurantActivity.historyQueue)
-    }
-
     func didAddBookRecord(_ record: BookRecord) {
         didAddRecord(record,
                      currentList: restaurantActivity.currentBookings,
@@ -231,13 +230,6 @@ extension RestaurantRecordLogicManager {
 
     func didUpdateBookRecord(_ record: BookRecord) {
         didUpdateRecord(record,
-                        currentList: restaurantActivity.currentBookings,
-                        waitingList: restaurantActivity.waitingBookings,
-                        historyList: restaurantActivity.historyBookings)
-    }
-
-    func didDeleteBookRecord(_ record: BookRecord) {
-        didDeleteRecord(record,
                         currentList: restaurantActivity.currentBookings,
                         waitingList: restaurantActivity.waitingBookings,
                         historyList: restaurantActivity.historyBookings)
@@ -258,8 +250,8 @@ extension RestaurantRecordLogicManager {
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
     }
 
-    func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
-                           completion: @escaping () -> Void) {
+    private func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
+                                   completion: @escaping () -> Void) {
         queueStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
                                   completion: completion)
     }
@@ -279,8 +271,8 @@ extension RestaurantRecordLogicManager {
         updateBookRecord(oldRecord: record, newRecord: new, completion: completion)
     }
 
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord,
-                          completion: @escaping () -> Void) {
+    private func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord,
+                                  completion: @escaping () -> Void) {
         bookingStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
                                     completion: completion)
     }

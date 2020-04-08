@@ -33,9 +33,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     // TODO: refactor
     var activeRecords: [Record] {
-        var records: [Record] = bookingLogicManager.activeBookRecords
-        records += queueLogicManager.currentQueueRecords
-        return records.sorted(by: { record1, record2 in
+        let bookRecords = bookingLogicManager.activeBookRecords
+        let queueRecords = queueLogicManager.currentQueueRecords
+        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if let queueRecord1 = record1 as? QueueRecord {

@@ -5,7 +5,5 @@ protocol QueueStorageSyncDelegate: AnyObject {
 
     func didUpdateQueueRecord(_ record: QueueRecord)
 
-    func didDeleteQueueRecord(_ record: QueueRecord)
-
     func restaurantDidPossiblyChangeQueueStatus(restaurant: Restaurant)
 }

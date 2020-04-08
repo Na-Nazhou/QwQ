@@ -11,5 +11,4 @@ protocol BookingStorageSyncDelegate: AnyObject {
 
     func didUpdateBookRecord(_ record: BookRecord)
 
-    func didDeleteBookRecord(_ record: BookRecord)
 }

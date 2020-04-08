@@ -40,7 +40,6 @@ class ActivityCell: UICollectionViewCell {
 
         switch record.status {
         case .pendingAdmission:
-            setUpEditButton()
             if let queueRecord = record as? QueueRecord {
                 statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
 
@@ -49,14 +48,14 @@ class ActivityCell: UICollectionViewCell {
             if let bookRecord = record as? BookRecord {
                 statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
             }
+            setUpEditButton()
         case .admitted:
-            setUpConfirmButton()
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+            setUpConfirmButton()
         case .confirmedAdmission:
+            statusLabel.text = "Confirmed at: \(record.confirmAdmissionTime!.toString())"
             setUpConfirmButton()
             disableRightButton()
-            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-                + " (Confirmed)"
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
         case .rejected:

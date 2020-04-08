@@ -192,12 +192,14 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                                                       completion: self.didUpdateRecord)
             }
 
-            if queueRecord.isAdmitted {
+            if queueRecord.isAdmitted || queueRecord.isConfirmedAdmission {
                 recordCell.rejectAction = {
                     self.recordLogicManager.rejectCustomer(record: queueRecord,
                                                            completion: self.didUpdateRecord)
                 }
+            }
 
+            if queueRecord.isConfirmedAdmission {
                 recordCell.serveAction = {
                     self.recordLogicManager.serveCustomer(record: queueRecord,
                                                           completion: self.didUpdateRecord)
@@ -211,12 +213,14 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                                                       completion: self.didUpdateRecord)
             }
 
-            if bookRecord.isAdmitted {
+            if bookRecord.isAdmitted || bookRecord.isConfirmedAdmission {
                 recordCell.rejectAction = {
                     self.recordLogicManager.rejectCustomer(record: bookRecord,
                                                            completion: self.didUpdateRecord)
                 }
+            }
 
+            if bookRecord.isConfirmedAdmission {
                 recordCell.serveAction = {
                     self.recordLogicManager.serveCustomer(record: bookRecord,
                                                           completion: self.didUpdateRecord)

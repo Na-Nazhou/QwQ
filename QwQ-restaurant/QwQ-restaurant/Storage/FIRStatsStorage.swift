@@ -14,18 +14,20 @@ class FIRStatsStorage: RestaurantStatsStorage {
     }
 
     private func restaurantQueues(of restaurant: Restaurant, from date: Date, to date2: Date) -> Query {
-        return queuesDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
+        queuesDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .whereField(Constants.startTimeKey, isLessThanOrEqualTo: getEndOfDay(of: date2))
             .whereField(Constants.startTimeKey, isGreaterThanOrEqualTo: getStartOfDay(of: date))
     }
 
     private func restaurantBookings(of restaurant: Restaurant, from date: Date, to date2: Date) -> Query {
-        return  bookingDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
+        bookingDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .whereField(Constants.timeKey, isLessThanOrEqualTo: getEndOfDay(of: date2))
             .whereField(Constants.timeKey, isGreaterThanOrEqualTo: getStartOfDay(of: date))
     }
 
-    func fetchTotalNumCustomers(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalNumCustomers(for restaurant: Restaurant,
+                                from date: Date, to date2: Date,
+                                completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
@@ -53,7 +55,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
         }
     }
     
-    func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant,
+                                          from date: Date, to date2: Date,
+                                          completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
@@ -73,7 +77,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
         }
     }
 
-    func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant,
+                                            from date: Date, to date2: Date,
+                                            completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
@@ -93,7 +99,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
         }
     }
     
-    func fetchQueueCancellationRate(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchQueueCancellationRate(for restaurant: Restaurant,
+                                    from date: Date, to date2: Date,
+                                    completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
@@ -110,7 +118,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
         }
     }
     
-    func fetchBookingCancellationRate(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchBookingCancellationRate(for restaurant: Restaurant,
+                                      from date: Date, to date2: Date,
+                                      completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantBookings(of: restaurant, from: date, to: date2)
@@ -138,10 +148,10 @@ class FIRStatsStorage: RestaurantStatsStorage {
     }
 
     private func getStartOfDay(of date: Date) -> Date {
-        return Calendar.current.startOfDay(for: date)
+        Calendar.current.startOfDay(for: date)
     }
 
     private func timeDifferenceInSeconds(between start: Date, and end: Date) -> Int {
-        return Int(end.timeIntervalSince(start))
+        Int(end.timeIntervalSince(start))
     }
 }

@@ -41,6 +41,10 @@ class RecordViewController: UIViewController {
             }
 
             if record.isAdmitted {
+                setUpPendingAdmissionButton()
+            }
+
+            if record.isConfirmedAdmission {
                 setUpServeButton()
             }
 
@@ -79,6 +83,12 @@ class RecordViewController: UIViewController {
     private func setUpServeButton() {
         actionButton.setTitle("SERVE", for: .normal)
         actionButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
+    }
+
+    private func setUpPendingAdmissionButton() {
+        actionButton.setTitle("PENDING ADMISSION", for: .normal)
+        actionButton.alpha = 0.5
+        actionButton.isEnabled = false
     }
 
     // TODO
