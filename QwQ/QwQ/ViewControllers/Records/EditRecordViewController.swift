@@ -11,9 +11,11 @@ class EditRecordViewController: UIViewController {
     var spinner: UIView?
 
     var restaurantLogicManager: RestaurantLogicManager?
-    var restaurant: Restaurant? {
-        restaurantLogicManager?.currentRestaurant
+
+    var restaurants: [Restaurant] {
+        restaurantLogicManager?.currentRestaurants ?? []
     }
+
     var record: Record?
 
     var groupSize: Int? {
@@ -60,10 +62,7 @@ class EditRecordViewController: UIViewController {
             babyChairQuantityTextField.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         } else {
-            guard let restaurant = restaurant else {
-                return
-            }
-            restaurantNameLabel.text = restaurant.name
+            restaurantNameLabel.text = restaurants.map({ $0.name }).joined(separator: ", ")
 
             // Autofill the name and contact
             nameTextField.text = CustomerActivity.shared().customer.name
@@ -77,27 +76,46 @@ class EditRecordViewController: UIViewController {
         contactTextField.isEnabled = false
     }
 
-     func didAddRecord() {
-         removeSpinner(spinner)
-         showMessage(
-             title: Constants.successTitle,
-             message: Constants.recordCreateSuccessMessage,
-             buttonText: Constants.okayTitle,
-             buttonAction: {_ in
-                 self.handleBack()
-             })
+    func didAddRecord() {
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordCreateSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+            })
+    }
+
+    func didAddRecords(_ newRecords: [Record]) {
+        guard !newRecords.isEmpty else {
+            return
+        }
+        removeSpinner(spinner)
+        let message: String
+        if newRecords.count == 1 {
+            message = Constants.recordCreateSuccessMessage
+        } else {
+            message = Constants.multipleRecordCreateSuccessMessage
+        }
+        showMessage(
+            title: Constants.successTitle,
+            message: message,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+            })
      }
 
-     func didUpdateRecord() {
-         removeSpinner(spinner)
-         showMessage(
-             title: Constants.successTitle,
-             message: Constants.recordUpdateSuccessMessage,
-             buttonText: Constants.okayTitle,
-             buttonAction: {_ in
-                 self.handleBack()
-             })
-     }
+    func didUpdateRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordUpdateSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+            })
+    }
 
     func didWithdrawRecord() {
         removeSpinner(spinner)

@@ -38,7 +38,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     deinit {
-        os_log("DEINITING queue lm", log: Log.deinitLogic, type: .info)
+        os_log("DEINITING queue logic manager", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 
@@ -61,6 +61,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     startTime: startTime)
 
         if !checkRestaurantQueue(for: newRecord) {
+            queueDelegate?.didFindRestaurantQueueClosed(for: restaurant)
             return false
         }
 
@@ -70,10 +71,40 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         return true
     }
 
+    func enqueue(to restaurants: [Restaurant],
+                 with groupSize: Int,
+                 babyChairQuantity: Int,
+                 wheelchairFriendly: Bool) -> Bool {
+        guard !restaurants.isEmpty else {
+            return true
+        }
+
+        if let restaurant = restaurants.first(where: { !$0.isQueueOpen }) {
+            queueDelegate?.didFindRestaurantQueueClosed(for: restaurant)
+            return false
+        }
+
+        let startTime = Date()
+        let newRecords: [QueueRecord] = restaurants.map { restaurant in
+            let newRecord = QueueRecord(restaurant: restaurant,
+                                        customer: self.customer,
+                                        groupSize: groupSize,
+                                        babyChairQuantity: babyChairQuantity,
+                                        wheelchairFriendly: wheelchairFriendly,
+                                        startTime: startTime)
+
+            return newRecord
+        }
+
+        queueStorage.addQueueRecords(newRecords: newRecords) {
+            self.queueDelegate?.didAddRecords(newRecords)
+        }
+        return true
+    }
+
     private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
         if !record.restaurant.isQueueOpen {
             os_log("Queue is closed", log: Log.closeQueue, type: .info)
-            queueDelegate?.didFindRestaurantQueueClosed()
             return false
         }
 

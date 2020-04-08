@@ -28,12 +28,31 @@ class FIRQueueStorage: CustomerQueueStorage {
 
     func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void) {
         let newRecordRef = queuesDb.document()
-        newRecordRef.setData(newRecord.dictionary) { (error) in
-            if let error = error {
+        newRecordRef.setData(newRecord.dictionary) { err in
+            if let err = err {
                 os_log("Error adding queue record",
                        log: Log.addQueueRecordError,
                        type: .error,
-                       error.localizedDescription)
+                       err.localizedDescription)
+                return
+            }
+            completion()
+        }
+    }
+
+    func addQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+
+        for newRecord in newRecords {
+            let newRecordRef = queuesDb.document()
+            newRecordRef.setData(newRecord.dictionary)
+        }
+        batch.commit { err in
+            if let err = err {
+                os_log("Error adding queue record",
+                       log: Log.addQueueRecordError,
+                       type: .error,
+                       err.localizedDescription)
                 return
             }
             completion()
@@ -89,7 +108,8 @@ class FIRQueueStorage: CustomerQueueStorage {
                                             restaurant: restaurant,
                                             id: qid) else {
                                                 os_log("Cannot create queue record. Maybe accidentally deleted.",
-                                                       log: Log.createQueueRecordError, type: .info)
+                                                       log: Log.createQueueRecordError,
+                                                       type: .error)
                                                 return
                     }
                     completion(rec)
@@ -98,6 +118,12 @@ class FIRQueueStorage: CustomerQueueStorage {
     }
 
     // MARK: - Listeners
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+
     func registerListener(for customer: Customer) {
         removeListener()
 
@@ -105,7 +131,10 @@ class FIRQueueStorage: CustomerQueueStorage {
             .whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
-                    os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
+                    os_log("Error getting queue record documents",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
 
@@ -125,11 +154,6 @@ class FIRQueueStorage: CustomerQueueStorage {
                         completion: completion)
                 }
             }
-    }
-
-    func removeListener() {
-        listener?.remove()
-        listener = nil
     }
 
     func registerDelegate(_ del: QueueStorageSyncDelegate) {

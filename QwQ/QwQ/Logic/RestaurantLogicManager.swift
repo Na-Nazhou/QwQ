@@ -9,6 +9,17 @@ class RestaurantLogicManager: RestaurantLogic {
 
     var currentRestaurant: Restaurant?
 
+    var selectedRestaurants = Collection<Restaurant>()
+    var currentRestaurants: [Restaurant] {
+        get {
+            Array(selectedRestaurants.restaurants)
+        }
+        set {
+            selectedRestaurants.reset()
+            selectedRestaurants.add(newValue)
+        }
+    }
+
     private var restaurantCollection = Collection<Restaurant>()
     var restaurants: [Restaurant] {
         Array(restaurantCollection.restaurants).sorted(by: {
@@ -37,6 +48,7 @@ class RestaurantLogicManager: RestaurantLogic {
                 restaurantDelegate?.didUpdateRestaurant()
             }
 
+            selectedRestaurants.update(restaurant)
             searchDelegate?.didUpdateRestaurantCollection()
         }
     }
@@ -49,6 +61,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     func didRemoveRestaurant(restaurant: Restaurant) {
         if restaurantCollection.remove(restaurant) {
+            selectedRestaurants.remove(restaurant)
             searchDelegate?.didUpdateRestaurantCollection()
         }
     }

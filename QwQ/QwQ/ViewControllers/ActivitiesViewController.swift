@@ -48,7 +48,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             } else {
                 time2 = (record2 as? BookRecord)!.time
             }
-            return time1 > time2
+            return time1 < time2
         })
     }
 

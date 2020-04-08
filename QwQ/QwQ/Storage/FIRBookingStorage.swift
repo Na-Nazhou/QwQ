@@ -28,12 +28,31 @@ class FIRBookingStorage: CustomerBookingStorage {
 
     func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void) {
         let newRecordRef = bookingDb.document()
-        newRecordRef.setData(newRecord.dictionary) { (error) in
-            if let error = error {
+        newRecordRef.setData(newRecord.dictionary) { err in
+            if let err = err {
                 os_log("Error adding book record",
                        log: Log.addBookRecordError,
                        type: .error,
-                       error.localizedDescription)
+                       err.localizedDescription)
+                return
+            }
+            completion()
+        }
+    }
+
+    func addBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+
+        for newRecord in newRecords {
+            let newRecordRef = bookingDb.document()
+            newRecordRef.setData(newRecord.dictionary)
+        }
+        batch.commit { err in
+            if let err = err {
+                os_log("Error adding book record",
+                       log: Log.addBookRecordError,
+                       type: .error,
+                       err.localizedDescription)
                 return
             }
             completion()
@@ -89,14 +108,19 @@ class FIRBookingStorage: CustomerBookingStorage {
                                                customer: customer,
                                                restaurant: restaurant,
                                                id: bid) else {
-                                                   os_log("Couldn't create book record. Likely a document is deleted but it's not supposed to.",
+                                                   os_log("Couldn't create book record.",
                                                           log: Log.createBookRecordError,
-                                                          type: .info)
+                                                          type: .error)
                                                 return
                     }
                     completion(rec)
                 }, errorHandler: { _ in })
         }, errorHandler: nil)
+    }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     func registerListener(for customer: Customer) {
@@ -107,7 +131,10 @@ class FIRBookingStorage: CustomerBookingStorage {
             .whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
-                    os_log("Error getting documents", log: Log.bookRetrievalError, type: .error, String(describing: err))
+                    os_log("Error getting documents",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
 
@@ -127,11 +154,6 @@ class FIRBookingStorage: CustomerBookingStorage {
                         completion: completion)
                 }
             }
-    }
-
-    func removeListener() {
-        listener?.remove()
-        listener = nil
     }
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {

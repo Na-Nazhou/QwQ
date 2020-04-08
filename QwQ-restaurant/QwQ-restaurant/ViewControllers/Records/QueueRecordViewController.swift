@@ -35,6 +35,6 @@ class QueueRecordViewController: RecordViewController {
         }
         self.spinner = self.showSpinner(onView: self.view)
         recordLogicManager.rejectCustomer(record: queueRecord,
-                            completion: self.didUpdateRecord)
+                                          completion: self.didUpdateRecord)
     }
 }

@@ -35,15 +35,11 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
 
         // Create a new book record
-        guard let restaurant = restaurant else {
-            return
-        }
-
-        if bookingLogicManager.addBookRecord(to: restaurant,
-                                             at: datePicker.date,
-                                             with: groupSize,
-                                             babyChairQuantity: babyChairQuantity,
-                                             wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+        if bookingLogicManager.addBookRecords(to: restaurants,
+                                              at: datePicker.date,
+                                              with: groupSize,
+                                              babyChairQuantity: babyChairQuantity,
+                                              wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
         }
     }
@@ -73,9 +69,9 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
     }
 
-    func didFindExistingRecord() {
+    func didFindExistingRecord(at restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
-                    message: "You have an existing booking at the same time at this restaurant already!",
+                    message: String(format: Constants.alreadyBookRestaurantMessage, restaurant.name),
                     buttonText: Constants.okayTitle)
     }
 }

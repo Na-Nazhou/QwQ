@@ -39,14 +39,14 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         // Cannot queue if the restaurant is currently not open
         if !restaurant.isQueueOpen {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.restaurantUnavailableMessage,
+                        message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                         buttonText: Constants.okayTitle)
             return
         }
 
         if !queueLogicManager.canQueue(for: restaurant) {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.alreadyQueuedRestaurantMessage,
+                        message: String(format: Constants.alreadyQueuedRestaurantMessage, restaurant.name),
                         buttonText: Constants.okayTitle)
             return
         }
@@ -85,12 +85,18 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let restaurant = restaurant else {
+            return
+        }
         if segue.identifier == Constants.editQueueSelectedSegue {
             guard let editQVC = segue.destination as? EditQueueViewController else {
                 assert(false,
                        "Destination should be editRecordVC.")
                 return
             }
+
+            restaurantLogicManager.currentRestaurants = [restaurant]
+
             editQVC.queueLogicManager = queueLogicManager
             editQVC.restaurantLogicManager = restaurantLogicManager
         }
@@ -100,6 +106,9 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                        "Destination should be editRecordVC and restaurant should not be nil.")
                 return
             }
+
+            restaurantLogicManager.currentRestaurants = [restaurant]
+
             editBVC.restaurantLogicManager = restaurantLogicManager
             editBVC.bookingLogicManager = bookingLogicManager
             return

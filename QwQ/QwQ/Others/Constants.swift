@@ -44,11 +44,12 @@ struct Constants {
     static let resetPasswordMessage = "Please check your email to reset your password."
 
     // MARK: Queue record settings
-    static let restaurantUnavailableMessage = "This restaurant queue is closed!"
-    static let alreadyQueuedRestaurantMessage = "You are already in the queue for this restaurant."
-    static let alreadyAdmittedMessage = "You are already admitted to a restaurant."
+    static let restaurantUnavailableMessage = "The queue for %@ is closed!"
+    static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
+    static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
     static let recordCreateSuccessMessage = "You have created a record."
+    static let multipleRecordCreateSuccessMessage = "You have successfully created multiple records."
     static let recordUpdateSuccessMessage = "Your record has been updated."
     static let recordConfirmSuccessMessage = "Your record has been confirmed."
     
@@ -142,4 +143,5 @@ struct Constants {
     static let withdrawTimeKey = "withdrawTime"
     static let confirmAdmissionTimeKey = "confirmAdmissionTime"
     static let timeKey = "time"
+    static let estimatedAdmitTimeKey = "estimatedAdmitTime"
 }

@@ -41,13 +41,33 @@ class SearchViewController: UIViewController, SearchDelegate {
     
     @IBAction private func handleBook(_ sender: Any) {
         if selectionState == .selectAll {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+                return
+            }
+            let selectedRestaurants = items.map {
+                filtered[$0.item]
+            }
+
+            guard !selectedRestaurants.isEmpty else {
+                return
+            }
+            self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: selectedRestaurants)
         }
     }
     
     @IBAction private func handleQueue(_ sender: Any) {
-        if selectionState == .selectOne {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+        if selectionState == .selectAll {
+            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+                return
+            }
+            let selectedRestaurants = items.map {
+                filtered[$0.item]
+            }
+
+            guard !selectedRestaurants.isEmpty else {
+                 return
+             }
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: selectedRestaurants)
         }
     }
     
@@ -134,10 +154,9 @@ class SearchViewController: UIViewController, SearchDelegate {
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,
-            let restaurant = sender as? Restaurant {
-            if restaurantLogicManager.currentRestaurant != restaurant {
-                restaurantLogicManager.currentRestaurant = restaurant
-            } // otherwise it is the most updated copy of restaurant
+            let restaurants = sender as? [Restaurant] {
+
+            restaurantLogicManager.currentRestaurants = restaurants
             
             guard let editVC = segue.destination as? EditQueueViewController else {
                 assert(false, "Wrong way of doing this")
@@ -145,6 +164,19 @@ class SearchViewController: UIViewController, SearchDelegate {
             }
             editVC.restaurantLogicManager = restaurantLogicManager
             editVC.queueLogicManager = queueLogicManager
+        }
+
+        if segue.identifier == Constants.editBookSelectedSegue,
+            let restaurants = sender as? [Restaurant] {
+
+            restaurantLogicManager.currentRestaurants = restaurants
+
+            guard let editVC = segue.destination as? EditBookingViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            editVC.restaurantLogicManager = restaurantLogicManager
+            editVC.bookingLogicManager = bookingLogicManager
         }
     }
 }
@@ -247,19 +279,19 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.queueAction = {
             if !restaurant.isQueueOpen {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.restaurantUnavailableMessage,
+                                 message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                                  buttonText: Constants.okayTitle)
                 return
             }
             
             if !self.queueLogicManager.canQueue(for: restaurant) {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.alreadyQueuedRestaurantMessage,
+                                 message: String(format: Constants.alreadyQueuedRestaurantMessage, restaurant.name), 
                                  buttonText: Constants.okayTitle)
                 return
             }
             
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: [restaurant])
         }
         return restaurantCell
     }
