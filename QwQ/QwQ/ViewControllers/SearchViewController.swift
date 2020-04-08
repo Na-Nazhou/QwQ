@@ -47,6 +47,10 @@ class SearchViewController: UIViewController, SearchDelegate {
             let selectedRestaurants = items.map {
                 filtered[$0.item]
             }
+
+            guard !selectedRestaurants.isEmpty else {
+                return
+            }
             self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: selectedRestaurants)
         }
     }
@@ -59,6 +63,10 @@ class SearchViewController: UIViewController, SearchDelegate {
             let selectedRestaurants = items.map {
                 filtered[$0.item]
             }
+
+            guard !selectedRestaurants.isEmpty else {
+                 return
+             }
             self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: selectedRestaurants)
         }
     }

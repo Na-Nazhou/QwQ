@@ -44,7 +44,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     // num of ppl in the record
                     completion($0.data()[Constants.groupSizeKey] as? Int ?? 0)
                 }
-        }
+            }
 
        restaurantBookings(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
@@ -58,7 +58,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                 recordsSnapshot!.documents.forEach {
                     completion($0.data()[Constants.groupSizeKey] as? Int ?? 0)
                 }
-        }
+            }
     }
     
     func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant,
@@ -83,7 +83,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     }
                     completion(self.timeDifferenceInSeconds(between: startTime, and: admitTime))
                 }
-        }
+            }
     }
 
     func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant,
@@ -108,7 +108,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     }
                     completion(self.timeDifferenceInSeconds(between: admitTime, and: serveTime))
                 }
-        }
+            }
     }
     
     func fetchQueueCancellationRate(for restaurant: Restaurant,
@@ -130,7 +130,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                         completion(1)
                     }
                 }
-        }
+            }
     }
     
     func fetchBookingCancellationRate(for restaurant: Restaurant,
@@ -152,7 +152,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                         completion(1)
                     }
                 }
-        }
+            }
     }
     
     private func checkFromToDates(from: Date, to: Date) {

@@ -62,7 +62,7 @@ class EditRecordViewController: UIViewController {
             babyChairQuantityTextField.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         } else {
-            restaurantNameLabel.text = restaurants.map({ $0.name }).joined()
+            restaurantNameLabel.text = restaurants.map({ $0.name }).joined(separator: ", ")
 
             // Autofill the name and contact
             nameTextField.text = CustomerActivity.shared().customer.name
@@ -78,12 +78,12 @@ class EditRecordViewController: UIViewController {
 
     func didAddRecord() {
         showMessage(
-        title: Constants.successTitle,
-        message: Constants.recordCreateSuccessMessage,
-        buttonText: Constants.okayTitle,
-        buttonAction: {_ in
-            self.handleBack()
-        })
+            title: Constants.successTitle,
+            message: Constants.recordCreateSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+            })
     }
 
     func didAddRecords(_ newRecords: [Record]) {

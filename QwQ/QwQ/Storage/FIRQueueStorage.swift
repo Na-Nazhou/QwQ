@@ -131,7 +131,10 @@ class FIRQueueStorage: CustomerQueueStorage {
             .whereField(Constants.customerKey, isEqualTo: customer.uid)
             .addSnapshotListener { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
-                    os_log("Error getting documents", log: Log.queueRetrievalError, type: .error, String(describing: err))
+                    os_log("Error getting queue record documents",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
 

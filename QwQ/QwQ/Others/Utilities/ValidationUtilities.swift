@@ -23,7 +23,7 @@ class ValidationUtilities {
     private static func isAllDigits(text: String) -> Bool {
         let characterSet = NSCharacterSet(charactersIn: "0123456789").inverted
         let inputString = text.components(separatedBy: characterSet)
-        let filtered = inputString.joined(separator: "")
+        let filtered = inputString.joined()
         return text == filtered
     }
 
