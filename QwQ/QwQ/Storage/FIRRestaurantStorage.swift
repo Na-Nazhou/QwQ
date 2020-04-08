@@ -20,7 +20,9 @@ class FIRRestaurantStorage: RestaurantStorage {
         removeListener()
     }
     
-    private func registerListener() {
+    func registerListener() {
+        removeListener()
+        
         listener = db.collection(Constants.restaurantsDirectory)
             .addSnapshotListener { (snapshot, err) in
                 guard err == nil else {

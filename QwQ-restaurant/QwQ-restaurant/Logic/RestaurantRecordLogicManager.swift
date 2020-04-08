@@ -162,7 +162,7 @@ extension RestaurantRecordLogicManager {
                                     waitingList: RecordCollection<T>,
                                     historyList: RecordCollection<T>) {
         if record.isPendingAdmission {
-            currentList.update(to: record)
+            currentList.update(record)
             self.presentationDelegate?.didUpdateCurrentList()
         }
 
