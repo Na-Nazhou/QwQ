@@ -33,16 +33,16 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         }
 
          // Create a new queue record
-        guard let restaurant = restaurant else {
-            return
-        }
-        
         if queueLogicManager
-            .enqueue(to: restaurant,
+            .enqueue(to: restaurants,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
+        } else {
+            showMessage(title: Constants.errorTitle,
+                        message: "",
+                        buttonText: Constants.okayTitle)
         }
     }
 

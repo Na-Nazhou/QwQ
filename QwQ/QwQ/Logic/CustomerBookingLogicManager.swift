@@ -62,6 +62,39 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         return true
     }
 
+    func addBookRecords(to restaurants: [Restaurant],
+                        at time: Date,
+                        with groupSize: Int,
+                        babyChairQuantity: Int,
+                        wheelchairFriendly: Bool) -> Bool {
+
+        var success = true
+        let newRecords: [BookRecord] = restaurants.map {
+            let newRecord = BookRecord(restaurant: $0,
+                                       customer: customer,
+                                       time: time,
+                                       groupSize: groupSize,
+                                       babyChairQuantity: babyChairQuantity,
+                                       wheelchairFriendly: wheelchairFriendly)
+
+            if !checkExistingRecords(against: newRecord) {
+                success = false
+            }
+
+            return newRecord
+        }
+
+        if !success {
+            return false
+        }
+
+        bookingStorage.addBookRecords(newRecords: newRecords) {
+            self.bookingDelegate?.didAddRecords(newRecords)
+        }
+
+        return true
+    }
+
     func editBookRecord(oldRecord: BookRecord,
                         at time: Date,
                         with groupSize: Int,

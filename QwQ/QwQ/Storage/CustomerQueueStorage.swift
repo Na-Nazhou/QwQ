@@ -19,9 +19,10 @@ protocol CustomerQueueStorage: QueueStorageSync {
     /// Insert a queue record
     func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void)
 
+    func addQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void)
+
     /// Update a queue record (can only update groupSize, babyCount, wheelchairCount)
     func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void)
 
     func updateQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void)
-
 }

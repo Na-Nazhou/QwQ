@@ -19,6 +19,8 @@ protocol CustomerBookingStorage: BookingStorageSync {
     /// Insert a book record
     func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void)
 
+    func addBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void)
+
     /// Update a book record (can only update groupSize, babyCount, wheelchairCount, and arrival time)
     func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void)
 

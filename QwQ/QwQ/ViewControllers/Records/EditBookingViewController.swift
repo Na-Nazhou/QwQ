@@ -35,16 +35,16 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
 
         // Create a new book record
-        guard let restaurant = restaurant else {
-            return
-        }
-
-        if bookingLogicManager.addBookRecord(to: restaurant,
-                                             at: datePicker.date,
-                                             with: groupSize,
-                                             babyChairQuantity: babyChairQuantity,
-                                             wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+        if bookingLogicManager.addBookRecords(to: restaurants,
+                                              at: datePicker.date,
+                                              with: groupSize,
+                                              babyChairQuantity: babyChairQuantity,
+                                              wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
+        } else {
+                showMessage(title: Constants.errorTitle,
+                            message: "",
+                            buttonText: Constants.okayTitle)
         }
     }
     

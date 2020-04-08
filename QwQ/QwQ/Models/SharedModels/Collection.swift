@@ -10,6 +10,7 @@ class Collection<T: Hashable> {
         return isNew
     }
 
+    @discardableResult
     func add(_ newElements: [T]) -> Bool {
         let origSize = size
         elements = elements.union(Set(newElements))
@@ -27,8 +28,13 @@ class Collection<T: Hashable> {
         return false
     }
 
+    @discardableResult
     func remove(_ element: T) -> Bool {
         let removed = elements.remove(element)
         return removed != nil
+    }
+
+    func reset() {
+        elements.removeAll()
     }
 }

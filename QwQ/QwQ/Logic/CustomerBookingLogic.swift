@@ -15,6 +15,12 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
                        babyChairQuantity: Int,
                        wheelchairFriendly: Bool) -> Bool
 
+    func addBookRecords(to restaurants: [Restaurant],
+                        at time: Date,
+                        with groupSize: Int,
+                        babyChairQuantity: Int,
+                        wheelchairFriendly: Bool) -> Bool
+
     func editBookRecord(oldRecord: BookRecord,
                         at time: Date,
                         with groupSize: Int,

@@ -9,6 +9,8 @@ protocol RecordDelegate: AnyObject {
 
     func didAddRecord()
 
+    func didAddRecords(_ newRecords: [Record])
+
     func didUpdateRecord()
 
     func didWithdrawRecord()

@@ -70,6 +70,36 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         return true
     }
 
+    func enqueue(to restaurants: [Restaurant],
+                 with groupSize: Int,
+                 babyChairQuantity: Int,
+                 wheelchairFriendly: Bool) -> Bool {
+        guard !restaurants.isEmpty else {
+            return true
+        }
+
+        guard restaurants.allSatisfy({ $0.isQueueOpen }) else {
+            return false
+        }
+
+        let startTime = Date()
+        let newRecords: [QueueRecord] = restaurants.map { restaurant in
+            let newRecord = QueueRecord(restaurant: restaurant,
+                                        customer: self.customer,
+                                        groupSize: groupSize,
+                                        babyChairQuantity: babyChairQuantity,
+                                        wheelchairFriendly: wheelchairFriendly,
+                                        startTime: startTime)
+
+            return newRecord
+        }
+
+        queueStorage.addQueueRecords(newRecords: newRecords) {
+            self.queueDelegate?.didAddRecords(newRecords)
+        }
+        return true
+    }
+
     private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
         if !record.restaurant.isQueueOpen {
             os_log("Queue is closed", log: Log.closeQueue, type: .info)

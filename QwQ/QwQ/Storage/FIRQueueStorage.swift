@@ -28,12 +28,31 @@ class FIRQueueStorage: CustomerQueueStorage {
 
     func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void) {
         let newRecordRef = queuesDb.document()
-        newRecordRef.setData(newRecord.dictionary) { (error) in
-            if let error = error {
+        newRecordRef.setData(newRecord.dictionary) { err in
+            if let err = err {
                 os_log("Error adding queue record",
                        log: Log.addQueueRecordError,
                        type: .error,
-                       error.localizedDescription)
+                       err.localizedDescription)
+                return
+            }
+            completion()
+        }
+    }
+
+    func addQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+
+        for newRecord in newRecords {
+            let newRecordRef = queuesDb.document()
+            newRecordRef.setData(newRecord.dictionary)
+        }
+        batch.commit { err in
+            if let err = err {
+                os_log("Error adding queue record",
+                       log: Log.addQueueRecordError,
+                       type: .error,
+                       err.localizedDescription)
                 return
             }
             completion()

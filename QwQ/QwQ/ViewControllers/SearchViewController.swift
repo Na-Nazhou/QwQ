@@ -41,13 +41,25 @@ class SearchViewController: UIViewController, SearchDelegate {
     
     @IBAction private func handleBook(_ sender: Any) {
         if selectionState == .selectAll {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+                return
+            }
+            let selectedRestaurants = items.map {
+                filtered[$0.item]
+            }
+            self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: selectedRestaurants)
         }
     }
     
     @IBAction private func handleQueue(_ sender: Any) {
-        if selectionState == .selectOne {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+        if selectionState == .selectAll {
+            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+                return
+            }
+            let selectedRestaurants = items.map {
+                filtered[$0.item]
+            }
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: selectedRestaurants)
         }
     }
     
@@ -134,10 +146,9 @@ class SearchViewController: UIViewController, SearchDelegate {
         }
         
         if segue.identifier == Constants.editQueueSelectedSegue,
-            let restaurant = sender as? Restaurant {
-            if restaurantLogicManager.currentRestaurant != restaurant {
-                restaurantLogicManager.currentRestaurant = restaurant
-            } // otherwise it is the most updated copy of restaurant
+            let restaurants = sender as? [Restaurant] {
+
+            restaurantLogicManager.currentRestaurants = restaurants
             
             guard let editVC = segue.destination as? EditQueueViewController else {
                 assert(false, "Wrong way of doing this")
@@ -145,6 +156,19 @@ class SearchViewController: UIViewController, SearchDelegate {
             }
             editVC.restaurantLogicManager = restaurantLogicManager
             editVC.queueLogicManager = queueLogicManager
+        }
+
+        if segue.identifier == Constants.editBookSelectedSegue,
+            let restaurants = sender as? [Restaurant] {
+
+            restaurantLogicManager.currentRestaurants = restaurants
+
+            guard let editVC = segue.destination as? EditBookingViewController else {
+                assert(false, "Wrong way of doing this")
+                return
+            }
+            editVC.restaurantLogicManager = restaurantLogicManager
+            editVC.bookingLogicManager = bookingLogicManager
         }
     }
 }
@@ -259,7 +283,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 return
             }
             
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: [restaurant])
         }
         return restaurantCell
     }
