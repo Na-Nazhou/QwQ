@@ -55,6 +55,22 @@ class FIRQueueStorage: CustomerQueueStorage {
         }
     }
 
+    func updateQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+        let recordDocPairs = newRecords.map {
+            ($0, getQueueRecordDocument(record: $0))
+        }
+        for (newRecord, docRef) in recordDocPairs {
+            batch.setData(newRecord.dictionary, forDocument: docRef)
+        }
+        batch.commit { err in
+            guard err == nil else {
+                return
+            }
+            completion()
+        }
+    }
+
     private func makeQueueRecord(document: DocumentSnapshot,
                                  completion: @escaping (QueueRecord) -> Void) {
         guard let data = document.data(),

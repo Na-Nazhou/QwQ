@@ -106,6 +106,21 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
+    private func withdrawBookRecords(_ records: [BookRecord], completion: @escaping () -> Void) {
+        guard !records.isEmpty else {
+            completion()
+            return
+        }
+        let withdrawTime = Date()
+        var newRecords = [BookRecord]()
+        for record in records {
+            var newRecord = record
+            newRecord.withdrawTime = withdrawTime
+            newRecords.append(newRecord)
+        }
+        bookingStorage.updateBookRecords(newRecords: newRecords, completion: completion)
+    }
+
     func confirmAdmissionOfBookRecord(_ record: BookRecord) {
         //TODO
     }
@@ -152,19 +167,20 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
+    private func clashingRecords(with record: BookRecord) -> [BookRecord] {
+        activeBookRecords.filter {
+            $0 != record && $0.time == record.time
+        }
+    }
+
     private func didAdmitBookRecord(_ record: BookRecord) {
         os_log("Detected admission", log: Log.admitCustomer, type: .info)
         guard customerActivity.currentBookings.update(record) else {
             return
         }
 
+        withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
-
-        // Delete other bookings at the same time
-        for otherRecord in activeBookRecords where otherRecord.time == record.time
-            && otherRecord != record {
-            withdrawBookRecord(otherRecord, completion: {})
-        }
     }
 
     private func didConfirmAdmission(of record: BookRecord) {
@@ -172,13 +188,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
 
+        withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
-
-        // Delete other bookings at the same time
-        for otherRecord in activeBookRecords where otherRecord.time == record.time
-            && otherRecord != record {
-            withdrawBookRecord(otherRecord, completion: {})
-        }
     }
 
     private func didServeBookRecord(_ record: BookRecord) {

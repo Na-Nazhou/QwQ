@@ -55,6 +55,22 @@ class FIRBookingStorage: CustomerBookingStorage {
         }
     }
 
+    func updateBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+        let recordDocPairs = newRecords.map {
+            ($0, getBookRecordDocument(record: $0))
+        }
+        for (newRecord, docRef) in recordDocPairs {
+            batch.setData(newRecord.dictionary, forDocument: docRef)
+        }
+        batch.commit { err in
+            guard err == nil else {
+                return
+            }
+            completion()
+        }
+    }
+
     private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
 
         guard let data = document.data(),

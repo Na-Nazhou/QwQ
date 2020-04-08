@@ -116,6 +116,21 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                        completion: completion)
     }
 
+    private func withdrawQueueRecords(_ queueRecords: [QueueRecord], completion: @escaping () -> Void) {
+        guard !queueRecords.isEmpty else {
+            completion()
+            return
+        }
+        let withdrawTime = Date()
+        var newRecords = [QueueRecord]()
+        for record in queueRecords {
+            var newRecord = record
+            newRecord.withdrawTime = withdrawTime
+            newRecords.append(newRecord)
+        }
+        queueStorage.updateQueueRecords(newRecords: newRecords, completion: completion)
+    }
+
     func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
         confirmAdmissionOfQueueRecord(record, completion: {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
@@ -126,13 +141,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         var newRecord = queueRecord
         newRecord.confirmAdmissionTime = Date()
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
-            completion()
-            for record in self.clashingRecords(with: queueRecord) {
-                self.withdrawQueueRecord(record) {
-                    os_log("Confirmation triggered auto withdrawal of a qRec.",
-                           log: Log.confirmedByCustomer, type: .info)
-                }
-            }
+            self.withdrawQueueRecords(self.clashingRecords(with: queueRecord), completion: completion)
         }
 
     }
@@ -147,11 +156,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         let modification = record.changeType(from: oldRecord)
-        print(modification)
-        print(oldRecord.status)
-        print(oldRecord)
-        print(record.status)
-        print(record)
         switch modification {
         case .admit:
             didAdmitQueueRecord(record)
@@ -204,7 +208,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
         // TODO: ?
-        os_log("Detected user initiated confirmation", log: Log.confirmedByCustomer, type: .info)
+        os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
