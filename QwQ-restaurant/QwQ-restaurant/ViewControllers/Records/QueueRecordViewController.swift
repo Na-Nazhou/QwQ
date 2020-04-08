@@ -15,7 +15,7 @@ class QueueRecordViewController: RecordViewController {
         }
         self.spinner = self.showSpinner(onView: self.view)
         recordLogicManager.admitCustomer(record: bookRecord,
-                           completion: self.didUpdateRecord)
+                                         completion: self.didUpdateRecord)
     }
 
     @IBAction override func handleServe(_ sender: Any) {
@@ -24,7 +24,7 @@ class QueueRecordViewController: RecordViewController {
         }
         self.spinner = self.showSpinner(onView: self.view)
         recordLogicManager.serveCustomer(record: bookRecord,
-                           completion: self.didUpdateRecord)
+                                         completion: self.didUpdateRecord)
 
     }
 

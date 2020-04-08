@@ -11,7 +11,9 @@ class RestaurantLogicManager: RestaurantLogic {
 
     private var restaurantCollection = Collection<Restaurant>()
     var restaurants: [Restaurant] {
-        Array(restaurantCollection.restaurants)
+        Array(restaurantCollection.restaurants).sorted(by: {
+            $0.name < $1.name
+        })
     }
 
     convenience init() {

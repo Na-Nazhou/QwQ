@@ -31,8 +31,4 @@ class Collection<T: Hashable> {
         let removed = elements.remove(element)
         return removed != nil
     }
-    
-    func reset() {
-        elements.removeAll()
-    }
 }

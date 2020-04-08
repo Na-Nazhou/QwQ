@@ -20,6 +20,7 @@ protocol Record {
     var serveTime: Date? { get set }
     var rejectTime: Date? { get set }
     var withdrawTime: Date? { get }
+    var confirmAdmissionTime: Date? { get }
 }
 
 extension Record {
@@ -33,6 +34,10 @@ extension Record {
 
     var isAdmitted: Bool {
         status == .admitted
+    }
+
+    var isConfirmedAdmission: Bool {
+        status == .confirmedAdmission
     }
 
     var isServed: Bool {
@@ -54,14 +59,16 @@ extension Record {
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
-        } else if admitTime == nil {
-            return .pendingAdmission
-        } else if rejectTime == nil && serveTime == nil {
-            return .admitted
-        } else if rejectTime != nil {
+        } else if admitTime != nil && rejectTime != nil {
             return .rejected
-        } else if serveTime != nil {
+        } else if admitTime != nil && serveTime != nil {
             return .served
+        } else if admitTime != nil && confirmAdmissionTime != nil {
+            return .confirmedAdmission
+        } else if admitTime != nil {
+            return .admitted
+        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
+            return .pendingAdmission
         }
         return .invalid
     }
@@ -72,6 +79,10 @@ extension Record {
             return nil
         }
 
+        if old.status == self.status {
+            return .customerUpdate
+        }
+
         if status == .withdrawn {
             return .withdraw
         }
@@ -80,17 +91,16 @@ extension Record {
             return .admit
         }
 
-        if old.status == .admitted && self.status == .served {
+        if (old.status == .admitted || old.status == .pendingAdmission) && self.status == .confirmedAdmission {
+            return .confirmAdmission
+        }
+
+        if old.status == .confirmedAdmission && self.status == .served {
             return .serve
         }
 
-        if old.status == .admitted && self.status == .rejected {
+        if (old.status == .admitted || old.status == .confirmedAdmission) && self.status == .rejected {
             return .reject
-        }
-
-        // TODO
-        if old.status == self.status {
-            return .customerUpdate
         }
 
         return nil
