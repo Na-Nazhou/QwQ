@@ -32,8 +32,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 //completion(recordsSnapshot!.count) //num of records or
@@ -45,8 +48,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
        restaurantBookings(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading book records from db.", log: Log.bookRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading book records from db.",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -62,8 +68,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -84,8 +93,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -106,8 +118,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -125,8 +140,11 @@ class FIRStatsStorage: RestaurantStatsStorage {
 
         restaurantBookings(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading book records from db.", log: Log.bookRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading book records from db.",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {

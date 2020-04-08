@@ -64,7 +64,6 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let statisticsDetails = statistics[indexPath.row]
-        print("\n\tTRIGGERED PERFORM SEGUE IN VC \n")
         performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
     }
 }

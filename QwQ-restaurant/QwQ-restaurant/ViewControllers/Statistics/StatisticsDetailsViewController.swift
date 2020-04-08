@@ -32,11 +32,11 @@ class StatisticsDetailsViewController: UIViewController {
             return
         }
         
-        queueCancellationRateLabel.text = "\(details.queueCancellationRate ?? 0)%"
-        bookingCancellationRateLabel.text = "\(details.bookingCancellationRate ?? 0)%"
-        numberOfCustomersLabel.text = "\(details.numberOfCustomers ?? 0)"
-        avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant ?? 0) mins"
-        avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer ?? 0) mins"
+        queueCancellationRateLabel.text = "\(details.queueCancellationRate)%"
+        bookingCancellationRateLabel.text = "\(details.bookingCancellationRate)%"
+        numberOfCustomersLabel.text = "\(details.numberOfCustomers)"
+        avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
+        avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
         dateLabel.text = "\(details.toDate ?? Date())"
         //TODO: add fromDate
     }

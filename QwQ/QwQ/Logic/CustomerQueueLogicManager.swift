@@ -38,7 +38,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     deinit {
-        os_log("DEINITING queue lm", log: Log.deinitLogic, type: .info)
+        os_log("DEINITING queue logic manager", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 

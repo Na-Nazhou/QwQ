@@ -89,7 +89,8 @@ class FIRQueueStorage: CustomerQueueStorage {
                                             restaurant: restaurant,
                                             id: qid) else {
                                                 os_log("Cannot create queue record. Maybe accidentally deleted.",
-                                                       log: Log.createQueueRecordError, type: .info)
+                                                       log: Log.createQueueRecordError,
+                                                       type: .error)
                                                 return
                     }
                     completion(rec)
@@ -98,6 +99,12 @@ class FIRQueueStorage: CustomerQueueStorage {
     }
 
     // MARK: - Listeners
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+
     func registerListener(for customer: Customer) {
         removeListener()
 
@@ -125,11 +132,6 @@ class FIRQueueStorage: CustomerQueueStorage {
                         completion: completion)
                 }
             }
-    }
-
-    func removeListener() {
-        listener?.remove()
-        listener = nil
     }
 
     func registerDelegate(_ del: QueueStorageSyncDelegate) {

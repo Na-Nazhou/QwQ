@@ -38,7 +38,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     deinit {
-        os_log("DEINITING booking lm", log: Log.deinitLogic, type: .info)
+        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 

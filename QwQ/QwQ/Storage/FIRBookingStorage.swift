@@ -91,12 +91,17 @@ class FIRBookingStorage: CustomerBookingStorage {
                                                id: bid) else {
                                                    os_log("Couldn't create book record. Likely a document is deleted but it's not supposed to.",
                                                           log: Log.createBookRecordError,
-                                                          type: .info)
+                                                          type: .error)
                                                 return
                     }
                     completion(rec)
                 }, errorHandler: { _ in })
         }, errorHandler: nil)
+    }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
     }
 
     func registerListener(for customer: Customer) {
@@ -127,11 +132,6 @@ class FIRBookingStorage: CustomerBookingStorage {
                         completion: completion)
                 }
             }
-    }
-
-    func removeListener() {
-        listener?.remove()
-        listener = nil
     }
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {
