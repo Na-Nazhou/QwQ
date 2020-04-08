@@ -39,14 +39,14 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         // Cannot queue if the restaurant is currently not open
         if !restaurant.isQueueOpen {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.restaurantUnavailableMessage,
+                        message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                         buttonText: Constants.okayTitle)
             return
         }
 
         if !queueLogicManager.canQueue(for: restaurant) {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.alreadyQueuedRestaurantMessage,
+                        message: String(format: Constants.alreadyQueuedRestaurantMessage, restaurant.name),
                         buttonText: Constants.okayTitle)
             return
         }

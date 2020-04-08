@@ -41,10 +41,6 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
                                               babyChairQuantity: babyChairQuantity,
                                               wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
-        } else {
-                showMessage(title: Constants.errorTitle,
-                            message: "",
-                            buttonText: Constants.okayTitle)
         }
     }
     
@@ -73,9 +69,9 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         }
     }
 
-    func didFindExistingRecord() {
+    func didFindExistingRecord(at restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
-                    message: "You have an existing booking at the same time at this restaurant already!",
+                    message: String(format: Constants.alreadyBookRestaurantMessage, restaurant.name),
                     buttonText: Constants.okayTitle)
     }
 }

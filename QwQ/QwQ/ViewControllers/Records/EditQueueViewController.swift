@@ -39,11 +39,7 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
-        } else {
-            showMessage(title: Constants.errorTitle,
-                        message: "",
-                        buttonText: Constants.okayTitle)
-        }
+        } 
     }
 
     override func viewDidLoad() {
@@ -51,9 +47,9 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         queueLogicManager.queueDelegate = self
     }
 
-    func didFindRestaurantQueueClosed() {
+    func didFindRestaurantQueueClosed(for restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
-                    message: Constants.restaurantUnavailableMessage,
+                    message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                     buttonText: Constants.okayTitle)
     }
 }

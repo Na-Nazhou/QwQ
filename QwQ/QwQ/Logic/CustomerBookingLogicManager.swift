@@ -53,6 +53,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    wheelchairFriendly: wheelchairFriendly)
 
         if !checkExistingRecords(against: newRecord) {
+            bookingDelegate?.didFindExistingRecord(at: restaurant)
             return false
         }
 
@@ -68,24 +69,19 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         babyChairQuantity: Int,
                         wheelchairFriendly: Bool) -> Bool {
 
-        var success = true
-        let newRecords: [BookRecord] = restaurants.map {
-            let newRecord = BookRecord(restaurant: $0,
+        var newRecords = [BookRecord]()
+        for restaurant in restaurants {
+            let newRecord = BookRecord(restaurant: restaurant,
                                        customer: customer,
                                        time: time,
                                        groupSize: groupSize,
                                        babyChairQuantity: babyChairQuantity,
                                        wheelchairFriendly: wheelchairFriendly)
-
             if !checkExistingRecords(against: newRecord) {
-                success = false
+                bookingDelegate?.didFindExistingRecord(at: restaurant)
+                return false
             }
-
-            return newRecord
-        }
-
-        if !success {
-            return false
+            newRecords.append(newRecord)
         }
 
         bookingStorage.addBookRecords(newRecords: newRecords) {
@@ -118,7 +114,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             $0.restaurant == record.restaurant &&
                 $0.time == record.time
         }) {
-            bookingDelegate?.didFindExistingRecord()
             return false
         }
 

@@ -61,6 +61,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
                                     startTime: startTime)
 
         if !checkRestaurantQueue(for: newRecord) {
+            queueDelegate?.didFindRestaurantQueueClosed(for: restaurant)
             return false
         }
 
@@ -78,7 +79,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return true
         }
 
-        guard restaurants.allSatisfy({ $0.isQueueOpen }) else {
+        if let restaurant = restaurants.first(where: { !$0.isQueueOpen }) {
+            queueDelegate?.didFindRestaurantQueueClosed(for: restaurant)
             return false
         }
 
@@ -103,7 +105,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     private func checkRestaurantQueue(for record: QueueRecord) -> Bool {
         if !record.restaurant.isQueueOpen {
             os_log("Queue is closed", log: Log.closeQueue, type: .info)
-            queueDelegate?.didFindRestaurantQueueClosed()
             return false
         }
 

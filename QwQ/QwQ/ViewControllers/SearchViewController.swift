@@ -279,14 +279,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.queueAction = {
             if !restaurant.isQueueOpen {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.restaurantUnavailableMessage,
+                                 message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                                  buttonText: Constants.okayTitle)
                 return
             }
             
             if !self.queueLogicManager.canQueue(for: restaurant) {
                 self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.alreadyQueuedRestaurantMessage,
+                                 message: String(format: Constants.alreadyQueuedRestaurantMessage, restaurant.name), 
                                  buttonText: Constants.okayTitle)
                 return
             }
