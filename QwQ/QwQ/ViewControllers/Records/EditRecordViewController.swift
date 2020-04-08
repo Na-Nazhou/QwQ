@@ -106,16 +106,16 @@ class EditRecordViewController: UIViewController {
             })
      }
 
-     func didUpdateRecord() {
-         removeSpinner(spinner)
-         showMessage(
-             title: Constants.successTitle,
-             message: Constants.recordUpdateSuccessMessage,
-             buttonText: Constants.okayTitle,
-             buttonAction: {_ in
-                 self.handleBack()
-             })
-     }
+    func didUpdateRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordUpdateSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+            })
+    }
 
     func didWithdrawRecord() {
         removeSpinner(spinner)

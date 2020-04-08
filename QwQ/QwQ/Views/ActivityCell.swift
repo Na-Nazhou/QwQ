@@ -35,27 +35,57 @@ class ActivityCell: UICollectionViewCell {
         nameLabel.text = record.restaurant.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        setUpDeleteButton()
+        setUpRecordImage(record: record)
+
+        showActionButtons()
         enableRightButton()
+        setUpDeleteButton()
 
         switch record.status {
         case .pendingAdmission:
-            if let queueRecord = record as? QueueRecord {
-                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-
-                // TODO: display estimated time instead
-            }
-            if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
-            }
-            setUpEditButton()
+            setUpPendingAdmissionRecord(record: record)
         case .admitted:
-            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-            setUpConfirmButton()
+            setUpAdmittedRecord(record: record)
         case .confirmedAdmission:
-            statusLabel.text = "Confirmed at: \(record.confirmAdmissionTime!.toString())"
-            setUpConfirmButton()
-            disableRightButton()
+            setUpConfirmedRecord(record: record)
+        default:
+            setUpHistoryRecord(record: record)
+        }
+    }
+
+    private func setUpPendingAdmissionRecord(record: Record) {
+        if let queueRecord = record as? QueueRecord {
+            statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+
+            if let estimatedAdmitTime = queueRecord.estimatedAdmitTime {
+                statusLabel.text = "Estimated admit time: \(estimatedAdmitTime.toString())"
+            }
+        }
+        if let bookRecord = record as? BookRecord {
+            statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
+        }
+        setUpEditButton()
+    }
+
+    private func setUpAdmittedRecord(record: Record) {
+        statusLabel.text = "Admitted at: \(record.admitTime!.toString()). Please arrive within 15 minutes"
+        if let bookRecord = record as? BookRecord {
+            statusLabel.text = "Reservation Time: \(bookRecord.time.toString()) (Admitted)"
+        }
+        setUpConfirmButton()
+    }
+
+    private func setUpConfirmedRecord(record: Record) {
+        statusLabel.text = "Admitted at: \(record.admitTime!.toString()) (Confirmed)"
+        if let bookRecord = record as? BookRecord {
+            statusLabel.text = "Reservation Time: \(bookRecord.time.toString()) (Confirmed)"
+        }
+        setUpConfirmButton()
+        disableRightButton()
+    }
+
+    private func setUpHistoryRecord(record: Record) {
+        switch record.status {
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
         case .rejected:
@@ -65,20 +95,16 @@ class ActivityCell: UICollectionViewCell {
         default:
             assert(false)
         }
+        hideActionButtons()
+    }
 
+    private func setUpRecordImage(record: Record) {
         if record as? QueueRecord != nil {
             queueBookImageView.image = UIImage(named: "c-queue-icon")
         }
 
         if record as? BookRecord != nil {
             queueBookImageView.image = UIImage(named: "c-book-icon")
-        }
-
-        // Hide edit and delete buttons if it is history record
-        if record.isHistoryRecord {
-            hideActionButtons()
-        } else {
-            showActionButtons()
         }
     }
 

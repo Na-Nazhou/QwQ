@@ -57,6 +57,7 @@ class FIRProfileStorage: ProfileStorage {
                     return
                 }
             }
+            print(document?.data())
 
             errorHandler(ProfileError.UserProfileNotFound)
             Auth.logout(completion: {}, errorHandler: errorHandler)

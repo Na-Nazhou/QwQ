@@ -17,6 +17,7 @@ struct QueueRecord: Record {
     var rejectTime: Date?
     let withdrawTime: Date?
     let confirmAdmissionTime: Date?
+    var estimatedAdmitTime: Date?
 
     var startDate: String {
         Date.getFormattedDate(date: startTime, format: Constants.recordDateFormat)
@@ -31,6 +32,9 @@ struct QueueRecord: Record {
         data[Constants.startTimeKey] = startTime
         data[Constants.restaurantKey] = restaurant.uid
 
+        if let estimatedAdmitTime = estimatedAdmitTime {
+            data[Constants.estimatedAdmitTimeKey] = estimatedAdmitTime
+        }
         if let admitTime = admitTime {
             data[Constants.admitTimeKey] = admitTime
         }
@@ -53,7 +57,8 @@ struct QueueRecord: Record {
     init(id: String, restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil,
+         confirmAdmissionTime: Date? = nil, estimatedAdmitTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -67,6 +72,7 @@ struct QueueRecord: Record {
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
         self.confirmAdmissionTime = confirmAdmissionTime
+        self.estimatedAdmitTime = estimatedAdmitTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -81,13 +87,15 @@ struct QueueRecord: Record {
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
         let confirmAdmissionTime = (dictionary[Constants.confirmAdmissionTimeKey] as? Timestamp)?.dateValue()
+        let estimatedAdmitTime = (dictionary[Constants.estimatedAdmitTimeKey] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
                   serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime,
-                  confirmAdmissionTime: confirmAdmissionTime)
+                  confirmAdmissionTime: confirmAdmissionTime,
+                  estimatedAdmitTime: estimatedAdmitTime)
     }
 }
 
@@ -115,5 +123,6 @@ extension QueueRecord {
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
             && other.confirmAdmissionTime == confirmAdmissionTime
+            && other.estimatedAdmitTime == estimatedAdmitTime
     }
 }

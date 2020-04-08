@@ -37,39 +37,52 @@ class RecordCell: UICollectionViewCell {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
 
-        setUpRejectButton()
+        setUpRecordImage(record: record)
+
+        showActionButtons()
         enableLeftButton()
         enableRightButton()
 
+        setUpRejectButton()
+
         switch record.status {
         case .pendingAdmission:
-            if let queueRecord = record as? QueueRecord {
-                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-                // TODO: display estimated time instead
-                timeLabel.text = "00:00"
-            }
-            if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
-                timeLabel.text = bookRecord.time.getFormattedTime()
-            }
-            timeLabel.textColor = .systemGreen
-            setUpAdmitButton()
-            disableRightButton()
+            setUpPendingAdmissionRecord(record: record)
         case .admitted:
-            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-            if let bookRecord = record as? BookRecord {
-                timeLabel.text = bookRecord.time.getFormattedTime()
-            } else {
-                timeLabel.text = record.admitTime!.getFormattedTime()
-            }
-            timeLabel.textColor = .systemGray
-            setUpServeButton()
-            disableLeftButton()
+            setUpAdmittedRecord(record: record)
         case .confirmedAdmission:
-            statusLabel.text = "Confirmed at: \(record.confirmAdmissionTime!.toString())"
-            timeLabel.text = record.confirmAdmissionTime!.getFormattedTime()
-            timeLabel.textColor = .systemGreen
-            setUpServeButton()
+            setUpConfirmedRecord(record: record)
+        default:
+            setUpHistoryRecord(record: record)
+        }
+    }
+
+    private func setUpRecordImage(record: Record) {
+        if record as? QueueRecord != nil {
+            queueBookImageView.image = UIImage(named: "c-queue-icon")
+        }
+
+        if record as? BookRecord != nil {
+            queueBookImageView.image = UIImage(named: "c-book-icon")
+        }
+    }
+
+    private func setUpPendingAdmissionRecord(record: Record) {
+        if let queueRecord = record as? QueueRecord {
+            statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+            timeLabel.text = queueRecord.estimatedAdmitTime!.getFormattedTime()
+        }
+        if let bookRecord = record as? BookRecord {
+            statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
+            timeLabel.text = bookRecord.time.getFormattedTime()
+        }
+        timeLabel.textColor = .systemGreen
+        setUpAdmitButton()
+        disableRightButton()
+    }
+
+    private func setUpHistoryRecord(record: Record) {
+        switch record.status {
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
             timeLabel.text = record.serveTime!.getFormattedTime()
@@ -85,20 +98,32 @@ class RecordCell: UICollectionViewCell {
         default:
             assert(false)
         }
+        hideActionButtons()
+    }
 
-        if record as? QueueRecord != nil {
-            queueBookImageView.image = UIImage(named: "c-queue-icon")
-        }
-
-        if record as? BookRecord != nil {
-            queueBookImageView.image = UIImage(named: "c-book-icon")
-        }
-
-        if record.isHistoryRecord {
-            hideButtons()
+    private func setUpAdmittedRecord(record: Record) {
+        statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+        if let bookRecord = record as? BookRecord {
+            timeLabel.text = bookRecord.time.getFormattedTime()
         } else {
-            showButtons()
+            timeLabel.text = record.admitTime!.getFormattedTime()
+            // show a timer instead
         }
+        timeLabel.textColor = .systemGray
+        setUpServeButton()
+        disableLeftButton()
+    }
+
+    private func setUpConfirmedRecord(record: Record) {
+        statusLabel.text = "Confirmed at: \(record.confirmAdmissionTime!.toString())"
+        timeLabel.text = record.confirmAdmissionTime!.getFormattedTime()
+        if let bookRecord = record as? BookRecord {
+            timeLabel.text = bookRecord.time.getFormattedTime()
+        }
+        // For queue record should show a timer instead
+        // show grey if exceed time limit
+        timeLabel.textColor = .systemGreen
+        setUpServeButton()
     }
 
     private func disableRightButton() {
@@ -127,12 +152,12 @@ class RecordCell: UICollectionViewCell {
         button.alpha = 0.5
     }
 
-    private func hideButtons() {
+    private func hideActionButtons() {
         leftButton.isHidden = true
         rightButton.isHidden = true
     }
 
-    private func showButtons() {
+    private func showActionButtons() {
         leftButton.isHidden = false
         rightButton.isHidden = false
     }

@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController {
     }
 
     private func logoutComplete() {
+        RestaurantPostLoginSetupManager.tearDown()
         performSegue(withIdentifier: Constants.logoutSegue, sender: self)
     }
 

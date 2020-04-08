@@ -13,7 +13,7 @@ import SDWebImage
 class FIRProfileStorage: ProfileStorage {
     typealias Auth = FIRAuthenticator
 
-    static let dbRef = Firestore.firestore().collection(Constants.restaurantKey)
+    static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
     static let storageRef = Storage.storage().reference().child("profile-pics")
 
     static func createInitialRestaurantProfile(uid: String,
@@ -21,7 +21,7 @@ class FIRProfileStorage: ProfileStorage {
                                                authDetails: AuthDetails,
                                                errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
-        db.collection(Constants.restaurantKey)
+        db.collection(Constants.restaurantsDirectory)
             .document(uid)
             .setData([Constants.uidKey: uid,
                       Constants.nameKey: signupDetails.name,
@@ -86,6 +86,7 @@ class FIRProfileStorage: ProfileStorage {
                 errorHandler(error)
                 return
             }
+            RestaurantPostLoginSetupManager.restaurantDidUpdateProfile(updated: restaurant)
             completion()
         }
     }
