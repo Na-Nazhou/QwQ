@@ -56,7 +56,7 @@ class ActivityCell: UICollectionViewCell {
             setUpConfirmButton()
             disableRightButton()
             statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-                + ", Confirmed admission."
+                + " (Confirmed)"
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
         case .rejected:
