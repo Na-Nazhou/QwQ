@@ -8,6 +8,11 @@
 import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
+
+    @IBOutlet private var selectButton: UIButton!
+    @IBOutlet private var restaurantCollectionView: UICollectionView!
+    @IBOutlet private var queueButton: UIButton!
+    @IBOutlet private var bookButton: UIButton!
     
     private var filter: (Restaurant) -> Bool = { _ in true }
     private var sorter: (Restaurant, Restaurant) -> Bool = { _, _  in true }
@@ -28,11 +33,6 @@ class SearchViewController: UIViewController, SearchDelegate {
     private var restaurants: [Restaurant] {
         restaurantLogicManager.restaurants
     }
-    
-    @IBOutlet private var selectButton: UIButton!
-    @IBOutlet private var restaurantCollectionView: UICollectionView!
-    @IBOutlet private var queueButton: UIButton!
-    @IBOutlet private var bookButton: UIButton!
     
     enum SelectionState {
         case selectOne
@@ -112,16 +112,8 @@ class SearchViewController: UIViewController, SearchDelegate {
         
         restaurantLogicManager.searchDelegate = self
     }
-    
-    func restaurantDidSetQueueStatus(restaurant: Restaurant, toIsOpen isOpen: Bool) {
-        restaurantCollectionView.reloadData()
-    }
-    
-    func restaurantCollectionDidLoadNewRestaurant() {
-        restaurantCollectionView.reloadData()
-    }
-    
-    func restaurantCollectionDidRemoveRestaurant() {
+
+    func didUpdateRestaurantCollection() {
         restaurantCollectionView.reloadData()
     }
     

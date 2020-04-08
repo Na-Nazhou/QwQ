@@ -35,7 +35,6 @@ class RestaurantRecordLogicManager: RestaurantRecordLogic {
     private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
-    
 
     var currentRecords: [Record] {
         (restaurantActivity.currentQueue.records + restaurantActivity.currentBookings.records).sorted(by: { record1, record2 in
@@ -163,7 +162,7 @@ extension RestaurantRecordLogicManager {
                                     waitingList: RecordCollection<T>,
                                     historyList: RecordCollection<T>) {
         if record.isPendingAdmission {
-            currentList.update(to: record)
+            currentList.update(record)
             self.presentationDelegate?.didUpdateCurrentList()
         }
 

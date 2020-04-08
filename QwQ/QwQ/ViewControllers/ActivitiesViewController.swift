@@ -35,7 +35,21 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     var activeRecords: [Record] {
         var records: [Record] = bookingLogicManager.activeBookRecords
         records += queueLogicManager.currentQueueRecords
-        return records
+        return records.sorted(by: { record1, record2 in
+            let time1: Date
+            let time2: Date
+            if let queueRecord1 = record1 as? QueueRecord {
+                time1 = queueRecord1.startTime
+            } else {
+                time1 = (record1 as? BookRecord)!.time
+            }
+            if let queueRecord2 = record2 as? QueueRecord {
+                time2 = queueRecord2.startTime
+            } else {
+                time2 = (record2 as? BookRecord)!.time
+            }
+            return time1 > time2
+        })
     }
 
     var historyRecords: [Record] {
@@ -108,13 +122,21 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             message: Constants.recordWithdrawSuccessMessage,
             buttonText: Constants.okayTitle,
             buttonAction: {_ in
-                self.navigationController?.popViewController(animated: true)
+                self.handleBack()
                 self.activitiesCollectionView.reloadData()
             })
     }
 
     func didConfirmAdmissionOfRecord() {
-        activitiesCollectionView.reloadData()
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordConfirmSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+                self.activitiesCollectionView.reloadData()
+            })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,10 +188,13 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         activityCell.setUpView(record: record)
         
         if let queueRecord = record as? QueueRecord {
-            activityCell.editAction = {
-                if record.isPendingAdmission {
+             if record.isPendingAdmission {
+                activityCell.editAction = {
                     self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: queueRecord)
-                } else if record.isAdmitted {
+                }
+            } else if record.isAdmitted {
+                activityCell.confirmAction = {
+                    self.spinner = self.showSpinner(onView: self.view)
                     self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
@@ -177,6 +202,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.spinner = self.showSpinner(onView: self.view)
                 self.queueLogicManager.withdrawQueueRecord(queueRecord)
             }
+
         }
 
         if let bookRecord = record as? BookRecord {

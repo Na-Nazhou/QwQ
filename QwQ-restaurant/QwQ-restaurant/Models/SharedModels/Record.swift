@@ -28,7 +28,7 @@ extension Record {
     }
 
     var isActiveRecord: Bool {
-        !isHistoryRecord
+        !isHistoryRecord && status != .invalid
     }
 
     var isAdmitted: Bool {

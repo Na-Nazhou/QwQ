@@ -10,8 +10,6 @@ struct Restaurant: User {
     let address: String
     let menu: String
 
-    var isRestaurantOpen: Bool
-
     //previous recorded times
     var queueOpenTime: Date?
     var queueCloseTime: Date?
@@ -40,21 +38,19 @@ struct Restaurant: User {
             Constants.contactKey: contact,
             Constants.addressKey: address,
             Constants.menuKey: menu,
-            Constants.isRestaurantOpenKey: isRestaurantOpen,
             Constants.queueOpenTimeKey: queueOpenTime as Any,
             Constants.queueCloseTimeKey: queueCloseTime as Any
         ]
     }
 
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         isRestaurantOpen: Bool, queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
+         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
         self.address = address
         self.menu = menu
-        self.isRestaurantOpen = isRestaurantOpen
         self.queueOpenTime = queueOpenTime
         self.queueCloseTime = queueCloseTime
     }
@@ -65,8 +61,7 @@ struct Restaurant: User {
             let email = dictionary[Constants.emailKey] as? String,
             let contact = dictionary[Constants.contactKey] as? String,
             let address = dictionary[Constants.addressKey] as? String,
-            let menu = dictionary[Constants.menuKey] as? String,
-            let isRestaurantOpen = dictionary[Constants.isRestaurantOpenKey] as? Bool
+            let menu = dictionary[Constants.menuKey] as? String
             else {
                 return nil
         }
@@ -75,7 +70,7 @@ struct Restaurant: User {
         let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
         
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
-                  menu: menu, isRestaurantOpen: isRestaurantOpen, queueOpenTime: queueOpenTime,
+                  menu: menu, queueOpenTime: queueOpenTime,
                   queueCloseTime: queueCloseTime)
     }
 }

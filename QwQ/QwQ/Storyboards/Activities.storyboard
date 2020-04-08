@@ -101,9 +101,6 @@
                                                                     <state key="normal" title="DELETE">
                                                                         <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
-                                                                    <connections>
-                                                                        <action selector="handleDelete:" destination="A74-J4-hxb" eventType="touchUpInside" id="UOj-Ua-QcO"/>
-                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-ti-REL">
                                                                     <rect key="frame" x="172" y="0.0" width="172" height="28"/>
@@ -111,9 +108,6 @@
                                                                     <state key="normal" title="EDIT">
                                                                         <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
-                                                                    <connections>
-                                                                        <action selector="handleEdit:" destination="A74-J4-hxb" eventType="touchUpInside" id="wfV-Oj-W0n"/>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -129,11 +123,11 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="384" height="152"/>
                                         <connections>
-                                            <outlet property="deleteButton" destination="NsT-QL-e0k" id="3Rf-ty-DCe"/>
                                             <outlet property="descriptionLabel" destination="oaU-SV-Xed" id="Iov-uj-PfT"/>
-                                            <outlet property="editButton" destination="GIl-ti-REL" id="IdU-Gd-o3A"/>
+                                            <outlet property="leftButton" destination="NsT-QL-e0k" id="3Rf-ty-DCe"/>
                                             <outlet property="nameLabel" destination="RRo-Q0-mf7" id="PRl-Pv-oHB"/>
                                             <outlet property="queueBookImageView" destination="77o-IU-jGY" id="LSU-ae-mp2"/>
+                                            <outlet property="rightButton" destination="GIl-ti-REL" id="IdU-Gd-o3A"/>
                                             <outlet property="statusLabel" destination="E2Y-0y-GSK" id="BB8-eD-fX1"/>
                                         </connections>
                                     </collectionViewCell>

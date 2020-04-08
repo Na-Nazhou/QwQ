@@ -54,7 +54,7 @@ struct QueueRecord: Record {
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
          rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
-        self.init(id: "0", restaurant: restaurant, customer: customer,
+        self.init(id: UUID().uuidString, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   startTime: startTime, admitTime: admitTime,
