@@ -127,4 +127,6 @@ struct Constants {
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
     static let timeKey = "time"
+    static let restaurantWorkingForKey = "restaurantWorkingFor"
+    static let permissionsKey = "permissions"
 }

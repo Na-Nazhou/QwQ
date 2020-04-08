@@ -28,6 +28,8 @@
 		5CAD354A2438CFC900245857 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD35492438CFC900245857 /* Staff.swift */; };
 		5CE032F22421FCBF008DB047 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F12421FCBF008DB047 /* ProfileStorage.swift */; };
 		5CE032F62421FCF6008DB047 /* FIRProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */; };
+		5CE15238243DC4F200A20ED6 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */; };
+		5CE1523A243DC50000A20ED6 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE15239243DC50000A20ED6 /* Permissions.swift */; };
 		6132680A241F28FF00B770B6 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */; };
 		6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */; };
 		6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */; };
@@ -140,6 +142,8 @@
 		5CAD35492438CFC900245857 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		5CE032F12421FCBF008DB047 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
 		5CE032F52421FCF6008DB047 /* FIRProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRProfileStorage.swift; sourceTree = "<group>"; };
+		5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		5CE15239243DC50000A20ED6 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		61326805241F28FF00B770B6 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
 		61326806241F28FF00B770B6 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		61326807241F28FF00B770B6 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
@@ -292,6 +296,15 @@
 				5C44C9B2241DD0390097C006 /* ValidationUtilities.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5CE15236243DC4E000A20ED6 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
+				5CE15239243DC50000A20ED6 /* Permissions.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		61326804241F28FF00B770B6 /* Fonts */ = {
@@ -448,6 +461,7 @@
 				7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */,
 				7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */,
 				5C44C9AA241DCE7B0097C006 /* Authentication & Profile */,
+				5CE15236243DC4E000A20ED6 /* Permissions */,
 				D4EA85FA241B2CC5009EB85B /* Storage */,
 				D4EA85F5241B2CA7009EB85B /* Logic */,
 				D4EA85E9241B2C65009EB85B /* Models */,
@@ -550,12 +564,12 @@
 				D4EA85ED241B2C65009EB85B /* User.swift */,
 				7EE6D032241E3EAC00C1465E /* Customer.swift */,
 				D4EA85EF241B2C65009EB85B /* Restaurant.swift */,
+				5CAD35492438CFC900245857 /* Staff.swift */,
 				61C868A9242C561F00CC6B9A /* Collection.swift */,
 				6148055D2422A3B7003D6D44 /* Record.swift */,
 				D4D329CC2426184300F2A5A5 /* RecordModification.swift */,
 				D4EA85EE241B2C65009EB85B /* QueueRecord.swift */,
 				6148055B2422A388003D6D44 /* BookRecord.swift */,
-				5CAD35492438CFC900245857 /* Staff.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -907,6 +921,7 @@
 				D4EA8601241B2CC6009EB85B /* RestaurantQueueStorage.swift in Sources */,
 				7EA7B49B2432468800A6828F /* StaffCell.swift in Sources */,
 				D453E3A8242368A0005FA25F /* Date+Extensions.swift in Sources */,
+				5CE15238243DC4F200A20ED6 /* PermissionsManager.swift in Sources */,
 				61ACB7FE242B1C3A002A1F47 /* RecordCollection.swift in Sources */,
 				D4EA85F3241B2C65009EB85B /* QueueRecord.swift in Sources */,
 				7E6884A724332B9C00486EB8 /* ForgotPasswordViewController.swift in Sources */,
@@ -920,6 +935,7 @@
 				5C2CB131242484D0003AFC6C /* AuthError.swift in Sources */,
 				D4EBA71A24384EC200FCB66C /* RestaurantStatisticsLogic.swift in Sources */,
 				5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */,
+				5CE1523A243DC50000A20ED6 /* Permissions.swift in Sources */,
 				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,
 				D4EA85F2241B2C65009EB85B /* User.swift in Sources */,
 				D4EBA72224387B4B00FCB66C /* StatsPresentationDelegate.swift in Sources */,
