@@ -31,10 +31,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         restaurant.isQueueOpen
     }
 
-    var isValidRestaurant: Bool {
-        restaurant.isValidRestaurant
-    }
-
     convenience init() {
         self.init(restaurantActivity: RestaurantActivity.shared(),
                   queueStorage: FIRQueueStorage.shared,
