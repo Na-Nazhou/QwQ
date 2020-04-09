@@ -1,4 +1,4 @@
-protocol RestaurantQueueLogicPresentationDelegate: AnyObject {
+protocol ActivitiesDelegate: AnyObject {
     func restaurantDidChangeQueueStatus(toIsOpen: Bool)
 
     func didUpdateCurrentList()

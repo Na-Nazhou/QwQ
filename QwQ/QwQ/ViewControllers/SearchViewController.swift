@@ -36,43 +36,49 @@ class SearchViewController: UIViewController, SearchDelegate {
         case selectOne
         case selectAll
     }
-    
-    @IBAction private func handleBook(_ sender: Any) {
+
+    private var selectedRestaurants: [Restaurant] {
         if selectionState == .selectAll {
             guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
-                return
+                return []
             }
-            let selectedRestaurants = items.map {
-                filtered[$0.item]
-            }
-
-            guard !selectedRestaurants.isEmpty else {
-                return
-            }
-            self.performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: selectedRestaurants)
+            return items.map { filtered[$0.item] }
         }
+        return []
+    }
+    
+    @IBAction private func handleBook(_ sender: Any) {
+        guard checkSelectedRestaurants() else {
+            return
+        }
+        self.performSegue(withIdentifier: Constants.editBookSelectedSegue,
+                          sender: selectedRestaurants)
     }
     
     @IBAction private func handleQueue(_ sender: Any) {
-        if selectionState == .selectAll {
-            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+        guard checkSelectedRestaurants() else {
+            return
+        }
+
+        for restaurant in selectedRestaurants {
+            if !checkRestaurantQueue(for: restaurant) {
+                // TODO: deselect the item
                 return
             }
-            let selectedRestaurants = items.map {
-                filtered[$0.item]
-            }
-
-            guard !selectedRestaurants.isEmpty else {
-                 return
-             }
-
-            for restaurant in selectedRestaurants {
-                if !checkRestaurantQueue(for: restaurant) {
-                    return
-                }
-            }
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: selectedRestaurants)
         }
+        self.performSegue(withIdentifier: Constants.editQueueSelectedSegue,
+                          sender: selectedRestaurants)
+    }
+
+    private func checkSelectedRestaurants() -> Bool {
+        if selectedRestaurants.isEmpty {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.noRestaurantSelectedMessage,
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
+        return true
     }
     
     @IBAction private func handleSelect(_ sender: Any) {

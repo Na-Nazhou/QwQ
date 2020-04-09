@@ -1,7 +1,5 @@
-protocol RestaurantRecordLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
-    var presentationDelegate: RestaurantQueueLogicPresentationDelegate? { get set }
-
-    var queueStorage: RestaurantQueueStorage { get }
+protocol RestaurantActivityLogic: QueueStorageSyncDelegate, BookingStorageSyncDelegate {
+    var activitiesDelegate: ActivitiesDelegate? { get set }
 
     /// Opens queue anfethadd registers the opening time of the restaurant as the current time.
     func openQueue()

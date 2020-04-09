@@ -16,7 +16,7 @@ class RecordViewController: UIViewController {
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet var actionButton: UIButton!
 
-    var recordLogicManager: RestaurantRecordLogicManager!
+    var activityLogicManager: RestaurantActivityLogicManager!
     var record: Record?
 
     var spinner: UIView?

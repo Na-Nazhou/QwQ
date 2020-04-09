@@ -32,6 +32,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
         restaurantLogicManager.restaurantDelegate = self
     }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        handleBack()
+    }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
         guard let restaurant = restaurant,
@@ -60,10 +64,6 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     @IBAction private func handleBookTap(_ sender: Any) {
         performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
     }
     
     private func setUpViews() {

@@ -19,38 +19,45 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet private var openCloseButton: UIButton!
 
     var spinner: UIView?
+
+    enum SelectedControl: Int {
+        case current
+        case waiting
+        case history
+    }
     
     // MARK: Model properties
-    let recordLogicManager = RestaurantRecordLogicManager()
+    let activityLogicManager = RestaurantActivityLogicManager()
 
     var filtered: [Record] = []
 
     var records: [Record] {
-        switch selectedIndex {
-        case 0:
+        switch selectedControl {
+        case .current:
             return currentRecords
-        case 1:
+        case .waiting:
             return waitingRecords
-        case 2:
+        case .history:
             return historyRecords
-        default:
-            assert(false)
         }
     }
 
-    var selectedIndex = 0
+    var selectedIndex = SelectedControl.current.rawValue
+    var selectedControl: SelectedControl {
+        SelectedControl(rawValue: selectedIndex)!
+    }
 
     // TODO: refactor
     var currentRecords: [Record] {
-        recordLogicManager.currentRecords
+        activityLogicManager.currentRecords
     }
 
     var waitingRecords: [Record] {
-        recordLogicManager.waitingRecords
+        activityLogicManager.waitingRecords
     }
 
     var historyRecords: [Record] {
-        recordLogicManager.historyRecords
+        activityLogicManager.historyRecords
     }
 
     override func viewDidLoad() {
@@ -61,12 +68,12 @@ class ActivitiesViewController: UIViewController {
         recordCollectionView.delegate = self
         recordCollectionView.dataSource = self
 
-        recordLogicManager.presentationDelegate = self
+        activityLogicManager.activitiesDelegate = self
         
         filtered = records
         setUpSegmentedControl()
 
-        if recordLogicManager.isQueueOpen {
+        if activityLogicManager.isQueueOpen {
             openQueue()
         } else {
             closeQueue()
@@ -74,8 +81,7 @@ class ActivitiesViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        filtered = records
-        recordCollectionView.reloadData()
+        reload()
 
         super.viewWillAppear(animated)
     }
@@ -87,8 +93,7 @@ class ActivitiesViewController: UIViewController {
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
         selectedIndex = sender.selectedIndex
-        filtered = records
-        recordCollectionView.reloadData()
+        reload()
     }
 
     @IBAction private func handleOpenClose(_ sender: UIButton) {
@@ -99,10 +104,10 @@ class ActivitiesViewController: UIViewController {
         switch title {
         case Constants.buttonTextToOpenQueue:
             openQueue()
-            recordLogicManager.openQueue()
+            activityLogicManager.openQueue()
         case Constants.buttonTextToCloseQueue:
             closeQueue()
-            recordLogicManager.closeQueue()
+            activityLogicManager.closeQueue()
         default:
             assert(false, "open close button title should be either open or close.")
         }
@@ -124,13 +129,13 @@ class ActivitiesViewController: UIViewController {
         if let queueRecord = sender as? QueueRecord,
             let queueRecordViewController = segue.destination as? QueueRecordViewController {
             queueRecordViewController.record = queueRecord
-            queueRecordViewController.recordLogicManager = recordLogicManager
+            queueRecordViewController.activityLogicManager = activityLogicManager
         }
         case Constants.bookRecordSelectedSegue:
         if let bookRecord = sender as? BookRecord,
             let bookRecordViewController = segue.destination as? BookRecordViewController {
-                bookRecordViewController.record = bookRecord
-            bookRecordViewController.recordLogicManager = recordLogicManager
+            bookRecordViewController.record = bookRecord
+            bookRecordViewController.activityLogicManager = activityLogicManager
         }
         default:
             return
@@ -188,42 +193,42 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
         if let queueRecord = record as? QueueRecord {
             recordCell.admitAction = {
-                self.recordLogicManager.admitCustomer(record: queueRecord,
-                                                      completion: self.didUpdateRecord)
+                self.activityLogicManager.admitCustomer(record: queueRecord,
+                                                        completion: self.didUpdateRecord)
             }
 
             if queueRecord.isAdmitted || queueRecord.isConfirmedAdmission {
                 recordCell.rejectAction = {
-                    self.recordLogicManager.rejectCustomer(record: queueRecord,
-                                                           completion: self.didUpdateRecord)
+                    self.activityLogicManager.rejectCustomer(record: queueRecord,
+                                                             completion: self.didUpdateRecord)
                 }
             }
 
             if queueRecord.isConfirmedAdmission {
                 recordCell.serveAction = {
-                    self.recordLogicManager.serveCustomer(record: queueRecord,
-                                                          completion: self.didUpdateRecord)
+                    self.activityLogicManager.serveCustomer(record: queueRecord,
+                                                            completion: self.didUpdateRecord)
                 }
             }
         }
 
         if let bookRecord = record as? BookRecord {
             recordCell.admitAction = {
-                self.recordLogicManager.admitCustomer(record: bookRecord,
-                                                      completion: self.didUpdateRecord)
+                self.activityLogicManager.admitCustomer(record: bookRecord,
+                                                        completion: self.didUpdateRecord)
             }
 
             if bookRecord.isAdmitted || bookRecord.isConfirmedAdmission {
                 recordCell.rejectAction = {
-                    self.recordLogicManager.rejectCustomer(record: bookRecord,
-                                                           completion: self.didUpdateRecord)
+                    self.activityLogicManager.rejectCustomer(record: bookRecord,
+                                                             completion: self.didUpdateRecord)
                 }
             }
 
             if bookRecord.isConfirmedAdmission {
                 recordCell.serveAction = {
-                    self.recordLogicManager.serveCustomer(record: bookRecord,
-                                                          completion: self.didUpdateRecord)
+                    self.activityLogicManager.serveCustomer(record: bookRecord,
+                                                            completion: self.didUpdateRecord)
                 }
             }
         }
@@ -247,7 +252,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
-extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
+extension ActivitiesViewController: ActivitiesDelegate {
 
     func restaurantDidChangeQueueStatus(toIsOpen: Bool) {
         if toIsOpen {
@@ -256,25 +261,28 @@ extension ActivitiesViewController: RestaurantQueueLogicPresentationDelegate {
             closeQueue()
         }
     }
+
     func didUpdateCurrentList() {
-        if selectedIndex == 0 {
-            self.filtered = self.records
-            recordCollectionView.reloadData()
+        if selectedControl == .current {
+            reload()
         }
     }
 
     func didUpdateWaitingList() {
-        if selectedIndex == 1 {
-            self.filtered = self.records
-            recordCollectionView.reloadData()
+        if selectedControl == .waiting {
+            reload()
         }
     }
 
     func didUpdateHistoryList() {
-        if selectedIndex == 2 {
-            self.filtered = self.records
-            recordCollectionView.reloadData()
+        if selectedControl == .history {
+            reload()
         }
+    }
+
+    private func reload() {
+        filtered = records
+        recordCollectionView.reloadData()
     }
 }
 

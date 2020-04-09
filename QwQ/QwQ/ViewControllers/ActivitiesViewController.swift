@@ -14,10 +14,15 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     var spinner: UIView?
 
-    var selectedIndex = 0
+    enum SelectedControl: Int {
+        case active
+        case history
+    }
+
+    var selectedIndex: Int = SelectedControl.active.rawValue
 
     var isActive: Bool {
-        selectedIndex == 0
+        selectedIndex == SelectedControl.active.rawValue
     }
 
     let queueLogicManager = CustomerQueueLogicManager()
