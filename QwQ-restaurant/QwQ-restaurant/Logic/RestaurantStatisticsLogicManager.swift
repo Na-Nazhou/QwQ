@@ -42,8 +42,8 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     func fetchWeeklyDetails() {
         weeklyDetails.removeAll()
-        let tenWeeksAgo = Calendar.current.date(byAdding: .weekOfMonth, value: 2, to: Date())!
-        for i  in (0..<2).reversed() {
+        let tenWeeksAgo = Calendar.current.date(byAdding: .weekOfMonth, value: -10, to: Date())!
+        for i  in (0..<10).reversed() {
             let fromDate = Calendar.current.date(byAdding: .weekOfMonth, value: i, to: tenWeeksAgo)!
             let toDate = Calendar.current.date(byAdding: .weekOfMonth, value: i + 1, to: tenWeeksAgo)!
             let stats = loadStats(from: fromDate, to: toDate)
@@ -54,8 +54,8 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     func fetchMonthlyDetails() {
         monthlyDetails.removeAll()
-        let oneYearAgo = Calendar.current.date(byAdding: .month, value: 2, to: Date())!
-        for i  in (0..<2).reversed() {
+        let oneYearAgo = Calendar.current.date(byAdding: .month, value: -12, to: Date())!
+        for i  in (0..<12).reversed() {
             let fromDate = Calendar.current.date(byAdding: .month, value: i, to: oneYearAgo)!
             let toDate = Calendar.current.date(byAdding: .month, value: i + 1, to: oneYearAgo)!
             let stats = loadStats(from: fromDate, to: toDate)
