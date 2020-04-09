@@ -9,6 +9,7 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var menuLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
@@ -17,10 +18,12 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    // MARK: Logic properties
     var bookingLogicManager: CustomerBookingLogicManager!
     var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
 
+    // MARK: Model properties
     var restaurant: Restaurant? {
         restaurantLogicManager.currentRestaurant
     }

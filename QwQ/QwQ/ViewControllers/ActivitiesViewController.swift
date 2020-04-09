@@ -9,6 +9,7 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
+    // MARK: View properties
     @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
@@ -18,31 +19,29 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         case active
         case history
     }
-
     var selectedIndex: Int = SelectedControl.active.rawValue
-
     var isActive: Bool {
         selectedIndex == SelectedControl.active.rawValue
     }
 
+    // MARK: Logic properties
     let queueLogicManager = CustomerQueueLogicManager()
     let bookingLogicManager = CustomerBookingLogicManager()
     let activityLogicManager = CustomerActivityLogicManager()
 
-    var activeRecords: [Record] {
-        activityLogicManager.activeRecords
-    }
-
-    var historyRecords: [Record] {
-        activityLogicManager.historyRecords
-    }
-
+    // MARK: Model properties
     var records: [Record] {
         if isActive {
             return activeRecords
         } else {
             return historyRecords
         }
+    }
+    var activeRecords: [Record] {
+        activityLogicManager.activeRecords
+    }
+    var historyRecords: [Record] {
+        activityLogicManager.historyRecords
     }
     
     override func viewDidLoad() {

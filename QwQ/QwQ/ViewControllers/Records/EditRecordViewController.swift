@@ -1,6 +1,8 @@
 import UIKit
 
 class EditRecordViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var contactTextField: UITextField!
     @IBOutlet var groupSizeTextField: UITextField!
@@ -10,8 +12,10 @@ class EditRecordViewController: UIViewController {
 
     var spinner: UIView?
 
+    // MARK: Logic properties
     var restaurantLogicManager: RestaurantLogicManager?
 
+    // MARK: Model properties
     // For editing a record
     var record: Record?
     // For creating records

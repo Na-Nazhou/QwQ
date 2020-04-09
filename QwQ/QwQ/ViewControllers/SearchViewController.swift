@@ -9,34 +9,28 @@ import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
 
+    // MARK: View properties
     @IBOutlet private var selectButton: UIButton!
     @IBOutlet private var restaurantCollectionView: UICollectionView!
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
-    private let bookingLogicManager = CustomerBookingLogicManager()
-    private let queueLogicManager = CustomerQueueLogicManager()
-    private let restaurantLogicManager = RestaurantLogicManager()
+    // MARK: Search and sort
+    private var searchActive: Bool = false
+    private let searchController = UISearchController(searchResultsController: nil)
 
-    private var restaurants: [Restaurant] {
-        restaurantLogicManager.restaurants
-    }
     private var filter: (Restaurant) -> Bool = { _ in true }
     private var sorter: (Restaurant, Restaurant) -> Bool = { $0.name < $1.name }
     private var filtered: [Restaurant] {
-        var finalRestaurants = restaurants.filter(filter)
-        finalRestaurants.sort(by: sorter)
-        return finalRestaurants
+        restaurants.filter(filter).sorted(by: sorter)
     }
-    private var searchActive: Bool = false
-    private let searchController = UISearchController(searchResultsController: nil)
-    private var selectionState = SelectionState.selectOne
 
+    // MARK: Multi-select
+    private var selectionState = SelectionState.selectOne
     enum SelectionState {
         case selectOne
         case selectAll
     }
-
     private var selectedRestaurants: [Restaurant] {
         if selectionState == .selectAll {
             guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
@@ -45,6 +39,16 @@ class SearchViewController: UIViewController, SearchDelegate {
             return items.map { filtered[$0.item] }
         }
         return []
+    }
+
+    // MARK: Logic properties
+    private let bookingLogicManager = CustomerBookingLogicManager()
+    private let queueLogicManager = CustomerQueueLogicManager()
+    private let restaurantLogicManager = RestaurantLogicManager()
+
+    // MARK: Model properties
+    private var restaurants: [Restaurant] {
+        restaurantLogicManager.restaurants
     }
     
     @IBAction private func handleBook(_ sender: Any) {

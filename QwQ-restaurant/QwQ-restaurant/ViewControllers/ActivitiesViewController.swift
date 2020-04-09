@@ -10,12 +10,11 @@ import UIKit
 import Foundation
 
 class ActivitiesViewController: UIViewController {
+
     // MARK: View properties
     @IBOutlet private var searchBarController: UISearchBar!
-
-    @IBOutlet var currentWaitingControl: SegmentedControl!
+    @IBOutlet private var currentWaitingControl: SegmentedControl!
     @IBOutlet private var recordCollectionView: UICollectionView!
-
     @IBOutlet private var openCloseButton: UIButton!
 
     var spinner: UIView?
@@ -25,12 +24,16 @@ class ActivitiesViewController: UIViewController {
         case waiting
         case history
     }
+    var selectedIndex = SelectedControl.current.rawValue
+    var selectedControl: SelectedControl {
+        SelectedControl(rawValue: selectedIndex)!
+    }
+
+    // MARK: Logic properties
+    let activityLogicManager = RestaurantActivityLogicManager()
     
     // MARK: Model properties
-    let activityLogicManager = RestaurantActivityLogicManager()
-
     var filtered: [Record] = []
-
     var records: [Record] {
         switch selectedControl {
         case .current:
@@ -41,21 +44,12 @@ class ActivitiesViewController: UIViewController {
             return historyRecords
         }
     }
-
-    var selectedIndex = SelectedControl.current.rawValue
-    var selectedControl: SelectedControl {
-        SelectedControl(rawValue: selectedIndex)!
-    }
-
-    // TODO: refactor
     var currentRecords: [Record] {
         activityLogicManager.currentRecords
     }
-
     var waitingRecords: [Record] {
         activityLogicManager.waitingRecords
     }
-
     var historyRecords: [Record] {
         activityLogicManager.historyRecords
     }

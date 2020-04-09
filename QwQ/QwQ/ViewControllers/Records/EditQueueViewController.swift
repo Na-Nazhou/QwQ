@@ -9,6 +9,7 @@ import UIKit
 
 class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
+    // MARK: Logic properties
     var queueLogicManager: CustomerQueueLogicManager!
 
     @IBAction override func handleSubmit(_ sender: Any) {

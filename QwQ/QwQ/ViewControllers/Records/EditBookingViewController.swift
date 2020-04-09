@@ -9,9 +9,11 @@ import UIKit
 
 class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
-    var bookingLogicManager: CustomerBookingLogicManager!
-
+    // MARK: View properties
     @IBOutlet var datePicker: UIDatePicker!
+
+    // MARK: Logic properties
+    var bookingLogicManager: CustomerBookingLogicManager!
 
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {

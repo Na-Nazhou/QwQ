@@ -9,6 +9,7 @@ import UIKit
 
 class PopoverContentController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet private var tableView: PopoverTableView!
 
     let sortCriteria = Constants.sortCriteria
