@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileImageView: UIImageView {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

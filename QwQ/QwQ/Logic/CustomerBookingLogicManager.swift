@@ -205,12 +205,11 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         guard customerActivity.currentBookings.update(record) else {
             return
         }
-
-        withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
     }
 
     private func didConfirmAdmission(of record: BookRecord) {
+        os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
         guard customerActivity.currentBookings.update(record) else {
             return
         }

@@ -8,15 +8,9 @@
 import UIKit
 
 class StaffCell: UITableViewCell {
+
+    // MARK: View properties
     @IBOutlet private var emailLabel: UILabel!
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     func setUpViews(staffEmail: String) {
         emailLabel.text = staffEmail

@@ -14,7 +14,9 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
         restaurantActivity.restaurant
     }
 
-    private(set) var currentStats: Statistics
+    var dailyDetails = [Statistics]()
+    var weeklyDetails = [Statistics]()
+    var monthlyDetails = [Statistics]()
 
     convenience init() {
         self.init(storage: FIRStatsStorage.shared,
@@ -24,44 +26,86 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     init(storage: RestaurantStatsStorage, restaurantActivity: RestaurantActivity) {
         self.storage = storage
         self.restaurantActivity = restaurantActivity
-
-        currentStats = Statistics(fromDate: Date(), toDate: Date())
     }
 
-    func loadAllStats(from date: Date, to date2: Date) {
-        currentStats = Statistics(fromDate: date, toDate: date2)
-
-        fetchTotalNumCustomers(from: date, to: date2)
+    func fetchDailyDetails() {
+        dailyDetails.removeAll()
+        let tenDaysAgo = Date().getDateOf(daysBeforeDate: 10)
+        for i  in (0..<10).reversed() {
+            let fromDate = Calendar.current.date(byAdding: .day, value: i, to: tenDaysAgo)!
+            let toDate = Calendar.current.date(byAdding: .day, value: i + 1, to: tenDaysAgo)!
+            let stats = loadStats(from: fromDate, to: toDate)
+            dailyDetails.append(stats)
+        }
+        statsDelegate?.didCompleteFetchingData()
     }
 
-    func fetchTotalNumCustomers(from date: Date, to date2: Date) {
-        storage.fetchTotalNumCustomers(for: restaurant, from: date, to: date2) { count in
-            self.currentStats.totalNumCustomers += count
+    func fetchWeeklyDetails() {
+        weeklyDetails.removeAll()
+        let tenWeeksAgo = Calendar.current.date(byAdding: .weekOfMonth, value: 2, to: Date())!
+        for i  in (0..<2).reversed() {
+            let fromDate = Calendar.current.date(byAdding: .weekOfMonth, value: i, to: tenWeeksAgo)!
+            let toDate = Calendar.current.date(byAdding: .weekOfMonth, value: i + 1, to: tenWeeksAgo)!
+            let stats = loadStats(from: fromDate, to: toDate)
+            weeklyDetails.append(stats)
+        }
+        statsDelegate?.didCompleteFetchingData()
+    }
+
+    func fetchMonthlyDetails() {
+        monthlyDetails.removeAll()
+        let oneYearAgo = Calendar.current.date(byAdding: .month, value: 2, to: Date())!
+        for i  in (0..<2).reversed() {
+            let fromDate = Calendar.current.date(byAdding: .month, value: i, to: oneYearAgo)!
+            let toDate = Calendar.current.date(byAdding: .month, value: i + 1, to: oneYearAgo)!
+            let stats = loadStats(from: fromDate, to: toDate)
+            monthlyDetails.append(stats)
+        }
+        statsDelegate?.didCompleteFetchingData()
+    }
+
+    private func loadStats(from date1: Date, to date2: Date) -> Statistics {
+        let stats = Statistics(fromDate: date1, toDate: date2)
+        fetchTotalNumCustomers(for: stats)
+        fetchAvgWaitingTimeForCustomer(for: stats)
+        fetchAvgWaitingTimeForRestaurant(for: stats)
+        fetchQueueCancellationRate(for: stats)
+        fetchBookingCancellationRate(for: stats)
+        return stats
+    }
+
+    func fetchTotalNumCustomers(for stats: Statistics) {
+        storage.fetchTotalNumCustomers(for: restaurant, from: stats.fromDate, to: stats.toDate) { count in
+            stats.totalNumCustomers += count
+            self.statsDelegate?.didCompleteFetchingData()
         }
     }
 
-    func fetchAvgWaitingTimeForCustomer(from date: Date, to date2: Date) {
-        storage.fetchTotalWaitingTimeForCustomer(for: restaurant, from: date, to: date2) { seconds in
-            self.currentStats.totalWaitingTimeCustomerPOV += seconds
+    func fetchAvgWaitingTimeForCustomer(for stats: Statistics) {
+        storage.fetchTotalWaitingTimeForCustomer(for: restaurant, from: stats.fromDate, to: stats.toDate) { seconds in
+            stats.totalWaitingTimeCustomerPOV = seconds
+            self.statsDelegate?.didCompleteFetchingData()
         }
     }
 
-    func fetchAvgWaitingTimeForRestaurant(from date: Date, to date2: Date) {
-        storage.fetchTotalWaitingTimeForRestaurant(for: restaurant, from: date, to: date2) { seconds in
-            self.currentStats.totalWaitingTimeRestaurantPOV += seconds
+    func fetchAvgWaitingTimeForRestaurant(for stats: Statistics) {
+        storage.fetchTotalWaitingTimeForRestaurant(for: restaurant, from: stats.fromDate, to: stats.toDate) { seconds in
+            stats.totalWaitingTimeRestaurantPOV = seconds
+            self.statsDelegate?.didCompleteFetchingData()
         }
     }
 
-    func fetchQueueCancellationRate(from date: Date, to date2: Date) {
-        storage.fetchQueueCancellationRate(for: restaurant, from: date, to: date2) { count in
-            self.currentStats.totalQueueCancelled += count
+    func fetchQueueCancellationRate(for stats: Statistics) {
+        storage.fetchQueueCancellationRate(for: restaurant,  from: stats.fromDate, to: stats.toDate) { count in
+            stats.totalQueueCancelled = count
+            self.statsDelegate?.didCompleteFetchingData()
         }
     }
 
-    func fetchBookingCancellationRate(from date: Date, to date2: Date) {
-        storage.fetchBookingCancellationRate(for: restaurant, from: date, to: date2) { count in
-            self.currentStats.totalBookingCancelled += count
+    func fetchBookingCancellationRate(for stats: Statistics) {
+        storage.fetchBookingCancellationRate(for: restaurant, from: stats.fromDate, to: stats.toDate) { count in
+            stats.totalBookingCancelled = count
+            self.statsDelegate?.didCompleteFetchingData()
         }
     }
-    
 }

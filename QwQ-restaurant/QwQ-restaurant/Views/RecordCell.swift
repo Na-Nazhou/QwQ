@@ -8,10 +8,12 @@
 import UIKit
 
 class RecordCell: UICollectionViewCell {
+
     var admitAction: (() -> Void)?
     var rejectAction: (() -> Void)?
     var serveAction: (() -> Void)?
-    
+
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet private var statusLabel: UILabel!
