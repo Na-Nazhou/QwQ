@@ -12,11 +12,12 @@ class EditRecordViewController: UIViewController {
 
     var restaurantLogicManager: RestaurantLogicManager?
 
+    // For editing a record
+    var record: Record?
+    // For creating records
     var restaurants: [Restaurant] {
         restaurantLogicManager?.currentRestaurants ?? []
     }
-
-    var record: Record?
 
     var groupSize: Int? {
         guard let groupSizeText = groupSizeTextField.text else {

@@ -9,6 +9,7 @@ import UIKit
 
 class RestaurantCell: UICollectionViewCell {
     var queueAction: (() -> Void)?
+    var canQueue: Bool = false
     
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
@@ -21,5 +22,11 @@ class RestaurantCell: UICollectionViewCell {
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
+
+        if canQueue {
+            queueButton.alpha = 1
+        } else {
+            queueButton.alpha = 0.5
+        }
     }
 }

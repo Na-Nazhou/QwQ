@@ -1,7 +1,7 @@
 class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
-    private(set) var restaurantStorage: RestaurantStorage
+    private var restaurantStorage: RestaurantStorage
     
     // View Controllers
     weak var restaurantDelegate: RestaurantDelegate?
@@ -9,22 +9,20 @@ class RestaurantLogicManager: RestaurantLogic {
 
     var currentRestaurant: Restaurant?
 
-    var selectedRestaurants = Collection<Restaurant>()
+    private var selectedRestaurantCollection = Collection<Restaurant>()
     var currentRestaurants: [Restaurant] {
         get {
-            Array(selectedRestaurants.restaurants)
+            selectedRestaurantCollection.restaurants
         }
         set {
-            selectedRestaurants.reset()
-            selectedRestaurants.add(newValue)
+            selectedRestaurantCollection.reset()
+            selectedRestaurantCollection.add(newValue)
         }
     }
 
     private var restaurantCollection = Collection<Restaurant>()
     var restaurants: [Restaurant] {
-        Array(restaurantCollection.restaurants).sorted(by: {
-            $0.name < $1.name
-        })
+        restaurantCollection.restaurants
     }
 
     convenience init() {
@@ -48,7 +46,7 @@ class RestaurantLogicManager: RestaurantLogic {
                 restaurantDelegate?.didUpdateRestaurant()
             }
 
-            selectedRestaurants.update(restaurant)
+            selectedRestaurantCollection.update(restaurant)
             searchDelegate?.didUpdateRestaurantCollection()
         }
     }
@@ -61,7 +59,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     func didRemoveRestaurant(restaurant: Restaurant) {
         if restaurantCollection.remove(restaurant) {
-            selectedRestaurants.remove(restaurant)
+            selectedRestaurantCollection.remove(restaurant)
             searchDelegate?.didUpdateRestaurantCollection()
         }
     }

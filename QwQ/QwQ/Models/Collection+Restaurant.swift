@@ -6,7 +6,10 @@
 //
 
 extension Collection where T == Restaurant {
-    var restaurants: Set<Restaurant> {
-        elements
+
+    var restaurants: [Restaurant] {
+        Array(elements).sorted(by: {
+            $0.name < $1.name
+        })
     }
 }

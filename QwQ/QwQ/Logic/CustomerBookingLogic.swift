@@ -2,12 +2,11 @@ import Foundation
 
 protocol CustomerBookingLogic: BookingStorageSyncDelegate {
 
-    // Storage
-    var bookingStorage: CustomerBookingStorage { get set }
-
     // View Controllers
     var bookingDelegate: BookingDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
+
+    var activeBookRecords: [BookRecord] { get }
 
     func addBookRecord(to restaurant: Restaurant,
                        at time: Date,

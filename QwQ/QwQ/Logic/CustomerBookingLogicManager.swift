@@ -2,8 +2,9 @@ import Foundation
 import os.log
 
 class CustomerBookingLogicManager: CustomerBookingLogic {
+
     // Storage
-    var bookingStorage: CustomerBookingStorage
+    private var bookingStorage: CustomerBookingStorage
 
     // View controller
     weak var bookingDelegate: BookingDelegate?
@@ -17,10 +18,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     var activeBookRecords: [BookRecord] {
         customerActivity.currentBookings.records
     }
-    var pastBookRecords: [BookRecord] {
-        customerActivity.bookingHistory.records
-    }
-    var bookRecords: [BookRecord] {
+    private var bookRecords: [BookRecord] {
         customerActivity.bookRecords
     }
 

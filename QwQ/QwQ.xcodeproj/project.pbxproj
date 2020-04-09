@@ -51,6 +51,7 @@
 		61ACB7F9242A7C7E002A1F47 /* CustomerActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */; };
 		61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */; };
 		61C74302242B4A1F005818A1 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C74301242B4A1F005818A1 /* RecordViewController.swift */; };
+		61D738D4243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */; };
 		7E1137FE24233B1F006984BB /* PopoverContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FD24233B1F006984BB /* PopoverContentController.swift */; };
 		7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */; };
 		7E428222242B4CB60019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */; };
@@ -172,6 +173,7 @@
 		61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerActivity.swift; sourceTree = "<group>"; };
 		61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollection.swift; sourceTree = "<group>"; };
 		61C74301242B4A1F005818A1 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerActivityLogicManager.swift; sourceTree = "<group>"; };
 		7B40F60E2565FF91A6C280E6 /* Pods-QwQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.debug.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1137FD24233B1F006984BB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
 		7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 				613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */,
 				6148054B24228798003D6D44 /* CustomerBookingLogic.swift */,
 				6148054D242287AB003D6D44 /* CustomerBookingLogicManager.swift */,
+				61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */,
 			);
 			name = Logic;
 			path = QwQ/Logic;
@@ -949,6 +952,7 @@
 				5C25BEAD2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */,
 				7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */,
+				61D738D4243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift in Sources */,
 				7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */,
 				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
 				7EA7B49F2432D3CA00A6828F /* ForgotPasswordViewController.swift in Sources */,

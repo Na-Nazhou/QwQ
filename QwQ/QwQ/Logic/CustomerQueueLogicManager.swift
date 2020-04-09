@@ -3,7 +3,7 @@ import os.log
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
     // Storage
-    var queueStorage: CustomerQueueStorage
+    private var queueStorage: CustomerQueueStorage
 
     // View Controller
     weak var queueDelegate: QueueDelegate?
@@ -17,10 +17,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     var currentQueueRecords: [QueueRecord] {
         customerActivity.currentQueues.records
     }
-    var pastQueueRecords: [QueueRecord] {
-        customerActivity.queueHistory.records
-    }
-    var queueRecords: [QueueRecord] {
+    private var queueRecords: [QueueRecord] {
         customerActivity.queueRecords
     }
 

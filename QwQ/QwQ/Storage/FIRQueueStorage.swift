@@ -45,7 +45,7 @@ class FIRQueueStorage: CustomerQueueStorage {
 
         for newRecord in newRecords {
             let newRecordRef = queuesDb.document()
-            newRecordRef.setData(newRecord.dictionary)
+            batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
             if let err = err {
@@ -116,13 +116,10 @@ class FIRQueueStorage: CustomerQueueStorage {
                 }, errorHandler: { _ in })
         }, errorHandler: nil)
     }
+}
 
+extension FIRQueueStorage {
     // MARK: - Listeners
-
-    func removeListener() {
-        listener?.remove()
-        listener = nil
-    }
 
     func registerListener(for customer: Customer) {
         removeListener()
@@ -155,6 +152,15 @@ class FIRQueueStorage: CustomerQueueStorage {
                 }
             }
     }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+}
+
+extension FIRQueueStorage {
+    // MARK: - Delegates
 
     func registerDelegate(_ del: QueueStorageSyncDelegate) {
         logicDelegates.add(del)
