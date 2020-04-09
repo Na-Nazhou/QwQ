@@ -9,6 +9,8 @@ protocol RecordDelegate: AnyObject {
 
     func didAddRecord()
 
+    func didAddRecords(_ newRecords: [Record])
+
     func didUpdateRecord()
 
     func didWithdrawRecord()
@@ -16,10 +18,10 @@ protocol RecordDelegate: AnyObject {
 
 protocol QueueDelegate: RecordDelegate {
 
-    func didFindRestaurantQueueClosed()
+    func didFindRestaurantQueueClosed(for restaurant: Restaurant)
 }
 
 protocol BookingDelegate: RecordDelegate {
 
-    func didFindExistingRecord()
+    func didFindExistingRecord(at restaurant: Restaurant)
 }

@@ -14,24 +14,29 @@ class FIRStatsStorage: RestaurantStatsStorage {
     }
 
     private func restaurantQueues(of restaurant: Restaurant, from date: Date, to date2: Date) -> Query {
-        return queuesDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
+        queuesDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .whereField(Constants.startTimeKey, isLessThanOrEqualTo: getEndOfDay(of: date2))
             .whereField(Constants.startTimeKey, isGreaterThanOrEqualTo: getStartOfDay(of: date))
     }
 
     private func restaurantBookings(of restaurant: Restaurant, from date: Date, to date2: Date) -> Query {
-        return  bookingDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
+        bookingDb.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .whereField(Constants.timeKey, isLessThanOrEqualTo: getEndOfDay(of: date2))
             .whereField(Constants.timeKey, isGreaterThanOrEqualTo: getStartOfDay(of: date))
     }
 
-    func fetchTotalNumCustomers(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalNumCustomers(for restaurant: Restaurant,
+                                from date: Date, to date2: Date,
+                                completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 //completion(recordsSnapshot!.count) //num of records or
@@ -39,27 +44,35 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     // num of ppl in the record
                     completion($0.data()[Constants.groupSizeKey] as? Int ?? 0)
                 }
-        }
+            }
 
        restaurantBookings(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading book records from db.", log: Log.bookRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading book records from db.",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
                     completion($0.data()[Constants.groupSizeKey] as? Int ?? 0)
                 }
-        }
+            }
     }
     
-    func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant,
+                                          from date: Date, to date2: Date,
+                                          completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -70,16 +83,21 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     }
                     completion(self.timeDifferenceInSeconds(between: startTime, and: admitTime))
                 }
-        }
+            }
     }
 
-    func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant,
+                                            from date: Date, to date2: Date,
+                                            completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -90,16 +108,21 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     }
                     completion(self.timeDifferenceInSeconds(between: admitTime, and: serveTime))
                 }
-        }
+            }
     }
     
-    func fetchQueueCancellationRate(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchQueueCancellationRate(for restaurant: Restaurant,
+                                    from date: Date, to date2: Date,
+                                    completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantQueues(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading queue records from db.", log: Log.queueRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading queue records from db.",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -107,16 +130,21 @@ class FIRStatsStorage: RestaurantStatsStorage {
                         completion(1)
                     }
                 }
-        }
+            }
     }
     
-    func fetchBookingCancellationRate(for restaurant: Restaurant, from date: Date, to date2: Date, completion: @escaping (Int) -> Void) {
+    func fetchBookingCancellationRate(for restaurant: Restaurant,
+                                      from date: Date, to date2: Date,
+                                      completion: @escaping (Int) -> Void) {
         checkFromToDates(from: date, to: date)
 
         restaurantBookings(of: restaurant, from: date, to: date2)
             .getDocuments { recordsSnapshot, err in
-                if err != nil {
-                    os_log("Error loading book records from db.", log: Log.bookRetrievalError, type: .error)
+                if let err = err {
+                    os_log("Error loading book records from db.",
+                           log: Log.bookRetrievalError,
+                           type: .error,
+                           err.localizedDescription)
                     return
                 }
                 recordsSnapshot!.documents.forEach {
@@ -124,7 +152,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
                         completion(1)
                     }
                 }
-        }
+            }
     }
     
     private func checkFromToDates(from: Date, to: Date) {
@@ -138,10 +166,10 @@ class FIRStatsStorage: RestaurantStatsStorage {
     }
 
     private func getStartOfDay(of date: Date) -> Date {
-        return Calendar.current.startOfDay(for: date)
+        Calendar.current.startOfDay(for: date)
     }
 
     private func timeDifferenceInSeconds(between start: Date, and end: Date) -> Int {
-        return Int(end.timeIntervalSince(start))
+        Int(end.timeIntervalSince(start))
     }
 }

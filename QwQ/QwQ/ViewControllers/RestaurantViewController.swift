@@ -9,6 +9,7 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var menuLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
@@ -17,9 +18,12 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    // MARK: Logic properties
     var bookingLogicManager: CustomerBookingLogicManager!
     var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
+
+    // MARK: Model properties
     var restaurant: Restaurant? {
         restaurantLogicManager.currentRestaurant
     }
@@ -31,35 +35,38 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
         restaurantLogicManager.restaurantDelegate = self
     }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        handleBack()
+    }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
-        guard let restaurant = restaurant else {
-            return
-        }
-        // Cannot queue if the restaurant is currently not open
-        if !restaurant.isQueueOpen {
-            showMessage(title: Constants.errorTitle,
-                        message: Constants.restaurantUnavailableMessage,
-                        buttonText: Constants.okayTitle)
-            return
-        }
-
-        if !queueLogicManager.canQueue(for: restaurant) {
-            showMessage(title: Constants.errorTitle,
-                        message: Constants.alreadyQueuedRestaurantMessage,
-                        buttonText: Constants.okayTitle)
+        guard let restaurant = restaurant,
+            checkRestaurantQueue(for: restaurant) else {
             return
         }
 
         performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
     }
 
+    @discardableResult
+    private func checkRestaurantQueue(for restaurant: Restaurant) -> Bool {
+        guard !queueLogicManager.canQueue(for: restaurant) else {
+            return true
+        }
+        var format = Constants.alreadyQueuedRestaurantMessage
+        if !restaurant.isQueueOpen {
+            format = Constants.restaurantUnavailableMessage
+        }
+
+        showMessage(title: Constants.errorTitle,
+                    message: String(format: format, restaurant.name),
+                    buttonText: Constants.okayTitle)
+        return false
+    }
+
     @IBAction private func handleBookTap(_ sender: Any) {
         performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
     }
     
     private func setUpViews() {
@@ -85,12 +92,18 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let restaurant = restaurant else {
+            return
+        }
         if segue.identifier == Constants.editQueueSelectedSegue {
             guard let editQVC = segue.destination as? EditQueueViewController else {
                 assert(false,
                        "Destination should be editRecordVC.")
                 return
             }
+
+            restaurantLogicManager.currentRestaurants = [restaurant]
+
             editQVC.queueLogicManager = queueLogicManager
             editQVC.restaurantLogicManager = restaurantLogicManager
         }
@@ -100,6 +113,9 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                        "Destination should be editRecordVC and restaurant should not be nil.")
                 return
             }
+
+            restaurantLogicManager.currentRestaurants = [restaurant]
+
             editBVC.restaurantLogicManager = restaurantLogicManager
             editBVC.bookingLogicManager = bookingLogicManager
             return

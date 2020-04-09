@@ -2,25 +2,24 @@ import Foundation
 import os.log
 
 class CustomerBookingLogicManager: CustomerBookingLogic {
+
     // Storage
-    var bookingStorage: CustomerBookingStorage
+    private var bookingStorage: CustomerBookingStorage
 
     // View controller
     weak var bookingDelegate: BookingDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
+    // Models
     private let customerActivity: CustomerActivity
     private var customer: Customer {
         customerActivity.customer
     }
 
-    var activeBookRecords: [BookRecord] {
+    private var activeBookRecords: [BookRecord] {
         customerActivity.currentBookings.records
     }
-    var pastBookRecords: [BookRecord] {
-        customerActivity.bookingHistory.records
-    }
-    var bookRecords: [BookRecord] {
+    private var bookRecords: [BookRecord] {
         customerActivity.bookRecords
     }
 
@@ -38,7 +37,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     deinit {
-        os_log("DEINITING booking lm", log: Log.deinitLogic, type: .info)
+        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 
@@ -53,12 +52,41 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    wheelchairFriendly: wheelchairFriendly)
 
         if !checkExistingRecords(against: newRecord) {
+            bookingDelegate?.didFindExistingRecord(at: restaurant)
             return false
         }
 
         bookingStorage.addBookRecord(newRecord: newRecord) {
             self.bookingDelegate?.didAddRecord()
         }
+        return true
+    }
+
+    func addBookRecords(to restaurants: [Restaurant],
+                        at time: Date,
+                        with groupSize: Int,
+                        babyChairQuantity: Int,
+                        wheelchairFriendly: Bool) -> Bool {
+
+        var newRecords = [BookRecord]()
+        for restaurant in restaurants {
+            let newRecord = BookRecord(restaurant: restaurant,
+                                       customer: customer,
+                                       time: time,
+                                       groupSize: groupSize,
+                                       babyChairQuantity: babyChairQuantity,
+                                       wheelchairFriendly: wheelchairFriendly)
+            if !checkExistingRecords(against: newRecord) {
+                bookingDelegate?.didFindExistingRecord(at: restaurant)
+                return false
+            }
+            newRecords.append(newRecord)
+        }
+
+        bookingStorage.addBookRecords(newRecords: newRecords) {
+            self.bookingDelegate?.didAddRecords(newRecords)
+        }
+
         return true
     }
 
@@ -85,7 +113,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             $0.restaurant == record.restaurant &&
                 $0.time == record.time
         }) {
-            bookingDelegate?.didFindExistingRecord()
             return false
         }
 

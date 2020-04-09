@@ -8,15 +8,16 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
-    typealias Profile = FIRRestaurantStorage
-    typealias Auth = FIRAuthenticator
-    
+
+    // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
     var spinner: UIView?
-    
+
+    typealias Profile = FIRRestaurantStorage
+    typealias Auth = FIRAuthenticator
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

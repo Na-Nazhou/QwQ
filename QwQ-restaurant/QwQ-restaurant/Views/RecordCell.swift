@@ -36,52 +36,28 @@ class RecordCell: UICollectionViewCell {
     func setUpView(record: Record) {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
+
+        setUpRecordImage(record: record)
+
+        showActionButtons()
+        enableLeftButton()
+        enableRightButton()
+
         setUpRejectButton()
 
         switch record.status {
         case .pendingAdmission:
-            if let queueRecord = record as? QueueRecord {
-                statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-                timeLabel.text = "00:00"
-            }
-            if let bookRecord = record as? BookRecord {
-                statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
-                timeLabel.text = bookRecord.time.getFormattedTime()
-            }
-            timeLabel.textColor = .systemGreen
-            setUpAdmitButton()
-            disableReject()
-            showButtons()
+            setUpPendingAdmissionRecord(record: record)
         case .admitted:
-            statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
-            if let bookRecord = record as? BookRecord {
-                timeLabel.text = bookRecord.time.getFormattedTime()
-            } else {
-                timeLabel.text = record.admitTime!.getFormattedTime()
-            }
-            timeLabel.textColor = .systemGreen
-            enableReject()
-            showButtons()
-            setUpServeButton()
-        case .served:
-            statusLabel.text = "Served at: \(record.serveTime!.toString())"
-            timeLabel.text = record.serveTime!.getFormattedTime()
-            timeLabel.textColor = .systemGreen
-            hideButtons()
-        case .rejected:
-            statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
-            timeLabel.text = record.rejectTime!.getFormattedTime()
-            timeLabel.textColor = .systemGray
-            hideButtons()
-        case .withdrawn:
-            statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
-            timeLabel.text = record.withdrawTime!.getFormattedTime()
-            timeLabel.textColor = .systemGray
-            hideButtons()
+            setUpAdmittedRecord(record: record)
+        case .confirmedAdmission:
+            setUpConfirmedRecord(record: record)
         default:
-            assert(false)
+            setUpHistoryRecord(record: record)
         }
+    }
 
+    private func setUpRecordImage(record: Record) {
         if record as? QueueRecord != nil {
             queueBookImageView.image = UIImage(named: "c-queue-icon")
         }
@@ -91,22 +67,97 @@ class RecordCell: UICollectionViewCell {
         }
     }
 
-    private func disableReject() {
-        rightButton.isEnabled = false
-        rightButton.alpha = 0.5
+    private func setUpPendingAdmissionRecord(record: Record) {
+        if let queueRecord = record as? QueueRecord {
+            statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+            timeLabel.text = queueRecord.estimatedAdmitTime!.getFormattedTime()
+        }
+        if let bookRecord = record as? BookRecord {
+            statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
+            timeLabel.text = bookRecord.time.getFormattedTime()
+        }
+        timeLabel.textColor = .systemGreen
+        setUpAdmitButton()
+        disableRightButton()
     }
 
-    private func enableReject() {
-        rightButton.isEnabled = true
-        rightButton.alpha = 1
+    private func setUpHistoryRecord(record: Record) {
+        switch record.status {
+        case .served:
+            statusLabel.text = "Served at: \(record.serveTime!.toString())"
+            timeLabel.text = record.serveTime!.getFormattedTime()
+            timeLabel.textColor = .systemGreen
+        case .rejected:
+            statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
+            timeLabel.text = record.rejectTime!.getFormattedTime()
+            timeLabel.textColor = .systemGray
+        case .withdrawn:
+            statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
+            timeLabel.text = record.withdrawTime!.getFormattedTime()
+            timeLabel.textColor = .systemGray
+        default:
+            assert(false)
+        }
+        hideActionButtons()
     }
 
-    private func hideButtons() {
+    private func setUpAdmittedRecord(record: Record) {
+        statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
+        if let bookRecord = record as? BookRecord {
+            timeLabel.text = bookRecord.time.getFormattedTime()
+        } else {
+            timeLabel.text = record.admitTime!.getFormattedTime()
+            // show a timer instead
+        }
+        timeLabel.textColor = .systemGray
+        setUpServeButton()
+        disableLeftButton()
+    }
+
+    private func setUpConfirmedRecord(record: Record) {
+        statusLabel.text = "Confirmed at: \(record.confirmAdmissionTime!.toString())"
+        timeLabel.text = record.confirmAdmissionTime!.getFormattedTime()
+        if let bookRecord = record as? BookRecord {
+            timeLabel.text = bookRecord.time.getFormattedTime()
+        }
+        // For queue record should show a timer instead
+        // show grey if exceed time limit
+        timeLabel.textColor = .systemGreen
+        setUpServeButton()
+    }
+
+    private func disableRightButton() {
+        disableButton(button: rightButton)
+    }
+
+    private func enableRightButton() {
+        enableButton(button: rightButton)
+    }
+
+    private func disableLeftButton() {
+        disableButton(button: leftButton)
+    }
+
+    private func enableLeftButton() {
+        enableButton(button: leftButton)
+    }
+
+    private func enableButton(button: UIButton) {
+        button.isEnabled = true
+        button.alpha = 1
+    }
+
+    private func disableButton(button: UIButton) {
+        button.isEnabled = false
+        button.alpha = 0.5
+    }
+
+    private func hideActionButtons() {
         leftButton.isHidden = true
         rightButton.isHidden = true
     }
 
-    private func showButtons() {
+    private func showActionButtons() {
         leftButton.isHidden = false
         rightButton.isHidden = false
     }

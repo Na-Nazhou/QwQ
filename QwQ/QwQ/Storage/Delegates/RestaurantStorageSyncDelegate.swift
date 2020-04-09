@@ -3,6 +3,7 @@ protocol RestaurantStorageSyncDelegate: AnyObject {
 
     func didAddRestaurant(restaurant: Restaurant)
 
+    /// Updates collection of restaurants when updated. 
     func didUpdateRestaurant(restaurant: Restaurant)
 
     func didRemoveRestaurant(restaurant: Restaurant)

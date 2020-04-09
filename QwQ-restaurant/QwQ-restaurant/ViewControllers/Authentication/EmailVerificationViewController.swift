@@ -8,6 +8,8 @@
 import UIKit
 
 class EmailVerificationViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet private var emailLabel: UILabel!
     
     override func viewDidLoad() {

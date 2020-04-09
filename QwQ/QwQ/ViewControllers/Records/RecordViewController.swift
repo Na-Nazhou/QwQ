@@ -8,6 +8,8 @@
 import UIKit
 
 class RecordViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
@@ -16,6 +18,7 @@ class RecordViewController: UIViewController {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
 
+    // MARK: Model properties
     var record: Record?
 
     override func viewDidLoad() {

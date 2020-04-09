@@ -27,6 +27,9 @@ struct BookRecord: Record {
     var serveTime: Date?
     var rejectTime: Date?
     let withdrawTime: Date?
+    var confirmAdmissionTime: Date? {
+        admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
+    }
 
     var dictionary: [String: Any] {
         var data = [String: Any]()
@@ -55,7 +58,8 @@ struct BookRecord: Record {
 
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
-         admitTime: Date? = nil, serveTime: Date? = nil, rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         admitTime: Date? = nil, serveTime: Date? = nil,
+         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer

@@ -9,6 +9,7 @@ import UIKit
 
 class EditProfileViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var newPasswordTextField: UITextField!
@@ -20,8 +21,10 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var maxGroupSizeTextField: UITextField!
     @IBOutlet private var autoCloseTimeTextField: UITextField!
     @IBOutlet private var advanceBookingLimitTextField: UITextField!
-    
     @IBOutlet private var profileImageView: UIImageView!
+
+    private var image: UIImage?
+    private var spinner: UIView?
 
     typealias Auth = FIRAuthenticator
     typealias Profile = FIRRestaurantStorage
@@ -30,10 +33,6 @@ class EditProfileViewController: UIViewController {
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
 
-    private var image: UIImage?
-
-    private var spinner: UIView?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

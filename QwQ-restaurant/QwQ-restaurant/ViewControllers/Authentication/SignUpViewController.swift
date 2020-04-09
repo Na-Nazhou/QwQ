@@ -8,22 +8,26 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-    
+
+    // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var segmentedControl: SegmentedControl!
+    
+    var spinner: UIView?
     
     typealias Auth = FIRAuthenticator
     typealias Profile = FIRRestaurantStorage
-
-    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
+        
+        setUpSegmentedControl()
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -74,6 +78,10 @@ class SignUpViewController: UIViewController {
                     authDetails: authDetails,
                     completion: signUpComplete,
                     errorHandler: handleError(error:))
+    }
+    
+    private func setUpSegmentedControl() {
+        segmentedControl.items = Constants.segmentedControlSignUpTitles
     }
     
     private func signUpComplete() {

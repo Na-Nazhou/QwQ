@@ -1,15 +1,9 @@
-//
-//  BookingStorageSyncDelegate.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 25/3/20.
-//
-
+/// Represents the protocol any booking storage syncing delegates need to conform to.
 protocol BookingStorageSyncDelegate: AnyObject {
 
     func didAddBookRecord(_ record: BookRecord)
 
+    /// Updates collection of book records when updated.
     func didUpdateBookRecord(_ record: BookRecord)
 
-    func didDeleteBookRecord(_ record: BookRecord)
 }

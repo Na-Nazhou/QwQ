@@ -9,46 +9,80 @@ import UIKit
 
 class SearchViewController: UIViewController, SearchDelegate {
 
+    // MARK: View properties
     @IBOutlet private var selectButton: UIButton!
     @IBOutlet private var restaurantCollectionView: UICollectionView!
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
-    
-    private var filter: (Restaurant) -> Bool = { _ in true }
-    private var sorter: (Restaurant, Restaurant) -> Bool = { _, _  in true }
-    private var filtered: [Restaurant] {
-        var finalRestaurants = restaurants.filter(filter)
-        finalRestaurants.sort(by: sorter)
-        return finalRestaurants
-    }
+
+    // MARK: Search and sort
     private var searchActive: Bool = false
     private let searchController = UISearchController(searchResultsController: nil)
-    private var selectionState = SelectionState.selectOne
-    private var selectedRestaurants: [Restaurant] = []
-    
-    private let bookingLogicManager = CustomerBookingLogicManager()
-    private let queueLogicManager = CustomerQueueLogicManager()
-    private let restaurantLogicManager = RestaurantLogicManager()
-    
-    private var restaurants: [Restaurant] {
-        restaurantLogicManager.restaurants
+
+    private var filter: (Restaurant) -> Bool = { _ in true }
+    private var sorter: (Restaurant, Restaurant) -> Bool = { $0.name < $1.name }
+    private var filtered: [Restaurant] {
+        restaurants.filter(filter).sorted(by: sorter)
     }
-    
+
+    // MARK: Multi-select
+    private var selectionState = SelectionState.selectOne
     enum SelectionState {
         case selectOne
         case selectAll
     }
+    private var selectedRestaurants: [Restaurant] {
+        if selectionState == .selectAll {
+            guard let items = restaurantCollectionView.indexPathsForSelectedItems else {
+                return []
+            }
+            return items.map { filtered[$0.item] }
+        }
+        return []
+    }
+
+    // MARK: Logic properties
+    private let bookingLogicManager = CustomerBookingLogicManager()
+    private let queueLogicManager = CustomerQueueLogicManager()
+    private let restaurantLogicManager = RestaurantLogicManager()
+
+    // MARK: Model properties
+    private var restaurants: [Restaurant] {
+        restaurantLogicManager.restaurants
+    }
     
     @IBAction private func handleBook(_ sender: Any) {
-        if selectionState == .selectAll {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+        guard checkSelectedRestaurants() else {
+            return
         }
+        self.performSegue(withIdentifier: Constants.editBookSelectedSegue,
+                          sender: selectedRestaurants)
     }
     
     @IBAction private func handleQueue(_ sender: Any) {
-        if selectionState == .selectOne {
-            let items = restaurantCollectionView.indexPathsForSelectedItems
+        guard checkSelectedRestaurants() else {
+            return
         }
+
+        for restaurant in selectedRestaurants {
+            if !checkRestaurantQueue(for: restaurant) {
+                // TODO: deselect the item
+                return
+            }
+        }
+        self.performSegue(withIdentifier: Constants.editQueueSelectedSegue,
+                          sender: selectedRestaurants)
+    }
+
+    private func checkSelectedRestaurants() -> Bool {
+        if selectedRestaurants.isEmpty {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.noRestaurantSelectedMessage,
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
+        return true
     }
     
     @IBAction private func handleSelect(_ sender: Any) {
@@ -66,7 +100,6 @@ class SearchViewController: UIViewController, SearchDelegate {
             selectButton.setTitle(Constants.selectAllText, for: .normal)
             
             selectionState = .selectOne
-            selectedRestaurants = []
             
             restaurantCollectionView.reloadData()
             restaurantCollectionView.allowsMultipleSelection = false
@@ -118,33 +151,38 @@ class SearchViewController: UIViewController, SearchDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.restaurantSelectedSegue {
-            if let indexPaths = self.restaurantCollectionView.indexPathsForSelectedItems {
-                let row = indexPaths[0].item
-                restaurantLogicManager.currentRestaurant = filtered[row]
+        switch segue.identifier {
+        case Constants.restaurantSelectedSegue:
+            guard let restaurant = sender as? Restaurant,
+                let rVC = segue.destination as? RestaurantViewController else {
+                    assert(false, "Wrong way of doing this")
+                    return
             }
-            
-            guard let rVC = segue.destination as? RestaurantViewController else {
-                assert(false, "Wrong way of doing this")
-                return
-            }
+
+            restaurantLogicManager.currentRestaurant = restaurant
             rVC.restaurantLogicManager = restaurantLogicManager
             rVC.queueLogicManager = queueLogicManager
             rVC.bookingLogicManager = bookingLogicManager
-        }
-        
-        if segue.identifier == Constants.editQueueSelectedSegue,
-            let restaurant = sender as? Restaurant {
-            if restaurantLogicManager.currentRestaurant != restaurant {
-                restaurantLogicManager.currentRestaurant = restaurant
-            } // otherwise it is the most updated copy of restaurant
-            
-            guard let editVC = segue.destination as? EditQueueViewController else {
+        case Constants.editQueueSelectedSegue:
+            guard let restaurants = sender as? [Restaurant],
+                let editVC = segue.destination as? EditQueueViewController else {
+                    assert(false, "Wrong way of doing this")
+                    return
+            }
+            restaurantLogicManager.currentRestaurants = restaurants
+            editVC.restaurantLogicManager = restaurantLogicManager
+            editVC.queueLogicManager = queueLogicManager
+        case Constants.editBookSelectedSegue:
+            guard let restaurants = sender as? [Restaurant],
+                let editVC = segue.destination as? EditBookingViewController else {
                 assert(false, "Wrong way of doing this")
                 return
             }
+            restaurantLogicManager.currentRestaurants = restaurants
             editVC.restaurantLogicManager = restaurantLogicManager
-            editVC.queueLogicManager = queueLogicManager
+            editVC.bookingLogicManager = bookingLogicManager
+        default:
+            assert(false)
         }
     }
 }
@@ -243,45 +281,48 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let restaurant = filtered[indexPath.item]
         
         restaurantCell.backgroundColor = Constants.deselectedRestaurantColor
+        restaurantCell.canQueue = queueLogicManager.canQueue(for: restaurant)
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
-            if !restaurant.isQueueOpen {
-                self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.restaurantUnavailableMessage,
-                                 buttonText: Constants.okayTitle)
-                return
+            guard self.checkRestaurantQueue(for: restaurant) else {
+                return false
             }
-            
-            if !self.queueLogicManager.canQueue(for: restaurant) {
-                self.showMessage(title: Constants.errorTitle,
-                                 message: Constants.alreadyQueuedRestaurantMessage,
-                                 buttonText: Constants.okayTitle)
-                return
-            }
-            
-            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: restaurant)
+            self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: [restaurant])
+            return true
         }
         return restaurantCell
+    }
+
+    @discardableResult
+    private func checkRestaurantQueue(for restaurant: Restaurant) -> Bool {
+        guard !queueLogicManager.canQueue(for: restaurant) else {
+            return true
+        }
+        var format = Constants.alreadyQueuedRestaurantMessage
+        if !restaurant.isQueueOpen {
+            format = Constants.restaurantUnavailableMessage
+        }
+
+        showMessage(title: Constants.errorTitle,
+                    message: String(format: format, restaurant.name),
+                    buttonText: Constants.okayTitle)
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectionState == .selectAll {
             let cell = collectionView.cellForItem(at: indexPath)
             if cell?.isSelected == true {
-                selectedRestaurants.append(filtered[indexPath.item])
                 cell?.backgroundColor = Constants.selectedRestaurantColor
             }
         } else if selectionState == .selectOne {
-            performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: self)
+            let selectedRestaurant = filtered[indexPath.item]
+            performSegue(withIdentifier: Constants.restaurantSelectedSegue, sender: selectedRestaurant)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        let restaurantToBeRemoved = filtered[indexPath.item]
-        selectedRestaurants = selectedRestaurants.filter {
-            $0 != restaurantToBeRemoved
-        }
         cell?.backgroundColor = Constants.deselectedRestaurantColor
     }
 }

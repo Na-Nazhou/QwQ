@@ -8,6 +8,8 @@
 import UIKit
 
 class RecordViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
@@ -16,10 +18,13 @@ class RecordViewController: UIViewController {
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet var actionButton: UIButton!
 
-    var recordLogicManager: RestaurantRecordLogicManager!
-    var record: Record?
-
     var spinner: UIView?
+
+    // MARK: Logic properties
+    var activityLogicManager: RestaurantActivityLogicManager!
+
+    // MARK: Model properties
+    var record: Record?
 
     override func viewDidLoad() {
            super.viewDidLoad()
@@ -41,6 +46,10 @@ class RecordViewController: UIViewController {
             }
 
             if record.isAdmitted {
+                setUpPendingAdmissionButton()
+            }
+
+            if record.isConfirmedAdmission {
                 setUpServeButton()
             }
 
@@ -79,6 +88,12 @@ class RecordViewController: UIViewController {
     private func setUpServeButton() {
         actionButton.setTitle("SERVE", for: .normal)
         actionButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
+    }
+
+    private func setUpPendingAdmissionButton() {
+        actionButton.setTitle("PENDING ADMISSION", for: .normal)
+        actionButton.alpha = 0.5
+        actionButton.isEnabled = false
     }
 
     // TODO

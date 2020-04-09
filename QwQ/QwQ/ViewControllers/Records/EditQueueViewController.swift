@@ -9,6 +9,7 @@ import UIKit
 
 class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
+    // MARK: Logic properties
     var queueLogicManager: CustomerQueueLogicManager!
 
     @IBAction override func handleSubmit(_ sender: Any) {
@@ -33,17 +34,13 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         }
 
          // Create a new queue record
-        guard let restaurant = restaurant else {
-            return
-        }
-        
         if queueLogicManager
-            .enqueue(to: restaurant,
+            .enqueue(to: restaurants,
                      with: groupSize,
                      babyChairQuantity: babyChairQuantity,
                      wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
-        }
+        } 
     }
 
     override func viewDidLoad() {
@@ -51,9 +48,9 @@ class EditQueueViewController: EditRecordViewController, QueueDelegate {
         queueLogicManager.queueDelegate = self
     }
 
-    func didFindRestaurantQueueClosed() {
+    func didFindRestaurantQueueClosed(for restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
-                    message: Constants.restaurantUnavailableMessage,
+                    message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
                     buttonText: Constants.okayTitle)
     }
 }

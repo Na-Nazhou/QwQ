@@ -9,14 +9,27 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
+    // MARK: View properties
     @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
     var spinner: UIView?
 
+    enum SelectedControl: Int {
+        case active
+        case history
+    }
+    var selectedControl: SelectedControl = .active
+    var isActive: Bool {
+        selectedControl == .active
+    }
+
+    // MARK: Logic properties
     let queueLogicManager = CustomerQueueLogicManager()
     let bookingLogicManager = CustomerBookingLogicManager()
+    let activityLogicManager = CustomerActivityLogicManager()
 
+    // MARK: Model properties
     var records: [Record] {
         if isActive {
             return activeRecords
@@ -24,56 +37,11 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             return historyRecords
         }
     }
-
-    var selectedIndex = 0
-
-    var isActive: Bool {
-        selectedIndex == 0
-    }
-
-    // TODO: refactor
     var activeRecords: [Record] {
-        var records: [Record] = bookingLogicManager.activeBookRecords
-        records += queueLogicManager.currentQueueRecords
-        return records.sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if let queueRecord1 = record1 as? QueueRecord {
-                time1 = queueRecord1.startTime
-            } else {
-                time1 = (record1 as? BookRecord)!.time
-            }
-            if let queueRecord2 = record2 as? QueueRecord {
-                time2 = queueRecord2.startTime
-            } else {
-                time2 = (record2 as? BookRecord)!.time
-            }
-            return time1 > time2
-        })
+        activityLogicManager.activeRecords
     }
-
     var historyRecords: [Record] {
-        let bookRecords = bookingLogicManager.pastBookRecords
-        let queueRecords = queueLogicManager.pastQueueRecords
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if record1.isServed {
-                time1 = record1.serveTime!
-            } else if record1.isRejected {
-                time1 = record1.rejectTime!
-            } else {
-                time1 = record1.withdrawTime!
-            }
-            if record2.isServed {
-                time2 = record2.serveTime!
-            } else if record2.isRejected {
-                time2 = record2.rejectTime!
-            } else {
-                time2 = record2.withdrawTime!
-            }
-            return time1 > time2
-        })
+        activityLogicManager.historyRecords
     }
     
     override func viewDidLoad() {
@@ -98,7 +66,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        selectedIndex = sender.selectedIndex
+        selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
         activitiesCollectionView.reloadData()
     }
 
@@ -221,6 +189,10 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row < records.count else {
+            activitiesCollectionView.reloadData()
+            return
+        }
         let record = records[indexPath.row]
         if let queueRecord = record as? QueueRecord {
             performSegue(withIdentifier: Constants.queueSelectedSegue, sender: queueRecord)

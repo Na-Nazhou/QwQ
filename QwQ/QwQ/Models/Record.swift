@@ -19,7 +19,7 @@ protocol Record {
     var admitTime: Date? { get }
     var serveTime: Date? { get }
     var rejectTime: Date? { get }
-    var withdrawTime: Date? { get }
+    var withdrawTime: Date? { get set }
     var confirmAdmissionTime: Date? { get }
 }
 
@@ -29,7 +29,7 @@ extension Record {
     }
 
     var isActiveRecord: Bool {
-        !isHistoryRecord
+        !isHistoryRecord && status != .invalid
     }
 
     var isAdmitted: Bool {

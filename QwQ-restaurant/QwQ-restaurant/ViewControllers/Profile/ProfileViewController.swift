@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
@@ -18,13 +19,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var groupSizeLabel: UILabel!
     @IBOutlet private var queueTimingLabel: UILabel!
     @IBOutlet private var advanceBookingLimitLabel: UILabel!
-    
     @IBOutlet private var profileImageView: UIImageView!
+
+    var spinner: UIView?
 
     typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator
-
-    var spinner: UIView?
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController {
     }
 
     private func logoutComplete() {
+        RestaurantPostLoginSetupManager.tearDown()
         performSegue(withIdentifier: Constants.logoutSegue, sender: self)
     }
 

@@ -8,6 +8,8 @@
 import UIKit
 
 class StatisticsViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet private var avgWaitingTimeRestaurantLabel: UILabel!
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
@@ -16,7 +18,11 @@ class StatisticsViewController: UIViewController {
 //    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
 //                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
 //                                               avgWaitingTimeCustomer: 4, date: Date())]
+
+    // MARK: Logic properties
     let statsManager = RestaurantStatisticsLogicManager()
+
+    // MARK: Model properties
     var statistics: [Statistics] {
         [statsManager.currentStats]
     }
@@ -43,7 +49,7 @@ class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statistics.count
+        statistics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,7 +70,6 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let statisticsDetails = statistics[indexPath.row]
-        print("\n\tTRIGGERED PERFORM SEGUE IN VC \n")
         performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
     }
 }

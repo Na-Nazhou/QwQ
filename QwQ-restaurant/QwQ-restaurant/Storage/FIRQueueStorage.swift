@@ -32,22 +32,32 @@ class FIRQueueStorage: RestaurantQueueStorage {
         removeListeners()
     }
 
-    func registerDelegate(_ del: QueueStorageSyncDelegate) {
-        logicDelegates.add(del)
+    private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
+        queueDb.document(record.id)
     }
 
-    func unregisterDelegate(_ del: QueueStorageSyncDelegate) {
-        logicDelegates.remove(del)
-    }
-
-    private func delegateWork(doWork: (QueueStorageSyncDelegate) -> Void) {
-        for delegate in logicDelegates.allObjects {
-            guard let delegate = delegate as? QueueStorageSyncDelegate else {
-                continue
+    func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
+        let oldDocRef = getQueueRecordDocument(record: oldRecord)
+        oldDocRef.setData(newRecord.dictionary) { err in
+            if let err = err {
+                os_log("Error updating queue record",
+                       log: Log.updateQueueRecordError,
+                       type: .error,
+                       err.localizedDescription)
+                return
             }
-            doWork(delegate)
+            completion()
         }
     }
+
+    func updateRestaurant(old: Restaurant, new: Restaurant) {
+        restaurantDb.document(old.uid)
+            .setData(new.dictionary)
+    }
+}
+
+extension FIRQueueStorage {
+    // MARK: - Listeners
 
     func registerListeners(for restaurant: Restaurant) {
         removeListeners()
@@ -67,17 +77,18 @@ class FIRQueueStorage: RestaurantQueueStorage {
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .addSnapshotListener { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
-                    print("Error fetching documents: \(String(describing: err))")
+                    os_log("Error getting queue record documents",
+                           log: Log.queueRetrievalError,
+                           type: .error,
+                           String(describing: err))
                     return
                 }
                 snapshot.documentChanges.forEach { diff in
                     var completion: (QueueRecord) -> Void
                     switch diff.type {
                     case .added:
-                        print("\n\tfound new q\n")
                         completion = { record in self.delegateWork { $0.didAddQueueRecord(record) } }
                     case .modified:
-                        print("\n\tfound update q\n")
                         completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
                     case .removed:
                         print("\n\tDetected removal of queue record from db which should not happen.\n")
@@ -96,7 +107,10 @@ class FIRQueueStorage: RestaurantQueueStorage {
         openCloseListener = restaurantDb.document(restaurant.uid)
             .addSnapshotListener { (profileSnapshot, err) in
                 if let err = err {
-                    print("Error fetching document: \(err)")
+                     os_log("Error getting restaurant documents",
+                            log: Log.restaurantRetrievalError,
+                            type: .error,
+                            err.localizedDescription)
                     return
                 }
                 guard let profileData = profileSnapshot!.data(),
@@ -105,7 +119,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
                         return
                 }
                 // regardless of change, contact delegate it has changed.
-                self.delegateWork { $0.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant) }
+                self.delegateWork { $0.didUpdateRestaurant(restaurant: updatedRestaurant) }
             }
     }
 
@@ -125,30 +139,31 @@ class FIRQueueStorage: RestaurantQueueStorage {
                                             restaurant: restaurant,
                                             id: qid) else {
                                                 os_log("Cannot create queue record.",
-                                                       log: Log.createQueueRecordError, type: .info)
+                                                       log: Log.createQueueRecordError, type: .error)
                                                 return
                     }
                     completion(rec)
                 }, errorHandler: { _ in })
     }
+}
 
-    private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
-        queueDb.document(record.id)
+extension FIRQueueStorage {
+    // MARK: - Delegates
+
+    func registerDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.add(del)
     }
 
-    func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord, completion: @escaping () -> Void) {
-        let oldDocRef = getQueueRecordDocument(record: oldRecord)
-        oldDocRef.setData(newRecord.dictionary) { error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+    func unregisterDelegate(_ del: QueueStorageSyncDelegate) {
+        logicDelegates.remove(del)
+    }
+
+    private func delegateWork(doWork: (QueueStorageSyncDelegate) -> Void) {
+        for delegate in logicDelegates.allObjects {
+            guard let delegate = delegate as? QueueStorageSyncDelegate else {
+                continue
             }
-            completion()
+            doWork(delegate)
         }
-    }
-
-    func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant) {
-        restaurantDb.document(old.uid)
-            .setData(new.dictionary)
     }
 }

@@ -70,6 +70,7 @@ struct Constants {
     static let restaurantsDirectory = "restaurants"
     static let queuesDirectory = "queues"
     static let bookingsDirectory = "bookings"
+    static let profilePicsDirectory = "profile-pics"
     
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"
@@ -81,6 +82,7 @@ struct Constants {
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
     static let segmentedControlStatisticsTitles = ["30 days", "3 months", "1 year"]
+    static let segmentedControlSignUpTitles = ["Staff", "Restaurant"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white
@@ -125,11 +127,10 @@ struct Constants {
     static let serveTimeKey = "serveTime"
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
+    static let confirmAdmissionTimeKey = "confirmAdmissionTime"
     static let timeKey = "time"
     static let assignedRestaurantKey = "assignedRestaurant"
     static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
-
-    // MARK: Firebase directory settings
-    static let profilePicKey = "profile-pics"
+    static let estimatedAdmitTimeKey = "estimatedAdmitTime"
 }
