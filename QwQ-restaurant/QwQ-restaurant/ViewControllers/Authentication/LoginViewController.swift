@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator
     
     @IBOutlet private var emailTextField: UITextField!

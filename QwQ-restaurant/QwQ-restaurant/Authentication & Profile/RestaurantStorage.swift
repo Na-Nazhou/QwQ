@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProfileStorage {
+protocol RestaurantStorage {
     // MARK: - Restaurant Creation Methods
     
     static func createInitialRestaurantProfile(uid: String,

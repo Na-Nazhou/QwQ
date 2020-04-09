@@ -15,7 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet private var passwordTextField: UITextField!
     
     typealias Auth = FIRAuthenticator
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
 
     var spinner: UIView?
 

@@ -5,13 +5,13 @@
 //  Created by Daniel Wong on 8/4/20.
 //
 
-enum Permissions {
-    case acceptBooking
-    case rejectBooking
+enum Permissions: String {
+    case acceptBooking = "acceptBooking"
+    case rejectBooking = "rejectBooking"
 
-    case acceptQueue
-    case rejectQueue
+    case acceptQueue = "acceptQueue"
+    case rejectQueue = "rejectQueue"
 
-    case addStaff
-    case editProfile
+    case addStaff = "addStaff"
+    case editProfile = "editProfile"
 }

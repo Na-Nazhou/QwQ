@@ -10,7 +10,7 @@ import FirebaseStorage
 import FirebaseUI
 import SDWebImage
 
-class FIRProfileStorage: ProfileStorage {
+class FIRRestaurantStorage: RestaurantStorage {
     typealias Auth = FIRAuthenticator
 
     static let dbRef = Firestore.firestore().collection("restaurants")

@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet private var profileImageView: UIImageView!
 
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator
 
     var spinner: UIView?

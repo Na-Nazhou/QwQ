@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var profileImageView: UIImageView!
 
     typealias Auth = FIRAuthenticator
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
     private var queueOpenTime: Date?

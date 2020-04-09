@@ -9,7 +9,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FIRAuthenticator: Authenticator {
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
     
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,

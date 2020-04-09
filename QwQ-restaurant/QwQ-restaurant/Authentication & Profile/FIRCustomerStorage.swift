@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FIRCustomerInfoStorage: CustomerInfoStorage {
+class FIRCustomerStorage: CustomerStorage {
     static func getCustomerFromUID(uid: String,
                                    completion: @escaping (Customer) -> Void,
                                    errorHandler: ((Error) -> Void)?) {

@@ -34,7 +34,7 @@ class RecordViewController: UIViewController {
             groupSizeLabel.text = String(record.groupSize)
             babyChairQuantityLabel.text = String(record.babyChairQuantity)
             wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
-            FIRProfileStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
+            FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
             if record.isPendingAdmission {
                 setUpAdmitButton()
