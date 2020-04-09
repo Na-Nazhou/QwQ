@@ -15,7 +15,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         customerActivity.customer
     }
 
-    var activeBookRecords: [BookRecord] {
+    private var activeBookRecords: [BookRecord] {
         customerActivity.currentBookings.records
     }
     private var bookRecords: [BookRecord] {

@@ -275,9 +275,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         restaurantCell.setUpView(restaurant: restaurant)
         restaurantCell.queueAction = {
             guard self.checkRestaurantQueue(for: restaurant) else {
-                return
+                return false
             }
             self.performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: [restaurant])
+            return true
         }
         return restaurantCell
     }

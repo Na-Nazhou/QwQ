@@ -6,8 +6,6 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
     var bookingDelegate: BookingDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
-    var activeBookRecords: [BookRecord] { get }
-
     func addBookRecord(to restaurant: Restaurant,
                        at time: Date,
                        with groupSize: Int,

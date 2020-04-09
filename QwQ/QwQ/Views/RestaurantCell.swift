@@ -8,7 +8,7 @@
 import UIKit
 
 class RestaurantCell: UICollectionViewCell {
-    var queueAction: (() -> Void)?
+    var queueAction: (() -> Bool)?
     var canQueue: Bool = false
     
     @IBOutlet private var nameLabel: UILabel!
@@ -16,13 +16,22 @@ class RestaurantCell: UICollectionViewCell {
     @IBOutlet private var queueButton: UIButton!
 
     @IBAction private func handleQueueTap(sender: Any?) {
-        queueAction?()
+        if queueAction?() ?? false {
+            canQueue = true
+        } else {
+            canQueue = false
+        }
+        setUpQueueButton()
     }
 
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
 
+        setUpQueueButton()
+    }
+
+    func setUpQueueButton() {
         if canQueue {
             queueButton.alpha = 1
         } else {

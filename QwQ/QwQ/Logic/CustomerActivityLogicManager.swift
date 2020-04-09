@@ -29,7 +29,7 @@ class CustomerActivityLogicManager {
             } else {
                 time2 = (record2 as? BookRecord)!.time
             }
-            return time1 < time2
+            return time1 > time2
         })
     }
 
@@ -54,6 +54,4 @@ class CustomerActivityLogicManager {
             return time1 > time2
         })
     }
-
-
 }

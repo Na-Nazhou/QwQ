@@ -14,7 +14,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         customerActivity.customer
     }
 
-    var currentQueueRecords: [QueueRecord] {
+    private var currentQueueRecords: [QueueRecord] {
         customerActivity.currentQueues.records
     }
     private var queueRecords: [QueueRecord] {
