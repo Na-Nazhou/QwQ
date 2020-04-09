@@ -18,7 +18,6 @@ class LoginViewController: UIViewController {
     typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -1,5 +1,6 @@
 protocol ActivitiesDelegate: AnyObject {
-    func restaurantDidChangeQueueStatus(toIsOpen: Bool)
+
+    func didUpdateRestaurant()
 
     func didUpdateCurrentList()
     func didUpdateWaitingList()

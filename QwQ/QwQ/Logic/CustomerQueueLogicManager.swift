@@ -2,6 +2,7 @@ import Foundation
 import os.log
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
+
     // Storage
     private var queueStorage: CustomerQueueStorage
 

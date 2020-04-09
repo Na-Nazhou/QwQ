@@ -1,16 +1,23 @@
 import Foundation
 
 protocol BookingStorageSync {
+
+    // MARK: - Listeners
+    func registerListener(for restaurant: Restaurant)
+
+    func removeListener()
+
+    // MARK: - Delegates
     var logicDelegates: NSHashTable<AnyObject> { get }
     
     func registerDelegate(_ del: BookingStorageSyncDelegate)
+
     func unregisterDelegate(_ del: BookingStorageSyncDelegate)
 
-    func registerListener(for restaurant: Restaurant)
-    func removeListener()
 }
 
 protocol RestaurantBookingStorage: BookingStorageSync {
+    // MARK: - Modifiers
     func updateRecord(oldRecord: BookRecord, newRecord: BookRecord,
                       completion: @escaping () -> Void)
 }

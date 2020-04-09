@@ -9,6 +9,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     // View Controller
     weak var activitiesDelegate: ActivitiesDelegate?
 
+    // Models
     private let restaurantActivity: RestaurantActivity
 
     private var restaurant: Restaurant {
@@ -59,7 +60,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         var new = restaurant
         new.queueOpenTime = time
 
-        queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
+        queueStorage.updateRestaurant(old: restaurant, new: new)
     }
 
     func closeQueue() {
@@ -67,7 +68,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         var new = restaurant
         new.queueCloseTime = time
 
-        queueStorage.updateRestaurantQueueStatus(old: restaurant, new: new)
+        queueStorage.updateRestaurant(old: restaurant, new: new)
     }
 
     func notifyCustomerOfAdmission(record: QueueRecord) {
@@ -82,17 +83,15 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     func alertRestaurantIfCustomerTookTooLongToArrive(record: QueueRecord) {
         // TODO: popup alert
     }
-
-    // MARK: - sync from global db update
-    func restaurantDidPossiblyChangeQueueStatus(restaurant: Restaurant) {
-        if self.restaurant.isQueueOpen != restaurant.isQueueOpen {
-            activitiesDelegate?.restaurantDidChangeQueueStatus(toIsOpen: restaurant.isQueueOpen)
-        }
-        self.restaurantActivity.updateRestaurant(restaurant)
-    }
 }
 
 extension RestaurantActivityLogicManager {
+
+    func didUpdateRestaurant(restaurant: Restaurant) {
+        restaurantActivity.updateRestaurant(restaurant)
+        activitiesDelegate?.didUpdateRestaurant()
+    }
+
     func didAddRecord<T: Record>(_ record: T,
                                  currentList: RecordCollection<T>,
                                  waitingList: RecordCollection<T>,

@@ -1,5 +1,8 @@
 import Foundation
+
 protocol RestaurantStatisticsLogic {
+
+    // View Controllers
     var statsDelegate: StatsPresentationDelegate? { get set }
 
     func loadAllStats(from date: Date, to date2: Date)
@@ -10,4 +13,5 @@ protocol RestaurantStatisticsLogic {
     func fetchAvgWaitingTimeForRestaurant(from date: Date, to date2: Date)
     func fetchQueueCancellationRate(from date: Date, to date2: Date)
     func fetchBookingCancellationRate(from date: Date, to date2: Date)
+
 }

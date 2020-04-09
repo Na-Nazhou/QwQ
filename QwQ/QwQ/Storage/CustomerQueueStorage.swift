@@ -1,6 +1,5 @@
 import Foundation
 
-/// Represents the univeral queue storage sync protocol.
 protocol QueueStorageSync {
 
     // MARK: - Listeners

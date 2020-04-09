@@ -47,11 +47,10 @@ class FIRBookingStorage: RestaurantBookingStorage {
                 completion()
         }
     }
+}
 
-    func removeListener() {
-        listener?.remove()
-        listener = nil
-    }
+extension FIRBookingStorage {
+    // MARK: - Listeners
 
     func registerListener(for restaurant: Restaurant) {
         removeListener()
@@ -113,6 +112,14 @@ class FIRBookingStorage: RestaurantBookingStorage {
                     completion(rec)
                 }, errorHandler: { _ in })
     }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+}
+
+extension FIRBookingStorage {
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {
         logicDelegates.add(del)

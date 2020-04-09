@@ -63,7 +63,10 @@ class ActivitiesViewController: UIViewController {
         
         filtered = records
         setUpSegmentedControl()
+        setUpQueueStatus()
+    }
 
+    private func setUpQueueStatus() {
         if activityLogicManager.isQueueOpen {
             openQueue()
         } else {
@@ -245,12 +248,8 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension ActivitiesViewController: ActivitiesDelegate {
 
-    func restaurantDidChangeQueueStatus(toIsOpen: Bool) {
-        if toIsOpen {
-            openQueue()
-        } else {
-            closeQueue()
-        }
+    func didUpdateRestaurant() {
+        setUpQueueStatus()
     }
 
     func didUpdateCurrentList() {

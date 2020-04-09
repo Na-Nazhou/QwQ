@@ -1,6 +1,5 @@
 import Foundation
 
-/// Represents the univeral booking storage sync protocol.
 protocol BookingStorageSync {
 
     // MARK: - Listeners
