@@ -5,13 +5,7 @@ protocol RestaurantStatisticsLogic {
     // View Controllers
     var statsDelegate: StatsPresentationDelegate? { get set }
 
-    func loadAllStats(from date: Date, to date2: Date)
-
-    func fetchTotalNumCustomers(from date: Date, to date2: Date)
-    /// Average time for restaurants to wait for customer to accept? reach and be served?
-    func fetchAvgWaitingTimeForCustomer(from date: Date, to date2: Date)
-    func fetchAvgWaitingTimeForRestaurant(from date: Date, to date2: Date)
-    func fetchQueueCancellationRate(from date: Date, to date2: Date)
-    func fetchBookingCancellationRate(from date: Date, to date2: Date)
-
+    func fetchDailyDetails()
+    func fetchWeeklyDetails()
+    func fetchMonthlyDetails()
 }

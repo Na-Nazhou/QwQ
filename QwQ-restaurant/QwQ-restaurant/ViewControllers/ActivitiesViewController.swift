@@ -34,21 +34,12 @@ class ActivitiesViewController: UIViewController {
     var records: [Record] {
         switch selectedControl {
         case .current:
-            return currentRecords
+            return activityLogicManager.currentRecords
         case .waiting:
-            return waitingRecords
+            return activityLogicManager.waitingRecords
         case .history:
-            return historyRecords
+            return activityLogicManager.historyRecords
         }
-    }
-    var currentRecords: [Record] {
-        activityLogicManager.currentRecords
-    }
-    var waitingRecords: [Record] {
-        activityLogicManager.waitingRecords
-    }
-    var historyRecords: [Record] {
-        activityLogicManager.historyRecords
     }
 
     override func viewDidLoad() {
@@ -231,8 +222,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 
     func didUpdateRecord() {
-        filtered = records
-        recordCollectionView.reloadData()
+        reload()
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

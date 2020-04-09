@@ -1,3 +1,5 @@
 protocol StatsPresentationDelegate: AnyObject {
-    func statsDidUpdate()
+
+    func didCompleteFetchingData()
+
 }

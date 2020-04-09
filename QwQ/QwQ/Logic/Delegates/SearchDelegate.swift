@@ -9,4 +9,6 @@
 protocol SearchDelegate: AnyObject {
 
     func didUpdateRestaurantCollection()
+
+    func didUpdateQueueRecordCollection()
 }

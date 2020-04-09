@@ -8,23 +8,17 @@
 import UIKit
 
 class StatisticsCell: UITableViewCell {
+
+    // MARK: View properties
     @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var avgWaitingTimeRestaurantLabel: UILabel!
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    func setUpViews(statisticsDetail: Statistics) {
+    func setUpViews(details: Statistics) {
         // TODO: add fromDate
-        let dateFormat = Date.getFormattedDate(date: statisticsDetail.toDate, format: Constants.statisticsDateFormat)
+        let dateFormat = "\(details.fromDate.getFomattedDate()) - \(details.toDate.getFomattedDate())"
         dateLabel.text = dateFormat
-        avgWaitingTimeRestaurantLabel.text = "\(statisticsDetail.avgWaitingTimeRestaurant) mins"
-        avgWaitingTimeCustomerLabel.text = "\(statisticsDetail.avgWaitingTimeCustomer) mins"
+        avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
+        avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
     }
 }

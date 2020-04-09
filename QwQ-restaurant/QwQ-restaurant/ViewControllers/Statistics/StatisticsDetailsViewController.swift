@@ -42,7 +42,6 @@ class StatisticsDetailsViewController: UIViewController {
         numberOfCustomersLabel.text = "\(details.numberOfCustomers)"
         avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
         avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
-        dateLabel.text = "\(details.toDate ?? Date())"
-        //TODO: add fromDate
+        dateLabel.text = "\(details.fromDate.getFomattedDate()) - \(details.toDate.getFomattedDate())"
     }
 }

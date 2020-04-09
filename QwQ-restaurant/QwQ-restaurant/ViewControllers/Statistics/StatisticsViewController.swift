@@ -14,29 +14,63 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
     @IBOutlet private var statisticsControl: SegmentedControl!
-    
-//    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
-//                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
-//                                               avgWaitingTimeCustomer: 4, date: Date())]
+
+    var spinner: UIView?
+
+    enum SelectedControl: Int {
+        case daily
+        case weekly
+        case monthly
+    }
+    var selectedControl: SelectedControl = .daily
 
     // MARK: Logic properties
     let statsManager = RestaurantStatisticsLogicManager()
 
     // MARK: Model properties
     var statistics: [Statistics] {
-        [statsManager.currentStats]
+        switch selectedControl {
+        case .daily:
+            return statsManager.dailyDetails
+        case .weekly:
+            return statsManager.weeklyDetails
+        case .monthly:
+            return statsManager.monthlyDetails
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statisticsControl.items = Constants.segmentedControlStatisticsTitles
-        
         statisticsTableView.delegate = self
         statisticsTableView.dataSource = self
 
         statsManager.statsDelegate = self
-        statsManager.loadAllStats(from: Date().getDateOf(daysBeforeDate: 7), to: Date())
+
+        setUpSegmentedControl()
+    }
+
+    private func setUpSegmentedControl() {
+        statisticsControl.items = Constants.segmentedControlStatisticsTitles
+        statisticsControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+        fetchData()
+    }
+
+    @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
+        selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
+        fetchData()
+    }
+
+    private func fetchData() {
+        switch selectedControl {
+        case .daily:
+            statsManager.fetchDailyDetails()
+        case .weekly:
+            statsManager.fetchWeeklyDetails()
+        case .monthly:
+            statsManager.fetchMonthlyDetails()
+        }
+        spinner = showSpinner(onView: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,8 +96,7 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let statisticsDetails = statistics[indexPath.row]
-        
-        statisticsCell.setUpViews(statisticsDetail: statisticsDetails)
+        statisticsCell.setUpViews(details: statisticsDetails)
     
         return statisticsCell
     }
@@ -76,7 +109,9 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension StatisticsViewController: StatsPresentationDelegate {
 
-    func statsDidUpdate() {
+    func didCompleteFetchingData() {
+        removeSpinner(spinner)
+
         statisticsTableView.reloadData()
     }
     
