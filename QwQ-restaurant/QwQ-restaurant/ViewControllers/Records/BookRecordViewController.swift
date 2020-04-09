@@ -9,6 +9,7 @@ import UIKit
 
 class BookRecordViewController: RecordViewController {
 
+    // MARK: View properties
     @IBOutlet var datePicker: UIDatePicker!
     
     override func setUpViews() {
@@ -25,8 +26,8 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        recordLogicManager.admitCustomer(record: bookRecord,
-                                         completion: self.didUpdateRecord)
+        activityLogicManager.admitCustomer(record: bookRecord,
+                                           completion: self.didUpdateRecord)
     }
 
     @IBAction override func handleServe(_ sender: Any) {
@@ -34,8 +35,8 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        recordLogicManager.serveCustomer(record: bookRecord,
-                                         completion: self.didUpdateRecord)
+        activityLogicManager.serveCustomer(record: bookRecord,
+                                           completion: self.didUpdateRecord)
 
     }
 
@@ -45,7 +46,7 @@ class BookRecordViewController: RecordViewController {
             return
         }
         self.spinner = self.showSpinner(onView: self.view)
-        recordLogicManager.rejectCustomer(record: queueRecord,
-                                          completion: self.didUpdateRecord)
+        activityLogicManager.rejectCustomer(record: queueRecord,
+                                            completion: self.didUpdateRecord)
     }
 }

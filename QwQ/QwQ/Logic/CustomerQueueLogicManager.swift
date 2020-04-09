@@ -2,6 +2,7 @@ import Foundation
 import os.log
 
 class CustomerQueueLogicManager: CustomerQueueLogic {
+
     // Storage
     private var queueStorage: CustomerQueueStorage
 
@@ -9,6 +10,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     weak var queueDelegate: QueueDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
+    // Models
     private let customerActivity: CustomerActivity
     private var customer: Customer {
         customerActivity.customer

@@ -9,6 +9,7 @@ import UIKit
 
 class RestaurantViewController: UIViewController, RestaurantDelegate {
 
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var menuLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
@@ -17,10 +18,12 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
 
+    // MARK: Logic properties
     var bookingLogicManager: CustomerBookingLogicManager!
     var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
 
+    // MARK: Model properties
     var restaurant: Restaurant? {
         restaurantLogicManager.currentRestaurant
     }
@@ -31,6 +34,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         setUpViews()
 
         restaurantLogicManager.restaurantDelegate = self
+    }
+
+    @IBAction private func handleBack(_ sender: Any) {
+        handleBack()
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
@@ -60,10 +67,6 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     @IBAction private func handleBookTap(_ sender: Any) {
         performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
-    }
-    
-    @IBAction private func handleBack(_ sender: Any) {
-        handleBack()
     }
     
     private func setUpViews() {

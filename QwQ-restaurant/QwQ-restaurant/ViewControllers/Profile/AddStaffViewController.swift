@@ -8,10 +8,12 @@
 import UIKit
 
 class AddStaffViewController: UIViewController {
-    var staffEmails: [String] = []
-    
+
+    // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var staffTableView: UITableView!
+
+    var staffEmails: [String] = []
     
     @IBAction private func handleAdd(_ sender: Any) {
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)

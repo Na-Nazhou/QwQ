@@ -1,10 +1,15 @@
 import Foundation
+
 class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
+
+    // Storage
+    private let storage: RestaurantStatsStorage
+
+    // View Controller
     weak var statsDelegate: StatsPresentationDelegate?
 
-    private let storage: RestaurantStatsStorage
+    // Models
     private let restaurantActivity: RestaurantActivity
-
     var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
@@ -15,6 +20,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
         self.init(storage: FIRStatsStorage.shared,
                   restaurantActivity: RestaurantActivity.shared())
     }
+
     init(storage: RestaurantStatsStorage, restaurantActivity: RestaurantActivity) {
         self.storage = storage
         self.restaurantActivity = restaurantActivity

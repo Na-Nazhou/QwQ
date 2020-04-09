@@ -9,35 +9,39 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
+    // MARK: View properties
     @IBOutlet private var activeHistoryControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
     var spinner: UIView?
 
-    var selectedIndex = 0
-
+    enum SelectedControl: Int {
+        case active
+        case history
+    }
+    var selectedControl: SelectedControl = .active
     var isActive: Bool {
-        selectedIndex == 0
+        selectedControl == .active
     }
 
+    // MARK: Logic properties
     let queueLogicManager = CustomerQueueLogicManager()
     let bookingLogicManager = CustomerBookingLogicManager()
     let activityLogicManager = CustomerActivityLogicManager()
 
-    var activeRecords: [Record] {
-        activityLogicManager.activeRecords
-    }
-
-    var historyRecords: [Record] {
-        activityLogicManager.historyRecords
-    }
-
+    // MARK: Model properties
     var records: [Record] {
         if isActive {
             return activeRecords
         } else {
             return historyRecords
         }
+    }
+    var activeRecords: [Record] {
+        activityLogicManager.activeRecords
+    }
+    var historyRecords: [Record] {
+        activityLogicManager.historyRecords
     }
     
     override func viewDidLoad() {
@@ -62,7 +66,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        selectedIndex = sender.selectedIndex
+        selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
         activitiesCollectionView.reloadData()
     }
 
@@ -185,6 +189,10 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row < records.count else {
+            activitiesCollectionView.reloadData()
+            return
+        }
         let record = records[indexPath.row]
         if let queueRecord = record as? QueueRecord {
             performSegue(withIdentifier: Constants.queueSelectedSegue, sender: queueRecord)

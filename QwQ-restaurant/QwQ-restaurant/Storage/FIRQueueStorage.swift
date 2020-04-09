@@ -50,10 +50,14 @@ class FIRQueueStorage: RestaurantQueueStorage {
         }
     }
 
-    func updateRestaurantQueueStatus(old: Restaurant, new: Restaurant) {
+    func updateRestaurant(old: Restaurant, new: Restaurant) {
         restaurantDb.document(old.uid)
             .setData(new.dictionary)
     }
+}
+
+extension FIRQueueStorage {
+    // MARK: - Listeners
 
     func registerListeners(for restaurant: Restaurant) {
         removeListeners()
@@ -115,7 +119,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
                         return
                 }
                 // regardless of change, contact delegate it has changed.
-                self.delegateWork { $0.restaurantDidPossiblyChangeQueueStatus(restaurant: updatedRestaurant) }
+                self.delegateWork { $0.didUpdateRestaurant(restaurant: updatedRestaurant) }
             }
     }
 
@@ -141,6 +145,10 @@ class FIRQueueStorage: RestaurantQueueStorage {
                     completion(rec)
                 }, errorHandler: { _ in })
     }
+}
+
+extension FIRQueueStorage {
+    // MARK: - Delegates
 
     func registerDelegate(_ del: QueueStorageSyncDelegate) {
         logicDelegates.add(del)

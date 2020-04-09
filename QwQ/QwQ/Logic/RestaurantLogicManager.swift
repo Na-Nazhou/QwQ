@@ -7,6 +7,12 @@ class RestaurantLogicManager: RestaurantLogic {
     weak var restaurantDelegate: RestaurantDelegate?
     weak var searchDelegate: SearchDelegate?
 
+    // Models
+    private var restaurantCollection = Collection<Restaurant>()
+    var restaurants: [Restaurant] {
+        restaurantCollection.restaurants
+    }
+
     var currentRestaurant: Restaurant?
 
     private var selectedRestaurantCollection = Collection<Restaurant>()
@@ -18,11 +24,6 @@ class RestaurantLogicManager: RestaurantLogic {
             selectedRestaurantCollection.reset()
             selectedRestaurantCollection.add(newValue)
         }
-    }
-
-    private var restaurantCollection = Collection<Restaurant>()
-    var restaurants: [Restaurant] {
-        restaurantCollection.restaurants
     }
 
     convenience init() {

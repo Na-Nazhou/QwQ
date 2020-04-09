@@ -8,6 +8,8 @@
 import UIKit
 
 class StatisticsViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet private var avgWaitingTimeRestaurantLabel: UILabel!
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
@@ -16,7 +18,11 @@ class StatisticsViewController: UIViewController {
 //    var statistics: [Statistics] = [Statistics(queueCancellationRate: 12, bookingCancellationRate: 1,
 //                                               numberOfCustomers: 2, avgWaitingTimeRestaurant: 3,
 //                                               avgWaitingTimeCustomer: 4, date: Date())]
+
+    // MARK: Logic properties
     let statsManager = RestaurantStatisticsLogicManager()
+
+    // MARK: Model properties
     var statistics: [Statistics] {
         [statsManager.currentStats]
     }

@@ -8,16 +8,17 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-    
+
+    // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+
+    var spinner: UIView?
     
     typealias Auth = FIRAuthenticator
     typealias Profile = FIRProfileStorage
-
-    var spinner: UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -5,6 +5,7 @@ protocol RestaurantLogic: RestaurantStorageSyncDelegate {
     var restaurantDelegate: RestaurantDelegate? { get set }
     var searchDelegate: SearchDelegate? { get set }
 
+    // Models
     var restaurants: [Restaurant] { get }
     var currentRestaurant: Restaurant? { get set }
     var currentRestaurants: [Restaurant] { get set }

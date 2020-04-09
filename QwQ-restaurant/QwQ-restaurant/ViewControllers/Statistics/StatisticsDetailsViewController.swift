@@ -8,19 +8,24 @@
 import UIKit
 
 class StatisticsDetailsViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet private var queueCancellationRateLabel: UILabel!
     @IBOutlet private var bookingCancellationRateLabel: UILabel!
     @IBOutlet private var numberOfCustomersLabel: UILabel!
     @IBOutlet private var avgWaitingTimeRestaurantLabel: UILabel!
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
+
+    var spinner: UIView?
+
+    // MARK: Model properties
+    var statisticsDetails: Statistics?
     
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
-    
-    var statisticsDetails: Statistics?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         

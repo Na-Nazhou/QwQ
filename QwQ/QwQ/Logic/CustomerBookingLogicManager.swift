@@ -10,6 +10,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     weak var bookingDelegate: BookingDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
+    // Models
     private let customerActivity: CustomerActivity
     private var customer: Customer {
         customerActivity.customer

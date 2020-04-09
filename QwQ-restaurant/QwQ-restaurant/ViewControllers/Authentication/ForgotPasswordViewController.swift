@@ -9,11 +9,12 @@ import UIKit
 
 class ForgotPasswordViewController: UIViewController {
 
-    typealias Auth = FIRAuthenticator
+    // MARK: View properties
+    @IBOutlet private var emailTextField: UITextField!
 
     var spinner: UIView?
-    
-    @IBOutlet private var emailTextField: UITextField!
+
+    typealias Auth = FIRAuthenticator
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,6 +8,8 @@
 import UIKit
 
 class RecordViewController: UIViewController {
+
+    // MARK: View properties
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contactLabel: UILabel!
     @IBOutlet var groupSizeLabel: UILabel!
@@ -16,10 +18,13 @@ class RecordViewController: UIViewController {
     @IBOutlet var wheelchairFriendlySwitch: UISwitch!
     @IBOutlet var actionButton: UIButton!
 
-    var recordLogicManager: RestaurantRecordLogicManager!
-    var record: Record?
-
     var spinner: UIView?
+
+    // MARK: Logic properties
+    var activityLogicManager: RestaurantActivityLogicManager!
+
+    // MARK: Model properties
+    var record: Record?
 
     override func viewDidLoad() {
            super.viewDidLoad()
