@@ -11,20 +11,21 @@ class FIRStaffStorage: StaffStorage {
 
     typealias Auth = FIRAuthenticator
 
-    static let dbRef = Firestore.firestore().collection("staff")
+    static let dbRef = Firestore.firestore().collection(Constants.staffDirectory)
 
     static func createInitialStaffProfile(uid: String,
                                           signupDetails: SignupDetails,
-                                          authDetails: AuthDetails,
+                                          email: String,
+                                          isOwner: Bool,
                                           errorHandler: @escaping (Error) -> Void) {
 
         let docRef = dbRef.document(uid)
         docRef.setData([Constants.uidKey: uid,
                         Constants.nameKey: signupDetails.name,
-                        Constants.emailKey: authDetails.email,
+                        Constants.emailKey: email,
                         Constants.contactKey: signupDetails.contact,
                         Constants.assignedRestaurantKey: "",
-                        Constants.isOwnerKey: "",
+                        Constants.isOwnerKey: isOwner,
                         Constants.permissionsKey: ""]) { (error) in
             if let error = error {
                 errorHandler(error)

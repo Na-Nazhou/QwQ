@@ -70,6 +70,7 @@ struct Constants {
     static let restaurantsDirectory = "restaurants"
     static let queuesDirectory = "queues"
     static let bookingsDirectory = "bookings"
+    static let staffDirectory = "staff"
     static let profilePicsDirectory = "profile-pics"
     
     // MARK: Collection view settings

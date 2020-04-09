@@ -22,7 +22,7 @@ class FIRProfileStorage: ProfileStorage {
 
     static func createInitialCustomerProfile(uid: String,
                                              signupDetails: SignupDetails,
-                                             authDetails: AuthDetails,
+                                             email: String,
                                              errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
         db.collection(Constants.customersDirectory)
@@ -30,7 +30,7 @@ class FIRProfileStorage: ProfileStorage {
             .setData([Constants.uidKey: uid,
                       Constants.nameKey: signupDetails.name,
                       Constants.contactKey: signupDetails.contact,
-                      Constants.emailKey: authDetails.email]) { (error) in
+                      Constants.emailKey: email]) { (error) in
                 if let error = error {
                     errorHandler(error)
                 }

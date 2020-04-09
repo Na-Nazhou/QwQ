@@ -12,7 +12,7 @@ protocol RestaurantStorage {
     
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
-                                               authDetails: AuthDetails,
+                                               email: String,
                                                errorHandler: @escaping (Error) -> Void)
     
     // MARK: - Restaurant Info Retrieval Methods

@@ -9,7 +9,8 @@ protocol StaffStorage {
 
     static func createInitialStaffProfile(uid: String,
                                           signupDetails: SignupDetails,
-                                          authDetails: AuthDetails,
+                                          email: String,
+                                          isOwner: Bool,
                                           errorHandler: @escaping (Error) -> Void)
 
     static func getStaffInfo(completion: @escaping (Staff) -> Void,

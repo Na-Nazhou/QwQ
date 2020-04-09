@@ -27,7 +27,7 @@ class FIRAuthenticator: Authenticator {
             
             Profile.createInitialRestaurantProfile(uid: result.user.uid,
                                                    signupDetails: signupDetails,
-                                                   authDetails: authDetails,
+                                                   email: authDetails.email,
                                                    errorHandler: errorHandler)
             FIRAuthenticator.login(authDetails: authDetails,
                                    completion: completion,

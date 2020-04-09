@@ -18,7 +18,7 @@ class FIRRestaurantStorage: RestaurantStorage {
 
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
-                                               authDetails: AuthDetails,
+                                               email: String,
                                                errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
         db.collection(Constants.restaurantsDirectory)
@@ -26,7 +26,7 @@ class FIRRestaurantStorage: RestaurantStorage {
             .setData([Constants.uidKey: uid,
                       Constants.nameKey: signupDetails.name,
                       Constants.contactKey: signupDetails.contact,
-                      Constants.emailKey: authDetails.email,
+                      Constants.emailKey: email,
                       Constants.addressKey: "",
                       Constants.menuKey: ""]) { (error) in
             if let error = error {
