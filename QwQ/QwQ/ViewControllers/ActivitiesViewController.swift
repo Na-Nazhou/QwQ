@@ -14,8 +14,23 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     var spinner: UIView?
 
+    var selectedIndex = 0
+
+    var isActive: Bool {
+        selectedIndex == 0
+    }
+
     let queueLogicManager = CustomerQueueLogicManager()
     let bookingLogicManager = CustomerBookingLogicManager()
+    let activityLogicManager = CustomerActivityLogicManager()
+
+    var activeRecords: [Record] {
+        activityLogicManager.activeRecords
+    }
+
+    var historyRecords: [Record] {
+        activityLogicManager.historyRecords
+    }
 
     var records: [Record] {
         if isActive {
@@ -23,57 +38,6 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         } else {
             return historyRecords
         }
-    }
-
-    var selectedIndex = 0
-
-    var isActive: Bool {
-        selectedIndex == 0
-    }
-
-    // TODO: refactor
-    var activeRecords: [Record] {
-        let bookRecords = bookingLogicManager.activeBookRecords
-        let queueRecords = queueLogicManager.currentQueueRecords
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if let queueRecord1 = record1 as? QueueRecord {
-                time1 = queueRecord1.startTime
-            } else {
-                time1 = (record1 as? BookRecord)!.time
-            }
-            if let queueRecord2 = record2 as? QueueRecord {
-                time2 = queueRecord2.startTime
-            } else {
-                time2 = (record2 as? BookRecord)!.time
-            }
-            return time1 < time2
-        })
-    }
-
-    var historyRecords: [Record] {
-        let bookRecords = bookingLogicManager.pastBookRecords
-        let queueRecords = queueLogicManager.pastQueueRecords
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if record1.isServed {
-                time1 = record1.serveTime!
-            } else if record1.isRejected {
-                time1 = record1.rejectTime!
-            } else {
-                time1 = record1.withdrawTime!
-            }
-            if record2.isServed {
-                time2 = record2.serveTime!
-            } else if record2.isRejected {
-                time2 = record2.rejectTime!
-            } else {
-                time2 = record2.withdrawTime!
-            }
-            return time1 > time2
-        })
     }
     
     override func viewDidLoad() {

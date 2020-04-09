@@ -1,15 +1,10 @@
 /// Represents the protocol for customer side's queue logic. There can be up to one active queue record at any one time;
 /// customers are not allowed to queue for another restaurant while in an active queue.
 protocol CustomerQueueLogic: QueueStorageSyncDelegate {
-    // Storage
-    var queueStorage: CustomerQueueStorage { get set }
 
     // View Controllers
     var queueDelegate: QueueDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
-
-    var currentQueueRecords: [QueueRecord] { get }
-    var pastQueueRecords: [QueueRecord] { get }
 
     func enqueue(to restaurant: Restaurant,
                  with groupSize: Int,

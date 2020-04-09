@@ -45,7 +45,7 @@ class FIRBookingStorage: CustomerBookingStorage {
 
         for newRecord in newRecords {
             let newRecordRef = bookingDb.document()
-            newRecordRef.setData(newRecord.dictionary)
+            batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
             if let err = err {
@@ -117,11 +117,10 @@ class FIRBookingStorage: CustomerBookingStorage {
                 }, errorHandler: { _ in })
         }, errorHandler: nil)
     }
+}
 
-    func removeListener() {
-        listener?.remove()
-        listener = nil
-    }
+extension FIRBookingStorage {
+    // MARK: - Listeners
 
     func registerListener(for customer: Customer) {
         removeListener()
@@ -155,6 +154,15 @@ class FIRBookingStorage: CustomerBookingStorage {
                 }
             }
     }
+
+    func removeListener() {
+        listener?.remove()
+        listener = nil
+    }
+}
+
+extension FIRBookingStorage {
+    // MARK: - Delegates
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {
         logicDelegates.add(del)

@@ -20,6 +20,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     var bookingLogicManager: CustomerBookingLogicManager!
     var queueLogicManager: CustomerQueueLogicManager!
     var restaurantLogicManager: RestaurantLogicManager!
+
     var restaurant: Restaurant? {
         restaurantLogicManager.currentRestaurant
     }
@@ -33,25 +34,28 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     }
     
     @IBAction private func handleQueueTap(_ sender: Any) {
-        guard let restaurant = restaurant else {
-            return
-        }
-        // Cannot queue if the restaurant is currently not open
-        if !restaurant.isQueueOpen {
-            showMessage(title: Constants.errorTitle,
-                        message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),
-                        buttonText: Constants.okayTitle)
-            return
-        }
-
-        if !queueLogicManager.canQueue(for: restaurant) {
-            showMessage(title: Constants.errorTitle,
-                        message: String(format: Constants.alreadyQueuedRestaurantMessage, restaurant.name),
-                        buttonText: Constants.okayTitle)
+        guard let restaurant = restaurant,
+            checkRestaurantQueue(for: restaurant) else {
             return
         }
 
         performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
+    }
+
+    @discardableResult
+    private func checkRestaurantQueue(for restaurant: Restaurant) -> Bool {
+        guard !queueLogicManager.canQueue(for: restaurant) else {
+            return true
+        }
+        var format = Constants.alreadyQueuedRestaurantMessage
+        if !restaurant.isQueueOpen {
+            format = Constants.restaurantUnavailableMessage
+        }
+
+        showMessage(title: Constants.errorTitle,
+                    message: String(format: format, restaurant.name),
+                    buttonText: Constants.okayTitle)
+        return false
     }
 
     @IBAction private func handleBookTap(_ sender: Any) {

@@ -5,12 +5,13 @@ class FIRRestaurantStorage: RestaurantStorage {
     // MARK: Storage as singleton
     static let shared = FIRRestaurantStorage()
 
-    private init() {
-        registerListener()
-    }
+    private init() {}
 
     // MARK: Storage capabilities
     private let db = Firestore.firestore()
+    private var restaurantDb: CollectionReference {
+        db.collection(Constants.restaurantsDirectory)
+    }
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
@@ -19,11 +20,15 @@ class FIRRestaurantStorage: RestaurantStorage {
     deinit {
         removeListener()
     }
-    
+}
+
+extension FIRRestaurantStorage {
+    // MARK: - Listeners
+
     func registerListener() {
         removeListener()
-        
-        listener = db.collection(Constants.restaurantsDirectory)
+
+        listener = restaurantDb
             .addSnapshotListener { (snapshot, err) in
                 guard err == nil else {
                     os_log("Error getting restaurant documents",
@@ -57,6 +62,10 @@ class FIRRestaurantStorage: RestaurantStorage {
         listener?.remove()
         listener = nil
     }
+}
+
+extension FIRRestaurantStorage {
+    // MARK: - Delegates
 
     func registerDelegate(_ del: RestaurantStorageSyncDelegate) {
         logicDelegates.add(del)
