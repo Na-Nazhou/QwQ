@@ -11,7 +11,8 @@ struct Staff: User {
     let email: String
     let contact: String
 
-    let restaurantWorkingFor: String
+    let assignedRestaurant: String
+    let isOwner: Bool
     let permissions: [Permissions]
 
     var dictionary: [String: Any] {
@@ -20,17 +21,19 @@ struct Staff: User {
             Constants.nameKey: name,
             Constants.emailKey: email,
             Constants.contactKey: contact,
-            Constants.restaurantWorkingForKey: restaurantWorkingFor,
+            Constants.assignedRestaurantKey: assignedRestaurant,
             Constants.permissionsKey: permissions
         ]
     }
 
-    init(uid: String, name: String, email: String, contact: String, restaurantWorkingFor: String, permissions: [Permissions]) {
+    init(uid: String, name: String, email: String, contact: String,
+         assignedRestaurant: String, isOwner: Bool, permissions: [Permissions]) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
-        self.restaurantWorkingFor = restaurantWorkingFor
+        self.assignedRestaurant = assignedRestaurant
+        self.isOwner = isOwner
         self.permissions = permissions
     }
 
@@ -39,7 +42,8 @@ struct Staff: User {
             let name = dictionary[Constants.nameKey] as? String,
             let email = dictionary[Constants.emailKey] as? String,
             let contact = dictionary[Constants.contactKey] as? String,
-            let restaurantWorkingFor = dictionary[Constants.restaurantWorkingForKey] as? String,
+            let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String,
+            let isOwner = dictionary[Constants.isOwnerKey] as? Bool,
             let permissions = dictionary[Constants.permissionsKey] as? [Permissions] else {
                 return nil
         }
@@ -48,7 +52,8 @@ struct Staff: User {
                   name: name,
                   email: email,
                   contact: contact,
-                  restaurantWorkingFor: restaurantWorkingFor,
+                  assignedRestaurant: assignedRestaurant,
+                  isOwner: isOwner,
                   permissions: permissions)
     }
 }

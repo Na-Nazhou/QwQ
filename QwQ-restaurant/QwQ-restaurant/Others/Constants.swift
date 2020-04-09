@@ -126,6 +126,10 @@ struct Constants {
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
     static let timeKey = "time"
-    static let restaurantWorkingForKey = "restaurantWorkingFor"
+    static let assignedRestaurantKey = "assignedRestaurant"
+    static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
+
+    // MARK: Firebase directory settings
+    static let profilePicKey = "profile-pics"
 }

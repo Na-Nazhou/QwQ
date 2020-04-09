@@ -13,26 +13,25 @@ import SDWebImage
 class FIRRestaurantStorage: RestaurantStorage {
     typealias Auth = FIRAuthenticator
 
-    static let dbRef = Firestore.firestore().collection("restaurants")
-    static let storageRef = Storage.storage().reference().child("profile-pics")
+    static let dbRef = Firestore.firestore().collection(Constants.restaurantKey)
+    static let storageRef = Storage.storage().reference().child(Constants.profilePicKey)
 
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
                                                authDetails: AuthDetails,
                                                errorHandler: @escaping (Error) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("restaurants")
-            .document(uid)
-            .setData(["uid": uid,
-                      "name": signupDetails.name,
-                      "contact": signupDetails.contact,
-                      "email": authDetails.email,
-                      "address": "",
-                      "menu": ""]) { (error) in
+        let docRef = dbRef.document(uid)
+
+        docRef.setData(["uid": uid,
+                        "name": signupDetails.name,
+                        "contact": signupDetails.contact,
+                        "email": authDetails.email,
+                        "address": "",
+                        "menu": ""]) { (error) in
             if let error = error {
                 errorHandler(error)
             }
-            }
+        }
     }
 
     static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
@@ -58,7 +57,7 @@ class FIRRestaurantStorage: RestaurantStorage {
                 }
             }
 
-            errorHandler(ProfileError.IncorrectUserType)
+            errorHandler(ProfileError.InvalidRestaurant)
             Auth.logout(completion: {}, errorHandler: errorHandler)
         }
     }
