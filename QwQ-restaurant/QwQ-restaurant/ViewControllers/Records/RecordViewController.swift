@@ -46,7 +46,7 @@ class RecordViewController: UIViewController {
             }
 
             if record.isAdmitted {
-                setUpPendingAdmissionButton()
+                setUpPendingConfirmationButton()
             }
 
             if record.isConfirmedAdmission {
@@ -90,8 +90,8 @@ class RecordViewController: UIViewController {
         actionButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
     }
 
-    private func setUpPendingAdmissionButton() {
-        actionButton.setTitle("PENDING ADMISSION", for: .normal)
+    private func setUpPendingConfirmationButton() {
+        actionButton.setTitle("PENDING CONFIRMATION", for: .normal)
         actionButton.alpha = 0.5
         actionButton.isEnabled = false
     }
