@@ -81,6 +81,7 @@ struct Constants {
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
     static let segmentedControlStatisticsTitles = ["Daily", "Weekly", "Monthly"]
+    static let segmentedControlSignUpTitles = ["Staff", "Restaurant"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white

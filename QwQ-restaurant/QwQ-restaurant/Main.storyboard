@@ -249,18 +249,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="yHx-Mu-I5p">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="267"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP WITH Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ3-eg-qhj">
-                                <rect key="frame" x="268.5" y="113.5" width="297" height="39.5"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
-                                </variation>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2t0-jl-ydk">
                                 <rect key="frame" x="15" y="282" width="804" height="689.5"/>
                                 <subviews>
@@ -392,21 +380,44 @@
                                     <action selector="handleBack:" destination="cYR-K6-pmi" eventType="touchUpInside" id="JIO-PB-VFp"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aBz-Ib-10i">
+                                <rect key="frame" x="268.5" y="25.5" width="297" height="216"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP WITH Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ3-eg-qhj">
+                                        <rect key="frame" x="0.0" y="0.0" width="297" height="108"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                        </variation>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s31-zB-ZzM" customClass="SegmentedControl" customModule="QwQ_restaurant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="297" height="108"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2t0-jl-ydk" firstAttribute="top" secondItem="yHx-Mu-I5p" secondAttribute="bottom" constant="15" id="2r0-Ti-86B"/>
                             <constraint firstItem="0T6-Za-95m" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" constant="20" id="50k-XS-9kg"/>
+                            <constraint firstItem="s31-zB-ZzM" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.0971223" id="7KU-vX-NQW"/>
                             <constraint firstItem="0T6-Za-95m" firstAttribute="width" secondItem="Tp8-pK-s1o" secondAttribute="width" multiplier="0.08" id="9Nx-LG-3JZ"/>
                             <constraint firstItem="Tp8-pK-s1o" firstAttribute="bottom" secondItem="Vhu-nh-gWC" secondAttribute="bottom" id="ABb-Mb-ncK"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="Aa7-ez-NoK"/>
                             <constraint firstItem="Tp8-pK-s1o" firstAttribute="trailing" secondItem="2t0-jl-ydk" secondAttribute="trailing" constant="15" id="CBx-Sv-TqA"/>
                             <constraint firstItem="0T6-Za-95m" firstAttribute="top" secondItem="Tp8-pK-s1o" secondAttribute="top" constant="30" id="LL5-R8-xXo"/>
+                            <constraint firstItem="aBz-Ib-10i" firstAttribute="centerY" secondItem="yHx-Mu-I5p" secondAttribute="centerY" id="OfF-wT-2U4"/>
                             <constraint firstItem="1cL-Sc-r32" firstAttribute="width" secondItem="Tp8-pK-s1o" secondAttribute="width" multiplier="0.5" id="PpG-KZ-hqq"/>
-                            <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerY" secondItem="yHx-Mu-I5p" secondAttribute="centerY" id="c6P-f0-gDY"/>
+                            <constraint firstItem="aBz-Ib-10i" firstAttribute="centerX" secondItem="qZx-fA-huR" secondAttribute="centerX" id="UZi-04-vwu"/>
+                            <constraint firstItem="s31-zB-ZzM" firstAttribute="width" secondItem="Tp8-pK-s1o" secondAttribute="width" multiplier="0.356115" id="aD3-vp-De3"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.08" id="cC5-G6-LpL"/>
                             <constraint firstItem="Vhu-nh-gWC" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="d3X-bK-oEW"/>
-                            <constraint firstItem="FZ3-eg-qhj" firstAttribute="centerX" secondItem="yHx-Mu-I5p" secondAttribute="centerX" id="hwt-f2-Fyj"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="trailing" secondItem="Tp8-pK-s1o" secondAttribute="trailing" id="j1s-hW-szC"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="leading" secondItem="Tp8-pK-s1o" secondAttribute="leading" id="pi1-Yq-Lwx"/>
                             <constraint firstItem="yHx-Mu-I5p" firstAttribute="height" secondItem="Tp8-pK-s1o" secondAttribute="height" multiplier="0.24" id="pu8-51-zW7"/>
@@ -421,13 +432,14 @@
                         <outlet property="emailTextField" destination="Fcg-lT-1vz" id="dbB-ng-qp8"/>
                         <outlet property="nameTextField" destination="1cL-Sc-r32" id="FFK-68-7w5"/>
                         <outlet property="passwordTextField" destination="2ba-Kg-7qM" id="Dr8-qg-GHk"/>
+                        <outlet property="segmentedControl" destination="s31-zB-ZzM" id="cJa-SE-zow"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="signupCompleted" id="y5a-2U-37J"/>
                         <segue destination="bNV-Dr-4g9" kind="show" identifier="emailNotVerified" id="PeX-wD-bBX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673" y="506"/>
+            <point key="canvasLocation" x="1672.6618705035971" y="505.57553956834533"/>
         </scene>
         <!--EmailVerification-->
         <scene sceneID="SAN-6o-gEP">
