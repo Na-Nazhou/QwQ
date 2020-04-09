@@ -26,7 +26,7 @@ class FIRAuthenticator: Authenticator {
             }
             Profile.createInitialCustomerProfile(uid: authDetails.email,
                                                  signupDetails: signupDetails,
-                                                 authDetails: authDetails,
+                                                 email: authDetails.email,
                                                  errorHandler: errorHandler)
 
             /* Email verification code, to be enabled only for production.
