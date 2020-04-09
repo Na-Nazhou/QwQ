@@ -24,10 +24,7 @@ class ActivitiesViewController: UIViewController {
         case waiting
         case history
     }
-    var selectedIndex = SelectedControl.current.rawValue
-    var selectedControl: SelectedControl {
-        SelectedControl(rawValue: selectedIndex)!
-    }
+    var selectedControl: SelectedControl = .current
 
     // MARK: Logic properties
     let activityLogicManager = RestaurantActivityLogicManager()
@@ -86,7 +83,7 @@ class ActivitiesViewController: UIViewController {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        selectedIndex = sender.selectedIndex
+        selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
         reload()
     }
 

@@ -19,9 +19,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         case active
         case history
     }
-    var selectedIndex: Int = SelectedControl.active.rawValue
+    var selectedControl: SelectedControl = .active
     var isActive: Bool {
-        selectedIndex == SelectedControl.active.rawValue
+        selectedControl == .active
     }
 
     // MARK: Logic properties
@@ -66,7 +66,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
-        selectedIndex = sender.selectedIndex
+        selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
         activitiesCollectionView.reloadData()
     }
 
