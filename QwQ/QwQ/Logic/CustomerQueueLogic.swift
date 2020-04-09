@@ -4,6 +4,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
 
     // View Controllers
     var queueDelegate: QueueDelegate? { get set }
+    var searchDelegate: SearchDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
     func enqueue(to restaurant: Restaurant,

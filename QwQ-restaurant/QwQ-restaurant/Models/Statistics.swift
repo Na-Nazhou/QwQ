@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Statistics {
+class Statistics {
     let fromDate: Date
-    let toDate: Date!
+    let toDate: Date
 
     // MARK: Raw stats
     var totalNumCustomers: Int = 0

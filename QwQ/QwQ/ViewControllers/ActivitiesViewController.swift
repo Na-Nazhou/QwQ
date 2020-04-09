@@ -57,8 +57,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         activitiesCollectionView.reloadData()
+
+        super.viewWillAppear(animated)
     }
 
     private func setUpSegmentedControl() {
@@ -189,10 +190,6 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.row < records.count else {
-            activitiesCollectionView.reloadData()
-            return
-        }
         let record = records[indexPath.row]
         if let queueRecord = record as? QueueRecord {
             performSegue(withIdentifier: Constants.queueSelectedSegue, sender: queueRecord)

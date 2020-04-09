@@ -8,6 +8,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     // View Controller
     weak var queueDelegate: QueueDelegate?
+    weak var searchDelegate: SearchDelegate?
     weak var activitiesDelegate: ActivitiesDelegate?
 
     // Models
@@ -212,6 +213,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if record.isHistoryRecord && customerActivity.queueHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
+        searchDelegate?.didUpdateQueueRecordCollection()
     }
 
     private func customerDidUpdateQueueRecord(record: QueueRecord) {
@@ -269,6 +271,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if customerActivity.currentQueues.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
+        searchDelegate?.didUpdateQueueRecordCollection()
     }
 
     private func addAsHistoryRecord(_ record: QueueRecord) {

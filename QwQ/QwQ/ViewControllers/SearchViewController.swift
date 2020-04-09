@@ -144,9 +144,20 @@ class SearchViewController: UIViewController, SearchDelegate {
         restaurantCollectionView.dataSource = self
         
         restaurantLogicManager.searchDelegate = self
+        queueLogicManager.searchDelegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        restaurantCollectionView.reloadData()
+
+        super.viewWillAppear(animated)
     }
 
     func didUpdateRestaurantCollection() {
+        restaurantCollectionView.reloadData()
+    }
+
+    func didUpdateQueueRecordCollection() {
         restaurantCollectionView.reloadData()
     }
     
