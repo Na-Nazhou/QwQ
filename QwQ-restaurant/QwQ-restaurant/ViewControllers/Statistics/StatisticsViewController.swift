@@ -14,7 +14,9 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var statisticsTableView: UITableView!
     @IBOutlet private var statisticsControl: SegmentedControl!
-
+    @IBOutlet private var fromDatePicker: UIDatePicker!
+    @IBOutlet private var toDatePicker: UIDatePicker!
+    
     var spinner: UIView?
 
     enum SelectedControl: Int {
@@ -56,6 +58,10 @@ class StatisticsViewController: UIViewController {
         fetchData()
     }
 
+    @IBAction func handleFilterByDate(_ sender: Any) {
+        
+    }
+    
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
         selectedControl = SelectedControl(rawValue: sender.selectedIndex)!
         fetchData()
