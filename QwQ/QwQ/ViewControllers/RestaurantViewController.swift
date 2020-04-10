@@ -18,8 +18,9 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var bookButton: UIButton!
     @IBOutlet private var groupSizeLabel: UILabel!
-    @IBOutlet private var openingHoursLabel: UILabel!
-    @IBOutlet weak var profileImageView: ProfileImageView!
+    @IBOutlet private var queueTimingsLabel: UILabel!
+    @IBOutlet private var profileImageView: ProfileImageView!
+    @IBOutlet private var bannerImageView: UIImageView!
     
     // MARK: Logic properties
     var bookingLogicManager: CustomerBookingLogicManager!

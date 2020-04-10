@@ -444,7 +444,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ok0-Jn-U5c">
                                                         <rect key="frame" x="0.0" y="347" width="428.5" height="23"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Opening Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-73-1gL">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Queue Timings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-73-1gL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="214.5" height="23"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
@@ -538,6 +538,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oaR-MC-pKJ"/>
                     <connections>
+                        <outlet property="bannerImageView" destination="9SF-iG-iOr" id="zz4-a1-gWh"/>
                         <outlet property="bookButton" destination="oNk-e5-0yg" id="Kh6-3q-hO6"/>
                         <outlet property="contactLabel" destination="j0K-Me-Win" id="Rdn-Di-si9"/>
                         <outlet property="emailLabel" destination="tPw-7L-wOq" id="gwa-l8-hP9"/>
@@ -545,9 +546,9 @@
                         <outlet property="locationLabel" destination="nad-DH-dLq" id="5Vm-Ys-d70"/>
                         <outlet property="menuLabel" destination="U2x-y3-4IH" id="WHb-fr-ybi"/>
                         <outlet property="nameLabel" destination="vFV-E1-Kcm" id="lfM-tx-Wfh"/>
-                        <outlet property="openingHoursLabel" destination="6kL-v7-wHj" id="Ulb-DW-lHp"/>
                         <outlet property="profileImageView" destination="Ab2-xO-uwp" id="Xh3-GO-1JF"/>
                         <outlet property="queueButton" destination="UUD-DO-NV8" id="JKE-Yx-V3c"/>
+                        <outlet property="queueTimingsLabel" destination="6kL-v7-wHj" id="UmG-J8-bfO"/>
                         <segue destination="lJC-Jw-heQ" kind="show" identifier="editQueueSelected" id="IfD-L4-uNp"/>
                         <segue destination="GkK-8M-Jcl" kind="show" identifier="editBookSelected" id="saL-Vy-eML"/>
                     </connections>
