@@ -14,7 +14,8 @@ class RestaurantCell: UICollectionViewCell {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var locationLabel: UILabel!
     @IBOutlet private var queueButton: UIButton!
-
+    @IBOutlet weak var profileImageView: UIImageView!
+    
     @IBAction private func handleQueueTap(sender: Any?) {
         if queueAction?() ?? false {
             canQueue = true

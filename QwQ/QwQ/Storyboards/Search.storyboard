@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -130,40 +130,52 @@
                                             <rect key="frame" x="0.0" y="0.0" width="372" height="159"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-zS-MIV">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sL4-zS-MIV">
                                                     <rect key="frame" x="15" y="0.0" width="342" height="159"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-f4-NMI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
-                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact">
-                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
-                                                            </variation>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Ic-Js3">
-                                                            <rect key="frame" x="0.0" y="53" width="342" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
-                                                            <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact">
-                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
-                                                            </variation>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7v-Q3-PNf">
-                                                            <rect key="frame" x="0.0" y="106" width="342" height="53"/>
-                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                                            <state key="normal" title="QUEUE">
-                                                                <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="handleQueueTapWithSender:" destination="lhN-ab-ua4" eventType="touchDown" id="Rpw-Yo-acz"/>
-                                                            </connections>
-                                                        </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="aU5-zc-zLs" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="28" width="102.5" height="103"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="aU5-zc-zLs" secondAttribute="height" id="9wi-s7-uC1"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="v0E-Vq-PDZ">
+                                                            <rect key="frame" x="117.5" y="0.0" width="224.5" height="159"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez4-f4-NMI">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="224.5" height="40.5"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
+                                                                    </variation>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Jurong West Central 2, JP1, #03-06/06A, S648886" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-Ic-Js3">
+                                                                    <rect key="frame" x="0.0" y="40.5" width="224.5" height="57.5"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
+                                                                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="13"/>
+                                                                    </variation>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7v-Q3-PNf">
+                                                                    <rect key="frame" x="0.0" y="98" width="224.5" height="61"/>
+                                                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                                    <state key="normal" title="QUEUE">
+                                                                        <color key="titleColor" red="0.95686274510000002" green="0.41960784309999999" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="handleQueueTapWithSender:" destination="lhN-ab-ua4" eventType="touchDown" id="Rpw-Yo-acz"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="ez4-f4-NMI" firstAttribute="leading" secondItem="sL4-zS-MIV" secondAttribute="leading" id="ask-1q-Tsi"/>
+                                                        <constraint firstItem="aU5-zc-zLs" firstAttribute="width" secondItem="sL4-zS-MIV" secondAttribute="width" multiplier="0.3" id="ezv-wR-R4d"/>
+                                                        <constraint firstItem="v0E-Vq-PDZ" firstAttribute="height" secondItem="sL4-zS-MIV" secondAttribute="height" id="rmR-il-cyH"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -179,6 +191,7 @@
                                         <connections>
                                             <outlet property="locationLabel" destination="fd7-Ic-Js3" id="ueo-Ds-gg8"/>
                                             <outlet property="nameLabel" destination="ez4-f4-NMI" id="RCM-aw-wpt"/>
+                                            <outlet property="profileImageView" destination="aU5-zc-zLs" id="g8d-c1-5ed"/>
                                             <outlet property="queueButton" destination="S7v-Q3-PNf" id="Usa-ig-GFF"/>
                                         </connections>
                                     </collectionViewCell>
@@ -281,18 +294,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFV-E1-Kcm">
-                                <rect key="frame" x="88.5" y="68" width="237" height="26"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
-                                </variation>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Zf3-xv-cyf">
+                                <rect key="frame" x="88.5" y="53.5" width="237" height="124"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="Ab2-xO-uwp" customClass="ProfileImageView" customModule="QwQ" customModuleProvider="target">
+                                        <rect key="frame" x="77" y="0.0" width="83" height="83"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ab2-xO-uwp" secondAttribute="height" id="ITb-sb-uxd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFV-E1-Kcm">
+                                        <rect key="frame" x="0.0" y="98" width="237" height="26"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-up-TA1">
                                 <rect key="frame" x="10" y="44" width="33" height="33"/>
                                 <constraints>
@@ -309,14 +333,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzQ-Uq-Gtn">
                                         <rect key="frame" x="20" y="20" width="377.5" height="548"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fBM-ob-2ch">
-                                                <rect key="frame" x="20" y="20" width="405.5" height="427.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="fBM-ob-2ch">
+                                                <rect key="frame" x="20" y="20" width="428.5" height="370"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwe-wW-PaA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="405.5" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="ncZ-Zs-6RM"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="0.0" width="428.5" height="23"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -325,43 +346,20 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2x-y3-4IH">
-                                                        <rect key="frame" x="0.0" y="65" width="405.5" height="122"/>
+                                                        <rect key="frame" x="0.0" y="48" width="428.5" height="28.5"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">Hawaiian Pizza (S/M/L)
-Aglio Olio
-Salmon Linguine
-Fish and Chips
-Chicken Risotto
-Pancake</string>
+                                                            <fragment content="Hawaiian Pizza (S/M/L)">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" metaFont="system" size="25"/>
+                                                                    <font key="NSFont" size="17" name="Comfortaa-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=compact">
-                                                            <attributedString key="attributedText">
-                                                                <fragment>
-                                                                    <string key="content">Hawaiian Pizza (S/M/L)
-Aglio Olio
-Salmon Linguine
-Fish and Chips
-Chicken Risotto
-Pancake</string>
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont"  name="Comfortaa-Regular" size="17"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmW-dT-K5i">
-                                                        <rect key="frame" x="0.0" y="202" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="101.5" width="428.5" height="23"/>
                                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -370,35 +368,24 @@ Pancake</string>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nad-DH-dLq">
-                                                        <rect key="frame" x="0.0" y="267" width="405.5" height="30.5"/>
+                                                        <rect key="frame" x="0.0" y="149.5" width="428.5" height="28.5"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont"  name="Comfortaa-Regular" size="25"/>
-                                                                    <font key="NSOriginalFont"  name="Comfortaa-Regular" size="25"/>
+                                                                    <font key="NSFont" size="17" name="Comfortaa-Regular"/>
+                                                                    <font key="NSOriginalFont" size="25" name="Comfortaa-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=compact">
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="1 Jurong West Central 2, JP1, #03-06/06A, S648886">
-                                                                    <attributes>
-                                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                        <font key="NSFont"  name="Comfortaa-Regular" size="17"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                        </variation>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="94T-Eg-RBn">
-                                                        <rect key="frame" x="0.0" y="312.5" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="203" width="428.5" height="23"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beQ-Qn-Prc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="23"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -406,8 +393,8 @@ Pancake</string>
                                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0K-Me-Win">
-                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99927392" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0K-Me-Win">
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="23"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -415,10 +402,10 @@ Pancake</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-1I-378">
-                                                        <rect key="frame" x="0.0" y="377.5" width="405.5" height="50"/>
+                                                        <rect key="frame" x="0.0" y="251" width="428.5" height="23"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBR-yY-bSO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="23"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -426,8 +413,48 @@ Pancake</string>
                                                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPw-7L-wOq">
-                                                                <rect key="frame" x="203" y="0.0" width="202.5" height="50"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="restaurant@mail.com" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPw-7L-wOq">
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="23"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="XxB-Tk-abx">
+                                                        <rect key="frame" x="0.0" y="299" width="428.5" height="23"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Group Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-sp-ZFx">
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="23"/>
+                                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                                </variation>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 to 4 pax" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saD-zh-NUa">
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="23"/>
+                                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
+                                                                <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ok0-Jn-U5c">
+                                                        <rect key="frame" x="0.0" y="347" width="428.5" height="23"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Opening Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-73-1gL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="23"/>
+                                                                <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
+                                                                </variation>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00 to 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kL-v7-wHj">
+                                                                <rect key="frame" x="214.5" y="0.0" width="214" height="23"/>
                                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                                 <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -435,11 +462,6 @@ Pancake</string>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="beQ-Qn-Prc" firstAttribute="height" secondItem="UmW-dT-K5i" secondAttribute="height" id="Fy4-Wk-F5m"/>
-                                                    <constraint firstItem="zBR-yY-bSO" firstAttribute="height" secondItem="beQ-Qn-Prc" secondAttribute="height" id="SBy-nu-X6G"/>
-                                                    <constraint firstItem="UmW-dT-K5i" firstAttribute="height" secondItem="vwe-wW-PaA" secondAttribute="height" id="WyW-aF-IDu"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -490,8 +512,8 @@ Pancake</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="gFj-up-TA1" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.08" id="1mf-aQ-YDN"/>
-                            <constraint firstItem="vFV-E1-Kcm" firstAttribute="centerX" secondItem="XED-LO-yaF" secondAttribute="centerX" id="2K6-8S-JVJ"/>
                             <constraint firstItem="gFj-up-TA1" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" constant="10" id="2kW-x6-qPB"/>
+                            <constraint firstItem="Zf3-xv-cyf" firstAttribute="centerY" secondItem="3EU-Cj-oZd" secondAttribute="centerY" id="43s-2v-2zO"/>
                             <constraint firstItem="3EU-Cj-oZd" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="BnG-mM-Scf"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="top" secondItem="XED-LO-yaF" secondAttribute="top" id="CUK-Dj-x1K"/>
                             <constraint firstItem="UUD-DO-NV8" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.08" id="LaQ-F3-MdK"/>
@@ -500,8 +522,8 @@ Pancake</string>
                             <constraint firstItem="au2-Jo-O9J" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="P2b-C2-Lzk"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="leading" secondItem="53Z-7s-fwh" secondAttribute="leading" id="V5R-DY-yrG"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="height" secondItem="3EU-Cj-oZd" secondAttribute="height" id="WpW-xE-HsU"/>
-                            <constraint firstItem="vFV-E1-Kcm" firstAttribute="bottom" secondItem="37u-KV-kYY" secondAttribute="top" constant="50" id="cVO-39-agI"/>
                             <constraint firstItem="3EU-Cj-oZd" firstAttribute="top" secondItem="XED-LO-yaF" secondAttribute="top" id="dIG-P3-Zp8"/>
+                            <constraint firstItem="Zf3-xv-cyf" firstAttribute="centerX" secondItem="XED-LO-yaF" secondAttribute="centerX" id="hWI-b9-Ki2"/>
                             <constraint firstItem="3EU-Cj-oZd" firstAttribute="height" secondItem="37u-KV-kYY" secondAttribute="height" multiplier="0.3" id="iAP-b5-t6s"/>
                             <constraint firstItem="53Z-7s-fwh" firstAttribute="bottom" secondItem="37u-KV-kYY" secondAttribute="bottom" constant="4.5" id="iWm-zJ-W31"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="leading" secondItem="37u-KV-kYY" secondAttribute="leading" id="lFo-nv-T3g"/>
@@ -509,6 +531,7 @@ Pancake</string>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="trailing" secondItem="au2-Jo-O9J" secondAttribute="trailing" id="tBF-xv-Icf"/>
                             <constraint firstItem="37u-KV-kYY" firstAttribute="top" secondItem="gFj-up-TA1" secondAttribute="top" id="w7D-im-aT7"/>
                             <constraint firstItem="53Z-7s-fwh" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="xnB-Bj-pA5"/>
+                            <constraint firstItem="Ab2-xO-uwp" firstAttribute="width" secondItem="37u-KV-kYY" secondAttribute="width" multiplier="0.2" id="xtu-9h-Avg"/>
                             <constraint firstItem="9SF-iG-iOr" firstAttribute="trailing" secondItem="37u-KV-kYY" secondAttribute="trailing" id="zLL-cc-223"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="37u-KV-kYY"/>
@@ -518,9 +541,12 @@ Pancake</string>
                         <outlet property="bookButton" destination="oNk-e5-0yg" id="Kh6-3q-hO6"/>
                         <outlet property="contactLabel" destination="j0K-Me-Win" id="Rdn-Di-si9"/>
                         <outlet property="emailLabel" destination="tPw-7L-wOq" id="gwa-l8-hP9"/>
+                        <outlet property="groupSizeLabel" destination="saD-zh-NUa" id="Lx5-mf-44Z"/>
                         <outlet property="locationLabel" destination="nad-DH-dLq" id="5Vm-Ys-d70"/>
                         <outlet property="menuLabel" destination="U2x-y3-4IH" id="WHb-fr-ybi"/>
                         <outlet property="nameLabel" destination="vFV-E1-Kcm" id="lfM-tx-Wfh"/>
+                        <outlet property="openingHoursLabel" destination="6kL-v7-wHj" id="Ulb-DW-lHp"/>
+                        <outlet property="profileImageView" destination="Ab2-xO-uwp" id="Xh3-GO-1JF"/>
                         <outlet property="queueButton" destination="UUD-DO-NV8" id="JKE-Yx-V3c"/>
                         <segue destination="lJC-Jw-heQ" kind="show" identifier="editQueueSelected" id="IfD-L4-uNp"/>
                         <segue destination="GkK-8M-Jcl" kind="show" identifier="editBookSelected" id="saL-Vy-eML"/>
@@ -583,14 +609,15 @@ Pancake</string>
             <point key="canvasLocation" x="2698.125" y="-87.676056338028175"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="back-icon" width="1060" height="1060"/>
-        <image name="food-background" width="2048" height="871"/>
-        <image name="gradient-background" width="2048" height="2732"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="saL-Vy-eML"/>
         <segue reference="IfD-L4-uNp"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="default-profile-pic" width="435" height="418"/>
+        <image name="food-background" width="2048" height="871"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
 </document>
