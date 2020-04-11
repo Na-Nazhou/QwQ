@@ -6,12 +6,12 @@
 //
 
 enum Permissions: String {
-    case acceptBooking = "acceptBooking"
-    case rejectBooking = "rejectBooking"
+    case acceptBooking
+    case rejectBooking
 
-    case acceptQueue = "acceptQueue"
-    case rejectQueue = "rejectQueue"
+    case acceptQueue
+    case rejectQueue
 
-    case addStaff = "addStaff"
-    case editProfile = "editProfile"
+    case addStaff
+    case editProfile
 }

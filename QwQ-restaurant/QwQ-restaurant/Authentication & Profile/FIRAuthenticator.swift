@@ -13,7 +13,7 @@ class FIRAuthenticator: Authenticator {
     
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
-                       completion: @escaping () -> Void,
+                       completion: @escaping (String) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
         
         Auth.auth().createUser(withEmail: authDetails.email, password: authDetails.password) { (result, error) in
@@ -24,14 +24,8 @@ class FIRAuthenticator: Authenticator {
             guard let result = result else {
                 return
             }
-            
-            Profile.createInitialRestaurantProfile(uid: result.user.uid,
-                                                   signupDetails: signupDetails,
-                                                   email: authDetails.email,
-                                                   errorHandler: errorHandler)
-            FIRAuthenticator.login(authDetails: authDetails,
-                                   completion: completion,
-                                   errorHandler: errorHandler)
+
+            completion(result.user.uid)
         }
     }
     
@@ -86,10 +80,6 @@ class FIRAuthenticator: Authenticator {
 
     static func checkIfAlreadyLoggedIn() -> Bool {
         Auth.auth().currentUser != nil
-    }
-    
-    static func getUIDOfCurrentUser() -> String? {
-        Auth.auth().currentUser?.uid
     }
 
     static func resetPassword(for email: String,

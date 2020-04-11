@@ -8,6 +8,9 @@
 import UIKit
 
 protocol RestaurantStorage {
+
+    static var currentRestaurantUID: String? { get set }
+
     // MARK: - Restaurant Creation Methods
     
     static func createInitialRestaurantProfile(uid: String,

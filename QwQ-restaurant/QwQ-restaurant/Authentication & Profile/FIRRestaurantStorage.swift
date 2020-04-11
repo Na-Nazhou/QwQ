@@ -13,6 +13,8 @@ import SDWebImage
 class FIRRestaurantStorage: RestaurantStorage {
     typealias Auth = FIRAuthenticator
 
+    static var currentRestaurantUID: String?
+
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
     static let storageRef = Storage.storage().reference().child(Constants.profilePicsDirectory)
 
@@ -38,7 +40,7 @@ class FIRRestaurantStorage: RestaurantStorage {
     static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
                                   errorHandler: @escaping (Error) -> Void) {
 
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentRestaurantUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
@@ -75,7 +77,7 @@ class FIRRestaurantStorage: RestaurantStorage {
     static func updateRestaurantInfo(restaurant: Restaurant,
                                      completion: @escaping () -> Void,
                                      errorHandler: @escaping (Error) -> Void) {
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentRestaurantUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }

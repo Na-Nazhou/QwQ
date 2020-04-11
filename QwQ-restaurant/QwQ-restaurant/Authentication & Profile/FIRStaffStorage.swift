@@ -11,21 +11,44 @@ class FIRStaffStorage: StaffStorage {
 
     typealias Auth = FIRAuthenticator
 
+    static var currentStaffUID: String?
+
     static let dbRef = Firestore.firestore().collection(Constants.staffDirectory)
 
+    /// Create initial staff profile for non-owner staff
     static func createInitialStaffProfile(uid: String,
                                           signupDetails: SignupDetails,
                                           email: String,
-                                          isOwner: Bool,
                                           errorHandler: @escaping (Error) -> Void) {
 
         let docRef = dbRef.document(uid)
         docRef.setData([Constants.uidKey: uid,
                         Constants.nameKey: signupDetails.name,
-                        Constants.emailKey: email,
                         Constants.contactKey: signupDetails.contact,
+                        Constants.emailKey: email,
                         Constants.assignedRestaurantKey: "",
-                        Constants.isOwnerKey: isOwner,
+                        Constants.isOwnerKey: false,
+                        Constants.permissionsKey: ""]) { (error) in
+            if let error = error {
+                errorHandler(error)
+            }
+        }
+    }
+
+    /// Create initial staff profile for owner
+    static func createInitialStaffProfile(uid: String,
+                                          signupDetails: SignupDetails,
+                                          email: String,
+                                          assignedRestaurant: String,
+                                          errorHandler: @escaping (Error) -> Void) {
+
+        let docRef = dbRef.document(uid)
+        docRef.setData([Constants.uidKey: uid,
+                        Constants.nameKey: signupDetails.name,
+                        Constants.contactKey: signupDetails.contact,
+                        Constants.emailKey: email,
+                        Constants.assignedRestaurantKey: "",
+                        Constants.isOwnerKey: true,
                         Constants.permissionsKey: ""]) { (error) in
             if let error = error {
                 errorHandler(error)
@@ -36,7 +59,7 @@ class FIRStaffStorage: StaffStorage {
     static func getStaffInfo(completion: @escaping (Staff) -> Void,
                              errorHandler: @escaping (Error) -> Void) {
 
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentStaffUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
@@ -66,7 +89,7 @@ class FIRStaffStorage: StaffStorage {
                                 completion: @escaping () -> Void,
                                 errorHandler: @escaping (Error) -> Void) {
 
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentStaffUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }

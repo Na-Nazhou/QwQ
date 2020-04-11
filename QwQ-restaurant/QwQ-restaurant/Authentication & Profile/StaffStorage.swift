@@ -7,10 +7,19 @@
 
 protocol StaffStorage {
 
+    static var currentStaffUID: String? { get set }
+
+    /// Create initial staff profile for non-owner staff
     static func createInitialStaffProfile(uid: String,
                                           signupDetails: SignupDetails,
                                           email: String,
-                                          isOwner: Bool,
+                                          errorHandler: @escaping (Error) -> Void)
+
+    /// Create initial staff profile for owner
+    static func createInitialStaffProfile(uid: String,
+                                          signupDetails: SignupDetails,
+                                          email: String,
+                                          assignedRestaurant: String,
                                           errorHandler: @escaping (Error) -> Void)
 
     static func getStaffInfo(completion: @escaping (Staff) -> Void,
