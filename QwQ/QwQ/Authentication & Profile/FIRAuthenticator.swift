@@ -99,12 +99,15 @@ class FIRAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
+        return Auth.auth().currentUser != nil
+    }
+
+    static func initAlreadyLoggedInUser() {
         guard let user = Auth.auth().currentUser else {
-            return false
+            return
         }
         Profile.currentUID = user.email
         Profile.currentAuthType = AuthTypes.Firebase
-        return true
     }
 
     static func resetPassword(for email: String,

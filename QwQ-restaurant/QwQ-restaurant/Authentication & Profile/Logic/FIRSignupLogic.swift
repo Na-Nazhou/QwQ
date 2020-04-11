@@ -40,18 +40,21 @@ class FIRSignupLogic: SignupLogic {
                                                              signupDetails: signupDetails,
                                                              email: authDetails.email,
                                                              errorHandler: handleError(error:))
+            RestaurantProfile.currentRestaurantUID = uid
 
             StaffProfile.createInitialStaffProfile(uid: authDetails.email,
                                                    signupDetails: signupDetails,
                                                    email: authDetails.email,
                                                    assignedRestaurant: uid,
                                                    errorHandler: handleError(error:))
+            StaffProfile.currentStaffUID = authDetails.email
 
         } else {
             StaffProfile.createInitialStaffProfile(uid: authDetails.email,
                                                    signupDetails: signupDetails,
                                                    email: authDetails.email,
                                                    errorHandler: handleError(error:))
+            StaffProfile.currentStaffUID = authDetails.email
         }
 
         FIRAuthenticator.login(authDetails: authDetails,

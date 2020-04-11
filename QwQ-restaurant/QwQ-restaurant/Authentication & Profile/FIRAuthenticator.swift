@@ -9,7 +9,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FIRAuthenticator: Authenticator {
-    typealias Profile = FIRRestaurantStorage
+
+    typealias StaffProfile = FIRStaffStorage
+    typealias RestaurantProfile = FIRRestaurantStorage
     
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
@@ -38,6 +40,7 @@ class FIRAuthenticator: Authenticator {
                 errorHandler(error)
                 return
             }
+            StaffProfile.currentStaffUID = authDetails.email
             completion()
         }
     }
@@ -45,6 +48,8 @@ class FIRAuthenticator: Authenticator {
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void) {
         do {
             try Auth.auth().signOut()
+            StaffProfile.currentStaffUID = nil
+            RestaurantProfile.currentRestaurantUID = nil
             completion()
         } catch {
             errorHandler(AuthError.SignOutError)
@@ -79,7 +84,14 @@ class FIRAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        Auth.auth().currentUser != nil
+        return Auth.auth().currentUser != nil
+    }
+
+    static func initAlreadyLoggedInUser() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        StaffProfile.currentStaffUID = user.email
     }
 
     static func resetPassword(for email: String,

@@ -96,8 +96,17 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     }
     
     func signUpComplete() {
-        RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
-                                            errorHandler: handleError(error:))
+        /* Email verification code - to be enabled only in production application
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+        return
+        */
+
+        if selectedUserType == UserType.staff {
+            // to do: perform segue to "ask manager to add you" screen
+        } else {
+            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                                errorHandler: handleError(error:))
+        }
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
