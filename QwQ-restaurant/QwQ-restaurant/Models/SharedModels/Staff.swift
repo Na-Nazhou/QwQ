@@ -15,6 +15,10 @@ struct Staff: User {
     let isOwner: Bool
     let permissions: [Permissions]
 
+    var permissionsStringArray: [String] {
+        return Permissions.convertPermissionsToStringArray(permissions)
+    }
+
     var dictionary: [String: Any] {
         [
             Constants.uidKey: uid,
@@ -22,7 +26,7 @@ struct Staff: User {
             Constants.emailKey: email,
             Constants.contactKey: contact,
             Constants.assignedRestaurantKey: assignedRestaurant,
-            Constants.permissionsKey: permissions
+            Constants.permissionsKey: permissionsStringArray
         ]
     }
 
@@ -38,23 +42,40 @@ struct Staff: User {
     }
 
     init?(dictionary: [String: Any]) {
+        guard let permissionsAnyArray = dictionary[Constants.permissionsKey] as? [Any] else {
+            return nil
+        }
+        let permissions = Staff.convertAnyToStringArray(permissionsAnyArray)
+
+        guard let isOwnerString = dictionary[Constants.isOwnerKey] as? String else {
+            return nil
+        }
+        let isOwner = isOwnerString == "true"
+
         guard let uid = dictionary[Constants.uidKey] as? String,
             let name = dictionary[Constants.nameKey] as? String,
             let email = dictionary[Constants.emailKey] as? String,
             let contact = dictionary[Constants.contactKey] as? String,
-            let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String,
-            let isOwner = dictionary[Constants.isOwnerKey] as? Bool,
-            let permissions = dictionary[Constants.permissionsKey] as? [Permissions] else {
+            let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String else {
                 return nil
         }
-
         self.init(uid: uid,
                   name: name,
                   email: email,
                   contact: contact,
                   assignedRestaurant: assignedRestaurant,
                   isOwner: isOwner,
-                  permissions: permissions)
+                  permissions: Permissions.convertStringArrayToPermissions(permissions))
+    }
+
+    static func convertAnyToStringArray(_ anyArray: [Any]) -> [String] {
+        var result = [String]()
+        for item in anyArray {
+            if let item = item as? String {
+                result.append(item)
+            }
+        }
+        return result
     }
 }
 

@@ -15,7 +15,6 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
 
     var spinner: UIView?
 
-    typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator
 
     override func viewDidLoad() {
