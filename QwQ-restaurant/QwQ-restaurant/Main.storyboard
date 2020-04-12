@@ -154,6 +154,7 @@
                         <outlet property="emailTextField" destination="qMP-nu-B0d" id="sWI-Sv-UEJ"/>
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="9rX-UU-HwP"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="23e-ha-7lb"/>
+                        <segue destination="yCH-9p-FPM" kind="show" identifier="staffNotVerified" id="zgS-vi-Hkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -168,7 +169,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euT-n7-rg9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="506"/>
+            <point key="canvasLocation" x="700" y="506"/>
+        </scene>
+        <!--StaffVerification-->
+        <scene sceneID="Tdd-C8-OWC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="StaffVerification" id="yCH-9p-FPM" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="AZp-Lt-xJR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbD-NN-mKe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1062" y="506"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V4T-oO-RXe">
@@ -206,7 +217,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3O-08-vEe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2453" y="101"/>
+            <point key="canvasLocation" x="2493" y="83"/>
         </scene>
         <!--Activities-->
         <scene sceneID="UBO-CK-qMg">
@@ -216,7 +227,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oP-Yc-OWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2503" y="5"/>
+            <point key="canvasLocation" x="2958" y="238"/>
         </scene>
         <!--Profile-->
         <scene sceneID="uvw-VP-MlA">
@@ -226,7 +237,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egv-4c-Mv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2509" y="214"/>
+            <point key="canvasLocation" x="2971" y="83"/>
         </scene>
         <!--Statistics-->
         <scene sceneID="CIU-Sy-L4c">
@@ -236,7 +247,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N4U-LJ-Ssj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="142"/>
+            <point key="canvasLocation" x="2958" y="-40"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="pzF-pP-bbx">
@@ -435,6 +446,7 @@
                         <outlet property="segmentedControl" destination="s31-zB-ZzM" id="cJa-SE-zow"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="signupCompleted" id="y5a-2U-37J"/>
                         <segue destination="bNV-Dr-4g9" kind="show" identifier="emailNotVerified" id="PeX-wD-bBX"/>
+                        <segue destination="m5o-cT-FwE" kind="show" identifier="staffNotVerified" id="XU2-R0-Bfp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAh-2K-nVS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -449,11 +461,21 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ERj-hT-JWv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1673" y="901"/>
+            <point key="canvasLocation" x="1532" y="907"/>
+        </scene>
+        <!--StaffVerification-->
+        <scene sceneID="oMq-7r-r3B">
+            <objects>
+                <viewControllerPlaceholder storyboardName="StaffVerification" id="m5o-cT-FwE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ONf-SV-u0j"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GUV-tt-2Bm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="907"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="y5a-2U-37J"/>
+        <segue reference="23e-ha-7lb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="back-icon" width="1060" height="1060"/>
