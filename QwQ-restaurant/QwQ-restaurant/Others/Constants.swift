@@ -64,6 +64,7 @@ struct Constants {
     static let bookRecordSelectedSegue = "bookRecordSelected"
     static let statisticsSelectedSegue = "statisticsSelected"
     static let logoutSegue = "logout"
+    static let staffNotVerifiedSegue = "staffNotVerified"
 
     // MARK: Storage settings
     static let customersDirectory = "customers"
