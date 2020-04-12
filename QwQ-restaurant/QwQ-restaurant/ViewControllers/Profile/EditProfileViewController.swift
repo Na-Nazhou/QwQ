@@ -28,7 +28,7 @@ class EditProfileViewController: UIViewController {
     private var spinner: UIView?
 
     typealias Auth = FIRAuthenticator
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
     private var queueOpenTime: Date?

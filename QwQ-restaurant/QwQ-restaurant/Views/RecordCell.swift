@@ -19,7 +19,7 @@ class RecordCell: UICollectionViewCell {
     @IBOutlet private var statusLabel: UILabel!
     @IBOutlet private var queueBookImageView: UIImageView!
     @IBOutlet private var timeLabel: UILabel!
-    @IBOutlet weak var profileImageView: ProfileImageView!
+    @IBOutlet private weak var profileImageView: ProfileImageView!
     
     @IBOutlet private var rightButton: UIButton!
     @IBOutlet private var leftButton: UIButton!

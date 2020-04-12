@@ -96,7 +96,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     func fetchQueueCancellationRate(for stats: Statistics) {
-        storage.fetchQueueCancellationRate(for: restaurant,  from: stats.fromDate, to: stats.toDate) { count in
+        storage.fetchQueueCancellationRate(for: restaurant, from: stats.fromDate, to: stats.toDate) { count in
             stats.totalQueueCancelled = count
             self.statsDelegate?.didCompleteFetchingData()
         }

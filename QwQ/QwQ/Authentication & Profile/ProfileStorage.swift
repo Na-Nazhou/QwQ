@@ -16,7 +16,7 @@ protocol ProfileStorage {
 
     static func createInitialCustomerProfile(uid: String,
                                              signupDetails: SignupDetails,
-                                             authDetails: AuthDetails,
+                                             email: String,
                                              errorHandler: @escaping (Error) -> Void)
 
     // MARK: - Customer Info Retrieval Methods

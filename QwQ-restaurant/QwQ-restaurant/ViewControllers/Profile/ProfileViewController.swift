@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
 
     var spinner: UIView?
 
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator
 
     override func viewWillAppear(_ animated: Bool) {

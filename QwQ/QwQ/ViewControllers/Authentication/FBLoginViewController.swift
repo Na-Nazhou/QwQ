@@ -69,7 +69,7 @@ class FBLoginViewController: UIViewController {
 
         Profile.createInitialCustomerProfile(uid: email,
                                              signupDetails: signupDetails,
-                                             authDetails: authDetails,
+                                             email: authDetails.email,
                                              errorHandler: handleError(error:))
         authCompleted()
 

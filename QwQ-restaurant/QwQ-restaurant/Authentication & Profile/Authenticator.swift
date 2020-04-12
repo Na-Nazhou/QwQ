@@ -8,7 +8,7 @@
 protocol Authenticator {
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
-                       completion: @escaping () -> Void,
+                       completion: @escaping (String) -> Void,
                        errorHandler: @escaping (Error) -> Void)
 
     static func login(authDetails: AuthDetails,
@@ -24,8 +24,6 @@ protocol Authenticator {
     static func checkIfEmailVerified() -> Bool
 
     static func checkIfAlreadyLoggedIn() -> Bool
-
-    static func getUIDOfCurrentUser() -> String?
 
     static func resetPassword(for email: String,
                               completion: @escaping () -> Void,

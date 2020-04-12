@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, SignupLogicDelegate {
 
     // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
@@ -19,7 +19,9 @@ class SignUpViewController: UIViewController {
     var spinner: UIView?
     
     typealias Auth = FIRAuthenticator
-    typealias Profile = FIRProfileStorage
+    typealias RestaurantProfile = FIRRestaurantStorage
+
+    var selectedUserType: UserType = .staff
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,24 +75,38 @@ class SignUpViewController: UIViewController {
 
         let signupDetails = SignupDetails(name: name, contact: contact)
         let authDetails = AuthDetails(email: email, password: password)
-        
-        Auth.signup(signupDetails: signupDetails,
-                    authDetails: authDetails,
-                    completion: signUpComplete,
-                    errorHandler: handleError(error:))
+
+        beginLogin(signupDetails: signupDetails, authDetails: authDetails, selectedUserType: selectedUserType)
     }
-    
+
+    @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
+        selectedUserType = UserType(rawValue: sender.selectedIndex)!
+    }
+
     private func setUpSegmentedControl() {
         segmentedControl.items = Constants.segmentedControlSignUpTitles
     }
+
+    private func beginLogin(signupDetails: SignupDetails, authDetails: AuthDetails, selectedUserType: UserType) {
+        let signupLogic = FIRSignupLogic(authDetails: authDetails,
+                                         signupDetails: signupDetails,
+                                         userType: selectedUserType)
+        signupLogic.delegate = self
+        signupLogic.beginSignup()
+    }
     
-    private func signUpComplete() {
+    func signUpComplete() {
         /* Email verification code - to be enabled only in production application
         performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
         return
         */
-        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
-                                  errorHandler: handleError(error:))
+
+        if selectedUserType == UserType.staff {
+            // to do: perform segue to "ask manager to add you" screen
+        } else {
+            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                                errorHandler: handleError(error:))
+        }
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
@@ -99,7 +115,7 @@ class SignUpViewController: UIViewController {
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
 
-    private func handleError(error: Error) {
+    func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }

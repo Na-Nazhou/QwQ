@@ -133,7 +133,7 @@ extension FIRQueueStorage {
         }
         let qid = document.documentID
 
-        FIRCustomerInfoStorage.getCustomerFromUID(uid: cid, completion: { customer in
+        FIRCustomerStorage.getCustomerFromUID(uid: cid, completion: { customer in
                 guard let rec = QueueRecord(dictionary: data,
                                             customer: customer,
                                             restaurant: restaurant,

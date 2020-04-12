@@ -10,15 +10,17 @@ import FirebaseStorage
 import FirebaseUI
 import SDWebImage
 
-class FIRProfileStorage: ProfileStorage {
+class FIRRestaurantStorage: RestaurantStorage {
     typealias Auth = FIRAuthenticator
 
+    static var currentRestaurantUID: String?
+
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
-    static let storageRef = Storage.storage().reference().child("profile-pics")
+    static let storageRef = Storage.storage().reference().child(Constants.profilePicsDirectory)
 
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
-                                               authDetails: AuthDetails,
+                                               email: String,
                                                errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
         db.collection(Constants.restaurantsDirectory)
@@ -26,7 +28,7 @@ class FIRProfileStorage: ProfileStorage {
             .setData([Constants.uidKey: uid,
                       Constants.nameKey: signupDetails.name,
                       Constants.contactKey: signupDetails.contact,
-                      Constants.emailKey: authDetails.email,
+                      Constants.emailKey: email,
                       Constants.addressKey: "",
                       Constants.menuKey: ""]) { (error) in
             if let error = error {
@@ -38,7 +40,7 @@ class FIRProfileStorage: ProfileStorage {
     static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
                                   errorHandler: @escaping (Error) -> Void) {
 
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentRestaurantUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }
@@ -58,7 +60,7 @@ class FIRProfileStorage: ProfileStorage {
                 }
             }
 
-            errorHandler(ProfileError.IncorrectUserType)
+            errorHandler(ProfileError.InvalidRestaurant)
             Auth.logout(completion: {}, errorHandler: errorHandler)
         }
     }
@@ -75,7 +77,7 @@ class FIRProfileStorage: ProfileStorage {
     static func updateRestaurantInfo(restaurant: Restaurant,
                                      completion: @escaping () -> Void,
                                      errorHandler: @escaping (Error) -> Void) {
-        guard let uid = Auth.getUIDOfCurrentUser() else {
+        guard let uid = currentRestaurantUID else {
             errorHandler(ProfileError.NotSignedIn)
             return
         }

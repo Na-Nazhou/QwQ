@@ -71,6 +71,8 @@ struct Constants {
     static let restaurantsDirectory = "restaurants"
     static let queuesDirectory = "queues"
     static let bookingsDirectory = "bookings"
+    static let staffDirectory = "staff"
+    static let profilePicsDirectory = "profile-pics"
     
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"
@@ -129,5 +131,8 @@ struct Constants {
     static let withdrawTimeKey = "withdrawTime"
     static let confirmAdmissionTimeKey = "confirmAdmissionTime"
     static let timeKey = "time"
+    static let assignedRestaurantKey = "assignedRestaurant"
+    static let isOwnerKey = "isOwner"
+    static let permissionsKey = "permissions"
     static let estimatedAdmitTimeKey = "estimatedAdmitTime"
 }

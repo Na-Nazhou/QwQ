@@ -7,15 +7,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    
+class LoginViewController: UIViewController, LoginLogicDelegate {
+
     // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
     var spinner: UIView?
 
-    typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator
 
     override func viewDidLoad() {
@@ -23,7 +22,7 @@ class LoginViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
         if Auth.checkIfAlreadyLoggedIn() {
-            authCompleted()
+            alreadyLoggedIn()
         } else {
             removeSpinner(spinner)
         }
@@ -31,7 +30,10 @@ class LoginViewController: UIViewController {
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
     }
-    
+
+    @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+    }
+
     @IBAction private func loginButton(_ sender: Any) {
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -60,36 +62,38 @@ class LoginViewController: UIViewController {
                         buttonText: Constants.okayTitle)
             return
         }
-        
-        let authDetails = AuthDetails(email: email, password: password)
-        Auth.login(authDetails: authDetails, completion: authCompleted, errorHandler: handleError(error:))
 
         spinner = showSpinner(onView: view)
+        
+        let authDetails = AuthDetails(email: email, password: password)
+        beginLogin(authDetails: authDetails)
+
     }
 
-    @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
+    private func beginLogin(authDetails: AuthDetails) {
+        let loginLogic = FIRLoginLogic()
+        loginLogic.delegate = self
+        loginLogic.beginLogin(authDetails: authDetails)
+    }
+
+    private func alreadyLoggedIn() {
+        Auth.initAlreadyLoggedInUser()
+        let loginLogic = FIRLoginLogic()
+        loginLogic.delegate = self
+        loginLogic.getStaffInfo()
     }
     
-    private func authCompleted() {
-        /* Email verification code - to be enabled only in production application
-        guard Auth.checkIfEmailVerified() else {
-            Auth.sendVerificationEmail(errorHandler: handleError(error:))
-            performSegue(withIdentifier: Constants.loginEmailNotVerifiedSegue, sender: self)
-            removeSpinner(spinner)
-            return
-        }
-        */
-        Profile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
-                                  errorHandler: handleError(error:))
-    }
-
-    private func getRestaurantInfoComplete(restaurant: Restaurant) {
-        RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
+    func loginComplete() {
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
     }
 
-    private func handleError(error: Error) {
+    func emailNotVerified() {
+        removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+    }
+
+    func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }
