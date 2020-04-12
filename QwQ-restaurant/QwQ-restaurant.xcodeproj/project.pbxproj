@@ -60,6 +60,8 @@
 		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
 		7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */; };
 		7E428226242B94F00019A8A2 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428225242B94EF0019A8A2 /* Statistics.swift */; };
+		7E505C542442A8EE00994D8D /* StaffVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E505C532442A8EE00994D8D /* StaffVerification.storyboard */; };
+		7E505C562442AADE00994D8D /* StaffVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E505C552442AADE00994D8D /* StaffVerificationViewController.swift */; };
 		7E53E2C2241F74990047C40F /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53E2C1241F74990047C40F /* ProfileImageView.swift */; };
 		7E6884A724332B9C00486EB8 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */; };
 		7E72B15C241C93FE00C1EE72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */; };
@@ -181,6 +183,8 @@
 		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
 		7E428225242B94EF0019A8A2 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		7E505C532442A8EE00994D8D /* StaffVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StaffVerification.storyboard; sourceTree = "<group>"; };
+		7E505C552442AADE00994D8D /* StaffVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffVerificationViewController.swift; sourceTree = "<group>"; };
 		7E53E2C1241F74990047C40F /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		7E72B158241C93FE00C1EE72 /* QwQ-restaurant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QwQ-restaurant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,6 +389,7 @@
 			children = (
 				7E72B1A3241CA5A100C1EE72 /* SignUpViewController.swift */,
 				7E6884A624332B9C00486EB8 /* ForgotPasswordViewController.swift */,
+				7E505C552442AADE00994D8D /* StaffVerificationViewController.swift */,
 				7E72B19D241CA52F00C1EE72 /* LoginViewController.swift */,
 				7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */,
 			);
@@ -446,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				7E42821B242B48530019A8A2 /* EmailVerification.storyboard */,
+				7E505C532442A8EE00994D8D /* StaffVerification.storyboard */,
 				7ECBA5802433274D00CE3340 /* ForgotPassword.storyboard */,
 			);
 			path = Authentication;
@@ -761,6 +767,7 @@
 				7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */,
 				7EFB697A242218280073E535 /* Book.storyboard in Resources */,
 				7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */,
+				7E505C542442A8EE00994D8D /* StaffVerification.storyboard in Resources */,
 				7EAC34D3242B32290088D00F /* Statistics.storyboard in Resources */,
 				6132680C241F28FF00B770B6 /* Comfortaa-Bold.ttf in Resources */,
 				7E72B168241C940500C1EE72 /* LaunchScreen.storyboard in Resources */,
@@ -943,6 +950,7 @@
 				5C25394924419D6D0080BF88 /* FIRSignupLogic.swift in Sources */,
 				7EE6D02D241E3AF100C1465E /* QueueRecordViewController.swift in Sources */,
 				5C2F2E422441BC98007A7C95 /* FIRLoginLogic.swift in Sources */,
+				7E505C562442AADE00994D8D /* StaffVerificationViewController.swift in Sources */,
 				5C2CB13524248918003AFC6C /* UIViewController+Spinner.swift in Sources */,
 				61ACB7EA242A5C9D002A1F47 /* ActivitiesDelegate.swift in Sources */,
 				614805592422A1EF003D6D44 /* FIRAuthenticator.swift in Sources */,
