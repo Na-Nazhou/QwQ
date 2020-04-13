@@ -101,9 +101,8 @@
 		D4494EC3241B24D900BD0780 /* RestaurantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */; };
 		D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */; };
 		D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */; };
-		D47852CF24442741006393C7 /* NotificationViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852CE24442741006393C7 /* NotificationViewer.swift */; };
 		D47852D124442EB8006393C7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D024442EB8006393C7 /* LocalNotificationManager.swift */; };
-		D47852D3244437D3006393C7 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D2244437D3006393C7 /* UIApplication+Extension.swift */; };
+		D47852D524445279006393C7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D424445279006393C7 /* Notification.swift */; };
 		D4AA685924303D8700F739CF /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685724303D8700F739CF /* RecordModification.swift */; };
 		D4AA685A24303D8700F739CF /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685824303D8700F739CF /* Collection.swift */; };
 		D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */; };
@@ -234,9 +233,8 @@
 		D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorage.swift; path = QwQ/Storage/RestaurantStorage.swift; sourceTree = SOURCE_ROOT; };
 		D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueueStorage.swift; path = QwQ/Storage/CustomerQueueStorage.swift; sourceTree = SOURCE_ROOT; };
 		D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorageSyncDelegate.swift; path = QwQ/Storage/Delegates/RestaurantStorageSyncDelegate.swift; sourceTree = SOURCE_ROOT; };
-		D47852CE24442741006393C7 /* NotificationViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewer.swift; sourceTree = "<group>"; };
 		D47852D024442EB8006393C7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
-		D47852D2244437D3006393C7 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		D47852D424445279006393C7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D4AA685724303D8700F739CF /* RecordModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordModification.swift; path = QwQ/Models/SharedModels/RecordModification.swift; sourceTree = SOURCE_ROOT; };
 		D4AA685824303D8700F739CF /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = QwQ/Models/SharedModels/Collection.swift; sourceTree = SOURCE_ROOT; };
 		D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerPostLoginSetupManager.swift; path = QwQ/Logic/CustomerPostLoginSetupManager.swift; sourceTree = SOURCE_ROOT; };
@@ -593,9 +591,8 @@
 		D47852CD244426F1006393C7 /* MockNotification */ = {
 			isa = PBXGroup;
 			children = (
-				D47852CE24442741006393C7 /* NotificationViewer.swift */,
 				D47852D024442EB8006393C7 /* LocalNotificationManager.swift */,
-				D47852D2244437D3006393C7 /* UIApplication+Extension.swift */,
+				D47852D424445279006393C7 /* Notification.swift */,
 			);
 			path = MockNotification;
 			sourceTree = "<group>";
@@ -901,7 +898,6 @@
 			files = (
 				5C1A419724236D1C00D1140B /* RestaurantInfoStorage.swift in Sources */,
 				5C59E91D2422134A004DFEB7 /* ProfileStorage.swift in Sources */,
-				D47852CF24442741006393C7 /* NotificationViewer.swift in Sources */,
 				D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */,
 				5C843AA7242A1B1F00BD9CEF /* EditRecordViewController.swift in Sources */,
 				7E7F7DCD2422447700A080E5 /* SegmentedControl.swift in Sources */,
@@ -920,7 +916,6 @@
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
 				61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */,
 				7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */,
-				D47852D3244437D3006393C7 /* UIApplication+Extension.swift in Sources */,
 				617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
@@ -975,6 +970,7 @@
 				7EE6D019241DC0EA00C1465E /* RestaurantCell.swift in Sources */,
 				5C25BEAD2422627300B03089 /* UIImageView+checkCacheThenSetImage.swift in Sources */,
 				7EC1F3152421FB7F005D20CD /* ActivityCell.swift in Sources */,
+				D47852D524445279006393C7 /* Notification.swift in Sources */,
 				7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */,
 				61D738D4243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift in Sources */,
 				7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */,

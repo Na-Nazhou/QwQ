@@ -1,8 +1,10 @@
 import Foundation
 import os.log
+import UIKit
 import UserNotifications
 
-/// Example request to schedule notifs: LocalNotificationManager.schedule(notif: Notification(id: "reminder-1", title: "Remember the milk!", timeInterval: 0))
+/// Example request to schedule notifs: LocalNotificationManager.schedule(notif:
+/// Notification(id: "reminder-1", title: "Remember the milk!", timeInterval: 0))
 class LocalNotificationManager {
     
     func listScheduledNotifications() {
@@ -18,6 +20,7 @@ class LocalNotificationManager {
             .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
                 if let error = error {
                     assert(false, error.localizedDescription)
+                    return
                 }
                 if granted {
                     return
@@ -36,15 +39,43 @@ class LocalNotificationManager {
             switch settings.authorizationStatus {
             case .authorized, .provisional:
                 self.scheduleNotification(notif)
-            default:
+            case .denied:
                 self.requestForPermissionsAgain()
-                break // Do nothing --- TODO: request for permissions again?
-            }
+            case .notDetermined:
+                assert(false, "?")
+                self.requestAuthorization()
+            @unknown default:
+                fatalError("auth status \(settings.authorizationStatus) not supported yet!")
+                }
             }
     }
 
     private func requestForPermissionsAgain() {
-        
+        let alertController = UIAlertController(
+            title: "Notifications Required!",
+            message: "Notifications are necessary to respond to your queues/bookings promptly!"
+                + " Please head over to Settings and enable notifications for QwQ.",
+            preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { success in
+                    os_log("Successfully opened Settings!", log: Log.redirectToSettings, type: .info)
+                    print(success)
+                })
+            }
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        DispatchQueue.main.async {
+            UIApplication.getTopMostViewController()?
+                .present(alertController, animated: true, completion: nil)
+
+        }
     }
 
     private func scheduleNotification(_ notification: Notification) {
@@ -71,11 +102,4 @@ class LocalNotificationManager {
         }
     }
 
-}
-
-struct Notification {
-    var id: String
-    var title: String
-    //var datetime: DateComponents
-    var timeInterval: Double
 }
