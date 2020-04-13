@@ -43,4 +43,10 @@ struct Log {
     static let createRestaurantError = OSLog(subsystem: subsystem, category: "FBError")
 
     static let ridError = OSLog(subsystem: subsystem, category: "FBError")
+    
+    // MARK: Notification logs
+    static let scheduleSuccess = OSLog(subsystem: subsystem, category: "LocalNotifications")
+    static let scheduleError = OSLog(subsystem: subsystem, category: "LocalNotifications")
+    static let requestPermissionsFail = OSLog(subsystem: subsystem, category: "LocalNotifications")
+    static let redirectToSettings = OSLog(subsystem: subsystem, category: "LocalNotifications")
 }
