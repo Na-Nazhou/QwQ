@@ -216,6 +216,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
+        QwQNotificationGenerator().notifyBookingAcceptance(record: record)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {

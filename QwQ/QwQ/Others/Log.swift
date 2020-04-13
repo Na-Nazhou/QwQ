@@ -49,4 +49,10 @@ struct Log {
     static let scheduleError = OSLog(subsystem: subsystem, category: "LocalNotifications")
     static let requestPermissionsFail = OSLog(subsystem: subsystem, category: "LocalNotifications")
     static let redirectToSettings = OSLog(subsystem: subsystem, category: "LocalNotifications")
+    
+    // MARK: Logic for notification
+    static let bookNotifError = OSLog(subsystem: subsystem, category: "BookNotifications")
+    static let queueNotifError = OSLog(subsystem: subsystem, category: "QueueNotifications")
+    static let bookNotifScheduled = OSLog(subsystem: subsystem, category: "BookNotifications")
+    static let queueNotifScheduled = OSLog(subsystem: subsystem, category: "QueueNotifications")
 }

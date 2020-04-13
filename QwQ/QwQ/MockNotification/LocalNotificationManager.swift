@@ -27,9 +27,6 @@ class LocalNotificationManager {
                 }
                 os_log("Notif auth request rejected.", log: Log.requestPermissionsFail, type: .info)
                 self.requestForPermissionsAgain()
-                //TODO: popup alert and redirect to settings
-                //problem?: how to know which parent to alert from?
-                //UIApplication.topViewController()?.present(alertController, animated: true, completion: nil)
             }
     }
 
@@ -40,7 +37,7 @@ class LocalNotificationManager {
             case .authorized, .provisional:
                 self.scheduleNotification(notif)
             case .denied:
-                self.requestForPermissionsAgain()
+                break
             case .notDetermined:
                 assert(false, "?")
                 self.requestAuthorization()
@@ -81,13 +78,14 @@ class LocalNotificationManager {
     private func scheduleNotification(_ notification: Notification) {
         let content = UNMutableNotificationContent()
         content.title = notification.title
+        content.body = notification.description
         content.sound = .default
 
         var trigger: UNNotificationTrigger?
-        if notification.timeInterval <= 0 {
+        if notification.shouldBeSentRegardlessOfTime {
             trigger = nil
         } else {
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: notification.timeInterval, repeats: false)
+            trigger = UNCalendarNotificationTrigger(dateMatching: notification.timeScheduled, repeats: false)
         }
 
         let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)

@@ -1,9 +1,9 @@
 protocol QwQNotifications {
-    func notifyBookingAcceptance()
-    func notifyQueueAdmittance()
+    func notifyBookingAcceptance(record: BookRecord)
+    func notifyQueueAdmittance(record: QueueRecord)
 
-    func notifyBookingRejection()
-    func notifyQueueRejection() //TODO: do we still allow restaurants to reject
+    func notifyBookingRejection(record: BookRecord)
+    func notifyQueueRejection(record: QueueRecord) //TODO: do we still allow restaurants to reject
 
     func retrackNotifications(afterConfirmAdmitFor record: QueueRecord)
 }

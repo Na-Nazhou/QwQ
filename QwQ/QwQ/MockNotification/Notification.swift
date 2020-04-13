@@ -1,51 +1,55 @@
 import Foundation
 
 struct Notification {
-    var id: String /// For removing  pending notif
-    var title: String
-    var description: String
-    //var datetime: DateComponents
-    var timeInterval: Double
+    let notifId: QwQNotificationId
+    let title: String
+    let description: String
+    let shouldBeSentRegardlessOfTime: Bool
+
+    var timeScheduled: DateComponents {
+        notifId.targetTime
+    }
+    var id: String {
+        notifId.string
+    }
     
-    fileprivate init(id: String, title: String, description: String, timeInterval: Double) {
-        self.id = id
+    init(notifId: QwQNotificationId, title: String, description: String, shouldSend: Bool) {
+        self.notifId = notifId
         self.title = title
         self.description = description
-        self.timeInterval = timeInterval
-    }
-}
-
-/// Specific to QwQ notifications.
-class QwQNotificationGenerator: QwQNotifications {
-    /// Sets 2 notifs: 1) accepted 2) schedule for booking time.
-    func notifyBookingAcceptance() {
-    }
-
-    /// Sets 4 notifs: 1) admitted 2) 1min mark 3) 2min marl 3) 3min missed queue (pushed back)
-    func notifyQueueAdmittance() {
-        
-    }
-
-    func notifyBookingRejection() {
-        
-    }
-
-    func notifyQueueRejection() {
-        
-    }
-
-    func retrackNotifications(afterConfirmAdmitFor record: QueueRecord) {
-        
+        shouldBeSentRegardlessOfTime = shouldSend
     }
 }
 
 struct QwQNotificationId {
     let recordId: String
     let firstAdmittedTiming: Date
-    let timeIntervalScheduled: Double
+    let targetTime: DateComponents
     
     var string: String {
-        "\(recordId) at \(firstAdmittedTiming) with interval \(timeIntervalScheduled)"
+        "\(recordId) at \(firstAdmittedTiming) with interval \(targetTime)"
+    }
+
+    init?(record: Record, targetTime: Date) {
+        guard let time = record.admitTime else {
+            assert(false)
+            return nil
+        }
+        recordId = record.id
+        firstAdmittedTiming = time
+        self.targetTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
+                                                          from: targetTime)
+    }
+
+    init?(record: Record, timeInMinutesFromAdmittedTime n: Int) {
+        guard let time = record.admitTime else {
+            assert(false)
+            return nil
+        }
+        recordId = record.id
+        firstAdmittedTiming = time
+        let triggerDate = Calendar.current.date(byAdding: .minute, value: n, to: time)!
+        targetTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: triggerDate)
     }
 }
 
