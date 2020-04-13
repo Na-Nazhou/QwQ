@@ -103,6 +103,7 @@
 		D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */; };
 		D47852D124442EB8006393C7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D024442EB8006393C7 /* LocalNotificationManager.swift */; };
 		D47852D524445279006393C7 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D424445279006393C7 /* Notification.swift */; };
+		D47852D7244455A0006393C7 /* QwQNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47852D6244455A0006393C7 /* QwQNotifications.swift */; };
 		D4AA685924303D8700F739CF /* RecordModification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685724303D8700F739CF /* RecordModification.swift */; };
 		D4AA685A24303D8700F739CF /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA685824303D8700F739CF /* Collection.swift */; };
 		D4EA85C0241B25E4009EB85B /* CustomerPostLoginSetupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */; };
@@ -235,6 +236,7 @@
 		D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorageSyncDelegate.swift; path = QwQ/Storage/Delegates/RestaurantStorageSyncDelegate.swift; sourceTree = SOURCE_ROOT; };
 		D47852D024442EB8006393C7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		D47852D424445279006393C7 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D47852D6244455A0006393C7 /* QwQNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQNotifications.swift; sourceTree = "<group>"; };
 		D4AA685724303D8700F739CF /* RecordModification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordModification.swift; path = QwQ/Models/SharedModels/RecordModification.swift; sourceTree = SOURCE_ROOT; };
 		D4AA685824303D8700F739CF /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = QwQ/Models/SharedModels/Collection.swift; sourceTree = SOURCE_ROOT; };
 		D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerPostLoginSetupManager.swift; path = QwQ/Logic/CustomerPostLoginSetupManager.swift; sourceTree = SOURCE_ROOT; };
@@ -593,6 +595,7 @@
 			children = (
 				D47852D024442EB8006393C7 /* LocalNotificationManager.swift */,
 				D47852D424445279006393C7 /* Notification.swift */,
+				D47852D6244455A0006393C7 /* QwQNotifications.swift */,
 			);
 			path = MockNotification;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				617B62E1241F3C0F0010AB30 /* BookRecord.swift in Sources */,
 				6148054A24227CE2003D6D44 /* FIRRestaurantStorage.swift in Sources */,
 				6148056724232B88003D6D44 /* UIViewController+Spinner.swift in Sources */,
+				D47852D7244455A0006393C7 /* QwQNotifications.swift in Sources */,
 				61480556242290B1003D6D44 /* Record.swift in Sources */,
 				7E6EBCC1243086E60058D19A /* Log.swift in Sources */,
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
