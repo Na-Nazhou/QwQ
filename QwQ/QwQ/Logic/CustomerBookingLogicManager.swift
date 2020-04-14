@@ -5,6 +5,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     // Storage
     private var bookingStorage: CustomerBookingStorage
+    
+    // Notification
+    private var notificationHandler: QwQNotificationHandler
 
     // View controller
     weak var bookingDelegate: BookingDelegate?
@@ -25,13 +28,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
-                  bookingStorage: FIRBookingStorage.shared)
+                  bookingStorage: FIRBookingStorage.shared,
+                  notificationHandler: QwQNotificationManager.shared)
     }
 
     // Constructor to provide flexibility for testing.
-    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage) {
+    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage,
+         notificationHandler: QwQNotificationHandler) {
         self.customerActivity = customerActivity
         self.bookingStorage = bookingStorage
+        self.notificationHandler = notificationHandler
 
         self.bookingStorage.registerDelegate(self)
     }
@@ -216,7 +222,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
-        QwQNotificationManager().notifyBookingAcceptance(record: record)
+        notificationHandler.notifyBookingAccepted(record: record)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {
@@ -230,6 +236,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
+        notificationHandler.notifyBookingRejected(record: record)
     }
 
     private func didWithdrawBookRecord(_ record: BookRecord) {
