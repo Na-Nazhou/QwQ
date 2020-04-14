@@ -73,7 +73,8 @@ class LocalNotificationManager {
         content.sound = .default
 
         var trigger: UNNotificationTrigger?
-        if notification.shouldBeSentRegardlessOfTime {
+        if Calendar.current.date(from: notification.timeScheduled)! <= Date()
+            && notification.shouldBeSentRegardlessOfTime {
             trigger = nil
         } else {
             trigger = UNCalendarNotificationTrigger(dateMatching: notification.timeScheduled, repeats: false)

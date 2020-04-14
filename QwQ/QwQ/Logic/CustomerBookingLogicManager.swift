@@ -178,7 +178,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            assert(false, "Modification should be something")
+            break
+            //assert(false, "Modification should be something")
         }
     }
 
