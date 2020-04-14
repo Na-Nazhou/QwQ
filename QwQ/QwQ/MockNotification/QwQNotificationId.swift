@@ -1,27 +1,6 @@
 import Foundation
 
-struct Notification {
-    let notifId: QwQNotificationId
-    let title: String
-    let description: String
-    let shouldBeSentRegardlessOfTime: Bool
-
-    var timeScheduled: DateComponents {
-        notifId.targetTime
-    }
-    var id: String {
-        notifId.string
-    }
-    
-    init(notifId: QwQNotificationId, title: String, description: String, shouldSend: Bool) {
-        self.notifId = notifId
-        self.title = title
-        self.description = description
-        shouldBeSentRegardlessOfTime = shouldSend
-    }
-}
-
-struct QwQNotificationId {
+struct QwQNotificationId: Equatable {
     let recordId: String
     let firstAdmittedTiming: Date
     let targetTime: DateComponents
@@ -37,8 +16,9 @@ struct QwQNotificationId {
         }
         recordId = record.id
         firstAdmittedTiming = time
-        self.targetTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],
-                                                          from: targetTime)
+        self.targetTime = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second],
+            from: targetTime)
     }
 
     init?(record: Record, timeInMinutesFromAdmittedTime n: Int) {
@@ -52,8 +32,3 @@ struct QwQNotificationId {
         targetTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: triggerDate)
     }
 }
-
-//struct NotificationType {
-//    let action: RestaurantAction
-//    let option:
-//}

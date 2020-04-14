@@ -3,17 +3,8 @@ import os.log
 import UIKit
 import UserNotifications
 
-/// Example request to schedule notifs: LocalNotificationManager.schedule(notif:
-/// Notification(id: "reminder-1", title: "Remember the milk!", timeInterval: 0))
+/// General notifications scheduler.
 class LocalNotificationManager {
-    
-    func listScheduledNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-            for notification in notifications {
-                print(notification)
-            }
-        }
-    }
 
     func requestAuthorization() {
         UNUserNotificationCenter.current()
@@ -98,6 +89,10 @@ class LocalNotificationManager {
 
             os_log("Notification successfully scheduled!", log: Log.scheduleSuccess, type: .info)
         }
+    }
+
+    func removeNotifications(ids: [String]) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
     }
 
 }
