@@ -242,7 +242,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             confirmAdmissionOfQueueRecord(record, completion: {})
             return
         }
-        notificationHandler.notifyQueueAdmittedAwaitingConfirmation(record)
+        notificationHandler.notifyQueueAdmittedAwaitingConfirmation(record: record)
     }
 
     private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {

@@ -142,7 +142,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             confirmedAdmissionNotification(record),
             missedQueueNotification(record, hasConfirmedPreviously: true)
         ]
-        notifs.compactMap { $0 }.forEach { notifManager.schedule($0) }
+        notifs.compactMap { $0 }.forEach { notifManager.schedule(notif: $0) }
     }
 
     private func confirmedAdmissionNotification(_ record: QueueRecord) -> QwQNotification? {
