@@ -18,8 +18,8 @@ struct Restaurant: User {
     let autoCloseTime: Date?
 
     //previous recorded times
-    var queueOpenTime: Date?
-    var queueCloseTime: Date?
+    let queueOpenTime: Date?
+    let queueCloseTime: Date?
 
     var isValidRestaurant: Bool {
         !address.isEmpty && !menu.isEmpty

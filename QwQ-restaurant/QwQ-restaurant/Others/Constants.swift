@@ -140,5 +140,4 @@ struct Constants {
     static let assignedRestaurantKey = "assignedRestaurant"
     static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
-
 }
