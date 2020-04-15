@@ -6,9 +6,11 @@ protocol RestaurantStatisticsLogic {
     var statsDelegate: StatsDelegate? { get set }
     var statsDetailsDelegate: StatsDetailsDelegate? { get set }
 
-    func loadStats(from date1: Date, to date2: Date) -> Statistics
+    func fetchSummary(type: StatsType)
     
     func fetchDailyDetails()
     func fetchWeeklyDetails()
     func fetchMonthlyDetails()
+
+    func loadStats(from date1: Date, to date2: Date) -> Statistics
 }

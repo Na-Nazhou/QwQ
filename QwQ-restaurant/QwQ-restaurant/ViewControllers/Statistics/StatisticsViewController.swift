@@ -82,8 +82,6 @@ class StatisticsViewController: UIViewController {
     private func setUpWaitingTimeLabels() {
         guard let avgWaitingTimeRestaurant = summary?.avgWaitingTimeRestaurant,
             let avgWaitingTimeCustomer = summary?.avgWaitingTimeCustomer else {
-                avgWaitingTimeRestaurantLabel.text = "Calculating..."
-                avgWaitingTimeCustomerLabel.text = "Calculating..."
                 return
         }
         avgWaitingTimeRestaurantLabel.text = "\(avgWaitingTimeRestaurant) mins"
