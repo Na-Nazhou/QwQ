@@ -140,15 +140,22 @@ class EditProfileViewController: UIViewController {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
-        self.uid = restaurant.uid
-        self.nameTextField.text = restaurant.name
-        self.emailTextField.text = restaurant.email
-        self.contactTextField.text = restaurant.contact
-        self.addressTextField.text = restaurant.address
-        self.menuTextView.text = restaurant.menu
-        self.minGroupSizeTextField.text = String(restaurant.minGroupSize)
-        self.maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
-        self.advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
+        uid = restaurant.uid
+        nameTextField.text = restaurant.name
+        emailTextField.text = restaurant.email
+        contactTextField.text = restaurant.contact
+        addressTextField.text = restaurant.address
+        menuTextView.text = restaurant.menu
+        minGroupSizeTextField.text = String(restaurant.minGroupSize)
+        maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
+        advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
+
+        if let openTime = restaurant.autoOpenTime {
+            autoOpenTimeTextField.text = openTime.getFormattedTime()
+        }
+        if let closeTime = restaurant.autoOpenTime {
+            autoOpenTimeTextField.text = closeTime.getFormattedTime()
+        }
 
         setUpProfileImageView(uid: restaurant.uid)
 

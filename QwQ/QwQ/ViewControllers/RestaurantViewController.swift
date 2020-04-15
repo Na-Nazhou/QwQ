@@ -83,7 +83,17 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         locationLabel.text = restaurant.address
         contactLabel.text = restaurant.contact
         emailLabel.text = restaurant.email
-        // TODO: queue timings
+        groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
+        // TODO: use auto open/close time
+        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {
+            queueTimingsLabel.text = "Opened at \(openTime.getFormattedTime())"
+        } else {
+            if let closeTime = restaurant.queueCloseTime {
+                queueTimingsLabel.text = "Closed at \(closeTime.getFormattedTime())"
+            } else {
+                queueTimingsLabel.text = "Closed"
+            }
+        }
         
         FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 

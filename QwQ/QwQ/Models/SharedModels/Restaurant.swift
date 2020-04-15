@@ -74,18 +74,16 @@ struct Restaurant: User {
         let autoOpenTime = (dictionary[Constants.autoOpenTimeKey] as? Timestamp)?.dateValue()
         let autoCloseTime = (dictionary[Constants.autoCloseTimeKey] as? Timestamp)?.dateValue()
 
-
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
-                  menu: menu, queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
-                  maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
+                  menu: menu, maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
                   advanceBookingLimit: advanceBookingLimit,
+                  queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
                   autoOpenTime: autoOpenTime, autoCloseTime: autoCloseTime)
     }
 
-
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
          maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
+         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
          autoOpenTime: Date?, autoCloseTime: Date?) {
         self.uid = uid
         self.name = name

@@ -60,10 +60,10 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
         let calendar = Calendar.current
         let minuteInterval = 15
-        let twoHoursLater = calendar.date(byAdding: .hour, value: advanceBookingLimit,
-                                          to: Date.getCurrentTime())!
-        let offset = minuteInterval - calendar.component(.minute, from: twoHoursLater) % minuteInterval
-        let minDate = calendar.date(byAdding: .minute, value: offset, to: twoHoursLater)!
+        let earliestBookingTime = calendar.date(byAdding: .hour, value: advanceBookingLimit,
+                                                to: Date.getCurrentTime())!
+        let offset = minuteInterval - calendar.component(.minute, from: earliestBookingTime) % minuteInterval
+        let minDate = calendar.date(byAdding: .minute, value: offset, to: earliestBookingTime)!
 
         datePicker.minimumDate = minDate
         datePicker.minuteInterval = minuteInterval

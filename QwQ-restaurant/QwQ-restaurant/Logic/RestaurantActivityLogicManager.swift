@@ -157,8 +157,8 @@ extension RestaurantActivityLogicManager {
     }
 
     private func didConfirmRecord<T: Record>(_ record: T,
-                                           _ currentList: RecordCollection<T>,
-                                           _ waitingList: RecordCollection<T>) {
+                                             _ currentList: RecordCollection<T>,
+                                             _ waitingList: RecordCollection<T>) {
         if currentList.remove(record) {
             activitiesDelegate?.didUpdateCurrentList()
         }
@@ -171,9 +171,9 @@ extension RestaurantActivityLogicManager {
     }
 
     private func didArchiveRecord<T: Record>(_ record: T,
-                                  _ currentList: RecordCollection<T>,
-                                  _ waitingList: RecordCollection<T>,
-                                  _ historyList: RecordCollection<T>) {
+                                             _ currentList: RecordCollection<T>,
+                                             _ waitingList: RecordCollection<T>,
+                                             _ historyList: RecordCollection<T>) {
         if currentList.remove(record) {
             activitiesDelegate?.didUpdateCurrentList()
         }
