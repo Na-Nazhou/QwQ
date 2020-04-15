@@ -88,7 +88,6 @@ class FIRRestaurantStorage: RestaurantStorage {
                 errorHandler(error)
                 return
             }
-            RestaurantPostLoginSetupManager.restaurantDidUpdateProfile(updated: restaurant)
             completion()
         }
     }

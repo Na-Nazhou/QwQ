@@ -108,7 +108,7 @@ struct Constants {
     static let buttonTextToCloseQueue = "CLICK TO CLOSE"
     
     // MARK: Statistics settings
-    static let statisticsDateFormat = "dd/MM/yyyy"
+    static let startAfterEndMessage = "Start date must be before end date"
     
     // MARK: Model settings
     static let uidKey = "uid"

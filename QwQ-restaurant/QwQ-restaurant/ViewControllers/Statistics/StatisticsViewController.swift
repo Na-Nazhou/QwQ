@@ -27,7 +27,7 @@ class StatisticsViewController: UIViewController {
     var selectedControl: SelectedControl = .daily
 
     // MARK: Logic properties
-    let statsManager = RestaurantStatisticsLogicManager()
+    var statsManager = RestaurantStatisticsLogicManager()
 
     // MARK: Model properties
     var statistics: [Statistics] {
@@ -40,6 +40,17 @@ class StatisticsViewController: UIViewController {
             return statsManager.monthlyDetails
         }
     }
+
+    var summary: Statistics? {
+        switch selectedControl {
+        case .daily:
+            return statsManager.dailySummary
+        case .weekly:
+            return statsManager.weeklySummary
+        case .monthly:
+            return statsManager.monthlySummary
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +61,8 @@ class StatisticsViewController: UIViewController {
         statsManager.statsDelegate = self
 
         setUpSegmentedControl()
+        setUpDatePickers()
+        setUpWaitingTimeLabels()
     }
 
     private func setUpSegmentedControl() {
@@ -58,8 +71,37 @@ class StatisticsViewController: UIViewController {
         fetchData()
     }
 
+    private func setUpDatePickers() {
+        fromDatePicker.maximumDate = Date()
+        toDatePicker.maximumDate = Date()
+
+        fromDatePicker.date = Date().getDateOf(daysBeforeDate: 7)
+        toDatePicker.date = Date()
+    }
+
+    private func setUpWaitingTimeLabels() {
+        guard let avgWaitingTimeRestaurant = summary?.avgWaitingTimeRestaurant,
+            let avgWaitingTimeCustomer = summary?.avgWaitingTimeCustomer else {
+                avgWaitingTimeRestaurantLabel.text = "Calculating..."
+                avgWaitingTimeCustomerLabel.text = "Calculating..."
+                return
+        }
+        avgWaitingTimeRestaurantLabel.text = "\(avgWaitingTimeRestaurant) mins"
+        avgWaitingTimeCustomerLabel.text = "\(avgWaitingTimeCustomer) mins"
+    }
+
     @IBAction func handleFilterByDate(_ sender: Any) {
-        
+        let fromDate = fromDatePicker.date
+        let toDate = toDatePicker.date
+
+        if fromDate > toDate {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.startAfterEndMessage,
+                        buttonText: Constants.okayTitle)
+        } else {
+            let statisticsDetails = statsManager.loadStats(from: fromDate, to: toDate)
+            performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
+        }
     }
     
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
@@ -71,18 +113,24 @@ class StatisticsViewController: UIViewController {
         switch selectedControl {
         case .daily:
             statsManager.fetchDailyDetails()
+            statsManager.fetchSummary(type: .daily)
         case .weekly:
             statsManager.fetchWeeklyDetails()
+            statsManager.fetchSummary(type: .weekly)
         case .monthly:
             statsManager.fetchMonthlyDetails()
+            statsManager.fetchSummary(type: .monthly)
         }
+        setUpWaitingTimeLabels()
         spinner = showSpinner(onView: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let statisticsDetailsViewController = segue.destination as? StatisticsDetailsViewController,
             let statisticsDetails = sender as? Statistics {
-            statisticsDetailsViewController.statisticsDetails = statisticsDetails
+
+            statsManager.currentStats = statisticsDetails
+            statisticsDetailsViewController.statsManager = statsManager
         }
     }
 }
@@ -113,11 +161,12 @@ extension StatisticsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension StatisticsViewController: StatsPresentationDelegate {
+extension StatisticsViewController: StatsDelegate {
 
     func didCompleteFetchingData() {
         removeSpinner(spinner)
 
+        setUpWaitingTimeLabels()
         statisticsTableView.reloadData()
     }
     

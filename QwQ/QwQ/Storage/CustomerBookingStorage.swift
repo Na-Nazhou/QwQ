@@ -17,14 +17,13 @@ protocol BookingStorageSync {
 
 protocol CustomerBookingStorage: BookingStorageSync {
     // MARK: - Modifiers
-    /// Insert a book record
-    func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void)
 
     /// Insert multiple book records
     func addBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void)
 
     /// Update a book record
-    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void)
+    func updateBookRecord(oldRecord: BookRecord, newRecord: BookRecord,
+                          completion: @escaping () -> Void)
 
     /// Update multiple book records
     func updateBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void)

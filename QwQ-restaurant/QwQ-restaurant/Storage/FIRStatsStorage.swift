@@ -16,8 +16,8 @@ class FIRStatsStorage: RestaurantStatsStorage {
     private func getRecordQuery(of restaurant: Restaurant, from date1: Date, to date2: Date,
                                 in collectionRef: CollectionReference, for key: String) -> Query {
         collectionRef.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
-            .whereField(key, isGreaterThanOrEqualTo: date1)
-            .whereField(key, isLessThanOrEqualTo: date2)
+            .whereField(key, isGreaterThanOrEqualTo: getStartOfDay(of: date1))
+            .whereField(key, isLessThanOrEqualTo: getEndOfDay(of: date2))
     }
 
     private func restaurantQueues(of restaurant: Restaurant, from date1: Date, to date2: Date) -> Query {
@@ -42,12 +42,10 @@ class FIRStatsStorage: RestaurantStatsStorage {
                            String(describing: err))
                     return
                 }
-                //completion(recordsSnapshot!.count) //num of records or
 
-                var total = 0
+                var totalNumOfCustomers = 0
                 snapshot.documents.forEach {
-                    // num of ppl in the record
-                    total += $0.data()[Constants.groupSizeKey] as? Int ?? 0
+                    totalNumOfCustomers += $0.data()[Constants.groupSizeKey] as? Int ?? 0
                 }
 
                 self.restaurantBookings(of: restaurant, from: date1, to: date2)
@@ -60,9 +58,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
                         return
                     }
                     snapshot.documents.forEach {
-                        total += $0.data()[Constants.groupSizeKey] as? Int ?? 0
+                        totalNumOfCustomers += $0.data()[Constants.groupSizeKey] as? Int ?? 0
                     }
-                    completion(total)
+                    completion(totalNumOfCustomers)
                 }
             }
     }
@@ -82,16 +80,16 @@ class FIRStatsStorage: RestaurantStatsStorage {
                     return
                 }
 
-                var total = 0
+                var totalWaitingTime = 0
                 snapshot.documents.forEach {
                     let dict = $0.data()
                     guard let startTime = (dict[Constants.startTimeKey] as? Timestamp)?.dateValue(),
                         let admitTime = (dict[Constants.admitTimeKey] as? Timestamp)?.dateValue() else {
                             return
                     }
-                    total += self.timeDifferenceInSeconds(between: startTime, and: admitTime)
+                    totalWaitingTime += self.timeDifferenceInSeconds(between: startTime, and: admitTime)
                 }
-                completion(total)
+                completion(totalWaitingTime)
             }
     }
 
@@ -109,22 +107,22 @@ class FIRStatsStorage: RestaurantStatsStorage {
                            String(describing: err))
                     return
                 }
-                var total = 0
+                var totalWaitingTime = 0
                 snapshot.documents.forEach {
                     let dict = $0.data()
-                    guard let serveTime = (dict[Constants.serveTimeKey] as? Timestamp)?.dateValue(),
-                        let admitTime = (dict[Constants.admitTimeKey] as? Timestamp)?.dateValue() else {
+                    guard let admitTime = (dict[Constants.admitTimeKey] as? Timestamp)?.dateValue(),
+                        let serveTime = (dict[Constants.serveTimeKey] as? Timestamp)?.dateValue() else {
                             return
                     }
-                    total += self.timeDifferenceInSeconds(between: admitTime, and: serveTime)
+                    totalWaitingTime += self.timeDifferenceInSeconds(between: admitTime, and: serveTime)
                 }
-                completion(total)
+                completion(totalWaitingTime)
             }
     }
     
     func fetchQueueCancellationRate(for restaurant: Restaurant,
                                     from date1: Date, to date2: Date,
-                                    completion: @escaping (Int) -> Void) {
+                                    completion: @escaping (Int, Int) -> Void) {
         checkFromToDates(from: date1, to: date2)
 
         restaurantQueues(of: restaurant, from: date1, to: date2)
@@ -136,19 +134,21 @@ class FIRStatsStorage: RestaurantStatsStorage {
                            String(describing: err))
                     return
                 }
-                var total = 0
+                var totalNumOfQueueRecords = 0
+                var totalNumOfWithdrawal = 0
                 snapshot.documents.forEach {
                     if $0.data()[Constants.withdrawTimeKey] as? Timestamp != nil {
-                        total += 1
+                        totalNumOfWithdrawal += 1
                     }
+                    totalNumOfQueueRecords += 1
                 }
-                completion(total)
+                completion(totalNumOfQueueRecords, totalNumOfWithdrawal)
             }
     }
     
     func fetchBookingCancellationRate(for restaurant: Restaurant,
                                       from date1: Date, to date2: Date,
-                                      completion: @escaping (Int) -> Void) {
+                                      completion: @escaping (Int, Int) -> Void) {
         checkFromToDates(from: date1, to: date2)
 
         restaurantBookings(of: restaurant, from: date1, to: date2)
@@ -160,13 +160,15 @@ class FIRStatsStorage: RestaurantStatsStorage {
                            String(describing: err))
                     return
                 }
-                var total = 0
+                var totalNumOfBookRecords = 0
+                var totalNumberOfWithdrawal = 0
                 snapshot.documents.forEach {
                     if $0.data()[Constants.withdrawTimeKey] as? Timestamp != nil {
-                        total += 1
+                        totalNumberOfWithdrawal += 1
                     }
+                    totalNumOfBookRecords += 1
                 }
-                completion(total)
+                completion(totalNumOfBookRecords, totalNumberOfWithdrawal)
             }
     }
     

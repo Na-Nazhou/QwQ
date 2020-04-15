@@ -16,7 +16,7 @@ struct Staff: User {
     let permissions: [Permissions]
 
     var permissionsStringArray: [String] {
-        return Permissions.convertPermissionsToStringArray(permissions)
+        Permissions.convertPermissionsToStringArray(permissions)
     }
 
     var dictionary: [String: Any] {

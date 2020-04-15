@@ -18,7 +18,7 @@ class FIRSignupLogic: SignupLogic {
     private let userType: UserType
 
     private var isOwner: Bool {
-        return userType == UserType.restaurant
+        userType == UserType.restaurant
     }
 
     init(authDetails: AuthDetails, signupDetails: SignupDetails, userType: UserType) {

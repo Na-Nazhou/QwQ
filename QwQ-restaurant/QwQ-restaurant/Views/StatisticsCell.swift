@@ -15,8 +15,7 @@ class StatisticsCell: UITableViewCell {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     
     func setUpViews(details: Statistics) {
-        let dateFormat = "\(details.fromDate.getFomattedDate()) - \(details.toDate.getFomattedDate())"
-        dateLabel.text = dateFormat
+        dateLabel.text = details.formattedDateRange
         avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
         avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
     }

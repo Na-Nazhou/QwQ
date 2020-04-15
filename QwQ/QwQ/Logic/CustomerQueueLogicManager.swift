@@ -43,32 +43,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     }
 
     func canQueue(for restaurant: Restaurant) -> Bool {
-        // add any other queueing restrictions here
         restaurant.isQueueOpen
             && currentQueueRecords.allSatisfy { $0.restaurant != restaurant }
-    }
-
-    func enqueue(to restaurant: Restaurant,
-                 with groupSize: Int,
-                 babyChairQuantity: Int,
-                 wheelchairFriendly: Bool) -> Bool {
-        let startTime = Date()
-        let newRecord = QueueRecord(restaurant: restaurant,
-                                    customer: customer,
-                                    groupSize: groupSize,
-                                    babyChairQuantity: babyChairQuantity,
-                                    wheelchairFriendly: wheelchairFriendly,
-                                    startTime: startTime)
-
-        if !checkRestaurantQueue(for: newRecord) {
-            queueDelegate?.didFindRestaurantQueueClosed(for: restaurant)
-            return false
-        }
-
-        queueStorage.addQueueRecord(newRecord: newRecord) {
-            self.queueDelegate?.didAddRecord()
-        }
-        return true
     }
 
     func enqueue(to restaurants: [Restaurant],
@@ -86,14 +62,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         let startTime = Date()
         let newRecords: [QueueRecord] = restaurants.map { restaurant in
-            let newRecord = QueueRecord(restaurant: restaurant,
-                                        customer: self.customer,
-                                        groupSize: groupSize,
-                                        babyChairQuantity: babyChairQuantity,
-                                        wheelchairFriendly: wheelchairFriendly,
-                                        startTime: startTime)
-
-            return newRecord
+            QueueRecord(restaurant: restaurant,
+                        customer: customer,
+                        groupSize: groupSize,
+                        babyChairQuantity: babyChairQuantity,
+                        wheelchairFriendly: wheelchairFriendly,
+                        startTime: startTime)
         }
 
         queueStorage.addQueueRecords(newRecords: newRecords) {
@@ -168,13 +142,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         })
     }
 
-    private func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord, completion: @escaping () -> Void) {
+    private func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord,
+                                               completion: @escaping () -> Void) {
         var newRecord = queueRecord
         newRecord.confirmAdmissionTime = Date()
         queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
             self.withdrawQueueRecords(self.clashingRecords(with: queueRecord), completion: completion)
         }
-
     }
 
     private func clashingRecords(with record: QueueRecord) -> [QueueRecord] {
@@ -230,16 +204,13 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
         activitiesDelegate?.didUpdateActiveRecords()
 
-        // tent
         if clashingRecords(with: record).isEmpty {
-            // auto accept since this is the only active queue
             confirmAdmissionOfQueueRecord(record, completion: {})
             return
         }
     }
 
     private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
-        // TODO: ?
         os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
@@ -248,33 +219,32 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     private func didWithdrawQueuerecord(_ record: QueueRecord) {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
+        removeFromCurrentQueue(record)
+        addToHistoryQueue(record)
+
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
         os_log("Detected service", log: Log.serveCustomer, type: .info)
-        // TODO: auto withdraw all other active queues (in case of late sync,
-        // withdraw those whose starttime <= record.servetime
+        removeFromCurrentQueue(record)
+        addToHistoryQueue(record)
 
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
+        removeFromCurrentQueue(record)
+        addToHistoryQueue(record)
     }
 
-    private func removeFromCurrent(_ record: QueueRecord) {
+    private func removeFromCurrentQueue(_ record: QueueRecord) {
         if customerActivity.currentQueues.remove(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
         searchDelegate?.didUpdateQueueRecordCollection()
     }
 
-    private func addAsHistoryRecord(_ record: QueueRecord) {
+    private func addToHistoryQueue(_ record: QueueRecord) {
         if customerActivity.queueHistory.add(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }

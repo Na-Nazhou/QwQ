@@ -33,4 +33,9 @@ extension Date {
         dateformat.dateFormat = format
         return dateformat.string(from: date)
     }
+
+    static func isSameDay(date1: Date, date2: Date) -> Bool {
+        let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
+        return diff.day == 0
+    }
 }
