@@ -237,7 +237,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        notificationHandler.retrackBookNotifications(for: record)
+        notificationHandler.retractBookNotifications(for: record)
         notificationHandler.notifyBookingRejected(record: record)
     }
 
@@ -245,7 +245,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        notificationHandler.retrackBookNotifications(for: record)
+        notificationHandler.retractBookNotifications(for: record)
     }
 
     private func removeFromCurrent(_ record: BookRecord) {

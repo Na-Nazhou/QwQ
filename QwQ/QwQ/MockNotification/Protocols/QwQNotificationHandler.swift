@@ -9,6 +9,6 @@ protocol QwQNotificationHandler {
     //TODO: do we still allow restaurants to reject
     func notifyQueueRejected(record: QueueRecord)
 
-    func retrackBookNotifications(for record: BookRecord)
-    func retrackQueueNotifications(for record: QueueRecord)
+    func retractBookNotifications(for record: BookRecord)
+    func retractQueueNotifications(for record: QueueRecord)
 }

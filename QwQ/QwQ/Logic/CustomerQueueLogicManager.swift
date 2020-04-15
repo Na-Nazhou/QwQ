@@ -257,7 +257,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
-        notificationHandler.retrackQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.notifyQueueConfirmed(record: record)
     }
 
@@ -265,7 +265,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        notificationHandler.retrackQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
@@ -275,15 +275,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        notificationHandler.retrackQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
-        notificationHandler.retrackQueueNotifications(for: record)
-        notificationHandler.retrackQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func removeFromCurrent(_ record: QueueRecord) {

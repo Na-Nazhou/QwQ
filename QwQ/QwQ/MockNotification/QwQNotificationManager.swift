@@ -164,12 +164,12 @@ class QwQNotificationManager: QwQNotificationHandler {
         //TODO? - yes. do for end of restaurant.
     }
 
-    func retrackBookNotifications(for record: BookRecord) {
+    func retractBookNotifications(for record: BookRecord) {
         let possiblyPendingBookNotif = bookTimeNotification(record)
         removeNotifications(notifIds: [possiblyPendingBookNotif.notifId])
     }
 
-    func retrackQueueNotifications(for record: QueueRecord) {
+    func retractQueueNotifications(for record: QueueRecord) {
         let hasConfirmedPreviously = record.confirmAdmissionTime != nil
         //retrack a confirmed admitted record means that confirming of admission alr retracked my admission notifs.
         let possiblyPendingQueueNotifs = [
