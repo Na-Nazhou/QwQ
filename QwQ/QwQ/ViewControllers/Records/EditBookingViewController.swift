@@ -12,6 +12,10 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
     // MARK: View properties
     @IBOutlet var datePicker: UIDatePicker!
 
+    var advanceBookingLimit: Int {
+        restaurants.map { $0.advanceBookingLimit }.max() ?? 2
+    }
+
     // MARK: Logic properties
     var bookingLogicManager: CustomerBookingLogicManager!
 
@@ -56,7 +60,8 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
 
         let calendar = Calendar.current
         let minuteInterval = 15
-        let twoHoursLater = calendar.date(byAdding: .hour, value: 2, to: Date.getCurrentTime())!
+        let twoHoursLater = calendar.date(byAdding: .hour, value: advanceBookingLimit,
+                                          to: Date.getCurrentTime())!
         let offset = minuteInterval - calendar.component(.minute, from: twoHoursLater) % minuteInterval
         let minDate = calendar.date(byAdding: .minute, value: offset, to: twoHoursLater)!
 
@@ -74,6 +79,13 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
     func didFindExistingRecord(at restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
                     message: String(format: Constants.alreadyBookRestaurantMessage, restaurant.name),
+                    buttonText: Constants.okayTitle)
+    }
+
+    func didExceedAdvanceBookingLimit(at restaurant: Restaurant) {
+        showMessage(title: Constants.errorTitle,
+                    message: String(format: Constants.exceedAdvanceBookingLimitMessage,
+                                    restaurant.advanceBookingLimit, restaurant.name),
                     buttonText: Constants.okayTitle)
     }
 }

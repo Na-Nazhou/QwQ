@@ -44,6 +44,9 @@ class ProfileViewController: UIViewController {
         self.contactLabel.text = restaurant.contact
         self.addressLabel.text = restaurant.address
         self.menuLabel.text = restaurant.menu
+        self.groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
+        self.advanceBookingLimitLabel.text = "\(restaurant.advanceBookingLimit) hours"
+        // TODO: queue timing
 
         Profile.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
     }
