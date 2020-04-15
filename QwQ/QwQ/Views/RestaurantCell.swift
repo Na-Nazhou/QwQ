@@ -28,6 +28,7 @@ class RestaurantCell: UICollectionViewCell {
     func setUpView(restaurant: Restaurant) {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
+        FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
         setUpQueueButton()
     }

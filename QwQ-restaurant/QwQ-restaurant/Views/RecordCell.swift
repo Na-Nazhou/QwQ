@@ -39,6 +39,7 @@ class RecordCell: UICollectionViewCell {
     func setUpView(record: Record) {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
+        FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
         setUpRecordImage(record: record)
 
