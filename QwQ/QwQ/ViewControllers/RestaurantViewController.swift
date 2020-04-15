@@ -83,6 +83,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         locationLabel.text = restaurant.address
         contactLabel.text = restaurant.contact
         emailLabel.text = restaurant.email
+        FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
         if queueLogicManager.canQueue(for: restaurant) {
             queueButton.alpha = 1

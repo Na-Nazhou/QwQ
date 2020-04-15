@@ -11,8 +11,4 @@ class RestaurantPostLoginSetupManager {
         FIRBookingStorage.shared.removeListener()
         RestaurantActivity.deinitShared()
     }
-
-    static func restaurantDidUpdateProfile(updated: Restaurant) {
-        RestaurantActivity.shared().updateRestaurant(updated)
-    }
 }

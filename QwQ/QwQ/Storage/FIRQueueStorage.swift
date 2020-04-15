@@ -26,25 +26,10 @@ class FIRQueueStorage: CustomerQueueStorage {
         queuesDb.document(record.id)
     }
 
-    func addQueueRecord(newRecord: QueueRecord, completion: @escaping () -> Void) {
-        let newRecordRef = queuesDb.document()
-        newRecordRef.setData(newRecord.dictionary) { err in
-            if let err = err {
-                os_log("Error adding queue record",
-                       log: Log.addQueueRecordError,
-                       type: .error,
-                       err.localizedDescription)
-                return
-            }
-            completion()
-        }
-    }
-
     func addQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
         let batch = db.batch()
-
         for newRecord in newRecords {
-            let newRecordRef = queuesDb.document()
+            let newRecordRef = getQueueRecordDocument(record: newRecord)
             batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
@@ -76,14 +61,16 @@ class FIRQueueStorage: CustomerQueueStorage {
 
     func updateQueueRecords(newRecords: [QueueRecord], completion: @escaping () -> Void) {
         let batch = db.batch()
-        let recordDocPairs = newRecords.map {
-            ($0, getQueueRecordDocument(record: $0))
-        }
-        for (newRecord, docRef) in recordDocPairs {
-            batch.setData(newRecord.dictionary, forDocument: docRef)
+        for newRecord in newRecords {
+            let newRecordRef = getQueueRecordDocument(record: newRecord)
+            batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
-            guard err == nil else {
+             if let err = err {
+                os_log("Error updating queue record",
+                       log: Log.updateQueueRecordError,
+                       type: .error,
+                       err.localizedDescription)
                 return
             }
             completion()

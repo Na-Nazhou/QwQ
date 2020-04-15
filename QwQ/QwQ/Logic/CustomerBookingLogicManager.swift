@@ -41,27 +41,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         bookingStorage.unregisterDelegate(self)
     }
 
-    func addBookRecord(to restaurant: Restaurant, at time: Date,
-                       with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) -> Bool {
-
-        let newRecord = BookRecord(restaurant: restaurant,
-                                   customer: customer,
-                                   time: time,
-                                   groupSize: groupSize,
-                                   babyChairQuantity: babyChairQuantity,
-                                   wheelchairFriendly: wheelchairFriendly)
-
-        if !checkExistingRecords(against: newRecord) {
-            bookingDelegate?.didFindExistingRecord(at: restaurant)
-            return false
-        }
-
-        bookingStorage.addBookRecord(newRecord: newRecord) {
-            self.bookingDelegate?.didAddRecord()
-        }
-        return true
-    }
-
     func addBookRecords(to restaurants: [Restaurant],
                         at time: Date,
                         with groupSize: Int,

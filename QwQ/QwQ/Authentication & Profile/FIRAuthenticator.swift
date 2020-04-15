@@ -99,7 +99,7 @@ class FIRAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        return Auth.auth().currentUser != nil
+        Auth.auth().currentUser != nil
     }
 
     static func initAlreadyLoggedInUser() {
