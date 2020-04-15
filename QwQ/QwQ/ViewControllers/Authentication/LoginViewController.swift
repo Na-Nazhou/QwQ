@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         spinner = showSpinner(onView: view)
 
         if Auth.checkIfAlreadyLoggedIn() {
-            authCompleted()
+            firAlreadyLoggedIn()
         } else if AccessToken.current != nil {
             fbAlreadyLoggedIn()
         } else {
@@ -73,6 +73,11 @@ class LoginViewController: UIViewController {
     
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
         removeSpinner(spinner)
+    }
+
+    private func firAlreadyLoggedIn() {
+        Auth.initAlreadyLoggedInUser()
+        authCompleted()
     }
 
     private func fbAlreadyLoggedIn() {

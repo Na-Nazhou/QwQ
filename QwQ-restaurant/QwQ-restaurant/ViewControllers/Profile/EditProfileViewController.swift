@@ -22,16 +22,18 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var autoCloseTimeTextField: UITextField!
     @IBOutlet private var advanceBookingLimitTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
-
+    @IBOutlet private var bannerImageView: UIImageView!
+    
     private var image: UIImage?
     private var spinner: UIView?
 
     typealias Auth = FIRAuthenticator
-    typealias Profile = FIRProfileStorage
+    typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
+    private var imageViewToEdit: UIImageView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +52,12 @@ class EditProfileViewController: UIViewController {
     @IBAction private func handleBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-
+    
+    @IBAction func handleEditBanner(_ sender: Any) {
+        imageViewToEdit = bannerImageView
+        showImagePickerControllerActionSheet()
+    }
+    
     @IBAction private func saveButton(_ sender: Any) {
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -107,6 +114,7 @@ class EditProfileViewController: UIViewController {
     }
 
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
+        imageViewToEdit = profileImageView
         showImagePickerControllerActionSheet()
     }
 
@@ -202,15 +210,18 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let selectedImageView = imageViewToEdit else {
+            return
+        }
+        
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            profileImageView.image = editedImage
+            selectedImageView.image = editedImage
             image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            profileImageView.image = originalImage
+            selectedImageView.image = originalImage
             image = originalImage
         }
         dismiss(animated: true, completion: nil)
-        
     }
     
 }

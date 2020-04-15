@@ -16,7 +16,7 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet private var currentWaitingControl: SegmentedControl!
     @IBOutlet private var recordCollectionView: UICollectionView!
     @IBOutlet private var openCloseButton: UIButton!
-
+    
     var spinner: UIView?
 
     enum SelectedControl: Int {

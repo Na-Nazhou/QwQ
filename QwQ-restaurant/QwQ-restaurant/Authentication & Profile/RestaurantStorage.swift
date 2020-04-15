@@ -7,12 +7,15 @@
 
 import UIKit
 
-protocol ProfileStorage {
+protocol RestaurantStorage {
+
+    static var currentRestaurantUID: String? { get set }
+
     // MARK: - Restaurant Creation Methods
     
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
-                                               authDetails: AuthDetails,
+                                               email: String,
                                                errorHandler: @escaping (Error) -> Void)
     
     // MARK: - Restaurant Info Retrieval Methods

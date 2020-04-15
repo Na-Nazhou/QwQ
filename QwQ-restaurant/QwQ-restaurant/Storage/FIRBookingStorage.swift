@@ -99,7 +99,8 @@ extension FIRBookingStorage {
         }
 
         let bid = document.documentID
-        FIRCustomerInfoStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
+
+        FIRCustomerStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
             guard let rec = BookRecord(dictionary: data,
                                        customer: customer,
                                        restaurant: restaurant,

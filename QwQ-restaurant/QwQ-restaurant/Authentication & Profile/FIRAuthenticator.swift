@@ -9,11 +9,13 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FIRAuthenticator: Authenticator {
-    typealias Profile = FIRProfileStorage
+
+    typealias StaffProfile = FIRStaffStorage
+    typealias RestaurantProfile = FIRRestaurantStorage
     
     static func signup(signupDetails: SignupDetails,
                        authDetails: AuthDetails,
-                       completion: @escaping () -> Void,
+                       completion: @escaping (String) -> Void,
                        errorHandler: @escaping (Error) -> Void) {
         
         Auth.auth().createUser(withEmail: authDetails.email, password: authDetails.password) { (result, error) in
@@ -24,14 +26,8 @@ class FIRAuthenticator: Authenticator {
             guard let result = result else {
                 return
             }
-            
-            Profile.createInitialRestaurantProfile(uid: result.user.uid,
-                                                   signupDetails: signupDetails,
-                                                   authDetails: authDetails,
-                                                   errorHandler: errorHandler)
-            FIRAuthenticator.login(authDetails: authDetails,
-                                   completion: completion,
-                                   errorHandler: errorHandler)
+
+            completion(result.user.uid)
         }
     }
     
@@ -44,6 +40,7 @@ class FIRAuthenticator: Authenticator {
                 errorHandler(error)
                 return
             }
+            StaffProfile.currentStaffUID = authDetails.email
             completion()
         }
     }
@@ -51,6 +48,8 @@ class FIRAuthenticator: Authenticator {
     static func logout(completion: @escaping () -> Void, errorHandler: @escaping (Error) -> Void) {
         do {
             try Auth.auth().signOut()
+            StaffProfile.currentStaffUID = nil
+            RestaurantProfile.currentRestaurantUID = nil
             completion()
         } catch {
             errorHandler(AuthError.SignOutError)
@@ -85,11 +84,14 @@ class FIRAuthenticator: Authenticator {
     }
 
     static func checkIfAlreadyLoggedIn() -> Bool {
-        Auth.auth().currentUser != nil
+        return Auth.auth().currentUser != nil
     }
-    
-    static func getUIDOfCurrentUser() -> String? {
-        Auth.auth().currentUser?.uid
+
+    static func initAlreadyLoggedInUser() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        StaffProfile.currentStaffUID = user.email
     }
 
     static func resetPassword(for email: String,

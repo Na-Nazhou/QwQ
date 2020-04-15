@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cUz-wy-QSS">
+    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Comfortaa-Bold.ttf">
+            <string>Comfortaa-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Staff Verification View Controller-->
+        <scene sceneID="OpN-4h-orZ">
+            <objects>
+                <viewController id="cUz-wy-QSS" customClass="StaffVerificationViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FEQ-YX-Txe">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="3Xm-lT-eTk">
+                                <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant-background" translatesAutoresizingMaskIntoConstraints="NO" id="SdM-sx-a7P">
+                                <rect key="frame" x="0.0" y="667" width="834" height="445"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ArF-hM-BRf">
+                                <rect key="frame" x="20" y="289.5" width="794" height="333.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No restaurant allocated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2C-Ty-CNw">
+                                        <rect key="frame" x="145" y="0.0" width="504" height="70"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="70"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please contact your restaurant manager to add your email to the restaurant account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUE-uB-7kS">
+                                        <rect key="frame" x="38" y="90" width="718" height="134"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link now and start managing your restaurant!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K60-3N-mtW">
+                                        <rect key="frame" x="32" y="244" width="730" height="89.5"/>
+                                        <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1F-xA-nqQ">
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="S1F-xA-nqQ" secondAttribute="height" multiplier="1:1" id="t1Z-lL-6U5"/>
+                                </constraints>
+                                <state key="normal" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="cUz-wy-QSS" eventType="touchUpInside" id="5iv-OI-X8h"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3Xm-lT-eTk" firstAttribute="top" secondItem="FEQ-YX-Txe" secondAttribute="top" id="9kV-6o-d3r"/>
+                            <constraint firstItem="ArF-hM-BRf" firstAttribute="leading" secondItem="78Y-aL-fvD" secondAttribute="leading" constant="20" id="Fds-lD-Mcu"/>
+                            <constraint firstItem="ArF-hM-BRf" firstAttribute="trailing" secondItem="78Y-aL-fvD" secondAttribute="trailing" constant="-20" id="N0d-4R-M1o"/>
+                            <constraint firstItem="ArF-hM-BRf" firstAttribute="centerY" secondItem="FEQ-YX-Txe" secondAttribute="centerY" constant="-100" id="N8O-Ts-m29"/>
+                            <constraint firstItem="78Y-aL-fvD" firstAttribute="leading" secondItem="S1F-xA-nqQ" secondAttribute="leading" constant="-20" id="TVE-TT-io5"/>
+                            <constraint firstItem="78Y-aL-fvD" firstAttribute="bottom" secondItem="SdM-sx-a7P" secondAttribute="bottom" id="X24-qM-AOx"/>
+                            <constraint firstItem="SdM-sx-a7P" firstAttribute="height" secondItem="3Xm-lT-eTk" secondAttribute="height" multiplier="0.4" id="e3r-sD-GK1"/>
+                            <constraint firstItem="78Y-aL-fvD" firstAttribute="top" secondItem="S1F-xA-nqQ" secondAttribute="top" constant="-30" id="eFZ-vQ-0aT"/>
+                            <constraint firstItem="SdM-sx-a7P" firstAttribute="trailing" secondItem="78Y-aL-fvD" secondAttribute="trailing" id="gQK-qJ-QJC"/>
+                            <constraint firstAttribute="trailing" secondItem="3Xm-lT-eTk" secondAttribute="trailing" id="jeC-N0-6X2"/>
+                            <constraint firstItem="S1F-xA-nqQ" firstAttribute="width" secondItem="78Y-aL-fvD" secondAttribute="width" multiplier="0.05" id="maW-pe-UOf"/>
+                            <constraint firstItem="SdM-sx-a7P" firstAttribute="leading" secondItem="78Y-aL-fvD" secondAttribute="leading" id="ueD-dG-QrF"/>
+                            <constraint firstItem="3Xm-lT-eTk" firstAttribute="leading" secondItem="FEQ-YX-Txe" secondAttribute="leading" id="vuK-4a-nlh"/>
+                            <constraint firstAttribute="bottom" secondItem="3Xm-lT-eTk" secondAttribute="bottom" id="zoA-sy-kF3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="78Y-aL-fvD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TbJ-wf-Ngk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.97122302158274" y="45.7286432160804"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back-icon" width="1060" height="1060"/>
+        <image name="gradient-background" width="2048" height="2732"/>
+        <image name="restaurant-background" width="549" height="490"/>
+    </resources>
+</document>
