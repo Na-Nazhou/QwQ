@@ -38,4 +38,14 @@ extension Date {
         let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
         return diff.day == 0
     }
+
+    static func getEndOfDay(of date: Date) -> Date {
+        let calendar = Calendar.current
+        let endTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)
+        return endTime!
+    }
+
+    static func getStartOfDay(of date: Date) -> Date {
+        Calendar.current.startOfDay(for: date)
+    }
 }

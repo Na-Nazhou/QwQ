@@ -19,6 +19,11 @@ class Statistics {
         }
     }
 
+    init(fromDate: Date, toDate: Date) {
+        self.fromDate = Date.getStartOfDay(of: fromDate)
+        self.toDate = Date.getEndOfDay(of: toDate)
+    }
+
     // MARK: Raw stats
     var totalNumOfCustomers: Int = 0
     var totalWaitingTimeCustomerPOV: Int = 0
@@ -61,11 +66,6 @@ class Statistics {
         totalNumOfBookRecords == 0
             ? 0
             : 100 * totalBookingCancelled / totalNumOfBookRecords
-    }
-    
-    init(fromDate: Date, toDate: Date) {
-        self.fromDate = fromDate
-        self.toDate = toDate
     }
 }
 
