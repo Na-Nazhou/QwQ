@@ -36,7 +36,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             notifId: notifId,
             title: "Booking \(keyword) by \(record.restaurant.name)",
             description: description, shouldSend: true)
-        os_log("Book accept/reject notif prepared to be sent to schedule.",
+        os_log("Book accept/reject notif prepared.",
                log: Log.bookNotifScheduled, type: .info)
         return notif
     }
@@ -48,7 +48,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "Time to Enter for Your Booking!",
             description: "\(record.restaurant.name) is waiting for your arrival since \(record.time.toString()).",
             shouldSend: true)
-        os_log("Book enter notif prepared to be sent to schedule.",
+        os_log("Book enter notif prepared.",
                log: Log.bookNotifScheduled, type: .info)
         return notifTimeToEnter
     }
@@ -73,7 +73,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "Please respond -- \(record.restaurant.name) has admitted you!",
             description: "Accept or reject the admission on the Activities page! \nRespond within: 3 min",
             shouldSend: true)
-        os_log("Queue admittance notif prepared to be sent to schedule.",
+        os_log("Queue admittance notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
         return notifAdmit
     }
@@ -90,7 +90,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "2 minutes left to respond -- \(record.restaurant.name) has admitted you!",
             description: "Accept or reject the admission on the Activities page! \nRespond within: 2 min",
             shouldSend: true)
-        os_log("Queue admit response (1 min mark) notif prepared to be sent to schedule.",
+        os_log("Queue admit response (1 min mark) notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
         return notifAdmit
     }
@@ -107,7 +107,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "1 min left to respond -- \(record.restaurant.name) has admitted you!",
             description: "Accept or reject the admission on the Activities page! \nRespond within: 1 min",
             shouldSend: true)
-        os_log("Queue admit response (2 min mark) notif prepared to be sent to schedule.",
+        os_log("Queue admit response (2 min mark) notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
         return notifAdmit
     }
@@ -117,7 +117,8 @@ class QwQNotificationManager: QwQNotificationHandler {
         return withdrawableMissedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
     }
 
-    private func withdrawableMissedQueueNotification(_ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
+    private func withdrawableMissedQueueNotification(
+        _ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
         let timeInterval = hasConfirmedPreviously ? 15 : 3
 
         let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
@@ -127,7 +128,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "Missed queue for: \(record.restaurant.name).",
             description: "You have been pushed back in the queue. Please wait in the vicinity.",
             shouldSend: true)
-        os_log("Queue admit missed notif prepared to be sent to schedule.",
+        os_log("Queue admit missed notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
         return notifAdmit
     }
@@ -155,7 +156,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             title: "Seats confirmed for \(record.restaurant.name)!",
             description: "Please arrive within 15min from the admitted time.",
             shouldSend: true)
-        os_log("Queue confirm admit notif prepared to be sent to schedule.",
+        os_log("Queue confirm admit notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
         return notif
     }
@@ -170,13 +171,13 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     func retractQueueNotifications(for record: QueueRecord) {
-        let hasConfirmedPreviously = record.confirmAdmissionTime != nil
-        //retrack a confirmed admitted record means that confirming of admission alr retracked my admission notifs.
         let possiblyPendingQueueNotifs = [
             withdrawableAdmitOneMinNotification(record),
             withdrawableAdmitTwoMinsNotification(record),
-            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
+            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: false),
+            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: true)
         ]
+        os_log("Queue notifs prepared to be withdrawn.")
         removeNotifications(notifIds: possiblyPendingQueueNotifs.map { $0.notifId })
     }
 
