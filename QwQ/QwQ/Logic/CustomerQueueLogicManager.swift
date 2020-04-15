@@ -192,6 +192,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
+        if record.completelyIdentical(to: oldRecord) {
+            os_log("Listener triggered although record is identical.",
+                   log: Log.regularModification, type: .debug)
+            return
+        }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -251,6 +257,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
+        notificationHandler.retrackQueueNotifications(for: record)
         notificationHandler.notifyQueueConfirmed(record: record)
     }
 
@@ -275,6 +282,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
+        notificationHandler.retrackQueueNotifications(for: record)
+        notificationHandler.retrackQueueNotifications(for: record)
     }
 
     private func removeFromCurrent(_ record: QueueRecord) {

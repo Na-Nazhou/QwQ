@@ -14,17 +14,24 @@ class QwQNotificationManager: QwQNotificationHandler {
             accepOrRejectBookingNotification(record, isAccept: true),
             bookTimeNotification(record)
         ]
-        bookNotifs.compactMap { $0 }
-            .forEach { notifManager.schedule(notif: $0) }
+        bookNotifs.forEach { notifManager.schedule(notif: $0) }
     }
 
     private func accepOrRejectBookingNotification(_ record: BookRecord, isAccept: Bool) -> QwQNotification {
-        let notifId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: 0)
+        var keyword: String
+        var description: String
+        if isAccept {
+            assert(record.admitTime != nil)
+            keyword = "Accepted"
+            description = "You can now view your accepted booking in the Activities page! Please arrive on time."
+        } else {
+            assert(record.rejectTime != nil)
+            keyword = "Rejected"
+            description = "You may consider booking at other restaurants."
+        }
 
-        let keyword = isAccept ? "Accepted" : "Rejected"
-        let description = isAccept
-            ? "You can now view your accepted booking in the Activities page! Please arrive on time."
-            : "You may consider booking at other restaurants."
+        let notifId = QwQNotificationId(record: record, timeDelayInMinutes: 0)
+
         let notif = QwQNotification(
             notifId: notifId,
             title: "Booking \(keyword) by \(record.restaurant.name)",
@@ -34,7 +41,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notif
     }
 
-    private func bookTimeNotification(_ record: BookRecord) -> QwQNotification? {
+    private func bookTimeNotification(_ record: BookRecord) -> QwQNotification {
         let notifIdTimeToEnter = QwQNotificationId(record: record, targetTime: record.time)
         let notifTimeToEnter = QwQNotification(
             notifId: notifIdTimeToEnter,
@@ -54,12 +61,13 @@ class QwQNotificationManager: QwQNotificationHandler {
             admitTwoMinsNotification(record),
             missedQueueNotification(record, hasConfirmedPreviously: false)
         ]
-        queueNotifs.compactMap { $0 }
-            .forEach { notifManager.schedule(notif: $0) }
+        queueNotifs.forEach { notifManager.schedule(notif: $0) }
     }
 
-    private func admitQueueNotification(_ record: QueueRecord) -> QwQNotification? {
-        let notifAdmitId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: 0)
+    private func admitQueueNotification(_ record: QueueRecord) -> QwQNotification {
+        assert(record.admitTime != nil)
+
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 0)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "Please respond -- \(record.restaurant.name) has admitted you!",
@@ -70,8 +78,13 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notifAdmit
     }
 
-    private func admitOneMinNotification(_ record: QueueRecord) -> QwQNotification? {
-        let notifAdmitId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: 1)
+    private func admitOneMinNotification(_ record: QueueRecord) -> QwQNotification {
+        assert(record.admitTime != nil)
+        return withdrawableAdmitOneMinNotification(record)
+    }
+
+    private func withdrawableAdmitOneMinNotification(_ record: QueueRecord) -> QwQNotification {
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 1)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "2 minutes left to respond -- \(record.restaurant.name) has admitted you!",
@@ -82,8 +95,13 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notifAdmit
     }
 
-    private func admitTwoMinsNotification(_ record: QueueRecord) -> QwQNotification? {
-        let notifAdmitId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: 2)
+    private func admitTwoMinsNotification(_ record: QueueRecord) -> QwQNotification {
+        assert(record.admitTime != nil)
+        return withdrawableAdmitTwoMinsNotification(record)
+    }
+
+    private func withdrawableAdmitTwoMinsNotification(_ record: QueueRecord) -> QwQNotification {
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 2)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "1 min left to respond -- \(record.restaurant.name) has admitted you!",
@@ -94,14 +112,20 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notifAdmit
     }
 
-    private func missedQueueNotification(_ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification? {
+    private func missedQueueNotification(_ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
+        assert(record.admitTime != nil)
+        return withdrawableMissedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
+    }
+
+    private func withdrawableMissedQueueNotification(_ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
         let timeInterval = hasConfirmedPreviously ? 15 : 3
-        let notifAdmitId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: timeInterval)
-        print("\n\t target time: \(notifAdmitId.string)")
+
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
+        print("\n\t target time: \(notifAdmitId.toString)")
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "Missed queue for: \(record.restaurant.name).",
-            description: "You have been pushed back in the queue. Please wait.",
+            description: "You have been pushed back in the queue. Please wait in the vicinity.",
             shouldSend: true)
         os_log("Queue admit missed notif prepared to be sent to schedule.",
                log: Log.queueNotifScheduled, type: .info)
@@ -118,15 +142,18 @@ class QwQNotificationManager: QwQNotificationHandler {
             confirmedAdmissionNotification(record),
             missedQueueNotification(record, hasConfirmedPreviously: true)
         ]
-        notifs.compactMap { $0 }.forEach { notifManager.schedule(notif: $0) }
+        notifs.forEach { notifManager.schedule(notif: $0) }
     }
 
-    private func confirmedAdmissionNotification(_ record: QueueRecord) -> QwQNotification? {
-        let notifId = QwQNotificationId(record: record, timeInMinutesFromReferenceTime: 0)
+    private func confirmedAdmissionNotification(_ record: QueueRecord) -> QwQNotification {
+        assert(record.confirmAdmissionTime != nil)
+        let refTime = record.confirmAdmissionTime!
+
+        let notifId = QwQNotificationId(record: record, timeDelayInMinutes: 0, afterReference: refTime)
         let notif = QwQNotification(
             notifId: notifId,
             title: "Seats confirmed for \(record.restaurant.name)!",
-            description: "Please arrive by 15min from admitted time.",
+            description: "Please arrive within 15min from the admitted time.",
             shouldSend: true)
         os_log("Queue confirm admit notif prepared to be sent to schedule.",
                log: Log.queueNotifScheduled, type: .info)
@@ -134,21 +161,27 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     func notifyQueueRejected(record: QueueRecord) {
-        //TODO?
+        //TODO? - yes. do for end of restaurant.
+    }
+
+    func retrackBookNotifications(for record: BookRecord) {
+        let possiblyPendingBookNotif = bookTimeNotification(record)
+        removeNotifications(notifIds: [possiblyPendingBookNotif.notifId])
     }
 
     func retrackQueueNotifications(for record: QueueRecord) {
         let hasConfirmedPreviously = record.confirmAdmissionTime != nil
+        //retrack a confirmed admitted record means that confirming of admission alr retracked my admission notifs.
         let possiblyPendingQueueNotifs = [
-            admitOneMinNotification(record),
-            admitTwoMinsNotification(record),
-            missedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
+            withdrawableAdmitOneMinNotification(record),
+            withdrawableAdmitTwoMinsNotification(record),
+            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
         ]
-        removeNotifications(notifIds: possiblyPendingQueueNotifs.compactMap { $0?.notifId })
+        removeNotifications(notifIds: possiblyPendingQueueNotifs.map { $0.notifId })
     }
 
     // MARK: Helper methods
     private func removeNotifications(notifIds: [QwQNotificationId]) {
-        notifManager.removeNotifications(ids: notifIds.map { $0.string })
+        notifManager.removeNotifications(ids: notifIds.map { $0.toString })
     }
 }

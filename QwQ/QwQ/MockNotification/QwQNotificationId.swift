@@ -2,16 +2,10 @@ import Foundation
 
 struct QwQNotificationId: Equatable {
     let recordId: String
-    let firstAdmittedTiming: Date?
-    let rejectedTiming: Date?
     let targetTime: DateComponents
-
-    var isRejectionNotification: Bool {
-        rejectedTiming != nil
-    }
     
-    var string: String {
-        "\(recordId) at \(firstAdmittedTiming) at \(targetTime)"
+    var toString: String {
+        "\(recordId) at \(targetTime)"
     }
 
     init(record: Record, targetTime: Date) {
@@ -19,28 +13,26 @@ struct QwQNotificationId: Equatable {
         self.targetTime = Calendar.current.dateComponents(
             [.year, .month, .day, .hour, .minute, .second],
             from: targetTime)
-        if let time = record.admitTime {
-            firstAdmittedTiming = time
-            rejectedTiming = nil
-        } else {
-            assert(record.rejectTime != nil)
-            rejectedTiming = record.rejectTime
-            firstAdmittedTiming = nil
-        }
     }
 
-    init(record: Record, timeInMinutesFromReferenceTime n: Int) {
+    /// If afterReference is given non-nil, it will be taken as reference.
+    /// Otherwise by default, takes admitTime of record as reference time, if available.
+    /// If admitTime is nil, then either rejectTime or withdrawTime must be non-nil and hence taken as reference.
+    init(record: Record, timeDelayInMinutes n: Int, afterReference refTime: Date? = nil) {
         var time: Date
-        if record.admitTime != nil {
-            time = record.admitTime!
-            rejectedTiming = nil
-            firstAdmittedTiming = time
+        if refTime != nil {
+            time = refTime!
         } else {
-            assert(record.rejectTime != nil)
-            time = record.rejectTime!
-            firstAdmittedTiming = nil
-            rejectedTiming = time
+            if record.admitTime != nil {
+                time = record.admitTime!
+            } else if record.rejectTime != nil {
+                time = record.rejectTime!
+            } else {
+                assert(record.withdrawTime != nil)
+                time = record.withdrawTime!
+            }
         }
+
         recordId = record.id
         let triggerDate = Calendar.current.date(byAdding: .minute, value: n, to: time)!
         targetTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: triggerDate)

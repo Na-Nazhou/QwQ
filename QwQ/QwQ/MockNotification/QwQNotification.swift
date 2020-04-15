@@ -10,7 +10,7 @@ struct QwQNotification: Notification {
         notifId.targetTime
     }
     var id: String {
-        notifId.string
+        notifId.toString
     }
     
     init(notifId: QwQNotificationId, title: String, description: String, shouldSend: Bool) {
