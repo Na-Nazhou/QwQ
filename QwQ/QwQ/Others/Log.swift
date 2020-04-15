@@ -24,6 +24,7 @@ struct Log {
     static let withdrawnByCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
     static let confirmedByCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
     static let regularModification = OSLog(subsystem: subsystem, category: "regularModification")
+    static let notAModification = OSLog(subsystem: subsystem, category: "notAModification")
 
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
@@ -49,6 +50,7 @@ struct Log {
     static let scheduleError = OSLog(subsystem: subsystem, category: "LocalNotifications")
     static let requestPermissionsFail = OSLog(subsystem: subsystem, category: "LocalNotifications")
     static let redirectToSettings = OSLog(subsystem: subsystem, category: "LocalNotifications")
+    static let withdrawNotif = OSLog(subsystem: subsystem, category: "NotificationWithdrawal")
     
     // MARK: Logic for notification
     static let bookNotifError = OSLog(subsystem: subsystem, category: "BookNotifications")

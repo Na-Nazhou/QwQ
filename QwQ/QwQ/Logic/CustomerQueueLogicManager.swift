@@ -193,8 +193,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
 
         if record.completelyIdentical(to: oldRecord) {
-            os_log("Listener triggered although record is identical.",
-                   log: Log.regularModification, type: .debug)
+            os_log("Listener triggered although queue record is identical.",
+                   log: Log.notAModification, type: .debug)
             return
         }
 

@@ -163,6 +163,12 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
 
+        if record.completelyIdentical(to: oldRecord) {
+            os_log("Listener triggered although book record is identical.",
+                   log: Log.notAModification, type: .debug)
+            return
+        }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -178,8 +184,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            break
-            //assert(false, "Modification should be something")
+            assert(false, "Modification should be something")
         }
     }
 

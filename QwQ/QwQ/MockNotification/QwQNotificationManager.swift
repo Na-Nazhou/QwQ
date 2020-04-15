@@ -122,7 +122,6 @@ class QwQNotificationManager: QwQNotificationHandler {
         let timeInterval = hasConfirmedPreviously ? 15 : 3
 
         let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
-        print("\n\t target time: \(notifAdmitId.toString)")
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "Missed queue for: \(record.restaurant.name).",
@@ -167,6 +166,7 @@ class QwQNotificationManager: QwQNotificationHandler {
 
     func retractBookNotifications(for record: BookRecord) {
         let possiblyPendingBookNotif = bookTimeNotification(record)
+        os_log("Book notifs prepared to be withdrawn.", log: Log.withdrawNotif)
         removeNotifications(notifIds: [possiblyPendingBookNotif.notifId])
     }
 
@@ -177,7 +177,7 @@ class QwQNotificationManager: QwQNotificationHandler {
             withdrawableMissedQueueNotification(record, hasConfirmedPreviously: false),
             withdrawableMissedQueueNotification(record, hasConfirmedPreviously: true)
         ]
-        os_log("Queue notifs prepared to be withdrawn.")
+        os_log("Queue notifs prepared to be withdrawn.", log: Log.withdrawNotif)
         removeNotifications(notifIds: possiblyPendingQueueNotifs.map { $0.notifId })
     }
 
