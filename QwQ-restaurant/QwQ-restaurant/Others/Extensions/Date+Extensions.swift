@@ -32,7 +32,10 @@ extension Date {
     }
 
     static func getTimeIntervalFromStartOfDay(_ date: Date) -> TimeInterval {
-        date.timeIntervalSince(Date.getStartOfDay(of: date))
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        let time = calendar.date(from: components)!
+        return time.timeIntervalSince(Date.getStartOfDay(of: time))
     }
 
     func getFomattedDate() -> String {

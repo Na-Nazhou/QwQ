@@ -25,6 +25,7 @@ struct Constants {
     static let welcomeMessage = "Welcome to QwQ!"
     static let profileSetupMessage = "Please set up your profile in the Profile tab."
     + "Until then, your restaurant will not be visible to customers."
+    static let openAfterCloseMessage = "Open time must be before close time"
 
     // MARK: Alert settings
     static let successTitle = "Success"

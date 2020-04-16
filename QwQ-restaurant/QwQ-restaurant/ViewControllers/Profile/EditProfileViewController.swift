@@ -32,27 +32,29 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
+    private var queueOpenTime: Date?
+    private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
 
     var minGroupSize: Int? {
         guard let groupSizeText = minGroupSizeTextField.text else {
             return nil
         }
-        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+        return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     var maxGroupSize: Int? {
         guard let groupSizeText = maxGroupSizeTextField.text else {
             return nil
         }
-        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+        return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     var advanceBookingLimit: Int? {
-        guard let advanceBookingLimitText = maxGroupSizeTextField.text else {
+        guard let advanceBookingLimitText = advanceBookingLimitTextField.text else {
             return nil
         }
-        return Int(advanceBookingLimitText.trimmingCharacters(in: .newlines))
+        return Int(advanceBookingLimitText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     var autoOpenTime: TimeInterval? {
@@ -156,8 +158,9 @@ class EditProfileViewController: UIViewController {
         if let openTime = autoOpenTime, let closeTime = autoCloseTime,
             openTime > closeTime {
             showMessage(title: Constants.errorTitle,
-                        message: Constants.startAfterEndMessage,
+                        message: Constants.openAfterCloseMessage,
                         buttonText: Constants.okayTitle)
+            return
         }
 
         spinner = showSpinner(onView: view)
@@ -174,6 +177,7 @@ class EditProfileViewController: UIViewController {
                                     address: address, menu: menu,
                                     maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
                                     advanceBookingLimit: advanceBookingLimit,
+                                    queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
                                     autoOpenTime: autoOpenTime, autoCloseTime: autoCloseTime)
 
         Profile.updateRestaurantInfo(restaurant: restaurant,
@@ -196,6 +200,8 @@ class EditProfileViewController: UIViewController {
         minGroupSizeTextField.text = String(restaurant.minGroupSize)
         maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
         advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
+        queueOpenTime = restaurant.queueOpenTime
+        queueCloseTime = restaurant.queueCloseTime
 
         if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
             autoOpenCloseSwitch.isOn = true
@@ -206,7 +212,7 @@ class EditProfileViewController: UIViewController {
             autoOpenTimePicker.isEnabled = false
             autoCloseTimePicker.isEnabled = false
             autoOpenTimePicker.date = Date.getStartOfDay(of: Date())
-            autoCloseTimePicker.date = Date.getEndOfDay(of: Date())
+            autoCloseTimePicker.date = Date.getEndOfDay(of: Date()).addingTimeInterval(-10 * 60)
         }
 
         setUpProfileImageView(uid: restaurant.uid)
