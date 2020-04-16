@@ -4,11 +4,27 @@ import UIKit
 import UserNotifications
 
 /// General notifications scheduler.
-class LocalNotificationManager {
+class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
+    static let singleton = LocalNotificationManager()
+
+    let notificationCenter = UNUserNotificationCenter.current()
+
+    private override init() {
+        super.init()
+        notificationCenter.delegate = self
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+}
+
+extension LocalNotificationManager {
 
     func requestAuthorization() {
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
                 if let error = error {
                     assert(false, error.localizedDescription)
                     return
@@ -22,8 +38,7 @@ class LocalNotificationManager {
     }
 
     func schedule(notif: Notification) {
-        UNUserNotificationCenter.current()
-            .getNotificationSettings { settings in
+        notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized, .provisional:
                 self.scheduleNotification(notif)
@@ -82,7 +97,7 @@ class LocalNotificationManager {
 
         let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
 
-        UNUserNotificationCenter.current().add(request) { error in
+        notificationCenter.add(request) { error in
             guard error == nil else {
                 os_log("Failed to schedule notification.", log: Log.scheduleError, type: .error)
                 return
@@ -93,7 +108,7 @@ class LocalNotificationManager {
     }
 
     func removeNotifications(ids: [String]) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
 }

@@ -6,7 +6,7 @@ import os.log
 class QwQNotificationManager: QwQNotificationHandler {
     static let shared = QwQNotificationManager()
 
-    let notifManager = LocalNotificationManager()
+    let notifManager = LocalNotificationManager.singleton
 
     /// Sets 2 notifs: 1) accepted 2) schedule for booking time.
     func notifyBookingAccepted(record: BookRecord) {
