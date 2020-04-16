@@ -59,6 +59,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                 bookingDelegate?.didFindExistingRecord(at: restaurant)
                 return false
             }
+            if !checkAdvanceBookingLimit(of: newRecord) {
+                bookingDelegate?.didExceedAdvanceBookingLimit(at: restaurant)
+                return false
+            }
             newRecords.append(newRecord)
         }
 
@@ -96,6 +100,13 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
 
         return true
+    }
+
+    private func checkAdvanceBookingLimit(of record: BookRecord) -> Bool {
+        let advanceBookingLimit = record.restaurant.advanceBookingLimit
+        let currentTime = Date.getCurrentTime()
+        let timeInterval = Int(record.time.timeIntervalSince(currentTime))
+        return timeInterval >= advanceBookingLimit * 60 
     }
 
     func withdrawBookRecord(_ record: BookRecord) {

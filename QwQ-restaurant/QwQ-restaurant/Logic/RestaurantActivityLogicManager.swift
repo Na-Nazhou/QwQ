@@ -124,43 +124,66 @@ extension RestaurantActivityLogicManager {
                                     waitingList: RecordCollection<T>,
                                     historyList: RecordCollection<T>) {
         if record.isPendingAdmission {
-            currentList.update(record)
-            self.activitiesDelegate?.didUpdateCurrentList()
+            didCustomerUpdateRecord(record, currentList)
         }
 
         if record.isAdmitted {
-            if currentList.remove(record) {
-                self.activitiesDelegate?.didUpdateCurrentList()
-            }
-            if waitingList.add(record) {
-                self.activitiesDelegate?.didUpdateWaitingList()
-            }
+            didAdmitRecord(record, currentList, waitingList)
         }
 
         if record.isConfirmedAdmission {
-            if currentList.remove(record) {
-                self.activitiesDelegate?.didUpdateCurrentList()
-            }
-            if waitingList.add(record) {
-                self.activitiesDelegate?.didUpdateWaitingList()
-            }
-            if waitingList.update(record) {
-                self.activitiesDelegate?.didUpdateWaitingList()
-            }
+            didConfirmRecord(record, currentList, waitingList)
         }
 
         if record.isHistoryRecord {
-            if currentList.remove(record) {
-                self.activitiesDelegate?.didUpdateCurrentList()
-            }
+            didArchiveRecord(record, currentList, waitingList, historyList)
+        }
+    }
 
-            if waitingList.remove(record) {
-                self.activitiesDelegate?.didUpdateWaitingList()
-            }
+    private func didCustomerUpdateRecord<T: Record>(_ record: T, _ currentList: RecordCollection<T>) {
+        currentList.update(record)
+        activitiesDelegate?.didUpdateCurrentList()
+    }
 
-            if historyList.add(record) {
-                self.activitiesDelegate?.didUpdateHistoryList()
-            }
+    private func didAdmitRecord<T: Record>(_ record: T,
+                                           _ currentList: RecordCollection<T>,
+                                           _ waitingList: RecordCollection<T>) {
+        if currentList.remove(record) {
+            activitiesDelegate?.didUpdateCurrentList()
+        }
+        if waitingList.add(record) {
+            activitiesDelegate?.didUpdateWaitingList()
+        }
+    }
+
+    private func didConfirmRecord<T: Record>(_ record: T,
+                                             _ currentList: RecordCollection<T>,
+                                             _ waitingList: RecordCollection<T>) {
+        if currentList.remove(record) {
+            activitiesDelegate?.didUpdateCurrentList()
+        }
+        if waitingList.add(record) {
+            activitiesDelegate?.didUpdateWaitingList()
+        }
+        if waitingList.update(record) {
+            activitiesDelegate?.didUpdateWaitingList()
+        }
+    }
+
+    private func didArchiveRecord<T: Record>(_ record: T,
+                                             _ currentList: RecordCollection<T>,
+                                             _ waitingList: RecordCollection<T>,
+                                             _ historyList: RecordCollection<T>) {
+        if currentList.remove(record) {
+            activitiesDelegate?.didUpdateCurrentList()
+        }
+
+        if waitingList.remove(record) {
+            activitiesDelegate?.didUpdateWaitingList()
+        }
+
+        if historyList.add(record) {
+            activitiesDelegate?.didUpdateHistoryList()
         }
     }
 
