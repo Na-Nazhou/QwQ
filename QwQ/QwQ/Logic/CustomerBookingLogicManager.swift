@@ -5,6 +5,9 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     // Storage
     private var bookingStorage: CustomerBookingStorage
+    
+    // Notification
+    private var notificationHandler: QwQNotificationHandler
 
     // View controller
     weak var bookingDelegate: BookingDelegate?
@@ -25,13 +28,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
-                  bookingStorage: FIRBookingStorage.shared)
+                  bookingStorage: FIRBookingStorage.shared,
+                  notificationHandler: QwQNotificationManager.shared)
     }
 
     // Constructor to provide flexibility for testing.
-    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage) {
+    init(customerActivity: CustomerActivity, bookingStorage: CustomerBookingStorage,
+         notificationHandler: QwQNotificationHandler) {
         self.customerActivity = customerActivity
         self.bookingStorage = bookingStorage
+        self.notificationHandler = notificationHandler
 
         self.bookingStorage.registerDelegate(self)
     }
@@ -147,6 +153,12 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
 
+        if record.completelyIdentical(to: oldRecord) {
+            os_log("Listener triggered although book record is identical.",
+                   log: Log.notAModification, type: .debug)
+            return
+        }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -206,6 +218,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
         withdrawBookRecords(clashingRecords(with: record), completion: {})
         activitiesDelegate?.didUpdateActiveRecords()
+        notificationHandler.notifyBookingAccepted(record: record)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {
@@ -219,12 +232,15 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
+        notificationHandler.retractBookNotifications(for: record)
+        notificationHandler.notifyBookingRejected(record: record)
     }
 
     private func didWithdrawBookRecord(_ record: BookRecord) {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         addAsHistoryRecord(record)
         removeFromCurrent(record)
+        notificationHandler.retractBookNotifications(for: record)
     }
 
     private func removeFromCurrent(_ record: BookRecord) {
