@@ -75,7 +75,7 @@ extension FIRQueueStorage {
     private func registerListenerForQueue(of restaurant: Restaurant) {
         queueListener = queueDb
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
-            .addSnapshotListener { (snapshot, err) in
+            .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
                     os_log("Error getting queue record documents",
                            log: Log.queueRetrievalError,
@@ -105,7 +105,7 @@ extension FIRQueueStorage {
 
     private func registerListenerForRestaurant(_ restaurant: Restaurant) {
         openCloseListener = restaurantDb.document(restaurant.uid)
-            .addSnapshotListener { (profileSnapshot, err) in
+            .addSnapshotListener(includeMetadataChanges: false) { (profileSnapshot, err) in
                 if let err = err {
                      os_log("Error getting restaurant documents",
                             log: Log.restaurantRetrievalError,

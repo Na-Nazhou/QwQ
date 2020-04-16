@@ -61,7 +61,7 @@ extension FIRBookingStorage {
         listener = db.collection(Constants.bookingsDirectory)
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
-            .addSnapshotListener { (snapshot, err) in
+            .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
                     os_log("Error getting book record documents",
                            log: Log.bookRetrievalError,

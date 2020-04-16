@@ -48,7 +48,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     func fetchDailyDetails() {
         let today = Date()
-        for i  in 0..<10 {
+        for i in 0..<10 {
             let fromDate = Calendar.current.date(byAdding: .day, value: -i, to: today)!
             let toDate = Calendar.current.date(byAdding: .day, value: -i, to: today)!
             let stats = loadStats(from: fromDate, to: toDate)
@@ -57,10 +57,10 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     func fetchWeeklyDetails() {
-        let tenWeeksAgo = Calendar.current.date(byAdding: .weekOfMonth, value: -9, to: Date())!
-        for i  in (0..<10).reversed() {
-            let fromDate = Calendar.current.date(byAdding: .weekOfMonth, value: i, to: tenWeeksAgo)!
-            let temp = Calendar.current.date(byAdding: .weekOfMonth, value: i + 1, to: tenWeeksAgo)!
+        let currentWeek = Date.getMonday(of: Date())
+        for i in 0..<10 {
+            let fromDate = Calendar.current.date(byAdding: .weekOfMonth, value: -i, to: currentWeek)!
+            let temp = Calendar.current.date(byAdding: .weekOfMonth, value: -i + 1, to: currentWeek)!
             let toDate = Calendar.current.date(byAdding: .day, value: -1, to: temp)!
             let stats = loadStats(from: fromDate, to: toDate)
             weeklyStatsCollection.addOrUpdate(stats)
@@ -72,7 +72,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
         let currentMonth = Calendar.current.component(.month, from: Date())
         let firstDayOfMonth = Calendar.current.date(
             from: DateComponents(year: currentYear, month: currentMonth, day: 1))!
-        for i  in 0..<12 {
+        for i in 0..<12 {
             let fromDate = Calendar.current.date(byAdding: .month, value: -i, to: firstDayOfMonth)!
             let temp = Calendar.current.date(byAdding: .month, value: -i + 1, to: firstDayOfMonth)!
             let toDate = Calendar.current.date(byAdding: .day, value: -1, to: temp)!

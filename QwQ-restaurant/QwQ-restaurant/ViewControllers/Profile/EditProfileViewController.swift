@@ -18,8 +18,9 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var menuTextView: UITextView!
     @IBOutlet private var minGroupSizeTextField: UITextField!
     @IBOutlet private var maxGroupSizeTextField: UITextField!
-    @IBOutlet private var autoOpenTimeTextField: UITextField!
-    @IBOutlet private var autoCloseTimeTextField: UITextField!
+    @IBOutlet private var autoOpenCloseSwitch: UISwitch!
+    @IBOutlet private var autoOpenTimePicker: UIDatePicker!
+    @IBOutlet private var autoCloseTimePicker: UIDatePicker!
     @IBOutlet private var advanceBookingLimitTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var bannerImageView: UIImageView!
@@ -54,11 +55,39 @@ class EditProfileViewController: UIViewController {
         return Int(advanceBookingLimitText.trimmingCharacters(in: .newlines))
     }
 
+    var autoOpenTime: TimeInterval? {
+        if !autoOpenCloseSwitch.isOn {
+            return nil
+        }
+        let openTime = autoOpenTimePicker.date
+        return Date.getTimeIntervalFromStartOfDay(openTime)
+    }
+
+    var autoCloseTime: TimeInterval? {
+        if !autoOpenCloseSwitch.isOn {
+            return nil
+        }
+        let closeTime = autoCloseTimePicker.date
+        return Date.getTimeIntervalFromStartOfDay(closeTime)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
+
+        setUpAutoOpenCloseSwitch()
+        setUpDatePicker()
+    }
+
+    private func setUpAutoOpenCloseSwitch() {
+        autoOpenCloseSwitch.addTarget(self, action: #selector(onSwitchChange), for: .valueChanged)
+    }
+
+    private func setUpDatePicker() {
+        autoOpenTimePicker.datePickerMode = .time
+        autoCloseTimePicker.datePickerMode = .time
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,8 +97,18 @@ class EditProfileViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
+    @IBAction private func onSwitchChange(_ sender: UISwitch) {
+        if sender.isOn {
+            autoOpenTimePicker.isEnabled = true
+            autoCloseTimePicker.isEnabled = true
+        } else {
+            autoOpenTimePicker.isEnabled = false
+            autoCloseTimePicker.isEnabled = false
+        }
+    }
+
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.handleBack()
     }
     
     @IBAction func handleEditBanner(_ sender: Any) {
@@ -114,6 +153,13 @@ class EditProfileViewController: UIViewController {
             return
         }
 
+        if let openTime = autoOpenTime, let closeTime = autoCloseTime,
+            openTime > closeTime {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.startAfterEndMessage,
+                        buttonText: Constants.okayTitle)
+        }
+
         spinner = showSpinner(onView: view)
 
         if let image = image {
@@ -127,7 +173,8 @@ class EditProfileViewController: UIViewController {
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
                                     address: address, menu: menu,
                                     maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
-                                    advanceBookingLimit: advanceBookingLimit)
+                                    advanceBookingLimit: advanceBookingLimit,
+                                    autoOpenTime: autoOpenTime, autoCloseTime: autoCloseTime)
 
         Profile.updateRestaurantInfo(restaurant: restaurant,
                                      completion: updateComplete,
@@ -150,11 +197,16 @@ class EditProfileViewController: UIViewController {
         maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
         advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
 
-        if let openTime = restaurant.autoOpenTime {
-            autoOpenTimeTextField.text = openTime.getFormattedTime()
-        }
-        if let closeTime = restaurant.autoOpenTime {
-            autoOpenTimeTextField.text = closeTime.getFormattedTime()
+        if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
+            autoOpenCloseSwitch.isOn = true
+            autoOpenTimePicker.date = Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+            autoCloseTimePicker.date = Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
+        } else {
+            autoOpenCloseSwitch.isOn = false
+            autoOpenTimePicker.isEnabled = false
+            autoCloseTimePicker.isEnabled = false
+            autoOpenTimePicker.date = Date.getStartOfDay(of: Date())
+            autoCloseTimePicker.date = Date.getEndOfDay(of: Date())
         }
 
         setUpProfileImageView(uid: restaurant.uid)

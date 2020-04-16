@@ -19,8 +19,8 @@ struct Restaurant: User {
     let maxGroupSize: Int
     let advanceBookingLimit: Int
 
-    let autoOpenTime: Date?
-    let autoCloseTime: Date?
+    let autoOpenTime: TimeInterval?
+    let autoCloseTime: TimeInterval?
 
     //previous recorded times
     var queueOpenTime: Date?
@@ -76,8 +76,8 @@ struct Restaurant: User {
 
         let queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
         let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
-        let autoOpenTime = (dictionary[Constants.autoOpenTimeKey] as? Timestamp)?.dateValue()
-        let autoCloseTime = (dictionary[Constants.autoCloseTimeKey] as? Timestamp)?.dateValue()
+        let autoOpenTime = dictionary[Constants.autoOpenTimeKey] as? Double
+        let autoCloseTime = dictionary[Constants.autoCloseTimeKey] as? Double
 
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
                   menu: menu, maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
@@ -89,8 +89,7 @@ struct Restaurant: User {
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
          maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
          queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
-         autoOpenTime: Date? = nil, autoCloseTime: Date? = nil) {
-        // TODO: settle auto open and auto close
+         autoOpenTime: TimeInterval? = nil, autoCloseTime: TimeInterval? = nil) {
         self.uid = uid
         self.name = name
         self.email = email

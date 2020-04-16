@@ -24,6 +24,17 @@ extension Date {
         Self.getFormattedDate(date: self, format: "HH:mm")
     }
 
+    static func getFormattedTime(_ interval: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.hour, .minute]
+        return formatter.string(from: interval) ?? ""
+    }
+
+    static func getTimeIntervalFromStartOfDay(_ date: Date) -> TimeInterval {
+        date.timeIntervalSince(Date.getStartOfDay(of: date))
+    }
+
     func getFomattedDate() -> String {
         Self.getFormattedDate(date: self, format: "yyyy-MM-dd")
     }
@@ -47,5 +58,13 @@ extension Date {
 
     static func getStartOfDay(of date: Date) -> Date {
         Calendar.current.startOfDay(for: date)
+    }
+
+    static func getMonday(of date: Date) -> Date {
+        let calendar = Calendar.current
+        var comps = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: date)
+        comps.weekday = 2 // Monday
+        let mondayInWeek = calendar.date(from: comps)!
+        return mondayInWeek
     }
 }

@@ -25,6 +25,13 @@ extension Date {
     func getFormattedTime() -> String {
         Self.getFormattedDate(date: self, format: "HH:mm")
     }
+
+    static func getFormattedTime(_ interval: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.hour, .minute]
+        return formatter.string(from: interval) ?? ""
+    }
     
     static func getFormattedDate(date: Date, format: String) -> String {
         let dateformat = DateFormatter()
