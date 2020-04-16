@@ -26,25 +26,10 @@ class FIRBookingStorage: CustomerBookingStorage {
         bookingDb.document(record.id)
     }
 
-    func addBookRecord(newRecord: BookRecord, completion: @escaping () -> Void) {
-        let newRecordRef = bookingDb.document()
-        newRecordRef.setData(newRecord.dictionary) { err in
-            if let err = err {
-                os_log("Error adding book record",
-                       log: Log.addBookRecordError,
-                       type: .error,
-                       err.localizedDescription)
-                return
-            }
-            completion()
-        }
-    }
-
     func addBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
         let batch = db.batch()
-
         for newRecord in newRecords {
-            let newRecordRef = bookingDb.document()
+            let newRecordRef = getBookRecordDocument(record: newRecord)
             batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
@@ -76,14 +61,16 @@ class FIRBookingStorage: CustomerBookingStorage {
 
     func updateBookRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
         let batch = db.batch()
-        let recordDocPairs = newRecords.map {
-            ($0, getBookRecordDocument(record: $0))
-        }
-        for (newRecord, docRef) in recordDocPairs {
-            batch.setData(newRecord.dictionary, forDocument: docRef)
+        for newRecord in newRecords {
+            let newRecordRef = getBookRecordDocument(record: newRecord)
+            batch.setData(newRecord.dictionary, forDocument: newRecordRef)
         }
         batch.commit { err in
-            guard err == nil else {
+            if let err = err {
+                os_log("Error updating book record",
+                       log: Log.updateBookRecordError,
+                       type: .error,
+                       err.localizedDescription)
                 return
             }
             completion()

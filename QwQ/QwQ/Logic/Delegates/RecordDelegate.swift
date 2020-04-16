@@ -19,9 +19,12 @@ protocol RecordDelegate: AnyObject {
 protocol QueueDelegate: RecordDelegate {
 
     func didFindRestaurantQueueClosed(for restaurant: Restaurant)
+
 }
 
 protocol BookingDelegate: RecordDelegate {
 
     func didFindExistingRecord(at restaurant: Restaurant)
+
+    func didExceedAdvanceBookingLimit(at restaurant: Restaurant)
 }

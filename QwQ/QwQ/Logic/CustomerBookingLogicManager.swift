@@ -47,27 +47,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         bookingStorage.unregisterDelegate(self)
     }
 
-    func addBookRecord(to restaurant: Restaurant, at time: Date,
-                       with groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) -> Bool {
-
-        let newRecord = BookRecord(restaurant: restaurant,
-                                   customer: customer,
-                                   time: time,
-                                   groupSize: groupSize,
-                                   babyChairQuantity: babyChairQuantity,
-                                   wheelchairFriendly: wheelchairFriendly)
-
-        if !checkExistingRecords(against: newRecord) {
-            bookingDelegate?.didFindExistingRecord(at: restaurant)
-            return false
-        }
-
-        bookingStorage.addBookRecord(newRecord: newRecord) {
-            self.bookingDelegate?.didAddRecord()
-        }
-        return true
-    }
-
     func addBookRecords(to restaurants: [Restaurant],
                         at time: Date,
                         with groupSize: Int,
@@ -84,6 +63,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                        wheelchairFriendly: wheelchairFriendly)
             if !checkExistingRecords(against: newRecord) {
                 bookingDelegate?.didFindExistingRecord(at: restaurant)
+                return false
+            }
+            if !checkAdvanceBookingLimit(of: newRecord) {
+                bookingDelegate?.didExceedAdvanceBookingLimit(at: restaurant)
                 return false
             }
             newRecords.append(newRecord)
@@ -123,6 +106,13 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
 
         return true
+    }
+
+    private func checkAdvanceBookingLimit(of record: BookRecord) -> Bool {
+        let advanceBookingLimit = record.restaurant.advanceBookingLimit
+        let currentTime = Date.getCurrentTime()
+        let timeInterval = Int(record.time.timeIntervalSince(currentTime))
+        return timeInterval >= advanceBookingLimit * 60 
     }
 
     func withdrawBookRecord(_ record: BookRecord) {

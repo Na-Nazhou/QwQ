@@ -19,7 +19,7 @@ class RecordCell: UICollectionViewCell {
     @IBOutlet private var statusLabel: UILabel!
     @IBOutlet private var queueBookImageView: UIImageView!
     @IBOutlet private var timeLabel: UILabel!
-    @IBOutlet private weak var profileImageView: ProfileImageView!
+    @IBOutlet private var profileImageView: ProfileImageView!
     
     @IBOutlet private var rightButton: UIButton!
     @IBOutlet private var leftButton: UIButton!
@@ -39,6 +39,7 @@ class RecordCell: UICollectionViewCell {
     func setUpView(record: Record) {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
+        FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
         setUpRecordImage(record: record)
 

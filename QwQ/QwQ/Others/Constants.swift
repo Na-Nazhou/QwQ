@@ -44,20 +44,23 @@ struct Constants {
     static let resetPasswordMessage = "Please check your email to reset your password."
 
     // MARK: Queue record settings
-    static let noRestaurantSelectedMessage = "You have to select at least one restaurant"
     static let restaurantUnavailableMessage = "The queue for %@ is closed!"
     static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
-    static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
 
+    // MARK: Book record settings
+    static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
+    static let exceedAdvanceBookingLimitMessage = "You have to book at least %@ hours in advance at %@."
+
+    // MARK: Record settings
+    static let defaultWheelchairFriendly = false
+    static let defaultBabyChairQuantity = 0
+
+    static let noRestaurantSelectedMessage = "You have to select at least one restaurant"
     static let recordCreateSuccessMessage = "You have created a record."
     static let multipleRecordCreateSuccessMessage = "You have successfully created multiple records."
     static let recordUpdateSuccessMessage = "Your record has been updated."
     static let recordConfirmSuccessMessage = "Your record has been confirmed."
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
-
-    // MARK: Record settings
-    static let defaultWheelchairFriendly = false
-    static let defaultBabyChairQuantity = 0
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -133,17 +136,22 @@ struct Constants {
     static let menuKey = "menu"
     static let queueOpenTimeKey = "queueOpenTime"
     static let queueCloseTimeKey = "queueCloseTime"
+    static let maxGroupSizeKey = "maxGroupSize"
+    static let minGroupSizeKey = "minGroupSize"
+    static let advanceBookingLimitKey = "advanceBookingLimit"
+    static let autoOpenTimeKey = "autoOpenTime"
+    static let autoCloseTimeKey = "autoCloseTime"
     static let customerKey = "customer"
     static let restaurantKey = "restaurant"
     static let groupSizeKey = "groupSize"
     static let babyChairQuantityKey = "babyChairQuantity"
     static let wheelChairFriendlyKey = "wheelChairFriendly"
-    static let startTimeKey = "startTime"
     static let admitTimeKey = "admitTime"
+    static let estimatedAdmitTimeKey = "estimatedAdmitTime"
     static let serveTimeKey = "serveTime"
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
     static let confirmAdmissionTimeKey = "confirmAdmissionTime"
+    static let startTimeKey = "startTime"
     static let timeKey = "time"
-    static let estimatedAdmitTimeKey = "estimatedAdmitTime"
 }

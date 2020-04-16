@@ -21,6 +21,10 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         return formatter.string(from: self)
     }
+
+    func getFormattedTime() -> String {
+        Self.getFormattedDate(date: self, format: "HH:mm")
+    }
     
     static func getFormattedDate(date: Date, format: String) -> String {
         let dateformat = DateFormatter()

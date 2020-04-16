@@ -17,8 +17,8 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var addressTextField: UITextField!
     @IBOutlet private var menuTextView: UITextView!
     @IBOutlet private var minGroupSizeTextField: UITextField!
-    @IBOutlet private var autoOpenTimeTextField: UITextField!
     @IBOutlet private var maxGroupSizeTextField: UITextField!
+    @IBOutlet private var autoOpenTimeTextField: UITextField!
     @IBOutlet private var autoCloseTimeTextField: UITextField!
     @IBOutlet private var advanceBookingLimitTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
@@ -31,9 +31,28 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
-    private var queueOpenTime: Date?
-    private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
+
+    var minGroupSize: Int? {
+        guard let groupSizeText = minGroupSizeTextField.text else {
+            return nil
+        }
+        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+    }
+
+    var maxGroupSize: Int? {
+        guard let groupSizeText = maxGroupSizeTextField.text else {
+            return nil
+        }
+        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+    }
+
+    var advanceBookingLimit: Int? {
+        guard let advanceBookingLimitText = maxGroupSizeTextField.text else {
+            return nil
+        }
+        return Int(advanceBookingLimitText.trimmingCharacters(in: .newlines))
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +93,8 @@ class EditProfileViewController: UIViewController {
         }
         
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu else {
+            let address = trimmedAddress, let menu = trimmedMenu, let minGroupSize = minGroupSize,
+            let maxGroupSize = maxGroupSize, let advanceBookingLimit = advanceBookingLimit else {
                 return
         }
         
@@ -106,7 +126,8 @@ class EditProfileViewController: UIViewController {
 
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
                                     address: address, menu: menu,
-                                    queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime)
+                                    maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
+                                    advanceBookingLimit: advanceBookingLimit)
 
         Profile.updateRestaurantInfo(restaurant: restaurant,
                                      completion: updateComplete,
@@ -119,14 +140,22 @@ class EditProfileViewController: UIViewController {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
-        self.uid = restaurant.uid
-        self.nameTextField.text = restaurant.name
-        self.emailTextField.text = restaurant.email
-        self.contactTextField.text = restaurant.contact
-        self.addressTextField.text = restaurant.address
-        self.menuTextView.text = restaurant.menu
-        self.queueOpenTime = restaurant.queueOpenTime
-        self.queueCloseTime = restaurant.queueCloseTime
+        uid = restaurant.uid
+        nameTextField.text = restaurant.name
+        emailTextField.text = restaurant.email
+        contactTextField.text = restaurant.contact
+        addressTextField.text = restaurant.address
+        menuTextView.text = restaurant.menu
+        minGroupSizeTextField.text = String(restaurant.minGroupSize)
+        maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
+        advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
+
+        if let openTime = restaurant.autoOpenTime {
+            autoOpenTimeTextField.text = openTime.getFormattedTime()
+        }
+        if let closeTime = restaurant.autoOpenTime {
+            autoOpenTimeTextField.text = closeTime.getFormattedTime()
+        }
 
         setUpProfileImageView(uid: restaurant.uid)
 
@@ -173,7 +202,10 @@ class EditProfileViewController: UIViewController {
                 !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
                 !contact.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
                 !address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-                !menu.isEmpty
+                !menu.isEmpty &&
+                minGroupSize != nil &&
+                maxGroupSize != nil &&
+                advanceBookingLimit != nil
         }
         return false
     }

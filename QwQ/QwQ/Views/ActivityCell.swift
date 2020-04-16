@@ -68,7 +68,7 @@ class ActivityCell: UICollectionViewCell {
     }
 
     private func setUpAdmittedRecord(record: Record) {
-        statusLabel.text = "Admitted at: \(record.admitTime!.toString()). Please arrive within 15 minutes"
+        statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
         if let bookRecord = record as? BookRecord {
             statusLabel.text = "Reservation Time: \(bookRecord.time.toString()) (Admitted)"
         }

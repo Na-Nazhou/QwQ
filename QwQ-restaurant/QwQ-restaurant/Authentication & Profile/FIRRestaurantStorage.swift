@@ -30,7 +30,10 @@ class FIRRestaurantStorage: RestaurantStorage {
                       Constants.contactKey: signupDetails.contact,
                       Constants.emailKey: email,
                       Constants.addressKey: "",
-                      Constants.menuKey: ""]) { (error) in
+                      Constants.menuKey: "",
+                      Constants.minGroupSizeKey: Restaurant.defaultMinGroupSize,
+                      Constants.maxGroupSizeKey: Restaurant.defaultMaxGroupSize,
+                      Constants.advanceBookingLimitKey: Restaurant.defaultAdvanceBookingLimit]) { (error) in
             if let error = error {
                 errorHandler(error)
             }
@@ -88,7 +91,6 @@ class FIRRestaurantStorage: RestaurantStorage {
                 errorHandler(error)
                 return
             }
-            RestaurantPostLoginSetupManager.restaurantDidUpdateProfile(updated: restaurant)
             completion()
         }
     }

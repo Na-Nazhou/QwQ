@@ -44,6 +44,18 @@ class ProfileViewController: UIViewController {
         self.contactLabel.text = restaurant.contact
         self.addressLabel.text = restaurant.address
         self.menuLabel.text = restaurant.menu
+        self.groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
+        self.advanceBookingLimitLabel.text = "\(restaurant.advanceBookingLimit) hours"
+        // TODO: use auto open/close time
+        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {
+            queueTimingLabel.text = "Opened at \(openTime.getFormattedTime())"
+        } else {
+            if let closeTime = restaurant.queueCloseTime {
+                queueTimingLabel.text = "Closed at \(closeTime.getFormattedTime())"
+            } else {
+                queueTimingLabel.text = "Closed"
+            }
+        }
 
         Profile.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
     }

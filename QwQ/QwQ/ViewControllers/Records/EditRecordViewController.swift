@@ -156,6 +156,19 @@ class EditRecordViewController: UIViewController {
             return false
         }
 
+        if !restaurants.allSatisfy { groupSize >= $0.minGroupSize } {
+            showMessage(title: Constants.errorTitle,
+                        message: "Group size must be larger than the minimum group size",
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
+        if !restaurants.allSatisfy { groupSize <= $0.maxGroupSize } {
+             showMessage(title: Constants.errorTitle,
+                         message: "Group size must be smaller than the maximum group size",
+                         buttonText: Constants.okayTitle)
+        }
+
         return true
     }
 }

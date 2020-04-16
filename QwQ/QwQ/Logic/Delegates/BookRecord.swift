@@ -58,14 +58,10 @@ struct BookRecord: Record {
     }
 
     init(restaurant: Restaurant, customer: Customer, time: Date,
-         groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
-         admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil, confirmAdmissionTime: Date? = nil) {
+         groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool) {
         self.init(id: UUID().uuidString, restaurant: restaurant, customer: customer, time: time,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
-                  wheelchairFriendly: wheelchairFriendly,
-                  admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime, withdrawTime: withdrawTime)
+                  wheelchairFriendly: wheelchairFriendly)
     }
 
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,

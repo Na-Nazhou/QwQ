@@ -2,6 +2,11 @@ import FirebaseFirestore
 import Foundation
 
 struct Restaurant: User {
+
+    static let defaultMinGroupSize = 1
+    static let defaultMaxGroupSize = 100
+    static let defaultAdvanceBookingLimit = 2
+
     let uid: String
     let name: String
     let email: String
@@ -9,6 +14,13 @@ struct Restaurant: User {
 
     let address: String
     let menu: String
+
+    let minGroupSize: Int
+    let maxGroupSize: Int
+    let advanceBookingLimit: Int
+
+    let autoOpenTime: Date?
+    let autoCloseTime: Date?
 
     //previous recorded times
     var queueOpenTime: Date?
@@ -39,20 +51,13 @@ struct Restaurant: User {
             Constants.addressKey: address,
             Constants.menuKey: menu,
             Constants.queueOpenTimeKey: queueOpenTime as Any,
-            Constants.queueCloseTimeKey: queueCloseTime as Any
+            Constants.queueCloseTimeKey: queueCloseTime as Any,
+            Constants.autoOpenTimeKey: autoOpenTime as Any,
+            Constants.autoCloseTimeKey: autoCloseTime as Any,
+            Constants.maxGroupSizeKey: maxGroupSize,
+            Constants.minGroupSizeKey: minGroupSize,
+            Constants.advanceBookingLimitKey: advanceBookingLimit
         ]
-    }
-
-    init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil) {
-        self.uid = uid
-        self.name = name
-        self.email = email
-        self.contact = contact
-        self.address = address
-        self.menu = menu
-        self.queueOpenTime = queueOpenTime
-        self.queueCloseTime = queueCloseTime
     }
 
     init?(dictionary: [String: Any]) {
@@ -61,17 +66,44 @@ struct Restaurant: User {
             let email = dictionary[Constants.emailKey] as? String,
             let contact = dictionary[Constants.contactKey] as? String,
             let address = dictionary[Constants.addressKey] as? String,
-            let menu = dictionary[Constants.menuKey] as? String
+            let menu = dictionary[Constants.menuKey] as? String,
+            let maxGroupSize = dictionary[Constants.maxGroupSizeKey] as? Int,
+            let minGroupSize = dictionary[Constants.minGroupSizeKey] as? Int,
+            let advanceBookingLimit = dictionary[Constants.advanceBookingLimitKey] as? Int
             else {
                 return nil
         }
 
         let queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
         let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
-        
+        let autoOpenTime = (dictionary[Constants.autoOpenTimeKey] as? Timestamp)?.dateValue()
+        let autoCloseTime = (dictionary[Constants.autoCloseTimeKey] as? Timestamp)?.dateValue()
+
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
-                  menu: menu, queueOpenTime: queueOpenTime,
-                  queueCloseTime: queueCloseTime)
+                  menu: menu, maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
+                  advanceBookingLimit: advanceBookingLimit,
+                  queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
+                  autoOpenTime: autoOpenTime, autoCloseTime: autoCloseTime)
+    }
+
+    init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
+         maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
+         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
+         autoOpenTime: Date? = nil, autoCloseTime: Date? = nil) {
+        // TODO: settle auto open and auto close
+        self.uid = uid
+        self.name = name
+        self.email = email
+        self.contact = contact
+        self.address = address
+        self.menu = menu
+        self.queueOpenTime = queueOpenTime
+        self.queueCloseTime = queueCloseTime
+        self.autoOpenTime = autoOpenTime
+        self.autoCloseTime = autoCloseTime
+        self.maxGroupSize = maxGroupSize
+        self.minGroupSize = minGroupSize
+        self.advanceBookingLimit = advanceBookingLimit
     }
 }
 

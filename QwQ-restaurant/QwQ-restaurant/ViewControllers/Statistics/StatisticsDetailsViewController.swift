@@ -19,8 +19,13 @@ class StatisticsDetailsViewController: UIViewController {
 
     var spinner: UIView?
 
+    // MARK: Logic properties
+    var statsManager: RestaurantStatisticsLogicManager!
+
     // MARK: Model properties
-    var statisticsDetails: Statistics?
+    var statisticsDetails: Statistics? {
+        statsManager.currentStats
+    }
     
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
@@ -28,7 +33,9 @@ class StatisticsDetailsViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        statsManager.statsDetailsDelegate = self
+
         setUpViews()
     }
     
@@ -37,11 +44,19 @@ class StatisticsDetailsViewController: UIViewController {
             return
         }
         
-        queueCancellationRateLabel.text = "\(details.queueCancellationRate)%"
-        bookingCancellationRateLabel.text = "\(details.bookingCancellationRate)%"
+        queueCancellationRateLabel.text = "\(details.totalQueueCancelled)/\(details.totalNumOfQueueRecords) (\(details.queueCancellationRate)%)"
+        bookingCancellationRateLabel.text = "\(details.totalBookingCancelled)/\(details.totalNumOfBookRecords) (\(details.bookingCancellationRate)%)"
         numberOfCustomersLabel.text = "\(details.numberOfCustomers)"
         avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
         avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
-        dateLabel.text = "\(details.fromDate.getFomattedDate()) - \(details.toDate.getFomattedDate())"
+        dateLabel.text = details.formattedDateRange
     }
+}
+
+extension StatisticsDetailsViewController: StatsDetailsDelegate {
+
+    func didCompleteFetchingData() {
+        setUpViews()
+    }
+
 }
