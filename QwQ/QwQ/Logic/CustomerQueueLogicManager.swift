@@ -1,7 +1,7 @@
 import Foundation
 import os.log
 
-class CustomerQueueLogicManager: CustomerQueueLogic {
+class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, CustomerQueueLogic {
 
     // Storage
     private var queueStorage: CustomerQueueStorage
@@ -12,7 +12,6 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     // View Controller
     weak var queueDelegate: QueueDelegate?
     weak var searchDelegate: SearchDelegate?
-    weak var activitiesDelegate: ActivitiesDelegate?
 
     // Models
     private let customerActivity: CustomerActivity
@@ -27,7 +26,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         customerActivity.queueRecords
     }
 
-    convenience init() {
+    override convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
                   queueStorage: FIRQueueStorage.shared,
                   notificationHandler: QwQNotificationManager.shared)
@@ -39,6 +38,8 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         self.customerActivity = customerActivity
         self.queueStorage = queueStorage
         self.notificationHandler = notificationHandler
+
+        super.init()
 
         self.queueStorage.registerDelegate(self)
     }
@@ -114,52 +115,56 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         }
     }
 
-    func withdrawQueueRecord(_ queueRecord: QueueRecord) {
-        withdrawQueueRecord(queueRecord) {
+    func withdrawQueueRecord(_ record: QueueRecord) {
+        withdrawQueueRecord(record) {
             self.activitiesDelegate?.didWithdrawRecord()
         }
     }
     
-    private func withdrawQueueRecord(_ queueRecord: QueueRecord, completion: @escaping () -> Void) {
-        var newRecord = queueRecord
-        newRecord.withdrawTime = Date()
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord,
-                                       completion: completion)
+    private func withdrawQueueRecord(_ record: QueueRecord, completion: @escaping () -> Void) {
+        let newRecord = getUpdatedRecord(record: record, event: .withdraw)
+        queueStorage.updateQueueRecord(oldRecord: record, newRecord: newRecord, completion: completion)
     }
 
-    private func withdrawQueueRecords(_ queueRecords: [QueueRecord], completion: @escaping () -> Void) {
-        guard !queueRecords.isEmpty else {
+    private func withdrawQueueRecords(_ records: [QueueRecord], completion: @escaping () -> Void) {
+        guard !records.isEmpty else {
             completion()
             return
         }
-        let withdrawTime = Date()
-        var newRecords = [QueueRecord]()
-        for record in queueRecords {
-            var newRecord = record
-            newRecord.withdrawTime = withdrawTime
-            newRecords.append(newRecord)
+        let newRecords = records.map {
+            getUpdatedRecord(record: $0, event: .withdraw)
         }
         queueStorage.updateQueueRecords(newRecords: newRecords, completion: completion)
     }
 
     func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
-        confirmAdmissionOfQueueRecord(record, completion: {
+        confirmAdmission(of: record, completion: {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
         })
     }
 
-    private func confirmAdmissionOfQueueRecord(_ queueRecord: QueueRecord,
-                                               completion: @escaping () -> Void) {
-        var newRecord = queueRecord
+    private func confirmAdmission(of record: QueueRecord,
+                                  completion: @escaping () -> Void) {
+        var newRecord = record
         newRecord.confirmAdmissionTime = Date()
-        queueStorage.updateQueueRecord(oldRecord: queueRecord, newRecord: newRecord) {
-            self.withdrawQueueRecords(self.clashingRecords(with: queueRecord), completion: completion)
+        queueStorage.updateQueueRecord(oldRecord: record, newRecord: newRecord) {
+            self.withdrawQueueRecords(self.clashingRecords(with: record), completion: completion)
         }
     }
 
     private func clashingRecords(with record: QueueRecord) -> [QueueRecord] {
         currentQueueRecords.filter { $0 != record && ($0.isPendingAdmission || $0.isAdmitted) }
     }
+
+    override func removeRecord(_ record: QueueRecord, from collection: RecordCollection<QueueRecord>) {
+        super.removeRecord(record, from: collection)
+        searchDelegate?.didUpdateQueueRecordCollection()
+    }
+}
+
+extension CustomerQueueLogicManager {
+
+    // MARK: Syncing
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
         guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
@@ -181,11 +186,11 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         case .reject:
             didRejectQueueRecord(record)
         case .withdraw:
-            didWithdrawQueuerecord(record)
+            didWithdrawQueueRecord(record)
         case .customerUpdate:
-            customerDidUpdateQueueRecord(record: record)
+            customerDidUpdateQueueRecord(record)
         case .confirmAdmission:
-            didConfirmAdmissionOfQueueRecord(record)
+            didConfirmAdmission(of: record)
         default:
             assert(false, "Modification should be something")
         }
@@ -193,20 +198,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     func didAddQueueRecord(_ record: QueueRecord) {
         os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
-        if record.isActiveRecord && customerActivity.currentQueues.add(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-        if record.isHistoryRecord && customerActivity.queueHistory.add(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
+        super.didAddRecord(record,
+                           customerActivity.currentQueues,
+                           customerActivity.queueHistory)
         searchDelegate?.didUpdateQueueRecordCollection()
     }
 
-    private func customerDidUpdateQueueRecord(record: QueueRecord) {
-        os_log("Detected regular modification", log: Log.regularModification, type: .info)
-        if record.isActiveRecord && customerActivity.currentQueues.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
+    private func customerDidUpdateQueueRecord(_ record: QueueRecord) {
+        super.customerDidUpdateRecord(record,
+                                      customerActivity.currentQueues)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
@@ -217,57 +217,42 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         activitiesDelegate?.didUpdateActiveRecords()
 
         if clashingRecords(with: record).isEmpty {
-            confirmAdmissionOfQueueRecord(record, completion: {})
+            confirmAdmission(of: record, completion: {})
             return
         }
         notificationHandler.notifyQueueAdmittedAwaitingConfirmation(record: record)
     }
 
-    private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
-        os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
-        if customerActivity.currentQueues.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
+    private func didConfirmAdmission(of record: QueueRecord) {
+        super.didConfirmRecord(record,
+                               customerActivity.currentQueues)
 
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.notifyQueueConfirmed(record: record)
     }
 
-    private func didWithdrawQueuerecord(_ record: QueueRecord) {
-        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
-        removeFromCurrentQueue(record)
-        addToHistoryQueue(record)
-
-        notificationHandler.retractQueueNotifications(for: record)
-    }
-
     private func didServeQueueRecord(_ record: QueueRecord) {
-        os_log("Detected service", log: Log.serveCustomer, type: .info)
-        removeFromCurrentQueue(record)
-        addToHistoryQueue(record)
+        super.didServeRecord(record,
+                             customerActivity.currentQueues,
+                             customerActivity.queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
-        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
-        removeFromCurrentQueue(record)
-        addToHistoryQueue(record)
+         super.didRejectRecord(record,
+                               customerActivity.currentQueues,
+                               customerActivity.queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.retractQueueNotifications(for: record)
     }
 
-    private func removeFromCurrentQueue(_ record: QueueRecord) {
-        if customerActivity.currentQueues.remove(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-        searchDelegate?.didUpdateQueueRecordCollection()
-    }
+    private func didWithdrawQueueRecord(_ record: QueueRecord) {
+        super.didWithdrawRecord(record,
+                                customerActivity.currentQueues,
+                                customerActivity.queueHistory)
 
-    private func addToHistoryQueue(_ record: QueueRecord) {
-        if customerActivity.queueHistory.add(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
+        notificationHandler.retractQueueNotifications(for: record)
     }
 }

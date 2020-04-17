@@ -108,6 +108,11 @@ class RestaurantLogicManager: RestaurantLogic {
                                                completion: {},
                                                errorHandler: { _ in })
     }
+}
+
+extension RestaurantLogicManager {
+
+    // MARK: Syncing
 
     func didUpdateRestaurant(restaurant: Restaurant) {
         restaurantActivity.updateRestaurant(restaurant)

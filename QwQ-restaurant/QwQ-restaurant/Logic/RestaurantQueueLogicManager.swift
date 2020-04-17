@@ -74,6 +74,11 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager, RestaurantQueue
         }
         return count
     }
+}
+
+extension RestaurantQueueLogicManager {
+
+    // MARK: Syncing
 
     func didAddQueueRecord(_ record: QueueRecord) {
         // Set estimated admit time

@@ -39,6 +39,11 @@ class RestaurantLogicManager: RestaurantLogic {
     deinit {
         restaurantStorage.unregisterDelegate(self)
     }
+}
+
+extension RestaurantLogicManager {
+
+    // MARK: Syncing
     
     func didUpdateRestaurant(restaurant: Restaurant) {
         if restaurantCollection.update(restaurant) {

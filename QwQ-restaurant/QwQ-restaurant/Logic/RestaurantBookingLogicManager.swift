@@ -51,6 +51,11 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager, RestaurantBoo
         bookingStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
                                     completion: completion)
     }
+}
+
+extension RestaurantBookingLogicManager {
+
+    // MARK: Syncing
 
     func didAddBookRecord(_ record: BookRecord) {
         var bookRecord = record
