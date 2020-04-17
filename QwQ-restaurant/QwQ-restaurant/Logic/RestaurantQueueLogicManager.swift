@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RestaurantQueueLogicManager: RestaurantRecordLogicManager, RestaurantQueueLogic {
+class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, RestaurantQueueLogic {
 
     // Storage
     private var queueStorage: RestaurantQueueStorage
@@ -106,15 +106,15 @@ extension RestaurantQueueLogicManager {
         }
 
         didAddRecord(newRecord,
-                     currentList: restaurantActivity.currentQueue,
-                     waitingList: restaurantActivity.waitingQueue,
-                     historyList: restaurantActivity.historyQueue)
+                     restaurantActivity.currentQueue,
+                     restaurantActivity.waitingQueue,
+                     restaurantActivity.historyQueue)
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
         didUpdateRecord(record,
-                        currentList: restaurantActivity.currentQueue,
-                        waitingList: restaurantActivity.waitingQueue,
-                        historyList: restaurantActivity.historyQueue)
+                        restaurantActivity.currentQueue,
+                        restaurantActivity.waitingQueue,
+                        restaurantActivity.historyQueue)
     }
 }

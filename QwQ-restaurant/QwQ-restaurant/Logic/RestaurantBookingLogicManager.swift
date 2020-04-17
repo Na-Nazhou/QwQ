@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RestaurantBookingLogicManager: RestaurantRecordLogicManager, RestaurantBookingLogic {
+class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, RestaurantBookingLogic {
 
     // Storage
     private var bookingStorage: RestaurantBookingStorage
@@ -59,27 +59,34 @@ extension RestaurantBookingLogicManager {
 
     func didAddBookRecord(_ record: BookRecord) {
         var bookRecord = record
-        bookRecord.autoRejectTimer = Timer(fireAt: record.time,
-                                           interval: 1,
-                                           target: self,
-                                           selector: #selector(handleAutoRejectTimer),
-                                           userInfo: nil,
-                                           repeats: false)
-        RunLoop.main.add(bookRecord.autoRejectTimer!, forMode: .common)
+        if bookRecord.isPendingAdmission {
+            bookRecord.autoRejectTimer = Timer(fireAt: record.time,
+                                               interval: 1,
+                                               target: self,
+                                               selector: #selector(handleAutoRejectTimer),
+                                               userInfo: bookRecord,
+                                               repeats: false)
+            RunLoop.main.add(bookRecord.autoRejectTimer!, forMode: .common)
+        }
+
         didAddRecord(bookRecord,
-                     currentList: restaurantActivity.currentBookings,
-                     waitingList: restaurantActivity.waitingBookings,
-                     historyList: restaurantActivity.historyBookings)
+                     restaurantActivity.currentBookings,
+                     restaurantActivity.waitingBookings,
+                     restaurantActivity.historyBookings)
     }
 
-    @objc func handleAutoRejectTimer() {
-
+    @objc func handleAutoRejectTimer(timer: Timer) {
+        if let record = timer.userInfo as? BookRecord {
+            if record.isPendingAdmission {
+                rejectCustomer(record: record, completion: {})
+            }
+        }
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
         didUpdateRecord(record,
-                        currentList: restaurantActivity.currentBookings,
-                        waitingList: restaurantActivity.waitingBookings,
-                        historyList: restaurantActivity.historyBookings)
+                        restaurantActivity.currentBookings,
+                        restaurantActivity.waitingBookings,
+                        restaurantActivity.historyBookings)
     }
 }

@@ -7,15 +7,15 @@
 
 import Foundation
 
-class RestaurantRecordLogicManager {
+class RestaurantRecordLogicManager<T: Record & Hashable> {
 
     // View Controller
     weak var activitiesDelegate: ActivitiesDelegate?
 
-    func didAddRecord<T: Record>(_ record: T,
-                                 currentList: RecordCollection<T>,
-                                 waitingList: RecordCollection<T>,
-                                 historyList: RecordCollection<T>) {
+    func didAddRecord(_ record: T,
+                      _ currentList: RecordCollection<T>,
+                      _ waitingList: RecordCollection<T>,
+                      _ historyList: RecordCollection<T>) {
         if record.isPendingAdmission {
             if addRecord(record, to: currentList) {
                 self.activitiesDelegate?.didUpdateCurrentList()
@@ -35,14 +35,14 @@ class RestaurantRecordLogicManager {
         }
     }
 
-    private func addRecord<T: Record>(_ record: T, to collection: RecordCollection<T>) -> Bool {
+    private func addRecord(_ record: T, to collection: RecordCollection<T>) -> Bool {
         collection.add(record)
     }
 
-    func didUpdateRecord<T: Record>(_ record: T,
-                                    currentList: RecordCollection<T>,
-                                    waitingList: RecordCollection<T>,
-                                    historyList: RecordCollection<T>) {
+    func didUpdateRecord(_ record: T,
+                         _ currentList: RecordCollection<T>,
+                         _ waitingList: RecordCollection<T>,
+                         _ historyList: RecordCollection<T>) {
         if record.isPendingAdmission {
             didCustomerUpdateRecord(record, currentList)
         }
@@ -60,14 +60,14 @@ class RestaurantRecordLogicManager {
         }
     }
 
-    func didCustomerUpdateRecord<T: Record>(_ record: T, _ currentList: RecordCollection<T>) {
+    func didCustomerUpdateRecord(_ record: T, _ currentList: RecordCollection<T>) {
         currentList.update(record)
         activitiesDelegate?.didUpdateCurrentList()
     }
 
-    private func didAdmitRecord<T: Record>(_ record: T,
-                                           _ currentList: RecordCollection<T>,
-                                           _ waitingList: RecordCollection<T>) {
+    private func didAdmitRecord(_ record: T,
+                                _ currentList: RecordCollection<T>,
+                                _ waitingList: RecordCollection<T>) {
         if currentList.remove(record) {
             activitiesDelegate?.didUpdateCurrentList()
         }
@@ -76,9 +76,9 @@ class RestaurantRecordLogicManager {
         }
     }
 
-    private func didConfirmRecord<T: Record>(_ record: T,
-                                             _ currentList: RecordCollection<T>,
-                                             _ waitingList: RecordCollection<T>) {
+    private func didConfirmRecord(_ record: T,
+                                  _ currentList: RecordCollection<T>,
+                                  _ waitingList: RecordCollection<T>) {
         if currentList.remove(record) {
             activitiesDelegate?.didUpdateCurrentList()
         }
@@ -90,10 +90,10 @@ class RestaurantRecordLogicManager {
         }
     }
 
-    private func didArchiveRecord<T: Record>(_ record: T,
-                                             _ currentList: RecordCollection<T>,
-                                             _ waitingList: RecordCollection<T>,
-                                             _ historyList: RecordCollection<T>) {
+    private func didArchiveRecord(_ record: T,
+                                  _ currentList: RecordCollection<T>,
+                                  _ waitingList: RecordCollection<T>,
+                                  _ historyList: RecordCollection<T>) {
         if currentList.remove(record) {
             activitiesDelegate?.didUpdateCurrentList()
         }
@@ -107,7 +107,7 @@ class RestaurantRecordLogicManager {
         }
     }
 
-    func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
+    func getUpdatedRecord(record: T, event: RecordModification) -> T {
         var new = record
         let time = Date()
         switch event {
