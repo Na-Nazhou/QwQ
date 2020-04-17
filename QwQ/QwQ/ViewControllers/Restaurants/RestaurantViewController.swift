@@ -23,13 +23,13 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     @IBOutlet private var bannerImageView: UIImageView!
     
     // MARK: Logic properties
-    var bookingLogicManager: CustomerBookingLogicManager!
-    var queueLogicManager: CustomerQueueLogicManager!
-    var restaurantLogicManager: RestaurantLogicManager!
+    var bookingLogic: CustomerBookingLogic!
+    var queueLogic: CustomerQueueLogic!
+    var restaurantLogic: RestaurantLogic!
 
     // MARK: Model properties
     var restaurant: Restaurant? {
-        restaurantLogicManager.currentRestaurant
+        restaurantLogic.currentRestaurant
     }
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         
         setUpViews()
 
-        restaurantLogicManager.restaurantDelegate = self
+        restaurantLogic.restaurantDelegate = self
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -55,7 +55,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
     @discardableResult
     private func checkRestaurantQueue(for restaurant: Restaurant) -> Bool {
-        guard !queueLogicManager.canQueue(for: restaurant) else {
+        guard !queueLogic.canQueue(for: restaurant) else {
             return true
         }
         var format = Constants.alreadyQueuedRestaurantMessage
@@ -100,7 +100,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 
         FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
-        if queueLogicManager.canQueue(for: restaurant) {
+        if queueLogic.canQueue(for: restaurant) {
             queueButton.alpha = 1
         } else {
             queueButton.alpha = 0.5
@@ -122,10 +122,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                 return
             }
 
-            restaurantLogicManager.currentRestaurants = [restaurant]
+            restaurantLogic.currentRestaurants = [restaurant]
 
-            editQVC.queueLogicManager = queueLogicManager
-            editQVC.restaurantLogicManager = restaurantLogicManager
+            editQVC.queueLogic = queueLogic
+            editQVC.restaurantLogic = restaurantLogic
         }
         if segue.identifier == Constants.editBookSelectedSegue {
             guard let editBVC = segue.destination as? EditBookingViewController else {
@@ -134,10 +134,10 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
                 return
             }
 
-            restaurantLogicManager.currentRestaurants = [restaurant]
+            restaurantLogic.currentRestaurants = [restaurant]
 
-            editBVC.restaurantLogicManager = restaurantLogicManager
-            editBVC.bookingLogicManager = bookingLogicManager
+            editBVC.restaurantLogic = restaurantLogic
+            editBVC.bookingLogic = bookingLogic
             return
         }
     }

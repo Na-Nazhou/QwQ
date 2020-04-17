@@ -20,4 +20,6 @@ protocol RestaurantBookingStorage: BookingStorageSync {
     // MARK: - Modifiers
     func updateRecord(oldRecord: BookRecord, newRecord: BookRecord,
                       completion: @escaping () -> Void)
+
+    func updateRecords(newRecords: [BookRecord], completion: @escaping () -> Void)
 }

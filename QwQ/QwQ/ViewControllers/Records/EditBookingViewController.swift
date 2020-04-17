@@ -7,17 +7,17 @@
 
 import UIKit
 
-class EditBookingViewController: EditRecordViewController, BookingDelegate {
+class EditBookingViewController: EditRecordViewController {
 
     // MARK: View properties
     @IBOutlet var datePicker: UIDatePicker!
 
-    var advanceBookingLimit: Int {
-        restaurants.map { $0.advanceBookingLimit }.max() ?? 2
-    }
-
     // MARK: Logic properties
-    var bookingLogicManager: CustomerBookingLogic!
+    var bookingLogic: CustomerBookingLogic!
+
+    var advanceBookingLimit: Int {
+        restaurants.map { $0.advanceBookingLimit }.max()!
+    }
 
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
@@ -31,29 +31,29 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         
         // Edit existing book record
         if let bookRecord = record as? BookRecord {
-            if bookingLogicManager.editBookRecord(oldRecord: bookRecord,
-                                                  at: datePicker.date,
-                                                  with: groupSize,
-                                                  babyChairQuantity: babyChairQuantity,
-                                                  wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+            if bookingLogic.editBookRecord(oldRecord: bookRecord,
+                                           at: datePicker.date,
+                                           with: groupSize,
+                                           babyChairQuantity: babyChairQuantity,
+                                           wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
                 spinner = showSpinner(onView: view)
             }
             return
         }
 
         // Create a new book record
-        if bookingLogicManager.addBookRecords(to: restaurants,
-                                              at: datePicker.date,
-                                              with: groupSize,
-                                              babyChairQuantity: babyChairQuantity,
-                                              wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+        if bookingLogic.addBookRecords(to: restaurants,
+                                       at: datePicker.date,
+                                       with: groupSize,
+                                       babyChairQuantity: babyChairQuantity,
+                                       wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
             spinner = showSpinner(onView: view)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bookingLogicManager.bookingDelegate = self
+        bookingLogic.bookingDelegate = self
     }
 
     override func setUpViews() {
@@ -76,6 +76,9 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
             datePicker.date = minDate
         }
     }
+}
+
+extension EditBookingViewController: BookingDelegate {
 
     func didFindExistingRecord(at restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,

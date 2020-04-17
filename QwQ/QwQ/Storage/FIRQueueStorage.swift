@@ -76,33 +76,6 @@ class FIRQueueStorage: CustomerQueueStorage {
             completion()
         }
     }
-
-    private func makeQueueRecord(document: DocumentSnapshot,
-                                 completion: @escaping (QueueRecord) -> Void) {
-        guard let data = document.data(),
-            let rid = data[Constants.restaurantKey] as? String else {
-            os_log("Error getting rid from Queue Record document.",
-                   log: Log.ridError, type: .error)
-            return
-        }
-        let qid = document.documentID
-
-        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
-            FIRProfileStorage.getCustomerInfo(
-                completion: { customer in
-                guard let rec = QueueRecord(dictionary: data,
-                                            customer: customer,
-                                            restaurant: restaurant,
-                                            id: qid) else {
-                                                os_log("Cannot create queue record. Maybe accidentally deleted.",
-                                                       log: Log.createQueueRecordError,
-                                                       type: .error)
-                                                return
-                    }
-                    completion(rec)
-                }, errorHandler: { _ in })
-        }, errorHandler: nil)
-    }
 }
 
 extension FIRQueueStorage {
@@ -138,6 +111,33 @@ extension FIRQueueStorage {
                         completion: completion)
                 }
             }
+    }
+
+    private func makeQueueRecord(document: DocumentSnapshot,
+                                 completion: @escaping (QueueRecord) -> Void) {
+        guard let data = document.data(),
+            let rid = data[Constants.restaurantKey] as? String else {
+            os_log("Error getting rid from Queue Record document.",
+                   log: Log.ridError, type: .error)
+            return
+        }
+        let qid = document.documentID
+
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
+            FIRProfileStorage.getCustomerInfo(
+                completion: { customer in
+                guard let rec = QueueRecord(dictionary: data,
+                                            customer: customer,
+                                            restaurant: restaurant,
+                                            id: qid) else {
+                                                os_log("Cannot create queue record. Maybe accidentally deleted.",
+                                                       log: Log.createQueueRecordError,
+                                                       type: .error)
+                                                return
+                    }
+                    completion(rec)
+                }, errorHandler: { _ in })
+        }, errorHandler: nil)
     }
 
     func removeListener() {

@@ -76,34 +76,6 @@ class FIRBookingStorage: CustomerBookingStorage {
             completion()
         }
     }
-
-    private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
-
-        guard let data = document.data(),
-            let rid = data[Constants.restaurantKey] as? String else {
-                os_log("Error getting rid from Book Record document.",
-                       log: Log.ridError, type: .error)
-            return
-        }
-
-        let bid = document.documentID
-
-        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
-            FIRProfileStorage.getCustomerInfo(
-                completion: { customer in
-                    guard let rec = BookRecord(dictionary: data,
-                                               customer: customer,
-                                               restaurant: restaurant,
-                                               id: bid) else {
-                                                   os_log("Couldn't create book record.",
-                                                          log: Log.createBookRecordError,
-                                                          type: .error)
-                                                return
-                    }
-                    completion(rec)
-                }, errorHandler: { _ in })
-        }, errorHandler: nil)
-    }
 }
 
 extension FIRBookingStorage {
@@ -140,6 +112,34 @@ extension FIRBookingStorage {
                         completion: completion)
                 }
             }
+    }
+
+    private func makeBookRecord(document: DocumentSnapshot, completion: @escaping (BookRecord) -> Void) {
+
+        guard let data = document.data(),
+            let rid = data[Constants.restaurantKey] as? String else {
+                os_log("Error getting rid from Book Record document.",
+                       log: Log.ridError, type: .error)
+            return
+        }
+
+        let bid = document.documentID
+
+        FIRRestaurantInfoStorage.getRestaurantFromUID(uid: rid, completion: { restaurant in
+            FIRProfileStorage.getCustomerInfo(
+                completion: { customer in
+                    guard let rec = BookRecord(dictionary: data,
+                                               customer: customer,
+                                               restaurant: restaurant,
+                                               id: bid) else {
+                                                   os_log("Couldn't create book record.",
+                                                          log: Log.createBookRecordError,
+                                                          type: .error)
+                                                return
+                    }
+                    completion(rec)
+                }, errorHandler: { _ in })
+        }, errorHandler: nil)
     }
 
     func removeListener() {

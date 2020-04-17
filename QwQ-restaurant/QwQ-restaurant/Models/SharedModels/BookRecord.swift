@@ -31,6 +31,8 @@ struct BookRecord: Record {
         admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
     }
 
+    var autoRejectTimer: Timer?
+
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.restaurantKey] = restaurant.uid

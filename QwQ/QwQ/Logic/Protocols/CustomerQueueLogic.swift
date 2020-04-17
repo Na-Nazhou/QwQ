@@ -7,6 +7,7 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
     var searchDelegate: SearchDelegate? { get set }
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
+    func canQueue(for restaurant: Restaurant) -> Bool
     func enqueue(to restaurants: [Restaurant],
                  with groupSize: Int,
                  babyChairQuantity: Int,

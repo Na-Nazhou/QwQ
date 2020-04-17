@@ -10,6 +10,7 @@ import Foundation
 import os.log
 
 class FIRBookingStorage: RestaurantBookingStorage {
+
     // MARK: Storage as singleton
     static let shared = FIRBookingStorage()
 
@@ -45,6 +46,24 @@ class FIRBookingStorage: RestaurantBookingStorage {
                     return
                 }
                 completion()
+        }
+    }
+
+    func updateRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
+        let batch = db.batch()
+        for newRecord in newRecords {
+            let newRecordRef = getBookRecordDocument(record: newRecord)
+            batch.setData(newRecord.dictionary, forDocument: newRecordRef)
+        }
+        batch.commit { err in
+            if let err = err {
+                os_log("Error updating book record",
+                       log: Log.updateBookRecordError,
+                       type: .error,
+                       err.localizedDescription)
+                return
+            }
+            completion()
         }
     }
 }

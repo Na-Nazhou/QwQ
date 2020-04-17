@@ -74,7 +74,12 @@ class RecordCell: UICollectionViewCell {
     private func setUpPendingAdmissionRecord(record: Record) {
         if let queueRecord = record as? QueueRecord {
             statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-            timeLabel.text = queueRecord.estimatedAdmitTime!.getFormattedTime()
+            if let estimatedAdmitime = queueRecord.estimatedAdmitTime {
+                timeLabel.text = estimatedAdmitime.getFormattedTime()
+            } else {
+                timeLabel.text = queueRecord.startTime.getFormattedTime()
+            }
+
             disableRightButton()
         }
         if let bookRecord = record as? BookRecord {

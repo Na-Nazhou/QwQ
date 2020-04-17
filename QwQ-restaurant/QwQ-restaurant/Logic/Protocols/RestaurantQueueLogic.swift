@@ -5,4 +5,12 @@
 //  Created by Nazhou Na on 17/4/20.
 //
 
-import Foundation
+protocol RestaurantQueueLogic: QueueStorageSyncDelegate {
+
+    // View Controllers
+    var activitiesDelegate: ActivitiesDelegate? { get set }
+
+    func admitCustomer(record: QueueRecord, completion: @escaping () -> Void)
+    func serveCustomer(record: QueueRecord, completion: @escaping () -> Void)
+    func rejectCustomer(record: QueueRecord, completion: @escaping () -> Void)
+}

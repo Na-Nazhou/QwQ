@@ -228,6 +228,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
+
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.notifyQueueConfirmed(record: record)
     }
@@ -236,6 +237,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         removeFromCurrentQueue(record)
         addToHistoryQueue(record)
+
         notificationHandler.retractQueueNotifications(for: record)
     }
 
@@ -251,6 +253,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         removeFromCurrentQueue(record)
         addToHistoryQueue(record)
+
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.retractQueueNotifications(for: record)
     }
