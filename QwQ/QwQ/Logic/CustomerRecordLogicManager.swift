@@ -63,30 +63,25 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
     }
 
     func addRecord(_ record: T, to collection: RecordCollection<T>) {
-        if record.isActiveRecord && collection.add(record) {
+        collection.add(record)
+        if record.isActiveRecord {
             activitiesDelegate?.didUpdateActiveRecords()
         }
-        if record.isHistoryRecord && collection.add(record) {
+        if record.isHistoryRecord {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
 
     func removeRecord(_ record: T, from collection: RecordCollection<T>) {
-        if record.isActiveRecord && collection.remove(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-        if record.isHistoryRecord && collection.remove(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
+        collection.remove(record)
+        activitiesDelegate?.didUpdateActiveRecords()
+        activitiesDelegate?.didUpdateHistoryRecords()
     }
 
     func updateRecord(_ record: T, in collection: RecordCollection<T>) {
-        if record.isActiveRecord && collection.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-        if record.isHistoryRecord && collection.update(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
+        collection.update(record)
+        activitiesDelegate?.didUpdateActiveRecords()
+        activitiesDelegate?.didUpdateHistoryRecords()
     }
 
     func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {

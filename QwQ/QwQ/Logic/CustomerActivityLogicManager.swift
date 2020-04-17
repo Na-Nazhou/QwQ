@@ -17,7 +17,7 @@ class CustomerActivityLogicManager: CustomerActivityLogic {
     }
 
     var activeRecords: [Record] {
-                customerActivity.activeRecords.sorted(by: { record1, record2 in
+        customerActivity.activeRecords.sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if let queueRecord1 = record1 as? QueueRecord {
@@ -35,7 +35,7 @@ class CustomerActivityLogicManager: CustomerActivityLogic {
     }
 
     var historyRecords: [Record] {
-                customerActivity.historyRecords.sorted(by: { record1, record2 in
+        customerActivity.historyRecords.sorted(by: { record1, record2 in
             let time1: Date
             let time2: Date
             if record1.isServed {
