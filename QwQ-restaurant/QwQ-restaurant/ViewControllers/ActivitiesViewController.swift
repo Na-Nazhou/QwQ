@@ -27,7 +27,7 @@ class ActivitiesViewController: UIViewController {
     var selectedControl: SelectedControl = .current
 
     // MARK: Logic properties
-    let activityLogicManager = RestaurantActivityLogicManager()
+    let activityLogicManager: RestaurantActivityLogic = RestaurantActivityLogicManager()
     
     // MARK: Model properties
     var filtered: [Record] = []

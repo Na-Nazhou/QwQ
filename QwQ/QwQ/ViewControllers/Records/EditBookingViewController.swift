@@ -17,7 +17,7 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
     }
 
     // MARK: Logic properties
-    var bookingLogicManager: CustomerBookingLogicManager!
+    var bookingLogicManager: CustomerBookingLogic!
 
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {

@@ -13,11 +13,13 @@ class EditRecordViewController: UIViewController {
     var spinner: UIView?
 
     // MARK: Logic properties
-    var restaurantLogicManager: RestaurantLogicManager?
+    // For creating records
+    var restaurantLogicManager: RestaurantLogic?
 
     // MARK: Model properties
     // For editing a record
     var record: Record?
+
     // For creating records
     var restaurants: [Restaurant] {
         restaurantLogicManager?.currentRestaurants ?? []

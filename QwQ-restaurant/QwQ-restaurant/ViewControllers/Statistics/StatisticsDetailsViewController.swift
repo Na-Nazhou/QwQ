@@ -20,7 +20,7 @@ class StatisticsDetailsViewController: UIViewController {
     var spinner: UIView?
 
     // MARK: Logic properties
-    var statsManager: RestaurantStatisticsLogicManager!
+    var statsManager: RestaurantStatisticsLogic!
 
     // MARK: Model properties
     var statisticsDetails: Statistics? {

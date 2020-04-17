@@ -55,7 +55,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     }
 
     func openQueue() {
-        let time = currentTime()
+        let time = Date()
         var new = restaurant
         new.queueOpenTime = time
 
@@ -63,7 +63,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     }
 
     func closeQueue() {
-        let time = currentTime()
+        let time = Date()
         var new = restaurant
         new.queueCloseTime = time
 
@@ -115,7 +115,7 @@ extension RestaurantActivityLogicManager {
         }
     }
 
-    func addRecord<T: Record>(_ record: T, to collection: RecordCollection<T>) -> Bool {
+    private func addRecord<T: Record>(_ record: T, to collection: RecordCollection<T>) -> Bool {
         collection.add(record)
     }
 
@@ -300,9 +300,9 @@ extension RestaurantActivityLogicManager {
                                     completion: completion)
     }
 
-    func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
+    private func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
         var new = record
-        let time = currentTime()
+        let time = Date()
         switch event {
         case .admit:
             new.admitTime = time
@@ -314,11 +314,5 @@ extension RestaurantActivityLogicManager {
             assert(false)
         }
         return new
-    }
-}
-
-extension RestaurantActivityLogicManager {
-    private func currentTime() -> Date {
-        Date()
     }
 }

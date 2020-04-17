@@ -21,13 +21,13 @@ class RestaurantActivity {
     // MARK: Properties
     private(set) var restaurant: Restaurant
 
-    var currentQueue: RecordCollection<QueueRecord>
-    var waitingQueue: RecordCollection<QueueRecord>
-    var historyQueue: RecordCollection<QueueRecord>
+    let currentQueue = RecordCollection<QueueRecord>()
+    let waitingQueue = RecordCollection<QueueRecord>()
+    let historyQueue = RecordCollection<QueueRecord>()
 
-    var currentBookings: RecordCollection<BookRecord>
-    var waitingBookings: RecordCollection<BookRecord>
-    var historyBookings: RecordCollection<BookRecord>
+    let currentBookings = RecordCollection<BookRecord>()
+    let waitingBookings = RecordCollection<BookRecord>()
+    let historyBookings = RecordCollection<BookRecord>()
 
     var currentRecords: [Record] {
         let bookRecords = currentQueue.records
@@ -83,12 +83,6 @@ class RestaurantActivity {
 
     private init(restaurant: Restaurant) {
         self.restaurant = restaurant
-        currentQueue = RecordCollection<QueueRecord>()
-        currentBookings = RecordCollection<BookRecord>()
-        historyQueue = RecordCollection<QueueRecord>()
-        historyBookings = RecordCollection<BookRecord>()
-        waitingQueue = RecordCollection<QueueRecord>()
-        waitingBookings = RecordCollection<BookRecord>()
     }
 }
 

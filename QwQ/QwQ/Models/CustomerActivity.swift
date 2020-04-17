@@ -19,11 +19,10 @@ class CustomerActivity {
     // MARK: Properties
     private(set) var customer: Customer
 
-    var currentQueues: RecordCollection<QueueRecord>
-    var currentBookings: RecordCollection<BookRecord>
-
-    var queueHistory: RecordCollection<QueueRecord>
-    var bookingHistory: RecordCollection<BookRecord>
+    let currentQueues = RecordCollection<QueueRecord>()
+    let currentBookings = RecordCollection<BookRecord>()
+    let queueHistory = RecordCollection<QueueRecord>()
+    let bookingHistory = RecordCollection<BookRecord>()
 
     var activeRecords: [Record] {
         currentQueues.records + currentBookings.records
@@ -43,10 +42,6 @@ class CustomerActivity {
 
     private init(customer: Customer) {
         self.customer = customer
-        currentQueues = RecordCollection<QueueRecord>()
-        currentBookings = RecordCollection<BookRecord>()
-        queueHistory = RecordCollection<QueueRecord>()
-        bookingHistory = RecordCollection<BookRecord>()
     }
 }
 

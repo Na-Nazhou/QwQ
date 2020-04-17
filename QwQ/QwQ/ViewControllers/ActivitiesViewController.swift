@@ -25,9 +25,9 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     }
 
     // MARK: Logic properties
-    let queueLogicManager = CustomerQueueLogicManager()
-    let bookingLogicManager = CustomerBookingLogicManager()
-    let activityLogicManager = CustomerActivityLogicManager()
+    let queueLogicManager: CustomerQueueLogic = CustomerQueueLogicManager()
+    let bookingLogicManager: CustomerBookingLogic = CustomerBookingLogicManager()
+    let activityLogicManager: CustomerActivityLogic = CustomerActivityLogicManager()
 
     // MARK: Model properties
     var records: [Record] {

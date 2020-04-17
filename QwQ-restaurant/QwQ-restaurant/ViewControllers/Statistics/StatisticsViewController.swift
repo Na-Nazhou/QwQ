@@ -27,7 +27,7 @@ class StatisticsViewController: UIViewController {
     var selectedControl: SelectedControl = .daily
 
     // MARK: Logic properties
-    var statsManager = RestaurantStatisticsLogicManager()
+    var statsManager: RestaurantStatisticsLogic = RestaurantStatisticsLogicManager()
 
     // MARK: Model properties
     var statistics: [Statistics] {
