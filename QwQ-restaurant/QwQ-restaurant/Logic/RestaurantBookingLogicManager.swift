@@ -77,7 +77,8 @@ extension RestaurantBookingLogicManager {
 
     @objc func handleAutoRejectTimer(timer: Timer) {
         if let record = timer.userInfo as? BookRecord {
-            if record.isPendingAdmission {
+            let isStillPending = restaurantActivity.currentBookings.records.contains(record)
+            if isStillPending {
                 rejectCustomer(record: record, completion: {})
             }
         }
