@@ -167,10 +167,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         bookingStorage.updateBookRecords(newRecords: newRecords, completion: completion)
     }
 
-    func confirmAdmissionOfBookRecord(_ record: BookRecord) {
-        //TODO
-    }
-
     func didUpdateBookRecord(_ record: BookRecord) {
         guard let oldRecord = bookRecords.first(where: { $0 == record }) else {
             return
@@ -182,10 +178,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             return
         }
 
-        let modification = record.changeType(from: oldRecord)
+        let modification = record.getChangeType(from: oldRecord)
         switch modification {
-        case .admit:
-            didAdmitBookRecord(record)
         case .serve:
             didServeBookRecord(record)
         case .reject:
@@ -223,14 +217,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         activeBookRecords.filter {
             $0 != record && $0.time == record.time
         }
-    }
-
-    private func didAdmitBookRecord(_ record: BookRecord) {
-        os_log("Detected admission", log: Log.admitCustomer, type: .info)
-        guard customerActivity.currentBookings.update(record) else {
-            return
-        }
-        activitiesDelegate?.didUpdateActiveRecords()
     }
 
     private func didConfirmAdmission(of record: BookRecord) {

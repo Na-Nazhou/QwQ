@@ -66,7 +66,6 @@ class SearchViewController: UIViewController, SearchDelegate {
 
         for restaurant in selectedRestaurants {
             if !checkRestaurantQueue(for: restaurant) {
-                // TODO: deselect the item
                 return
             }
         }

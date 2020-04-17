@@ -205,7 +205,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                                                         completion: self.didUpdateRecord)
             }
 
-            if bookRecord.isAdmitted || bookRecord.isConfirmedAdmission {
+            if bookRecord.isPendingAdmission {
                 recordCell.rejectAction = {
                     self.activityLogicManager.rejectCustomer(record: bookRecord,
                                                              completion: self.didUpdateRecord)

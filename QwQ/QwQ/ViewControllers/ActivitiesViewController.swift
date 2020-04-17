@@ -38,10 +38,10 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         }
     }
     var activeRecords: [Record] {
-        activityLogicManager.activeRecords
+        activityLogicManager.fetchActiveRecords()
     }
     var historyRecords: [Record] {
-        activityLogicManager.historyRecords
+        activityLogicManager.fetchHistoryRecords()
     }
     
     override func viewDidLoad() {
@@ -80,6 +80,7 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
     
     func didUpdateActiveRecords() {
         if isActive {
+            print("reloading")
             activitiesCollectionView.reloadData()
         }
     }

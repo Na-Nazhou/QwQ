@@ -172,7 +172,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
-        let modification = record.changeType(from: oldRecord)
+        let modification = record.getChangeType(from: oldRecord)
         switch modification {
         case .admit:
             didAdmitQueueRecord(record)
