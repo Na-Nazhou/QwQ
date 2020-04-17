@@ -1,3 +1,5 @@
+import Foundation
+
 class CustomerActivity {
     // MARK: Customer as singleton
     private static var customerActivity: CustomerActivity?

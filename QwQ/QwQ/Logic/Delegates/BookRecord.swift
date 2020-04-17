@@ -23,12 +23,13 @@ struct BookRecord: Record {
         Date.getFormattedDate(date: time, format: Constants.recordDateFormat)
     }
 
-    let admitTime: Date?
-    let serveTime: Date?
-    let rejectTime: Date?
+    var admitTime: Date?
+    var serveTime: Date?
+    var rejectTime: Date?
     var withdrawTime: Date?
     var confirmAdmissionTime: Date? {
-        admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
+        admitTime
+        // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
         // hence once admitted, auto confirmed admission.
     }
 
@@ -160,7 +161,7 @@ extension BookRecord {
         return .invalid
     }
 
-    func changeType(from old: Record) -> RecordModification? {
+    func getChangeType(from old: Record) -> RecordModification? {
         if self.id != old.id {
             // not valid comparison
             return nil
@@ -178,12 +179,12 @@ extension BookRecord {
             return .confirmAdmission
         }
 
-        if old.status == .confirmedAdmission && self.status == .served {
-            return .serve
+        if old.status == .pendingAdmission && self.status == .rejected {
+            return .reject
         }
 
-        if (old.status == .pendingAdmission || old.status == .confirmedAdmission) && self.status == .rejected {
-            return .reject
+        if old.status == .confirmedAdmission && self.status == .served {
+            return .serve
         }
 
         return nil

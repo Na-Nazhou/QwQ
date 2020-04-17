@@ -74,7 +74,13 @@ class RecordCell: UICollectionViewCell {
     private func setUpPendingAdmissionRecord(record: Record) {
         if let queueRecord = record as? QueueRecord {
             statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
-            timeLabel.text = queueRecord.estimatedAdmitTime!.getFormattedTime()
+            if let estimatedAdmitime = queueRecord.estimatedAdmitTime {
+                timeLabel.text = estimatedAdmitime.getFormattedTime()
+            } else {
+                timeLabel.text = queueRecord.startTime.getFormattedTime()
+            }
+
+            disableRightButton()
         }
         if let bookRecord = record as? BookRecord {
             statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
@@ -82,7 +88,6 @@ class RecordCell: UICollectionViewCell {
         }
         timeLabel.textColor = .systemGreen
         setUpAdmitButton()
-        disableRightButton()
     }
 
     private func setUpHistoryRecord(record: Record) {
@@ -109,6 +114,7 @@ class RecordCell: UICollectionViewCell {
         statusLabel.text = "Admitted at: \(record.admitTime!.toString())"
         if let bookRecord = record as? BookRecord {
             timeLabel.text = bookRecord.time.getFormattedTime()
+            disableRightButton()
         } else {
             timeLabel.text = record.admitTime!.getFormattedTime()
             // show a timer instead
@@ -123,6 +129,7 @@ class RecordCell: UICollectionViewCell {
         timeLabel.text = record.confirmAdmissionTime!.getFormattedTime()
         if let bookRecord = record as? BookRecord {
             timeLabel.text = bookRecord.time.getFormattedTime()
+            disableRightButton()
         }
         // For queue record should show a timer instead
         // show grey if exceed time limit

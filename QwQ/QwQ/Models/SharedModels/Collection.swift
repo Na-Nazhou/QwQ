@@ -5,6 +5,7 @@ class Collection<T: Hashable> {
         elements.count
     }
 
+    @discardableResult
     func add(_ element: T) -> Bool {
         let (isNew, _) = elements.insert(element)
         return isNew

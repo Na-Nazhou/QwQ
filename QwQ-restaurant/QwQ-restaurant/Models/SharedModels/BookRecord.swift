@@ -35,6 +35,8 @@ struct BookRecord: Record {
         nil
     }
 
+    var autoRejectTimer: Timer?
+
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.restaurantKey] = restaurant.uid
@@ -151,7 +153,7 @@ extension BookRecord {
         return .invalid
     }
 
-    func changeType(from old: Record) -> RecordModification? {
+    func getChangeType(from old: Record) -> RecordModification? {
         if self.id != old.id {
             // not valid comparison
             return nil
@@ -169,12 +171,12 @@ extension BookRecord {
             return .confirmAdmission
         }
 
-        if old.status == .confirmedAdmission && self.status == .served {
-            return .serve
+        if old.status == .pendingAdmission && self.status == .rejected {
+            return .reject
         }
 
-        if (old.status == .pendingAdmission || old.status == .confirmedAdmission) && self.status == .rejected {
-            return .reject
+        if old.status == .confirmedAdmission && self.status == .served {
+            return .serve
         }
 
         return nil

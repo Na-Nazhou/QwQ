@@ -10,7 +10,12 @@ import Foundation
 class CustomerActivityLogicManager: CustomerActivityLogic {
 
     // Models
-    private let customerActivity = CustomerActivity.shared()
+    private let customerActivity: CustomerActivity
+
+    init() {
+        self.customerActivity = CustomerActivity.shared()
+    }
+
     var activeRecords: [Record] {
         customerActivity.activeRecords.sorted(by: { record1, record2 in
             let time1: Date

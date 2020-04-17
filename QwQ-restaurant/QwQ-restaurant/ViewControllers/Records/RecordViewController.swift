@@ -20,9 +20,6 @@ class RecordViewController: UIViewController {
 
     var spinner: UIView?
 
-    // MARK: Logic properties
-    var activityLogicManager: RestaurantActivityLogic!
-
     // MARK: Model properties
     var record: Record?
 

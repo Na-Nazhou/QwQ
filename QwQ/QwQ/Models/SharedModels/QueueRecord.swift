@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 
 struct QueueRecord: Record {
-    var id: String
+    let id: String
     let restaurant: Restaurant
     let customer: Customer
 
@@ -12,9 +12,9 @@ struct QueueRecord: Record {
 
     let startTime: Date
 
-    let admitTime: Date?
-    let serveTime: Date?
-    let rejectTime: Date?
+    var admitTime: Date?
+    var serveTime: Date?
+    var rejectTime: Date?
     var withdrawTime: Date?
     var confirmAdmissionTime: Date?
 
@@ -112,7 +112,7 @@ struct QueueRecord: Record {
         let missTime = (dictionary[Constants.missTimeKey] as? Timestamp)?.dateValue()
         let readmitTime = (dictionary[Constants.readmitTimeKey] as? Timestamp)?.dateValue()
         let estimatedAdmitTime = (dictionary[Constants.estimatedAdmitTimeKey] as? Timestamp)?.dateValue()
-        
+
         self.init(id: id, restaurant: restaurant, customer: customer,
                   groupSize: groupSize, babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
@@ -132,9 +132,7 @@ extension QueueRecord: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-}
 
-extension QueueRecord {
     func completelyIdentical(to other: QueueRecord) -> Bool {
         other == self
             && other.restaurant == restaurant
@@ -151,5 +149,75 @@ extension QueueRecord {
             && other.missTime == missTime
             && other.readmitTime == readmitTime
             && other.estimatedAdmitTime == estimatedAdmitTime
+    }
+}
+
+extension QueueRecord {
+    var status: RecordStatus {
+        if withdrawTime != nil {
+            return .withdrawn
+        } else if rejectTime != nil {
+            return .rejected
+        } else if admitTime != nil && serveTime != nil {
+            return .served
+        } else if admitTime != nil && missTime == nil {
+            return .admitted
+        } else if missTime != nil && readmitTime != nil {
+            assert(confirmAdmissionTime != nil)
+            if confirmAdmissionTime! < readmitTime! {
+                return .admitted
+            }
+            return .confirmedAdmission
+        } else if missTime != nil {
+                return .missedAndPending
+        } else if admitTime != nil && confirmAdmissionTime != nil && missTime == nil {
+            return .confirmedAdmission
+        } else if admitTime != nil {
+            return .admitted
+        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
+            return .pendingAdmission
+        }
+        return .invalid
+    }
+
+    func getChangeType(from old: Record) -> RecordModification? {
+        if self.id != old.id {
+            // not valid comparison
+            return nil
+        }
+
+        if old.status == self.status {
+            return .customerUpdate
+        }
+
+        if status == .withdrawn {
+            return .withdraw
+        }
+
+        if (old.status == .pendingAdmission && self.status == .admitted)
+            || (old.status == .missedAndPending && self.status == .admitted) {
+            return .admit
+        }
+
+        if self.status == .missedAndPending
+            && (old.status == .admitted || old.status == .confirmedAdmission) {
+            return .miss
+        }
+
+        if (old.status == .admitted || old.status == .pendingAdmission || old.status == .missedAndPending)
+            && self.status == .confirmedAdmission {
+            return .confirmAdmission
+        }
+
+        if (old.status != .rejected || old.status != .withdrawn)
+            && self.status == .served {
+            return .serve
+        }
+
+        if self.status == .rejected {
+            return .reject
+        }
+
+        return nil
     }
 }
