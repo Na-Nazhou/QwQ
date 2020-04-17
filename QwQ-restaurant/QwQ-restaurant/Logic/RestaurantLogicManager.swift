@@ -11,6 +11,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
     typealias RestaurantStorage = FIRRestaurantStorage
+    let queueStorage: RestaurantQueueStorage = FIRQueueStorage.shared
 
     // View Controller
     weak var activitiesDelegate: ActivitiesDelegate?
@@ -107,6 +108,11 @@ class RestaurantLogicManager: RestaurantLogic {
                                                completion: {},
                                                errorHandler: { _ in })
     }
+}
+
+extension RestaurantLogicManager {
+
+    // MARK: Syncing
 
     func didUpdateRestaurant(restaurant: Restaurant) {
         restaurantActivity.updateRestaurant(restaurant)

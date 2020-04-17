@@ -21,6 +21,9 @@ protocol Record {
     var rejectTime: Date? { get set }
     var withdrawTime: Date? { get }
     var confirmAdmissionTime: Date? { get }
+
+    var status: RecordStatus { get }
+    func getChangeType(from old: Record) -> RecordModification?
 }
 
 extension Record {
@@ -54,55 +57,5 @@ extension Record {
 
     var isPendingAdmission: Bool {
         status == .pendingAdmission
-    }
-
-    var status: RecordStatus {
-        if withdrawTime != nil {
-            return .withdrawn
-        } else if admitTime != nil && rejectTime != nil {
-            return .rejected
-        } else if admitTime != nil && serveTime != nil {
-            return .served
-        } else if admitTime != nil && confirmAdmissionTime != nil {
-            return .confirmedAdmission
-        } else if admitTime != nil {
-            return .admitted
-        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
-            return .pendingAdmission
-        }
-        return .invalid
-    }
-
-    func changeType(from old: Record) -> RecordModification? {
-        if self.id != old.id {
-            // not valid comparison
-            return nil
-        }
-
-        if old.status == self.status {
-            return .customerUpdate
-        }
-
-        if status == .withdrawn {
-            return .withdraw
-        }
-
-        if old.status == .pendingAdmission && self.status == .admitted {
-            return .admit
-        }
-
-        if (old.status == .admitted || old.status == .pendingAdmission) && self.status == .confirmedAdmission {
-            return .confirmAdmission
-        }
-
-        if old.status == .confirmedAdmission && self.status == .served {
-            return .serve
-        }
-
-        if (old.status == .admitted || old.status == .confirmedAdmission) && self.status == .rejected {
-            return .reject
-        }
-
-        return nil
     }
 }

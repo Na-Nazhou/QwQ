@@ -15,11 +15,9 @@ protocol RestaurantStatisticsLogic {
     var weeklySummary: Statistics? { get }
     var monthlySummary: Statistics? { get }
 
-    func fetchSummary(type: StatsType)
-    
     func fetchDailyDetails()
     func fetchWeeklyDetails()
     func fetchMonthlyDetails()
-
+    func fetchSummary(type: StatsType)
     func loadStats(from date1: Date, to date2: Date) -> Statistics
 }

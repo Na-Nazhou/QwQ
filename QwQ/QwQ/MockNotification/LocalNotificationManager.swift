@@ -9,7 +9,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     let notificationCenter = UNUserNotificationCenter.current()
 
-    private override init() {
+    override private init() {
         super.init()
         notificationCenter.delegate = self
     }

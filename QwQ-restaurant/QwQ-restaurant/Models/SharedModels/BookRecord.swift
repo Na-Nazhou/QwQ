@@ -31,6 +31,8 @@ struct BookRecord: Record {
         admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
     }
 
+    var autoRejectTimer: Timer?
+
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.restaurantKey] = restaurant.uid
@@ -117,5 +119,55 @@ extension BookRecord: Hashable {
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
+    }
+}
+
+extension BookRecord {
+    var status: RecordStatus {
+        if withdrawTime != nil {
+            return .withdrawn
+        } else if admitTime == nil && rejectTime != nil {
+            // for book records, can only be rejected when requesting
+            // once confirmed, cannot reject. (dif from queues)
+            return .rejected
+        } else if admitTime != nil && serveTime != nil {
+            return .served
+        } else if admitTime != nil && confirmAdmissionTime != nil {
+            return .confirmedAdmission
+        } else if admitTime != nil {
+            return .admitted
+        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
+            return .pendingAdmission
+        }
+        return .invalid
+    }
+
+    func getChangeType(from old: Record) -> RecordModification? {
+        if self.id != old.id {
+            // not valid comparison
+            return nil
+        }
+
+        if old.status == self.status {
+            return .customerUpdate
+        }
+
+        if status == .withdrawn {
+            return .withdraw
+        }
+
+        if old.status == .pendingAdmission && self.status == .confirmedAdmission {
+            return .confirmAdmission
+        }
+
+        if old.status == .pendingAdmission && self.status == .rejected {
+            return .reject
+        }
+
+        if old.status == .confirmedAdmission && self.status == .served {
+            return .serve
+        }
+
+        return nil
     }
 }

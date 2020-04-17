@@ -14,7 +14,7 @@ class EditRecordViewController: UIViewController {
 
     // MARK: Logic properties
     // For creating records
-    var restaurantLogicManager: RestaurantLogic?
+    var restaurantLogic: RestaurantLogic?
 
     // MARK: Model properties
     // For editing a record
@@ -22,7 +22,7 @@ class EditRecordViewController: UIViewController {
 
     // For creating records
     var restaurants: [Restaurant] {
-        restaurantLogicManager?.currentRestaurants ?? []
+        restaurantLogic?.currentRestaurants ?? []
     }
 
     var groupSize: Int? {

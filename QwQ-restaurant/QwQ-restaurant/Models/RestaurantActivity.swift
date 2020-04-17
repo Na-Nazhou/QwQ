@@ -30,55 +30,15 @@ class RestaurantActivity {
     let historyBookings = RecordCollection<BookRecord>()
 
     var currentRecords: [Record] {
-        let bookRecords = currentQueue.records
-        let queueRecords = currentBookings.records
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if let queueRecord1 = record1 as? QueueRecord {
-                time1 = queueRecord1.startTime
-            } else {
-                time1 = (record1 as? BookRecord)!.time
-            }
-            if let queueRecord2 = record2 as? QueueRecord {
-                time2 = queueRecord2.startTime
-            } else {
-                time2 = (record2 as? BookRecord)!.time
-            }
-            return time1 < time2
-        })
+        currentQueue.records + currentBookings.records
     }
 
     var waitingRecords: [Record] {
-        let bookRecords = waitingQueue.records
-        let queueRecords = waitingBookings.records
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            record1.admitTime! < record2.admitTime!
-        })
+        waitingQueue.records + waitingBookings.records
     }
 
     var historyRecords: [Record] {
-        let bookRecords = historyQueue.records
-        let queueRecords = historyBookings.records
-        return (bookRecords + queueRecords).sorted(by: { record1, record2 in
-            let time1: Date
-            let time2: Date
-            if record1.isServed {
-                time1 = record1.serveTime!
-            } else if record1.isRejected {
-                time1 = record1.rejectTime!
-            } else {
-                time1 = record1.withdrawTime!
-            }
-            if record2.isServed {
-                time2 = record2.serveTime!
-            } else if record2.isRejected {
-                time2 = record2.rejectTime!
-            } else {
-                time2 = record2.withdrawTime!
-            }
-            return time1 > time2
-        })
+        historyQueue.records + historyBookings.records
     }
 
     private init(restaurant: Restaurant) {

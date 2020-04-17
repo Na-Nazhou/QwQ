@@ -1,7 +1,7 @@
 import Foundation
 import os.log
 
-class CustomerBookingLogicManager: CustomerBookingLogic {
+class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, CustomerBookingLogic {
 
     // Storage
     private var bookingStorage: CustomerBookingStorage
@@ -11,7 +11,6 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
 
     // View controller
     weak var bookingDelegate: BookingDelegate?
-    weak var activitiesDelegate: ActivitiesDelegate?
 
     // Models
     private let customerActivity: CustomerActivity
@@ -26,7 +25,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         customerActivity.bookRecords
     }
 
-    convenience init() {
+    override convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
                   bookingStorage: FIRBookingStorage.shared,
                   notificationHandler: QwQNotificationManager.shared)
@@ -38,6 +37,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         self.customerActivity = customerActivity
         self.bookingStorage = bookingStorage
         self.notificationHandler = notificationHandler
+
+        super.init()
 
         self.bookingStorage.registerDelegate(self)
     }
@@ -145,11 +146,8 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
     }
 
     private func withdrawBookRecord(_ record: BookRecord, completion: @escaping () -> Void) {
-        var newRecord = record
-        newRecord.withdrawTime = Date()
-        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord) {
-            completion()
-        }
+        let newRecord = getUpdatedRecord(record: record, event: .withdraw)
+        bookingStorage.updateBookRecord(oldRecord: record, newRecord: newRecord, completion: completion)
     }
 
     private func withdrawBookRecords(_ records: [BookRecord], completion: @escaping () -> Void) {
@@ -157,35 +155,24 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
             completion()
             return
         }
-        let withdrawTime = Date()
-        var newRecords = [BookRecord]()
-        for record in records {
-            var newRecord = record
-            newRecord.withdrawTime = withdrawTime
-            newRecords.append(newRecord)
+        let newRecords = records.map {
+            getUpdatedRecord(record: $0, event: .withdraw)
         }
         bookingStorage.updateBookRecords(newRecords: newRecords, completion: completion)
     }
+}
 
-    func confirmAdmissionOfBookRecord(_ record: BookRecord) {
-        //TODO
-    }
+extension CustomerBookingLogicManager {
+
+    // MARK: Syncing
 
     func didUpdateBookRecord(_ record: BookRecord) {
         guard let oldRecord = bookRecords.first(where: { $0 == record }) else {
             return
         }
 
-        if record.completelyIdentical(to: oldRecord) {
-            os_log("Listener triggered although book record is identical.",
-                   log: Log.notAModification, type: .debug)
-            return
-        }
-
-        let modification = record.changeType(from: oldRecord)
+        let modification = record.getChangeType(from: oldRecord)
         switch modification {
-        case .admit:
-            didAdmitBookRecord(record)
         case .serve:
             didServeBookRecord(record)
         case .reject:
@@ -193,7 +180,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         case .withdraw:
             didWithdrawBookRecord(record)
         case .customerUpdate:
-            customerDidUpdateBookRecord(record: record)
+            customerDidUpdateBookRecord(record)
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
@@ -201,22 +188,17 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
-    private func customerDidUpdateBookRecord(record: BookRecord) {
-        os_log("Detected regular modification", log: Log.regularModification, type: .info)
-        if customerActivity.currentBookings.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-    }
-
     func didAddBookRecord(_ record: BookRecord) {
         os_log("Detected new book record", log: Log.newBookRecord, type: .info)
-        if record.isActiveRecord && customerActivity.currentBookings.add(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
+        super.didAddRecord(record,
+                           customerActivity.currentBookings,
+                           customerActivity.bookingHistory)
+    }
 
-        if record.isHistoryRecord && customerActivity.bookingHistory.add(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
+    private func customerDidUpdateBookRecord(_ record: BookRecord) {
+        super.customerDidUpdateRecord(record,
+                                      customerActivity.currentBookings,
+                                      customerActivity.bookingHistory)
     }
 
     private func clashingRecords(with record: BookRecord) -> [BookRecord] {
@@ -225,56 +207,36 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         }
     }
 
-    private func didAdmitBookRecord(_ record: BookRecord) {
-        os_log("Detected admission", log: Log.admitCustomer, type: .info)
-        guard customerActivity.currentBookings.update(record) else {
-            return
-        }
-        activitiesDelegate?.didUpdateActiveRecords()
-    }
-
     private func didConfirmAdmission(of record: BookRecord) {
-        os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
-        guard customerActivity.currentBookings.update(record) else {
-            return
-        }
+        super.didConfirmRecord(record,
+                               customerActivity.currentBookings)
 
         withdrawBookRecords(clashingRecords(with: record), completion: {})
-        activitiesDelegate?.didUpdateActiveRecords()
+
         notificationHandler.notifyBookingAccepted(record: record)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {
-        os_log("Detected service", log: Log.serveCustomer, type: .info)
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
+        super.didServeRecord(record,
+                             customerActivity.currentBookings,
+                             customerActivity.bookingHistory)
 
     }
 
     private func didRejectBookRecord(_ record: BookRecord) {
-        os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
+        super.didRejectRecord(record,
+                              customerActivity.currentBookings,
+                              customerActivity.bookingHistory)
+
         notificationHandler.retractBookNotifications(for: record)
         notificationHandler.notifyBookingRejected(record: record)
     }
 
     private func didWithdrawBookRecord(_ record: BookRecord) {
-        os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
-        addAsHistoryRecord(record)
-        removeFromCurrent(record)
+        super.didWithdrawRecord(record,
+                                customerActivity.currentBookings,
+                                customerActivity.bookingHistory)
+
         notificationHandler.retractBookNotifications(for: record)
-    }
-
-    private func removeFromCurrent(_ record: BookRecord) {
-        if customerActivity.currentBookings.remove(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
-    }
-
-    private func addAsHistoryRecord(_ record: BookRecord) {
-        if customerActivity.bookingHistory.add(record) {
-            activitiesDelegate?.didUpdateHistoryRecords()
-        }
     }
 }

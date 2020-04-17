@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, ActivitiesDelegate {
+class ActivitiesViewController: UIViewController {
 
     // MARK: View properties
     @IBOutlet private var activeHistoryControl: SegmentedControl!
@@ -20,9 +20,6 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         case history
     }
     var selectedControl: SelectedControl = .active
-    var isActive: Bool {
-        selectedControl == .active
-    }
 
     // MARK: Logic properties
     let queueLogicManager: CustomerQueueLogic = CustomerQueueLogicManager()
@@ -31,17 +28,12 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
 
     // MARK: Model properties
     var records: [Record] {
-        if isActive {
-            return activeRecords
-        } else {
-            return historyRecords
+        switch selectedControl {
+        case .active:
+            return activityLogicManager.activeRecords
+        case .history:
+            return activityLogicManager.historyRecords
         }
-    }
-    var activeRecords: [Record] {
-        activityLogicManager.activeRecords
-    }
-    var historyRecords: [Record] {
-        activityLogicManager.historyRecords
     }
     
     override func viewDidLoad() {
@@ -71,43 +63,6 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
         activitiesCollectionView.reloadData()
     }
 
-    func didUpdateHistoryRecords() {
-        if isActive {
-            return
-        }
-        activitiesCollectionView.reloadData()
-    }
-    
-    func didUpdateActiveRecords() {
-        if isActive {
-            activitiesCollectionView.reloadData()
-        }
-    }
-
-    func didWithdrawRecord() {
-        removeSpinner(spinner)
-        showMessage(
-            title: Constants.successTitle,
-            message: Constants.recordWithdrawSuccessMessage,
-            buttonText: Constants.okayTitle,
-            buttonAction: {_ in
-                self.handleBack()
-                self.activitiesCollectionView.reloadData()
-            })
-    }
-
-    func didConfirmAdmissionOfRecord() {
-        removeSpinner(spinner)
-        showMessage(
-            title: Constants.successTitle,
-            message: Constants.recordConfirmSuccessMessage,
-            buttonText: Constants.okayTitle,
-            buttonAction: {_ in
-                self.handleBack()
-                self.activitiesCollectionView.reloadData()
-            })
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.queueSelectedSegue:
@@ -124,13 +79,13 @@ class ActivitiesViewController: UIViewController, ActivitiesDelegate {
             if let queueRecord = sender as? QueueRecord,
                 let editQueueViewController = segue.destination as? EditQueueViewController {
                     editQueueViewController.record = queueRecord
-                editQueueViewController.queueLogicManager = queueLogicManager
+                editQueueViewController.queueLogic = queueLogicManager
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
-                editBookingViewController.bookingLogicManager = bookingLogicManager
+                editBookingViewController.bookingLogic = bookingLogicManager
             }
         default:
             return
@@ -197,5 +152,43 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         if let bookRecord = record as? BookRecord {
             performSegue(withIdentifier: Constants.bookSelectedSegue, sender: bookRecord)
         }
+    }
+}
+
+extension ActivitiesViewController: ActivitiesDelegate {
+    func didUpdateHistoryRecords() {
+        if selectedControl == .history {
+            activitiesCollectionView.reloadData()
+        }
+    }
+
+    func didUpdateActiveRecords() {
+        if selectedControl == .active {
+            activitiesCollectionView.reloadData()
+        }
+    }
+
+    func didWithdrawRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordWithdrawSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+                self.activitiesCollectionView.reloadData()
+            })
+    }
+
+    func didConfirmAdmissionOfRecord() {
+        removeSpinner(spinner)
+        showMessage(
+            title: Constants.successTitle,
+            message: Constants.recordConfirmSuccessMessage,
+            buttonText: Constants.okayTitle,
+            buttonAction: {_ in
+                self.handleBack()
+                self.activitiesCollectionView.reloadData()
+            })
     }
 }

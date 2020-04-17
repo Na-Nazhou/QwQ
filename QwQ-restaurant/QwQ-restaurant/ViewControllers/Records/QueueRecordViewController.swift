@@ -9,22 +9,27 @@ import UIKit
 
 class QueueRecordViewController: RecordViewController {
 
+    // MARK: Logic properties
+    var queueLogic: RestaurantQueueLogic!
+
     @IBAction override func handleAdmit(_ sender: Any) {
         guard let bookRecord = record as? QueueRecord else {
             return
         }
-        self.spinner = self.showSpinner(onView: self.view)
-        activityLogicManager.admitCustomer(record: bookRecord,
-                                           completion: self.didUpdateRecord)
+    
+        spinner = showSpinner(onView: view)
+        queueLogic.admitCustomer(record: bookRecord,
+                                 completion: self.didUpdateRecord)
     }
 
     @IBAction override func handleServe(_ sender: Any) {
         guard let bookRecord = record as? QueueRecord else {
             return
         }
-        self.spinner = self.showSpinner(onView: self.view)
-        activityLogicManager.serveCustomer(record: bookRecord,
-                                           completion: self.didUpdateRecord)
+
+        spinner = showSpinner(onView: view)
+        queueLogic.serveCustomer(record: bookRecord,
+                                 completion: self.didUpdateRecord)
 
     }
 
@@ -33,8 +38,9 @@ class QueueRecordViewController: RecordViewController {
         guard let queueRecord = record as? QueueRecord else {
             return
         }
-        self.spinner = self.showSpinner(onView: self.view)
-        activityLogicManager.rejectCustomer(record: queueRecord,
-                                            completion: self.didUpdateRecord)
+
+        spinner = showSpinner(onView: view)
+        queueLogic.rejectCustomer(record: queueRecord,
+                                  completion: self.didUpdateRecord)
     }
 }
