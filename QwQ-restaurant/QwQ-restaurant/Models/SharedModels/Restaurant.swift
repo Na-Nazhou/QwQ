@@ -19,8 +19,28 @@ struct Restaurant: User {
     let maxGroupSize: Int
     let advanceBookingLimit: Int
 
-    let autoOpenTime: Date?
-    let autoCloseTime: Date?
+    let autoOpenTime: TimeInterval?
+    let autoCloseTime: TimeInterval?
+
+    var isAutoOpenCloseEnabled: Bool {
+        autoOpenTime != nil && autoCloseTime != nil
+    }
+
+    var currentAutoOpenTime: Date {
+        if let openTime = autoOpenTime {
+            return Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+        } else {
+            return Date.getStartOfDay(of: Date())
+        }
+    }
+
+    var currentAutoCloseTime: Date {
+        if let closeTime = autoCloseTime {
+            return Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
+        } else {
+            return Calendar.current.date(bySettingHour: 23, minute: 50, second: 0, of: currentAutoOpenTime)!
+        }
+    }
 
     //previous recorded times
     var queueOpenTime: Date?
@@ -43,21 +63,30 @@ struct Restaurant: User {
     }
 
     var dictionary: [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact,
-            Constants.addressKey: address,
-            Constants.menuKey: menu,
-            Constants.queueOpenTimeKey: queueOpenTime as Any,
-            Constants.queueCloseTimeKey: queueCloseTime as Any,
-            Constants.autoOpenTimeKey: autoOpenTime as Any,
-            Constants.autoCloseTimeKey: autoCloseTime as Any,
-            Constants.maxGroupSizeKey: maxGroupSize,
-            Constants.minGroupSizeKey: minGroupSize,
-            Constants.advanceBookingLimitKey: advanceBookingLimit
-        ]
+        var data = [String: Any]()
+        data[Constants.uidKey] = uid
+        data[Constants.nameKey] = name
+        data[Constants.emailKey] = email
+        data[Constants.contactKey] = contact
+        data[Constants.addressKey] = address
+        data[Constants.menuKey] = menu
+        data[Constants.maxGroupSizeKey] = maxGroupSize
+        data[Constants.minGroupSizeKey] = minGroupSize
+        data[Constants.advanceBookingLimitKey] = advanceBookingLimit
+
+        if let queueOpenTime = queueOpenTime {
+            data[Constants.queueOpenTimeKey] = queueOpenTime
+        }
+        if let queueCloseTime = queueCloseTime {
+            data[Constants.queueCloseTimeKey] = queueCloseTime
+        }
+        if let autoOpenTime = autoOpenTime {
+            data[Constants.autoOpenTimeKey] = autoOpenTime
+        }
+        if let autoCloseTime = autoCloseTime {
+            data[Constants.autoCloseTimeKey] = autoCloseTime
+        }
+        return data
     }
 
     init?(dictionary: [String: Any]) {
@@ -76,8 +105,8 @@ struct Restaurant: User {
 
         let queueOpenTime = (dictionary[Constants.queueOpenTimeKey] as? Timestamp)?.dateValue()
         let queueCloseTime = (dictionary[Constants.queueCloseTimeKey] as? Timestamp)?.dateValue()
-        let autoOpenTime = (dictionary[Constants.autoOpenTimeKey] as? Timestamp)?.dateValue()
-        let autoCloseTime = (dictionary[Constants.autoCloseTimeKey] as? Timestamp)?.dateValue()
+        let autoOpenTime = dictionary[Constants.autoOpenTimeKey] as? TimeInterval
+        let autoCloseTime = dictionary[Constants.autoCloseTimeKey] as? TimeInterval
 
         self.init(uid: uid, name: name, email: email, contact: contact, address: address,
                   menu: menu, maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
@@ -88,9 +117,8 @@ struct Restaurant: User {
 
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
          maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
-         queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
-         autoOpenTime: Date? = nil, autoCloseTime: Date? = nil) {
-        // TODO: settle auto open and auto close
+         queueOpenTime: Date?, queueCloseTime: Date?,
+         autoOpenTime: TimeInterval?, autoCloseTime: TimeInterval?) {
         self.uid = uid
         self.name = name
         self.email = email

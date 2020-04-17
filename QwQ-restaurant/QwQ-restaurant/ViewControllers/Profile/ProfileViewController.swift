@@ -39,23 +39,31 @@ class ProfileViewController: UIViewController {
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
         removeSpinner(spinner)
-        self.nameLabel.text = restaurant.name
-        self.emailLabel.text = restaurant.email
-        self.contactLabel.text = restaurant.contact
-        self.addressLabel.text = restaurant.address
-        self.menuLabel.text = restaurant.menu
-        self.groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
-        self.advanceBookingLimitLabel.text = "\(restaurant.advanceBookingLimit) hours"
-        // TODO: use auto open/close time
-        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {
-            queueTimingLabel.text = "Opened at \(openTime.getFormattedTime())"
+
+        nameLabel.text = restaurant.name
+        emailLabel.text = restaurant.email
+        contactLabel.text = restaurant.contact
+        addressLabel.text = restaurant.address
+        menuLabel.text = restaurant.menu
+        groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
+        advanceBookingLimitLabel.text = "\(restaurant.advanceBookingLimit) hours"
+
+        if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
+            queueTimingLabel.text = "\(Date.getFormattedTime(openTime)) - \(Date.getFormattedTime(closeTime))"
         } else {
-            if let closeTime = restaurant.queueCloseTime {
-                queueTimingLabel.text = "Closed at \(closeTime.getFormattedTime())"
-            } else {
-                queueTimingLabel.text = "Closed"
-            }
+            queueTimingLabel.text = ""
         }
+
+        // TODO: Queue Status Label
+        //        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {
+        //            queueTimingLabel.text = "Opened at \(openTime.getFormattedTime())"
+        //        } else {
+        //            if let closeTime = restaurant.queueCloseTime {
+        //                queueTimingLabel.text = "Closed at \(closeTime.getFormattedTime())"
+        //            } else {
+        //                queueTimingLabel.text = "Closed"
+        //            }
+        //        }
 
         Profile.getRestaurantProfilePic(uid: restaurant.uid, placeholder: profileImageView)
     }

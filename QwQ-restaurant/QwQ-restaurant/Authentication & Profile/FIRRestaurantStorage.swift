@@ -86,7 +86,7 @@ class FIRRestaurantStorage: RestaurantStorage {
         }
         let docRef = dbRef.document(uid)
 
-        docRef.updateData(restaurant.dictionary) { (error) in
+        docRef.setData(restaurant.dictionary) { (error) in
             if let error = error {
                 errorHandler(error)
                 return

@@ -18,8 +18,9 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var menuTextView: UITextView!
     @IBOutlet private var minGroupSizeTextField: UITextField!
     @IBOutlet private var maxGroupSizeTextField: UITextField!
-    @IBOutlet private var autoOpenTimeTextField: UITextField!
-    @IBOutlet private var autoCloseTimeTextField: UITextField!
+    @IBOutlet private var autoOpenCloseSwitch: UISwitch!
+    @IBOutlet private var autoOpenTimePicker: UIDatePicker!
+    @IBOutlet private var autoCloseTimePicker: UIDatePicker!
     @IBOutlet private var advanceBookingLimitTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var bannerImageView: UIImageView!
@@ -31,27 +32,45 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
+    private var queueOpenTime: Date?
+    private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
 
     var minGroupSize: Int? {
         guard let groupSizeText = minGroupSizeTextField.text else {
             return nil
         }
-        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+        return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     var maxGroupSize: Int? {
         guard let groupSizeText = maxGroupSizeTextField.text else {
             return nil
         }
-        return Int(groupSizeText.trimmingCharacters(in: .newlines))
+        return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     var advanceBookingLimit: Int? {
-        guard let advanceBookingLimitText = maxGroupSizeTextField.text else {
+        guard let advanceBookingLimitText = advanceBookingLimitTextField.text else {
             return nil
         }
-        return Int(advanceBookingLimitText.trimmingCharacters(in: .newlines))
+        return Int(advanceBookingLimitText.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+
+    var autoOpenTime: TimeInterval? {
+        if !autoOpenCloseSwitch.isOn {
+            return nil
+        }
+        let openTime = autoOpenTimePicker.date
+        return Date.getTimeIntervalFromStartOfDay(openTime)
+    }
+
+    var autoCloseTime: TimeInterval? {
+        if !autoOpenCloseSwitch.isOn {
+            return nil
+        }
+        let closeTime = autoCloseTimePicker.date
+        return Date.getTimeIntervalFromStartOfDay(closeTime)
     }
 
     override func viewDidLoad() {
@@ -68,8 +87,18 @@ class EditProfileViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
+    @IBAction private func onSwitchChange(_ sender: UISwitch) {
+        if sender.isOn {
+            autoOpenTimePicker.isEnabled = true
+            autoCloseTimePicker.isEnabled = true
+        } else {
+            autoOpenTimePicker.isEnabled = false
+            autoCloseTimePicker.isEnabled = false
+        }
+    }
+
     @IBAction private func handleBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        handleBack()
     }
     
     @IBAction func handleEditBanner(_ sender: Any) {
@@ -114,6 +143,14 @@ class EditProfileViewController: UIViewController {
             return
         }
 
+        if let openTime = autoOpenTime, let closeTime = autoCloseTime,
+            openTime > closeTime {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.openAfterCloseMessage,
+                        buttonText: Constants.okayTitle)
+            return
+        }
+
         spinner = showSpinner(onView: view)
 
         if let image = image {
@@ -127,7 +164,9 @@ class EditProfileViewController: UIViewController {
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
                                     address: address, menu: menu,
                                     maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
-                                    advanceBookingLimit: advanceBookingLimit)
+                                    advanceBookingLimit: advanceBookingLimit,
+                                    queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
+                                    autoOpenTime: autoOpenTime, autoCloseTime: autoCloseTime)
 
         Profile.updateRestaurantInfo(restaurant: restaurant,
                                      completion: updateComplete,
@@ -141,6 +180,9 @@ class EditProfileViewController: UIViewController {
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
         uid = restaurant.uid
+        queueOpenTime = restaurant.queueOpenTime
+        queueCloseTime = restaurant.queueCloseTime
+
         nameTextField.text = restaurant.name
         emailTextField.text = restaurant.email
         contactTextField.text = restaurant.contact
@@ -150,11 +192,14 @@ class EditProfileViewController: UIViewController {
         maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
         advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
 
-        if let openTime = restaurant.autoOpenTime {
-            autoOpenTimeTextField.text = openTime.getFormattedTime()
-        }
-        if let closeTime = restaurant.autoOpenTime {
-            autoOpenTimeTextField.text = closeTime.getFormattedTime()
+        autoOpenTimePicker.date = restaurant.currentAutoOpenTime
+        autoCloseTimePicker.date = restaurant.currentAutoCloseTime
+        if restaurant.isAutoOpenCloseEnabled {
+            autoOpenCloseSwitch.isOn = true
+        } else {
+            autoOpenCloseSwitch.isOn = false
+            autoOpenTimePicker.isEnabled = false
+            autoCloseTimePicker.isEnabled = false
         }
 
         setUpProfileImageView(uid: restaurant.uid)
@@ -175,7 +220,7 @@ class EditProfileViewController: UIViewController {
         showMessage(title: Constants.successTitle,
                     message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
-                    buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
+                    buttonAction: handleBack )
     }
 
     private func setUpProfileImageView(uid: String) {
@@ -188,8 +233,10 @@ class EditProfileViewController: UIViewController {
     }
 
     private func handleError(error: Error) {
-        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
+        showMessage(title: Constants.errorTitle,
+                    message: error.localizedDescription,
+                    buttonText: Constants.okayTitle)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {

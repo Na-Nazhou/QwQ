@@ -115,7 +115,7 @@ extension FIRBookingStorage {
         //add listener
         listener = bookingDb
             .whereField(Constants.customerKey, isEqualTo: customer.uid)
-            .addSnapshotListener { (snapshot, err) in
+            .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
                     os_log("Error getting documents",
                            log: Log.bookRetrievalError,
