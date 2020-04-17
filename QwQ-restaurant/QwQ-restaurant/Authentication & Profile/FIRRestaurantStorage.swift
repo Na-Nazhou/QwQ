@@ -9,6 +9,7 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseUI
 import SDWebImage
+import os.log
 
 class FIRRestaurantStorage: RestaurantStorage {
     typealias Auth = FIRAuthenticator
@@ -18,13 +19,15 @@ class FIRRestaurantStorage: RestaurantStorage {
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
     static let storageRef = Storage.storage().reference().child(Constants.profilePicsDirectory)
 
+    // MARK: - Restaurant Listener
+    static weak var delegate: RestaurantStorageSyncDelegate?
+    private static var restaurantListener: ListenerRegistration?
+
     static func createInitialRestaurantProfile(uid: String,
                                                signupDetails: SignupDetails,
                                                email: String,
                                                errorHandler: @escaping (Error) -> Void) {
-        let db = Firestore.firestore()
-        db.collection(Constants.restaurantsDirectory)
-            .document(uid)
+        dbRef.document(uid)
             .setData([Constants.uidKey: uid,
                       Constants.nameKey: signupDetails.name,
                       Constants.contactKey: signupDetails.contact,
@@ -53,6 +56,10 @@ class FIRRestaurantStorage: RestaurantStorage {
         docRef.getDocument { (document, error) in
             if let error = error {
                 errorHandler(error)
+                os_log("Error getting restaurant documents",
+                       log: Log.restaurantRetrievalError,
+                       type: .error,
+                       error.localizedDescription)
                 return
             }
             
@@ -109,5 +116,32 @@ class FIRRestaurantStorage: RestaurantStorage {
             }
         }
         SDImageCache.shared.removeImage(forKey: storageRef.child("\(uid).png").fullPath, withCompletion: nil)
+    }
+
+    // MARK: - Restaurant Listener
+    
+    static func registerListenerForRestaurant(_ restaurant: Restaurant) {
+        removeListener()
+        restaurantListener = dbRef.document(restaurant.uid)
+            .addSnapshotListener { (snapshot, err) in
+                guard err == nil, let snapshot = snapshot else {
+                     os_log("Error getting restaurant documents",
+                            log: Log.restaurantRetrievalError,
+                            type: .error,
+                            String(describing: err))
+                    return
+                }
+                guard let data = snapshot.data(),
+                    let updatedRestaurant = Restaurant(dictionary: data) else {
+                        assert(false, "document should be of correct format(fields) of a restaurant!")
+                        return
+                }
+
+                delegate?.didUpdateRestaurant(restaurant: updatedRestaurant)
+            }
+    }
+
+    static func removeListener() {
+        restaurantListener?.remove()
     }
 }

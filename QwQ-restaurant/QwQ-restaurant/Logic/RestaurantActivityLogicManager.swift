@@ -26,10 +26,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     var historyRecords: [Record] {
         restaurantActivity.historyRecords
     }
-    
-    var isQueueOpen: Bool {
-        restaurant.isQueueOpen
-    }
 
     convenience init() {
         self.init(restaurantActivity: RestaurantActivity.shared(),
@@ -54,22 +50,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         bookingStorage.unregisterDelegate(self)
     }
 
-    func openQueue() {
-        let time = Date()
-        var new = restaurant
-        new.queueOpenTime = time
-
-        queueStorage.updateRestaurant(old: restaurant, new: new)
-    }
-
-    func closeQueue() {
-        let time = Date()
-        var new = restaurant
-        new.queueCloseTime = time
-
-        queueStorage.updateRestaurant(old: restaurant, new: new)
-    }
-
     // TODO
     func notifyCustomerOfAdmission(record: QueueRecord) {
         //setup timer events
@@ -82,14 +62,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
 
     func alertRestaurantIfCustomerTookTooLongToArrive(record: QueueRecord) {
         // TODO: popup alert
-    }
-}
-
-extension RestaurantActivityLogicManager {
-
-    func didUpdateRestaurant(restaurant: Restaurant) {
-        restaurantActivity.updateRestaurant(restaurant)
-        activitiesDelegate?.didUpdateRestaurant()
     }
 
     func didAddRecord<T: Record>(_ record: T,

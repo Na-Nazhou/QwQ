@@ -1,8 +1,6 @@
 /// Represents the protocol any queue storage syncing delegates need to conform to.
 protocol QueueStorageSyncDelegate: AnyObject {
 
-    func didUpdateRestaurant(restaurant: Restaurant)
-
     func didAddQueueRecord(_ record: QueueRecord)
 
     /// Updates collection of queue records when updated.

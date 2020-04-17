@@ -28,6 +28,7 @@ class ActivitiesViewController: UIViewController {
 
     // MARK: Logic properties
     let activityLogicManager: RestaurantActivityLogic = RestaurantActivityLogicManager()
+    let restaurantLogicManager: RestaurantLogic = RestaurantLogicManager()
     
     // MARK: Model properties
     var filtered: [Record] = []
@@ -51,6 +52,7 @@ class ActivitiesViewController: UIViewController {
         recordCollectionView.dataSource = self
 
         activityLogicManager.activitiesDelegate = self
+        restaurantLogicManager.activitiesDelegate = self
         
         filtered = records
         setUpSegmentedControl()
@@ -58,7 +60,7 @@ class ActivitiesViewController: UIViewController {
     }
 
     private func setUpQueueStatus() {
-        if activityLogicManager.isQueueOpen {
+        if restaurantLogicManager.isQueueOpen {
             openQueue()
         } else {
             closeQueue()
@@ -86,13 +88,13 @@ class ActivitiesViewController: UIViewController {
             assert(false, "open close button title should not be nil")
             return
         }
+
+        spinner = showSpinner(onView: view)
         switch title {
         case Constants.buttonTextToOpenQueue:
-            openQueue()
-            activityLogicManager.openQueue()
+            restaurantLogicManager.openQueue()
         case Constants.buttonTextToCloseQueue:
-            closeQueue()
-            activityLogicManager.closeQueue()
+            restaurantLogicManager.closeQueue()
         default:
             assert(false, "open close button title should be either open or close.")
         }
@@ -239,6 +241,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 extension ActivitiesViewController: ActivitiesDelegate {
 
     func didUpdateRestaurant() {
+        removeSpinner(spinner)
         setUpQueueStatus()
     }
 

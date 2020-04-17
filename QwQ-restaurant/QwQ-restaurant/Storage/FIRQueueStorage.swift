@@ -19,13 +19,9 @@ class FIRQueueStorage: RestaurantQueueStorage {
     private var queueDb: CollectionReference {
         db.collection(Constants.queuesDirectory)
     }
-    private var restaurantDb: CollectionReference {
-        db.collection(Constants.restaurantsDirectory)
-    }
 
     let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
-    private var openCloseListener: ListenerRegistration?
     private var queueListener: ListenerRegistration?
 
     deinit {
@@ -49,11 +45,6 @@ class FIRQueueStorage: RestaurantQueueStorage {
             completion()
         }
     }
-
-    func updateRestaurant(old: Restaurant, new: Restaurant) {
-        restaurantDb.document(old.uid)
-            .setData(new.dictionary)
-    }
 }
 
 extension FIRQueueStorage {
@@ -62,13 +53,10 @@ extension FIRQueueStorage {
     func registerListeners(for restaurant: Restaurant) {
         removeListeners()
         registerListenerForQueue(of: restaurant)
-        registerListenerForRestaurant(restaurant)
     }
 
     func removeListeners() {
-        openCloseListener?.remove()
         queueListener?.remove()
-        openCloseListener = nil
         queueListener = nil
     }
 
@@ -100,26 +88,6 @@ extension FIRQueueStorage {
                         restaurant: restaurant,
                         completion: completion)
                 }
-            }
-    }
-
-    private func registerListenerForRestaurant(_ restaurant: Restaurant) {
-        openCloseListener = restaurantDb.document(restaurant.uid)
-            .addSnapshotListener(includeMetadataChanges: false) { (profileSnapshot, err) in
-                if let err = err {
-                     os_log("Error getting restaurant documents",
-                            log: Log.restaurantRetrievalError,
-                            type: .error,
-                            err.localizedDescription)
-                    return
-                }
-                guard let profileData = profileSnapshot!.data(),
-                    let updatedRestaurant = Restaurant(dictionary: profileData) else {
-                        assert(false, "document should be of correct format(fields) of a restaurant!")
-                        return
-                }
-                // regardless of change, contact delegate it has changed.
-                self.delegateWork { $0.didUpdateRestaurant(restaurant: updatedRestaurant) }
             }
     }
 

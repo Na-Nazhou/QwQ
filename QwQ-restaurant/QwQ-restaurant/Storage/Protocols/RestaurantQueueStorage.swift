@@ -18,8 +18,6 @@ protocol QueueStorageSync {
 
 protocol RestaurantQueueStorage: QueueStorageSync {
     // MARK: - Modifier
-    func updateRestaurant(old: Restaurant, new: Restaurant)
-
     func updateRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
                       completion: @escaping () -> Void)
 }
