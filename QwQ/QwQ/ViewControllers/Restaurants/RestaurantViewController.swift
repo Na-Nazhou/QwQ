@@ -84,6 +84,9 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         contactLabel.text = restaurant.contact
         emailLabel.text = restaurant.email
         groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
+        queueTimingsLabel.text = restaurant.operatingHours
+
+        // TODO: advance booking limit label
         // TODO: Queue Status Label
 //        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {
 //            queueTimingsLabel.text = "Opened at \(openTime.getFormattedTime())"
@@ -95,12 +98,6 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
 //            }
 //        }
 
-        if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
-            queueTimingsLabel.text = "\(Date.getFormattedTime(openTime)) - \(Date.getFormattedTime(closeTime))"
-        } else {
-             queueTimingsLabel.text = ""
-        }
-        
         FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
         if queueLogicManager.canQueue(for: restaurant) {

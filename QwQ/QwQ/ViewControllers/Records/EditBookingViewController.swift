@@ -31,12 +31,13 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         
         // Edit existing book record
         if let bookRecord = record as? BookRecord {
-            bookingLogicManager.editBookRecord(oldRecord: bookRecord,
+            if bookingLogicManager.editBookRecord(oldRecord: bookRecord,
                                                at: datePicker.date,
                                                with: groupSize,
                                                babyChairQuantity: babyChairQuantity,
-                                               wheelchairFriendly: wheelchairFriendlySwitch.isOn)
-            spinner = showSpinner(onView: view)
+                                               wheelchairFriendly: wheelchairFriendlySwitch.isOn) {
+                spinner = showSpinner(onView: view)
+            }
             return
         }
 
@@ -86,6 +87,13 @@ class EditBookingViewController: EditRecordViewController, BookingDelegate {
         showMessage(title: Constants.errorTitle,
                     message: String(format: Constants.exceedAdvanceBookingLimitMessage,
                                     restaurant.advanceBookingLimit, restaurant.name),
+                    buttonText: Constants.okayTitle)
+    }
+
+    func didExceedOperatingHours(at restaurant: Restaurant) {
+        showMessage(title: Constants.errorTitle,
+                    message: String(format: Constants.exceedOperatingHoursMessage,
+                                    restaurant.name, restaurant.operatingHours),
                     buttonText: Constants.okayTitle)
     }
 }

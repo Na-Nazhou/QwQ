@@ -131,7 +131,7 @@ class FIRRestaurantStorage: RestaurantStorage {
     static func registerListener(for restaurant: Restaurant) {
         removeListener()
         restaurantListener = dbRef.document(restaurant.uid)
-            .addSnapshotListener { (snapshot, err) in
+            .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard err == nil, let snapshot = snapshot else {
                      os_log("Error getting restaurant documents",
                             log: Log.restaurantRetrievalError,

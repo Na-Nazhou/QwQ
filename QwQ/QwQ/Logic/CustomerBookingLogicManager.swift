@@ -69,6 +69,10 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                 bookingDelegate?.didExceedAdvanceBookingLimit(at: restaurant)
                 return false
             }
+            if !checkRestaurantOperatingHours(of: newRecord) {
+                bookingDelegate?.didExceedOperatingHours(at: restaurant)
+                return false
+            }
             newRecords.append(newRecord)
         }
 
@@ -83,7 +87,7 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool) {
+                        wheelchairFriendly: Bool) -> Bool {
         let newRecord = BookRecord(id: oldRecord.id,
                                    restaurant: oldRecord.restaurant,
                                    customer: customer,
@@ -92,9 +96,16 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
                                    babyChairQuantity: babyChairQuantity,
                                    wheelchairFriendly: wheelchairFriendly)
 
+        if !checkRestaurantOperatingHours(of: newRecord) {
+            bookingDelegate?.didExceedOperatingHours(at: newRecord.restaurant)
+            return false
+        }
+
         bookingStorage.updateBookRecord(oldRecord: oldRecord, newRecord: newRecord) {
             self.bookingDelegate?.didUpdateRecord()
         }
+
+        return true
     }
 
     private func checkExistingRecords(against record: BookRecord) -> Bool {
@@ -113,6 +124,18 @@ class CustomerBookingLogicManager: CustomerBookingLogic {
         let currentTime = Date.getCurrentTime()
         let timeInterval = Int(record.time.timeIntervalSince(currentTime))
         return timeInterval >= advanceBookingLimit * 60 
+    }
+
+    private func checkRestaurantOperatingHours(of record: BookRecord) -> Bool {
+        guard record.restaurant.isAutoOpenCloseEnabled else {
+            return true
+        }
+
+        let restaurant = record.restaurant
+        let time = record.time
+        let minTime = Date.getStartOfDay(of: record.time).addingTimeInterval(restaurant.autoOpenTime!)
+        let maxTime = Date.getStartOfDay(of: record.time).addingTimeInterval(restaurant.autoCloseTime!)
+        return time >= minTime && time <= maxTime
     }
 
     func withdrawBookRecord(_ record: BookRecord) {

@@ -8,6 +8,11 @@
 import Foundation
 
 extension Date {
+
+    static let minute: TimeInterval = 60.0
+    static let hour: TimeInterval = 60.0 * minute
+    static let day: TimeInterval = 24 * hour
+
     func getDateOf(daysBeforeDate numDays: Int) -> Date {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: self)

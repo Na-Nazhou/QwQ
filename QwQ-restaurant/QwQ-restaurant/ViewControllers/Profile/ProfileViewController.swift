@@ -47,12 +47,7 @@ class ProfileViewController: UIViewController {
         menuLabel.text = restaurant.menu
         groupSizeLabel.text = "\(restaurant.minGroupSize) to \(restaurant.maxGroupSize) pax"
         advanceBookingLimitLabel.text = "\(restaurant.advanceBookingLimit) hours"
-
-        if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
-            queueTimingLabel.text = "\(Date.getFormattedTime(openTime)) - \(Date.getFormattedTime(closeTime))"
-        } else {
-            queueTimingLabel.text = ""
-        }
+        queueTimingLabel.text = restaurant.operatingHours
 
         // TODO: Queue Status Label
         //        if restaurant.isQueueOpen, let openTime = restaurant.queueOpenTime {

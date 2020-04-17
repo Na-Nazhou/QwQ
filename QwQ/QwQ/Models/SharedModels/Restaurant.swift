@@ -21,19 +21,11 @@ struct Restaurant: User {
         autoOpenTime != nil && autoCloseTime != nil
     }
 
-    var currentAutoOpenTime: Date? {
-        if let openTime = autoOpenTime {
-            return Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+    var operatingHours: String {
+        if let openTime = autoOpenTime, let closeTime = autoCloseTime {
+            return "\(Date.getFormattedTime(openTime)) - \(Date.getFormattedTime(closeTime))"
         } else {
-            return nil
-        }
-    }
-
-    var currentAutoCloseTime: Date? {
-        if let closeTime = autoCloseTime {
-            return Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
-        } else {
-            return nil
+            return ""
         }
     }
 
