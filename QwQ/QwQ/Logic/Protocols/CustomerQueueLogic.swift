@@ -18,4 +18,6 @@ protocol CustomerQueueLogic: QueueStorageSyncDelegate {
                          wheelchairFriendly: Bool)
 
     func withdrawQueueRecord(_ queueRecord: QueueRecord)
+
+    func confirmAdmissionOfQueueRecord(_ record: QueueRecord)
 }

@@ -7,7 +7,7 @@
 
 protocol CustomerActivityLogic {
 
+    // Models
     var activeRecords: [Record] { get }
     var historyRecords: [Record] { get }
-
 }

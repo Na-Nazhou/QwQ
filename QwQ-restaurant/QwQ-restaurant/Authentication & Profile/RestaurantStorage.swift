@@ -35,4 +35,10 @@ protocol RestaurantStorage {
     static func updateRestaurantProfilePic(uid: String,
                                            image: UIImage,
                                            errorHandler: @escaping (Error) -> Void)
+
+    // MARK: - Restaurant Listener
+
+    static func registerListener(for restaurant: Restaurant)
+
+    static func removeListener()
 }

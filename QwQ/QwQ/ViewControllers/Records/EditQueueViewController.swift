@@ -10,7 +10,7 @@ import UIKit
 class EditQueueViewController: EditRecordViewController, QueueDelegate {
 
     // MARK: Logic properties
-    var queueLogicManager: CustomerQueueLogicManager!
+    var queueLogicManager: CustomerQueueLogic!
 
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {

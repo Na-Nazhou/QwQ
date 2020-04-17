@@ -26,10 +26,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     var historyRecords: [Record] {
         restaurantActivity.historyRecords
     }
-    
-    var isQueueOpen: Bool {
-        restaurant.isQueueOpen
-    }
 
     convenience init() {
         self.init(restaurantActivity: RestaurantActivity.shared(),
@@ -54,22 +50,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         bookingStorage.unregisterDelegate(self)
     }
 
-    func openQueue() {
-        let time = currentTime()
-        var new = restaurant
-        new.queueOpenTime = time
-
-        queueStorage.updateRestaurant(old: restaurant, new: new)
-    }
-
-    func closeQueue() {
-        let time = currentTime()
-        var new = restaurant
-        new.queueCloseTime = time
-
-        queueStorage.updateRestaurant(old: restaurant, new: new)
-    }
-
     // TODO
     func notifyCustomerOfAdmission(record: QueueRecord) {
         //setup timer events
@@ -82,14 +62,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
 
     func alertRestaurantIfCustomerTookTooLongToArrive(record: QueueRecord) {
         // TODO: popup alert
-    }
-}
-
-extension RestaurantActivityLogicManager {
-
-    func didUpdateRestaurant(restaurant: Restaurant) {
-        restaurantActivity.updateRestaurant(restaurant)
-        activitiesDelegate?.didUpdateRestaurant()
     }
 
     func didAddRecord<T: Record>(_ record: T,
@@ -115,7 +87,7 @@ extension RestaurantActivityLogicManager {
         }
     }
 
-    func addRecord<T: Record>(_ record: T, to collection: RecordCollection<T>) -> Bool {
+    private func addRecord<T: Record>(_ record: T, to collection: RecordCollection<T>) -> Bool {
         collection.add(record)
     }
 
@@ -300,9 +272,9 @@ extension RestaurantActivityLogicManager {
                                     completion: completion)
     }
 
-    func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
+    private func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
         var new = record
-        let time = currentTime()
+        let time = Date()
         switch event {
         case .admit:
             new.admitTime = time
@@ -314,11 +286,5 @@ extension RestaurantActivityLogicManager {
             assert(false)
         }
         return new
-    }
-}
-
-extension RestaurantActivityLogicManager {
-    private func currentTime() -> Date {
-        Date()
     }
 }

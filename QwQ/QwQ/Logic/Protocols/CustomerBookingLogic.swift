@@ -16,7 +16,7 @@ protocol CustomerBookingLogic: BookingStorageSyncDelegate {
                         at time: Date,
                         with groupSize: Int,
                         babyChairQuantity: Int,
-                        wheelchairFriendly: Bool)
+                        wheelchairFriendly: Bool) -> Bool
 
     func withdrawBookRecord(_ bookRecord: BookRecord)
 }

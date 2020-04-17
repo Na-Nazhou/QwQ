@@ -45,4 +45,8 @@ extension Date {
         print(currentTime)
         return currentTime
     }
+
+    static func getStartOfDay(of date: Date) -> Date {
+        Calendar.current.startOfDay(for: date)
+    }
 }

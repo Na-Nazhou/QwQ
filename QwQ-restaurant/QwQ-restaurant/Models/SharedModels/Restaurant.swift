@@ -26,19 +26,38 @@ struct Restaurant: User {
         autoOpenTime != nil && autoCloseTime != nil
     }
 
-    var currentAutoOpenTime: Date {
+    var nextAutoOpenTime: Date {
         if let openTime = autoOpenTime {
-            return Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+            var timeInterval: TimeInterval = 0
+            let todayOpenTime = Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+            if todayOpenTime < Date() {
+                timeInterval = Date.day
+            }
+            return todayOpenTime.addingTimeInterval(timeInterval)
         } else {
-            return Date.getStartOfDay(of: Date())
+            return Calendar.current.date(bySettingHour: 10, minute: 0, second: 0,
+                                         of: Date.getStartOfDay(of: Date()))!
         }
     }
 
-    var currentAutoCloseTime: Date {
+    var nextAutoCloseTime: Date {
         if let closeTime = autoCloseTime {
-            return Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
+            var timeInterval: TimeInterval = 0
+            let todayCloseTime = Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
+            if todayCloseTime < Date() {
+                timeInterval = Date.day
+            }
+            return todayCloseTime.addingTimeInterval(timeInterval)
         } else {
-            return Calendar.current.date(bySettingHour: 23, minute: 50, second: 0, of: currentAutoOpenTime)!
+            return Calendar.current.date(bySettingHour: 21, minute: 30, second: 0, of: nextAutoOpenTime)!
+        }
+    }
+
+    var operatingHours: String {
+        if let openTime = autoOpenTime, let closeTime = autoCloseTime {
+            return "\(Date.getFormattedTime(openTime)) - \(Date.getFormattedTime(closeTime))"
+        } else {
+            return ""
         }
     }
 

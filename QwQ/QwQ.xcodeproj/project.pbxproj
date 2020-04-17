@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		465CEEC0B3C37B94DA8E2920 /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3624B0C51A8B3AFF5EE2CD /* Pods_QwQTests.framework */; };
+		24601179C0715BDBB09FB34B /* Pods_QwQTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6DBC5D8D86F98EA23CC1B82 /* Pods_QwQTests.framework */; };
+		58EA71FACFC09C1178C44B28 /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC9A77CCAB57AE891DDD786 /* Pods_QwQ.framework */; };
 		5C11FD032418E300002B88E3 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */; };
 		5C11FD042418E302002B88E3 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */; };
 		5C11FD052418E304002B88E3 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */; };
@@ -92,7 +93,6 @@
 		7EFB69742422130C0073E535 /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB69732422130C0073E535 /* Book.storyboard */; };
 		7EFB6976242213470073E535 /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6975242213470073E535 /* QueueRecordViewController.swift */; };
 		7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6977242215B60073E535 /* BookRecordViewController.swift */; };
-		CED71CB49EC68FFC40628E9F /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB48FDF031A197D3B45A304 /* Pods_QwQ_QwQUITests.framework */; };
 		D41F91A224227FFE00724D6C /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F91A124227FFE00724D6C /* Date+Extensions.swift */; };
 		D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */; };
 		D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB6241B247600BD0780 /* RestaurantLogic.swift */; };
@@ -114,7 +114,7 @@
 		D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CC241B29CB009EB85B /* Customer.swift */; };
 		D4EA85D1241B29CC009EB85B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CD241B29CC009EB85B /* User.swift */; };
 		D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA85CE241B29CC009EB85B /* Restaurant.swift */; };
-		DB92FB5D82FF396239A0743E /* Pods_QwQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F91795CE6C20494F7CC00E04 /* Pods_QwQ.framework */; };
+		E26861B3BCB68748D706FC61 /* Pods_QwQ_QwQUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B971A880DE29829545A95 /* Pods_QwQ_QwQUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,9 +135,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C0E2DB8822CBCE7888BF4B6 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		2D3624B0C51A8B3AFF5EE2CD /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CEDFCC6C8F18BD052CECD9C /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2F7F0DBC5544AE73003BF26A /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C11FD002418E2F6002B88E3 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
 		5C11FD012418E2F6002B88E3 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		5C11FD022418E2F6002B88E3 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -182,7 +180,8 @@
 		61C74301242B4A1F005818A1 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerActivityLogicManager.swift; sourceTree = "<group>"; };
 		61D738D5243EFD2B00FFFAD9 /* CustomerActivityLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerActivityLogic.swift; sourceTree = "<group>"; };
-		7B40F60E2565FF91A6C280E6 /* Pods-QwQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.debug.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.debug.xcconfig"; sourceTree = "<group>"; };
+		73BB1F20688036424F1C55EE /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7987F22191FDB75DE26F0E6A /* Pods-QwQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.debug.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1137FD24233B1F006984BB /* PopoverContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentController.swift; sourceTree = "<group>"; };
 		7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
@@ -228,14 +227,17 @@
 		7EFB69732422130C0073E535 /* Book.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
 		7EFB6975242213470073E535 /* QueueRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordViewController.swift; sourceTree = "<group>"; };
 		7EFB6977242215B60073E535 /* BookRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordViewController.swift; sourceTree = "<group>"; };
-		AEA44F25D266FF11F9598FF4 /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
+		8579EA018AFBDAF8A5F6ED09 /* Pods-QwQ-QwQUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9CC9A77CCAB57AE891DDD786 /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6DBC5D8D86F98EA23CC1B82 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35FC895E2B02D7ADD048988 /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		D41F91A124227FFE00724D6C /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogicManager.swift; sourceTree = "<group>"; };
 		D4494EB6241B247600BD0780 /* RestaurantLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogic.swift; sourceTree = "<group>"; };
 		D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
 		D4494EBE241B24D800BD0780 /* QueueStorageSyncDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueStorageSyncDelegate.swift; sourceTree = "<group>"; };
-		D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorage.swift; path = QwQ/Storage/RestaurantStorage.swift; sourceTree = SOURCE_ROOT; };
-		D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueueStorage.swift; path = QwQ/Storage/CustomerQueueStorage.swift; sourceTree = SOURCE_ROOT; };
+		D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorage.swift; path = QwQ/Storage/Protocols/RestaurantStorage.swift; sourceTree = SOURCE_ROOT; };
+		D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomerQueueStorage.swift; path = QwQ/Storage/Protocols/CustomerQueueStorage.swift; sourceTree = SOURCE_ROOT; };
 		D4494EC1241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantStorageSyncDelegate.swift; path = QwQ/Storage/Delegates/RestaurantStorageSyncDelegate.swift; sourceTree = SOURCE_ROOT; };
 		D47852D024442EB8006393C7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		D47852D424445279006393C7 /* QwQNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQNotification.swift; sourceTree = "<group>"; };
@@ -250,10 +252,8 @@
 		D4EA85CC241B29CB009EB85B /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Customer.swift; path = QwQ/Models/SharedModels/Customer.swift; sourceTree = SOURCE_ROOT; };
 		D4EA85CD241B29CC009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = QwQ/Models/SharedModels/User.swift; sourceTree = SOURCE_ROOT; };
 		D4EA85CE241B29CC009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Restaurant.swift; path = QwQ/Models/SharedModels/Restaurant.swift; sourceTree = SOURCE_ROOT; };
-		EA4CA69144E95FF8E97BA1B2 /* Pods-QwQTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.debug.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EAB48FDF031A197D3B45A304 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F278C71E6E531A5A6AEDC95E /* Pods-QwQTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQTests.release.xcconfig"; path = "Target Support Files/Pods-QwQTests/Pods-QwQTests.release.xcconfig"; sourceTree = "<group>"; };
-		F91795CE6C20494F7CC00E04 /* Pods_QwQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E801E6979C5A3DB7A1759253 /* Pods-QwQ-QwQUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-QwQUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB2B971A880DE29829545A95 /* Pods_QwQ_QwQUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_QwQUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,7 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB92FB5D82FF396239A0743E /* Pods_QwQ.framework in Frameworks */,
+				58EA71FACFC09C1178C44B28 /* Pods_QwQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				465CEEC0B3C37B94DA8E2920 /* Pods_QwQTests.framework in Frameworks */,
+				24601179C0715BDBB09FB34B /* Pods_QwQTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,19 +277,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED71CB49EC68FFC40628E9F /* Pods_QwQ_QwQUITests.framework in Frameworks */,
+				E26861B3BCB68748D706FC61 /* Pods_QwQ_QwQUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		257E841A749B0A4744D9227A /* Frameworks */ = {
+		00B1D8529CBFBE5DD90D2D25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F91795CE6C20494F7CC00E04 /* Pods_QwQ.framework */,
-				EAB48FDF031A197D3B45A304 /* Pods_QwQ_QwQUITests.framework */,
-				2D3624B0C51A8B3AFF5EE2CD /* Pods_QwQTests.framework */,
+				9CC9A77CCAB57AE891DDD786 /* Pods_QwQ.framework */,
+				EB2B971A880DE29829545A95 /* Pods_QwQ_QwQUITests.framework */,
+				B6DBC5D8D86F98EA23CC1B82 /* Pods_QwQTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -358,6 +358,37 @@
 				61673BF52422168400134891 /* ActivitiesDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6150CA0C24497ECB008F6D1B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */,
+				6148054F242287F1003D6D44 /* CustomerBookingStorage.swift */,
+				D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6150CA0D24497EEE008F6D1B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D4494EB6241B247600BD0780 /* RestaurantLogic.swift */,
+				D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */,
+				6148054B24228798003D6D44 /* CustomerBookingLogic.swift */,
+				61D738D5243EFD2B00FFFAD9 /* CustomerActivityLogic.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6150CA0E24497F4B008F6D1B /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
+				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
+				7E1137FD24233B1F006984BB /* PopoverContentController.swift */,
+			);
+			path = Restaurants;
 			sourceTree = "<group>";
 		};
 		61B2EAA22418BAA400B88018 /* Models */ = {
@@ -466,7 +497,7 @@
 				7EC7E66E2418B6CA00C2F9BB /* QwQUITests */,
 				7EC7E64B2418B6C300C2F9BB /* Products */,
 				EA0FC2A023335949098FAD44 /* Pods */,
-				257E841A749B0A4744D9227A /* Frameworks */,
+				00B1D8529CBFBE5DD90D2D25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -524,13 +555,11 @@
 		7EC7E67D2418B7FB00C2F9BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7E6EBCE12430A8770058D19A /* Records */,
-				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
-				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
-				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
-				7E1137FD24233B1F006984BB /* PopoverContentController.swift */,
-				7E6EBCE22430A8850058D19A /* Profile */,
 				7E6EBCE02430A85B0058D19A /* Authentication */,
+				7E6EBCE22430A8850058D19A /* Profile */,
+				6150CA0E24497F4B008F6D1B /* Restaurants */,
+				7E6EBCE12430A8770058D19A /* Records */,
+				7EC1F3122421F837005D20CD /* ActivitiesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -583,13 +612,10 @@
 			children = (
 				D4EA85BF241B25E4009EB85B /* CustomerPostLoginSetupManager.swift */,
 				613267F9241F220C00B770B6 /* Delegates */,
-				D4494EB6241B247600BD0780 /* RestaurantLogic.swift */,
+				6150CA0D24497EEE008F6D1B /* Protocols */,
 				D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */,
-				D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */,
 				613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */,
-				6148054B24228798003D6D44 /* CustomerBookingLogic.swift */,
 				6148054D242287AB003D6D44 /* CustomerBookingLogicManager.swift */,
-				61D738D5243EFD2B00FFFAD9 /* CustomerActivityLogic.swift */,
 				61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */,
 			);
 			name = Logic;
@@ -612,9 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				6101D7982427A81400ACBCC9 /* Delegates */,
-				D4494EC0241B24D900BD0780 /* CustomerQueueStorage.swift */,
-				6148054F242287F1003D6D44 /* CustomerBookingStorage.swift */,
-				D4494EBF241B24D800BD0780 /* RestaurantStorage.swift */,
+				6150CA0C24497ECB008F6D1B /* Protocols */,
 				5C6DA5CF241A1799001CABC3 /* FIRQueueStorage.swift */,
 				6101D79324271B6E00ACBCC9 /* FIRBookingStorage.swift */,
 				6148054924227CE2003D6D44 /* FIRRestaurantStorage.swift */,
@@ -634,12 +658,12 @@
 		EA0FC2A023335949098FAD44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7B40F60E2565FF91A6C280E6 /* Pods-QwQ.debug.xcconfig */,
-				AEA44F25D266FF11F9598FF4 /* Pods-QwQ.release.xcconfig */,
-				0C0E2DB8822CBCE7888BF4B6 /* Pods-QwQ-QwQUITests.debug.xcconfig */,
-				4CEDFCC6C8F18BD052CECD9C /* Pods-QwQ-QwQUITests.release.xcconfig */,
-				EA4CA69144E95FF8E97BA1B2 /* Pods-QwQTests.debug.xcconfig */,
-				F278C71E6E531A5A6AEDC95E /* Pods-QwQTests.release.xcconfig */,
+				7987F22191FDB75DE26F0E6A /* Pods-QwQ.debug.xcconfig */,
+				C35FC895E2B02D7ADD048988 /* Pods-QwQ.release.xcconfig */,
+				E801E6979C5A3DB7A1759253 /* Pods-QwQ-QwQUITests.debug.xcconfig */,
+				8579EA018AFBDAF8A5F6ED09 /* Pods-QwQ-QwQUITests.release.xcconfig */,
+				73BB1F20688036424F1C55EE /* Pods-QwQTests.debug.xcconfig */,
+				2F7F0DBC5544AE73003BF26A /* Pods-QwQTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -651,12 +675,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E6742418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQ" */;
 			buildPhases = (
-				9DD9FCC8C98A300D16F6FCF7 /* [CP] Check Pods Manifest.lock */,
+				79438482C72045C857FBF10F /* [CP] Check Pods Manifest.lock */,
 				7EC7E6462418B6C300C2F9BB /* Sources */,
 				7EC7E6472418B6C300C2F9BB /* Frameworks */,
 				7EC7E6482418B6C300C2F9BB /* Resources */,
 				5C39D2032418DA5B001E03C0 /* ShellScript */,
-				AA177F68CD3D389AFFEE9961 /* [CP] Embed Pods Frameworks */,
+				8BE1CD4BB02E6FBCB3755419 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -671,7 +695,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E6772418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQTests" */;
 			buildPhases = (
-				AF5A2F75D82CDF427B382D7B /* [CP] Check Pods Manifest.lock */,
+				A017E444DCDD062583F1E529 /* [CP] Check Pods Manifest.lock */,
 				7EC7E65C2418B6CA00C2F9BB /* Sources */,
 				7EC7E65D2418B6CA00C2F9BB /* Frameworks */,
 				7EC7E65E2418B6CA00C2F9BB /* Resources */,
@@ -690,11 +714,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EC7E67A2418B6CA00C2F9BB /* Build configuration list for PBXNativeTarget "QwQUITests" */;
 			buildPhases = (
-				4AEBC9CAF38E0E2FEFB88160 /* [CP] Check Pods Manifest.lock */,
+				E0C7792D1782FACAD906DD54 /* [CP] Check Pods Manifest.lock */,
 				7EC7E6672418B6CA00C2F9BB /* Sources */,
 				7EC7E6682418B6CA00C2F9BB /* Frameworks */,
 				7EC7E6692418B6CA00C2F9BB /* Resources */,
-				4F29EDC4E3180DDC865145C1 /* [CP] Embed Pods Frameworks */,
+				AB453C5340BDC8D642D32A43 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -792,45 +816,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4AEBC9CAF38E0E2FEFB88160 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QwQ-QwQUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4F29EDC4E3180DDC865145C1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5C39D2032418DA5B001E03C0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -848,7 +833,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		9DD9FCC8C98A300D16F6FCF7 /* [CP] Check Pods Manifest.lock */ = {
+		79438482C72045C857FBF10F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -870,7 +855,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AA177F68CD3D389AFFEE9961 /* [CP] Embed Pods Frameworks */ = {
+		8BE1CD4BB02E6FBCB3755419 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -887,7 +872,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ/Pods-QwQ-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AF5A2F75D82CDF427B382D7B /* [CP] Check Pods Manifest.lock */ = {
+		A017E444DCDD062583F1E529 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -903,6 +888,45 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-QwQTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB453C5340BDC8D642D32A43 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QwQ-QwQUITests/Pods-QwQ-QwQUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0C7792D1782FACAD906DD54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QwQ-QwQUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1163,7 +1187,7 @@
 		};
 		7EC7E6752418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B40F60E2565FF91A6C280E6 /* Pods-QwQ.debug.xcconfig */;
+			baseConfigurationReference = 7987F22191FDB75DE26F0E6A /* Pods-QwQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
@@ -1185,7 +1209,7 @@
 		};
 		7EC7E6762418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEA44F25D266FF11F9598FF4 /* Pods-QwQ.release.xcconfig */;
+			baseConfigurationReference = C35FC895E2B02D7ADD048988 /* Pods-QwQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QwQ/QwQ.entitlements;
@@ -1207,7 +1231,7 @@
 		};
 		7EC7E6782418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA4CA69144E95FF8E97BA1B2 /* Pods-QwQTests.debug.xcconfig */;
+			baseConfigurationReference = 73BB1F20688036424F1C55EE /* Pods-QwQTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1228,7 +1252,7 @@
 		};
 		7EC7E6792418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F278C71E6E531A5A6AEDC95E /* Pods-QwQTests.release.xcconfig */;
+			baseConfigurationReference = 2F7F0DBC5544AE73003BF26A /* Pods-QwQTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1249,7 +1273,7 @@
 		};
 		7EC7E67B2418B6CA00C2F9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C0E2DB8822CBCE7888BF4B6 /* Pods-QwQ-QwQUITests.debug.xcconfig */;
+			baseConfigurationReference = E801E6979C5A3DB7A1759253 /* Pods-QwQ-QwQUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQUITests/Info.plist;
@@ -1268,7 +1292,7 @@
 		};
 		7EC7E67C2418B6CA00C2F9BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CEDFCC6C8F18BD052CECD9C /* Pods-QwQ-QwQUITests.release.xcconfig */;
+			baseConfigurationReference = 8579EA018AFBDAF8A5F6ED09 /* Pods-QwQ-QwQUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QwQUITests/Info.plist;

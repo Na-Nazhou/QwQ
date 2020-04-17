@@ -50,6 +50,7 @@ struct Constants {
     // MARK: Book record settings
     static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
     static let exceedAdvanceBookingLimitMessage = "You have to book at least %@ hours in advance at %@."
+    static let exceedOperatingHoursMessage = "%@ only operates at %@"
 
     // MARK: Record settings
     static let defaultWheelchairFriendly = false
@@ -61,7 +62,7 @@ struct Constants {
     static let recordUpdateSuccessMessage = "Your record has been updated."
     static let recordConfirmSuccessMessage = "Your record has been confirmed."
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
-    
+
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"

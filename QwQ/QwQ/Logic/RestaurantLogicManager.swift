@@ -8,14 +8,14 @@ class RestaurantLogicManager: RestaurantLogic {
     weak var searchDelegate: SearchDelegate?
 
     // Models
-    private var restaurantCollection = Collection<Restaurant>()
+    private let restaurantCollection = Collection<Restaurant>()
     var restaurants: [Restaurant] {
         restaurantCollection.restaurants
     }
 
     var currentRestaurant: Restaurant?
 
-    private var selectedRestaurantCollection = Collection<Restaurant>()
+    private let selectedRestaurantCollection = Collection<Restaurant>()
     var currentRestaurants: [Restaurant] {
         get {
             selectedRestaurantCollection.restaurants

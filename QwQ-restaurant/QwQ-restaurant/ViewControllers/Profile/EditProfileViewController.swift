@@ -192,8 +192,8 @@ class EditProfileViewController: UIViewController {
         maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
         advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
 
-        autoOpenTimePicker.date = restaurant.currentAutoOpenTime
-        autoCloseTimePicker.date = restaurant.currentAutoCloseTime
+        autoOpenTimePicker.date = restaurant.nextAutoOpenTime
+        autoCloseTimePicker.date = restaurant.nextAutoCloseTime
         if restaurant.isAutoOpenCloseEnabled {
             autoOpenCloseSwitch.isOn = true
         } else {
