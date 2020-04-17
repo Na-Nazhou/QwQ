@@ -17,6 +17,10 @@ struct QueueRecord: Record {
     var rejectTime: Date?
     let withdrawTime: Date?
     let confirmAdmissionTime: Date?
+
+    var missTime: Date?
+    var readmitTime: Date?
+
     var estimatedAdmitTime: Date?
 
     var startDate: String {
@@ -50,6 +54,12 @@ struct QueueRecord: Record {
         if let confirmAdmissionTime = confirmAdmissionTime {
             data[Constants.confirmAdmissionTimeKey] = confirmAdmissionTime
         }
+        if let missTime = missTime {
+            data[Constants.missTimeKey] = missTime
+        }
+        if let readmitTime = readmitTime {
+            data[Constants.readmitTimeKey] = readmitTime
+        }
 
         return data
     }
@@ -58,7 +68,8 @@ struct QueueRecord: Record {
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
          rejectTime: Date? = nil, withdrawTime: Date? = nil,
-         confirmAdmissionTime: Date? = nil, estimatedAdmitTime: Date? = nil) {
+         confirmAdmissionTime: Date? = nil, estimatedAdmitTime: Date? = nil,
+         missTime: Date? = nil, readmitTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -72,6 +83,8 @@ struct QueueRecord: Record {
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
         self.confirmAdmissionTime = confirmAdmissionTime
+        self.missTime = missTime
+        self.readmitTime = readmitTime
         self.estimatedAdmitTime = estimatedAdmitTime
     }
 
@@ -87,6 +100,8 @@ struct QueueRecord: Record {
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
         let confirmAdmissionTime = (dictionary[Constants.confirmAdmissionTimeKey] as? Timestamp)?.dateValue()
+        let missTime = (dictionary[Constants.missTimeKey] as? Timestamp)?.dateValue()
+        let readmitTime = (dictionary[Constants.readmitTimeKey] as? Timestamp)?.dateValue()
         let estimatedAdmitTime = (dictionary[Constants.estimatedAdmitTimeKey] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
@@ -95,7 +110,8 @@ struct QueueRecord: Record {
                   startTime: startTime, admitTime: admitTime,
                   serveTime: serveTime, rejectTime: rejectTime, withdrawTime: withdrawTime,
                   confirmAdmissionTime: confirmAdmissionTime,
-                  estimatedAdmitTime: estimatedAdmitTime)
+                  estimatedAdmitTime: estimatedAdmitTime,
+                  missTime: missTime, readmitTime: readmitTime)
     }
 }
 
@@ -123,6 +139,8 @@ extension QueueRecord {
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
             && other.confirmAdmissionTime == confirmAdmissionTime
+            && other.missTime == missTime
+            && other.readmitTime == readmitTime
             && other.estimatedAdmitTime == estimatedAdmitTime
     }
 }

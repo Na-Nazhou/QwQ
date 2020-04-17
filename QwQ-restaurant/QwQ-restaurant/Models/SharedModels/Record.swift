@@ -21,6 +21,8 @@ protocol Record {
     var rejectTime: Date? { get set }
     var withdrawTime: Date? { get }
     var confirmAdmissionTime: Date? { get }
+    var missTime: Date? { get }
+    var readmitTime: Date? {get }
 }
 
 extension Record {
@@ -56,14 +58,29 @@ extension Record {
         status == .pendingAdmission
     }
 
+    var isMissedAndPending: Bool {
+        status == .missedAndPending
+    }
+
+    // Status for missable records
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
-        } else if admitTime != nil && rejectTime != nil {
+        } else if rejectTime != nil {
             return .rejected
         } else if admitTime != nil && serveTime != nil {
             return .served
-        } else if admitTime != nil && confirmAdmissionTime != nil {
+        } else if admitTime != nil && missTime == nil {
+            return .admitted
+        } else if missTime != nil && readmitTime != nil {
+            assert(confirmAdmissionTime != nil)
+            if confirmAdmissionTime! < readmitTime! {
+                return .admitted
+            }
+            return .confirmedAdmission
+        } else if missTime != nil {
+                return .missedAndPending
+        } else if admitTime != nil && confirmAdmissionTime != nil && missTime == nil {
             return .confirmedAdmission
         } else if admitTime != nil {
             return .admitted
@@ -87,19 +104,27 @@ extension Record {
             return .withdraw
         }
 
-        if old.status == .pendingAdmission && self.status == .admitted {
+        if (old.status == .pendingAdmission && self.status == .admitted)
+            || (old.status == .missedAndPending && self.status == .admitted) {
             return .admit
         }
 
-        if (old.status == .admitted || old.status == .pendingAdmission) && self.status == .confirmedAdmission {
+        if self.status == .missedAndPending
+            && (old.status == .admitted || old.status == .confirmedAdmission) {
+            return .miss
+        }
+
+        if (old.status == .admitted || old.status == .pendingAdmission || old.status == .missedAndPending)
+            && self.status == .confirmedAdmission {
             return .confirmAdmission
         }
 
-        if old.status == .confirmedAdmission && self.status == .served {
+        if (old.status != .rejected || old.status != .withdrawn)
+            && self.status == .served {
             return .serve
         }
 
-        if (old.status == .admitted || old.status == .confirmedAdmission) && self.status == .rejected {
+        if self.status == .rejected {
             return .reject
         }
 

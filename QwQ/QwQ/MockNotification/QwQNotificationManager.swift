@@ -5,6 +5,8 @@ import os.log
 /// Note: private functions are written separately for logging purposes also.
 class QwQNotificationManager: QwQNotificationHandler {
     static let shared = QwQNotificationManager()
+    static let waitConfirmTimeInMins = 3 //TODO: make text static
+    static let waitArrivalInMins = 15 // TODO: all in constants? file.
 
     let notifManager = LocalNotificationManager.singleton
 
@@ -119,7 +121,9 @@ class QwQNotificationManager: QwQNotificationHandler {
 
     private func withdrawableMissedQueueNotification(
         _ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
-        let timeInterval = hasConfirmedPreviously ? 15 : 3
+        let timeInterval = hasConfirmedPreviously
+            ? QwQNotificationManager.waitArrivalInMins
+            : QwQNotificationManager.waitConfirmTimeInMins
 
         let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
         let notifAdmit = QwQNotification(

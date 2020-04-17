@@ -5,4 +5,5 @@ enum RecordModification: Int {
     case serve
     case withdraw
     case confirmAdmission
+    case miss
 }

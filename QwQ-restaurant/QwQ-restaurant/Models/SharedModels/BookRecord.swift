@@ -30,6 +30,10 @@ struct BookRecord: Record {
     var confirmAdmissionTime: Date? {
         admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
     }
+    var missTime: Date?
+    var readmitTime: Date? {
+        nil
+    }
 
     var dictionary: [String: Any] {
         var data = [String: Any]()
@@ -52,6 +56,9 @@ struct BookRecord: Record {
         if let withdrawTime = withdrawTime {
             data[Constants.withdrawTimeKey] = withdrawTime
         }
+        if let missTime = missTime {
+            data[Constants.missTimeKey] = missTime
+        }
 
         return data
     }
@@ -59,7 +66,8 @@ struct BookRecord: Record {
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil,
+         missTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -72,6 +80,7 @@ struct BookRecord: Record {
         self.serveTime = serveTime
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
+        self.missTime = missTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -85,6 +94,7 @@ struct BookRecord: Record {
         let serveTime = (dictionary[Constants.serveTimeKey] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
+        let missTime = (dictionary[Constants.missTimeKey] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   time: time,
@@ -92,7 +102,8 @@ struct BookRecord: Record {
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime, withdrawTime: withdrawTime)
+                  rejectTime: rejectTime, withdrawTime: withdrawTime,
+                  missTime: missTime)
     }
 }
 
@@ -117,5 +128,55 @@ extension BookRecord: Hashable {
             && other.serveTime == serveTime
             && other.rejectTime == rejectTime
             && other.withdrawTime == withdrawTime
+    }
+}
+
+extension BookRecord {
+    var status: RecordStatus {
+        if withdrawTime != nil {
+            return .withdrawn
+        } else if admitTime == nil && rejectTime != nil {
+            // for book records, can only be rejected when requesting
+            // once confirmed, cannot reject. (dif from queues)
+            return .rejected
+        } else if admitTime != nil && serveTime != nil {
+            return .served
+        } else if admitTime != nil && confirmAdmissionTime != nil {
+            return .confirmedAdmission
+        } else if admitTime != nil {
+            return .admitted
+        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
+            return .pendingAdmission
+        }
+        return .invalid
+    }
+
+    func changeType(from old: Record) -> RecordModification? {
+        if self.id != old.id {
+            // not valid comparison
+            return nil
+        }
+
+        if old.status == self.status {
+            return .customerUpdate
+        }
+
+        if status == .withdrawn {
+            return .withdraw
+        }
+
+        if old.status == .pendingAdmission && self.status == .confirmedAdmission {
+            return .confirmAdmission
+        }
+
+        if old.status == .confirmedAdmission && self.status == .served {
+            return .serve
+        }
+
+        if (old.status == .pendingAdmission || old.status == .confirmedAdmission) && self.status == .rejected {
+            return .reject
+        }
+
+        return nil
     }
 }
