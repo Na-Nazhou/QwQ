@@ -3,9 +3,9 @@ import Foundation
 protocol QueueStorageSync {
 
     // MARK: - Listeners
-    func registerListeners(for restaurant: Restaurant)
+    func registerListener(for restaurant: Restaurant)
 
-    func removeListeners()
+    func removeListener()
 
     // MARK: - Delegates
     var logicDelegates: NSHashTable<AnyObject> { get }

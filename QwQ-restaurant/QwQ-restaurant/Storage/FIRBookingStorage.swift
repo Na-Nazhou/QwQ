@@ -56,11 +56,11 @@ extension FIRBookingStorage {
         removeListener()
         let date = Date()
         let calendar = Calendar.current
+        // TODO: use open/close time
         let startTime = calendar.startOfDay(for: date)
-        let startTimestamp = Timestamp(date: startTime)
         listener = db.collection(Constants.bookingsDirectory)
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
-            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTimestamp)
+            .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTime)
             .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
                     os_log("Error getting book record documents",
@@ -95,7 +95,9 @@ extension FIRBookingStorage {
 
         guard let data = document.data(),
             let customerUID = data[Constants.customerKey] as? String else {
-            return
+                os_log("Error getting cid from Book Record document.",
+                       log: Log.cidError, type: .error)
+                return
         }
 
         let bid = document.documentID

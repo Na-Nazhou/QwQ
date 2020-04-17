@@ -33,11 +33,6 @@ class RestaurantLogicManager: RestaurantLogic {
         self.restaurantActivity = restaurantActivity
 
         RestaurantStorage.delegate = self
-        RestaurantStorage.registerListenerForRestaurant(restaurant)
-    }
-
-    deinit {
-        RestaurantStorage.removeListener()
     }
 
     func openQueue() {

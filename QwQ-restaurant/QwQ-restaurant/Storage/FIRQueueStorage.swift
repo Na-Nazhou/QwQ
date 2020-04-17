@@ -25,7 +25,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
     private var queueListener: ListenerRegistration?
 
     deinit {
-        removeListeners()
+        removeListener()
     }
 
     private func getQueueRecordDocument(record: QueueRecord) -> DocumentReference {
@@ -50,58 +50,55 @@ class FIRQueueStorage: RestaurantQueueStorage {
 extension FIRQueueStorage {
     // MARK: - Listeners
 
-    func registerListeners(for restaurant: Restaurant) {
-        removeListeners()
-        registerListenerForQueue(of: restaurant)
-    }
-
-    func removeListeners() {
-        queueListener?.remove()
-        queueListener = nil
-    }
-
-    private func registerListenerForQueue(of restaurant: Restaurant) {
+    func registerListener(for restaurant: Restaurant) {
+        removeListener()
         queueListener = queueDb
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
-                guard let snapshot = snapshot, err == nil else {
-                    os_log("Error getting queue record documents",
-                           log: Log.queueRetrievalError,
-                           type: .error,
-                           String(describing: err))
-                    return
-                }
-                snapshot.documentChanges.forEach { diff in
-                    var completion: (QueueRecord) -> Void
-                    switch diff.type {
-                    case .added:
-                        completion = { record in self.delegateWork { $0.didAddQueueRecord(record) } }
-                    case .modified:
-                        completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
-                    case .removed:
-                        print("\n\tDetected removal of queue record from db which should not happen.\n")
-                        completion = { _ in }
-                    }
-
-                    self.makeQueueRecord(
-                        document: diff.document,
-                        restaurant: restaurant,
-                        completion: completion)
-                }
+            guard let snapshot = snapshot, err == nil else {
+                os_log("Error getting queue record documents",
+                       log: Log.queueRetrievalError,
+                       type: .error,
+                       String(describing: err))
+                return
             }
+            snapshot.documentChanges.forEach { diff in
+                var completion: (QueueRecord) -> Void
+                switch diff.type {
+                case .added:
+                    completion = { record in self.delegateWork { $0.didAddQueueRecord(record) } }
+                case .modified:
+                    completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
+                case .removed:
+                    print("\n\tDetected removal of queue record from db which should not happen.\n")
+                    completion = { _ in }
+                }
+
+                self.makeQueueRecord(
+                    document: diff.document,
+                    restaurant: restaurant,
+                    completion: completion)
+            }
+        }
+    }
+
+    func removeListener() {
+        queueListener?.remove()
+        queueListener = nil
     }
 
     private func makeQueueRecord(document: DocumentSnapshot,
                                  restaurant: Restaurant,
                                  completion: @escaping (QueueRecord) -> Void) {
-        guard let data = document.data(), let cid = data[Constants.customerKey] as? String else {
+        guard let data = document.data(), let customerUID = data[Constants.customerKey] as? String else {
             os_log("Error getting cid from Queue Record document.",
                    log: Log.cidError, type: .error)
             return
         }
+
         let qid = document.documentID
 
-        FIRCustomerStorage.getCustomerFromUID(uid: cid, completion: { customer in
+        FIRCustomerStorage.getCustomerFromUID(uid: customerUID, completion: { customer in
                 guard let rec = QueueRecord(dictionary: data,
                                             customer: customer,
                                             restaurant: restaurant,

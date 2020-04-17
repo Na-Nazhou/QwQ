@@ -39,6 +39,10 @@ class FIRRestaurantStorage: RestaurantStorage {
                       Constants.advanceBookingLimitKey: Restaurant.defaultAdvanceBookingLimit]) { (error) in
             if let error = error {
                 errorHandler(error)
+                os_log("Error creating restaurant",
+                       log: Log.createRestaurantError,
+                       type: .error,
+                       error.localizedDescription)
             }
             }
     }
@@ -96,6 +100,10 @@ class FIRRestaurantStorage: RestaurantStorage {
         docRef.setData(restaurant.dictionary) { (error) in
             if let error = error {
                 errorHandler(error)
+                os_log("Error updating restaurant",
+                       log: Log.updateRestaurantError,
+                       type: .error,
+                       error.localizedDescription)
                 return
             }
             completion()
@@ -120,7 +128,7 @@ class FIRRestaurantStorage: RestaurantStorage {
 
     // MARK: - Restaurant Listener
     
-    static func registerListenerForRestaurant(_ restaurant: Restaurant) {
+    static func registerListener(for restaurant: Restaurant) {
         removeListener()
         restaurantListener = dbRef.document(restaurant.uid)
             .addSnapshotListener { (snapshot, err) in
@@ -143,5 +151,6 @@ class FIRRestaurantStorage: RestaurantStorage {
 
     static func removeListener() {
         restaurantListener?.remove()
+        restaurantListener = nil
     }
 }

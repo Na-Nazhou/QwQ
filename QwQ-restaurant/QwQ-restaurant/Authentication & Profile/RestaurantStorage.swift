@@ -38,7 +38,7 @@ protocol RestaurantStorage {
 
     // MARK: - Restaurant Listener
 
-    static func registerListenerForRestaurant(_ restaurant: Restaurant)
+    static func registerListener(for restaurant: Restaurant)
 
     static func removeListener()
 }
