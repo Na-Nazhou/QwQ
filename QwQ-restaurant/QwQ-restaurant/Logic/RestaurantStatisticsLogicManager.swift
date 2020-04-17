@@ -11,30 +11,30 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     // Models
     private let restaurantActivity: RestaurantActivity
-    var restaurant: Restaurant {
+    private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
 
     var currentStats: Statistics?
 
-    var dailyStatsCollection = Collection<Statistics>()
+    private let dailyStatsCollection = Collection<Statistics>()
     var dailyDetails: [Statistics] {
         dailyStatsCollection.statistics
     }
 
-    var weeklyStatsCollection = Collection<Statistics>()
+    private let weeklyStatsCollection = Collection<Statistics>()
     var weeklyDetails: [Statistics] {
         weeklyStatsCollection.statistics
     }
 
-    var monthlyStatsCollection = Collection<Statistics>()
+    private let monthlyStatsCollection = Collection<Statistics>()
     var monthlyDetails: [Statistics] {
         monthlyStatsCollection.statistics
     }
 
-    var dailySummary: Statistics?
-    var weeklySummary: Statistics?
-    var monthlySummary: Statistics?
+    private(set) var dailySummary: Statistics?
+    private(set) var weeklySummary: Statistics?
+    private(set) var monthlySummary: Statistics?
 
     convenience init() {
         self.init(storage: FIRStatsStorage.shared,

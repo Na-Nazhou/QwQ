@@ -564,12 +564,15 @@
                                                             </textField>
                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yzh-VD-1ZX">
                                                                 <rect key="frame" x="0.0" y="749.5" width="478.5" height="92"/>
+                                                                <connections>
+                                                                    <action selector="onSwitchChange:" destination="uvb-Aq-pGb" eventType="valueChanged" id="Yzb-EE-KpF"/>
+                                                                </connections>
                                                             </switch>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="10" translatesAutoresizingMaskIntoConstraints="NO" id="hOT-FW-O2c">
-                                                                <rect key="frame" x="0.0" y="856.5" width="476.5" height="92"/>
+                                                                <rect key="frame" x="0.0" y="856" width="476" height="92"/>
                                                             </datePicker>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="10" translatesAutoresizingMaskIntoConstraints="NO" id="QJN-IL-bJK">
-                                                                <rect key="frame" x="0.0" y="963.5" width="476.5" height="92"/>
+                                                                <rect key="frame" x="0.0" y="963" width="476" height="92"/>
                                                             </datePicker>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2" textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="pB5-WI-g4a">
                                                                 <rect key="frame" x="0.0" y="1070.5" width="476.5" height="92"/>

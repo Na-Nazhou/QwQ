@@ -22,6 +22,26 @@ struct Restaurant: User {
     let autoOpenTime: TimeInterval?
     let autoCloseTime: TimeInterval?
 
+    var isAutoOpenCloseEnabled: Bool {
+        autoOpenTime != nil && autoCloseTime != nil
+    }
+
+    var currentAutoOpenTime: Date {
+        if let openTime = autoOpenTime {
+            return Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
+        } else {
+            return Date.getStartOfDay(of: Date())
+        }
+    }
+
+    var currentAutoCloseTime: Date {
+        if let closeTime = autoCloseTime {
+            return Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
+        } else {
+            return Calendar.current.date(bySettingHour: 23, minute: 50, second: 0, of: currentAutoOpenTime)!
+        }
+    }
+
     //previous recorded times
     var queueOpenTime: Date?
     var queueCloseTime: Date?

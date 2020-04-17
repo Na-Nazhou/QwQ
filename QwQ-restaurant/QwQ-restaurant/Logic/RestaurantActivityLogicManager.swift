@@ -11,7 +11,6 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
 
     // Models
     private let restaurantActivity: RestaurantActivity
-
     private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
@@ -71,6 +70,7 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
         queueStorage.updateRestaurant(old: restaurant, new: new)
     }
 
+    // TODO
     func notifyCustomerOfAdmission(record: QueueRecord) {
         //setup timer events
     }

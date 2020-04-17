@@ -78,18 +78,6 @@ class EditProfileViewController: UIViewController {
         
         self.registerObserversForKeyboard()
         self.hideKeyboardWhenTappedAround()
-
-        setUpAutoOpenCloseSwitch()
-        setUpDatePicker()
-    }
-
-    private func setUpAutoOpenCloseSwitch() {
-        autoOpenCloseSwitch.addTarget(self, action: #selector(onSwitchChange), for: .valueChanged)
-    }
-
-    private func setUpDatePicker() {
-        autoOpenTimePicker.datePickerMode = .time
-        autoCloseTimePicker.datePickerMode = .time
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +98,7 @@ class EditProfileViewController: UIViewController {
     }
 
     @IBAction private func handleBack(_ sender: Any) {
-        self.handleBack()
+        handleBack()
     }
     
     @IBAction func handleEditBanner(_ sender: Any) {
@@ -192,6 +180,9 @@ class EditProfileViewController: UIViewController {
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
         uid = restaurant.uid
+        queueOpenTime = restaurant.queueOpenTime
+        queueCloseTime = restaurant.queueCloseTime
+
         nameTextField.text = restaurant.name
         emailTextField.text = restaurant.email
         contactTextField.text = restaurant.contact
@@ -200,19 +191,15 @@ class EditProfileViewController: UIViewController {
         minGroupSizeTextField.text = String(restaurant.minGroupSize)
         maxGroupSizeTextField.text = String(restaurant.maxGroupSize)
         advanceBookingLimitTextField.text = String(restaurant.advanceBookingLimit)
-        queueOpenTime = restaurant.queueOpenTime
-        queueCloseTime = restaurant.queueCloseTime
 
-        if let openTime = restaurant.autoOpenTime, let closeTime = restaurant.autoCloseTime {
+        autoOpenTimePicker.date = restaurant.currentAutoOpenTime
+        autoCloseTimePicker.date = restaurant.currentAutoCloseTime
+        if restaurant.isAutoOpenCloseEnabled {
             autoOpenCloseSwitch.isOn = true
-            autoOpenTimePicker.date = Date.getStartOfDay(of: Date()).addingTimeInterval(openTime)
-            autoCloseTimePicker.date = Date.getStartOfDay(of: Date()).addingTimeInterval(closeTime)
         } else {
             autoOpenCloseSwitch.isOn = false
             autoOpenTimePicker.isEnabled = false
             autoCloseTimePicker.isEnabled = false
-            autoOpenTimePicker.date = Date.getStartOfDay(of: Date())
-            autoCloseTimePicker.date = Date.getEndOfDay(of: Date()).addingTimeInterval(-10 * 60)
         }
 
         setUpProfileImageView(uid: restaurant.uid)
@@ -233,7 +220,7 @@ class EditProfileViewController: UIViewController {
         showMessage(title: Constants.successTitle,
                     message: Constants.profileUpdateSuccessMessage,
                     buttonText: Constants.okayTitle,
-                    buttonAction: { _ in self.navigationController?.popViewController(animated: true) })
+                    buttonAction: handleBack )
     }
 
     private func setUpProfileImageView(uid: String) {
@@ -246,8 +233,10 @@ class EditProfileViewController: UIViewController {
     }
 
     private func handleError(error: Error) {
-        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
+        showMessage(title: Constants.errorTitle,
+                    message: error.localizedDescription,
+                    buttonText: Constants.okayTitle)
     }
 
     private func checkIfAllFieldsAreFilled() -> Bool {
