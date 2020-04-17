@@ -6,6 +6,9 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
     // Storage
     private var queueStorage: CustomerQueueStorage
 
+    // Notification
+    private var notificationHandler: QwQNotificationHandler
+
     // View Controller
     weak var queueDelegate: QueueDelegate?
     weak var searchDelegate: SearchDelegate?
@@ -26,13 +29,16 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
 
     convenience init() {
         self.init(customerActivity: CustomerActivity.shared(),
-                  queueStorage: FIRQueueStorage.shared)
+                  queueStorage: FIRQueueStorage.shared,
+                  notificationHandler: QwQNotificationManager.shared)
     }
 
     // Constructor to provide flexibility for testing.
-    init(customerActivity: CustomerActivity, queueStorage: CustomerQueueStorage) {
+    init(customerActivity: CustomerActivity, queueStorage: CustomerQueueStorage,
+         notificationHandler: QwQNotificationHandler) {
         self.customerActivity = customerActivity
         self.queueStorage = queueStorage
+        self.notificationHandler = notificationHandler
 
         self.queueStorage.registerDelegate(self)
     }
@@ -160,6 +166,12 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             return
         }
 
+        if record.completelyIdentical(to: oldRecord) {
+            os_log("Listener triggered although queue record is identical.",
+                   log: Log.notAModification, type: .debug)
+            return
+        }
+
         let modification = record.changeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -208,6 +220,7 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
             confirmAdmissionOfQueueRecord(record, completion: {})
             return
         }
+        notificationHandler.notifyQueueAdmittedAwaitingConfirmation(record: record)
     }
 
     private func didConfirmAdmissionOfQueueRecord(_ record: QueueRecord) {
@@ -215,13 +228,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         if customerActivity.currentQueues.update(record) {
             activitiesDelegate?.didUpdateActiveRecords()
         }
+        notificationHandler.retractQueueNotifications(for: record)
+        notificationHandler.notifyQueueConfirmed(record: record)
     }
 
     private func didWithdrawQueuerecord(_ record: QueueRecord) {
         os_log("Detected withdrawal", log: Log.withdrawnByCustomer, type: .info)
         removeFromCurrentQueue(record)
         addToHistoryQueue(record)
-
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
@@ -229,12 +244,15 @@ class CustomerQueueLogicManager: CustomerQueueLogic {
         removeFromCurrentQueue(record)
         addToHistoryQueue(record)
 
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
         os_log("Detected rejection", log: Log.rejectCustomer, type: .info)
         removeFromCurrentQueue(record)
         addToHistoryQueue(record)
+        notificationHandler.retractQueueNotifications(for: record)
+        notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func removeFromCurrentQueue(_ record: QueueRecord) {
