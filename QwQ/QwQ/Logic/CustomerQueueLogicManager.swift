@@ -171,12 +171,6 @@ extension CustomerQueueLogicManager {
             return
         }
 
-        if record.completelyIdentical(to: oldRecord) {
-            os_log("Listener triggered although queue record is identical.",
-                   log: Log.notAModification, type: .debug)
-            return
-        }
-
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
         case .admit:
@@ -206,15 +200,13 @@ extension CustomerQueueLogicManager {
 
     private func customerDidUpdateQueueRecord(_ record: QueueRecord) {
         super.customerDidUpdateRecord(record,
-                                      customerActivity.currentQueues)
+                                      customerActivity.currentQueues,
+                                      customerActivity.queueHistory)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
         os_log("Detected admission", log: Log.admitCustomer, type: .info)
-        guard customerActivity.currentQueues.update(record) else {
-            return
-        }
-        activitiesDelegate?.didUpdateActiveRecords()
+        super.updateRecord(record, in: customerActivity.currentQueues)
 
         if clashingRecords(with: record).isEmpty {
             confirmAdmission(of: record, completion: {})

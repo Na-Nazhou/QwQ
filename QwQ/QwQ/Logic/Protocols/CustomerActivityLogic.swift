@@ -7,6 +7,6 @@
 
 protocol CustomerActivityLogic {
 
-    func fetchActiveRecords() -> [Record]
-    func fetchHistoryRecords() -> [Record]
+    var activeRecords: [Record] { get }
+    var historyRecords: [Record] { get }
 }

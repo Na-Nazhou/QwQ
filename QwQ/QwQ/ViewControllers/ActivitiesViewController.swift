@@ -20,9 +20,6 @@ class ActivitiesViewController: UIViewController {
         case history
     }
     var selectedControl: SelectedControl = .active
-    var isActive: Bool {
-        selectedControl == .active
-    }
 
     // MARK: Logic properties
     let queueLogicManager: CustomerQueueLogic = CustomerQueueLogicManager()
@@ -31,17 +28,12 @@ class ActivitiesViewController: UIViewController {
 
     // MARK: Model properties
     var records: [Record] {
-        if isActive {
-            return activeRecords
-        } else {
-            return historyRecords
+        switch selectedControl {
+        case .active:
+            return activityLogicManager.activeRecords
+        case .history:
+            return activityLogicManager.historyRecords
         }
-    }
-    var activeRecords: [Record] {
-        activityLogicManager.fetchActiveRecords()
-    }
-    var historyRecords: [Record] {
-        activityLogicManager.fetchHistoryRecords()
     }
     
     override func viewDidLoad() {
@@ -165,14 +157,13 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension ActivitiesViewController: ActivitiesDelegate {
     func didUpdateHistoryRecords() {
-        if isActive {
-            return
+        if selectedControl == .history {
+            activitiesCollectionView.reloadData()
         }
-        activitiesCollectionView.reloadData()
     }
 
     func didUpdateActiveRecords() {
-        if isActive {
+        if selectedControl == .active {
             activitiesCollectionView.reloadData()
         }
     }

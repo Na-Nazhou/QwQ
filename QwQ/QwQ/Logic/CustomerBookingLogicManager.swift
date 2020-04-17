@@ -171,12 +171,6 @@ extension CustomerBookingLogicManager {
             return
         }
 
-        if record.completelyIdentical(to: oldRecord) {
-            os_log("Listener triggered although book record is identical.",
-                   log: Log.notAModification, type: .debug)
-            return
-        }
-
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
         case .serve:
@@ -203,7 +197,8 @@ extension CustomerBookingLogicManager {
 
     private func customerDidUpdateBookRecord(_ record: BookRecord) {
         super.customerDidUpdateRecord(record,
-                                      customerActivity.currentBookings)
+                                      customerActivity.currentBookings,
+                                      customerActivity.bookingHistory)
     }
 
     private func clashingRecords(with record: BookRecord) -> [BookRecord] {
@@ -217,7 +212,7 @@ extension CustomerBookingLogicManager {
                                customerActivity.currentBookings)
 
         withdrawBookRecords(clashingRecords(with: record), completion: {})
-        activitiesDelegate?.didUpdateActiveRecords()
+
         notificationHandler.notifyBookingAccepted(record: record)
     }
 

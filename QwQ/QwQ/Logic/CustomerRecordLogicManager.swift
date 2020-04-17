@@ -25,19 +25,17 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
     }
 
     func customerDidUpdateRecord(_ record: T,
-                                 _ activeList: RecordCollection<T>) {
+                                 _ activeList: RecordCollection<T>,
+                                 _ historyList: RecordCollection<T>) {
         os_log("Detected regular modification", log: Log.regularModification, type: .info)
-        if record.isActiveRecord && activeList.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
+        updateRecord(record, in: activeList)
+        updateRecord(record, in: historyList)
     }
 
     func didConfirmRecord(_ record: T,
                           _ activeList: RecordCollection<T>) {
         os_log("Detected confirmation", log: Log.confirmedByCustomer, type: .info)
-        if record.isActiveRecord && activeList.update(record) {
-            activitiesDelegate?.didUpdateActiveRecords()
-        }
+        updateRecord(record, in: activeList)
     }
 
     func didWithdrawRecord(_ record: T,
@@ -78,6 +76,15 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
             activitiesDelegate?.didUpdateActiveRecords()
         }
         if record.isHistoryRecord && collection.remove(record) {
+            activitiesDelegate?.didUpdateHistoryRecords()
+        }
+    }
+
+    func updateRecord(_ record: T, in collection: RecordCollection<T>) {
+        if record.isActiveRecord && collection.update(record) {
+            activitiesDelegate?.didUpdateActiveRecords()
+        }
+        if record.isHistoryRecord && collection.update(record) {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
