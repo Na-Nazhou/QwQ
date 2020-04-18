@@ -30,10 +30,8 @@ struct BookRecord: Record {
     var confirmAdmissionTime: Date? {
         admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
     }
-    var missTime: Date?
-    var readmitTime: Date? {
-        nil
-    }
+    var missTime: Date? = nil
+    var readmitTime: Date? = nil
 
     var autoRejectTimer: Timer?
 

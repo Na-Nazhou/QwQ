@@ -52,6 +52,11 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
     }
 
+    func missCustomer(record: QueueRecord, completion: @escaping () -> Void) {
+        let new = getUpdatedRecord(record: record, event: .miss)
+        updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
+    }
+
     private func updateQueueRecord(oldRecord: QueueRecord, newRecord: QueueRecord,
                                    completion: @escaping () -> Void) {
         queueStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
@@ -112,9 +117,91 @@ extension RestaurantQueueLogicManager {
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
+        if isAdmitModification(record) {
+            addInitialAutoMissTimer(for: record)
+        }
         didUpdateRecord(record,
                         restaurantActivity.currentQueue,
                         restaurantActivity.waitingQueue,
                         restaurantActivity.historyQueue)
     }
+}
+
+// MARK: - Miss timers and miss penalties
+extension RestaurantQueueLogicManager {
+
+    private func isAdmitModification(_ record: QueueRecord) -> Bool {
+        guard let oldRecord = restaurantActivity.currentQueue.records.first(where: { $0 == record }) else {
+            return false
+        }
+        let change = record.getChangeType(from: oldRecord)
+        if change != .admit && change != .readmit {
+            return false
+        }
+        return true
+    }
+
+    private func isMissModification(_ record: QueueRecord) -> Bool {
+        guard let oldRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+            return false
+        }
+        if record.getChangeType(from: oldRecord) != .miss {
+            return false
+        }
+        return true
+    }
+
+    private func addInitialAutoMissTimer(for qRecord: QueueRecord) {
+        let confirmationTimer = Timer(
+            fireAt: qRecord.admitTime!.addingTimeInterval(60 * Constants.queueWaitConfirmTimeInMins),
+            interval: 1, target: self,
+            selector: #selector(handleInitialMissOrWaitTimer),
+            userInfo: qRecord, repeats: false)
+        RunLoop.main.add(confirmationTimer, forMode: .common)
+    }
+
+    @objc private func handleInitialMissOrWaitTimer(timer: Timer) {
+        guard let record = timer.userInfo as? QueueRecord,
+            restaurantActivity.waitingQueue.records.contains(record),
+            let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+                return
+        }
+        switch updatedRecord.status {
+        case .admitted:
+            if updatedRecord.wasOnceMissed {
+                rejectCustomer(record: updatedRecord, completion: {})
+                return
+            }
+            // missed for the first time: given second chance
+            missCustomer(record: updatedRecord, completion: {})
+        case .confirmedAdmission:
+            addDelayedAutoMissTimer(for: updatedRecord)
+        default:
+            break
+        }
+    }
+
+    private func addDelayedAutoMissTimer(for qRecord: QueueRecord) {
+        let serveArrivalTimer = Timer(
+            fireAt: qRecord.admitTime!.addingTimeInterval(60 * Constants.queueWaitArrivalInMins),
+            interval: 1, target: self,
+            selector: #selector(handleDelayedMissTimer),
+            userInfo: qRecord, repeats: false)
+        RunLoop.main.add(serveArrivalTimer, forMode: .common)
+    }
+
+    @objc private func handleDelayedMissTimer(timer: Timer) {
+        guard let record = timer.userInfo as? QueueRecord,
+            restaurantActivity.waitingQueue.records.contains(record),
+            let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+                return
+        }
+        assert(updatedRecord.status == .confirmedAdmission)
+        if updatedRecord.wasOnceMissed {
+            rejectCustomer(record: updatedRecord, completion: {})
+        } else {
+            missCustomer(record: updatedRecord, completion: {})
+        }
+    }
+    
 }

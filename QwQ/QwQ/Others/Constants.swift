@@ -157,4 +157,8 @@ struct Constants {
     static let readmitTimeKey = "readmitTime"
     static let startTimeKey = "startTime"
     static let timeKey = "time"
+    
+    // MARK: Queue timed settings
+    static let queueWaitConfirmTimeInMins = 3
+    static let queueWaitArrivalInMins = 15
 }

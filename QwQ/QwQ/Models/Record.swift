@@ -16,13 +16,13 @@ protocol Record {
     var babyChairQuantity: Int { get }
     var wheelchairFriendly: Bool { get }
 
-    var admitTime: Date? { get set }
-    var serveTime: Date? { get set }
-    var rejectTime: Date? { get set }
+    var admitTime: Date? { get }
+    var serveTime: Date? { get }
+    var rejectTime: Date? { get }
     var withdrawTime: Date? { get set }
     var confirmAdmissionTime: Date? { get }
 
-    var missTime: Date? { get set }
+    var missTime: Date? { get }
     var readmitTime: Date? { get }
 
     var status: RecordStatus { get }
@@ -64,5 +64,9 @@ extension Record {
 
     var isMissedAndPending: Bool {
         status == .missedAndPending
+    }
+
+    var wasOnceMissed: Bool {
+        missTime != nil
     }
 }

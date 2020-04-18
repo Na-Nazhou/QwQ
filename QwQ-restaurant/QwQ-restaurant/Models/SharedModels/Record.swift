@@ -22,8 +22,8 @@ protocol Record {
     var withdrawTime: Date? { get }
     var confirmAdmissionTime: Date? { get }
 
-    var missTime: Date? { get }
-    var readmitTime: Date? { get }
+    var missTime: Date? { get set }
+    var readmitTime: Date? { get set }
 
     var status: RecordStatus { get }
     func getChangeType(from old: Record) -> RecordModification?
@@ -64,5 +64,9 @@ extension Record {
 
     var isMissedAndPending: Bool {
         status == .missedAndPending
+    }
+
+    var wasOnceMissed: Bool {
+        missTime != nil
     }
 }

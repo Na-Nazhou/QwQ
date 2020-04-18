@@ -185,9 +185,12 @@ extension QueueRecord {
             return .withdraw
         }
 
-        if (old.status == .pendingAdmission && self.status == .admitted)
-            || (old.status == .missedAndPending && self.status == .admitted) {
+        if old.status == .pendingAdmission && self.status == .admitted {
             return .admit
+        }
+
+        if old.status == .missedAndPending && self.status == .admitted {
+            return .readmit
         }
 
         if self.status == .missedAndPending

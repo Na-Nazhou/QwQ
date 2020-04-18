@@ -6,4 +6,5 @@ enum RecordModification: Int {
     case withdraw
     case confirmAdmission
     case miss
+    case readmit
 }

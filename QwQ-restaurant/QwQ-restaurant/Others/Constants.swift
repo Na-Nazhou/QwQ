@@ -145,5 +145,8 @@ struct Constants {
     static let permissionsKey = "permissions"
 
     // MARK: Queue timed settings
-    static let inactivateAdmitAfterMissTimeInMins = 5
+    static let inactivateAdmitAfterMissTimeInMins = 10.0
+    static let timeBufferForBookArrivalInMins = 15.0
+    static let queueWaitConfirmTimeInMins = 3.0
+    static let queueWaitArrivalInMins = 15.0
 }
