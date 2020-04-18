@@ -18,8 +18,8 @@ struct QueueRecord: Record {
     var withdrawTime: Date?
     var confirmAdmissionTime: Date?
 
-    var missTime: Date?
-    var readmitTime: Date?
+    let missTime: Date?
+    let readmitTime: Date?
 
     var estimatedAdmitTime: Date?
 

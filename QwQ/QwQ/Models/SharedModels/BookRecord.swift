@@ -23,9 +23,9 @@ struct BookRecord: Record {
         Date.getFormattedDate(date: time, format: Constants.recordDateFormat)
     }
 
-    var admitTime: Date?
-    var serveTime: Date?
-    var rejectTime: Date?
+    let admitTime: Date?
+    let serveTime: Date?
+    let rejectTime: Date?
     var withdrawTime: Date?
     var confirmAdmissionTime: Date? {
         admitTime
@@ -33,7 +33,7 @@ struct BookRecord: Record {
         // hence once admitted, auto confirmed admission.
     }
 
-    var missTime: Date?
+    let missTime: Date? = nil
     var readmitTime: Date? {
         nil
     }
@@ -59,9 +59,6 @@ struct BookRecord: Record {
         if let withdrawTime = withdrawTime {
             data[Constants.withdrawTimeKey] = withdrawTime
         }
-        if let missTime = missTime {
-            data[Constants.missTimeKey] = missTime
-        }
 
         return data
     }
@@ -76,8 +73,7 @@ struct BookRecord: Record {
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
-         rejectTime: Date? = nil, withdrawTime: Date? = nil,
-         missTime: Date? = nil) {
+         rejectTime: Date? = nil, withdrawTime: Date? = nil) {
         self.id = id
         self.restaurant = restaurant
         self.customer = customer
@@ -90,7 +86,6 @@ struct BookRecord: Record {
         self.serveTime = serveTime
         self.rejectTime = rejectTime
         self.withdrawTime = withdrawTime
-        self.missTime = missTime
     }
 
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
@@ -104,7 +99,6 @@ struct BookRecord: Record {
         let serveTime = (dictionary[Constants.serveTimeKey] as? Timestamp)?.dateValue()
         let rejectTime = (dictionary[Constants.rejectTimeKey] as? Timestamp)?.dateValue()
         let withdrawTime = (dictionary[Constants.withdrawTimeKey] as? Timestamp)?.dateValue()
-        let missTime = (dictionary[Constants.missTimeKey] as? Timestamp)?.dateValue()
 
         self.init(id: id, restaurant: restaurant, customer: customer,
                   time: time,
@@ -112,8 +106,7 @@ struct BookRecord: Record {
                   babyChairQuantity: babyChairQuantity,
                   wheelchairFriendly: wheelchairFriendly,
                   admitTime: admitTime, serveTime: serveTime,
-                  rejectTime: rejectTime, withdrawTime: withdrawTime,
-                  missTime: missTime)
+                  rejectTime: rejectTime, withdrawTime: withdrawTime)
     }
 }
 
