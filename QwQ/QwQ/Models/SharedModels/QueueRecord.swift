@@ -12,9 +12,9 @@ struct QueueRecord: Record {
 
     let startTime: Date
 
-    var admitTime: Date?
-    var serveTime: Date?
-    var rejectTime: Date?
+    let admitTime: Date?
+    let serveTime: Date?
+    let rejectTime: Date?
     var withdrawTime: Date?
     var confirmAdmissionTime: Date?
 
