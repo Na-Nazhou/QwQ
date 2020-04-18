@@ -6,27 +6,105 @@
 //
 
 import XCTest
+@testable import QwQ
 
 class CollectionTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var collection: Collection<Restaurant>!
+    
+    override func setUp() {
+        super.setUp()
+        collection = Collection()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testAdd_newElement_returnsTrue() {
+        XCTAssertEqual(collection.size, 0)
+        
+        let restaurant = RestaurantBuilder.build()
+        XCTAssertTrue(collection.add(restaurant))
+        
+        XCTAssertEqual(collection.size, 1)
+        XCTAssertEqual(collection.elements.first, restaurant)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testAdd_existingElement_returnsFalse() {
+        XCTAssertEqual(collection.size, 0)
+        
+        collection.add(RestaurantBuilder.build())
+        XCTAssertEqual(collection.size, 1)
+        
+        XCTAssertFalse(collection.add(RestaurantBuilder.build()))
+        XCTAssertEqual(collection.size, 1)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testAddMultiple_newElements_returnsTrue() {
+        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        let set = Set(restaurants)
+        
+        XCTAssertEqual(collection.size, 0)
+        
+        collection.add(restaurants)
+        
+        XCTAssertEqual(collection.size, 2)
+        XCTAssertEqual(collection.elements, set)
     }
-
+    
+    func testAddMultiple_existingElements_returnsFalse() {
+        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        let set = Set(restaurants)
+        
+        collection.add(restaurants)
+        XCTAssertEqual(collection.size, 2)
+        
+        collection.add(restaurants)
+        XCTAssertEqual(collection.size, 2)
+        XCTAssertEqual(collection.elements, set)
+    }
+    
+    func testUpdate_existingElement_returnsTrue() {
+        XCTAssertEqual(collection.size, 0)
+        
+        XCTAssertTrue(collection.add(RestaurantBuilder.build()))
+        XCTAssertEqual(collection.size, 1)
+        
+        let updatedRestaurant = RestaurantBuilder.with(name: "Eli")
+        XCTAssertTrue(collection.update(updatedRestaurant))
+        XCTAssertEqual(collection.size, 1)
+        XCTAssertEqual(collection.elements.first, updatedRestaurant)
+    }
+    
+    func testUpdate_noExistingElement_returnsFalse() {
+        XCTAssertEqual(collection.size, 0)
+        
+        let updatedRestaurant = RestaurantBuilder.with(name: "Eli")
+        XCTAssertFalse(collection.update(updatedRestaurant))
+        XCTAssertEqual(collection.size, 0)
+    }
+    
+    func testRemove_existingElement_returnsTrue() {
+        XCTAssertEqual(collection.size, 0)
+        
+        let restaurant = RestaurantBuilder.build()
+        XCTAssertTrue(collection.add(restaurant))
+        XCTAssertEqual(collection.size, 1)
+        
+        XCTAssertTrue(collection.remove(restaurant))
+        XCTAssertEqual(collection.size, 0)
+    }
+    
+    func testRemove_noExistingElement_returnsFalse() {
+        XCTAssertEqual(collection.size, 0)
+        
+        let restaurant = RestaurantBuilder.build()
+        XCTAssertFalse(collection.remove(restaurant))
+        XCTAssertEqual(collection.size, 0)
+    }
+    
+    func testReset() {
+        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        collection.add(restaurants)
+        XCTAssertEqual(collection.size, 2)
+        
+        collection.reset()
+        XCTAssertEqual(collection.size, 0)
+    }
 }
