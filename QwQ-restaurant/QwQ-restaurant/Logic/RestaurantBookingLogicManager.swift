@@ -75,7 +75,7 @@ extension RestaurantBookingLogicManager {
                      restaurantActivity.historyBookings)
     }
 
-    @objc func handleAutoRejectTimer(timer: Timer) {
+    @objc private func handleAutoRejectTimer(timer: Timer) {
         if let record = timer.userInfo as? BookRecord {
             let isStillPending = restaurantActivity.currentBookings.records.contains(record)
             if isStillPending {
@@ -85,9 +85,26 @@ extension RestaurantBookingLogicManager {
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
+        if record.isConfirmedAdmission {
+            let autoRejectTimer = Timer(
+                fireAt: record.time.addingTimeInterval(60 *  Constants.timeBufferForBookArrivalInMins),
+                interval: 1, target: self,
+                selector: #selector(handleBufferRejectTimer),
+                userInfo: record, repeats: false)
+            RunLoop.main.add(autoRejectTimer, forMode: .common)
+        }
         didUpdateRecord(record,
                         restaurantActivity.currentBookings,
                         restaurantActivity.waitingBookings,
                         restaurantActivity.historyBookings)
+    }
+
+    @objc private func handleBufferRejectTimer(timer: Timer) {
+        if let record = timer.userInfo as? BookRecord {
+            let isStillWaiting = restaurantActivity.waitingBookings.records.contains(record)
+            if isStillWaiting {
+                rejectCustomer(record: record, completion: {})
+            }
+        }
     }
 }

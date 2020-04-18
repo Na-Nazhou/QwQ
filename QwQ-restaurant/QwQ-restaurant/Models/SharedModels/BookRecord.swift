@@ -135,9 +135,7 @@ extension BookRecord {
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
-        } else if admitTime == nil && rejectTime != nil {
-            // for book records, can only be rejected when requesting
-            // once confirmed, cannot reject. (dif from queues)
+        } else if rejectTime != nil {
             return .rejected
         } else if admitTime != nil && serveTime != nil {
             return .served

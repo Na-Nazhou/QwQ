@@ -96,9 +96,13 @@ class RecordCell: UICollectionViewCell {
         if let queueRecord = record as? QueueRecord {
             statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
             if let estimatedAdmitime = queueRecord.estimatedAdmitTime {
-                timeLabel.text = (estimatedAdmitime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins)).getFormattedTime()
+                timeLabel.text =
+                    (estimatedAdmitime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins))
+                        .getFormattedTime()
             } else {
-                timeLabel.text = (queueRecord.startTime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins)).getFormattedTime()
+                timeLabel.text =
+                    (queueRecord.startTime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins))
+                        .getFormattedTime()
             }
 
             disableAdmitButtonIfJustMissed(record: queueRecord)
