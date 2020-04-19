@@ -60,6 +60,11 @@
 		7E23E9E0244AFE7700B6BD33 /* CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9DF244AFE7700B6BD33 /* CustomerTests.swift */; };
 		7E23E9E2244B07E600B6BD33 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9E1244B07E600B6BD33 /* CollectionTests.swift */; };
 		7E23E9E4244B0A0900B6BD33 /* RestaurantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9E3244B0A0900B6BD33 /* RestaurantBuilder.swift */; };
+		7E23E9E6244B296200B6BD33 /* QueueRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9E5244B296200B6BD33 /* QueueRecordTests.swift */; };
+		7E23E9E8244B2CB900B6BD33 /* CustomerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9E7244B2CB900B6BD33 /* CustomerBuilder.swift */; };
+		7E23E9EA244B349A00B6BD33 /* QueueRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9E9244B349A00B6BD33 /* QueueRecordBuilder.swift */; };
+		7E23E9EC244BF26500B6BD33 /* BookRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9EB244BF26500B6BD33 /* BookRecordTests.swift */; };
+		7E23E9EE244BF2A600B6BD33 /* BookRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9ED244BF2A600B6BD33 /* BookRecordBuilder.swift */; };
 		7E428220242B4C9C0019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */; };
 		7E428222242B4CB60019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */; };
 		7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */; };
@@ -193,6 +198,11 @@
 		7E23E9DF244AFE7700B6BD33 /* CustomerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTests.swift; sourceTree = "<group>"; };
 		7E23E9E1244B07E600B6BD33 /* CollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
 		7E23E9E3244B0A0900B6BD33 /* RestaurantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantBuilder.swift; sourceTree = "<group>"; };
+		7E23E9E5244B296200B6BD33 /* QueueRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordTests.swift; sourceTree = "<group>"; };
+		7E23E9E7244B2CB900B6BD33 /* CustomerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerBuilder.swift; sourceTree = "<group>"; };
+		7E23E9E9244B349A00B6BD33 /* QueueRecordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordBuilder.swift; sourceTree = "<group>"; };
+		7E23E9EB244BF26500B6BD33 /* BookRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordTests.swift; sourceTree = "<group>"; };
+		7E23E9ED244BF2A600B6BD33 /* BookRecordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordBuilder.swift; sourceTree = "<group>"; };
 		7E42821F242B4C9C0019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E428221242B4CB60019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
@@ -551,7 +561,12 @@
 				7EC7E6662418B6CA00C2F9BB /* Info.plist */,
 				7E23E9DD244AFA6C00B6BD33 /* RestaurantTests.swift */,
 				7E23E9E3244B0A0900B6BD33 /* RestaurantBuilder.swift */,
+				7E23E9E9244B349A00B6BD33 /* QueueRecordBuilder.swift */,
+				7E23E9E7244B2CB900B6BD33 /* CustomerBuilder.swift */,
+				7E23E9EB244BF26500B6BD33 /* BookRecordTests.swift */,
+				7E23E9ED244BF2A600B6BD33 /* BookRecordBuilder.swift */,
 				7E23E9E1244B07E600B6BD33 /* CollectionTests.swift */,
+				7E23E9E5244B296200B6BD33 /* QueueRecordTests.swift */,
 				7E23E9DF244AFE7700B6BD33 /* CustomerTests.swift */,
 			);
 			path = QwQTests;
@@ -1050,9 +1065,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E23E9EE244BF2A600B6BD33 /* BookRecordBuilder.swift in Sources */,
 				7E23E9DE244AFA6C00B6BD33 /* RestaurantTests.swift in Sources */,
 				7E23E9E2244B07E600B6BD33 /* CollectionTests.swift in Sources */,
 				7E23E9E4244B0A0900B6BD33 /* RestaurantBuilder.swift in Sources */,
+				7E23E9EA244B349A00B6BD33 /* QueueRecordBuilder.swift in Sources */,
+				7E23E9E8244B2CB900B6BD33 /* CustomerBuilder.swift in Sources */,
+				7E23E9EC244BF26500B6BD33 /* BookRecordTests.swift in Sources */,
+				7E23E9E6244B296200B6BD33 /* QueueRecordTests.swift in Sources */,
 				7E23E9E0244AFE7700B6BD33 /* CustomerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

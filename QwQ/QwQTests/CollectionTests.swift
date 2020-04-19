@@ -19,7 +19,7 @@ class CollectionTests: XCTestCase {
     func testAdd_newElement_returnsTrue() {
         XCTAssertEqual(collection.size, 0)
         
-        let restaurant = RestaurantBuilder.build()
+        let restaurant = RestaurantBuilder().build()
         XCTAssertTrue(collection.add(restaurant))
         
         XCTAssertEqual(collection.size, 1)
@@ -29,15 +29,15 @@ class CollectionTests: XCTestCase {
     func testAdd_existingElement_returnsFalse() {
         XCTAssertEqual(collection.size, 0)
         
-        collection.add(RestaurantBuilder.build())
+        collection.add(RestaurantBuilder().build())
         XCTAssertEqual(collection.size, 1)
         
-        XCTAssertFalse(collection.add(RestaurantBuilder.build()))
+        XCTAssertFalse(collection.add(RestaurantBuilder().build()))
         XCTAssertEqual(collection.size, 1)
     }
     
     func testAddMultiple_newElements_returnsTrue() {
-        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        let restaurants = [RestaurantBuilder().build(), RestaurantBuilder().with(uid: "2").build()]
         let set = Set(restaurants)
         
         XCTAssertEqual(collection.size, 0)
@@ -49,7 +49,7 @@ class CollectionTests: XCTestCase {
     }
     
     func testAddMultiple_existingElements_returnsFalse() {
-        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        let restaurants = [RestaurantBuilder().build(), RestaurantBuilder().with(uid: "2").build()]
         let set = Set(restaurants)
         
         collection.add(restaurants)
@@ -63,10 +63,10 @@ class CollectionTests: XCTestCase {
     func testUpdate_existingElement_returnsTrue() {
         XCTAssertEqual(collection.size, 0)
         
-        XCTAssertTrue(collection.add(RestaurantBuilder.build()))
+        XCTAssertTrue(collection.add(RestaurantBuilder().build()))
         XCTAssertEqual(collection.size, 1)
         
-        let updatedRestaurant = RestaurantBuilder.with(name: "Eli")
+        let updatedRestaurant = RestaurantBuilder().with(name: "Eli").build()
         XCTAssertTrue(collection.update(updatedRestaurant))
         XCTAssertEqual(collection.size, 1)
         XCTAssertEqual(collection.elements.first, updatedRestaurant)
@@ -75,7 +75,7 @@ class CollectionTests: XCTestCase {
     func testUpdate_noExistingElement_returnsFalse() {
         XCTAssertEqual(collection.size, 0)
         
-        let updatedRestaurant = RestaurantBuilder.with(name: "Eli")
+        let updatedRestaurant = RestaurantBuilder().with(name: "Eli").build()
         XCTAssertFalse(collection.update(updatedRestaurant))
         XCTAssertEqual(collection.size, 0)
     }
@@ -83,7 +83,7 @@ class CollectionTests: XCTestCase {
     func testRemove_existingElement_returnsTrue() {
         XCTAssertEqual(collection.size, 0)
         
-        let restaurant = RestaurantBuilder.build()
+        let restaurant = RestaurantBuilder().build()
         XCTAssertTrue(collection.add(restaurant))
         XCTAssertEqual(collection.size, 1)
         
@@ -94,13 +94,13 @@ class CollectionTests: XCTestCase {
     func testRemove_noExistingElement_returnsFalse() {
         XCTAssertEqual(collection.size, 0)
         
-        let restaurant = RestaurantBuilder.build()
+        let restaurant = RestaurantBuilder().build()
         XCTAssertFalse(collection.remove(restaurant))
         XCTAssertEqual(collection.size, 0)
     }
     
     func testReset() {
-        let restaurants = [RestaurantBuilder.build(), RestaurantBuilder.with(uid: "2")]
+        let restaurants = [RestaurantBuilder().build(), RestaurantBuilder().with(uid: "2").build()]
         collection.add(restaurants)
         XCTAssertEqual(collection.size, 2)
         

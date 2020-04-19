@@ -11,33 +11,28 @@ import XCTest
 class RestaurantTests: XCTestCase {
     var restaurant: Restaurant!
     var restaurantFromDictionary: Restaurant?
-    let dictionary = [
-        Constants.uidKey: RestaurantBuilder.uid,
-        Constants.nameKey: RestaurantBuilder.name,
-        Constants.emailKey: RestaurantBuilder.email,
-        Constants.contactKey: RestaurantBuilder.contact,
-        Constants.addressKey: RestaurantBuilder.address,
-        Constants.menuKey: RestaurantBuilder.menu,
-        Constants.maxGroupSizeKey: RestaurantBuilder.maxGroupSize,
-        Constants.minGroupSizeKey: RestaurantBuilder.minGroupSize,
-        Constants.advanceBookingLimitKey: RestaurantBuilder.advanceBookingLimit,
-        Constants.queueOpenTimeKey: RestaurantBuilder.queueOpenTime,
-        Constants.queueCloseTimeKey: RestaurantBuilder.queueCloseTime,
-        Constants.autoOpenTimeKey: RestaurantBuilder.autoOpenTime,
-        Constants.autoCloseTimeKey: RestaurantBuilder.autoCloseTime
-        ] as [String : Any]
     
     override func setUp() {
         super.setUp()
-        restaurant = RestaurantBuilder.build()
-        restaurantFromDictionary = Restaurant(dictionary: dictionary)
+        restaurant = RestaurantBuilder().build()
+        restaurantFromDictionary = Restaurant(dictionary: RestaurantBuilder().getDictionary())
     }
     
     func testInit() {
-        XCTAssertEqual(restaurant.uid, dictionary[Constants.uidKey] as? String)
-        XCTAssertEqual(restaurant.name, dictionary[Constants.nameKey] as? String)
-        XCTAssertEqual(restaurant.email, dictionary[Constants.emailKey] as? String)
-        XCTAssertEqual(restaurant.contact, dictionary[Constants.contactKey] as? String)
+        XCTAssertEqual(restaurant.uid, "1")
+        XCTAssertEqual(restaurant.name, "Hot tomato")
+        XCTAssertEqual(restaurant.email, "hottomato@mail.com")
+        XCTAssertEqual(restaurant.contact, "66156257")
+        XCTAssertEqual(restaurant.address, "66156257")
+        XCTAssertEqual(restaurant.menu, "Aglio olio student meal at $9!")
+        XCTAssertEqual(restaurant.maxGroupSize, 5)
+        XCTAssertEqual(restaurant.minGroupSize, 1)
+        XCTAssertEqual(restaurant.advanceBookingLimit, 2)
+        XCTAssertEqual(restaurant.queueOpenTime, Date())
+        XCTAssertEqual(restaurant.queueCloseTime, Date())
+        XCTAssertEqual(restaurant.advanceBookingLimit, 2)
+        XCTAssertEqual(restaurant.autoOpenTime, TimeInterval(60))
+        XCTAssertEqual(restaurant.autoCloseTime, TimeInterval(60))
     }
     
     func testDictionaryInit() {
@@ -45,72 +40,76 @@ class RestaurantTests: XCTestCase {
     }
     
     func testEqual_sameId_isEqual() {
-        let otherRestaurant = RestaurantBuilder.build()
+        let otherRestaurant = RestaurantBuilder().build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentId_isnotEqual() {
-        let otherRestaurant = RestaurantBuilder.with(uid: "2")
+        let otherRestaurant = RestaurantBuilder().with(uid: "2").build()
         XCTAssertFalse(otherRestaurant == restaurant)
     }
     
     func testEqual_differentName_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(name: "Saizerya")
+        let otherRestaurant = RestaurantBuilder().with(name: "Saizerya").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentEmail_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(email: "saizerya@mail.com")
+        let otherRestaurant = RestaurantBuilder().with(email: "saizerya@mail.com").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentContact_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(contact: "92736537")
+        let otherRestaurant = RestaurantBuilder().with(contact: "92736537").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentAddress_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(address: "21 Jurong East")
+        let otherRestaurant = RestaurantBuilder().with(address: "21 Jurong East").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentMenu_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(menu: "Spaghetti, carbonara, fusili")
+        let otherRestaurant = RestaurantBuilder().with(menu: "Spaghetti, carbonara, fusili").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentMaxGroupSize_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(maxGroupSize: 4)
+        let otherRestaurant = RestaurantBuilder().with(maxGroupSize: 4).build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentMinGroupSize_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(minGroupSize: 2)
+        let otherRestaurant = RestaurantBuilder().with(minGroupSize: 2).build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentAdvanceBookingLimit_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(advanceBookingLimit: 1)
+        let otherRestaurant = RestaurantBuilder().with(advanceBookingLimit: 1).build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentQueueOpenTime_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(queueOpenTime: Date(timeIntervalSinceReferenceDate: -123456789.0))
+        let otherRestaurant = RestaurantBuilder()
+            .with(queueOpenTime: Date(timeIntervalSinceReferenceDate: -123456789.0))
+            .build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentQueueCloseTime_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(queueCloseTime: Date(timeIntervalSinceReferenceDate: -123456789.0))
+        let otherRestaurant = RestaurantBuilder()
+            .with(queueCloseTime: Date(timeIntervalSinceReferenceDate: -123456789.0))
+            .build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentAutoOpenTime_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(autoOpenTime: TimeInterval(50))
+        let otherRestaurant = RestaurantBuilder().with(autoOpenTime: TimeInterval(50)).build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
     func testEqual_differentAutoCloseTime_isEqual() {
-        let otherRestaurant = RestaurantBuilder.with(autoCloseTime: TimeInterval(50))
+        let otherRestaurant = RestaurantBuilder().with(autoCloseTime: TimeInterval(50)).build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
 }

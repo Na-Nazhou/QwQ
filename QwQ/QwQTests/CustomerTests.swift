@@ -12,26 +12,23 @@ class CustomerTests: XCTestCase {
     var customer: Customer!
     var customerFromDictionary: Customer?
     let dictionary = [
-        Constants.uidKey: defaultCustomer.uid,
-        Constants.nameKey: defaultCustomer.name,
-        Constants.emailKey: defaultCustomer.email,
-        Constants.contactKey: defaultCustomer.contact
+        Constants.uidKey: CustomerBuilder().uid,
+        Constants.nameKey: CustomerBuilder().name,
+        Constants.emailKey: CustomerBuilder().email,
+        Constants.contactKey: CustomerBuilder().contact
     ]
     
     override func setUp() {
         super.setUp()
-        customer = Customer(uid: defaultCustomer.uid,
-                            name: defaultCustomer.name,
-                            email: defaultCustomer.email,
-                            contact: defaultCustomer.contact)
+        customer = CustomerBuilder().build()
         customerFromDictionary = Customer(dictionary: dictionary)
     }
     
     func testInit() {
-        XCTAssertEqual(customer.uid, defaultCustomer.uid)
-        XCTAssertEqual(customer.name, defaultCustomer.name)
-        XCTAssertEqual(customer.email, defaultCustomer.email)
-        XCTAssertEqual(customer.contact, defaultCustomer.contact)
+        XCTAssertEqual(customer.uid, "1")
+        XCTAssertEqual(customer.name, "John")
+        XCTAssertEqual(customer.email, "john@mail.com")
+        XCTAssertEqual(customer.contact, CustomerBuilder().contact)
     }
     
     func testDictionaryInit() {
@@ -39,49 +36,27 @@ class CustomerTests: XCTestCase {
     }
     
     func testEqual_sameId_isEqual() {
-        let otherCustomer = Customer(uid: defaultCustomer.uid,
-                                     name: defaultCustomer.name,
-                                     email: defaultCustomer.email,
-                                     contact: defaultCustomer.contact)
+        let otherCustomer = CustomerBuilder().build()
         XCTAssertEqual(otherCustomer, customer)
     }
     
     func testEqual_differentId_isnotEqual() {
-        let otherCustomer = Customer(uid: "2",
-                                     name: defaultCustomer.name,
-                                     email: defaultCustomer.email,
-                                     contact: defaultCustomer.contact)
+        let otherCustomer = CustomerBuilder().with(uid: "2").build()
         XCTAssertFalse(otherCustomer == customer)
     }
     
     func testEqual_differentName_isEqual() {
-        let otherCustomer = Customer(uid: defaultCustomer.uid,
-                                     name: "Eli",
-                                     email: defaultCustomer.email,
-                                     contact: defaultCustomer.contact)
+        let otherCustomer = CustomerBuilder().with(name: "Eli").build()
         XCTAssertEqual(otherCustomer, customer)
     }
     
     func testEqual_differentEmail_isnotEqual() {
-        let otherCustomer = Customer(uid: defaultCustomer.uid,
-                                     name: defaultCustomer.name,
-                                     email: "john1@mail.com",
-                                     contact: defaultCustomer.contact)
+        let otherCustomer = CustomerBuilder().with(email: "eli@mail.com").build()
         XCTAssertEqual(otherCustomer, customer)
     }
     
     func testEqual_differentContact_isnotEqual() {
-        let otherCustomer = Customer(uid: defaultCustomer.uid,
-                                     name: defaultCustomer.name,
-                                     email: defaultCustomer.email,
-                                     contact: "82273833")
+        let otherCustomer = CustomerBuilder().with(contact: "98735748").build()
         XCTAssertEqual(otherCustomer, customer)
     }
-}
-
-struct defaultCustomer {
-    static let uid = "1"
-    static let name = "John"
-    static let email = "john@mail.com"
-    static let contact = "92736282"
 }
