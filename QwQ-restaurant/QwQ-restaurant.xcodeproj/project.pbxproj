@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27114D021DF374BCBEF71DEB /* Pods_QwQ_restaurantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20CD9C7C4273F3CEA54A38A8 /* Pods_QwQ_restaurantTests.framework */; };
+		5C1059E1244C0BBD00B41925 /* PermissionSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C1059E0244C0BBD00B41925 /* PermissionSelector.storyboard */; };
 		5C14CE182422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */; };
 		5C18EC302435E38E00EAE938 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C18EC2F2435E38E00EAE938 /* GoogleService-Info.plist */; };
 		5C18EC312435E38E00EAE938 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C18EC2F2435E38E00EAE938 /* GoogleService-Info.plist */; };
@@ -142,6 +143,7 @@
 /* Begin PBXFileReference section */
 		20CD9C7C4273F3CEA54A38A8 /* Pods_QwQ_restaurantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241A708DE8DF995A1BB35169 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant-QwQ-restaurantUITests/Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C1059E0244C0BBD00B41925 /* PermissionSelector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PermissionSelector.storyboard; sourceTree = "<group>"; };
 		5C14CE172422673900CCC507 /* UIImageView+checkCacheThenSetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+checkCacheThenSetImage.swift"; sourceTree = "<group>"; };
 		5C18EC2F2435E38E00EAE938 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C1A419224236BE500D1140B /* FIRCustomerStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCustomerStorage.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				7E72B18F241C95F000C1EE72 /* Profile.storyboard */,
+				5C1059E0244C0BBD00B41925 /* PermissionSelector.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				6132680B241F28FF00B770B6 /* Comfortaa-Regular.ttf in Resources */,
 				7EFB697C2422183C0073E535 /* Queue.storyboard in Resources */,
 				7ECBA5812433274D00CE3340 /* ForgotPassword.storyboard in Resources */,
+				5C1059E1244C0BBD00B41925 /* PermissionSelector.storyboard in Resources */,
 				5C18EC302435E38E00EAE938 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
