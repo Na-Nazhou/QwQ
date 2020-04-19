@@ -35,6 +35,10 @@ class CustomerActivity {
         queueHistory.records + bookingHistory.records
     }
 
+    var missedRecords: [Record] {
+        missedQueues.records
+    }
+
     var queueRecords: [QueueRecord] {
         currentQueues.records + queueHistory.records + missedQueues.records
     }

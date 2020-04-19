@@ -20,6 +20,7 @@ struct Log {
     static let admitCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
     static let rejectCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
     static let serveCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
+    static let missCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
 
     static let withdrawnByCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")
     static let confirmedByCustomer = OSLog(subsystem: subsystem, category: "handleCustomer")

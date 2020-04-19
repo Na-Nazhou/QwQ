@@ -163,8 +163,7 @@ extension QueueRecord {
         } else if admitTime != nil && missTime == nil {
             return .admitted
         } else if missTime != nil && readmitTime != nil {
-            assert(confirmAdmissionTime != nil)
-            if confirmAdmissionTime! < readmitTime! {
+            if confirmAdmissionTime == nil || confirmAdmissionTime! < readmitTime! {
                 return .admitted
             }
             return .confirmedAdmission

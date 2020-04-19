@@ -82,7 +82,7 @@ class RecordCell: UICollectionViewCell {
                 timeLabel.text = queueRecord.startTime.getFormattedTime()
             }
 
-            disableRightButton()
+            //disableRightButton()
         }
         if let bookRecord = record as? BookRecord {
             statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
@@ -214,13 +214,14 @@ class RecordCell: UICollectionViewCell {
     private func disableAdmitButtonIfJustMissed(record: QueueRecord) {
         assert(record.missTime != nil)
         let now = Date()
-        guard now < record.missTime! else {
+        let enableTime = record.missTime!.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins)
+        guard now < enableTime else {
             return
         }
         disableLeftButton()
         //add timer to enable.
         let enableTimer = Timer(
-            fire: record.missTime!.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins),
+            fire: enableTime,
             interval: 1, repeats: false) { _ in
                 self.enableLeftButton()
         }

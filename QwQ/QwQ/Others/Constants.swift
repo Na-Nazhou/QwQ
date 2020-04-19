@@ -100,7 +100,7 @@ struct Constants {
     static let popoverHeight = CGFloat(80.0)
     
     // MARK: Segmented control settings
-    static let segmentedControlTitles = ["Active", "History"]
+    static let segmentedControlTitles = ["Active", "Missed", "History"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white

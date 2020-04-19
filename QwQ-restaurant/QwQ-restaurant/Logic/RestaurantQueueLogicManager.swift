@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, RestaurantQueueLogic {
 
@@ -152,8 +153,12 @@ extension RestaurantQueueLogicManager {
     }
 
     private func addInitialAutoMissTimer(for qRecord: QueueRecord) {
+        var refTime = qRecord.admitTime!
+        if qRecord.readmitTime != nil {
+            refTime = qRecord.readmitTime!
+        }
         let confirmationTimer = Timer(
-            fireAt: qRecord.admitTime!.addingTimeInterval(60 * Constants.queueWaitConfirmTimeInMins),
+            fireAt: refTime.addingTimeInterval(60 * Constants.queueWaitConfirmTimeInMins),
             interval: 1, target: self,
             selector: #selector(handleInitialMissOrWaitTimer),
             userInfo: qRecord, repeats: false)
@@ -161,6 +166,7 @@ extension RestaurantQueueLogicManager {
     }
 
     @objc private func handleInitialMissOrWaitTimer(timer: Timer) {
+        os_log("Initial miss timer triggered.", log: Log.missCustomer, type: .info)
         guard let record = timer.userInfo as? QueueRecord,
             restaurantActivity.waitingQueue.records.contains(record),
             let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
@@ -182,8 +188,12 @@ extension RestaurantQueueLogicManager {
     }
 
     private func addDelayedAutoMissTimer(for qRecord: QueueRecord) {
+        var refTime = qRecord.admitTime!
+        if qRecord.readmitTime != nil {
+            refTime = qRecord.readmitTime!
+        }
         let serveArrivalTimer = Timer(
-            fireAt: qRecord.admitTime!.addingTimeInterval(60 * Constants.queueWaitArrivalInMins),
+            fireAt: refTime.addingTimeInterval(60 * Constants.queueWaitArrivalInMins),
             interval: 1, target: self,
             selector: #selector(handleDelayedMissTimer),
             userInfo: qRecord, repeats: false)
@@ -191,6 +201,7 @@ extension RestaurantQueueLogicManager {
     }
 
     @objc private func handleDelayedMissTimer(timer: Timer) {
+        os_log("Delayed miss timer triggered.", log: Log.missCustomer, type: .info)
         guard let record = timer.userInfo as? QueueRecord,
             restaurantActivity.waitingQueue.records.contains(record),
             let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
