@@ -163,7 +163,16 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     func notifyQueueRejected(record: QueueRecord) {
-        //TODO? - yes. do for end of restaurant.
+        assert(record.rejectTime != nil)
+        let notifId = QwQNotificationId(record: record, timeDelayInMinutes: 0, afterReference: record.rejectTime!)
+        let notif = QwQNotification(
+            notifId: notifId,
+            title: "You have been rejected by \(record.restaurant.name).",
+            description: "Please try to be prompt next time.",
+            shouldSend: true)
+        
+        os_log("Queue rejection notif scheduled.")
+        notifManager.schedule(notif: notif)
     }
 
     func retractBookNotifications(for record: BookRecord) {

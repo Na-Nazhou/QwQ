@@ -254,7 +254,7 @@ extension CustomerQueueLogicManager {
                               customerActivity.queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
-        notificationHandler.retractQueueNotifications(for: record)
+        notificationHandler.notifyQueueRejected(record: record)
     }
 
     private func didWithdrawQueueRecord(_ record: QueueRecord) {
