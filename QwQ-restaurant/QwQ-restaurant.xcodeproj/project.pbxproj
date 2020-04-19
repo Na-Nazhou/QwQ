@@ -67,6 +67,15 @@
 		61ACB808242B27DA002A1F47 /* BookingStorageSyncDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB807242B27DA002A1F47 /* BookingStorageSyncDelegate.swift */; };
 		61C868AA242C562000CC6B9A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C868A9242C561F00CC6B9A /* Collection.swift */; };
 		7E11380024234828006984BB /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1137FF24234828006984BB /* SegmentedControl.swift */; };
+		7E23E9F0244BFDB300B6BD33 /* RestaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9EF244BFDB300B6BD33 /* RestaurantTests.swift */; };
+		7E23E9F4244BFE6A00B6BD33 /* RestaurantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9F3244BFE6A00B6BD33 /* RestaurantBuilder.swift */; };
+		7E23E9F6244BFE8300B6BD33 /* CustomerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9F5244BFE8300B6BD33 /* CustomerBuilder.swift */; };
+		7E23E9FA244BFEC600B6BD33 /* QueueRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9F9244BFEC600B6BD33 /* QueueRecordBuilder.swift */; };
+		7E23E9FC244BFEF000B6BD33 /* BookRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9FB244BFEF000B6BD33 /* BookRecordTests.swift */; };
+		7E23E9FE244BFF2800B6BD33 /* BookRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9FD244BFF2800B6BD33 /* BookRecordBuilder.swift */; };
+		7E23EA00244BFF4300B6BD33 /* CollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23E9FF244BFF4300B6BD33 /* CollectionTests.swift */; };
+		7E23EA02244BFF5F00B6BD33 /* QueueRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23EA01244BFF5F00B6BD33 /* QueueRecordTests.swift */; };
+		7E23EA04244BFF7E00B6BD33 /* CustomerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E23EA03244BFF7E00B6BD33 /* CustomerTests.swift */; };
 		7E42821C242B48530019A8A2 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E42821B242B48530019A8A2 /* EmailVerification.storyboard */; };
 		7E42821E242B4AF00019A8A2 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */; };
 		7E428224242B62D50019A8A2 /* UIViewController+handleBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */; };
@@ -79,7 +88,6 @@
 		7E72B15E241C93FE00C1EE72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */; };
 		7E72B165241C940500C1EE72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B164241C940500C1EE72 /* Assets.xcassets */; };
 		7E72B168241C940500C1EE72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B166241C940500C1EE72 /* LaunchScreen.storyboard */; };
-		7E72B173241C940500C1EE72 /* QwQ_restaurantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */; };
 		7E72B17E241C940500C1EE72 /* QwQ_restaurantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E72B17D241C940500C1EE72 /* QwQ_restaurantUITests.swift */; };
 		7E72B18C241C95BF00C1EE72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B18B241C95BF00C1EE72 /* Main.storyboard */; };
 		7E72B190241C95F000C1EE72 /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E72B18E241C95F000C1EE72 /* Activities.storyboard */; };
@@ -200,6 +208,15 @@
 		6A8C6BD326CF80939ACB4FCC /* Pods_QwQ_restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQ_restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BFFF4957F9ED12FC51FDC6 /* Pods-QwQ-restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurant.debug.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurant/Pods-QwQ-restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1137FF24234828006984BB /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		7E23E9EF244BFDB300B6BD33 /* RestaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTests.swift; sourceTree = "<group>"; };
+		7E23E9F3244BFE6A00B6BD33 /* RestaurantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantBuilder.swift; sourceTree = "<group>"; };
+		7E23E9F5244BFE8300B6BD33 /* CustomerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerBuilder.swift; sourceTree = "<group>"; };
+		7E23E9F9244BFEC600B6BD33 /* QueueRecordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordBuilder.swift; sourceTree = "<group>"; };
+		7E23E9FB244BFEF000B6BD33 /* BookRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordTests.swift; sourceTree = "<group>"; };
+		7E23E9FD244BFF2800B6BD33 /* BookRecordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRecordBuilder.swift; sourceTree = "<group>"; };
+		7E23E9FF244BFF4300B6BD33 /* CollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTests.swift; sourceTree = "<group>"; };
+		7E23EA01244BFF5F00B6BD33 /* QueueRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRecordTests.swift; sourceTree = "<group>"; };
+		7E23EA03244BFF7E00B6BD33 /* CustomerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTests.swift; sourceTree = "<group>"; };
 		7E42821B242B48530019A8A2 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmailVerification.storyboard; sourceTree = "<group>"; };
 		7E42821D242B4AF00019A8A2 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		7E428223242B62D50019A8A2 /* UIViewController+handleBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handleBack.swift"; sourceTree = "<group>"; };
@@ -215,7 +232,6 @@
 		7E72B167241C940500C1EE72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E72B169241C940500C1EE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E72B16E241C940500C1EE72 /* QwQ-restaurantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QwQ-restaurantTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQ_restaurantTests.swift; sourceTree = "<group>"; };
 		7E72B174241C940500C1EE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E72B179241C940500C1EE72 /* QwQ-restaurantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "QwQ-restaurantUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E72B17D241C940500C1EE72 /* QwQ_restaurantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QwQ_restaurantUITests.swift; sourceTree = "<group>"; };
@@ -427,6 +443,17 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		7E23E9F1244BFE2F00B6BD33 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7E23E9F3244BFE6A00B6BD33 /* RestaurantBuilder.swift */,
+				7E23E9FD244BFF2800B6BD33 /* BookRecordBuilder.swift */,
+				7E23E9F5244BFE8300B6BD33 /* CustomerBuilder.swift */,
+				7E23E9F9244BFEC600B6BD33 /* QueueRecordBuilder.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		7E6EBCD12430A12D0058D19A /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,8 +593,13 @@
 		7E72B171241C940500C1EE72 /* QwQ-restaurantTests */ = {
 			isa = PBXGroup;
 			children = (
-				7E72B172241C940500C1EE72 /* QwQ_restaurantTests.swift */,
 				7E72B174241C940500C1EE72 /* Info.plist */,
+				7E23E9EF244BFDB300B6BD33 /* RestaurantTests.swift */,
+				7E23E9FF244BFF4300B6BD33 /* CollectionTests.swift */,
+				7E23EA01244BFF5F00B6BD33 /* QueueRecordTests.swift */,
+				7E23EA03244BFF7E00B6BD33 /* CustomerTests.swift */,
+				7E23E9FB244BFEF000B6BD33 /* BookRecordTests.swift */,
+				7E23E9F1244BFE2F00B6BD33 /* Utilities */,
 			);
 			path = "QwQ-restaurantTests";
 			sourceTree = "<group>";
@@ -776,6 +808,7 @@
 					};
 					7E72B16D241C940500C1EE72 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1140;
 						TestTargetID = 7E72B157241C93FE00C1EE72;
 					};
 					7E72B178241C940500C1EE72 = {
@@ -1069,7 +1102,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E72B173241C940500C1EE72 /* QwQ_restaurantTests.swift in Sources */,
+				7E23EA02244BFF5F00B6BD33 /* QueueRecordTests.swift in Sources */,
+				7E23E9F6244BFE8300B6BD33 /* CustomerBuilder.swift in Sources */,
+				7E23E9FC244BFEF000B6BD33 /* BookRecordTests.swift in Sources */,
+				7E23EA04244BFF7E00B6BD33 /* CustomerTests.swift in Sources */,
+				7E23E9F4244BFE6A00B6BD33 /* RestaurantBuilder.swift in Sources */,
+				7E23E9FE244BFF2800B6BD33 /* BookRecordBuilder.swift in Sources */,
+				7E23E9FA244BFEC600B6BD33 /* QueueRecordBuilder.swift in Sources */,
+				7E23E9F0244BFDB300B6BD33 /* RestaurantTests.swift in Sources */,
+				7E23EA00244BFF4300B6BD33 /* CollectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1268,6 +1309,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "QwQ-restaurantTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1278,6 +1320,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cs3217.qwq.QwQ-restaurantTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QwQ-restaurant.app/QwQ-restaurant";
@@ -1290,6 +1333,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "QwQ-restaurantTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
