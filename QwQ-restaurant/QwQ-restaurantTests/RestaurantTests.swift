@@ -1,12 +1,12 @@
 //
 //  RestaurantTests.swift
-//  QwQTests
+//  QwQ-restaurantTests
 //
 //  Created by Tan Su Yee on 18/4/20.
 //
 
 import XCTest
-@testable import QwQ
+@testable import QwQ_restaurant
 
 class RestaurantTests: XCTestCase {
     var restaurant: Restaurant!

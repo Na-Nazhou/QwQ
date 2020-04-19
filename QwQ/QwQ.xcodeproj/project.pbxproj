@@ -421,6 +421,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		7E23E9F2244BFE3F00B6BD33 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7E23E9E3244B0A0900B6BD33 /* RestaurantBuilder.swift */,
+				7E23E9E9244B349A00B6BD33 /* QueueRecordBuilder.swift */,
+				7E23E9E7244B2CB900B6BD33 /* CustomerBuilder.swift */,
+				7E23E9ED244BF2A600B6BD33 /* BookRecordBuilder.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		7E6EBCC2243087370058D19A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,11 +571,8 @@
 			children = (
 				7EC7E6662418B6CA00C2F9BB /* Info.plist */,
 				7E23E9DD244AFA6C00B6BD33 /* RestaurantTests.swift */,
-				7E23E9E3244B0A0900B6BD33 /* RestaurantBuilder.swift */,
-				7E23E9E9244B349A00B6BD33 /* QueueRecordBuilder.swift */,
-				7E23E9E7244B2CB900B6BD33 /* CustomerBuilder.swift */,
 				7E23E9EB244BF26500B6BD33 /* BookRecordTests.swift */,
-				7E23E9ED244BF2A600B6BD33 /* BookRecordBuilder.swift */,
+				7E23E9F2244BFE3F00B6BD33 /* Utilities */,
 				7E23E9E1244B07E600B6BD33 /* CollectionTests.swift */,
 				7E23E9E5244B296200B6BD33 /* QueueRecordTests.swift */,
 				7E23E9DF244AFE7700B6BD33 /* CustomerTests.swift */,

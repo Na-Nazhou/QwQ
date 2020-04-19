@@ -1,12 +1,12 @@
 //
 //  RestaurantBuilder.swift
-//  QwQTests
+//  QwQ-restaurantTests
 //
-//  Created by Tan Su Yee on 18/4/20.
+//  Created by Tan Su Yee on 19/4/20.
 //
 
 import Foundation
-@testable import QwQ
+@testable import QwQ_restaurant
 
 class RestaurantBuilder {
     var uid = "1"
@@ -18,8 +18,8 @@ class RestaurantBuilder {
     var maxGroupSize = 5
     var minGroupSize = 1
     var advanceBookingLimit = 2
-    var queueOpenTime: Date? = Date()
-    var queueCloseTime: Date? = Date()
+    var queueOpenTime: Date? = Date(timeIntervalSinceReferenceDate: 12_345)
+    var queueCloseTime: Date? = Date(timeIntervalSinceReferenceDate: 12_345)
     var autoOpenTime: TimeInterval? = TimeInterval(60)
     var autoCloseTime: TimeInterval? = TimeInterval(60)
     
@@ -144,3 +144,4 @@ class RestaurantBuilder {
                           autoCloseTime: autoCloseTime)
     }
 }
+
