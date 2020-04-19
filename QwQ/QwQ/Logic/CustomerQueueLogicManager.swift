@@ -138,6 +138,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
+        print("\n\tPUBLIC CONFIRM CALLED")
         confirmAdmission(of: record, completion: {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
         })
@@ -145,6 +146,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 
     private func confirmAdmission(of record: QueueRecord,
                                   completion: @escaping () -> Void) {
+        print("\tconfirmadmission\n")
         var newRecord = record
         newRecord.confirmAdmissionTime = Date()
         queueStorage.updateQueueRecord(oldRecord: record, newRecord: newRecord) {

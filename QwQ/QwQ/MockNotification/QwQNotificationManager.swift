@@ -174,7 +174,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         os_log("Queue rejection notif scheduled.")
         notifManager.schedule(notif: notif)
     }
-
+   
     func retractBookNotifications(for record: BookRecord) {
         let possiblyPendingBookNotif = bookTimeNotification(record)
         os_log("Book notifs prepared to be withdrawn.", log: Log.withdrawNotif)

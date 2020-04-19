@@ -156,27 +156,38 @@ extension QueueRecord {
     var status: RecordStatus {
         if withdrawTime != nil {
             return .withdrawn
-        } else if rejectTime != nil {
-            return .rejected
-        } else if admitTime != nil && serveTime != nil {
-            return .served
-        } else if admitTime != nil && missTime == nil {
-            return .admitted
-        } else if missTime != nil && readmitTime != nil {
-            if confirmAdmissionTime == nil || confirmAdmissionTime! < readmitTime! {
-                return .admitted
-            }
-            return .confirmedAdmission
-        } else if missTime != nil {
-                return .missedAndPending
-        } else if admitTime != nil && confirmAdmissionTime != nil && missTime == nil {
-            return .confirmedAdmission
-        } else if admitTime != nil {
-            return .admitted
-        } else if admitTime == nil && rejectTime == nil && serveTime == nil {
-            return .pendingAdmission
         }
-        return .invalid
+        if rejectTime != nil {
+            return .rejected
+        }
+        if admitTime != nil && serveTime != nil {
+            return .served
+        }
+        if admitTime != nil {
+            if confirmAdmissionTime != nil {
+                if missTime == nil {
+                    return .confirmedAdmission
+                }
+                if readmitTime == nil {
+                    if confirmAdmissionTime! < missTime! {
+                        return .missedAndPending
+                    }
+                    return .invalid
+                }
+                if readmitTime! < missTime! {
+                    return .invalid
+                }
+                if confirmAdmissionTime! < readmitTime! {
+                    return .admitted
+                }
+                return .confirmedAdmission
+            }
+            return .admitted
+        }
+        if serveTime != nil {
+            return .invalid
+        }
+        return .pendingAdmission
     }
 
     func getChangeType(from old: Record) -> RecordModification? {
