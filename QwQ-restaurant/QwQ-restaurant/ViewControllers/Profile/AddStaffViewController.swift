@@ -35,6 +35,13 @@ class AddStaffViewController: UIViewController {
                         buttonText: Constants.okayTitle)
             return
         }
+
+        guard !staffEmails.contains(email) else {
+            showMessage(title: Constants.duplicateEmailTitle,
+                        message: Constants.duplicateEmailMessage,
+                        buttonText: Constants.okayTitle)
+            return
+        }
         
         staffEmails.append(email)
         staffTableView.reloadData()

@@ -409,7 +409,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Open/Close" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fl-bn-Mbr">
-                                                                <rect key="frame" x="0.0" y="749.5" width="297.5" height="76"/>
+                                                                <rect key="frame" x="0.0" y="749.5" width="297.5" height="71.5"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -418,7 +418,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Open Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRH-o4-dI8">
-                                                                <rect key="frame" x="0.0" y="840.5" width="297.5" height="76"/>
+                                                                <rect key="frame" x="0.0" y="836" width="297.5" height="72"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -427,7 +427,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Close Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4d-3M-08x">
-                                                                <rect key="frame" x="0.0" y="931.5" width="297.5" height="76"/>
+                                                                <rect key="frame" x="0.0" y="923" width="297.5" height="71.5"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -436,7 +436,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advance Booking Limit (hour)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hev-mv-sl2">
-                                                                <rect key="frame" x="0.0" y="1022.5" width="297.5" height="92"/>
+                                                                <rect key="frame" x="0.0" y="1009.5" width="297.5" height="92"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -445,7 +445,7 @@
                                                                 </variation>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umL-41-vHc">
-                                                                <rect key="frame" x="0.0" y="1129.5" width="297.5" height="140"/>
+                                                                <rect key="frame" x="0.0" y="1116.5" width="297.5" height="153"/>
                                                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="23"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -812,14 +812,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="794" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pm-f5-d6I">
-                                                            <rect key="frame" x="0.0" y="0.0" width="159" height="100"/>
-                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="476.5" height="100"/>
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-zN-jxi" userLabel="Role Label">
-                                                            <rect key="frame" x="159" y="0.0" width="555.5" height="100"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                            <rect key="frame" x="476.5" y="0.0" width="238" height="100"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -831,7 +831,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="MAp-i4-inq" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.1" id="5qS-JJ-nTF"/>
-                                                        <constraint firstItem="3pm-f5-d6I" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.2" id="zd2-KR-rtS"/>
+                                                        <constraint firstItem="3pm-f5-d6I" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.6" id="zd2-KR-rtS"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -843,7 +843,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="editPermissionsButton" destination="MAp-i4-inq" id="1OX-fD-6nn"/>
                                             <outlet property="emailLabel" destination="3pm-f5-d6I" id="LUi-Wc-gGu"/>
+                                            <outlet property="roleLabel" destination="Xwc-zN-jxi" id="9P7-Yd-QkO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

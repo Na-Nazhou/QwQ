@@ -24,11 +24,8 @@ class FIRStaffStorage: StaffStorage {
         let docRef = dbRef.document(uid)
         docRef.setData([Constants.uidKey: uid,
                         Constants.nameKey: signupDetails.name,
-                        Constants.contactKey: signupDetails.contact,
                         Constants.emailKey: email,
-                        Constants.assignedRestaurantKey: "",
-                        Constants.isOwnerKey: false,
-                        Constants.permissionsKey: ""]) { (error) in
+                        Constants.contactKey: signupDetails.contact,]) { (error) in
             if let error = error {
                 errorHandler(error)
             }
@@ -45,11 +42,10 @@ class FIRStaffStorage: StaffStorage {
         let docRef = dbRef.document(uid)
         docRef.setData([Constants.uidKey: uid,
                         Constants.nameKey: signupDetails.name,
-                        Constants.contactKey: signupDetails.contact,
                         Constants.emailKey: email,
-                        Constants.assignedRestaurantKey: "",
-                        Constants.isOwnerKey: true,
-                        Constants.permissionsKey: ""]) { (error) in
+                        Constants.contactKey: signupDetails.contact,
+                        Constants.assignedRestaurantKey: assignedRestaurant,
+                        Constants.roleNameKey: "Owner"]) { (error) in
             if let error = error {
                 errorHandler(error)
             }
