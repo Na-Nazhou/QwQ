@@ -102,7 +102,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
         */
 
         if selectedUserType == UserType.staff {
-            // to do: perform segue to "ask manager to add you" screen
+            performSegue(withIdentifier: Constants.staffNotVerifiedSegue, sender: self)
         } else {
             RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                                 errorHandler: handleError(error:))
