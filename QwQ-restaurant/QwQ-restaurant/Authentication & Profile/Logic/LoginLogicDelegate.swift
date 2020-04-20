@@ -11,6 +11,8 @@ protocol LoginLogicDelegate: AnyObject {
 
     func emailNotVerified()
 
+    func noAssignedRestaurant()
+
     func handleError(error: Error)
     
 }

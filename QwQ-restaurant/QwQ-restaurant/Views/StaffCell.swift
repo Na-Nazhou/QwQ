@@ -11,7 +11,9 @@ class StaffCell: UITableViewCell {
 
     // MARK: View properties
     @IBOutlet private var emailLabel: UILabel!
-    
+    @IBOutlet var roleLabel: UILabel!
+    @IBOutlet var editPermissionsButton: UIButton!
+
     func setUpViews(staffEmail: String) {
         emailLabel.text = staffEmail
     }

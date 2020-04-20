@@ -9,16 +9,16 @@ class PermissionsManager {
 
     static var currentStaff: Staff?
 
-    static func checkPermissions(_ permissions: Permissions...) -> Bool {
+    static func checkPermissions(_ permissions: Permission...) -> Bool {
         guard let staff = currentStaff else {
             return false
         }
 
-        for permission in permissions {
-            if !staff.permissions.contains(permission) {
-                return false
-            }
-        }
+//        for permission in permissions {
+//            if !staff.permissions.contains(permission) {
+//                return false
+//            }
+//        }
 
         return true
     }

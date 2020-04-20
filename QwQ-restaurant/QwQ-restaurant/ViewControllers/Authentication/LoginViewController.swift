@@ -93,6 +93,11 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
         performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
     }
 
+    func noAssignedRestaurant() {
+        removeSpinner(spinner)
+        performSegue(withIdentifier: Constants.noAssignedRestaurantSegue, sender: self)
+    }
+
     func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
