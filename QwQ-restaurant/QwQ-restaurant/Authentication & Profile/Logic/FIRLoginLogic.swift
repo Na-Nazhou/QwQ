@@ -31,14 +31,14 @@ class FIRLoginLogic: LoginLogic {
     }
 
     private func getAssignedRestaurant(staff: Staff) {
-        if staff.assignedRestaurant.isEmpty {
-            fatalError("Testing.")
-            // to do: Segue to no assigned restaurant page.
-        } else {
-            RestaurantProfile.currentRestaurantUID = staff.assignedRestaurant
-            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
-                                                errorHandler: handleError(error:))
+        guard let assignedRestaurant = staff.assignedRestaurant else {
+            delegate?.noAssignedRestaurant()
+            return
         }
+
+        RestaurantProfile.currentRestaurantUID = assignedRestaurant
+        RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                            errorHandler: handleError(error:))
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {

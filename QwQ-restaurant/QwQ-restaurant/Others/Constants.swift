@@ -26,6 +26,8 @@ struct Constants {
     static let profileSetupMessage = "Please set up your profile in the Profile tab."
     + "Until then, your restaurant will not be visible to customers."
     static let openAfterCloseMessage = "Open time must be before close time"
+    static let duplicateEmailTitle = "Error - Duplicate Email"
+    static let duplicateEmailMessage = "This email already exists."
 
     // MARK: Alert settings
     static let successTitle = "Success"
@@ -66,6 +68,7 @@ struct Constants {
     static let statisticsSelectedSegue = "statisticsSelected"
     static let logoutSegue = "logout"
     static let staffNotVerifiedSegue = "staffNotVerified"
+    static let noAssignedRestaurantSegue = "noAssignedRestaurant"
 
     // MARK: Storage settings
     static let customersDirectory = "customers"
@@ -74,6 +77,7 @@ struct Constants {
     static let bookingsDirectory = "bookings"
     static let staffDirectory = "staff"
     static let profilePicsDirectory = "profile-pics"
+    static let rolesDirectory = "roles"
     
     // MARK: Collection view settings
     static let queueRecordReuseIdentifier = "queueRecordCell"
@@ -143,6 +147,7 @@ struct Constants {
     static let assignedRestaurantKey = "assignedRestaurant"
     static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
+    static let roleNameKey = "roleName"
 
     // MARK: Queue timed settings
     static let inactivateAdmitAfterMissTimeInMins = 10.0

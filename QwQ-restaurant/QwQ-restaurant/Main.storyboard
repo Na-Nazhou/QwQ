@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uXK-ad-Mgw">
     <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -155,6 +155,7 @@
                         <outlet property="passwordTextField" destination="vRt-MH-ebt" id="9rX-UU-HwP"/>
                         <segue destination="zBd-vc-N4j" kind="show" identifier="loginCompleted" id="23e-ha-7lb"/>
                         <segue destination="yCH-9p-FPM" kind="show" identifier="staffNotVerified" id="zgS-vi-Hkb"/>
+                        <segue destination="0w5-T2-u8Y" kind="show" identifier="noAssignedRestaurant" id="3sz-gg-OD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -170,6 +171,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euT-n7-rg9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="700" y="506"/>
+        </scene>
+        <!--StaffVerification-->
+        <scene sceneID="Nlc-vE-CDj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="StaffVerification" id="0w5-T2-u8Y" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PpG-Bw-YK4"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PxD-au-aLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886" y="506"/>
         </scene>
         <!--StaffVerification-->
         <scene sceneID="Tdd-C8-OWC">

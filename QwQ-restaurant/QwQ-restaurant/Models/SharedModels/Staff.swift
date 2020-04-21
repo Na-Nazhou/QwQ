@@ -11,72 +11,57 @@ struct Staff: User {
     let email: String
     let contact: String
 
-    let assignedRestaurant: String
-    let isOwner: Bool
-    let permissions: [Permissions]
-
-    var permissionsStringArray: [String] {
-        Permissions.convertPermissionsToStringArray(permissions)
-    }
+    let assignedRestaurant: String?
+    let roleName: String?
 
     var dictionary: [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact,
-            Constants.assignedRestaurantKey: assignedRestaurant,
-            Constants.permissionsKey: permissionsStringArray
-        ]
+        var data = [String: Any]()
+
+        data[Constants.uidKey] = uid
+        data[Constants.nameKey] = name
+        data[Constants.emailKey] = email
+        data[Constants.contactKey] = contact
+
+        if let assignedRestaurant = assignedRestaurant {
+            data[Constants.assignedRestaurantKey] = assignedRestaurant
+        }
+        if let roleName = roleName {
+            data[Constants.roleNameKey] = roleName
+        }
+
+        return data
     }
 
     init(uid: String, name: String, email: String, contact: String,
-         assignedRestaurant: String, isOwner: Bool, permissions: [Permissions]) {
+         assignedRestaurant: String?, roleName: String?) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
         self.assignedRestaurant = assignedRestaurant
-        self.isOwner = isOwner
-        self.permissions = permissions
+        self.roleName = roleName
     }
 
     init?(dictionary: [String: Any]) {
-        guard let permissionsAnyArray = dictionary[Constants.permissionsKey] as? [Any] else {
-            return nil
-        }
-        let permissions = Staff.convertAnyToStringArray(permissionsAnyArray)
-
-        guard let isOwnerString = dictionary[Constants.isOwnerKey] as? String else {
-            return nil
-        }
-        let isOwner = isOwnerString == "true"
 
         guard let uid = dictionary[Constants.uidKey] as? String,
             let name = dictionary[Constants.nameKey] as? String,
             let email = dictionary[Constants.emailKey] as? String,
-            let contact = dictionary[Constants.contactKey] as? String,
-            let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String else {
+            let contact = dictionary[Constants.contactKey] as? String else {
                 return nil
         }
+
+        let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String
+        let roleName = dictionary[Constants.roleNameKey] as? String
+
         self.init(uid: uid,
                   name: name,
                   email: email,
                   contact: contact,
                   assignedRestaurant: assignedRestaurant,
-                  isOwner: isOwner,
-                  permissions: Permissions.convertStringArrayToPermissions(permissions))
+                  roleName: roleName)
     }
 
-    static func convertAnyToStringArray(_ anyArray: [Any]) -> [String] {
-        var result = [String]()
-        for item in anyArray {
-            if let item = item as? String {
-                result.append(item)
-            }
-        }
-        return result
-    }
 }
 
 extension Staff {
