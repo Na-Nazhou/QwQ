@@ -154,13 +154,15 @@ class SegmentedControl: UIControl {
             let topConstraint = NSLayoutConstraint(item: button,
                                                    attribute: NSLayoutConstraint.Attribute.top,
                                                    relatedBy: NSLayoutConstraint.Relation.equal,
-                                                   toItem: mainView, attribute: NSLayoutConstraint.Attribute.top,
+                                                   toItem: mainView,
+                                                   attribute: NSLayoutConstraint.Attribute.top,
                                                    multiplier: 1.0, constant: 0)
             
             let bottomConstraint = NSLayoutConstraint(item: button,
                                                       attribute: NSLayoutConstraint.Attribute.bottom,
                                                       relatedBy: NSLayoutConstraint.Relation.equal,
-                                                      toItem: mainView, attribute: NSLayoutConstraint.Attribute.bottom,
+                                                      toItem: mainView,
+                                                      attribute: NSLayoutConstraint.Attribute.bottom,
                                                       multiplier: 1.0,
                                                       constant: 0)
 
@@ -170,7 +172,8 @@ class SegmentedControl: UIControl {
                 rightConstraint = NSLayoutConstraint(item: button,
                                                      attribute: NSLayoutConstraint.Attribute.right,
                                                      relatedBy: NSLayoutConstraint.Relation.equal,
-                                                     toItem: mainView, attribute: NSLayoutConstraint.Attribute.right,
+                                                     toItem: mainView,
+                                                     attribute: NSLayoutConstraint.Attribute.right,
                                                      multiplier: 1.0,
                                                      constant: -padding)
             } else {
@@ -178,7 +181,8 @@ class SegmentedControl: UIControl {
                 rightConstraint = NSLayoutConstraint(item: button,
                                                      attribute: NSLayoutConstraint.Attribute.right,
                                                      relatedBy: NSLayoutConstraint.Relation.equal,
-                                                     toItem: nextButton, attribute: NSLayoutConstraint.Attribute.left,
+                                                     toItem: nextButton,
+                                                     attribute: NSLayoutConstraint.Attribute.left,
                                                      multiplier: 1.0,
                                                      constant: -padding)
             }

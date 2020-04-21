@@ -32,14 +32,16 @@ class RecordViewController: UIViewController {
     }
 
     func setUpViews() {
-        if let record = record {
-            nameLabel.text = record.restaurant.name
-            contactLabel.text = record.restaurant.contact
-            locationLabel.text = record.restaurant.address
-            groupSizeLabel.text = String(record.groupSize)
-            babyChairQuantityLabel.text = String(record.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
-            FIRProfileStorage.getCustomerProfilePic(uid: record.restaurant.uid, placeholder: profileImageView)
+        guard let record = record else {
+            return
         }
+
+        nameLabel.text = record.restaurant.name
+        contactLabel.text = record.restaurant.contact
+        locationLabel.text = record.restaurant.address
+        groupSizeLabel.text = String(record.groupSize)
+        babyChairQuantityLabel.text = String(record.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
+        FIRProfileStorage.getCustomerProfilePic(uid: record.restaurant.uid, placeholder: profileImageView)
     }
 }
