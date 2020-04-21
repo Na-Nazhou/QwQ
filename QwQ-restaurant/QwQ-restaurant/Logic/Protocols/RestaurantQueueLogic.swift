@@ -13,4 +13,5 @@ protocol RestaurantQueueLogic: QueueStorageSyncDelegate {
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void)
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void)
     func rejectCustomer(record: QueueRecord, completion: @escaping () -> Void)
+    func missCustomer(record: QueueRecord, completion: @escaping () -> Void)
 }

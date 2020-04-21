@@ -20,7 +20,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     private var currentQueueRecords: [QueueRecord] {
-        customerActivity.currentQueues.records
+        customerActivity.currentQueues.records + customerActivity.missedQueues.records
     }
     private var queueRecords: [QueueRecord] {
         customerActivity.queueRecords
@@ -138,6 +138,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
+        print("\n\tPUBLIC CONFIRM CALLED")
         confirmAdmission(of: record, completion: {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
         })
@@ -145,6 +146,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 
     private func confirmAdmission(of record: QueueRecord,
                                   completion: @escaping () -> Void) {
+        print("\tconfirmadmission\n")
         var newRecord = record
         newRecord.confirmAdmissionTime = Date()
         queueStorage.updateQueueRecord(oldRecord: record, newRecord: newRecord) {
@@ -153,7 +155,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     private func clashingRecords(with record: QueueRecord) -> [QueueRecord] {
-        currentQueueRecords.filter { $0 != record && ($0.isPendingAdmission || $0.isAdmitted) }
+        currentQueueRecords.filter { $0 != record && ($0.isPendingAdmission || $0.isAdmitted || $0.isMissedAndPending) }
     }
 
     override func removeRecord(_ record: QueueRecord, from collection: RecordCollection<QueueRecord>) {
@@ -173,7 +175,9 @@ extension CustomerQueueLogicManager {
 
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
-        case .admit:
+        case .miss:
+            didMissQueueRecord(record)
+        case .admit, .readmit:
             didAdmitQueueRecord(record)
         case .serve:
             didServeQueueRecord(record)
@@ -206,13 +210,24 @@ extension CustomerQueueLogicManager {
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
         os_log("Detected admission", log: Log.admitCustomer, type: .info)
-        super.updateRecord(record, in: customerActivity.currentQueues)
+        if record.wasOnceMissed {
+            super.removeRecord(record, from: customerActivity.missedQueues)
+            super.addRecord(record, to: customerActivity.currentQueues)
+        } else {
+            super.updateRecord(record, in: customerActivity.currentQueues)
+        }
 
         if clashingRecords(with: record).isEmpty {
             confirmAdmission(of: record, completion: {})
             return
         }
         notificationHandler.notifyQueueAdmittedAwaitingConfirmation(record: record)
+    }
+
+    private func didMissQueueRecord(_ record: QueueRecord) {
+        os_log("Detected miss", log: Log.missCustomer, type: .info)
+        addRecord(record, to: customerActivity.missedQueues)
+        removeRecord(record, from: customerActivity.currentQueues)
     }
 
     private func didConfirmAdmission(of record: QueueRecord) {
@@ -235,14 +250,21 @@ extension CustomerQueueLogicManager {
          super.didRejectRecord(record,
                                customerActivity.currentQueues,
                                customerActivity.queueHistory)
+        
+        super.didRejectRecord(record,
+                              customerActivity.missedQueues,
+                              customerActivity.queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
-        notificationHandler.retractQueueNotifications(for: record)
+        notificationHandler.notifyQueueRejected(record: record)
     }
 
     private func didWithdrawQueueRecord(_ record: QueueRecord) {
         super.didWithdrawRecord(record,
                                 customerActivity.currentQueues,
+                                customerActivity.queueHistory)
+        super.didWithdrawRecord(record,
+                                customerActivity.missedQueues,
                                 customerActivity.queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)

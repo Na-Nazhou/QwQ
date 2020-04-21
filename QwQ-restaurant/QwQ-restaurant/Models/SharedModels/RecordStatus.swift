@@ -5,5 +5,6 @@ enum RecordStatus: Int {
     case rejected
     case withdrawn
     case confirmedAdmission
+    case missedAndPending
     case invalid
 }

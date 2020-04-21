@@ -55,4 +55,10 @@ class CustomerActivityLogicManager: CustomerActivityLogic {
             return time1 > time2
         })
     }
+
+    var missedRecords: [Record] {
+        customerActivity.missedRecords.sorted(by: { record1, record2 in
+            record1.missTime! < record2.missTime!
+        })
+    }
 }

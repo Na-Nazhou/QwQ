@@ -47,6 +47,10 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
             didCustomerUpdateRecord(record, currentList)
         }
 
+        if record.isMissedAndPending {
+            didMissRecord(record, currentList, waitingList)
+        }
+
         if record.isAdmitted {
             didAdmitRecord(record, currentList, waitingList)
         }
@@ -63,6 +67,18 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
     func didCustomerUpdateRecord(_ record: T, _ currentList: RecordCollection<T>) {
         currentList.update(record)
         activitiesDelegate?.didUpdateCurrentList()
+    }
+
+    private func didMissRecord(_ record: T,
+                               _ currentList: RecordCollection<T>,
+                               _ waitingList: RecordCollection<T>) {
+        assert(record as? BookRecord == nil, "Book records are not missable.")
+        if waitingList.remove(record) {
+            activitiesDelegate?.didUpdateWaitingList()
+        }
+        if currentList.add(record) {
+            activitiesDelegate?.didUpdateCurrentList()
+        }
     }
 
     private func didAdmitRecord(_ record: T,
@@ -112,11 +128,17 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
         let time = Date()
         switch event {
         case .admit:
-            new.admitTime = time
+            if record.wasOnceMissed {
+                new.readmitTime = time
+            } else {
+                new.admitTime = time
+            }
         case .serve:
             new.serveTime = time
         case .reject:
             new.rejectTime = time
+        case .miss:
+            new.missTime = time
         default:
             assert(false)
         }

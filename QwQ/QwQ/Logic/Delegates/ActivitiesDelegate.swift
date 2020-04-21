@@ -10,6 +10,8 @@ protocol ActivitiesDelegate: AnyObject {
     func didUpdateHistoryRecords()
 
     func didUpdateActiveRecords()
+
+    func didUpdateMissedRecords()
     
     func didWithdrawRecord()
 

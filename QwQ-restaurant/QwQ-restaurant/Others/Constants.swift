@@ -140,10 +140,18 @@ struct Constants {
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
     static let confirmAdmissionTimeKey = "confirmAdmissionTime"
+    static let missTimeKey = "missTime"
+    static let readmitTimeKey = "readmitTime"
     static let startTimeKey = "startTime"
     static let timeKey = "time"
     static let assignedRestaurantKey = "assignedRestaurant"
     static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
     static let roleNameKey = "roleName"
+
+    // MARK: Queue timed settings
+    static let inactivateAdmitAfterMissTimeInMins = 10.0
+    static let timeBufferForBookArrivalInMins = 15.0
+    static let queueWaitConfirmTimeInMins = 3.0
+    static let queueWaitArrivalInMins = 15.0
 }

@@ -33,6 +33,11 @@ struct BookRecord: Record {
         // hence once admitted, auto confirmed admission.
     }
 
+    let missTime: Date? = nil
+    var readmitTime: Date? {
+        nil
+    }
+
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.restaurantKey] = restaurant.uid
