@@ -13,7 +13,7 @@ class FIRRestaurantStorage: RestaurantStorage {
         db.collection(Constants.restaurantsDirectory)
     }
 
-    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    private let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listener: ListenerRegistration?
 

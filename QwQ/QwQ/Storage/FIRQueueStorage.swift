@@ -14,7 +14,7 @@ class FIRQueueStorage: CustomerQueueStorage {
         db.collection(Constants.queuesDirectory)
     }
 
-    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    private let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listener: ListenerRegistration?
 

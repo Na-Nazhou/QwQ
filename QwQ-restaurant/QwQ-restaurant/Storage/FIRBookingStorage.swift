@@ -10,7 +10,6 @@ import Foundation
 import os.log
 
 class FIRBookingStorage: RestaurantBookingStorage {
-
     // MARK: Storage as singleton
     static let shared = FIRBookingStorage()
 
@@ -22,7 +21,7 @@ class FIRBookingStorage: RestaurantBookingStorage {
         db.collection(Constants.bookingsDirectory)
     }
 
-    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    private let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listener: ListenerRegistration?
 
@@ -142,6 +141,7 @@ extension FIRBookingStorage {
 }
 
 extension FIRBookingStorage {
+    // MARK: - Delegates
 
     func registerDelegate(_ del: BookingStorageSyncDelegate) {
         logicDelegates.add(del)

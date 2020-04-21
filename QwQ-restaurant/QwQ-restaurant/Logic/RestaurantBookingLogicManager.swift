@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, RestaurantBookingLogic {
 
@@ -28,6 +29,7 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, R
     }
 
     deinit {
+        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 

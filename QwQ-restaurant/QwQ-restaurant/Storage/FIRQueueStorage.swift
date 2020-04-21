@@ -20,7 +20,7 @@ class FIRQueueStorage: RestaurantQueueStorage {
         db.collection(Constants.queuesDirectory)
     }
 
-    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    private let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var queueListener: ListenerRegistration?
 

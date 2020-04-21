@@ -11,7 +11,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
     typealias RestaurantStorage = FIRRestaurantStorage
-    let queueStorage: RestaurantQueueStorage = FIRQueueStorage.shared
+    private let queueStorage: RestaurantQueueStorage
 
     // View Controller
     weak var activitiesDelegate: ActivitiesDelegate?
@@ -36,6 +36,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
     init(restaurantActivity: RestaurantActivity) {
         self.restaurantActivity = restaurantActivity
+        self.queueStorage = FIRQueueStorage.shared
 
         RestaurantStorage.delegate = self
 

@@ -1,8 +1,8 @@
 import Foundation
 
 protocol RestaurantStorageSync {
-    var logicDelegates: NSHashTable<AnyObject> { get }
 
+    // MARK: - Delegates
     func registerDelegate(_ del: RestaurantStorageSyncDelegate)
 
     func unregisterDelegate(_ del: RestaurantStorageSyncDelegate)
