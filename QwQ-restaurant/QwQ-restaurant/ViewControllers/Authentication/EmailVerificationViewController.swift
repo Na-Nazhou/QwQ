@@ -15,7 +15,7 @@ class EmailVerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }

@@ -13,28 +13,34 @@ class ActivitiesViewController: UIViewController {
 
     // MARK: View properties
     @IBOutlet private var searchBarController: UISearchBar!
-    @IBOutlet private var currentWaitingControl: SegmentedControl!
+    @IBOutlet private var activityControl: SegmentedControl!
     @IBOutlet private var recordCollectionView: UICollectionView!
     @IBOutlet private var openCloseButton: UIButton!
     
-    var spinner: UIView?
+    private var spinner: UIView?
 
-    enum SelectedControl: Int {
+    // MARK: Filter
+    private var filter: (Record) -> Bool = { _ in true }
+    private var filtered: [Record] {
+        records.filter(filter)
+    }
+
+    // MARK: Segmented control
+    private enum SelectedControl: Int {
         case current
         case waiting
         case history
     }
-    var selectedControl: SelectedControl = .current
+    private var selectedControl: SelectedControl = .current
 
     // MARK: Logic properties
-    let restaurantLogic: RestaurantLogic = RestaurantLogicManager()
-    let queueLogic: RestaurantQueueLogic = RestaurantQueueLogicManager()
-    let bookingLogic: RestaurantBookingLogic = RestaurantBookingLogicManager()
-    let activityLogic: RestaurantActivityLogic = RestaurantActivityLogicManager()
+    private let restaurantLogic: RestaurantLogic = RestaurantLogicManager()
+    private let queueLogic: RestaurantQueueLogic = RestaurantQueueLogicManager()
+    private let bookingLogic: RestaurantBookingLogic = RestaurantBookingLogicManager()
+    private let activityLogic: RestaurantActivityLogic = RestaurantActivityLogicManager()
 
     // MARK: Model properties
-    var filtered: [Record] = []
-    var records: [Record] {
+    private var records: [Record] {
         switch selectedControl {
         case .current:
             return activityLogic.currentRecords
@@ -56,8 +62,7 @@ class ActivitiesViewController: UIViewController {
         queueLogic.activitiesDelegate = self
         bookingLogic.activitiesDelegate = self
         restaurantLogic.activitiesDelegate = self
-        
-        filtered = records
+
         setUpSegmentedControl()
         setUpQueueStatus()
     }
@@ -77,8 +82,8 @@ class ActivitiesViewController: UIViewController {
     }
 
     private func setUpSegmentedControl() {
-        currentWaitingControl.items = Constants.segmentedControlActivitiesTitles
-        currentWaitingControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+        activityControl.items = Constants.segmentedControlActivitiesTitles
+        activityControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
@@ -135,13 +140,16 @@ class ActivitiesViewController: UIViewController {
 
 extension ActivitiesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if !(searchBar.text?.isEmpty)! {
-            self.recordCollectionView?.reloadData()
-        }
+        reloadRecords()
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = searchText.isEmpty ? records : records.filter { (item: Record) -> Bool in
+        if searchText.isEmpty {
+            filter = { _ in true }
+            return
+        }
+
+        filter = { (item: Record) -> Bool in
             item.customer.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
     }
@@ -227,7 +235,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
         return recordCell
     }
 
-    func didUpdateRecord() {
+    private func didUpdateRecord() {
         reloadRecords()
     }
 
@@ -268,7 +276,6 @@ extension ActivitiesViewController: ActivitiesDelegate {
     }
 
     private func reloadRecords() {
-        filtered = records
         recordCollectionView.reloadData()
     }
 }

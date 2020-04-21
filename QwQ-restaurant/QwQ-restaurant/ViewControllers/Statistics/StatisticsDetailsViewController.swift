@@ -23,7 +23,7 @@ class StatisticsDetailsViewController: UIViewController {
     var statsLogic: RestaurantStatisticsLogic!
 
     // MARK: Model properties
-    var statisticsDetails: Statistics? {
+    private var statisticsDetails: Statistics? {
         statsLogic.currentStats
     }
     

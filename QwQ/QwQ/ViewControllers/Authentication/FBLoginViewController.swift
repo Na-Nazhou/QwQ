@@ -11,13 +11,14 @@ import FacebookLogin
 
 class FBLoginViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var contactTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
 
-    typealias Profile = FIRProfileStorage
-
     var spinner: UIView?
+
+    typealias Profile = FIRProfileStorage
 
     override func viewDidLoad() {
         super.viewDidLoad()

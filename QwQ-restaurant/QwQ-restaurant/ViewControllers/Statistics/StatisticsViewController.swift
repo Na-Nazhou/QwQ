@@ -19,18 +19,19 @@ class StatisticsViewController: UIViewController {
     
     var spinner: UIView?
 
-    enum SelectedControl: Int {
+    // MARK: Segmented control
+    private enum SelectedControl: Int {
         case daily
         case weekly
         case monthly
     }
-    var selectedControl: SelectedControl = .daily
+    private var selectedControl: SelectedControl = .daily
 
     // MARK: Logic properties
-    var statsLogic: RestaurantStatisticsLogic = RestaurantStatisticsLogicManager()
+    private var statsLogic: RestaurantStatisticsLogic = RestaurantStatisticsLogicManager()
 
     // MARK: Model properties
-    var statistics: [Statistics] {
+    private var statistics: [Statistics] {
         switch selectedControl {
         case .daily:
             return statsLogic.dailyDetails
@@ -41,7 +42,7 @@ class StatisticsViewController: UIViewController {
         }
     }
 
-    var summary: Statistics? {
+    private var summary: Statistics? {
         switch selectedControl {
         case .daily:
             return statsLogic.dailySummary

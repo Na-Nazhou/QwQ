@@ -19,6 +19,7 @@ protocol Record {
     var admitTime: Date? { get set }
     var serveTime: Date? { get set }
     var rejectTime: Date? { get set }
+
     var withdrawTime: Date? { get }
     var confirmAdmissionTime: Date? { get }
 

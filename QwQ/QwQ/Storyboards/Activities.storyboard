@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ykL-OW-g2w">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,23 +17,23 @@
             <objects>
                 <viewController id="07R-S5-BfO" customClass="ActivitiesViewController" customModule="QwQ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5fZ-AD-hlT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="DhZ-hD-LWP">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="230.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="165.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LtW-f4-P8e">
-                                <rect key="frame" x="87" y="58.5" width="240" height="114"/>
+                                <rect key="frame" x="126" y="25.5" width="348" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw6-yj-Epa">
-                                        <rect key="frame" x="55" y="0.0" width="130.5" height="57"/>
+                                        <rect key="frame" x="114.5" y="0.0" width="119" height="57"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4T-DD-Q5f" customClass="SegmentedControl" customModule="QwQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="57" width="240" height="57"/>
+                                        <rect key="frame" x="54" y="57" width="240" height="57"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="57" id="5uI-lV-wK3"/>
@@ -44,7 +43,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gMT-pe-MMR">
-                                <rect key="frame" x="15" y="238" width="384" height="560"/>
+                                <rect key="frame" x="15" y="173" width="570" height="363"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGS-Zd-gvF">
                                     <size key="itemSize" width="384" height="152"/>
@@ -54,7 +53,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="activityCell" id="A74-J4-hxb" customClass="ActivityCell" customModule="QwQ" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="152"/>
+                                        <rect key="frame" x="93" y="0.0" width="384" height="152"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8pk-Me-4iC">
                                             <rect key="frame" x="0.0" y="0.0" width="384" height="152"/>
@@ -152,8 +151,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="AnF-ie-i4t"/>
                     <connections>
-                        <outlet property="activeHistoryControl" destination="R4T-DD-Q5f" id="Rtw-7g-iWH"/>
                         <outlet property="activitiesCollectionView" destination="gMT-pe-MMR" id="A8s-aY-74f"/>
+                        <outlet property="activityControl" destination="R4T-DD-Q5f" id="Rtw-7g-iWH"/>
                         <segue destination="NGo-9A-thp" kind="show" identifier="queueSelected" id="wAb-S6-564"/>
                         <segue destination="i2s-ga-rpF" kind="show" identifier="bookSelected" id="LxS-rR-JuO"/>
                         <segue destination="Oe4-1x-dEj" kind="show" identifier="editQueueSelected" id="0lh-Ti-s26"/>
@@ -212,6 +211,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uVN-zR-dcc">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

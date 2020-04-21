@@ -12,13 +12,14 @@ import FacebookCore
 
 class LoginViewController: UIViewController {
 
-    typealias Profile = FIRProfileStorage
-    typealias Auth = FIRAuthenticator
-    
-    var spinner: UIView?
-
+    // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+
+    var spinner: UIView?
+
+    typealias Profile = FIRProfileStorage
+    typealias Auth = FIRAuthenticator
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,12 +10,12 @@ import UIKit
 class EditBookingViewController: EditRecordViewController {
 
     // MARK: View properties
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet private var datePicker: UIDatePicker!
 
     // MARK: Logic properties
     var bookingLogic: CustomerBookingLogic!
 
-    var advanceBookingLimit: Int {
+    private var advanceBookingLimit: Int {
         restaurants.map { $0.advanceBookingLimit }.max()!
     }
 

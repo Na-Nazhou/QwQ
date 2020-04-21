@@ -15,17 +15,13 @@ struct QueueRecord: Record {
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
+
     let withdrawTime: Date?
     let confirmAdmissionTime: Date?
 
     var missTime: Date?
     var readmitTime: Date?
-
     var estimatedAdmitTime: Date?
-
-    var startDate: String {
-        Date.getFormattedDate(date: startTime, format: Constants.recordDateFormat)
-    }
 
     var dictionary: [String: Any] {
         var data = [String: Any]()

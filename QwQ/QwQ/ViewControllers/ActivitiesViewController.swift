@@ -10,25 +10,26 @@ import UIKit
 class ActivitiesViewController: UIViewController {
 
     // MARK: View properties
-    @IBOutlet private var activeHistoryControl: SegmentedControl!
+    @IBOutlet private var activityControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
     var spinner: UIView?
 
-    enum SelectedControl: Int {
+    // MARK: Segmented control
+    private enum SelectedControl: Int {
         case active
         case missed
         case history
     }
-    var selectedControl: SelectedControl = .active
+    private var selectedControl: SelectedControl = .active
 
     // MARK: Logic properties
-    let queueLogic: CustomerQueueLogic = CustomerQueueLogicManager()
-    let bookingLogic: CustomerBookingLogic = CustomerBookingLogicManager()
-    let activityLogic: CustomerActivityLogic = CustomerActivityLogicManager()
+    private let queueLogic: CustomerQueueLogic = CustomerQueueLogicManager()
+    private let bookingLogic: CustomerBookingLogic = CustomerBookingLogicManager()
+    private let activityLogic: CustomerActivityLogic = CustomerActivityLogicManager()
 
     // MARK: Model properties
-    var records: [Record] {
+    private var records: [Record] {
         switch selectedControl {
         case .active:
             return activityLogic.activeRecords
@@ -58,7 +59,7 @@ class ActivitiesViewController: UIViewController {
     }
 
     private func setUpSegmentedControl() {
-        activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+        activityControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {

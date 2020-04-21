@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
-    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RV0-Cs-HoF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,17 +17,17 @@
             <objects>
                 <viewController id="unC-H2-shI" customClass="ActivitiesViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BKf-ZL-3DJ">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient-background" translatesAutoresizingMaskIntoConstraints="NO" id="nOr-ig-2QA">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="255"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="132"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Fu-FR5">
-                                <rect key="frame" x="208.5" y="50" width="417" height="180.5"/>
+                                <rect key="frame" x="150" y="50" width="300" height="183"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUEUE/ BOOKINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsL-SD-n9A">
-                                        <rect key="frame" x="0.0" y="0.0" width="417" height="39.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -40,7 +39,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Shz-l6-QAq">
-                                        <rect key="frame" x="0.0" y="54.5" width="417" height="46"/>
+                                        <rect key="frame" x="0.0" y="56" width="300" height="47"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="30"/>
                                         <state key="normal" title="OPEN">
@@ -56,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOb-bP-BmU" customClass="SegmentedControl" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.5" width="417" height="65"/>
+                                        <rect key="frame" x="0.0" y="118" width="300" height="65"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="65" id="nkd-H4-Wu3"/>
@@ -65,7 +64,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ss1-lc-U0X">
-                                <rect key="frame" x="20" y="263" width="794" height="799"/>
+                                <rect key="frame" x="20" y="140" width="560" height="411"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d0B-Rw-EPH">
                                     <size key="itemSize" width="770" height="235"/>
@@ -75,7 +74,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueRecordCell" id="lhN-ab-ua4" customClass="RecordCell" customModule="QwQ_restaurant" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="50" width="770" height="235"/>
+                                        <rect key="frame" x="-105" y="50" width="770" height="235"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="d5m-QS-HYA">
                                             <rect key="frame" x="0.0" y="0.0" width="770" height="235"/>
@@ -194,11 +193,11 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="collectionViewHeader" id="q8W-Dd-Di1" customClass="SearchCollectionReusableView" customModule="QwQ_restaurant" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="794" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" placeholder="Enter customer name" translatesAutoresizingMaskIntoConstraints="NO" id="Eq4-dl-NjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="794" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                                             <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <userDefinedRuntimeAttributes>
@@ -241,7 +240,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nln-qZ-h8h"/>
                     <connections>
-                        <outlet property="currentWaitingControl" destination="iOb-bP-BmU" id="0Vo-XD-5pU"/>
+                        <outlet property="activityControl" destination="iOb-bP-BmU" id="0Vo-XD-5pU"/>
                         <outlet property="openCloseButton" destination="Shz-l6-QAq" id="8c3-kl-HrW"/>
                         <outlet property="recordCollectionView" destination="ss1-lc-U0X" id="6K8-01-bNA"/>
                         <segue destination="nN2-Nh-xwu" kind="show" identifier="queueRecordSelected" id="bsd-c0-28c"/>
@@ -280,6 +279,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nwc-dW-2ZX">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -296,6 +296,6 @@
         <image name="c-queue-icon" width="194" height="114"/>
         <image name="default-profile-pic" width="435" height="418"/>
         <image name="gradient-background" width="2048" height="2732"/>
-        <image name="person.3" catalog="system" width="128" height="62"/>
+        <image name="person.3" catalog="system" width="72" height="35"/>
     </resources>
 </document>

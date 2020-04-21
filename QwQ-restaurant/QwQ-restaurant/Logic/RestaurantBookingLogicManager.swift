@@ -58,18 +58,18 @@ extension RestaurantBookingLogicManager {
     // MARK: Syncing
 
     func didAddBookRecord(_ record: BookRecord) {
-        var bookRecord = record
-        if bookRecord.isPendingAdmission {
-            bookRecord.autoRejectTimer = Timer(fireAt: record.time,
-                                               interval: 1,
-                                               target: self,
-                                               selector: #selector(handleAutoRejectTimer),
-                                               userInfo: bookRecord,
-                                               repeats: false)
-            RunLoop.main.add(bookRecord.autoRejectTimer!, forMode: .common)
+        if record.isPendingAdmission {
+            let autoRejectTimer = Timer(
+                fireAt: record.time,
+                interval: 1,
+                target: self,
+                selector: #selector(handleAutoRejectTimer),
+                userInfo: record,
+                repeats: false)
+            RunLoop.main.add(autoRejectTimer, forMode: .common)
         }
 
-        didAddRecord(bookRecord,
+        didAddRecord(record,
                      restaurantActivity.currentBookings,
                      restaurantActivity.waitingBookings,
                      restaurantActivity.historyBookings)
