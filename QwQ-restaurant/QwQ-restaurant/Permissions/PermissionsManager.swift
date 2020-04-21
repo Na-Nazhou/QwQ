@@ -9,9 +9,8 @@ class PermissionsManager {
 
     static var grantedPermissions: [Permission]?
 
-    static func checkPermissions(_ toCheck: Permission..., handleError: @escaping (Error) -> Void) -> Bool {
+    static func checkPermissions(_ toCheck: Permission...) -> Bool {
         guard let grantedPermissions = grantedPermissions else {
-            handleError(ProfileError.PermissionsNotInitialised)
             return false
         }
 

@@ -21,6 +21,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var advanceBookingLimitLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
 
+    @IBOutlet private var addStaffButton: UIButton!
+    @IBOutlet private var editProfileButton: UIButton!
+
     private var spinner: UIView?
 
     typealias Profile = FIRRestaurantStorage
@@ -35,6 +38,17 @@ class ProfileViewController: UIViewController {
 
     @IBAction private func logoutButton(_ sender: Any) {
         Auth.logout(completion: logoutComplete, errorHandler: handleError(error:))
+    }
+
+    private func checkPermissions() {
+        if !PermissionsManager.checkPermissions(Permission.addStaff) {
+            addStaffButton.isEnabled = false
+            addStaffButton.isHidden = true
+        }
+        if !PermissionsManager.checkPermissions(Permission.editProfile) {
+            editProfileButton.isEnabled = false
+            editProfileButton.isHidden = true
+        }
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {

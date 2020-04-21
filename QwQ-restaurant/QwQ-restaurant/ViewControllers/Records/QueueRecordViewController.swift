@@ -13,12 +13,16 @@ class QueueRecordViewController: RecordViewController {
     var queueLogic: RestaurantQueueLogic!
 
     @IBAction override func handleAdmit(_ sender: Any) {
-        guard let bookRecord = record as? QueueRecord else {
+        guard let queueRecord = record as? QueueRecord else {
             return
+        }
+
+        if !PermissionsManager.checkPermissions(Permission.acceptQueue) {
+            hideActionButton()
         }
     
         spinner = showSpinner(onView: view)
-        queueLogic.admitCustomer(record: bookRecord,
+        queueLogic.admitCustomer(record: queueRecord,
                                  completion: self.didUpdateRecord)
     }
 

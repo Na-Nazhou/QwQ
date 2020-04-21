@@ -61,6 +61,24 @@ class RecordCell: UICollectionViewCell {
         default:
             setUpHistoryRecord(record: record)
         }
+
+        if record as? QueueRecord != nil {
+            if !PermissionsManager.checkPermissions(Permission.acceptQueue) {
+                disableLeftButton()
+            }
+            if !PermissionsManager.checkPermissions(Permission.rejectQueue) {
+                disableRightButton()
+            }
+        }
+        if record as? BookRecord != nil {
+            if !PermissionsManager.checkPermissions(Permission.acceptBooking) {
+                disableLeftButton()
+            }
+            if !PermissionsManager.checkPermissions(Permission.rejectBooking) {
+                disableRightButton()
+            }
+        }
+
     }
 
     private func setUpRecordImage(record: Record) {
