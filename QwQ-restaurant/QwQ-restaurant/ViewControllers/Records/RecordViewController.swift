@@ -99,7 +99,7 @@ class RecordViewController: UIViewController {
         actionButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
     }
 
-    private func hideActionButton() {
+    func hideActionButton() {
         actionButton.isHidden = true
     }
 }

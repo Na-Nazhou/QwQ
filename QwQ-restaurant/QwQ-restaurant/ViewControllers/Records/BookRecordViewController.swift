@@ -20,6 +20,10 @@ class BookRecordViewController: RecordViewController {
         guard let bookRecord = record as? BookRecord else {
             return
         }
+        
+        if !PermissionsManager.checkPermissions(Permission.acceptBooking) {
+            hideActionButton()
+        }
 
         datePicker.date = bookRecord.time
     }
