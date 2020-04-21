@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantViewController: UIViewController, RestaurantDelegate {
+class RestaurantViewController: UIViewController {
 
     // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
@@ -28,7 +28,7 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
     var restaurantLogic: RestaurantLogic!
 
     // MARK: Model properties
-    var restaurant: Restaurant? {
+    private var restaurant: Restaurant? {
         restaurantLogic.currentRestaurant
     }
     
@@ -107,10 +107,6 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
         }
     }
 
-    func didUpdateRestaurant() {
-        setUpViews()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let restaurant = restaurant else {
             return
@@ -141,4 +137,12 @@ class RestaurantViewController: UIViewController, RestaurantDelegate {
             return
         }
     }
+}
+
+extension RestaurantViewController: RestaurantDelegate {
+
+    func didUpdateRestaurant() {
+        setUpViews()
+    }
+
 }

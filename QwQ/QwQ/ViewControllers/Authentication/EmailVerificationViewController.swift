@@ -9,9 +9,10 @@ import UIKit
 
 class EmailVerificationViewController: UIViewController {
 
-    typealias Profile = FIRProfileStorage
-
+    // MARK: View properties
     @IBOutlet private var emailLabel: UILabel!
+
+    typealias Profile = FIRProfileStorage
     
     @IBAction private func handleBack(_ sender: Any) {
         performSegue(withIdentifier: "goToLogin", sender: self)

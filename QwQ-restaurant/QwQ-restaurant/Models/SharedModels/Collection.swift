@@ -12,11 +12,13 @@ class Collection<T: Hashable> {
         elements.count
     }
 
+    @discardableResult
     func add(_ element: T) -> Bool {
         let (isNew, _) = elements.insert(element)
         return isNew
     }
 
+    @discardableResult
     func add(_ newElements: [T]) -> Bool {
         let origSize = size
         elements = elements.union(Set(newElements))

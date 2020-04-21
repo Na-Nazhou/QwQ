@@ -43,7 +43,7 @@ class BookRecordBuilder {
     }
     
     func getDictionary() -> [String: Any] {
-        return [
+        [
             Constants.customerKey: id,
             Constants.restaurantKey: id,
             Constants.groupSizeKey: groupSize,
@@ -54,7 +54,7 @@ class BookRecordBuilder {
             Constants.serveTimeKey: serveTime as Any,
             Constants.rejectTimeKey: rejectTime as Any,
             Constants.withdrawTimeKey: withdrawTime as Any
-            ] as [String: Any]
+        ] 
     }
     
     func with(id: String) -> BookRecordBuilder {
@@ -113,16 +113,16 @@ class BookRecordBuilder {
     }
     
     func build() -> BookRecord {
-        return BookRecord(id: id,
-                          restaurant: restaurant,
-                          customer: customer,
-                          time: time,
-                          groupSize: groupSize,
-                          babyChairQuantity: babyChairQuantity,
-                          wheelchairFriendly: wheelchairFriendly,
-                          admitTime: admitTime,
-                          serveTime: serveTime,
-                          rejectTime: rejectTime,
-                          withdrawTime: withdrawTime)
+        BookRecord(id: id,
+                   restaurant: restaurant,
+                   customer: customer,
+                   time: time,
+                   groupSize: groupSize,
+                   babyChairQuantity: babyChairQuantity,
+                   wheelchairFriendly: wheelchairFriendly,
+                   admitTime: admitTime,
+                   serveTime: serveTime,
+                   rejectTime: rejectTime,
+                   withdrawTime: withdrawTime)
     }
 }

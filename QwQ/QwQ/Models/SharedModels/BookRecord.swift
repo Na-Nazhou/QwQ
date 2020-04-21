@@ -9,7 +9,8 @@ import Foundation
 import FirebaseFirestore
 
 struct BookRecord: Record {
-    var id: String
+
+    let id: String
     let restaurant: Restaurant
     let customer: Customer
 
@@ -19,13 +20,10 @@ struct BookRecord: Record {
 
     let time: Date
 
-    var date: String {
-        Date.getFormattedDate(date: time, format: Constants.recordDateFormat)
-    }
-
     let admitTime: Date?
     let serveTime: Date?
     let rejectTime: Date?
+
     var withdrawTime: Date?
     var confirmAdmissionTime: Date? {
         admitTime

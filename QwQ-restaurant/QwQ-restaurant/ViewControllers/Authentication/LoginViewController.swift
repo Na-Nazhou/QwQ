@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Auth = FIRAuthenticator
 

@@ -21,10 +21,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var advanceBookingLimitLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
 
-    @IBOutlet var addStaffButton: UIButton!
-    @IBOutlet var editProfileButton: UIButton!
+    @IBOutlet private var addStaffButton: UIButton!
+    @IBOutlet private var editProfileButton: UIButton!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator

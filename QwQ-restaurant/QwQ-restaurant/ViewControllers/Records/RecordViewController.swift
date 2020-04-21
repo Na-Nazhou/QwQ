@@ -30,29 +30,31 @@ class RecordViewController: UIViewController {
     }
     
     func setUpViews() {
-        if let record = record {
-            nameLabel.text = record.customer.name
-            contactLabel.text = record.customer.contact
-            groupSizeLabel.text = String(record.groupSize)
-            babyChairQuantityLabel.text = String(record.babyChairQuantity)
-            wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
-            FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
+        guard let record = record else {
+            return
+        }
 
-            if record.isPendingAdmission {
-                setUpAdmitButton()
-            }
+        nameLabel.text = record.customer.name
+        contactLabel.text = record.customer.contact
+        groupSizeLabel.text = String(record.groupSize)
+        babyChairQuantityLabel.text = String(record.babyChairQuantity)
+        wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
+        FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
-            if record.isAdmitted {
-                setUpPendingConfirmationButton()
-            }
+        if record.isPendingAdmission {
+            setUpAdmitButton()
+        }
 
-            if record.isConfirmedAdmission {
-                setUpServeButton()
-            }
+        if record.isAdmitted {
+            setUpPendingConfirmationButton()
+        }
 
-            if record.isHistoryRecord {
-                hideActionButton()
-            }
+        if record.isConfirmedAdmission {
+            setUpServeButton()
+        }
+
+        if record.isHistoryRecord {
+            hideActionButton()
         }
     }
 

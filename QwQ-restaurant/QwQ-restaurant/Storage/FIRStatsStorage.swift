@@ -1,10 +1,11 @@
 import FirebaseFirestore
 import os.log
 
-// note that stats is considered static (history stats)
 class FIRStatsStorage: RestaurantStatsStorage {
+    // MARK: Storage as singleton
     static let shared = FIRStatsStorage()
 
+    // MARK: Storage capabilities
     private let db = Firestore.firestore()
     private var queuesDb: CollectionReference {
         db.collection(Constants.queuesDirectory)

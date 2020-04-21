@@ -9,11 +9,12 @@ import UIKit
 
 class ForgotPasswordViewController: UIViewController {
 
-    typealias Auth = FIRAuthenticator
-
-    var spinner: UIView?
-    
+    // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
+
+    private var spinner: UIView?
+
+    typealias Auth = FIRAuthenticator
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class ForgotPasswordViewController: UIViewController {
         Auth.resetPassword(for: email, completion: emailSent, errorHandler: handleError(error:))
     }
     
-    @IBAction func handleBack(_ sender: Any) {
+    @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
     

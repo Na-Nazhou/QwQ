@@ -8,8 +8,6 @@ protocol BookingStorageSync {
     func removeListener()
 
     // MARK: - Delegates
-    var logicDelegates: NSHashTable<AnyObject> { get }
-    
     func registerDelegate(_ del: BookingStorageSyncDelegate)
 
     func unregisterDelegate(_ del: BookingStorageSyncDelegate)

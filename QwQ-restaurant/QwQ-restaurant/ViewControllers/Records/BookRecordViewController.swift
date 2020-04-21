@@ -10,7 +10,7 @@ import UIKit
 class BookRecordViewController: RecordViewController {
 
     // MARK: View properties
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet private var datePicker: UIDatePicker!
 
     // MARK: Logic properties
     var bookingLogic: RestaurantBookingLogic!

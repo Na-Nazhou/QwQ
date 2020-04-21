@@ -19,21 +19,17 @@ struct BookRecord: Record {
 
     let time: Date
 
-    var date: String {
-        Date.getFormattedDate(date: time, format: Constants.recordDateFormat)
-    }
-
     var admitTime: Date?
     var serveTime: Date?
     var rejectTime: Date?
+
     let withdrawTime: Date?
     var confirmAdmissionTime: Date? {
         admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
     }
+
     var missTime: Date?
     var readmitTime: Date?
-
-    var autoRejectTimer: Timer?
 
     var dictionary: [String: Any] {
         var data = [String: Any]()

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os.log
 
 class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, RestaurantBookingLogic {
 
@@ -28,6 +29,7 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, R
     }
 
     deinit {
+        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 
@@ -58,18 +60,18 @@ extension RestaurantBookingLogicManager {
     // MARK: Syncing
 
     func didAddBookRecord(_ record: BookRecord) {
-        var bookRecord = record
-        if bookRecord.isPendingAdmission {
-            bookRecord.autoRejectTimer = Timer(fireAt: record.time,
-                                               interval: 1,
-                                               target: self,
-                                               selector: #selector(handleAutoRejectTimer),
-                                               userInfo: bookRecord,
-                                               repeats: false)
-            RunLoop.main.add(bookRecord.autoRejectTimer!, forMode: .common)
+        if record.isPendingAdmission {
+            let autoRejectTimer = Timer(
+                fireAt: record.time,
+                interval: 1,
+                target: self,
+                selector: #selector(handleAutoRejectTimer),
+                userInfo: record,
+                repeats: false)
+            RunLoop.main.add(autoRejectTimer, forMode: .common)
         }
 
-        didAddRecord(bookRecord,
+        didAddRecord(record,
                      restaurantActivity.currentBookings,
                      restaurantActivity.waitingBookings,
                      restaurantActivity.historyBookings)
@@ -87,7 +89,7 @@ extension RestaurantBookingLogicManager {
     func didUpdateBookRecord(_ record: BookRecord) {
         if record.isConfirmedAdmission {
             let autoRejectTimer = Timer(
-                fireAt: record.time.addingTimeInterval(60 *  Constants.timeBufferForBookArrivalInMins),
+                fireAt: record.time.addingTimeInterval(60 * Constants.timeBufferForBookArrivalInMins),
                 interval: 1, target: self,
                 selector: #selector(handleBufferRejectTimer),
                 userInfo: record, repeats: false)

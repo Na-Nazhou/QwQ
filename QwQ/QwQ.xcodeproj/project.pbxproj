@@ -44,6 +44,8 @@
 		61480556242290B1003D6D44 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61480555242290B1003D6D44 /* Record.swift */; };
 		6148056724232B88003D6D44 /* UIViewController+Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6148056624232B87003D6D44 /* UIViewController+Spinner.swift */; };
 		61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61673BF52422168400134891 /* ActivitiesDelegate.swift */; };
+		617B0F31244EFDE7001F1413 /* UIWindow+key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B0F30244EFDE7001F1413 /* UIWindow+key.swift */; };
+		617B0F35244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */; };
 		617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DC241F392F0010AB30 /* SearchDelegate.swift */; };
 		617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DE241F39EF0010AB30 /* RecordDelegate.swift */; };
 		617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */; };
@@ -180,6 +182,8 @@
 		61480555242290B1003D6D44 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Record.swift; path = QwQ/Models/Record.swift; sourceTree = SOURCE_ROOT; };
 		6148056624232B87003D6D44 /* UIViewController+Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Spinner.swift"; sourceTree = "<group>"; };
 		61673BF52422168400134891 /* ActivitiesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDelegate.swift; sourceTree = "<group>"; };
+		617B0F30244EFDE7001F1413 /* UIWindow+key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+key.swift"; sourceTree = "<group>"; };
+		617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+getTopMostViewController.swift"; sourceTree = "<group>"; };
 		617B62DC241F392F0010AB30 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		617B62DE241F39EF0010AB30 /* RecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDelegate.swift; sourceTree = "<group>"; };
 		617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidationUtilities.swift; path = QwQ/Others/Utilities/ValidationUtilities.swift; sourceTree = "<group>"; };
@@ -440,6 +444,8 @@
 				5C9D9B5B24221D2F0019B7EE /* UIViewController+ShowMessage.swift */,
 				7E428229242BA0EE0019A8A2 /* UIViewController+handleBack.swift */,
 				6148056624232B87003D6D44 /* UIViewController+Spinner.swift */,
+				617B0F30244EFDE7001F1413 /* UIWindow+key.swift */,
+				617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */,
 				D41F91A124227FFE00724D6C /* Date+Extensions.swift */,
 			);
 			path = Extensions;
@@ -991,6 +997,7 @@
 				617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */,
 				D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */,
 				7EFB6976242213470073E535 /* QueueRecordViewController.swift in Sources */,
+				617B0F35244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift in Sources */,
 				6148054A24227CE2003D6D44 /* FIRRestaurantStorage.swift in Sources */,
 				6148056724232B88003D6D44 /* UIViewController+Spinner.swift in Sources */,
 				D47852D7244455A0006393C7 /* QwQNotificationHandler.swift in Sources */,
@@ -1034,6 +1041,7 @@
 				6148054C24228798003D6D44 /* CustomerBookingLogic.swift in Sources */,
 				7E6884A92434661A00486EB8 /* PopoverTableView.swift in Sources */,
 				5C2CB12A24247966003AFC6C /* ProfileError.swift in Sources */,
+				617B0F31244EFDE7001F1413 /* UIWindow+key.swift in Sources */,
 				6101D79424271B6E00ACBCC9 /* FIRBookingStorage.swift in Sources */,
 				7E72B14C241B8B8700C1EE72 /* LoginViewController.swift in Sources */,
 				D4EA85D0241B29CC009EB85B /* Customer.swift in Sources */,

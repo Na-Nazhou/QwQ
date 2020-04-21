@@ -48,7 +48,7 @@ class QueueRecordBuilder {
     }
     
     func getDictionary() -> [String: Any] {
-        return [
+        [
             Constants.customerKey: id,
             Constants.restaurantKey: id,
             Constants.groupSizeKey: groupSize,
@@ -61,7 +61,7 @@ class QueueRecordBuilder {
             Constants.withdrawTimeKey: withdrawTime as Any,
             Constants.confirmAdmissionTimeKey: confirmAdmissionTime as Any,
             Constants.estimatedAdmitTimeKey: estimatedAdmitTime as Any
-            ] as [String: Any]
+        ] 
     }
     
     func with(id: String) -> QueueRecordBuilder {
@@ -130,18 +130,18 @@ class QueueRecordBuilder {
     }
     
     func build() -> QueueRecord {
-        return QueueRecord(id: id,
-                           restaurant: restaurant,
-                           customer: customer,
-                           groupSize: groupSize,
-                           babyChairQuantity: babyChairQuantity,
-                           wheelchairFriendly: wheelchairFriendly,
-                           startTime: startTime,
-                           admitTime: admitTime,
-                           serveTime: serveTime,
-                           rejectTime: rejectTime,
-                           withdrawTime: withdrawTime,
-                           confirmAdmissionTime: confirmAdmissionTime,
-                           estimatedAdmitTime: estimatedAdmitTime)
+        QueueRecord(id: id,
+                    restaurant: restaurant,
+                    customer: customer,
+                    groupSize: groupSize,
+                    babyChairQuantity: babyChairQuantity,
+                    wheelchairFriendly: wheelchairFriendly,
+                    startTime: startTime,
+                    admitTime: admitTime,
+                    serveTime: serveTime,
+                    rejectTime: rejectTime,
+                    withdrawTime: withdrawTime,
+                    confirmAdmissionTime: confirmAdmissionTime,
+                    estimatedAdmitTime: estimatedAdmitTime)
     }
 }

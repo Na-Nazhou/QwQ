@@ -10,32 +10,33 @@ import UIKit
 class ActivitiesViewController: UIViewController {
 
     // MARK: View properties
-    @IBOutlet private var activeHistoryControl: SegmentedControl!
+    @IBOutlet private var activityControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
-    enum SelectedControl: Int {
+    // MARK: Segmented control
+    private enum SelectedControl: Int {
         case active
         case missed
         case history
     }
-    var selectedControl: SelectedControl = .active
+    private var selectedControl: SelectedControl = .active
 
     // MARK: Logic properties
-    let queueLogicManager: CustomerQueueLogic = CustomerQueueLogicManager()
-    let bookingLogicManager: CustomerBookingLogic = CustomerBookingLogicManager()
-    let activityLogicManager: CustomerActivityLogic = CustomerActivityLogicManager()
+    private let queueLogic: CustomerQueueLogic = CustomerQueueLogicManager()
+    private let bookingLogic: CustomerBookingLogic = CustomerBookingLogicManager()
+    private let activityLogic: CustomerActivityLogic = CustomerActivityLogicManager()
 
     // MARK: Model properties
-    var records: [Record] {
+    private var records: [Record] {
         switch selectedControl {
         case .active:
-            return activityLogicManager.activeRecords
+            return activityLogic.activeRecords
         case .history:
-            return activityLogicManager.historyRecords
+            return activityLogic.historyRecords
         case .missed:
-            return activityLogicManager.missedRecords
+            return activityLogic.missedRecords
         }
     }
     
@@ -45,8 +46,8 @@ class ActivitiesViewController: UIViewController {
         activitiesCollectionView.dataSource = self
         activitiesCollectionView.delegate = self
 
-        queueLogicManager.activitiesDelegate = self
-        bookingLogicManager.activitiesDelegate = self
+        queueLogic.activitiesDelegate = self
+        bookingLogic.activitiesDelegate = self
 
         setUpSegmentedControl()
     }
@@ -58,7 +59,7 @@ class ActivitiesViewController: UIViewController {
     }
 
     private func setUpSegmentedControl() {
-        activeHistoryControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
+        activityControl.addTarget(self, action: #selector(onTapSegButton), for: .valueChanged)
     }
 
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
@@ -82,13 +83,13 @@ class ActivitiesViewController: UIViewController {
             if let queueRecord = sender as? QueueRecord,
                 let editQueueViewController = segue.destination as? EditQueueViewController {
                     editQueueViewController.record = queueRecord
-                editQueueViewController.queueLogic = queueLogicManager
+                editQueueViewController.queueLogic = queueLogic
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
-                editBookingViewController.bookingLogic = bookingLogicManager
+                editBookingViewController.bookingLogic = bookingLogic
             }
         default:
             return
@@ -122,12 +123,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             } else if record.isAdmitted {
                 activityCell.confirmAction = {
                     self.spinner = self.showSpinner(onView: self.view)
-                    self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
+                    self.queueLogic.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.queueLogicManager.withdrawQueueRecord(queueRecord)
+                self.queueLogic.withdrawQueueRecord(queueRecord)
             }
 
         }
@@ -140,7 +141,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.bookingLogicManager.withdrawBookRecord(bookRecord)
+                self.bookingLogic.withdrawBookRecord(bookRecord)
             }
         }
 

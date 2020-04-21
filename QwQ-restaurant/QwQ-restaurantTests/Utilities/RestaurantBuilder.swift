@@ -46,7 +46,7 @@ class RestaurantBuilder {
     }
     
     func getDictionary() -> [String: Any] {
-        return [
+        [
             Constants.uidKey: uid,
             Constants.nameKey: name,
             Constants.emailKey: email,
@@ -56,11 +56,11 @@ class RestaurantBuilder {
             Constants.maxGroupSizeKey: maxGroupSize,
             Constants.minGroupSizeKey: minGroupSize,
             Constants.advanceBookingLimitKey: advanceBookingLimit,
-            Constants.queueOpenTimeKey: queueOpenTime,
-            Constants.queueCloseTimeKey: queueCloseTime,
-            Constants.autoOpenTimeKey: autoOpenTime,
-            Constants.autoCloseTimeKey: autoCloseTime
-            ] as [String : Any]
+            Constants.queueOpenTimeKey: queueOpenTime as Any,
+            Constants.queueCloseTimeKey: queueCloseTime as Any,
+            Constants.autoOpenTimeKey: autoOpenTime as Any,
+            Constants.autoCloseTimeKey: autoCloseTime as Any
+        ] 
     }
     
     func with(uid: String) -> RestaurantBuilder {
@@ -129,19 +129,18 @@ class RestaurantBuilder {
     }
     
     func build() -> Restaurant {
-        return Restaurant(uid: uid,
-                          name: name,
-                          email: email,
-                          contact: contact,
-                          address: address,
-                          menu: menu,
-                          maxGroupSize: maxGroupSize,
-                          minGroupSize: minGroupSize,
-                          advanceBookingLimit: advanceBookingLimit,
-                          queueOpenTime: queueOpenTime,
-                          queueCloseTime: queueCloseTime,
-                          autoOpenTime: autoOpenTime,
-                          autoCloseTime: autoCloseTime)
+        Restaurant(uid: uid,
+                   name: name,
+                   email: email,
+                   contact: contact,
+                   address: address,
+                   menu: menu,
+                   maxGroupSize: maxGroupSize,
+                   minGroupSize: minGroupSize,
+                   advanceBookingLimit: advanceBookingLimit,
+                   queueOpenTime: queueOpenTime,
+                   queueCloseTime: queueCloseTime,
+                   autoOpenTime: autoOpenTime,
+                   autoCloseTime: autoCloseTime)
     }
 }
-

@@ -9,19 +9,20 @@ import UIKit
 
 class EditProfileViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var contactTextField: UITextField!
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
 
+    private var spinner: UIView?
+
     typealias Auth = FIRAuthenticator
     typealias Profile = FIRProfileStorage
 
-    var uid: String?
-    var image: UIImage?
-
-    var spinner: UIView?
+    private var uid: String?
+    private var image: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -17,38 +17,39 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var fromDatePicker: UIDatePicker!
     @IBOutlet private var toDatePicker: UIDatePicker!
     
-    var spinner: UIView?
+    private var spinner: UIView?
 
-    enum SelectedControl: Int {
+    // MARK: Segmented control
+    private enum SelectedControl: Int {
         case daily
         case weekly
         case monthly
     }
-    var selectedControl: SelectedControl = .daily
+    private var selectedControl: SelectedControl = .daily
 
     // MARK: Logic properties
-    var statsManager: RestaurantStatisticsLogic = RestaurantStatisticsLogicManager()
+    private var statsLogic: RestaurantStatisticsLogic = RestaurantStatisticsLogicManager()
 
     // MARK: Model properties
-    var statistics: [Statistics] {
+    private var statistics: [Statistics] {
         switch selectedControl {
         case .daily:
-            return statsManager.dailyDetails
+            return statsLogic.dailyDetails
         case .weekly:
-            return statsManager.weeklyDetails
+            return statsLogic.weeklyDetails
         case .monthly:
-            return statsManager.monthlyDetails
+            return statsLogic.monthlyDetails
         }
     }
 
-    var summary: Statistics? {
+    private var summary: Statistics? {
         switch selectedControl {
         case .daily:
-            return statsManager.dailySummary
+            return statsLogic.dailySummary
         case .weekly:
-            return statsManager.weeklySummary
+            return statsLogic.weeklySummary
         case .monthly:
-            return statsManager.monthlySummary
+            return statsLogic.monthlySummary
         }
     }
     
@@ -58,7 +59,7 @@ class StatisticsViewController: UIViewController {
         statisticsTableView.delegate = self
         statisticsTableView.dataSource = self
 
-        statsManager.statsDelegate = self
+        statsLogic.statsDelegate = self
 
         setUpSegmentedControl()
         setUpDatePickers()
@@ -97,7 +98,7 @@ class StatisticsViewController: UIViewController {
                         message: Constants.startAfterEndMessage,
                         buttonText: Constants.okayTitle)
         } else {
-            let statisticsDetails = statsManager.loadStats(from: fromDate, to: toDate)
+            let statisticsDetails = statsLogic.loadStats(from: fromDate, to: toDate)
             performSegue(withIdentifier: Constants.statisticsSelectedSegue, sender: statisticsDetails)
         }
     }
@@ -110,14 +111,14 @@ class StatisticsViewController: UIViewController {
     private func fetchData() {
         switch selectedControl {
         case .daily:
-            statsManager.fetchDailyDetails()
-            statsManager.fetchSummary(type: .daily)
+            statsLogic.fetchDailyDetails()
+            statsLogic.fetchSummary(type: .daily)
         case .weekly:
-            statsManager.fetchWeeklyDetails()
-            statsManager.fetchSummary(type: .weekly)
+            statsLogic.fetchWeeklyDetails()
+            statsLogic.fetchSummary(type: .weekly)
         case .monthly:
-            statsManager.fetchMonthlyDetails()
-            statsManager.fetchSummary(type: .monthly)
+            statsLogic.fetchMonthlyDetails()
+            statsLogic.fetchSummary(type: .monthly)
         }
         setUpWaitingTimeLabels()
         spinner = showSpinner(onView: view)
@@ -127,8 +128,8 @@ class StatisticsViewController: UIViewController {
         if let statisticsDetailsViewController = segue.destination as? StatisticsDetailsViewController,
             let statisticsDetails = sender as? Statistics {
 
-            statsManager.currentStats = statisticsDetails
-            statisticsDetailsViewController.statsManager = statsManager
+            statsLogic.currentStats = statisticsDetails
+            statisticsDetailsViewController.statsLogic = statsLogic
         }
     }
 }
