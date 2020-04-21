@@ -12,6 +12,20 @@ class FIRRoleStorage {
 
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
 
+    static func createDefaultRoles(uid: String, errorHandler: @escaping (Error) -> Void) {
+        let roleRef = dbRef.document(uid).collection(Constants.rolesDirectory)
+
+        for role in Role.defaultRoles {
+            let docRef = roleRef.document(role.roleName)
+
+            docRef.setData(role.dictionary) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                }
+            }
+        }
+    }
+
     static func getRestaurantRoles(completion: @escaping ([Role]) -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
         guard let currentUID = RestaurantStorage.currentRestaurantUID else {

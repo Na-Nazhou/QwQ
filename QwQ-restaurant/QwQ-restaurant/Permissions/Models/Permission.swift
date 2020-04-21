@@ -15,6 +15,11 @@ enum Permission: String {
     case addStaff
     case editProfile
 
+    static var ownerPermissions: [Permission] {
+        return [Permission.acceptQueue, Permission.acceptBooking, Permission.rejectQueue,
+                Permission.rejectBooking, Permission.addStaff, Permission.editProfile]
+    }
+
     static func convertStringArrayToPermissions(_ rawValues: [String]) -> [Permission] {
         var permissions = [Permission]()
         for value in rawValues {
