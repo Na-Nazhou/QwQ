@@ -17,7 +17,7 @@ class StatisticsViewController: UIViewController {
     @IBOutlet private var fromDatePicker: UIDatePicker!
     @IBOutlet private var toDatePicker: UIDatePicker!
     
-    var spinner: UIView?
+    private var spinner: UIView?
 
     // MARK: Segmented control
     private enum SelectedControl: Int {

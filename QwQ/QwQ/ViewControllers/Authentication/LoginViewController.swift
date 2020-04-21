@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator

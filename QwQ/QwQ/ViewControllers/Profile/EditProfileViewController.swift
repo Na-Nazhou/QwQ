@@ -16,13 +16,13 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private var newPasswordTextField: UITextField!
     @IBOutlet private var profileImageView: UIImageView!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Auth = FIRAuthenticator
     typealias Profile = FIRProfileStorage
 
-    var uid: String?
-    var image: UIImage?
+    private var uid: String?
+    private var image: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()

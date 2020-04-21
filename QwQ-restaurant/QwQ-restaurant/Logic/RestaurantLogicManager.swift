@@ -72,12 +72,12 @@ class RestaurantLogicManager: RestaurantLogic {
     }
 
     @objc func handleOpenQueueTimer() {
-        print("fire open queue timer")
+        print("Fire open queue timer")
         openQueue()
     }
 
     @objc func handleCloseQueueTimer() {
-        print("fire close queue timer")
+        print("Fire close queue timer")
         closeQueue()
     }
 

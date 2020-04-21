@@ -33,7 +33,7 @@ class RestaurantCell: UICollectionViewCell {
         setUpQueueButton()
     }
 
-    func setUpQueueButton() {
+    private func setUpQueueButton() {
         if canQueue {
             queueButton.alpha = 1
         } else {

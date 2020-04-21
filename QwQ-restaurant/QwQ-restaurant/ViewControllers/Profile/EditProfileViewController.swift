@@ -36,52 +36,52 @@ class EditProfileViewController: UIViewController {
     private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
 
-    var trimmedName: String? {
+    private var trimmedName: String? {
         nameTextField.text?.trimmingCharacters(in: .newlines)
     }
 
-    var trimmedEmail: String? {
+    private var trimmedEmail: String? {
         emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    var trimmedContact: String? {
+    private var trimmedContact: String? {
         contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    var trimmedAddress: String? {
+    private var trimmedAddress: String? {
         addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    var trimmedMenu: String? {
+    private var trimmedMenu: String? {
         menuTextView.text
     }
 
-    var password: String? {
+    private var password: String? {
         newPasswordTextField.text
     }
 
-    var minGroupSize: Int? {
+    private var minGroupSize: Int? {
         guard let groupSizeText = minGroupSizeTextField.text else {
             return nil
         }
         return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
-    var maxGroupSize: Int? {
+    private var maxGroupSize: Int? {
         guard let groupSizeText = maxGroupSizeTextField.text else {
             return nil
         }
         return Int(groupSizeText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
-    var advanceBookingLimit: Int? {
+    private var advanceBookingLimit: Int? {
         guard let advanceBookingLimitText = advanceBookingLimitTextField.text else {
             return nil
         }
         return Int(advanceBookingLimitText.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
-    var autoOpenTime: TimeInterval? {
+    private var autoOpenTime: TimeInterval? {
         if !autoOpenCloseSwitch.isOn {
             return nil
         }
@@ -89,7 +89,7 @@ class EditProfileViewController: UIViewController {
         return Date.getTimeIntervalFromStartOfDay(openTime)
     }
 
-    var autoCloseTime: TimeInterval? {
+    private var autoCloseTime: TimeInterval? {
         if !autoOpenCloseSwitch.isOn {
             return nil
         }
@@ -125,7 +125,7 @@ class EditProfileViewController: UIViewController {
         handleBack()
     }
     
-    @IBAction func handleEditBanner(_ sender: Any) {
+    @IBAction private func handleEditBanner(_ sender: Any) {
         imageViewToEdit = bannerImageView
         showImagePickerControllerActionSheet()
     }
@@ -171,7 +171,7 @@ class EditProfileViewController: UIViewController {
                                      errorHandler: handleError(error:))
     }
 
-    @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
+    @objc private func handleProfileTap(_ sender: UITapGestureRecognizer) {
         imageViewToEdit = profileImageView
         showImagePickerControllerActionSheet()
     }

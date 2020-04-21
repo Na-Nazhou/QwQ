@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var emailLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
 
-    var spinner: UIView?
+    private var spinner: UIView?
     
     typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator

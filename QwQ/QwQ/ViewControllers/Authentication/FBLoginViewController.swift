@@ -16,7 +16,7 @@ class FBLoginViewController: UIViewController {
     @IBOutlet var contactTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Profile = FIRProfileStorage
 

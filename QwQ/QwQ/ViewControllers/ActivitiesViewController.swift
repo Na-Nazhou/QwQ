@@ -13,7 +13,7 @@ class ActivitiesViewController: UIViewController {
     @IBOutlet private var activityControl: SegmentedControl!
     @IBOutlet private var activitiesCollectionView: UICollectionView!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     // MARK: Segmented control
     private enum SelectedControl: Int {

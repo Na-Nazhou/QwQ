@@ -27,7 +27,7 @@ class RecordViewController: UIViewController {
         setUpViews()
     }
 
-    @IBAction private func handleBack(_ sender: Any) {
+    @IBAction func handleBack(_ sender: Any) {
         handleBack()
     }
 

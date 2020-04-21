@@ -17,7 +17,7 @@ class StatisticsDetailsViewController: UIViewController {
     @IBOutlet private var avgWaitingTimeCustomerLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     // MARK: Logic properties
     var statsLogic: RestaurantStatisticsLogic!

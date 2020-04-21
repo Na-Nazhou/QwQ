@@ -107,8 +107,6 @@ class RestaurantViewController: UIViewController {
         }
     }
 
-
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let restaurant = restaurant else {
             return
