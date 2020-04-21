@@ -16,7 +16,8 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+                                withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .badge, .sound])
     }
 }
@@ -34,7 +35,7 @@ extension LocalNotificationManager {
                 }
                 os_log("Notif auth request rejected.", log: Log.requestPermissionsFail, type: .info)
                 self.requestForPermissionsAgain()
-            }
+        }
     }
 
     func schedule(notif: Notification) {
@@ -50,7 +51,7 @@ extension LocalNotificationManager {
             @unknown default:
                 fatalError("auth status \(settings.authorizationStatus) not supported yet!")
                 }
-            }
+        }
     }
 
     private func requestForPermissionsAgain() {

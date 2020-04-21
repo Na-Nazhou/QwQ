@@ -23,19 +23,19 @@ class ActivitiesViewController: UIViewController {
     var selectedControl: SelectedControl = .active
 
     // MARK: Logic properties
-    let queueLogicManager: CustomerQueueLogic = CustomerQueueLogicManager()
-    let bookingLogicManager: CustomerBookingLogic = CustomerBookingLogicManager()
-    let activityLogicManager: CustomerActivityLogic = CustomerActivityLogicManager()
+    let queueLogic: CustomerQueueLogic = CustomerQueueLogicManager()
+    let bookingLogic: CustomerBookingLogic = CustomerBookingLogicManager()
+    let activityLogic: CustomerActivityLogic = CustomerActivityLogicManager()
 
     // MARK: Model properties
     var records: [Record] {
         switch selectedControl {
         case .active:
-            return activityLogicManager.activeRecords
+            return activityLogic.activeRecords
         case .history:
-            return activityLogicManager.historyRecords
+            return activityLogic.historyRecords
         case .missed:
-            return activityLogicManager.missedRecords
+            return activityLogic.missedRecords
         }
     }
     
@@ -45,8 +45,8 @@ class ActivitiesViewController: UIViewController {
         activitiesCollectionView.dataSource = self
         activitiesCollectionView.delegate = self
 
-        queueLogicManager.activitiesDelegate = self
-        bookingLogicManager.activitiesDelegate = self
+        queueLogic.activitiesDelegate = self
+        bookingLogic.activitiesDelegate = self
 
         setUpSegmentedControl()
     }
@@ -82,13 +82,13 @@ class ActivitiesViewController: UIViewController {
             if let queueRecord = sender as? QueueRecord,
                 let editQueueViewController = segue.destination as? EditQueueViewController {
                     editQueueViewController.record = queueRecord
-                editQueueViewController.queueLogic = queueLogicManager
+                editQueueViewController.queueLogic = queueLogic
         }
         case Constants.editBookSelectedSegue:
             if let bookRecord = sender as? BookRecord,
                 let editBookingViewController = segue.destination as? EditBookingViewController {
                     editBookingViewController.record = bookRecord
-                editBookingViewController.bookingLogic = bookingLogicManager
+                editBookingViewController.bookingLogic = bookingLogic
             }
         default:
             return
@@ -122,12 +122,12 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             } else if record.isAdmitted {
                 activityCell.confirmAction = {
                     self.spinner = self.showSpinner(onView: self.view)
-                    self.queueLogicManager.confirmAdmissionOfQueueRecord(queueRecord)
+                    self.queueLogic.confirmAdmissionOfQueueRecord(queueRecord)
                 }
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.queueLogicManager.withdrawQueueRecord(queueRecord)
+                self.queueLogic.withdrawQueueRecord(queueRecord)
             }
 
         }
@@ -140,7 +140,7 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
             }
             activityCell.deleteAction = {
                 self.spinner = self.showSpinner(onView: self.view)
-                self.bookingLogicManager.withdrawBookRecord(bookRecord)
+                self.bookingLogic.withdrawBookRecord(bookRecord)
             }
         }
 

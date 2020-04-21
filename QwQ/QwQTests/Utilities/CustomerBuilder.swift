@@ -25,12 +25,12 @@ class CustomerBuilder {
     }
     
     func getDictionary() -> [String: Any] {
-        return [
+        [
             Constants.uidKey: uid,
             Constants.nameKey: name,
             Constants.emailKey: email,
-            Constants.contactKey: contact,
-            ] as [String : Any]
+            Constants.contactKey: contact
+        ]
     }
     
     func with(uid: String) -> CustomerBuilder {
@@ -54,9 +54,9 @@ class CustomerBuilder {
     }
     
     func build() -> Customer {
-        return Customer(uid: uid,
-                        name: name,
-                        email: email,
-                        contact: contact)
+        Customer(uid: uid,
+                 name: name,
+                 email: email,
+                 contact: contact)
     }
 }

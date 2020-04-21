@@ -97,7 +97,7 @@ extension FIRQueueStorage {
                     restaurant: restaurant,
                     completion: completion)
             }
-        }
+            }
     }
 
     func removeListener() {

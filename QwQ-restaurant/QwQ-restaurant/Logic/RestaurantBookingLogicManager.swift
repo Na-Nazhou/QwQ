@@ -87,7 +87,7 @@ extension RestaurantBookingLogicManager {
     func didUpdateBookRecord(_ record: BookRecord) {
         if record.isConfirmedAdmission {
             let autoRejectTimer = Timer(
-                fireAt: record.time.addingTimeInterval(60 *  Constants.timeBufferForBookArrivalInMins),
+                fireAt: record.time.addingTimeInterval(60 * Constants.timeBufferForBookArrivalInMins),
                 interval: 1, target: self,
                 selector: #selector(handleBufferRejectTimer),
                 userInfo: record, repeats: false)

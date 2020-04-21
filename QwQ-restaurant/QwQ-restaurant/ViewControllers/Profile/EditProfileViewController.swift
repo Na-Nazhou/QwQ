@@ -36,6 +36,30 @@ class EditProfileViewController: UIViewController {
     private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
 
+    var trimmedName: String? {
+        nameTextField.text?.trimmingCharacters(in: .newlines)
+    }
+
+    var trimmedEmail: String? {
+        emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    var trimmedContact: String? {
+        contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    var trimmedAddress: String? {
+        addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    var trimmedMenu: String? {
+        menuTextView.text
+    }
+
+    var password: String? {
+        newPasswordTextField.text
+    }
+
     var minGroupSize: Int? {
         guard let groupSizeText = minGroupSizeTextField.text else {
             return nil
@@ -107,12 +131,6 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction private func saveButton(_ sender: Any) {
-        let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedAddress = addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedMenu = menuTextView.text
-
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
@@ -127,27 +145,7 @@ class EditProfileViewController: UIViewController {
                 return
         }
         
-        guard ValidationUtilities.validateEmail(email: email) else {
-            showMessage(title: Constants.invalidEmailTitle,
-                        message: Constants.invalidEmailMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
-            return
-        }
-
-        guard ValidationUtilities.validateContact(contact: contact) else {
-            showMessage(title: Constants.invalidContactTitle,
-                        message: Constants.invalidContactMessage,
-                        buttonText: Constants.okayTitle,
-                        buttonAction: nil)
-            return
-        }
-
-        if let openTime = autoOpenTime, let closeTime = autoCloseTime,
-            openTime > closeTime {
-            showMessage(title: Constants.errorTitle,
-                        message: Constants.openAfterCloseMessage,
-                        buttonText: Constants.okayTitle)
+        guard validateEmail(), validateContact(), validateAutoOpenCloseTime() else {
             return
         }
 
@@ -157,7 +155,7 @@ class EditProfileViewController: UIViewController {
             Profile.updateRestaurantProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
 
-        if let password = newPasswordTextField.text {
+        if let password = password {
             changePassword(password)
         }
 
@@ -257,6 +255,41 @@ class EditProfileViewController: UIViewController {
         return false
     }
 
+    private func validateEmail() -> Bool {
+        guard let email = trimmedEmail, ValidationUtilities.validateEmail(email: email) else {
+            showMessage(title: Constants.invalidEmailTitle,
+                        message: Constants.invalidEmailMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return false
+        }
+
+        return true
+    }
+
+    private func validateContact() -> Bool {
+        guard let contact = trimmedContact, ValidationUtilities.validateContact(contact: contact) else {
+            showMessage(title: Constants.invalidContactTitle,
+                        message: Constants.invalidContactMessage,
+                        buttonText: Constants.okayTitle,
+                        buttonAction: nil)
+            return false
+        }
+
+        return true
+    }
+
+    private func validateAutoOpenCloseTime() -> Bool {
+        if let openTime = autoOpenTime, let closeTime = autoCloseTime,
+            openTime > closeTime {
+            showMessage(title: Constants.errorTitle,
+                        message: Constants.openAfterCloseMessage,
+                        buttonText: Constants.okayTitle)
+            return false
+        }
+
+        return true
+    }
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

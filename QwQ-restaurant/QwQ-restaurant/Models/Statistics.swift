@@ -68,10 +68,18 @@ class Statistics {
             : 100 * totalQueueCancelled / totalNumOfQueueRecords
     }
 
+    var formattedQueueCancellationRate: String {
+        "\(totalQueueCancelled)/\(totalNumOfQueueRecords) (\(queueCancellationRate)%)"
+    }
+
     var bookingCancellationRate: Int {
         totalNumOfBookRecords == 0
             ? 0
             : 100 * totalBookingCancelled / totalNumOfBookRecords
+    }
+
+    var formattedBookingCancellationRate: String {
+        "\(totalBookingCancelled)/\(totalNumOfBookRecords) (\(bookingCancellationRate)%)"
     }
 }
 

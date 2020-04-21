@@ -20,11 +20,11 @@ class StatisticsDetailsViewController: UIViewController {
     var spinner: UIView?
 
     // MARK: Logic properties
-    var statsManager: RestaurantStatisticsLogic!
+    var statsLogic: RestaurantStatisticsLogic!
 
     // MARK: Model properties
     var statisticsDetails: Statistics? {
-        statsManager.currentStats
+        statsLogic.currentStats
     }
     
     @IBAction private func handleBack(_ sender: Any) {
@@ -34,7 +34,7 @@ class StatisticsDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        statsManager.statsDetailsDelegate = self
+        statsLogic.statsDetailsDelegate = self
 
         setUpViews()
     }
@@ -44,8 +44,8 @@ class StatisticsDetailsViewController: UIViewController {
             return
         }
         
-        queueCancellationRateLabel.text = "\(details.totalQueueCancelled)/\(details.totalNumOfQueueRecords) (\(details.queueCancellationRate)%)"
-        bookingCancellationRateLabel.text = "\(details.totalBookingCancelled)/\(details.totalNumOfBookRecords) (\(details.bookingCancellationRate)%)"
+        queueCancellationRateLabel.text = details.formattedQueueCancellationRate
+        bookingCancellationRateLabel.text = details.formattedBookingCancellationRate
         numberOfCustomersLabel.text = "\(details.numberOfCustomers)"
         avgWaitingTimeRestaurantLabel.text = "\(details.avgWaitingTimeRestaurant) mins"
         avgWaitingTimeCustomerLabel.text = "\(details.avgWaitingTimeCustomer) mins"
