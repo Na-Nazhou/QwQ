@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     
     typealias Auth = FIRAuthenticator
     typealias RestaurantProfile = FIRRestaurantStorage
+    typealias StaffProfile = FIRStaffStorage
 
     var selectedUserType: UserType = .staff
 
@@ -102,10 +103,20 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
         */
 
         if selectedUserType == UserType.staff {
-            performSegue(withIdentifier: Constants.staffNotVerifiedSegue, sender: self)
+            StaffProfile.getStaffInfo(completion: getStaffInfoComplete(staff:), errorHandler: handleError(error:))
         } else {
             RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                                 errorHandler: handleError(error:))
+        }
+    }
+
+    private func getStaffInfoComplete(staff: Staff) {
+        if let assignedRestaurant = staff.assignedRestaurant {
+            RestaurantProfile.currentRestaurantUID = assignedRestaurant
+            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                                errorHandler: handleError(error:))
+        } else {
+            performSegue(withIdentifier: Constants.staffNotVerifiedSegue, sender: self)
         }
     }
 

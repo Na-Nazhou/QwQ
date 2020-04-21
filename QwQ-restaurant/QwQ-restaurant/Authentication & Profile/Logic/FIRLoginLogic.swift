@@ -10,6 +10,7 @@ class FIRLoginLogic: LoginLogic {
     typealias Auth = FIRAuthenticator
     typealias StaffProfile = FIRStaffStorage
     typealias RestaurantProfile = FIRRestaurantStorage
+    typealias RoleStorage = FIRRoleStorage
 
     weak var delegate: LoginLogicDelegate?
 
@@ -23,7 +24,6 @@ class FIRLoginLogic: LoginLogic {
             return
         }
         */
-
     }
 
     func getStaffInfo() {
@@ -33,17 +33,42 @@ class FIRLoginLogic: LoginLogic {
     private func getAssignedRestaurant(staff: Staff) {
         guard let assignedRestaurant = staff.assignedRestaurant else {
             delegate?.noAssignedRestaurant()
+            abortLogin()
             return
         }
 
         RestaurantProfile.currentRestaurantUID = assignedRestaurant
+
+        getAssignedPermissions(staff: staff)
+
         RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
                                             errorHandler: handleError(error:))
+
+    }
+
+    private func getAssignedPermissions(staff: Staff) {
+        guard let assignedRole = staff.roleName else {
+            delegate?.noAssignedRole()
+            abortLogin()
+            return
+        }
+
+        RoleStorage.getRolePermissions(roleName: assignedRole,
+                                       completion: getAssignedPermissionsComplete(permissions:),
+                                       errorHandler: handleError(error:))
+    }
+
+    private func getAssignedPermissionsComplete(permissions: [Permission]) {
+        PermissionsManager.grantedPermissions = permissions
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
         RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         delegate?.loginComplete()
+    }
+
+    private func abortLogin() {
+        Auth.logout(completion: {}, errorHandler: handleError(error:))
     }
 
     private func handleError(error: Error) {
