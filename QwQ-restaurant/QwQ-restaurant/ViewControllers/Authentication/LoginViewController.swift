@@ -98,6 +98,11 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
         performSegue(withIdentifier: Constants.noAssignedRestaurantSegue, sender: self)
     }
 
+    func noAssignedRole() {
+        removeSpinner(spinner)
+        handleError(error: ProfileError.PermissionsNotInitialised)
+    }
+
     func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)

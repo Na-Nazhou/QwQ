@@ -13,6 +13,8 @@ protocol LoginLogicDelegate: AnyObject {
 
     func noAssignedRestaurant()
 
+    func noAssignedRole()
+
     func handleError(error: Error)
     
 }
