@@ -365,13 +365,13 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
-		5C43B88F244D8AB500254532 /* Model */ = {
+		5C43B88F244D8AB500254532 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5CE15239243DC50000A20ED6 /* Permission.swift */,
 				5CB1D55E244D6A7E00700772 /* Role.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5C44C9AA241DCE7B0097C006 /* Authentication & Profile */ = {
@@ -406,7 +406,7 @@
 			children = (
 				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
 				5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */,
-				5C43B88F244D8AB500254532 /* Model */,
+				5C43B88F244D8AB500254532 /* Models */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
