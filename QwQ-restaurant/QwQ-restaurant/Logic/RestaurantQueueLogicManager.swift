@@ -40,8 +40,7 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         let new = getUpdatedRecord(record: record, event: .admit)
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
-        // Update estimated admit time
-        // TODO
+        // TODO: Update estimated admit time
     }
 
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
@@ -95,7 +94,7 @@ extension RestaurantQueueLogicManager {
             let queueSize = getQueueInFront(of: record)
 
             if queueSize == 0 {
-                newRecord.estimatedAdmitTime = Calendar.current.date(byAdding: .minute, value: 5, to: Date())!
+                newRecord.estimatedAdmitTime = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
             } else {
                 if let queueRecord = currentRecords[0] as? QueueRecord,
                     let reference = queueRecord.estimatedAdmitTime {

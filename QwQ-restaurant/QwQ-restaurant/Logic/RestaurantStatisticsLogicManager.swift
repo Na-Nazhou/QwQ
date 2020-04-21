@@ -151,7 +151,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     private func fetchQueueCancellationRate(for stats: Statistics) {
         statsStorage.fetchQueueCancellationRate(for: restaurant,
-                                           stats: stats) { queueCount, withdrawCount in
+                                                stats: stats) { queueCount, withdrawCount in
             stats.totalNumOfQueueRecords = queueCount
             stats.totalQueueCancelled = withdrawCount
             self.statsDelegate?.didCompleteFetchingData()
@@ -163,7 +163,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     private func fetchBookingCancellationRate(for stats: Statistics) {
         statsStorage.fetchBookingCancellationRate(for: restaurant,
-                                             stats: stats) { bookCount, withdrawcount in
+                                                  stats: stats) { bookCount, withdrawcount in
             stats.totalNumOfBookRecords = bookCount
             stats.totalBookingCancelled = withdrawcount
             self.statsDelegate?.didCompleteFetchingData()
