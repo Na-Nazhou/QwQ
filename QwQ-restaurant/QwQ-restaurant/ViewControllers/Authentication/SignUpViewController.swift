@@ -16,13 +16,13 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     @IBOutlet private var passwordTextField: UITextField!
     @IBOutlet private var segmentedControl: SegmentedControl!
     
-    var spinner: UIView?
+    private var spinner: UIView?
     
     typealias Auth = FIRAuthenticator
     typealias RestaurantProfile = FIRRestaurantStorage
     typealias StaffProfile = FIRStaffStorage
 
-    var selectedUserType: UserType = .staff
+    private var selectedUserType: UserType = .staff
 
     override func viewDidLoad() {
         super.viewDidLoad()

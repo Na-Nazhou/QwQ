@@ -14,7 +14,7 @@ class FIRBookingStorage: CustomerBookingStorage {
         db.collection(Constants.bookingsDirectory)
     }
 
-    let logicDelegates = NSHashTable<AnyObject>.weakObjects()
+    private let logicDelegates = NSHashTable<AnyObject>.weakObjects()
 
     private var listener: ListenerRegistration?
 

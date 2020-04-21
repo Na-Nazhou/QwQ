@@ -5,6 +5,10 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
     // Models
     private let restaurantActivity: RestaurantActivity
 
+    init() {
+        self.restaurantActivity = RestaurantActivity.shared()
+    }
+
     var currentRecords: [Record] {
         restaurantActivity.currentRecords.sorted(by: { record1, record2 in
             let time1: Date
@@ -49,9 +53,5 @@ class RestaurantActivityLogicManager: RestaurantActivityLogic {
             }
             return time1 > time2
         })
-    }
-
-    init() {
-        self.restaurantActivity = RestaurantActivity.shared()
     }
 }

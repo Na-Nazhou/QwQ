@@ -10,16 +10,16 @@ import FacebookLogin
 
 class ProfileViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var contactLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
-
     @IBOutlet private var profileImageView: UIImageView!
+
+    private var spinner: UIView?
     
     typealias Profile = FIRProfileStorage
     typealias Auth = FIRAuthenticator
-
-    var spinner: UIView?
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)

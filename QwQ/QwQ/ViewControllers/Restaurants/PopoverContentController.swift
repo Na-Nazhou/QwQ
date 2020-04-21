@@ -19,10 +19,6 @@ class PopoverContentController: UIViewController {
         super.viewDidLoad()
         tableView.maxHeight = Constants.maxTableHeight
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 }
 
 extension PopoverContentController: UITableViewDelegate, UITableViewDataSource {

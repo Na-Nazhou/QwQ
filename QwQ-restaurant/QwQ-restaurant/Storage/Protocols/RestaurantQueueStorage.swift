@@ -8,8 +8,6 @@ protocol QueueStorageSync {
     func removeListener()
 
     // MARK: - Delegates
-    var logicDelegates: NSHashTable<AnyObject> { get }
-
     func registerDelegate(_ del: QueueStorageSyncDelegate)
 
     func unregisterDelegate(_ del: QueueStorageSyncDelegate)

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import os
+import os.log
 
 class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, RestaurantQueueLogic {
 
@@ -33,6 +33,7 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     }
 
     deinit {
+        os_log("DEINITING queue logic manager", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 

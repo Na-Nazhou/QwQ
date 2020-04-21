@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet private var advanceBookingLimitLabel: UILabel!
     @IBOutlet private var profileImageView: UIImageView!
 
-    var spinner: UIView?
+    private var spinner: UIView?
 
     typealias Profile = FIRRestaurantStorage
     typealias Auth = FIRAuthenticator

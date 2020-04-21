@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
 
     // MARK: Multi-select
     private var selectionState = SelectionState.selectOne
-    enum SelectionState {
+    private enum SelectionState {
         case selectOne
         case selectAll
     }
@@ -64,7 +64,7 @@ class SearchViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        restaurantCollectionView.reloadData()
+        reloadRestaurants()
 
         super.viewWillAppear(animated)
     }
@@ -123,7 +123,7 @@ class SearchViewController: UIViewController {
 
             selectionState = .selectOne
 
-            restaurantCollectionView.reloadData()
+            reloadRestaurants()
             restaurantCollectionView.allowsMultipleSelection = false
         }
     }
@@ -198,10 +198,10 @@ extension SearchViewController: PopoverContentControllerDelegate {
         switch name {
         case Constants.sortCriteria[0]:
             handleSortByName()
-            restaurantCollectionView.reloadData()
+            reloadRestaurants()
         case Constants.sortCriteria[1]:
             handleSortByLocation()
-            restaurantCollectionView.reloadData()
+            reloadRestaurants()
         default:
             break
         }
@@ -239,7 +239,7 @@ extension SearchViewController: UIPopoverPresentationControllerDelegate {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.restaurantCollectionView?.reloadData()
+        reloadRestaurants()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -336,10 +336,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension SearchViewController: SearchDelegate {
 
     func didUpdateRestaurantCollection() {
-        restaurantCollectionView.reloadData()
+        reloadRestaurants()
     }
 
     func didUpdateQueueRecordCollection() {
+        reloadRestaurants()
+    }
+
+    private func reloadRestaurants() {
         restaurantCollectionView.reloadData()
     }
 }

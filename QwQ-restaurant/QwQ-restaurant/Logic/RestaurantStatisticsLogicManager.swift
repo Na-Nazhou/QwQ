@@ -3,7 +3,7 @@ import Foundation
 class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     // Storage
-    private let storage: RestaurantStatsStorage
+    private let statsStorage: RestaurantStatsStorage
 
     // View Controller
     weak var statsDelegate: StatsDelegate?
@@ -37,13 +37,13 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     private(set) var monthlySummary: Statistics?
 
     convenience init() {
-        self.init(storage: FIRStatsStorage.shared,
+        self.init(statsStorage: FIRStatsStorage.shared,
                   restaurantActivity: RestaurantActivity.shared())
     }
 
-    init(storage: RestaurantStatsStorage, restaurantActivity: RestaurantActivity) {
-        self.storage = storage
+    init(statsStorage: RestaurantStatsStorage, restaurantActivity: RestaurantActivity) {
         self.restaurantActivity = restaurantActivity
+        self.statsStorage = statsStorage
     }
 
     func fetchDailyDetails() {
@@ -120,7 +120,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     private func fetchTotalNumCustomers(for stats: Statistics) {
-        storage.fetchTotalNumCustomers(for: restaurant, stats: stats) { count in
+        statsStorage.fetchTotalNumCustomers(for: restaurant, stats: stats) { count in
             stats.totalNumOfCustomers += count
             self.statsDelegate?.didCompleteFetchingData()
             if stats == self.currentStats {
@@ -130,7 +130,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     private func fetchAvgWaitingTimeForCustomer(for stats: Statistics) {
-        storage.fetchTotalWaitingTimeForCustomer(for: restaurant, stats: stats) { seconds in
+        statsStorage.fetchTotalWaitingTimeForCustomer(for: restaurant, stats: stats) { seconds in
             stats.totalWaitingTimeCustomerPOV = seconds
             self.statsDelegate?.didCompleteFetchingData()
             if stats == self.currentStats {
@@ -140,7 +140,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     private func fetchAvgWaitingTimeForRestaurant(for stats: Statistics) {
-        storage.fetchTotalWaitingTimeForRestaurant(for: restaurant, stats: stats) { seconds in
+        statsStorage.fetchTotalWaitingTimeForRestaurant(for: restaurant, stats: stats) { seconds in
             stats.totalWaitingTimeRestaurantPOV = seconds
             self.statsDelegate?.didCompleteFetchingData()
             if stats == self.currentStats {
@@ -150,7 +150,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     private func fetchQueueCancellationRate(for stats: Statistics) {
-        storage.fetchQueueCancellationRate(for: restaurant,
+        statsStorage.fetchQueueCancellationRate(for: restaurant,
                                            stats: stats) { queueCount, withdrawCount in
             stats.totalNumOfQueueRecords = queueCount
             stats.totalQueueCancelled = withdrawCount
@@ -162,7 +162,7 @@ class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
     }
 
     private func fetchBookingCancellationRate(for stats: Statistics) {
-        storage.fetchBookingCancellationRate(for: restaurant,
+        statsStorage.fetchBookingCancellationRate(for: restaurant,
                                              stats: stats) { bookCount, withdrawcount in
             stats.totalNumOfBookRecords = bookCount
             stats.totalBookingCancelled = withdrawcount
