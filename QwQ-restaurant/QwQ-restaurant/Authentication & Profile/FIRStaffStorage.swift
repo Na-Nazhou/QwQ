@@ -25,7 +25,7 @@ class FIRStaffStorage: StaffStorage {
         docRef.setData([Constants.uidKey: uid,
                         Constants.nameKey: signupDetails.name,
                         Constants.emailKey: email,
-                        Constants.contactKey: signupDetails.contact]) { (error) in
+                        Constants.contactKey: signupDetails.contact], merge: true) { (error) in
             if let error = error {
                 errorHandler(error)
             }

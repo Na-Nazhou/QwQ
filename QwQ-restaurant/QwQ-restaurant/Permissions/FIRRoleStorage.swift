@@ -12,6 +12,20 @@ class FIRRoleStorage {
 
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
 
+    static func createDefaultRoles(uid: String, errorHandler: @escaping (Error) -> Void) {
+        let roleRef = dbRef.document(uid).collection(Constants.rolesDirectory)
+
+        for role in Role.defaultRoles {
+            let docRef = roleRef.document(role.roleName)
+
+            docRef.setData(role.dictionary) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                }
+            }
+        }
+    }
+
     static func getRestaurantRoles(completion: @escaping ([Role]) -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
         guard let currentUID = RestaurantStorage.currentRestaurantUID else {
@@ -36,6 +50,31 @@ class FIRRoleStorage {
             }
 
             completion(roles)
+        }
+    }
+
+    static func getRolePermissions(roleName: String,
+                                   completion: @escaping([Permission]) -> Void,
+                                   errorHandler: @escaping (Error) -> Void) {
+        guard let currentUID = RestaurantStorage.currentRestaurantUID else {
+            errorHandler(ProfileError.NoRestaurantAssigned)
+            return
+        }
+
+        let permissionsRef = dbRef.document(currentUID).collection(Constants.rolesDirectory).document(roleName)
+
+        permissionsRef.getDocument { (document, error) in
+            if let error = error {
+                errorHandler(error)
+                return
+            }
+
+            if let data = document?.data() {
+                if let role = Role(dictionary: data) {
+                    completion(role.permissions)
+                    return
+                }
+            }
         }
     }
 

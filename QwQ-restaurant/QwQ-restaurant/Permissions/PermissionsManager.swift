@@ -7,18 +7,19 @@
 
 class PermissionsManager {
 
-    static var currentStaff: Staff?
+    static var grantedPermissions: [Permission]?
 
-    static func checkPermissions(_ permissions: Permission...) -> Bool {
-        guard let staff = currentStaff else {
+    static func checkPermissions(_ toCheck: Permission..., handleError: @escaping (Error) -> Void) -> Bool {
+        guard let grantedPermissions = grantedPermissions else {
+            handleError(ProfileError.PermissionsNotInitialised)
             return false
         }
 
-//        for permission in permissions {
-//            if !staff.permissions.contains(permission) {
-//                return false
-//            }
-//        }
+        for permission in toCheck {
+            if !grantedPermissions.contains(permission) {
+                return false
+            }
+        }
 
         return true
     }

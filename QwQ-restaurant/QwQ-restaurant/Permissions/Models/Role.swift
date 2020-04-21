@@ -20,6 +20,21 @@ struct Role {
         ]
     }
 
+    static var defaultRoles: [Role] {
+        var roles = [Role]()
+
+        roles.append(Role(roleName: "Owner", permissions: [Permission.acceptBooking, Permission.acceptQueue,
+                                                           Permission.rejectBooking, Permission.rejectQueue,
+                                                           Permission.addStaff, Permission.editProfile]))
+        roles.append(Role(roleName: "Manager", permissions: [Permission.acceptBooking, Permission.acceptQueue,
+                                                             Permission.rejectBooking, Permission.rejectQueue,
+                                                             Permission.addStaff]))
+        roles.append(Role(roleName: "Server", permissions: [Permission.acceptBooking, Permission.acceptQueue,
+                                                            Permission.rejectBooking, Permission.rejectQueue]))
+
+        return roles
+    }
+
     init?(dictionary: [String: Any]) {
         guard let permissionAnyArray = dictionary[Constants.permissionsKey] as? [Any] else {
             return nil

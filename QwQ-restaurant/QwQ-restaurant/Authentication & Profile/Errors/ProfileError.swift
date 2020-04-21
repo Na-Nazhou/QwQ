@@ -14,6 +14,7 @@ enum ProfileError: Error {
     case UIImageNotFound
     case NoImageSelected
     case NoRestaurantAssigned
+    case PermissionsNotInitialised
 }
 
 extension ProfileError: LocalizedError {
@@ -31,6 +32,8 @@ extension ProfileError: LocalizedError {
             return "No image was selected."
         case .NoRestaurantAssigned:
             return "You are not currently assigned to any restaurant!"
+        case .PermissionsNotInitialised:
+            return "Your permissions were not initialised properly!"
         }
     }
 }

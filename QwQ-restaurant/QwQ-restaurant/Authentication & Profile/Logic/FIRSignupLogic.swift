@@ -10,6 +10,7 @@ class FIRSignupLogic: SignupLogic {
     typealias Auth = FIRAuthenticator
     typealias StaffProfile = FIRStaffStorage
     typealias RestaurantProfile = FIRRestaurantStorage
+    typealias RoleStorage = FIRRoleStorage
     
     weak var delegate: SignupLogicDelegate?
 
@@ -48,6 +49,9 @@ class FIRSignupLogic: SignupLogic {
                                                    assignedRestaurant: uid,
                                                    errorHandler: handleError(error:))
             StaffProfile.currentStaffUID = authDetails.email
+
+            RoleStorage.createDefaultRoles(uid: uid, errorHandler: handleError(error:))
+            PermissionsManager.grantedPermissions = Permission.ownerPermissions
 
         } else {
             StaffProfile.createInitialStaffProfile(uid: authDetails.email,
