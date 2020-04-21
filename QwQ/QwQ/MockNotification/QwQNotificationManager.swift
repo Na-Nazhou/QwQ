@@ -119,7 +119,9 @@ class QwQNotificationManager: QwQNotificationHandler {
 
     private func withdrawableMissedQueueNotification(
         _ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
-        let timeInterval = hasConfirmedPreviously ? 15 : 3
+        let timeInterval = hasConfirmedPreviously
+            ? Constants.queueWaitArrivalInMins
+            : Constants.queueWaitConfirmTimeInMins
 
         let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
         let notifAdmit = QwQNotification(
@@ -161,9 +163,18 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     func notifyQueueRejected(record: QueueRecord) {
-        //TODO? - yes. do for end of restaurant.
+        assert(record.rejectTime != nil)
+        let notifId = QwQNotificationId(record: record, timeDelayInMinutes: 0, afterReference: record.rejectTime!)
+        let notif = QwQNotification(
+            notifId: notifId,
+            title: "You have been rejected by \(record.restaurant.name).",
+            description: "Please try to be prompt next time.",
+            shouldSend: true)
+        
+        os_log("Queue rejection notif scheduled.")
+        notifManager.schedule(notif: notif)
     }
-
+   
     func retractBookNotifications(for record: BookRecord) {
         let possiblyPendingBookNotif = bookTimeNotification(record)
         os_log("Book notifs prepared to be withdrawn.", log: Log.withdrawNotif)

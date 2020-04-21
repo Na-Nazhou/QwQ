@@ -100,7 +100,7 @@ struct Constants {
     static let popoverHeight = CGFloat(80.0)
     
     // MARK: Segmented control settings
-    static let segmentedControlTitles = ["Active", "History"]
+    static let segmentedControlTitles = ["Active", "Missed", "History"]
     static let segmentedControlDefaultSelectedIndex = 0
     static let segmentedControlSelectedLabelColor = UIColor.black
     static let segmentedControlUnselectedLabelColor = UIColor.white
@@ -153,6 +153,12 @@ struct Constants {
     static let rejectTimeKey = "rejectTime"
     static let withdrawTimeKey = "withdrawTime"
     static let confirmAdmissionTimeKey = "confirmAdmissionTime"
+    static let missTimeKey = "missTime"
+    static let readmitTimeKey = "readmitTime"
     static let startTimeKey = "startTime"
     static let timeKey = "time"
+    
+    // MARK: Queue timed settings
+    static let queueWaitConfirmTimeInMins = 3
+    static let queueWaitArrivalInMins = 15
 }

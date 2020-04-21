@@ -64,6 +64,10 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
 
     func addRecord(_ record: T, to collection: RecordCollection<T>) {
         collection.add(record)
+        if record.isMissedAndPending {
+            activitiesDelegate?.didUpdateMissedRecords()
+            return
+        }
         if record.isActiveRecord {
             activitiesDelegate?.didUpdateActiveRecords()
         }
@@ -75,12 +79,14 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
     func removeRecord(_ record: T, from collection: RecordCollection<T>) {
         collection.remove(record)
         activitiesDelegate?.didUpdateActiveRecords()
+        activitiesDelegate?.didUpdateMissedRecords()
         activitiesDelegate?.didUpdateHistoryRecords()
     }
 
     func updateRecord(_ record: T, in collection: RecordCollection<T>) {
         collection.update(record)
         activitiesDelegate?.didUpdateActiveRecords()
+        activitiesDelegate?.didUpdateMissedRecords()
         activitiesDelegate?.didUpdateHistoryRecords()
     }
 

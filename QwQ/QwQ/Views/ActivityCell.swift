@@ -42,7 +42,7 @@ class ActivityCell: UICollectionViewCell {
         setUpDeleteButton()
 
         switch record.status {
-        case .pendingAdmission:
+        case .pendingAdmission, .missedAndPending:
             setUpPendingAdmissionRecord(record: record)
         case .admitted:
             setUpAdmittedRecord(record: record)

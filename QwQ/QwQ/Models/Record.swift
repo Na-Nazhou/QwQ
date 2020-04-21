@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Record {
-    var id: String { get set }
+    var id: String { get }
     var restaurant: Restaurant { get }
     var customer: Customer { get }
 
@@ -21,6 +21,9 @@ protocol Record {
     var rejectTime: Date? { get }
     var withdrawTime: Date? { get set }
     var confirmAdmissionTime: Date? { get }
+
+    var missTime: Date? { get }
+    var readmitTime: Date? { get }
 
     var status: RecordStatus { get }
     func getChangeType(from old: Record) -> RecordModification?
@@ -57,5 +60,13 @@ extension Record {
 
     var isPendingAdmission: Bool {
         status == .pendingAdmission
+    }
+
+    var isMissedAndPending: Bool {
+        status == .missedAndPending
+    }
+
+    var wasOnceMissed: Bool {
+        missTime != nil
     }
 }

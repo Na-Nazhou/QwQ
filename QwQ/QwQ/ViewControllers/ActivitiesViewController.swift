@@ -17,6 +17,7 @@ class ActivitiesViewController: UIViewController {
 
     enum SelectedControl: Int {
         case active
+        case missed
         case history
     }
     var selectedControl: SelectedControl = .active
@@ -33,6 +34,8 @@ class ActivitiesViewController: UIViewController {
             return activityLogicManager.activeRecords
         case .history:
             return activityLogicManager.historyRecords
+        case .missed:
+            return activityLogicManager.missedRecords
         }
     }
     
@@ -164,6 +167,12 @@ extension ActivitiesViewController: ActivitiesDelegate {
 
     func didUpdateActiveRecords() {
         if selectedControl == .active {
+            activitiesCollectionView.reloadData()
+        }
+    }
+
+    func didUpdateMissedRecords() {
+        if selectedControl == .missed {
             activitiesCollectionView.reloadData()
         }
     }

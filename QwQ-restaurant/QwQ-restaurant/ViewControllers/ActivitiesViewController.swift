@@ -187,14 +187,15 @@ extension ActivitiesViewController: UICollectionViewDelegate, UICollectionViewDa
                                               completion: self.didUpdateRecord)
             }
 
-            if queueRecord.isAdmitted || queueRecord.isConfirmedAdmission {
+            if queueRecord.isAdmitted || queueRecord.isConfirmedAdmission
+            || queueRecord.isPendingAdmission || queueRecord.isMissedAndPending {
                 recordCell.rejectAction = {
                     self.queueLogic.rejectCustomer(record: queueRecord,
                                                    completion: self.didUpdateRecord)
                 }
             }
 
-            if queueRecord.isConfirmedAdmission {
+            if queueRecord.isConfirmedAdmission || queueRecord.isAdmitted {
                 recordCell.serveAction = {
                     self.queueLogic.serveCustomer(record: queueRecord,
                                                   completion: self.didUpdateRecord)

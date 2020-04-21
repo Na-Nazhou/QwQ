@@ -33,7 +33,6 @@
 		5CEDCD90242F63BC004051F9 /* FBLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */; };
 		5CF9DB5824308196003B257B /* AuthTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9DB5724308196003B257B /* AuthTypes.swift */; };
 		6101D79424271B6E00ACBCC9 /* FIRBookingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101D79324271B6E00ACBCC9 /* FIRBookingStorage.swift */; };
-		6126DB14243A204800E588A6 /* RecordStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6126DB13243A204800E588A6 /* RecordStatus.swift */; };
 		613267FB241F220D00B770B6 /* CustomerQueueLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */; };
 		613267FC241F220D00B770B6 /* RestaurantDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613267FA241F220C00B770B6 /* RestaurantDelegate.swift */; };
 		61469B9B2449F14800226F79 /* CustomerRecordLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61469B9A2449F14800226F79 /* CustomerRecordLogicManager.swift */; };
@@ -47,11 +46,9 @@
 		61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61673BF52422168400134891 /* ActivitiesDelegate.swift */; };
 		617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DC241F392F0010AB30 /* SearchDelegate.swift */; };
 		617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DE241F39EF0010AB30 /* RecordDelegate.swift */; };
-		617B62E1241F3C0F0010AB30 /* BookRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62E0241F3C0F0010AB30 /* BookRecord.swift */; };
 		617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */; };
 		61ACB7F0242A72E3002A1F47 /* Collection+Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */; };
 		61ACB7F9242A7C7E002A1F47 /* CustomerActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */; };
-		61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */; };
 		61C74302242B4A1F005818A1 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C74301242B4A1F005818A1 /* RecordViewController.swift */; };
 		61D738D4243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */; };
 		61D738D6243EFD2B00FFFAD9 /* CustomerActivityLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D738D5243EFD2B00FFFAD9 /* CustomerActivityLogic.swift */; };
@@ -104,6 +101,9 @@
 		7EFB6976242213470073E535 /* QueueRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6975242213470073E535 /* QueueRecordViewController.swift */; };
 		7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB6977242215B60073E535 /* BookRecordViewController.swift */; };
 		D41F91A224227FFE00724D6C /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F91A124227FFE00724D6C /* Date+Extensions.swift */; };
+		D42A5436244B4AEA008FFB48 /* RecordCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A5433244B4AE9008FFB48 /* RecordCollection.swift */; };
+		D42A5437244B4AEA008FFB48 /* BookRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A5434244B4AE9008FFB48 /* BookRecord.swift */; };
+		D42A5438244B4AEA008FFB48 /* RecordStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42A5435244B4AE9008FFB48 /* RecordStatus.swift */; };
 		D4494EB9241B247600BD0780 /* RestaurantLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */; };
 		D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB6241B247600BD0780 /* RestaurantLogic.swift */; };
 		D4494EBB241B247600BD0780 /* CustomerQueueLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */; };
@@ -169,7 +169,6 @@
 		5CEDCD8F242F63BB004051F9 /* FBLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginViewController.swift; sourceTree = "<group>"; };
 		5CF9DB5724308196003B257B /* AuthTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTypes.swift; sourceTree = "<group>"; };
 		6101D79324271B6E00ACBCC9 /* FIRBookingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRBookingStorage.swift; sourceTree = "<group>"; };
-		6126DB13243A204800E588A6 /* RecordStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStatus.swift; sourceTree = "<group>"; };
 		613267F8241F220C00B770B6 /* CustomerQueueLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogicManager.swift; sourceTree = "<group>"; };
 		613267FA241F220C00B770B6 /* RestaurantDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDelegate.swift; sourceTree = "<group>"; };
 		61469B9A2449F14800226F79 /* CustomerRecordLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerRecordLogicManager.swift; sourceTree = "<group>"; };
@@ -183,11 +182,9 @@
 		61673BF52422168400134891 /* ActivitiesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDelegate.swift; sourceTree = "<group>"; };
 		617B62DC241F392F0010AB30 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		617B62DE241F39EF0010AB30 /* RecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDelegate.swift; sourceTree = "<group>"; };
-		617B62E0241F3C0F0010AB30 /* BookRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookRecord.swift; path = QwQ/Logic/Delegates/BookRecord.swift; sourceTree = SOURCE_ROOT; };
 		617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidationUtilities.swift; path = QwQ/Others/Utilities/ValidationUtilities.swift; sourceTree = "<group>"; };
 		61ACB7EF242A72E3002A1F47 /* Collection+Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Restaurant.swift"; sourceTree = "<group>"; };
 		61ACB7F7242A7C7D002A1F47 /* CustomerActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerActivity.swift; sourceTree = "<group>"; };
-		61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordCollection.swift; sourceTree = "<group>"; };
 		61C74301242B4A1F005818A1 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		61D738D3243ED7E200FFFAD9 /* CustomerActivityLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerActivityLogicManager.swift; sourceTree = "<group>"; };
 		61D738D5243EFD2B00FFFAD9 /* CustomerActivityLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerActivityLogic.swift; sourceTree = "<group>"; };
@@ -252,6 +249,9 @@
 		B6DBC5D8D86F98EA23CC1B82 /* Pods_QwQTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QwQTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35FC895E2B02D7ADD048988 /* Pods-QwQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ.release.xcconfig"; path = "Target Support Files/Pods-QwQ/Pods-QwQ.release.xcconfig"; sourceTree = "<group>"; };
 		D41F91A124227FFE00724D6C /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		D42A5433244B4AE9008FFB48 /* RecordCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordCollection.swift; path = QwQ/Models/SharedModels/RecordCollection.swift; sourceTree = SOURCE_ROOT; };
+		D42A5434244B4AE9008FFB48 /* BookRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookRecord.swift; path = QwQ/Models/SharedModels/BookRecord.swift; sourceTree = SOURCE_ROOT; };
+		D42A5435244B4AE9008FFB48 /* RecordStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordStatus.swift; path = QwQ/Models/SharedModels/RecordStatus.swift; sourceTree = SOURCE_ROOT; };
 		D4494EB5241B247600BD0780 /* RestaurantLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogicManager.swift; sourceTree = "<group>"; };
 		D4494EB6241B247600BD0780 /* RestaurantLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantLogic.swift; sourceTree = "<group>"; };
 		D4494EB7241B247600BD0780 /* CustomerQueueLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerQueueLogic.swift; sourceTree = "<group>"; };
@@ -631,14 +631,14 @@
 			children = (
 				D4AA685824303D8700F739CF /* Collection.swift */,
 				D4AA685724303D8700F739CF /* RecordModification.swift */,
-				6126DB13243A204800E588A6 /* RecordStatus.swift */,
+				D42A5434244B4AE9008FFB48 /* BookRecord.swift */,
+				D42A5433244B4AE9008FFB48 /* RecordCollection.swift */,
+				D42A5435244B4AE9008FFB48 /* RecordStatus.swift */,
 				D4EA85CD241B29CC009EB85B /* User.swift */,
 				D4EA85CC241B29CB009EB85B /* Customer.swift */,
 				D4EA85CE241B29CC009EB85B /* Restaurant.swift */,
 				61480555242290B1003D6D44 /* Record.swift */,
 				D4EA85CB241B29CB009EB85B /* QueueRecord.swift */,
-				617B62E0241F3C0F0010AB30 /* BookRecord.swift */,
-				61ACB7F8242A7C7D002A1F47 /* RecordCollection.swift */,
 			);
 			name = SharedModels;
 			path = QwQ/SharedModels;
@@ -991,7 +991,6 @@
 				617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */,
 				D4494EBA241B247600BD0780 /* RestaurantLogic.swift in Sources */,
 				7EFB6976242213470073E535 /* QueueRecordViewController.swift in Sources */,
-				617B62E1241F3C0F0010AB30 /* BookRecord.swift in Sources */,
 				6148054A24227CE2003D6D44 /* FIRRestaurantStorage.swift in Sources */,
 				6148056724232B88003D6D44 /* UIViewController+Spinner.swift in Sources */,
 				D47852D7244455A0006393C7 /* QwQNotificationHandler.swift in Sources */,
@@ -999,8 +998,8 @@
 				61480556242290B1003D6D44 /* Record.swift in Sources */,
 				7E6EBCC1243086E60058D19A /* Log.swift in Sources */,
 				D4EA85CF241B29CC009EB85B /* QueueRecord.swift in Sources */,
-				61ACB7FA242A7C7E002A1F47 /* RecordCollection.swift in Sources */,
 				7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */,
+				D42A5438244B4AEA008FFB48 /* RecordStatus.swift in Sources */,
 				617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
@@ -1015,6 +1014,7 @@
 				5C11FD0E2418E652002B88E3 /* FIRAuthenticator.swift in Sources */,
 				61469B9B2449F14800226F79 /* CustomerRecordLogicManager.swift in Sources */,
 				D4494EC2241B24D900BD0780 /* QueueStorageSyncDelegate.swift in Sources */,
+				D42A5436244B4AEA008FFB48 /* RecordCollection.swift in Sources */,
 				7EE6D015241D2BEC00C1465E /* Constants.swift in Sources */,
 				5C9411DF2423D11F0093D92D /* SignupDetails.swift in Sources */,
 				61D738D6243EFD2B00FFFAD9 /* CustomerActivityLogic.swift in Sources */,
@@ -1043,6 +1043,7 @@
 				7EC7E698241B387000C2F9BB /* RestaurantViewController.swift in Sources */,
 				5C9411E12423D1E30093D92D /* AuthDetails.swift in Sources */,
 				7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */,
+				D42A5437244B4AEA008FFB48 /* BookRecord.swift in Sources */,
 				D47852D124442EB8006393C7 /* LocalNotificationManager.swift in Sources */,
 				7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */,
 				7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */,
@@ -1064,7 +1065,6 @@
 				7EFB6978242215B60073E535 /* BookRecordViewController.swift in Sources */,
 				5CE17B4E241CEDDF00A04B8B /* EditProfileViewController.swift in Sources */,
 				7EA7B49F2432D3CA00A6828F /* ForgotPasswordViewController.swift in Sources */,
-				6126DB14243A204800E588A6 /* RecordStatus.swift in Sources */,
 				7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

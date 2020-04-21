@@ -23,6 +23,7 @@ class CustomerActivity {
 
     let currentQueues = RecordCollection<QueueRecord>()
     let currentBookings = RecordCollection<BookRecord>()
+    let missedQueues = RecordCollection<QueueRecord>()
     let queueHistory = RecordCollection<QueueRecord>()
     let bookingHistory = RecordCollection<BookRecord>()
 
@@ -34,8 +35,12 @@ class CustomerActivity {
         queueHistory.records + bookingHistory.records
     }
 
+    var missedRecords: [Record] {
+        missedQueues.records
+    }
+
     var queueRecords: [QueueRecord] {
-        currentQueues.records + queueHistory.records
+        currentQueues.records + queueHistory.records + missedQueues.records
     }
 
     var bookRecords: [BookRecord] {

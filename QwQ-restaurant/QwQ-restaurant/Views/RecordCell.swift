@@ -52,6 +52,8 @@ class RecordCell: UICollectionViewCell {
         switch record.status {
         case .pendingAdmission:
             setUpPendingAdmissionRecord(record: record)
+        case .missedAndPending:
+            setUpMissedAndPendingAdmissionRecord(record: record)
         case .admitted:
             setUpAdmittedRecord(record: record)
         case .confirmedAdmission:
@@ -80,12 +82,32 @@ class RecordCell: UICollectionViewCell {
                 timeLabel.text = queueRecord.startTime.getFormattedTime()
             }
 
-            disableRightButton()
+            //disableRightButton()
         }
         if let bookRecord = record as? BookRecord {
             statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
             timeLabel.text = bookRecord.time.getFormattedTime()
         }
+        timeLabel.textColor = .systemGreen
+        setUpAdmitButton()
+    }
+
+    private func setUpMissedAndPendingAdmissionRecord(record: Record) {
+        if let queueRecord = record as? QueueRecord {
+            statusLabel.text = "Queued at: \(queueRecord.startTime.toString())"
+            if let estimatedAdmitime = queueRecord.estimatedAdmitTime {
+                timeLabel.text =
+                    (estimatedAdmitime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins))
+                        .getFormattedTime()
+            } else {
+                timeLabel.text =
+                    (queueRecord.startTime.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins))
+                        .getFormattedTime()
+            }
+
+            disableAdmitButtonIfJustMissed(record: queueRecord)
+        }
+        assert(record as? BookRecord == nil)
         timeLabel.textColor = .systemGreen
         setUpAdmitButton()
     }
@@ -187,5 +209,22 @@ class RecordCell: UICollectionViewCell {
     private func setUpRejectButton() {
         rightButton.setTitle("REJECT", for: .normal)
         rightButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
+    }
+
+    private func disableAdmitButtonIfJustMissed(record: QueueRecord) {
+        assert(record.missTime != nil)
+        let now = Date()
+        let enableTime = record.missTime!.addingTimeInterval(60 * Constants.inactivateAdmitAfterMissTimeInMins)
+        guard now < enableTime else {
+            return
+        }
+        disableLeftButton()
+        //add timer to enable.
+        let enableTimer = Timer(
+            fire: enableTime,
+            interval: 1, repeats: false) { _ in
+                self.enableLeftButton()
+        }
+        RunLoop.main.add(enableTimer, forMode: .common)
     }
 }
