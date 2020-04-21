@@ -100,7 +100,7 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
 
     func noAssignedRole() {
         removeSpinner(spinner)
-        handleError(error: ProfileError.PermissionsNotInitialised)
+        handleError(error: PermissionError.PermissionsNotInitialised)
     }
 
     func handleError(error: Error) {

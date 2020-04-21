@@ -283,9 +283,11 @@
                     <navigationItem key="navigationItem" id="B5e-gj-Zbs"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addStaffButton" destination="bZM-TX-cFF" id="Ulh-NN-joc"/>
                         <outlet property="addressLabel" destination="Sx7-31-N9e" id="79K-ZD-Dh2"/>
                         <outlet property="advanceBookingLimitLabel" destination="ATn-zY-W34" id="aqK-3D-3N8"/>
                         <outlet property="contactLabel" destination="irm-t1-E44" id="wII-yG-Nqa"/>
+                        <outlet property="editProfileButton" destination="iwe-M6-rc9" id="YgV-fL-4Qi"/>
                         <outlet property="emailLabel" destination="4To-Of-qc3" id="hKi-zM-fv4"/>
                         <outlet property="groupSizeLabel" destination="ltH-A0-Ks8" id="7m8-QY-xZD"/>
                         <outlet property="menuLabel" destination="m2X-6u-bgO" id="aW8-1q-qE3"/>

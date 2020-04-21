@@ -38,6 +38,7 @@
 		5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */; };
 		5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */; };
 		5CAD354A2438CFC900245857 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD35492438CFC900245857 /* Staff.swift */; };
+		5CB065BC244EF34A0019B34C /* PermissionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB065BB244EF34A0019B34C /* PermissionError.swift */; };
 		5CB1D55F244D6A7E00700772 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1D55E244D6A7E00700772 /* Role.swift */; };
 		5CB1D561244D6C1B00700772 /* FormattingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1D560244D6C1B00700772 /* FormattingUtilities.swift */; };
 		5CE032F62421FCF6008DB047 /* FIRRestaurantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE032F52421FCF6008DB047 /* FIRRestaurantStorage.swift */; };
@@ -180,6 +181,7 @@
 		5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+dismissKeyboard.swift"; sourceTree = "<group>"; };
 		5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowMessage.swift"; sourceTree = "<group>"; };
 		5CAD35492438CFC900245857 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		5CB065BB244EF34A0019B34C /* PermissionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionError.swift; sourceTree = "<group>"; };
 		5CB1D55E244D6A7E00700772 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		5CB1D560244D6C1B00700772 /* FormattingUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingUtilities.swift; sourceTree = "<group>"; };
 		5CE032F12421FCBF008DB047 /* RestaurantStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStorage.swift; sourceTree = "<group>"; };
@@ -401,11 +403,20 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		5CB065BA244EF33B0019B34C /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				5CB065BB244EF34A0019B34C /* PermissionError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		5CE15236243DC4E000A20ED6 /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
 				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
 				5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */,
+				5CB065BA244EF33B0019B34C /* Errors */,
 				5C43B88F244D8AB500254532 /* Models */,
 			);
 			path = Permissions;
@@ -1028,6 +1039,7 @@
 				5C34FFC42441B15C00E8A252 /* RestaurantStorage.swift in Sources */,
 				61469B952449E2B300226F79 /* RestaurantQueueLogic.swift in Sources */,
 				5C44BB552422141A0012EC59 /* RestaurantPostLoginSetupManager.swift in Sources */,
+				5CB065BC244EF34A0019B34C /* PermissionError.swift in Sources */,
 				D4EBA7162438475A00FCB66C /* RestaurantActivity.swift in Sources */,
 				6148055A2422A1EF003D6D44 /* Authenticator.swift in Sources */,
 				D4EA85F8241B2CA7009EB85B /* RestaurantActivityLogic.swift in Sources */,
