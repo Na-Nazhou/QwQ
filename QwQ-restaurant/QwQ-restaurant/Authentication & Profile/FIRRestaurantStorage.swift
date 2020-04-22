@@ -123,7 +123,8 @@ class FIRRestaurantStorage: RestaurantStorage {
                 completion()
             }
         } catch {
-            os_log("Error serializing restaurant.", log: Log.updateRestaurantError, type: .error, error.localizedDescription)
+            os_log("Error serializing restaurant.",
+                   log: Log.updateRestaurantError, type: .error, error.localizedDescription)
         }
     }
 
@@ -152,8 +153,7 @@ class FIRRestaurantStorage: RestaurantStorage {
                 guard err == nil, let snapshot = snapshot else {
                      os_log("Error getting restaurant documents",
                             log: Log.restaurantRetrievalError,
-                            type: .error,
-                            String(describing: err))
+                            type: .error, String(describing: err))
                     return
                 }
 
@@ -170,7 +170,8 @@ class FIRRestaurantStorage: RestaurantStorage {
                     }
                     updatedRestaurant = res!
                 case .failure(let error):
-                    os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
+                    os_log("Restaurant cannot be created.",
+                           log: Log.createRestaurantError, type: .error, error.localizedDescription)
                     assert(false, "document should be of correct format(fields) of a restaurant!")
                     return
                 }

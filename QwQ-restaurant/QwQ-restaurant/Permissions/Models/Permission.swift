@@ -5,7 +5,7 @@
 //  Created by Daniel Wong on 8/4/20.
 //
 
-enum Permission: String {
+enum Permission: String, Codable {
     case acceptBooking
     case rejectBooking
 
