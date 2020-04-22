@@ -72,6 +72,13 @@ struct Restaurant: User {
     var queueOpenTimestamp: Timestamp?
     var queueCloseTimestamp: Timestamp?
 
+    mutating func openQueue(at time: Date) {
+        queueOpenTimestamp = Timestamp(date: time)
+    }
+    mutating func closeQueue(at time: Date) {
+        queueCloseTimestamp = Timestamp(date: time)
+    }
+
     var isValidRestaurant: Bool {
         !address.isEmpty && !menu.isEmpty
     }

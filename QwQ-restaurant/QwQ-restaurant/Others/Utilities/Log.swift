@@ -46,4 +46,6 @@ struct Log {
 
     static let cidError = OSLog(subsystem: subsystem, category: "FBError")
     static let createCustomerError = OSLog(subsystem: subsystem, category: "FBError")
+
+    static let createStaffError = OSLog(subsystem: subsystem, category: "FBError")
 }

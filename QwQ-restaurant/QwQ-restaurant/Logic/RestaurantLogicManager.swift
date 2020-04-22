@@ -89,7 +89,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
         let time = Date()
         var new = restaurant
-        new.queueOpenTime = time
+        new.openQueue(at: time)
         updateRestaurant(new: new)
     }
 
@@ -100,7 +100,7 @@ class RestaurantLogicManager: RestaurantLogic {
 
         let time = Date()
         var new = restaurant
-        new.queueCloseTime = time
+        new.closeQueue(at: time)
         updateRestaurant(new: new)
     }
 

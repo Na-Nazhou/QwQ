@@ -14,52 +14,14 @@ struct Staff: User {
     let assignedRestaurant: String?
     let roleName: String?
 
-    var dictionary: [String: Any] {
-        var data = [String: Any]()
-
-        data[Constants.uidKey] = uid
-        data[Constants.nameKey] = name
-        data[Constants.emailKey] = email
-        data[Constants.contactKey] = contact
-
-        if let assignedRestaurant = assignedRestaurant {
-            data[Constants.assignedRestaurantKey] = assignedRestaurant
-        }
-        if let roleName = roleName {
-            data[Constants.roleNameKey] = roleName
-        }
-
-        return data
-    }
-
     init(uid: String, name: String, email: String, contact: String,
-         assignedRestaurant: String?, roleName: String?) {
+         assignedRestaurant: String? = nil, roleName: String? = nil) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
         self.assignedRestaurant = assignedRestaurant
         self.roleName = roleName
-    }
-
-    init?(dictionary: [String: Any]) {
-
-        guard let uid = dictionary[Constants.uidKey] as? String,
-            let name = dictionary[Constants.nameKey] as? String,
-            let email = dictionary[Constants.emailKey] as? String,
-            let contact = dictionary[Constants.contactKey] as? String else {
-                return nil
-        }
-
-        let assignedRestaurant = dictionary[Constants.assignedRestaurantKey] as? String
-        let roleName = dictionary[Constants.roleNameKey] as? String
-
-        self.init(uid: uid,
-                  name: name,
-                  email: email,
-                  contact: contact,
-                  assignedRestaurant: assignedRestaurant,
-                  roleName: roleName)
     }
 
 }
