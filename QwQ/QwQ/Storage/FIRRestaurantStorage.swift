@@ -39,37 +39,42 @@ extension FIRRestaurantStorage {
                     return
                 }
                 snapshot!.documentChanges.forEach { diff in
-                    let result = Result {
-                        try diff.document.data(as: Restaurant.self)
-                    }
-                    var restaurant: Restaurant
-                    switch result {
-                    case .success(let res):
-                        if let res = res {
-                            restaurant = res
-                            break
-                        }
-                        os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
-                        return
-                    case .failure(let error):
-                        os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
-                        return
-                    }
-
-                    guard restaurant.isValidRestaurant else {
-                        os_log("Restaurant is not validated; ignored.", log: Log.createRestaurantError, type: .info)
-                        return
-                    }
-                    switch diff.type {
-                    case .added:
-                        self.delegateWork { $0.didAddRestaurant(restaurant: restaurant) }
-                    case .modified:
-                        self.delegateWork { $0.didUpdateRestaurant(restaurant: restaurant) }
-                    case .removed:
-                        self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
-                    }
+                    self.parseDocumentChange(diff)
                 }
             }
+    }
+
+    private func parseDocumentChange(_ diff: DocumentChange) {
+        let result = Result {
+            try diff.document.data(as: Restaurant.self)
+        }
+        var restaurant: Restaurant
+        switch result {
+        case .success(let res):
+            if let res = res {
+                restaurant = res
+                break
+            }
+            os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
+            return
+        case .failure(let error):
+            os_log("Restaurant cannot be created.",
+                   log: Log.createRestaurantError, type: .error, error.localizedDescription)
+            return
+        }
+        
+        guard restaurant.isValidRestaurant else {
+            os_log("Restaurant is not validated; ignored.", log: Log.createRestaurantError, type: .info)
+            return
+        }
+        switch diff.type {
+        case .added:
+            self.delegateWork { $0.didAddRestaurant(restaurant: restaurant) }
+        case .modified:
+            self.delegateWork { $0.didUpdateRestaurant(restaurant: restaurant) }
+        case .removed:
+            self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
+        }
     }
 
     func removeListener() {

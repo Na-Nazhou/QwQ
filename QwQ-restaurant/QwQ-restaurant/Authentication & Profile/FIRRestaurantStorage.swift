@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseUI
 import SDWebImage
@@ -27,24 +28,29 @@ class FIRRestaurantStorage: RestaurantStorage {
                                                signupDetails: SignupDetails,
                                                email: String,
                                                errorHandler: @escaping (Error) -> Void) {
-        dbRef.document(uid)
-            .setData([Constants.uidKey: uid,
-                      Constants.nameKey: signupDetails.name,
-                      Constants.contactKey: signupDetails.contact,
-                      Constants.emailKey: email,
-                      Constants.addressKey: "",
-                      Constants.menuKey: "",
-                      Constants.minGroupSizeKey: Restaurant.defaultMinGroupSize,
-                      Constants.maxGroupSizeKey: Restaurant.defaultMaxGroupSize,
-                      Constants.advanceBookingLimitKey: Restaurant.defaultAdvanceBookingLimit]) { (error) in
-            if let error = error {
-                errorHandler(error)
-                os_log("Error creating restaurant",
-                       log: Log.createRestaurantError,
-                       type: .error,
-                       error.localizedDescription)
-            }
-            }
+        do {
+            try dbRef.document(uid)
+                .setData(from:
+                    Restaurant(uid: uid, name: signupDetails.name,
+                               email: email, contact: signupDetails.contact,
+                               address: "", menu: "",
+                               maxGroupSize: Restaurant.defaultMaxGroupSize, minGroupSize: Restaurant.defaultMinGroupSize,
+                               advanceBookingLimit: Restaurant.defaultAdvanceBookingLimit)
+                    ) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                    os_log("Error creating restaurant",
+                           log: Log.createRestaurantError,
+                           type: .error,
+                           error.localizedDescription)
+                }
+                }
+        } catch {
+            os_log("Error serializing restaurant.",
+                   log: Log.createRestaurantError,
+                   type: .error,
+                   error.localizedDescription)
+        }
     }
 
     static func getRestaurantInfo(completion: @escaping (Restaurant) -> Void,
@@ -66,12 +72,19 @@ class FIRRestaurantStorage: RestaurantStorage {
                        error.localizedDescription)
                 return
             }
-            
-            if let data = document?.data() {
-                if let restaurant = Restaurant(dictionary: data) {
+
+            let result = Result {
+                try document?.data(as: Restaurant.self)
+            }
+            switch result {
+            case .success(let res):
+                if let restaurant = res {
                     completion(restaurant)
                     return
                 }
+                os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
+            case .failure(let error):
+                os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
             }
 
             errorHandler(ProfileError.InvalidRestaurant)
@@ -97,16 +110,20 @@ class FIRRestaurantStorage: RestaurantStorage {
         }
         let docRef = dbRef.document(uid)
 
-        docRef.setData(restaurant.dictionary) { (error) in
-            if let error = error {
-                errorHandler(error)
-                os_log("Error updating restaurant",
-                       log: Log.updateRestaurantError,
-                       type: .error,
-                       error.localizedDescription)
-                return
+        do {
+            try docRef.setData(from: restaurant) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                    os_log("Error updating restaurant",
+                           log: Log.updateRestaurantError,
+                           type: .error,
+                           error.localizedDescription)
+                    return
+                }
+                completion()
             }
-            completion()
+        } catch {
+            os_log("Error serializing restaurant.", log: Log.updateRestaurantError, type: .error, error.localizedDescription)
         }
     }
 
@@ -139,10 +156,23 @@ class FIRRestaurantStorage: RestaurantStorage {
                             String(describing: err))
                     return
                 }
-                guard let data = snapshot.data(),
-                    let updatedRestaurant = Restaurant(dictionary: data) else {
+
+                var updatedRestaurant: Restaurant
+                let result = Result {
+                    try snapshot.data(as: Restaurant.self)
+                }
+                switch result {
+                case .success(let res):
+                    if res == nil {
+                        os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
                         assert(false, "document should be of correct format(fields) of a restaurant!")
                         return
+                    }
+                    updatedRestaurant = res!
+                case .failure(let error):
+                    os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
+                    assert(false, "document should be of correct format(fields) of a restaurant!")
+                    return
                 }
 
                 delegate?.didUpdateRestaurant(restaurant: updatedRestaurant)

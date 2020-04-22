@@ -12,6 +12,7 @@ target 'QwQ-restaurant' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
+  pod 'FirebaseFirestoreSwift' 
   pod 'SDWebImage/Core'
 
   target 'QwQ-restaurantTests' do
