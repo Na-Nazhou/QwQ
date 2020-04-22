@@ -52,7 +52,11 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         let new = getUpdatedRecord(record: record, event: .admit)
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
-        setEstimatedAdmitTime(for: currentQueueRecords)
+
+        // Update the estimatedAdmitTime for remaining current queue records
+        var queueRecords = currentQueueRecords
+        queueRecords.removeAll(where: { $0 == record })
+        setEstimatedAdmitTime(for: queueRecords)
     }
 
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
