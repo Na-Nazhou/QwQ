@@ -17,6 +17,14 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
 
     typealias Auth = FIRAuthenticator
 
+    private var trimmedEmail: String? {
+        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedPassword: String? {
+        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,8 +43,6 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
     }
 
     @IBAction private func loginButton(_ sender: Any) {
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard let email = trimmedEmail, let password = trimmedPassword else {
             return

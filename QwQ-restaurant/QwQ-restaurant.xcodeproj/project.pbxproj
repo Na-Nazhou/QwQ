@@ -285,7 +285,7 @@
 		D4EA85E7241B2B70009EB85B /* RestaurantPostLoginSetupManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantPostLoginSetupManager.swift; path = "QwQ-restaurant/Logic/RestaurantPostLoginSetupManager.swift"; sourceTree = SOURCE_ROOT; };
 		D4EA85ED241B2C65009EB85B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D4EA85EE241B2C65009EB85B /* QueueRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueRecord.swift; sourceTree = "<group>"; };
-		D4EA85EF241B2C65009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		D4EA85EF241B2C65009EB85B /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		D4EA85F6241B2CA7009EB85B /* RestaurantActivityLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantActivityLogic.swift; sourceTree = "<group>"; };
 		D4EA85F7241B2CA7009EB85B /* RestaurantActivityLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantActivityLogicManager.swift; sourceTree = "<group>"; };
 		D4EA85FD241B2CC5009EB85B /* RestaurantQueueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantQueueStorage.swift; sourceTree = "<group>"; };
@@ -1379,7 +1379,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EFB575CC8D4CFE1C3DE88285 /* Pods-QwQ-restaurantTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1403,7 +1402,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85F6D1E37506F262F752247B /* Pods-QwQ-restaurantTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1426,7 +1424,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 241A708DE8DF995A1BB35169 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "QwQ-restaurantUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1446,7 +1443,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB4CD7E0B0E66F3F9C27B621 /* Pods-QwQ-restaurant-QwQ-restaurantUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "QwQ-restaurantUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -56,8 +56,8 @@ class FIRRoleStorage {
                     if let role = role {
                         roles.append(role)
                     }
-                case .failure(_):
-                    break
+                case .failure(let error):
+                    errorHandler(error)
                 }
             }
 
@@ -90,8 +90,8 @@ class FIRRoleStorage {
                     completion(role.permissions)
                     return
                 }
-            case .failure(_):
-                break
+            case .failure:
+                errorHandler(PermissionError.PermissionsNotInitialised)
             }
         }
     }
@@ -110,7 +110,7 @@ class FIRRoleStorage {
         for role in roles {
             let docRef = roleRef.document(role.roleName)
 
-            try? docRef.setData(from :role)
+            try? docRef.setData(from: role)
         }
 
         completion()

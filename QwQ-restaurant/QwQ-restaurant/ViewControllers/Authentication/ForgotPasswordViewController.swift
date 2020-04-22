@@ -16,13 +16,15 @@ class ForgotPasswordViewController: UIViewController {
 
     typealias Auth = FIRAuthenticator
 
+    private var trimmedEmail: String? {
+        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction private func handleResetPassword(_ sender: Any) {
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-
         guard let email = trimmedEmail else {
             showMessage(title: Constants.invalidEmailTitle,
                         message: Constants.invalidEmailMessage,

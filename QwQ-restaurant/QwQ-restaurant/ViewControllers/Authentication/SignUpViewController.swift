@@ -24,6 +24,22 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
 
     private var selectedUserType: UserType = .staff
 
+    private var trimmedName: String? {
+        nameTextField.text?.trimmingCharacters(in: .newlines)
+    }
+
+    private var trimmedContact: String? {
+        contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedEmail: String? {
+        emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedPassword: String? {
+        passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,10 +54,6 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     }
     
     @IBAction private func submitButton(_ sender: Any) {
-        let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
-        let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
