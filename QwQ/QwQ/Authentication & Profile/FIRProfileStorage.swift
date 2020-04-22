@@ -4,10 +4,11 @@
 //
 //  Created by Daniel Wong on 14/3/20.
 //
-
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import FirebaseStorage
 import FirebaseUI
+import os
 import SDWebImage
 
 class FIRProfileStorage: ProfileStorage {
@@ -25,16 +26,22 @@ class FIRProfileStorage: ProfileStorage {
                                              email: String,
                                              errorHandler: @escaping (Error) -> Void) {
         let db = Firestore.firestore()
-        db.collection(Constants.customersDirectory)
-            .document(uid)
-            .setData([Constants.uidKey: uid,
-                      Constants.nameKey: signupDetails.name,
-                      Constants.contactKey: signupDetails.contact,
-                      Constants.emailKey: email]) { (error) in
-                if let error = error {
-                    errorHandler(error)
+        do {
+            try db.collection(Constants.customersDirectory)
+                .document(uid)
+                .setData(from: Customer(uid: uid, name: signupDetails.name,
+                                        email: email, contact: signupDetails.contact)
+                ) { (error) in
+                    if let error = error {
+                        errorHandler(error)
+                    }
                 }
-            }
+        } catch {
+            os_log("Error serializing customer to write to firestore.",
+                   log: Log.entityError,
+                   type: .error,
+                   error.localizedDescription)
+        }
     }
 
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
@@ -51,11 +58,18 @@ class FIRProfileStorage: ProfileStorage {
                 return
             }
 
-            if let data = document?.data() {
-                if let customer = Customer(dictionary: data) {
+            let result = Result {
+                try document?.data(as: Customer.self)
+            }
+            switch result {
+            case .success(let customer):
+                if let customer = customer {
                     completion(customer)
                     return
                 }
+                print("Customer document does not exist")
+            case .failure(let error):
+                print("Error decoding customer: \(error)")
             }
 
             errorHandler(ProfileError.UserProfileNotFound)
@@ -81,13 +95,20 @@ class FIRProfileStorage: ProfileStorage {
         }
         let docRef = dbRef.document(uid)
 
-        docRef.updateData(customer.dictionary) { (error) in
-            if let error = error {
-                errorHandler(error)
-                return
+        do {
+            try docRef.setData(from: customer) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                    return
+                }
+                CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)
+                completion()
             }
-            CustomerPostLoginSetupManager.customerDidUpdateProfile(updated: customer)
-            completion()
+        } catch {
+            os_log("Error serializing customer to write to firestore.",
+                   log: Log.entityError,
+                   type: .error,
+                   error.localizedDescription)
         }
     }
 
