@@ -6,6 +6,8 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
+import os
 
 class FIRCustomerStorage: CustomerStorage {
     static func getCustomerFromUID(uid: String,
@@ -19,12 +21,20 @@ class FIRCustomerStorage: CustomerStorage {
             if let error = error, let errorHandler = errorHandler {
                 errorHandler(error)
             }
-            if let data = document?.data() {
-                guard let customer = Customer(dictionary: data) else {
-                    // create new error for error handler?
+
+            let result = Result {
+              try document?.data(as: Customer.self)
+            }
+            switch result {
+            case .success(let cus):
+                if let customer = cus {
+                    completion(customer)
                     return
                 }
-                completion(customer)
+                os_log("Customer document does not exist.", log: Log.createCustomerError, type: .error)
+            case .failure(let error):
+                os_log("Customer cannot be created.",
+                       log: Log.createCustomerError, type: .error, error.localizedDescription)
             }
         }
     }

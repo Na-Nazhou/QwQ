@@ -12,31 +12,11 @@ struct Customer: User {
     let email: String
     let contact: String
 
-    var dictionary: [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact
-        ]
-    }
-
     init(uid: String, name: String, email: String, contact: String) {
         self.uid = uid
         self.name = name
         self.email = email
         self.contact = contact
-    }
-
-    init?(dictionary: [String: Any]) {
-        guard let uid = dictionary[Constants.uidKey] as? String,
-            let name = dictionary[Constants.nameKey] as? String,
-            let email = dictionary[Constants.emailKey] as? String,
-            let contact = dictionary[Constants.contactKey] as? String else {
-                return nil
-        }
-
-        self.init(uid: uid, name: name, email: email, contact: contact)
     }
 }
 

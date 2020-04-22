@@ -18,10 +18,14 @@ class FIRRoleStorage {
         for role in Role.defaultRoles {
             let docRef = roleRef.document(role.roleName)
 
-            docRef.setData(role.dictionary) { (error) in
-                if let error = error {
-                    errorHandler(error)
+            do {
+                try docRef.setData(from: role) { (error) in
+                    if let error = error {
+                        errorHandler(error)
+                    }
                 }
+            } catch {
+                errorHandler(error)
             }
         }
     }
@@ -44,8 +48,16 @@ class FIRRoleStorage {
             var roles = [Role]()
 
             for document in querySnapshot!.documents {
-                if let role = Role(dictionary: document.data()) {
-                    roles.append(role)
+                let result = Result {
+                    try document.data(as: Role.self)
+                }
+                switch result {
+                case .success(let role):
+                    if let role = role {
+                        roles.append(role)
+                    }
+                case .failure(_):
+                    break
                 }
             }
 
@@ -69,11 +81,17 @@ class FIRRoleStorage {
                 return
             }
 
-            if let data = document?.data() {
-                if let role = Role(dictionary: data) {
+            let result = Result {
+                try document?.data(as: Role.self)
+            }
+            switch result {
+            case .success(let role):
+                if let role = role {
                     completion(role.permissions)
                     return
                 }
+            case .failure(_):
+                break
             }
         }
     }
@@ -92,7 +110,7 @@ class FIRRoleStorage {
         for role in roles {
             let docRef = roleRef.document(role.roleName)
 
-            docRef.setData(role.dictionary)
+            try? docRef.setData(from :role)
         }
 
         completion()

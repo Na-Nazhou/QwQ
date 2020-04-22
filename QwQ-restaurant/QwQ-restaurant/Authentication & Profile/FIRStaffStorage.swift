@@ -6,6 +6,8 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
+import os
 
 class FIRStaffStorage: StaffStorage {
 
@@ -22,13 +24,17 @@ class FIRStaffStorage: StaffStorage {
                                           errorHandler: @escaping (Error) -> Void) {
 
         let docRef = dbRef.document(uid)
-        docRef.setData([Constants.uidKey: uid,
-                        Constants.nameKey: signupDetails.name,
-                        Constants.emailKey: email,
-                        Constants.contactKey: signupDetails.contact], merge: true) { (error) in
-            if let error = error {
-                errorHandler(error)
+        do {
+            try docRef.setData(from:
+                Staff(uid: uid, name: signupDetails.name,
+                      email: email, contact: signupDetails.contact),
+                           merge: true) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                }
             }
+        } catch {
+            errorHandler(error)
         }
     }
 
@@ -40,15 +46,17 @@ class FIRStaffStorage: StaffStorage {
                                           errorHandler: @escaping (Error) -> Void) {
 
         let docRef = dbRef.document(uid)
-        docRef.setData([Constants.uidKey: uid,
-                        Constants.nameKey: signupDetails.name,
-                        Constants.emailKey: email,
-                        Constants.contactKey: signupDetails.contact,
-                        Constants.assignedRestaurantKey: assignedRestaurant,
-                        Constants.roleNameKey: "Owner"]) { (error) in
-            if let error = error {
-                errorHandler(error)
+        do {
+            try docRef.setData(from:
+                Staff(uid: uid, name: signupDetails.name,
+                      email: email, contact: signupDetails.contact,
+                      assignedRestaurant: assignedRestaurant, roleName: "Owner")) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                }
             }
+        } catch {
+            errorHandler(error)
         }
     }
 
@@ -68,11 +76,18 @@ class FIRStaffStorage: StaffStorage {
                 return
             }
 
-            if let data = document?.data() {
-                if let staff = Staff(dictionary: data) {
+            let result = Result {
+                try document?.data(as: Staff.self)
+            }
+            switch result {
+            case .success(let staff):
+                if let staff = staff {
                     completion(staff)
                     return
                 }
+                os_log("Staff document not found.", log: Log.createStaffError, type: .error)
+            case .failure(let error):
+                os_log("Error creating staff.", log: Log.createStaffError, type: .error, error.localizedDescription)
             }
 
             /// If no staff profile is found, the user is not a staff (probably a customer)
@@ -91,12 +106,16 @@ class FIRStaffStorage: StaffStorage {
         }
         let docRef = dbRef.document(uid)
 
-        docRef.updateData(staff.dictionary) { (error) in
-            if let error = error {
-                errorHandler(error)
-                return
+        do {
+            try docRef.setData(from: staff) { (error) in
+                if let error = error {
+                    errorHandler(error)
+                    return
+                }
+                completion()
             }
-            completion()
+        } catch {
+            errorHandler(error)
         }
     }
 }

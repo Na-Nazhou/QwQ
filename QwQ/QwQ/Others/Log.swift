@@ -14,6 +14,8 @@ private let subsystem = Bundle.main.bundleIdentifier!
 struct Log {
     static let deinitLogic = OSLog(subsystem: subsystem, category: "deinitLogic")
 
+    static let entityError = OSLog(subsystem: subsystem, category: "Entity de/serialization error")
+
     static let closeQueue = OSLog(subsystem: subsystem, category: "handleQueue")
     static let openQueue = OSLog(subsystem: subsystem, category: "handleQueue")
 

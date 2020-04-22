@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import os
 
 class FIRRestaurantInfoStorage: RestaurantInfoStorage {
 
@@ -20,12 +21,19 @@ class FIRRestaurantInfoStorage: RestaurantInfoStorage {
             if let error = error, let errorHandler = errorHandler {
                 errorHandler(error)
             }
-            if let data = document?.data() {
-                guard let restaurant = Restaurant(dictionary: data) else {
-                    // create new error for error handler?
+            let result = Result {
+              try document?.data(as: Restaurant.self)
+            }
+            switch result {
+            case .success(let res):
+                if let restaurant = res {
+                    completion(restaurant)
                     return
                 }
-                completion(restaurant)
+                os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
+            case .failure(let error):
+                os_log("Restaurant cannot be created.",
+                       log: Log.createRestaurantError, type: .error, error.localizedDescription)
             }
         }
     }

@@ -5,7 +5,7 @@
 //  Created by Daniel Wong on 20/4/20.
 //
 
-struct Role {
+struct Role: Codable {
     let roleName: String
     let permissions: [Permission]
 
@@ -13,12 +13,12 @@ struct Role {
         Permission.convertPermissionsToStringArray(permissions)
     }
 
-    var dictionary: [String: Any] {
-        [
-            Constants.roleNameKey: roleName,
-            Constants.permissionsKey: permissionsStringArray
-        ]
-    }
+//    var dictionary: [String: Any] {
+//        [
+//            Constants.roleNameKey: roleName,
+//            Constants.permissionsKey: permissionsStringArray
+//        ]
+//    }
 
     static var defaultRoles: [Role] {
         var roles = [Role]()
@@ -35,19 +35,19 @@ struct Role {
         return roles
     }
 
-    init?(dictionary: [String: Any]) {
-        guard let permissionAnyArray = dictionary[Constants.permissionsKey] as? [Any] else {
-            return nil
-        }
-        let permissionStringArray = FormattingUtilities.convertAnyToStringArray(permissionAnyArray)
-        let permissions = Permission.convertStringArrayToPermissions(permissionStringArray)
-
-        guard let roleName = dictionary[Constants.roleNameKey] as? String else {
-            return nil
-        }
-
-        self.init(roleName: roleName, permissions: permissions)
-    }
+//    init?(dictionary: [String: Any]) {
+//        guard let permissionAnyArray = dictionary[Constants.permissionsKey] as? [Any] else {
+//            return nil
+//        }
+//        let permissionStringArray = FormattingUtilities.convertAnyToStringArray(permissionAnyArray)
+//        let permissions = Permission.convertStringArrayToPermissions(permissionStringArray)
+//
+//        guard let roleName = dictionary[Constants.roleNameKey] as? String else {
+//            return nil
+//        }
+//
+//        self.init(roleName: roleName, permissions: permissions)
+//    }
 
     init(roleName: String, permissions: [Permission]) {
         self.roleName = roleName
