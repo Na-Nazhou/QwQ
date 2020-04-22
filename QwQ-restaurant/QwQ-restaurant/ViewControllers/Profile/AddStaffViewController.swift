@@ -16,6 +16,7 @@ class AddStaffViewController: UIViewController {
     private var spinner: UIView?
 
     private var staff: [Staff] = []
+    private var staffEmails: [String] = []
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)

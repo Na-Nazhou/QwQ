@@ -149,6 +149,11 @@ struct Constants {
     static let permissionsKey = "permissions"
     static let roleNameKey = "roleName"
 
+    // MARK: Default permission names
+    static let ownerPermissionsKey = "Owner"
+    static let managerPermissionsKey = "Manager"
+    static let serverPermissionsKey = "Server"
+
     // MARK: Queue timed settings
     static let inactivateAdmitAfterMissTimeInMins = 10.0
     static let timeBufferForBookArrivalInMins = 15.0

@@ -14,8 +14,7 @@ class StaffCell: UITableViewCell {
     @IBOutlet var roleLabel: UILabel!
     @IBOutlet var editPermissionsButton: UIButton!
 
-    func setUpViews(staff: Staff) {
-        emailLabel.text = staff.email
-        roleLabel.text = staff.roleName
+    func setUpViews(staffEmail: String) {
+        emailLabel.text = staffEmail
     }
 }

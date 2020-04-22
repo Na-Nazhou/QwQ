@@ -34,7 +34,8 @@ class FIRRestaurantStorage: RestaurantStorage {
                     Restaurant(uid: uid, name: signupDetails.name,
                                email: email, contact: signupDetails.contact,
                                address: "", menu: "",
-                               maxGroupSize: Restaurant.defaultMaxGroupSize, minGroupSize: Restaurant.defaultMinGroupSize,
+                               maxGroupSize: Restaurant.defaultMaxGroupSize,
+                               minGroupSize: Restaurant.defaultMinGroupSize,
                                advanceBookingLimit: Restaurant.defaultAdvanceBookingLimit)
                     ) { (error) in
                 if let error = error {
@@ -84,7 +85,8 @@ class FIRRestaurantStorage: RestaurantStorage {
                 }
                 os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
             case .failure(let error):
-                os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
+                os_log("Restaurant cannot be created.", log: Log.createRestaurantError,
+                       type: .error, error.localizedDescription)
             }
 
             errorHandler(ProfileError.InvalidRestaurant)
@@ -152,8 +154,7 @@ class FIRRestaurantStorage: RestaurantStorage {
             .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard err == nil, let snapshot = snapshot else {
                      os_log("Error getting restaurant documents",
-                            log: Log.restaurantRetrievalError,
-                            type: .error, String(describing: err))
+                            log: Log.restaurantRetrievalError, type: .error, String(describing: err))
                     return
                 }
 
