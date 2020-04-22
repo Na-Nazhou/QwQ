@@ -1,5 +1,3 @@
-import Foundation
-
 protocol CustomerBookingLogic: BookingStorageSyncDelegate {
 
     // View Controllers

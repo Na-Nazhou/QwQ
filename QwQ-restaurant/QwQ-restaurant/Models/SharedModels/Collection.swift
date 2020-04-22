@@ -25,11 +25,6 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
-    func remove(_ element: T) -> Bool {
-        let removed = elements.remove(element)
-        return removed != nil
-    }
-
     @discardableResult
     func update(_ element: T) -> Bool {
         if elements.contains(element) {
@@ -39,6 +34,19 @@ class Collection<T: Hashable> {
         }
 
         return false
+    }
+
+    func remove(_ element: T) -> Bool {
+        let removed = elements.remove(element)
+        return removed != nil
+    }
+
+    func contains(_ element: T) -> Bool {
+        elements.contains(element)
+    }
+
+    func find(_ element: T) -> T? {
+        elements.first(where: { $0 == element })
     }
 
     func reset() {

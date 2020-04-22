@@ -1,5 +1,3 @@
-import Foundation
-
 protocol RestaurantStatsStorage {
 
     func fetchTotalNumCustomers(for restaurant: Restaurant,

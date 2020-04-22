@@ -49,15 +49,6 @@ struct Constants {
     static let missingPasswordMessage = "Please provide a valid password."
     static let resetPasswordTitle = "Reset Password"
     static let resetPasswordMessage = "Please check your email to reset your password."
-
-    // MARK: Record settings
-    static let admitCustomerTitle = "Admit Customer"
-    static let admitCustomerMessage = "The customer has been notified."
-    static let serveCustomerTitle = "Serve Customer"
-    static let serveCustomerMessage = "The customer has been served."
-    static let rejectCustomerTitle = "Reject Customer"
-    static let rejectCustomerMessage = "The customer has been rejected."
-    static let recordDateFormat = "ddMMyyyy"
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -154,4 +145,5 @@ struct Constants {
     static let timeBufferForBookArrivalInMins = 15.0
     static let queueWaitConfirmTimeInMins = 3.0
     static let queueWaitArrivalInMins = 15.0
+    static let waitingTimePerQueueRecord = 10
 }

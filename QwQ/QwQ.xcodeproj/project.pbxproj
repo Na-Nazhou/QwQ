@@ -46,6 +46,7 @@
 		61673BF62422168400134891 /* ActivitiesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61673BF52422168400134891 /* ActivitiesDelegate.swift */; };
 		617B0F31244EFDE7001F1413 /* UIWindow+key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B0F30244EFDE7001F1413 /* UIWindow+key.swift */; };
 		617B0F35244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */; };
+		617B0F3E2450901F001F1413 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B0F3D2450901F001F1413 /* UIButton+Extension.swift */; };
 		617B62DD241F392F0010AB30 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DC241F392F0010AB30 /* SearchDelegate.swift */; };
 		617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62DE241F39EF0010AB30 /* RecordDelegate.swift */; };
 		617B62EB241F85ED0010AB30 /* ValidationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */; };
@@ -184,6 +185,7 @@
 		61673BF52422168400134891 /* ActivitiesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDelegate.swift; sourceTree = "<group>"; };
 		617B0F30244EFDE7001F1413 /* UIWindow+key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+key.swift"; sourceTree = "<group>"; };
 		617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+getTopMostViewController.swift"; sourceTree = "<group>"; };
+		617B0F3D2450901F001F1413 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		617B62DC241F392F0010AB30 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		617B62DE241F39EF0010AB30 /* RecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDelegate.swift; sourceTree = "<group>"; };
 		617B62EA241F85EC0010AB30 /* ValidationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidationUtilities.swift; path = QwQ/Others/Utilities/ValidationUtilities.swift; sourceTree = "<group>"; };
@@ -331,11 +333,9 @@
 		5C11FD0A2418E611002B88E3 /* Authentication & Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5C11FD0B2418E63D002B88E3 /* Authenticator.swift */,
+				617B0F3F2450902D001F1413 /* Protocols */,
 				5C11FD0D2418E652002B88E3 /* FIRAuthenticator.swift */,
-				5C11FD082418E503002B88E3 /* ProfileStorage.swift */,
 				5CA15947241C9F9400835102 /* FIRProfileStorage.swift */,
-				5C1A419624236D1C00D1140B /* RestaurantInfoStorage.swift */,
 				5C1A419824236D2800D1140B /* FIRRestaurantInfoStorage.swift */,
 				5C9411DE2423D11F0093D92D /* SignupDetails.swift */,
 				5C9411E02423D1E30093D92D /* AuthDetails.swift */,
@@ -415,6 +415,16 @@
 			path = Restaurants;
 			sourceTree = "<group>";
 		};
+		617B0F3F2450902D001F1413 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5C11FD0B2418E63D002B88E3 /* Authenticator.swift */,
+				5C11FD082418E503002B88E3 /* ProfileStorage.swift */,
+				5C1A419624236D1C00D1140B /* RestaurantInfoStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		61B2EAA22418BAA400B88018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +456,7 @@
 				6148056624232B87003D6D44 /* UIViewController+Spinner.swift */,
 				617B0F30244EFDE7001F1413 /* UIWindow+key.swift */,
 				617B0F34244EFEC3001F1413 /* UIApplication+getTopMostViewController.swift */,
+				617B0F3D2450901F001F1413 /* UIButton+Extension.swift */,
 				D41F91A124227FFE00724D6C /* Date+Extensions.swift */,
 			);
 			path = Extensions;
@@ -1008,6 +1019,7 @@
 				7E7F7DCB2422244100A080E5 /* SearchCollectionReusableView.swift in Sources */,
 				D42A5438244B4AEA008FFB48 /* RecordStatus.swift in Sources */,
 				617B62DF241F39EF0010AB30 /* RecordDelegate.swift in Sources */,
+				617B0F3E2450901F001F1413 /* UIButton+Extension.swift in Sources */,
 				D4494EC5241B24D900BD0780 /* RestaurantStorageSyncDelegate.swift in Sources */,
 				D4494EC4241B24D900BD0780 /* CustomerQueueStorage.swift in Sources */,
 				D4EA85D2241B29CC009EB85B /* Restaurant.swift in Sources */,

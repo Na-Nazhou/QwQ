@@ -42,7 +42,6 @@ extension Date {
     static func getCurrentTime() -> Date {
         let calendar = Calendar.current
         let currentTime = calendar.date(bySetting: .second, value: 0, of: Date())!
-        print(currentTime)
         return currentTime
     }
 

@@ -18,6 +18,7 @@ class BookRecordViewController: RecordViewController {
         guard let bookRecord = record as? BookRecord else {
             return
         }
+
         datePicker.date = bookRecord.time
     }
 }

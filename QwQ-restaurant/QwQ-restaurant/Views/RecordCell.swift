@@ -178,29 +178,19 @@ class RecordCell: UICollectionViewCell {
     }
 
     private func disableRightButton() {
-        disableButton(button: rightButton)
+        rightButton.disable()
     }
 
     private func enableRightButton() {
-        enableButton(button: rightButton)
+        rightButton.enable()
     }
 
     private func disableLeftButton() {
-        disableButton(button: leftButton)
+        leftButton.disable()
     }
 
     private func enableLeftButton() {
-        enableButton(button: leftButton)
-    }
-
-    private func enableButton(button: UIButton) {
-        button.isEnabled = true
-        button.alpha = 1
-    }
-
-    private func disableButton(button: UIButton) {
-        button.isEnabled = false
-        button.alpha = 0.5
+        leftButton.enable()
     }
 
     private func hideActionButtons() {
