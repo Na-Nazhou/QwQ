@@ -1,4 +1,5 @@
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import os.log
 
 class FIRRestaurantStorage: RestaurantStorage {
@@ -38,10 +39,23 @@ extension FIRRestaurantStorage {
                     return
                 }
                 snapshot!.documentChanges.forEach { diff in
-                    guard let restaurant = Restaurant(dictionary: diff.document.data()) else {
-                        os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error)
+                    let result = Result {
+                        try diff.document.data(as: Restaurant.self)
+                    }
+                    var restaurant: Restaurant
+                    switch result {
+                    case .success(let res):
+                        if let res = res {
+                            restaurant = res
+                            break
+                        }
+                        os_log("Restaurant document does not exist.", log: Log.createRestaurantError, type: .error)
+                        return
+                    case .failure(let error):
+                        os_log("Restaurant cannot be created.", log: Log.createRestaurantError, type: .error, error.localizedDescription)
                         return
                     }
+
                     guard restaurant.isValidRestaurant else {
                         os_log("Restaurant is not validated; ignored.", log: Log.createRestaurantError, type: .info)
                         return

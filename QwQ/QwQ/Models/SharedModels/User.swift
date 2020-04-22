@@ -1,4 +1,4 @@
-protocol User: Hashable {
+protocol User: Hashable, Codable {
     var uid: String { get }
     var name: String { get }
     var email: String { get }
