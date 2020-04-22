@@ -42,12 +42,7 @@ class RecordCell: UICollectionViewCell {
         FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
         setUpRecordImage(record: record)
-
-        showActionButtons()
-        enableLeftButton()
-        enableRightButton()
-
-        setUpRejectButton()
+        setUpActionButtons()
 
         switch record.status {
         case .pendingAdmission:
@@ -62,6 +57,17 @@ class RecordCell: UICollectionViewCell {
             setUpHistoryRecord(record: record)
         }
 
+        checkPermissions(for: record)
+    }
+
+    private func setUpActionButtons() {
+        showActionButtons()
+        enableLeftButton()
+        enableRightButton()
+        setUpRejectButton()
+    }
+
+    private func checkPermissions(for record: Record) {
         if record as? QueueRecord != nil {
             if !PermissionsManager.checkPermissions(Permission.acceptQueue) {
                 disableLeftButton()
@@ -78,7 +84,6 @@ class RecordCell: UICollectionViewCell {
                 disableRightButton()
             }
         }
-
     }
 
     private func setUpRecordImage(record: Record) {
@@ -157,7 +162,6 @@ class RecordCell: UICollectionViewCell {
             disableRightButton()
         } else {
             timeLabel.text = record.admitTime!.getFormattedTime()
-            // show a timer instead
         }
         timeLabel.textColor = .systemGray
         setUpServeButton()

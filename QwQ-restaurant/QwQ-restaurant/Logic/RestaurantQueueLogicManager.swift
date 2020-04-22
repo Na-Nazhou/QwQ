@@ -35,7 +35,6 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
         currentRecords.compactMap({ $0 as? QueueRecord })
     }
 
-
     override init() {
         self.restaurantActivity = RestaurantActivity.shared()
         self.queueStorage = FIRQueueStorage.shared
@@ -53,7 +52,7 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         let new = getUpdatedRecord(record: record, event: .admit)
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
-        // TODO: Update estimated admit time
+        setEstimatedAdmitTime(for: currentQueueRecords)
     }
 
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
@@ -126,10 +125,18 @@ extension RestaurantQueueLogicManager {
         let waitingTimePerRecord = Constants.waitingTimePerQueueRecord
 
         if queueSize == 0 {
-            return Calendar.current.date(byAdding: .minute,
-                                         value: waitingTimePerRecord,
-                                         to: Date())!
+            // If this is the first record in the current record list
+            if record.estimatedAdmitTime == nil {
+                // If there is no existing estimate, set to 10 min after the current time
+                return Calendar.current.date(byAdding: .minute,
+                                             value: waitingTimePerRecord,
+                                             to: Date())!
+            } else if let estimatedAdmitTime = record.estimatedAdmitTime, estimatedAdmitTime < Date() {
+                // If the estimated estimate is outdated, set to current time
+                return Date()
+            }
         } else {
+            // For subsequent records, set estimate to number of ppl in front * 10min
             if let queueRecord = currentRecords[0] as? QueueRecord,
                 let reference = queueRecord.estimatedAdmitTime {
                 return Calendar.current.date(byAdding: .minute,
@@ -152,7 +159,6 @@ extension RestaurantQueueLogicManager {
         }
 
         didUpdateRecord(record, currentQueue, waitingQueue, historyQueue)
-        setEstimatedAdmitTime(for: currentQueueRecords)
     }
 }
 

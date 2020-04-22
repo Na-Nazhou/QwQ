@@ -199,7 +199,8 @@ extension CustomerQueueLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            assert(false, "Modification should be something")
+//            assert(false, "Modification should be something")
+            customerDidUpdateQueueRecord(record)
         }
     }
 

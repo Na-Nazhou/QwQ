@@ -190,7 +190,8 @@ extension CustomerBookingLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            assert(false, "Modification should be something")
+//            assert(false, "Modification should be something")
+            customerDidUpdateBookRecord(record)
         }
     }
 
@@ -212,6 +213,7 @@ extension CustomerBookingLogicManager {
     private func didConfirmAdmission(of record: BookRecord) {
         super.didConfirmRecord(record, currentBookings)
 
+        // Auto withdraw clashing records
         withdrawBookRecords(clashingRecords(with: record), completion: {})
 
         notificationHandler.notifyBookingAccepted(record: record)
