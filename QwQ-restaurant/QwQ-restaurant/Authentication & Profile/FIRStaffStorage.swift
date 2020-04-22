@@ -121,39 +121,4 @@ class FIRStaffStorage: StaffStorage {
         }
     }
 
-    static func getAllRestaurantStaff(completion: @escaping ([Staff]) -> Void,
-                                      errorHandler: @escaping (Error) -> Void) {
-        guard let restaurantUID = RestaurantProfile.currentRestaurantUID else {
-            errorHandler(ProfileError.InvalidRestaurant)
-            return
-        }
-
-        dbRef.whereField(Constants.assignedRestaurantKey, isEqualTo: restaurantUID)
-            .getDocuments { (querySnapshot, error) in
-                if let error = error {
-                    errorHandler(error)
-                    return
-                }
-
-                var staff = [Staff]()
-
-                for document in querySnapshot!.documents {
-                    let result = Result {
-                        try document.data(as: Staff.self)
-                    }
-                    switch result {
-                    case .success(let newStaff):
-                        if let newStaff = newStaff {
-                            staff.append(newStaff)
-                        }
-                    case .failure(let error):
-                        os_log("Error creating staff.",
-                               log: Log.createStaffError,
-                               type: .error, error.localizedDescription)
-                    }
-                }
-
-                completion(staff)
-            }
-    }
 }

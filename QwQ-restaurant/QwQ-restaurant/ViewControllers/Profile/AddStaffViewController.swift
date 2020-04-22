@@ -15,12 +15,13 @@ class AddStaffViewController: UIViewController {
 
     private var spinner: UIView?
 
-    private var staff: [Staff] = []
-    private var staffEmails: [String] = []
+    typealias PositionStorage = FIRStaffPositionStorage
+
+    private var staffPositions: [StaffPosition] = []
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
-        FIRStaffStorage.getAllRestaurantStaff(completion: getAllRestaurantStaffComplete(staff:),
+        PositionStorage.getAllRestaurantStaff(completion: getAllRestaurantStaffComplete(staffPositions:),
                                               errorHandler: handleError(error:))
         super.viewWillAppear(animated)
     }
@@ -32,9 +33,12 @@ class AddStaffViewController: UIViewController {
         staffTableView.dataSource = self
     }
 
-    private func getAllRestaurantStaffComplete(staff: [Staff]) {
-        self.staff = staff
+    private func getAllRestaurantStaffComplete(staffPositions: [StaffPosition]) {
+        self.staffPositions = staffPositions
         staffTableView.reloadData()
+
+        removeSpinner(spinner
+        )
     }
     
     @IBAction private func handleAdd(_ sender: Any) {
@@ -58,19 +62,27 @@ class AddStaffViewController: UIViewController {
             return
         }
 
-        guard !staffEmails.contains(email) else {
+        guard !checkIfAlreadyExists(email: email) else {
             showMessage(title: Constants.duplicateEmailTitle,
                         message: Constants.duplicateEmailMessage,
                         buttonText: Constants.okayTitle)
             return
         }
-        
-        staffEmails.append(email)
+
+        staffPositions.append(StaffPosition(email: email, roleName: "Server"))
         staffTableView.reloadData()
     }
-    
+
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
+    }
+
+    private func checkIfAlreadyExists(email: String) -> Bool {
+        for position in staffPositions where position.email == email {
+            return true
+        }
+
+        return false
     }
 
     private func handleError(error: Error) {
@@ -83,7 +95,7 @@ class AddStaffViewController: UIViewController {
 
 extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        staffEmails.count
+        staffPositions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,8 +107,8 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        let staffEmail = staffEmails[indexPath.row]
-        staffCell.setUpViews(staffEmail: staffEmail)
+        let position = staffPositions[indexPath.row]
+        staffCell.setUpViews(staffPosition: position)
         
         return staffCell
     }
@@ -109,8 +121,8 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            staffEmails = staffEmails.filter {
-                $0 != staffEmails[indexPath.item]
+            staffPositions = staffPositions.filter {
+                $0 != staffPositions[indexPath.item]
             }
             staffTableView.reloadData()
         }
