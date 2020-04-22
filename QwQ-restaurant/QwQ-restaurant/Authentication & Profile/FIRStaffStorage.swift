@@ -10,6 +10,7 @@ import FirebaseFirestore
 class FIRStaffStorage: StaffStorage {
 
     typealias Auth = FIRAuthenticator
+    typealias RestaurantProfile = FIRRestaurantStorage
 
     static var currentStaffUID: String?
 
@@ -98,5 +99,31 @@ class FIRStaffStorage: StaffStorage {
             }
             completion()
         }
+    }
+
+    static func getAllRestaurantStaff(completion: @escaping ([Staff]) -> Void,
+                                      errorHandler: @escaping (Error) -> Void) {
+        guard let restaurantUID = RestaurantProfile.currentRestaurantUID else {
+            errorHandler(ProfileError.InvalidRestaurant)
+            return
+        }
+
+        dbRef.whereField(Constants.assignedRestaurantKey, isEqualTo: restaurantUID)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    errorHandler(error)
+                    return
+                }
+
+                var staff = [Staff]()
+
+                for document in querySnapshot!.documents {
+                    if let newStaff = Staff(dictionary: document.data()) {
+                        staff.append(newStaff)
+                    }
+                }
+
+                completion(staff)
+            }
     }
 }

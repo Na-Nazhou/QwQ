@@ -13,7 +13,28 @@ class AddStaffViewController: UIViewController {
     @IBOutlet private var emailTextField: UITextField!
     @IBOutlet private var staffTableView: UITableView!
 
-    private var staffEmails: [String] = []
+    private var spinner: UIView?
+
+    private var staff: [Staff] = []
+
+    override func viewWillAppear(_ animated: Bool) {
+        spinner = showSpinner(onView: view)
+        FIRStaffStorage.getAllRestaurantStaff(completion: getAllRestaurantStaffComplete(staff:),
+                                              errorHandler: handleError(error:))
+        super.viewWillAppear(animated)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        staffTableView.delegate = self
+        staffTableView.dataSource = self
+    }
+
+    private func getAllRestaurantStaffComplete(staff: [Staff]) {
+        self.staff = staff
+        staffTableView.reloadData()
+    }
     
     @IBAction private func handleAdd(_ sender: Any) {
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -50,12 +71,12 @@ class AddStaffViewController: UIViewController {
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        staffTableView.delegate = self
-        staffTableView.dataSource = self
+
+    private func handleError(error: Error) {
+        removeSpinner(spinner)
+        showMessage(title: Constants.errorTitle,
+                    message: error.localizedDescription,
+                    buttonText: Constants.okayTitle)
     }
 }
 

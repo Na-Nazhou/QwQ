@@ -52,7 +52,7 @@ class EditProfileViewController: UIViewController {
         addressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var trimmedMenu: String? {
+    private var menu: String? {
         menuTextView.text
     }
 
@@ -140,7 +140,7 @@ class EditProfileViewController: UIViewController {
         }
         
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = trimmedMenu, let minGroupSize = minGroupSize,
+            let address = trimmedAddress, let menu = menu, let minGroupSize = minGroupSize,
             let maxGroupSize = maxGroupSize, let advanceBookingLimit = advanceBookingLimit else {
                 return
         }
