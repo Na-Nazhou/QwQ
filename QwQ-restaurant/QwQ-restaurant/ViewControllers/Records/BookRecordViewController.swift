@@ -16,10 +16,11 @@ class BookRecordViewController: RecordViewController {
     var bookingLogic: RestaurantBookingLogic!
     
     override func setUpViews() {
-        super.setUpViews()
         guard let bookRecord = record as? BookRecord else {
             return
         }
+
+        super.setUpViews()
         
         if !PermissionsManager.checkPermissions(Permission.acceptBooking) {
             hideActionButton()
@@ -49,14 +50,14 @@ class BookRecordViewController: RecordViewController {
 
     }
 
-    // TODO
+    // TODO: add reject button 
     @IBAction override func handleReject(_ sender: Any) {
-        guard let queueRecord = record as? BookRecord else {
+        guard let bookRecord = record as? BookRecord else {
             return
         }
     
         spinner = showSpinner(onView: view)
-        bookingLogic.rejectCustomer(record: queueRecord,
+        bookingLogic.rejectCustomer(record: bookRecord,
                                     completion: self.didUpdateRecord)
     }
 }

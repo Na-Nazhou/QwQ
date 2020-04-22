@@ -51,6 +51,7 @@ struct Constants {
     static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
     static let exceedAdvanceBookingLimitMessage = "You have to book at least %@ hours in advance at %@."
     static let exceedOperatingHoursMessage = "%@ only operates at %@"
+    static let bookingTimeInterval = 15
 
     // MARK: Record settings
     static let defaultWheelchairFriendly = false

@@ -18,6 +18,15 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, R
     private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
+    private var currentBookings: RecordCollection<BookRecord> {
+        restaurantActivity.currentBookings
+    }
+    private var waitingBookings: RecordCollection<BookRecord> {
+        restaurantActivity.waitingBookings
+    }
+    private var historyBookings: RecordCollection<BookRecord> {
+        restaurantActivity.historyBookings
+    }
 
     override init() {
         self.restaurantActivity = RestaurantActivity.shared()
@@ -60,26 +69,28 @@ extension RestaurantBookingLogicManager {
     // MARK: Syncing
 
     func didAddBookRecord(_ record: BookRecord) {
-        if record.isPendingAdmission {
-            let autoRejectTimer = Timer(
-                fireAt: record.time,
-                interval: 1,
-                target: self,
-                selector: #selector(handleAutoRejectTimer),
-                userInfo: record,
-                repeats: false)
-            RunLoop.main.add(autoRejectTimer, forMode: .common)
+        scheduleAutoRejectTimer(for: record)
+        didAddRecord(record, currentBookings, waitingBookings, historyBookings)
+    }
+
+    private func scheduleAutoRejectTimer(for record: BookRecord) {
+        guard record.isPendingAdmission else {
+            return
         }
 
-        didAddRecord(record,
-                     restaurantActivity.currentBookings,
-                     restaurantActivity.waitingBookings,
-                     restaurantActivity.historyBookings)
+        let autoRejectTimer = Timer(
+            fireAt: record.time,
+            interval: 1,
+            target: self,
+            selector: #selector(handleAutoRejectTimer),
+            userInfo: record,
+            repeats: false)
+        RunLoop.main.add(autoRejectTimer, forMode: .common)
     }
 
     @objc private func handleAutoRejectTimer(timer: Timer) {
         if let record = timer.userInfo as? BookRecord {
-            let isStillPending = restaurantActivity.currentBookings.records.contains(record)
+            let isStillPending = currentBookings.contains(record)
             if isStillPending {
                 rejectCustomer(record: record, completion: {})
             }
@@ -87,23 +98,26 @@ extension RestaurantBookingLogicManager {
     }
 
     func didUpdateBookRecord(_ record: BookRecord) {
-        if record.isConfirmedAdmission {
-            let autoRejectTimer = Timer(
-                fireAt: record.time.addingTimeInterval(60 * Constants.timeBufferForBookArrivalInMins),
-                interval: 1, target: self,
-                selector: #selector(handleBufferRejectTimer),
-                userInfo: record, repeats: false)
-            RunLoop.main.add(autoRejectTimer, forMode: .common)
+        scheduleBufferRejectTimer(for: record)
+        didUpdateRecord(record, currentBookings, waitingBookings, historyBookings)
+    }
+
+    private func scheduleBufferRejectTimer(for record: BookRecord) {
+        guard record.isConfirmedAdmission else {
+            return
         }
-        didUpdateRecord(record,
-                        restaurantActivity.currentBookings,
-                        restaurantActivity.waitingBookings,
-                        restaurantActivity.historyBookings)
+
+        let bufferRejectTimer = Timer(
+            fireAt: record.time.addingTimeInterval(60 * Constants.timeBufferForBookArrivalInMins),
+            interval: 1, target: self,
+            selector: #selector(handleBufferRejectTimer),
+            userInfo: record, repeats: false)
+        RunLoop.main.add(bufferRejectTimer, forMode: .common)
     }
 
     @objc private func handleBufferRejectTimer(timer: Timer) {
         if let record = timer.userInfo as? BookRecord {
-            let isStillWaiting = restaurantActivity.waitingBookings.records.contains(record)
+            let isStillWaiting = waitingBookings.contains(record)
             if isStillWaiting {
                 rejectCustomer(record: record, completion: {})
             }

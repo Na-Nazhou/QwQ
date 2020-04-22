@@ -17,8 +17,14 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
     private var customer: Customer {
         customerActivity.customer
     }
+    private var currentBookings: RecordCollection<BookRecord> {
+        customerActivity.currentBookings
+    }
+    private var bookingHistory: RecordCollection<BookRecord> {
+        customerActivity.bookingHistory
+    }
 
-    private var activeBookRecords: [BookRecord] {
+    private var currentBookRecords: [BookRecord] {
         customerActivity.currentBookings.records
     }
     private var bookRecords: [BookRecord] {
@@ -110,7 +116,7 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
     }
 
     private func checkExistingRecords(against record: BookRecord) -> Bool {
-        if activeBookRecords.contains(where: {
+        if currentBookRecords.contains(where: {
             $0.restaurant == record.restaurant &&
                 $0.time == record.time
         }) {
@@ -184,58 +190,49 @@ extension CustomerBookingLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            assert(false, "Modification should be something")
+//            assert(false, "Modification should be something")
+            customerDidUpdateBookRecord(record)
         }
     }
 
     func didAddBookRecord(_ record: BookRecord) {
         os_log("Detected new book record", log: Log.newBookRecord, type: .info)
-        super.didAddRecord(record,
-                           customerActivity.currentBookings,
-                           customerActivity.bookingHistory)
+        super.didAddRecord(record, currentBookings, bookingHistory)
     }
 
     private func customerDidUpdateBookRecord(_ record: BookRecord) {
-        super.customerDidUpdateRecord(record,
-                                      customerActivity.currentBookings,
-                                      customerActivity.bookingHistory)
+        super.customerDidUpdateRecord(record, currentBookings, bookingHistory)
     }
 
     private func clashingRecords(with record: BookRecord) -> [BookRecord] {
-        activeBookRecords.filter {
+        currentBookRecords.filter {
             $0 != record && $0.time == record.time
         }
     }
 
     private func didConfirmAdmission(of record: BookRecord) {
-        super.didConfirmRecord(record,
-                               customerActivity.currentBookings)
+        super.didConfirmRecord(record, currentBookings)
 
+        // Auto withdraw clashing records
         withdrawBookRecords(clashingRecords(with: record), completion: {})
 
         notificationHandler.notifyBookingAccepted(record: record)
     }
 
     private func didServeBookRecord(_ record: BookRecord) {
-        super.didServeRecord(record,
-                             customerActivity.currentBookings,
-                             customerActivity.bookingHistory)
+        super.didServeRecord(record, currentBookings, bookingHistory)
 
     }
 
     private func didRejectBookRecord(_ record: BookRecord) {
-        super.didRejectRecord(record,
-                              customerActivity.currentBookings,
-                              customerActivity.bookingHistory)
+        super.didRejectRecord(record, currentBookings, bookingHistory)
 
         notificationHandler.retractBookNotifications(for: record)
         notificationHandler.notifyBookingRejected(record: record)
     }
 
     private func didWithdrawBookRecord(_ record: BookRecord) {
-        super.didWithdrawRecord(record,
-                                customerActivity.currentBookings,
-                                customerActivity.bookingHistory)
+        super.didWithdrawRecord(record, currentBookings, bookingHistory)
 
         notificationHandler.retractBookNotifications(for: record)
     }

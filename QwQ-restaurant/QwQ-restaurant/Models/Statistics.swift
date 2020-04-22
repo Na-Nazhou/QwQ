@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum StatsType {
-    case daily
-    case weekly
-    case monthly
-}
-
 class Statistics {
     let fromDate: Date
     let toDate: Date

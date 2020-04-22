@@ -1,5 +1,3 @@
-import Foundation
-
 class RestaurantActivity {
     // MARK: Restaurant as singleton
     private static var restaurantActivity: RestaurantActivity?
