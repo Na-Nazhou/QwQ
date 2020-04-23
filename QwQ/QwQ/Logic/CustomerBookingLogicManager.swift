@@ -23,6 +23,9 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
     private var bookingHistory: RecordCollection<BookRecord> {
         customerActivity.bookingHistory
     }
+    private var missedBookings: RecordCollection<BookRecord> {
+        RecordCollection<BookRecord>()
+    }
 
     private var currentBookRecords: [BookRecord] {
         customerActivity.currentBookings.records
@@ -197,11 +200,11 @@ extension CustomerBookingLogicManager {
 
     func didAddBookRecord(_ record: BookRecord) {
         os_log("Detected new book record", log: Log.newBookRecord, type: .info)
-        super.didAddRecord(record, currentBookings, bookingHistory)
+        super.didAddRecord(record, currentBookings, missedBookings, bookingHistory)
     }
 
     private func customerDidUpdateBookRecord(_ record: BookRecord) {
-        super.customerDidUpdateRecord(record, currentBookings, bookingHistory)
+        super.customerDidUpdateRecord(record, currentBookings, missedBookings, bookingHistory)
     }
 
     private func clashingRecords(with record: BookRecord) -> [BookRecord] {

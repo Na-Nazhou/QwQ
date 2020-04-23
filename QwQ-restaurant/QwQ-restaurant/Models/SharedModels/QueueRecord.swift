@@ -169,6 +169,9 @@ extension QueueRecord {
                 }
                 return .confirmedAdmission
             }
+            if missTime != nil && readmitTime == nil {
+                return .missedAndPending
+            }
             return .admitted
         }
         if serveTime != nil {

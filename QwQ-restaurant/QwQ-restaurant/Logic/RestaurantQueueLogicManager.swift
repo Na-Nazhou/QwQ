@@ -50,7 +50,12 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     }
 
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
-        let new = getUpdatedRecord(record: record, event: .admit)
+        var new: QueueRecord
+        if record.wasOnceMissed {
+            new = getUpdatedRecord(record: record, event: .readmit)
+        } else {
+            new = getUpdatedRecord(record: record, event: .admit)
+        }
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
 
         // Update the estimatedAdmitTime for remaining current queue records
