@@ -15,8 +15,11 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
 
     func didAddRecord(_ record: T,
                       _ activeList: RecordCollection<T>,
+                      _ missedList: RecordCollection<T>,
                       _ historyList: RecordCollection<T>) {
-        if record.isActiveRecord {
+        if record.isMissedAndPending {
+            addRecord(record, to: missedList)
+        } else if record.isActiveRecord {
             addRecord(record, to: activeList)
         }
         if record.isHistoryRecord {
@@ -26,8 +29,10 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
 
     func customerDidUpdateRecord(_ record: T,
                                  _ activeList: RecordCollection<T>,
+                                 _ missedList: RecordCollection<T>,
                                  _ historyList: RecordCollection<T>) {
         os_log("Detected regular modification", log: Log.regularModification, type: .info)
+        updateRecord(record, in: missedList)
         updateRecord(record, in: activeList)
         updateRecord(record, in: historyList)
     }

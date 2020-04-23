@@ -176,11 +176,15 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 extension CustomerQueueLogicManager {
 
     // MARK: Syncing
-
     func didUpdateQueueRecord(_ record: QueueRecord) {
         guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             return
         }
+
+        print("\n\trecord status is: ")
+        print(record.status)
+        print("\told record status was: ")
+        print(oldRecord.status)
 
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
@@ -206,13 +210,16 @@ extension CustomerQueueLogicManager {
 
     func didAddQueueRecord(_ record: QueueRecord) {
         os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
-        super.didAddRecord(record, currentQueues, queueHistory)
+        if record.status == .missedAndPending {
+            super.didAddRecord(record, currentQueues, missedQueues, queueHistory)
+        }
+        super.didAddRecord(record, currentQueues, missedQueues, queueHistory)
     
         searchDelegate?.didUpdateQueueRecordCollection()
     }
 
     private func customerDidUpdateQueueRecord(_ record: QueueRecord) {
-        super.customerDidUpdateRecord(record, currentQueues, queueHistory)
+        super.customerDidUpdateRecord(record, currentQueues, missedQueues, queueHistory)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
