@@ -18,6 +18,15 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     private var customer: Customer {
         customerActivity.customer
     }
+    private var currentQueues: RecordCollection<QueueRecord> {
+        customerActivity.currentQueues
+    }
+    private var missedQueues: RecordCollection<QueueRecord> {
+        customerActivity.missedQueues
+    }
+    private var queueHistory: RecordCollection<QueueRecord> {
+        customerActivity.queueHistory
+    }
 
     private var currentQueueRecords: [QueueRecord] {
         customerActivity.currentQueues.records + customerActivity.missedQueues.records
@@ -167,11 +176,15 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 extension CustomerQueueLogicManager {
 
     // MARK: Syncing
-
     func didUpdateQueueRecord(_ record: QueueRecord) {
         guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             return
         }
+
+        print("\n\trecord status is: ")
+        print(record.status)
+        print("\told record status was: ")
+        print(oldRecord.status)
 
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
@@ -190,31 +203,32 @@ extension CustomerQueueLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-            assert(false, "Modification should be something")
+//            assert(false, "Modification should be something")
+            customerDidUpdateQueueRecord(record)
         }
     }
 
     func didAddQueueRecord(_ record: QueueRecord) {
         os_log("Detected new queue record", log: Log.newQueueRecord, type: .info)
-        super.didAddRecord(record,
-                           customerActivity.currentQueues,
-                           customerActivity.queueHistory)
+        if record.status == .missedAndPending {
+            super.didAddRecord(record, currentQueues, missedQueues, queueHistory)
+        }
+        super.didAddRecord(record, currentQueues, missedQueues, queueHistory)
+    
         searchDelegate?.didUpdateQueueRecordCollection()
     }
 
     private func customerDidUpdateQueueRecord(_ record: QueueRecord) {
-        super.customerDidUpdateRecord(record,
-                                      customerActivity.currentQueues,
-                                      customerActivity.queueHistory)
+        super.customerDidUpdateRecord(record, currentQueues, missedQueues, queueHistory)
     }
 
     private func didAdmitQueueRecord(_ record: QueueRecord) {
         os_log("Detected admission", log: Log.admitCustomer, type: .info)
         if record.wasOnceMissed {
-            super.removeRecord(record, from: customerActivity.missedQueues)
-            super.addRecord(record, to: customerActivity.currentQueues)
+            super.removeRecord(record, from: missedQueues)
+            super.addRecord(record, to: currentQueues)
         } else {
-            super.updateRecord(record, in: customerActivity.currentQueues)
+            super.updateRecord(record, in: currentQueues)
         }
 
         if clashingRecords(with: record).isEmpty {
@@ -226,46 +240,34 @@ extension CustomerQueueLogicManager {
 
     private func didMissQueueRecord(_ record: QueueRecord) {
         os_log("Detected miss", log: Log.missCustomer, type: .info)
-        addRecord(record, to: customerActivity.missedQueues)
-        removeRecord(record, from: customerActivity.currentQueues)
+        addRecord(record, to: missedQueues)
+        removeRecord(record, from: currentQueues)
     }
 
     private func didConfirmAdmission(of record: QueueRecord) {
-        super.didConfirmRecord(record,
-                               customerActivity.currentQueues)
+        super.didConfirmRecord(record, currentQueues)
 
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.notifyQueueConfirmed(record: record)
     }
 
     private func didServeQueueRecord(_ record: QueueRecord) {
-        super.didServeRecord(record,
-                             customerActivity.currentQueues,
-                             customerActivity.queueHistory)
+        super.didServeRecord(record, currentQueues, queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
     }
 
     private func didRejectQueueRecord(_ record: QueueRecord) {
-         super.didRejectRecord(record,
-                               customerActivity.currentQueues,
-                               customerActivity.queueHistory)
-        
-        super.didRejectRecord(record,
-                              customerActivity.missedQueues,
-                              customerActivity.queueHistory)
+        super.didRejectRecord(record, currentQueues, queueHistory)
+        super.didRejectRecord(record, missedQueues, queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
         notificationHandler.notifyQueueRejected(record: record)
     }
 
     private func didWithdrawQueueRecord(_ record: QueueRecord) {
-        super.didWithdrawRecord(record,
-                                customerActivity.currentQueues,
-                                customerActivity.queueHistory)
-        super.didWithdrawRecord(record,
-                                customerActivity.missedQueues,
-                                customerActivity.queueHistory)
+        super.didWithdrawRecord(record, currentQueues, queueHistory)
+        super.didWithdrawRecord(record, missedQueues, queueHistory)
 
         notificationHandler.retractQueueNotifications(for: record)
     }

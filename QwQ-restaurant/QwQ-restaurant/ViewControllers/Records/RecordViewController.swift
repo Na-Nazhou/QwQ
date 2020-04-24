@@ -95,7 +95,7 @@ class RecordViewController: UIViewController {
         actionButton.isEnabled = false
     }
 
-    // TODO
+    // TODO: add reject button
     private func setUpRejectButton() {
         actionButton.setTitle("REJECT", for: .normal)
         actionButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)

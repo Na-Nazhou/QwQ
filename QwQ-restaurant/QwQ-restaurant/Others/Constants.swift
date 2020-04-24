@@ -166,4 +166,5 @@ struct Constants {
     static let timeBufferForBookArrivalInMins = 15.0
     static let queueWaitConfirmTimeInMins = 3.0
     static let queueWaitArrivalInMins = 15.0
+    static let waitingTimePerQueueRecord = 10
 }

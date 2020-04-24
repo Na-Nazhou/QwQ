@@ -12,13 +12,21 @@ class QueueRecordViewController: RecordViewController {
     // MARK: Logic properties
     var queueLogic: RestaurantQueueLogic!
 
-    @IBAction override func handleAdmit(_ sender: Any) {
-        guard let queueRecord = record as? QueueRecord else {
-            return
-        }
+    override func setUpViews() {
+        guard record as? QueueRecord != nil else {
+             return
+         }
+
+        super.setUpViews()
 
         if !PermissionsManager.checkPermissions(Permission.acceptQueue) {
             hideActionButton()
+        }
+    }
+
+    @IBAction override func handleAdmit(_ sender: Any) {
+        guard let queueRecord = record as? QueueRecord else {
+            return
         }
     
         spinner = showSpinner(onView: view)
@@ -27,17 +35,17 @@ class QueueRecordViewController: RecordViewController {
     }
 
     @IBAction override func handleServe(_ sender: Any) {
-        guard let bookRecord = record as? QueueRecord else {
+        guard let queueRecord = record as? QueueRecord else {
             return
         }
 
         spinner = showSpinner(onView: view)
-        queueLogic.serveCustomer(record: bookRecord,
+        queueLogic.serveCustomer(record: queueRecord,
                                  completion: self.didUpdateRecord)
 
     }
 
-    // TODO
+    // TODO: add reject button 
     @IBAction override func handleReject(_ sender: Any) {
         guard let queueRecord = record as? QueueRecord else {
             return

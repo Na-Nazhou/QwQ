@@ -18,9 +18,21 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     private var restaurant: Restaurant {
         restaurantActivity.restaurant
     }
+    private var currentQueue: RecordCollection<QueueRecord> {
+        restaurantActivity.currentQueue
+    }
+    private var waitingQueue: RecordCollection<QueueRecord> {
+        restaurantActivity.waitingQueue
+    }
+    private var historyQueue: RecordCollection<QueueRecord> {
+        restaurantActivity.historyQueue
+    }
 
-    var currentRecords: [Record] {
-        restaurantActivity.currentRecords
+    private var currentRecords: [Record] {
+        RestaurantActivityLogicManager().currentRecords
+    }
+    private var currentQueueRecords: [QueueRecord] {
+        currentRecords.compactMap({ $0 as? QueueRecord })
     }
 
     override init() {
@@ -38,10 +50,18 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     }
 
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
-        let new = getUpdatedRecord(record: record, event: .admit)
+        var new: QueueRecord
+        if record.wasOnceMissed {
+            new = getUpdatedRecord(record: record, event: .readmit)
+        } else {
+            new = getUpdatedRecord(record: record, event: .admit)
+        }
         updateQueueRecord(oldRecord: record, newRecord: new, completion: completion)
-        // Update estimated admit time
-        // TODO
+
+        // Update the estimatedAdmitTime for remaining current queue records
+        var queueRecords = currentQueueRecords
+        queueRecords.removeAll(where: { $0 == record })
+        setEstimatedAdmitTime(for: queueRecords)
     }
 
     func serveCustomer(record: QueueRecord, completion: @escaping () -> Void) {
@@ -64,6 +84,33 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
         queueStorage.updateRecord(oldRecord: oldRecord, newRecord: newRecord,
                                   completion: completion)
     }
+}
+
+extension RestaurantQueueLogicManager {
+
+    // MARK: Syncing
+
+    func didAddQueueRecord(_ record: QueueRecord) {
+        didAddRecord(record, currentQueue, waitingQueue, historyQueue)
+
+        setEstimatedAdmitTime(for: record)
+    }
+
+    private func setEstimatedAdmitTime(for records: [QueueRecord]) {
+        for record in records {
+            setEstimatedAdmitTime(for: record)
+        }
+    }
+
+    private func setEstimatedAdmitTime(for record: QueueRecord) {
+        var newRecord = record
+        if record.isPendingAdmission {
+            if let estimatedAdmitTime = getEstimatedAdmitTime(of: record) {
+                newRecord.estimatedAdmitTime = estimatedAdmitTime
+            }
+            updateQueueRecord(oldRecord: record, newRecord: newRecord, completion: {})
+        }
+    }
 
     private func getQueueInFront(of newRecord: QueueRecord) -> Int {
         var count = 0
@@ -81,51 +128,46 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
         }
         return count
     }
-}
 
-extension RestaurantQueueLogicManager {
+    private func getEstimatedAdmitTime(of record: QueueRecord) -> Date? {
+        let queueSize = getQueueInFront(of: record)
+        let waitingTimePerRecord = Constants.waitingTimePerQueueRecord
 
-    // MARK: Syncing
-
-    func didAddQueueRecord(_ record: QueueRecord) {
-        // Set estimated admit time
-        // TODO: Assume average waiting time per customer is 10 minutes (replace with stats later)
-        var newRecord = record
-        if record.isPendingAdmission {
-            let queueSize = getQueueInFront(of: record)
-
-            if queueSize == 0 {
-                newRecord.estimatedAdmitTime = Calendar.current.date(byAdding: .minute, value: 5, to: Date())!
-            } else {
-                if let queueRecord = currentRecords[0] as? QueueRecord,
-                    let reference = queueRecord.estimatedAdmitTime {
-                    newRecord.estimatedAdmitTime = Calendar.current.date(byAdding: .minute,
-                                                                         value: queueSize * 10,
-                                                                         to: reference)!
-                }
-                if let bookRecord = currentRecords[0] as? BookRecord {
-                    newRecord.estimatedAdmitTime = Calendar.current.date(byAdding: .minute,
-                                                                         value: queueSize * 10,
-                                                                         to: bookRecord.time)!
-                }
+        if queueSize == 0 {
+            // If this is the first record in the current record list
+            if record.estimatedAdmitTime == nil {
+                // If there is no existing estimate, set to 10 min after the current time
+                return Calendar.current.date(byAdding: .minute,
+                                             value: waitingTimePerRecord,
+                                             to: Date())!
+            } else if let estimatedAdmitTime = record.estimatedAdmitTime, estimatedAdmitTime < Date() {
+                // If the estimated estimate is outdated, set to current time
+                return Date()
             }
-            updateQueueRecord(oldRecord: record, newRecord: newRecord, completion: {})
+        } else {
+            // For subsequent records, set estimate to number of ppl in front * 10min
+            if let queueRecord = currentRecords[0] as? QueueRecord,
+                let reference = queueRecord.estimatedAdmitTime {
+                return Calendar.current.date(byAdding: .minute,
+                                             value: queueSize * waitingTimePerRecord,
+                                             to: reference)!
+            }
+            if let bookRecord = currentRecords[0] as? BookRecord {
+                return Calendar.current.date(byAdding: .minute,
+                                             value: queueSize * waitingTimePerRecord,
+                                             to: bookRecord.time)!
+            }
         }
 
-        didAddRecord(newRecord,
-                     restaurantActivity.currentQueue,
-                     restaurantActivity.waitingQueue,
-                     restaurantActivity.historyQueue)
+        return nil
     }
 
     func didUpdateQueueRecord(_ record: QueueRecord) {
         if isAdmitModification(record) {
             addInitialAutoMissTimer(for: record)
         }
-        didUpdateRecord(record,
-                        restaurantActivity.currentQueue,
-                        restaurantActivity.waitingQueue,
-                        restaurantActivity.historyQueue)
+
+        didUpdateRecord(record, currentQueue, waitingQueue, historyQueue)
     }
 }
 
@@ -133,7 +175,7 @@ extension RestaurantQueueLogicManager {
 extension RestaurantQueueLogicManager {
 
     private func isAdmitModification(_ record: QueueRecord) -> Bool {
-        guard let oldRecord = restaurantActivity.currentQueue.records.first(where: { $0 == record }) else {
+        guard let oldRecord = currentQueue.find(record) else {
             return false
         }
         let change = record.getChangeType(from: oldRecord)
@@ -144,7 +186,7 @@ extension RestaurantQueueLogicManager {
     }
 
     private func isMissModification(_ record: QueueRecord) -> Bool {
-        guard let oldRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+        guard let oldRecord = waitingQueue.find(record) else {
             return false
         }
         if record.getChangeType(from: oldRecord) != .miss {
@@ -168,11 +210,12 @@ extension RestaurantQueueLogicManager {
 
     @objc private func handleInitialMissOrWaitTimer(timer: Timer) {
         os_log("Initial miss timer triggered.", log: Log.missCustomer, type: .info)
+
         guard let record = timer.userInfo as? QueueRecord,
-            restaurantActivity.waitingQueue.records.contains(record),
-            let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+            let updatedRecord = waitingQueue.find(record) else {
                 return
         }
+
         switch updatedRecord.status {
         case .admitted:
             if updatedRecord.wasOnceMissed {
@@ -188,27 +231,29 @@ extension RestaurantQueueLogicManager {
         }
     }
 
-    private func addDelayedAutoMissTimer(for qRecord: QueueRecord) {
-        var refTime = qRecord.admitTime!
-        if qRecord.readmitTime != nil {
-            refTime = qRecord.readmitTime!
+    private func addDelayedAutoMissTimer(for record: QueueRecord) {
+        var refTime = record.admitTime!
+        if record.readmitTime != nil {
+            refTime = record.readmitTime!
         }
         let serveArrivalTimer = Timer(
             fireAt: refTime.addingTimeInterval(60 * Constants.queueWaitArrivalInMins),
             interval: 1, target: self,
             selector: #selector(handleDelayedMissTimer),
-            userInfo: qRecord, repeats: false)
+            userInfo: record, repeats: false)
         RunLoop.main.add(serveArrivalTimer, forMode: .common)
     }
 
     @objc private func handleDelayedMissTimer(timer: Timer) {
         os_log("Delayed miss timer triggered.", log: Log.missCustomer, type: .info)
+
         guard let record = timer.userInfo as? QueueRecord,
-            restaurantActivity.waitingQueue.records.contains(record),
-            let updatedRecord = restaurantActivity.waitingQueue.records.first(where: { $0 == record }) else {
+            let updatedRecord = waitingQueue.find(record) else {
                 return
         }
+
         assert(updatedRecord.status == .confirmedAdmission)
+
         if updatedRecord.wasOnceMissed {
             rejectCustomer(record: updatedRecord, completion: {})
         } else {

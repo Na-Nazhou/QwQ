@@ -109,11 +109,11 @@ class ActivityCell: UICollectionViewCell {
     }
 
     private func disableRightButton() {
-        disableButton(button: rightButton)
+        rightButton.disable()
     }
 
     private func enableRightButton() {
-        enableButton(button: rightButton)
+        rightButton.enable()
     }
 
     private func hideActionButtons() {
@@ -124,16 +124,6 @@ class ActivityCell: UICollectionViewCell {
     private func showActionButtons() {
         leftButton.isHidden = false
         rightButton.isHidden = false
-    }
-
-    private func enableButton(button: UIButton) {
-        button.isEnabled = true
-        button.alpha = 1
-    }
-
-    private func disableButton(button: UIButton) {
-        button.isEnabled = false
-        button.alpha = 0.5
     }
 
     private func setEditButtonText(to title: String) {

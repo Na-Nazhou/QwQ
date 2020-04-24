@@ -16,7 +16,7 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
                       _ currentList: RecordCollection<T>,
                       _ waitingList: RecordCollection<T>,
                       _ historyList: RecordCollection<T>) {
-        if record.isPendingAdmission {
+        if record.isPendingAdmission || record.isMissedAndPending {
             if addRecord(record, to: currentList) {
                 self.activitiesDelegate?.didUpdateCurrentList()
             }
@@ -128,11 +128,9 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
         let time = Date()
         switch event {
         case .admit:
-            if record.wasOnceMissed {
-                new.readmitTime = time
-            } else {
-                new.admitTime = time
-            }
+            new.admitTime = time
+        case .readmit:
+            new.readmitTime = time
         case .serve:
             new.serveTime = time
         case .reject:
