@@ -6,6 +6,7 @@
 //
 
 struct StaffPosition: Codable, Equatable {
+
     let email: String
     let roleName: String
 }

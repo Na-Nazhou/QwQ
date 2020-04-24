@@ -50,6 +50,10 @@ struct Constants {
     static let resetPasswordTitle = "Reset Password"
     static let resetPasswordMessage = "Please check your email to reset your password."
 
+    // MARK: Staff Managemenr settings
+    static let cannotDeleteOwnerTitle = "Error - Cannot Delete Owner"
+    static let cannotDeleteOwnerMessage = "The owner account cannot be removed from the staff list."
+
     // MARK: Record settings
     static let admitCustomerTitle = "Admit Customer"
     static let admitCustomerMessage = "The customer has been notified."
@@ -58,7 +62,7 @@ struct Constants {
     static let rejectCustomerTitle = "Reject Customer"
     static let rejectCustomerMessage = "The customer has been rejected."
     static let recordDateFormat = "ddMMyyyy"
-    
+
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
@@ -85,6 +89,9 @@ struct Constants {
     static let activityCellHeight = CGFloat(300)
     static let statisticsReuseIdentifier = "statisticsCell"
     static let staffReuseIdentifier = "staffCell"
+    static let roleReuseIdentifier = "roleCell"
+    static let positionReuseIdentifier = "positionCell"
+    static let positionSelectorVCIdentifier = "positionSelectorVC"
     
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]

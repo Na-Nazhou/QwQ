@@ -21,6 +21,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     typealias Auth = FIRAuthenticator
     typealias RestaurantProfile = FIRRestaurantStorage
     typealias StaffProfile = FIRStaffStorage
+    typealias RoleStorage = FIRRoleStorage
 
     private var selectedUserType: UserType = .staff
 
@@ -133,6 +134,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        RoleStorage.defaultRole = restaurant.defaultRole
         RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)

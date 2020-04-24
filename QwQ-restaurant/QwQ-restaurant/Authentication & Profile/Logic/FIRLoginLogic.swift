@@ -63,6 +63,7 @@ class FIRLoginLogic: LoginLogic {
     }
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
+        RoleStorage.defaultRole = restaurant.defaultRole
         RestaurantPostLoginSetupManager.setUp(asIdentity: restaurant)
         delegate?.loginComplete()
     }

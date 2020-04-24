@@ -15,6 +15,8 @@ struct Restaurant: User {
     let address: String
     let menu: String
 
+    let defaultRole: String
+
     let minGroupSize: Int
     let maxGroupSize: Int
     let advanceBookingLimit: Int
@@ -96,7 +98,7 @@ struct Restaurant: User {
     }
 
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
+         defaultRole: String, maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
          queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
          autoOpenTime: TimeInterval? = nil, autoCloseTime: TimeInterval? = nil) {
         self.uid = uid
@@ -105,6 +107,7 @@ struct Restaurant: User {
         self.contact = contact
         self.address = address
         self.menu = menu
+        self.defaultRole = defaultRole
         self.queueOpenTimestamp = queueOpenTime == nil ? nil
             : Timestamp(date: queueOpenTime!)
         self.queueCloseTimestamp = queueCloseTime == nil ? nil
@@ -125,6 +128,7 @@ extension Restaurant {
         case contact
         case address
         case menu
+        case defaultRole
         case queueOpenTimestamp = "queueOpenTime"
         case queueCloseTimestamp = "queueCloseTime"
         case autoOpenTime

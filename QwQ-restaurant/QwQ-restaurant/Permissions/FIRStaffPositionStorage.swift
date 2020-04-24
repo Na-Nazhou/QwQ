@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import os
 
-class FIRStaffPositionStorage {
+class FIRStaffPositionStorage: StaffPositionStorage {
 
     typealias RestaurantProfile = FIRRestaurantStorage
 
@@ -31,7 +31,6 @@ class FIRStaffPositionStorage {
                 var staff = [StaffPosition]()
 
                 for document in querySnapshot!.documents {
-                    print(document.data())
                     let result = Result {
                         try document.data(as: StaffPosition.self)
                     }

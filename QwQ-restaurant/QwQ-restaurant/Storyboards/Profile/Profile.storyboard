@@ -818,16 +818,19 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-zN-jxi" userLabel="Role Label">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-zN-jxi" userLabel="Role Label">
                                                             <rect key="frame" x="476.5" y="0.0" width="198.5" height="100"/>
                                                             <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-i4-inq" userLabel="Edit Permissions Button">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-i4-inq" userLabel="Edit Permissions Button">
                                                             <rect key="frame" x="675" y="0.0" width="119" height="100"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <state key="normal" title="Edit Role"/>
+                                                            <connections>
+                                                                <action selector="editRole:" destination="lIr-VP-IJD" eventType="touchUpInside" id="dgu-pE-Xa3"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -915,12 +918,29 @@
                                 <rect key="frame" x="83.5" y="44.5" width="667" height="133.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Staff Roles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaC-gf-3bV">
-                                        <rect key="frame" x="0.0" y="0.0" width="667" height="133.5"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="667" height="35"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWl-TT-AGS">
+                                        <rect key="frame" x="0.0" y="35" width="667" height="98.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Role:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7h-lg-c1C">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="98.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sxa-5Q-aKu">
+                                                <rect key="frame" x="200" y="0.0" width="467" height="98.5"/>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Sxa-5Q-aKu" firstAttribute="width" secondItem="See-ur-RO3" secondAttribute="width" multiplier="0.7" id="Ys0-CE-rDr"/>
+                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="guc-Fq-tDo">
                                 <rect key="frame" x="20" y="242.5" width="794" height="799.5"/>
@@ -1007,6 +1027,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JN-Ez-sdP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2453.9568345323742" y="2188.4892086330938"/>
+        </scene>
+        <!--RoleSelector-->
+        <scene sceneID="wxl-Dm-tnM">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="positionSelectorVC" storyboardName="RoleSelector" id="gPD-77-tAg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZm-ac-arh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2910" y="1505"/>
         </scene>
     </scenes>
     <resources>

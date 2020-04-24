@@ -15,14 +15,24 @@ class AddStaffViewController: UIViewController {
 
     private var spinner: UIView?
 
+    typealias RoleStorage = FIRRoleStorage
     typealias PositionStorage = FIRStaffPositionStorage
 
+    private var defaultRole: String {
+        return RoleStorage.defaultRole ?? ""
+    }
+
     private var staffPositions: [StaffPosition] = []
+    private var roles: [Role] = []
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
         PositionStorage.getAllRestaurantStaff(completion: getAllRestaurantStaffComplete(staffPositions:),
                                               errorHandler: handleError(error:))
+
+        RoleStorage.getRestaurantRoles(completion: getRestaurantRolesComplete(roles:),
+                                       errorHandler: handleError(error:))
+
         super.viewWillAppear(animated)
     }
 
@@ -37,8 +47,11 @@ class AddStaffViewController: UIViewController {
         self.staffPositions = staffPositions
         staffTableView.reloadData()
 
-        removeSpinner(spinner
-        )
+        removeSpinner(spinner)
+    }
+
+    private func getRestaurantRolesComplete(roles: [Role]) {
+        self.roles = roles
     }
     
     @IBAction private func handleAdd(_ sender: Any) {
@@ -69,7 +82,7 @@ class AddStaffViewController: UIViewController {
             return
         }
 
-        staffPositions.append(StaffPosition(email: email, roleName: "Server"))
+        staffPositions.append(StaffPosition(email: email, roleName: defaultRole))
         staffTableView.reloadData()
     }
 
@@ -109,6 +122,7 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
         
         let position = staffPositions[indexPath.row]
         staffCell.setUpViews(staffPosition: position)
+        staffCell.delegate = self
         
         return staffCell
     }
@@ -121,10 +135,59 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+
+            let toDelete = staffPositions[indexPath.item]
+
+            guard toDelete.roleName != Constants.ownerPermissionsKey else {
+                showMessage(title: Constants.cannotDeleteOwnerTitle,
+                            message: Constants.cannotDeleteOwnerMessage,
+                            buttonText: Constants.okayTitle)
+                return
+            }
+
             staffPositions = staffPositions.filter {
                 $0 != staffPositions[indexPath.item]
             }
             staffTableView.reloadData()
         }
+    }
+}
+
+extension AddStaffViewController: StaffCellDelegate {
+    // adapted from https://slicode.com/showing-popover-from-tableview-cells/
+    func editRoleButtonPressed(cell: StaffCell, button: UIButton) {
+
+        let frame = button.frame
+        var popoverFrame = cell.convert(frame, to: staffTableView)
+        popoverFrame = staffTableView.convert(popoverFrame, to: view)
+        popoverFrame.origin.y -= 10
+
+        let positionSelector = self.storyboard?
+            .instantiateViewController(withIdentifier: Constants.positionSelectorVCIdentifier)
+            as? PositionSelectorViewController
+
+        positionSelector?.modalPresentationStyle = .popover
+        positionSelector?.delegate = self
+        positionSelector?.roles = roles
+        positionSelector?.email = cell.email
+
+        if let presentationController = positionSelector?.popoverPresentationController {
+            presentationController.permittedArrowDirections = .up
+            presentationController.sourceView = self.view
+            presentationController.sourceRect = popoverFrame
+            presentationController.delegate = self
+
+            if let positionSelector = positionSelector {
+                present(positionSelector, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension AddStaffViewController: RoleSelectorDelegate, UIPopoverPresentationControllerDelegate {
+    func roleSelected(controller: PositionSelectorViewController, didselectItem staffPosition: StaffPosition) {
+        print(staffPosition
+        )
+
     }
 }
