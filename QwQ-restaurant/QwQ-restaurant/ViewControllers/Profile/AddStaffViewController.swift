@@ -18,12 +18,12 @@ class AddStaffViewController: UIViewController {
     typealias RoleStorage = FIRRoleStorage
     typealias PositionStorage = FIRStaffPositionStorage
 
+    private var staffPositions: [StaffPosition] = []
+    private var roles: [Role] = []
+
     private var defaultRole: String {
         return RoleStorage.defaultRole ?? ""
     }
-
-    private var staffPositions: [StaffPosition] = []
-    private var roles: [Role] = []
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
@@ -116,7 +116,7 @@ class AddStaffViewController: UIViewController {
 
 extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        staffPositions.count
+        return staffPositions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

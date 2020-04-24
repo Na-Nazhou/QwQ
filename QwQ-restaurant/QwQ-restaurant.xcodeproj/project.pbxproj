@@ -570,9 +570,9 @@
 				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
 				7EE6D022241E393A00C1465E /* EditProfileViewController.swift */,
 				7EA7B4982432419400A6828F /* AddStaffViewController.swift */,
+				5C5006112451E0BE00605085 /* PositionSelectorViewController.swift */,
 				5C92811A2450BB5800A50DE0 /* SetRolesViewController.swift */,
 				5C50060D2451E09700605085 /* PermissionSelectorViewController.swift */,
-				5C5006112451E0BE00605085 /* PositionSelectorViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

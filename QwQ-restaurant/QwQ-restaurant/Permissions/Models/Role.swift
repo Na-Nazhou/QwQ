@@ -5,7 +5,7 @@
 //  Created by Daniel Wong on 20/4/20.
 //
 
-struct Role: Codable {
+struct Role: Codable, Equatable {
     let roleName: String
     let permissions: [Permission]
 
