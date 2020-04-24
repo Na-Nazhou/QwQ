@@ -15,7 +15,7 @@ class FIRStaffPositionStorage: StaffPositionStorage {
     static let dbRef = Firestore.firestore().collection(Constants.staffDirectory)
 
     static func getAllStaffPositions(completion: @escaping ([StaffPosition]) -> Void,
-                                      errorHandler: @escaping (Error) -> Void) {
+                                     errorHandler: @escaping (Error) -> Void) {
         guard let restaurantUID = RestaurantProfile.currentRestaurantUID else {
             errorHandler(ProfileError.InvalidRestaurant)
             return

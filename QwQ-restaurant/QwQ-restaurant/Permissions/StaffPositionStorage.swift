@@ -8,6 +8,6 @@
 protocol StaffPositionStorage {
 
     static func getAllStaffPositions(completion: @escaping ([StaffPosition]) -> Void,
-                                      errorHandler: @escaping (Error) -> Void)
+                                     errorHandler: @escaping (Error) -> Void)
     
 }

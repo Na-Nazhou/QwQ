@@ -28,7 +28,7 @@ class AddStaffViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
         PositionStorage.getAllStaffPositions(completion: getAllRestaurantStaffComplete(staffPositions:),
-                                              errorHandler: handleError(error:))
+                                             errorHandler: handleError(error:))
 
         RoleStorage.getRestaurantRoles(completion: getRestaurantRolesComplete(roles:),
                                        errorHandler: handleError(error:))
