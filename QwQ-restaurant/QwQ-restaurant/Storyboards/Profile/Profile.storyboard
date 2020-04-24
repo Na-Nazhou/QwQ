@@ -780,7 +780,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="handleAdd:" destination="uh7-Qf-lX3" eventType="touchUpInside" id="v52-xB-8ko"/>
                                             <segue destination="VrE-ye-hHz" kind="show" id="vXZ-NU-1Hg"/>
                                         </connections>
                                     </button>
@@ -819,20 +818,23 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-zN-jxi" userLabel="Role Label">
-                                                            <rect key="frame" x="476.5" y="0.0" width="238" height="100"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-zN-jxi" userLabel="Role Label">
+                                                            <rect key="frame" x="476.5" y="0.0" width="198.5" height="100"/>
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-i4-inq" userLabel="Edit Permissions Button">
-                                                            <rect key="frame" x="714.5" y="0.0" width="79.5" height="100"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                            <state key="normal" title="Edit"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-i4-inq" userLabel="Edit Permissions Button">
+                                                            <rect key="frame" x="675" y="0.0" width="119" height="100"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                            <state key="normal" title="Edit Role"/>
+                                                            <connections>
+                                                                <action selector="editRole:" destination="lIr-VP-IJD" eventType="touchUpInside" id="dgu-pE-Xa3"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="MAp-i4-inq" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.1" id="5qS-JJ-nTF"/>
+                                                        <constraint firstItem="MAp-i4-inq" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.15" id="5qS-JJ-nTF"/>
                                                         <constraint firstItem="3pm-f5-d6I" firstAttribute="width" secondItem="0O5-7K-TGt" secondAttribute="width" multiplier="0.6" id="zd2-KR-rtS"/>
                                                     </constraints>
                                                 </stackView>
@@ -901,10 +903,10 @@
             </objects>
             <point key="canvasLocation" x="1700.0000000000002" y="766.3316582914573"/>
         </scene>
-        <!--View Controller-->
+        <!--Set Roles View Controller-->
         <scene sceneID="d6B-jR-cBJ">
             <objects>
-                <viewController id="VrE-ye-hHz" sceneMemberID="viewController">
+                <viewController id="VrE-ye-hHz" customClass="SetRolesViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jzw-JP-0pE">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -916,18 +918,35 @@
                                 <rect key="frame" x="83.5" y="44.5" width="667" height="133.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Staff Roles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaC-gf-3bV">
-                                        <rect key="frame" x="0.0" y="0.0" width="667" height="133.5"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="667" height="35"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="35"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWl-TT-AGS">
+                                        <rect key="frame" x="0.0" y="35" width="667" height="98.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Role:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7h-lg-c1C">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="98.5"/>
+                                                <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sxa-5Q-aKu">
+                                                <rect key="frame" x="200" y="0.0" width="467" height="98.5"/>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Sxa-5Q-aKu" firstAttribute="width" secondItem="See-ur-RO3" secondAttribute="width" multiplier="0.7" id="Ys0-CE-rDr"/>
+                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="guc-Fq-tDo">
                                 <rect key="frame" x="20" y="242.5" width="794" height="799.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="HUp-sw-fnK" userLabel="roleCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="roleCell" rowHeight="100" id="HUp-sw-fnK" userLabel="roleCell" customClass="RoleCell" customModule="QwQ_restaurant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="794" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HUp-sw-fnK" id="aeh-R0-o6E">
@@ -972,6 +991,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pv5-FV-igm">
+                                <rect key="frame" x="20" y="30" width="41.5" height="41.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Pv5-FV-igm" secondAttribute="height" id="63Z-W8-hdy"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="back-icon"/>
+                                <connections>
+                                    <action selector="handleBack:" destination="VrE-ye-hHz" eventType="touchUpInside" id="wKY-IR-GNt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -979,11 +1008,14 @@
                             <constraint firstItem="faJ-GC-kAJ" firstAttribute="bottom" secondItem="guc-Fq-tDo" secondAttribute="bottom" constant="20" id="104-gH-nJh"/>
                             <constraint firstItem="See-ur-RO3" firstAttribute="centerX" secondItem="drc-rZ-WSt" secondAttribute="centerX" id="1OZ-lt-J5A"/>
                             <constraint firstItem="See-ur-RO3" firstAttribute="width" secondItem="drc-rZ-WSt" secondAttribute="width" multiplier="0.8" id="Cdq-6b-4V7"/>
+                            <constraint firstItem="Pv5-FV-igm" firstAttribute="width" secondItem="faJ-GC-kAJ" secondAttribute="width" multiplier="0.05" id="Cra-Ur-Q30"/>
+                            <constraint firstItem="Pv5-FV-igm" firstAttribute="top" secondItem="faJ-GC-kAJ" secondAttribute="top" constant="30" id="IOk-UL-U8v"/>
                             <constraint firstItem="drc-rZ-WSt" firstAttribute="height" secondItem="Jzw-JP-0pE" secondAttribute="height" multiplier="0.2" id="Mpu-ji-psp"/>
                             <constraint firstItem="drc-rZ-WSt" firstAttribute="leading" secondItem="faJ-GC-kAJ" secondAttribute="leading" id="Ogr-iE-cck"/>
                             <constraint firstItem="faJ-GC-kAJ" firstAttribute="trailing" secondItem="guc-Fq-tDo" secondAttribute="trailing" constant="20" id="SQo-xu-K0g"/>
                             <constraint firstItem="drc-rZ-WSt" firstAttribute="top" secondItem="faJ-GC-kAJ" secondAttribute="top" id="Stz-U0-krv"/>
                             <constraint firstItem="guc-Fq-tDo" firstAttribute="leading" secondItem="faJ-GC-kAJ" secondAttribute="leading" constant="20" id="cQ7-Jo-rQE"/>
+                            <constraint firstItem="Pv5-FV-igm" firstAttribute="leading" secondItem="faJ-GC-kAJ" secondAttribute="leading" constant="20" id="eHP-ay-IBd"/>
                             <constraint firstItem="See-ur-RO3" firstAttribute="height" secondItem="drc-rZ-WSt" secondAttribute="height" multiplier="0.6" id="fFw-U0-qvv"/>
                             <constraint firstItem="drc-rZ-WSt" firstAttribute="trailing" secondItem="faJ-GC-kAJ" secondAttribute="trailing" id="iln-75-vuz"/>
                             <constraint firstItem="See-ur-RO3" firstAttribute="centerY" secondItem="drc-rZ-WSt" secondAttribute="centerY" id="mxR-6M-iLn"/>
@@ -995,6 +1027,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JN-Ez-sdP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2453.9568345323742" y="2188.4892086330938"/>
+        </scene>
+        <!--RoleSelector-->
+        <scene sceneID="wxl-Dm-tnM">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="positionSelectorVC" storyboardName="RoleSelector" id="gPD-77-tAg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZm-ac-arh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2910" y="1505"/>
         </scene>
     </scenes>
     <resources>

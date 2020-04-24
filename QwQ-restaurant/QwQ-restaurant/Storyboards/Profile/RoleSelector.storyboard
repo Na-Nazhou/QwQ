@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iDW-yd-Hjk">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Position Selector View Controller-->
+        <scene sceneID="Tux-VH-W4o">
+            <objects>
+                <viewController id="iDW-yd-Hjk" customClass="PositionSelectorViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yf2-eP-Zsz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dqg-6C-7MU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="positionCell" id="u7b-XW-Efo" customClass="PositionCell" customModule="QwQ_restaurant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="43"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u7b-XW-Efo" id="flq-UL-lMg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Sf-g8-2bI">
+                                                    <rect key="frame" x="15" y="11" width="290" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0Sf-g8-2bI" secondAttribute="trailing" id="Q4v-9J-0eD"/>
+                                                <constraint firstItem="0Sf-g8-2bI" firstAttribute="leading" secondItem="flq-UL-lMg" secondAttribute="leadingMargin" id="gaW-HV-5nN"/>
+                                                <constraint firstItem="0Sf-g8-2bI" firstAttribute="top" secondItem="flq-UL-lMg" secondAttribute="topMargin" id="r2P-Mg-aaj"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0Sf-g8-2bI" secondAttribute="bottom" id="tIS-aZ-8N7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="roleLabel" destination="0Sf-g8-2bI" id="xSa-NT-Csy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="rRd-jI-GTc" firstAttribute="bottom" secondItem="Dqg-6C-7MU" secondAttribute="bottom" id="7cg-7k-3bD"/>
+                            <constraint firstItem="Dqg-6C-7MU" firstAttribute="top" secondItem="rRd-jI-GTc" secondAttribute="top" id="Sgv-Cx-zAO"/>
+                            <constraint firstItem="Dqg-6C-7MU" firstAttribute="leading" secondItem="rRd-jI-GTc" secondAttribute="leading" id="lF6-xT-7MN"/>
+                            <constraint firstItem="rRd-jI-GTc" firstAttribute="trailing" secondItem="Dqg-6C-7MU" secondAttribute="trailing" id="rtB-yi-GGd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rRd-jI-GTc"/>
+                    </view>
+                    <connections>
+                        <outlet property="positionTableView" destination="Dqg-6C-7MU" id="0rB-Wf-Ozp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wmi-c2-5SM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="120"/>
+        </scene>
+    </scenes>
+</document>

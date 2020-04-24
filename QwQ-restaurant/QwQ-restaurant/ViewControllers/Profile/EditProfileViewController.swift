@@ -32,6 +32,8 @@ class EditProfileViewController: UIViewController {
     typealias Profile = FIRRestaurantStorage
 
     private var uid: String?
+    private var defaultRole: String?
+
     private var queueOpenTime: Date?
     private var queueCloseTime: Date?
     private var imageViewToEdit: UIImageView?
@@ -140,8 +142,9 @@ class EditProfileViewController: UIViewController {
         }
         
         guard let uid = uid, let name = trimmedName, let email = trimmedEmail, let contact = trimmedContact,
-            let address = trimmedAddress, let menu = menu, let minGroupSize = minGroupSize,
-            let maxGroupSize = maxGroupSize, let advanceBookingLimit = advanceBookingLimit else {
+            let address = trimmedAddress, let menu = menu, let defaultRole = defaultRole,
+            let minGroupSize = minGroupSize, let maxGroupSize = maxGroupSize,
+            let advanceBookingLimit = advanceBookingLimit else {
                 return
         }
         
@@ -160,7 +163,7 @@ class EditProfileViewController: UIViewController {
         }
 
         let restaurant = Restaurant(uid: uid, name: name, email: email, contact: contact,
-                                    address: address, menu: menu,
+                                    address: address, menu: menu, defaultRole: defaultRole,
                                     maxGroupSize: maxGroupSize, minGroupSize: minGroupSize,
                                     advanceBookingLimit: advanceBookingLimit,
                                     queueOpenTime: queueOpenTime, queueCloseTime: queueCloseTime,
@@ -178,6 +181,7 @@ class EditProfileViewController: UIViewController {
 
     private func getRestaurantInfoComplete(restaurant: Restaurant) {
         uid = restaurant.uid
+        defaultRole = restaurant.defaultRole
         queueOpenTime = restaurant.queueOpenTime
         queueCloseTime = restaurant.queueCloseTime
 

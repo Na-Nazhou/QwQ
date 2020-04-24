@@ -7,8 +7,10 @@
 
 import FirebaseFirestore
 
-class FIRRoleStorage {
+class FIRRoleStorage: RoleStorage {
     typealias RestaurantStorage = FIRRestaurantStorage
+
+    static var defaultRole: String?
 
     static let dbRef = Firestore.firestore().collection(Constants.restaurantsDirectory)
 

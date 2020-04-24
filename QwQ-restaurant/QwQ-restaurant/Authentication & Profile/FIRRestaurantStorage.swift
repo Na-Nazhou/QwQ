@@ -33,7 +33,7 @@ class FIRRestaurantStorage: RestaurantStorage {
                 .setData(from:
                     Restaurant(uid: uid, name: signupDetails.name,
                                email: email, contact: signupDetails.contact,
-                               address: "", menu: "",
+                               address: "", menu: "", defaultRole: Constants.serverPermissionsKey,
                                maxGroupSize: Restaurant.defaultMaxGroupSize,
                                minGroupSize: Restaurant.defaultMinGroupSize,
                                advanceBookingLimit: Restaurant.defaultAdvanceBookingLimit)
