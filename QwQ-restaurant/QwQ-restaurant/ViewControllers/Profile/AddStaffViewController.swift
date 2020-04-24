@@ -27,7 +27,7 @@ class AddStaffViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
-        PositionStorage.getAllRestaurantStaff(completion: getAllRestaurantStaffComplete(staffPositions:),
+        PositionStorage.getAllStaffPositions(completion: getAllRestaurantStaffComplete(staffPositions:),
                                               errorHandler: handleError(error:))
 
         RoleStorage.getRestaurantRoles(completion: getRestaurantRolesComplete(roles:),
@@ -52,6 +52,9 @@ class AddStaffViewController: UIViewController {
 
     private func getRestaurantRolesComplete(roles: [Role]) {
         self.roles = roles
+        self.roles.removeAll { (role) -> Bool in
+            role.roleName == "Owner"
+        }
     }
     
     @IBAction private func handleAdd(_ sender: Any) {
@@ -82,7 +85,12 @@ class AddStaffViewController: UIViewController {
             return
         }
 
-        staffPositions.append(StaffPosition(email: email, roleName: defaultRole))
+        let staffPosition = StaffPosition(email: email, roleName: defaultRole)
+
+        PositionStorage.updateStaffPosition(staffPosition: staffPosition,
+                                            errorHandler: handleError(error:))
+
+        staffPositions.append(staffPosition)
         staffTableView.reloadData()
     }
 
@@ -145,6 +153,8 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
                 return
             }
 
+            PositionStorage.deleteStaffPosition(staffPosition: toDelete)
+
             staffPositions = staffPositions.filter {
                 $0 != staffPositions[indexPath.item]
             }
@@ -154,6 +164,7 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddStaffViewController: StaffCellDelegate {
+    
     // adapted from https://slicode.com/showing-popover-from-tableview-cells/
     func editRoleButtonPressed(cell: StaffCell, button: UIButton) {
 
@@ -168,8 +179,8 @@ extension AddStaffViewController: StaffCellDelegate {
 
         positionSelector?.modalPresentationStyle = .popover
         positionSelector?.delegate = self
+        positionSelector?.owner = cell
         positionSelector?.roles = roles
-        positionSelector?.email = cell.email
 
         if let presentationController = positionSelector?.popoverPresentationController {
             presentationController.permittedArrowDirections = .up
@@ -185,9 +196,14 @@ extension AddStaffViewController: StaffCellDelegate {
 }
 
 extension AddStaffViewController: RoleSelectorDelegate, UIPopoverPresentationControllerDelegate {
-    func roleSelected(controller: PositionSelectorViewController, didselectItem staffPosition: StaffPosition) {
-        print(staffPosition
-        )
+    func roleSelected(controller: PositionSelectorViewController, selectedRole: String, owner: StaffCell) {
+
+        let staffPosition = StaffPosition(email: owner.email, roleName: selectedRole)
+
+        PositionStorage.updateStaffPosition(staffPosition: staffPosition,
+                                            errorHandler: handleError(error:))
+
+        owner.updateRoleLabel(roleName: selectedRole)
 
     }
 }

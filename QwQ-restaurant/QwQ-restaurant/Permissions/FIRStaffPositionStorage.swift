@@ -14,7 +14,7 @@ class FIRStaffPositionStorage: StaffPositionStorage {
 
     static let dbRef = Firestore.firestore().collection(Constants.staffDirectory)
 
-    static func getAllRestaurantStaff(completion: @escaping ([StaffPosition]) -> Void,
+    static func getAllStaffPositions(completion: @escaping ([StaffPosition]) -> Void,
                                       errorHandler: @escaping (Error) -> Void) {
         guard let restaurantUID = RestaurantProfile.currentRestaurantUID else {
             errorHandler(ProfileError.InvalidRestaurant)
@@ -48,5 +48,28 @@ class FIRStaffPositionStorage: StaffPositionStorage {
 
                 completion(staff)
             }
+    }
+
+    static func updateStaffPosition(staffPosition: StaffPosition, errorHandler: @escaping (Error) -> Void) {
+        guard let restaurantUID = RestaurantProfile.currentRestaurantUID else {
+            errorHandler(ProfileError.InvalidRestaurant)
+            return
+        }
+
+        let docRef = dbRef.document(staffPosition.email)
+
+        docRef.setData([Constants.roleNameKey: staffPosition.roleName,
+                        Constants.emailKey: staffPosition.email,
+                        Constants.assignedRestaurantKey: restaurantUID],
+                       merge: true) { (error) in
+                            if let error = error {
+                                errorHandler(error)
+                            }
+        }
+    }
+
+    static func deleteStaffPosition(staffPosition: StaffPosition) {
+        let docRef = dbRef.document(staffPosition.email)
+        docRef.delete()
     }
 }

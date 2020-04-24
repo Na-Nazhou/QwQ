@@ -32,6 +32,10 @@ class StaffCell: UITableViewCell {
         }
     }
 
+    func updateRoleLabel(roleName: String) {
+        roleLabel.text = roleName
+    }
+
     @IBAction func editRole(_ sender: UIButton) {
         delegate?.editRoleButtonPressed(cell: self, button: sender)
     }

@@ -14,7 +14,7 @@ class PositionSelectorViewController: UIViewController {
     weak var delegate: RoleSelectorDelegate?
 
     var roles: [Role]?
-    var email: String?
+    weak var owner: StaffCell?
 
     override func viewDidLoad() {
         positionTableView.delegate = self
@@ -52,13 +52,12 @@ extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let roles = roles, let email = email else {
+        guard let roles = roles, let owner = owner else {
             return
         }
         let selectedRole = roles[indexPath.row].roleName
-        let staffPosition = StaffPosition(email: email, roleName: selectedRole)
-        
-        self.delegate?.roleSelected(controller: self, didselectItem: staffPosition)
+
+        self.delegate?.roleSelected(controller: self, selectedRole: selectedRole, owner: owner)
         self.dismiss(animated: true, completion: nil)
     }
 }

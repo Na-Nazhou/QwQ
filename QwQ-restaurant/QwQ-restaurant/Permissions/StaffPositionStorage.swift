@@ -7,7 +7,7 @@
 
 protocol StaffPositionStorage {
 
-    static func getAllRestaurantStaff(completion: @escaping ([StaffPosition]) -> Void,
+    static func getAllStaffPositions(completion: @escaping ([StaffPosition]) -> Void,
                                       errorHandler: @escaping (Error) -> Void)
     
 }
