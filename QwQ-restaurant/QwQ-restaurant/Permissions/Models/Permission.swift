@@ -37,4 +37,8 @@ enum Permission: String, Codable {
          Permission.rejectBooking, Permission.addStaff, Permission.editProfile]
     }
 
+    static var allPermissions: [Permission] {
+        return ownerPermissions
+    }
+
 }

@@ -99,7 +99,6 @@ class FIRRoleStorage: RoleStorage {
     }
 
     static func setRestaurantRoles(roles: [Role],
-                                   completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
 
         guard let currentUID = RestaurantStorage.currentRestaurantUID else {
@@ -115,7 +114,6 @@ class FIRRoleStorage: RoleStorage {
             try? docRef.setData(from: role)
         }
 
-        completion()
     }
 
     static func deleteCurrentRoles(completion: @escaping () -> Void,

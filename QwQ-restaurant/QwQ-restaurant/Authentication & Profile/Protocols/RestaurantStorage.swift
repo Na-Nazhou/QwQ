@@ -36,6 +36,8 @@ protocol RestaurantStorage {
                                            image: UIImage,
                                            errorHandler: @escaping (Error) -> Void)
 
+    static func setDefaultRole(roleName: String, errorHandler: @escaping (Error) -> Void)
+
     // MARK: - Restaurant Listener
 
     static func registerListener(for restaurant: Restaurant)

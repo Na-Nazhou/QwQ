@@ -25,6 +25,10 @@ class AddStaffViewController: UIViewController {
         return RoleStorage.defaultRole ?? ""
     }
 
+    private var trimmedEmail: String? {
+        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
         PositionStorage.getAllStaffPositions(completion: getAllRestaurantStaffComplete(staffPositions:),
@@ -58,8 +62,6 @@ class AddStaffViewController: UIViewController {
     }
     
     @IBAction private func handleAdd(_ sender: Any) {
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         guard let email = trimmedEmail else {
             return
         }
@@ -92,6 +94,8 @@ class AddStaffViewController: UIViewController {
 
         staffPositions.append(staffPosition)
         staffTableView.reloadData()
+
+        emailTextField.text = ""
     }
 
     @IBAction private func handleBack(_ sender: Any) {

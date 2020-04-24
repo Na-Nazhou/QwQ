@@ -224,10 +224,10 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="rJj-QF-aSP"/>
                             </scrollView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zIB-8k-qXX">
-                                <rect key="frame" x="542.5" y="30" width="261.5" height="21"/>
+                                <rect key="frame" x="514.5" y="30" width="289.5" height="21"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-TX-cFF">
-                                        <rect key="frame" x="0.0" y="0.5" width="98" height="20"/>
+                                        <rect key="frame" x="0.0" y="1" width="110" height="19"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Add staff" image="plus.rectangle" catalog="system"/>
@@ -236,7 +236,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwe-M6-rc9">
-                                        <rect key="frame" x="113" y="0.5" width="55.5" height="20.5"/>
+                                        <rect key="frame" x="125" y="0.5" width="61.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Edit" image="square.and.pencil" catalog="system"/>
@@ -245,7 +245,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b46-bc-fw5">
-                                        <rect key="frame" x="183.5" y="0.0" width="78" height="21"/>
+                                        <rect key="frame" x="201.5" y="0.0" width="88" height="21"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Logout" image="square.and.arrow.up" catalog="system"/>
@@ -926,11 +926,11 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="65U-FS-dat">
                                         <rect key="frame" x="0.0" y="55" width="584" height="46"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="jane@hotmail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yLA-Ax-88k">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Role name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yLA-Ax-88k">
                                                 <rect key="frame" x="0.0" y="0.0" width="409" height="46"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" textContentType="organization-title"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nty-ZS-5eT">
                                                 <rect key="frame" x="429" y="0.0" width="155" height="46"/>
@@ -938,6 +938,9 @@
                                                 <state key="normal" title="ADD">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="handleAdd:" destination="VrE-ye-hHz" eventType="touchUpInside" id="zil-4v-PSP"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -981,30 +984,34 @@
                                             <rect key="frame" x="0.0" y="0.0" width="794" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egD-Uk-ipr">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="egD-Uk-ipr">
                                                     <rect key="frame" x="0.0" y="0.0" width="794" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvP-A0-lQc" userLabel="Role Name">
                                                             <rect key="frame" x="0.0" y="0.0" width="159" height="100"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="List of permissions" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-8r-d2k">
-                                                            <rect key="frame" x="159" y="0.0" width="555.5" height="100"/>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="List of permissions" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-8r-d2k">
+                                                            <rect key="frame" x="179" y="0.0" width="515.5" height="100"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dh-oZ-dYs">
                                                             <rect key="frame" x="714.5" y="0.0" width="79.5" height="100"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                             <state key="normal" title="Edit"/>
+                                                            <connections>
+                                                                <action selector="handleEdit:" destination="HUp-sw-fnK" eventType="touchUpInside" id="9JV-LI-deT"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="3dh-oZ-dYs" firstAttribute="width" secondItem="egD-Uk-ipr" secondAttribute="width" multiplier="0.1" id="N0g-wZ-SOM"/>
+                                                        <constraint firstAttribute="height" constant="80" id="Rnr-l0-ADS"/>
                                                         <constraint firstItem="qvP-A0-lQc" firstAttribute="width" secondItem="egD-Uk-ipr" secondAttribute="width" multiplier="0.2" id="f2c-mV-Pxf"/>
                                                     </constraints>
                                                 </stackView>
@@ -1017,7 +1024,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="editButton" destination="3dh-oZ-dYs" id="eoV-FY-TjR"/>
+                                            <outlet property="editButton" destination="3dh-oZ-dYs" id="vwj-Ff-PL9"/>
                                             <outlet property="permissionsTextView" destination="Dk2-8r-d2k" id="LKe-hC-SdZ"/>
                                             <outlet property="roleNameLabel" destination="qvP-A0-lQc" id="0yS-FV-Kel"/>
                                         </connections>
@@ -1059,6 +1066,7 @@
                     <connections>
                         <outlet property="defaultRolePicker" destination="Sxa-5Q-aKu" id="gaJ-Cp-4r4"/>
                         <outlet property="emailTextField" destination="yLA-Ax-88k" id="Oin-lc-Ddr"/>
+                        <outlet property="roleNameField" destination="yLA-Ax-88k" id="fXE-Q4-OPX"/>
                         <outlet property="roleTableView" destination="guc-Fq-tDo" id="Hyg-KT-2S5"/>
                     </connections>
                 </viewController>
@@ -1073,6 +1081,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZm-ac-arh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2910" y="1505"/>
+        </scene>
+        <!--PermissionSelector-->
+        <scene sceneID="9bs-jT-pcX">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="permissionSelectorVC" storyboardName="PermissionSelector" id="0hr-dc-ik4" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8qT-eo-eYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2910" y="2183"/>
         </scene>
     </scenes>
     <resources>

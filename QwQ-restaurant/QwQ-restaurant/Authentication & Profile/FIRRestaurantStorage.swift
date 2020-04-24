@@ -146,6 +146,17 @@ class FIRRestaurantStorage: RestaurantStorage {
         SDImageCache.shared.removeImage(forKey: storageRef.child("\(uid).png").fullPath, withCompletion: nil)
     }
 
+    static func setDefaultRole(roleName: String, errorHandler: @escaping (Error) -> Void) {
+        guard let uid = currentRestaurantUID else {
+            errorHandler(ProfileError.NotSignedIn)
+            return
+        }
+        let docRef = dbRef.document(uid)
+
+        docRef.setData([Constants.defaultRoleKey: roleName], merge: true)
+
+    }
+
     // MARK: - Restaurant Listener
     
     static func registerListener(for restaurant: Restaurant) {
