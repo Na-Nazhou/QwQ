@@ -58,6 +58,7 @@ class SetRolesViewController: UIViewController {
         RoleStorage.setRestaurantRoles(roles: roles, errorHandler: handleError(error:))
 
         let newDefaultRole = rolesWithoutOwner[defaultRolePicker.selectedRow(inComponent: 0)].roleName
+        RoleStorage.defaultRole = newDefaultRole
         RestaurantStorage.setDefaultRole(roleName: newDefaultRole, errorHandler: handleError(error:))
 
         super.viewWillDisappear(animated)
