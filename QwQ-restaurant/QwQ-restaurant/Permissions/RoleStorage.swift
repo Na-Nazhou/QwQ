@@ -21,6 +21,6 @@ protocol RoleStorage {
     static func setRestaurantRoles(roles: [Role],
                                    errorHandler: @escaping (Error) -> Void)
 
-    static func deleteCurrentRoles(completion: @escaping () -> Void,
-                                   errorHandler: @escaping (Error) -> Void)
+    static func deleteRole(role: Role, completion: @escaping (Role) -> Void,
+                           errorHandler: @escaping (Error) -> Void)
 }

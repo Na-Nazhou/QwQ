@@ -10,6 +10,7 @@ import Foundation
 enum PermissionError: Error {
     case PermissionsNotInitialised
     case NotGrantedPermission
+    case PermissionInUse
 }
 
 extension PermissionError: LocalizedError {
@@ -19,6 +20,8 @@ extension PermissionError: LocalizedError {
             return "Your permissions were not initialised properly!"
         case .NotGrantedPermission:
             return "You do not have permission to do so!"
+        case .PermissionInUse:
+            return "This permission is currently in use by staff!"
         }
     }
 }

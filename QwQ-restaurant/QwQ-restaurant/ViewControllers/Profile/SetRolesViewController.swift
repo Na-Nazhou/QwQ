@@ -50,6 +50,7 @@ class SetRolesViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         RoleStorage.setRestaurantRoles(roles: roles, errorHandler: handleError(error:))
+
         let newDefaultRole = roles[defaultRolePicker.selectedRow(inComponent: 0)].roleName
         RestaurantStorage.setDefaultRole(roleName: newDefaultRole, errorHandler: handleError(error:))
 
@@ -141,6 +142,8 @@ extension SetRolesViewController: UITableViewDelegate, UITableViewDataSource {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            spinner = showSpinner(onView: view)
+
             let toDelete = roles[indexPath.item]
 
             guard toDelete.roleName != Constants.ownerPermissionsKey else {
@@ -149,13 +152,18 @@ extension SetRolesViewController: UITableViewDelegate, UITableViewDataSource {
                             buttonText: Constants.okayTitle)
                 return
             }
-
-            roles = roles.filter {
-                $0 != roles[indexPath.item]
-            }
-
-            roleTableView.reloadData()
+            RoleStorage.deleteRole(role: toDelete,
+                                   completion: didDeleteRole(role:),
+                                   errorHandler: handleError(error:))
         }
+    }
+
+    private func didDeleteRole(role: Role) {
+        roles = roles.filter {
+            $0 != role
+        }
+        removeSpinner(spinner)
+        roleTableView.reloadData()
     }
 }
 
@@ -227,11 +235,11 @@ extension SetRolesViewController: PermissionSelectorDelegate, UIPopoverPresentat
             return
         }
         let newRole = Role(roleName: currentRole.roleName, permissions: permissions)
-        cell.setupViews(role: newRole)
-
         roles = roles.filter {
             $0 != currentRole
         }
         roles.append(newRole)
+
+        roleTableView.reloadData()
     }
 }
