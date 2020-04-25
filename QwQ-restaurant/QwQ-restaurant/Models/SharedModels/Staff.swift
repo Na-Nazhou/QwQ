@@ -1,10 +1,4 @@
-//
-//  Staff.swift
-//  QwQ-restaurant
-//
-//  Created by Daniel Wong on 4/4/20.
-//
-
+/// A restaurant staff, which is identified by his `uid` for equality and hash.
 struct Staff: User {
     let uid: String
     let name: String
