@@ -28,6 +28,8 @@ struct Constants {
     static let openAfterCloseMessage = "Open time must be before close time"
     static let duplicateEmailTitle = "Error - Duplicate Email"
     static let duplicateEmailMessage = "This email already exists."
+    static let duplicateRoleTitle = "Error - Duplicate Role"
+    static let duplicateRoleMessage = "This role already exists."
 
     // MARK: Alert settings
     static let successTitle = "Success"
@@ -52,7 +54,7 @@ struct Constants {
 
     // MARK: Staff Managemenr settings
     static let cannotDeleteOwnerTitle = "Error - Cannot Delete Owner"
-    static let cannotDeleteOwnerMessage = "The owner account cannot be removed from the staff list."
+    static let cannotDeleteOwnerMessage = "The owner cannot be removed from the list."
 
     // MARK: Record settings
     static let admitCustomerTitle = "Admit Customer"
@@ -92,6 +94,8 @@ struct Constants {
     static let roleReuseIdentifier = "roleCell"
     static let positionReuseIdentifier = "positionCell"
     static let positionSelectorVCIdentifier = "positionSelectorVC"
+    static let permissionReuseIdentifier = "permissionCell"
+    static let permissionSelectorVCIdentifier = "permissionSelectorVC"
     
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
@@ -155,6 +159,7 @@ struct Constants {
     static let isOwnerKey = "isOwner"
     static let permissionsKey = "permissions"
     static let roleNameKey = "roleName"
+    static let defaultRoleKey = "defaultRole"
 
     // MARK: Default permission names
     static let ownerPermissionsKey = "Owner"

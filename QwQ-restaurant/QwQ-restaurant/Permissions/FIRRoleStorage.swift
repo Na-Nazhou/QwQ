@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import os
 
 class FIRRoleStorage: RoleStorage {
     typealias RestaurantStorage = FIRRestaurantStorage
@@ -99,7 +100,6 @@ class FIRRoleStorage: RoleStorage {
     }
 
     static func setRestaurantRoles(roles: [Role],
-                                   completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void) {
 
         guard let currentUID = RestaurantStorage.currentRestaurantUID else {
@@ -109,37 +109,55 @@ class FIRRoleStorage: RoleStorage {
 
         let roleRef = dbRef.document(currentUID).collection(Constants.rolesDirectory)
 
-        for role in roles {
-            let docRef = roleRef.document(role.roleName)
+        do {
+            for role in roles {
+                let docRef = roleRef.document(role.roleName)
 
-            try? docRef.setData(from: role)
+                try docRef.setData(from: role)
+            }
+        } catch {
+            os_log("Error uploading roles",
+                   log: Log.createRoleError,
+                   type: .error,
+                   error.localizedDescription)
         }
 
-        completion()
     }
 
-    static func deleteCurrentRoles(completion: @escaping () -> Void,
-                                   errorHandler: @escaping (Error) -> Void) {
+    static func deleteRole(role: Role, completion: @escaping (Role) -> Void,
+                           errorHandler: @escaping (Error) -> Void) {
+        
         guard let currentUID = RestaurantStorage.currentRestaurantUID else {
             errorHandler(ProfileError.NoRestaurantAssigned)
             return
         }
 
-        let roleRef = dbRef.document(currentUID).collection(Constants.rolesDirectory)
+        let staffRef = Firestore.firestore().collection(Constants.staffDirectory)
 
-        roleRef.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                errorHandler(error)
-                return
-            }
+        staffRef.whereField(Constants.assignedRestaurantKey, isEqualTo: currentUID)
+            .whereField(Constants.roleNameKey, isEqualTo: role.roleName).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    errorHandler(error)
+                    return
+                }
 
-            for document in querySnapshot!.documents {
-                document.reference.delete()
+                if querySnapshot!.documents.isEmpty {
+                    deleteDocumentForRole(role: role, errorHandler: errorHandler)
+                    completion(role)
+                } else {
+                    errorHandler(PermissionError.PermissionInUse)
+                }
             }
+    }
+
+    private static func deleteDocumentForRole(role: Role, errorHandler: @escaping (Error) -> Void) {
+        guard let currentUID = RestaurantStorage.currentRestaurantUID else {
+            errorHandler(ProfileError.NoRestaurantAssigned)
+            return
         }
-
-        completion()
-
+        let roleRef = dbRef.document(currentUID).collection(Constants.rolesDirectory)
+        let docRef = roleRef.document(role.roleName)
+        docRef.delete()
     }
 
 }

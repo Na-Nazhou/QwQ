@@ -15,9 +15,30 @@ enum Permission: String, Codable {
     case addStaff
     case editProfile
 
+    var localizedDescription: String {
+        switch self {
+        case .acceptBooking:
+            return "Accept Booking"
+        case .rejectBooking:
+            return "Reject Booking"
+        case .acceptQueue:
+            return "Accept Queue"
+        case .rejectQueue:
+            return "Reject Queue"
+        case .addStaff:
+            return "Add Staff"
+        case .editProfile:
+            return "Edit Profile"
+        }
+    }
+
     static var ownerPermissions: [Permission] {
         [Permission.acceptQueue, Permission.acceptBooking, Permission.rejectQueue,
          Permission.rejectBooking, Permission.addStaff, Permission.editProfile]
+    }
+
+    static var allPermissions: [Permission] {
+        return ownerPermissions
     }
 
 }

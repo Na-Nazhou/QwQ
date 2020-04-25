@@ -18,12 +18,16 @@ class AddStaffViewController: UIViewController {
     typealias RoleStorage = FIRRoleStorage
     typealias PositionStorage = FIRStaffPositionStorage
 
+    private var staffPositions: [StaffPosition] = []
+    private var roles: [Role] = []
+
     private var defaultRole: String {
         return RoleStorage.defaultRole ?? ""
     }
 
-    private var staffPositions: [StaffPosition] = []
-    private var roles: [Role] = []
+    private var trimmedEmail: String? {
+        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         spinner = showSpinner(onView: view)
@@ -58,8 +62,6 @@ class AddStaffViewController: UIViewController {
     }
     
     @IBAction private func handleAdd(_ sender: Any) {
-        let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         guard let email = trimmedEmail else {
             return
         }
@@ -92,6 +94,8 @@ class AddStaffViewController: UIViewController {
 
         staffPositions.append(staffPosition)
         staffTableView.reloadData()
+
+        emailTextField.text = ""
     }
 
     @IBAction private func handleBack(_ sender: Any) {
@@ -116,7 +120,7 @@ class AddStaffViewController: UIViewController {
 
 extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        staffPositions.count
+        return staffPositions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
