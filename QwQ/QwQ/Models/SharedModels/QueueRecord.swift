@@ -1,6 +1,10 @@
 import Foundation
 import FirebaseFirestore
 
+/// A record for queues. Each queue record is identified by its `id`, in which equality and hash relies solely on.
+/// In addition to typical records, queue records have a time in which the customer started queueing.
+/// A queue record also has estimated time it will be admitted controlled by the restaurant.
+/// Invariants on a `Record` holds.
 struct QueueRecord: Record {
     let id: String
     let restaurant: Restaurant
@@ -23,6 +27,7 @@ struct QueueRecord: Record {
     let readmitTime: Date?
     let estimatedAdmitTime: Date?
 
+    /// A Firestore-compatible queue record dictionary representing a queue record.
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.customerKey] = customer.uid
@@ -60,6 +65,8 @@ struct QueueRecord: Record {
         return data
     }
 
+    /// Constructs a copy of a new queue record at `restaurant` for `customer` at `startTime`
+    /// with specified attendee details.
     init(restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date) {
@@ -69,6 +76,8 @@ struct QueueRecord: Record {
                   startTime: startTime)
     }
 
+    /// Constructs a copy of a queue record at `restaurant` for `customer` at `startTime` with record id `id`
+    /// and attendee details. Optional parameters for action times can also be provided to initialise this queue record.
     init(id: String, restaurant: Restaurant, customer: Customer,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          startTime: Date, admitTime: Date? = nil, serveTime: Date? = nil,
@@ -93,6 +102,8 @@ struct QueueRecord: Record {
         self.estimatedAdmitTime = estimatedAdmitTime
     }
 
+    /// Constructs a queue record for `customer` at `restaurant` from the given `dictionary`.
+    /// The `dictionary` should be a Firestore-compatible queue record dictionary.
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
         guard let groupSize = dictionary[Constants.groupSizeKey] as? Int,
             let babyChairQuantity = dictionary[Constants.babyChairQuantityKey] as? Int,
@@ -149,7 +160,10 @@ extension QueueRecord: Hashable {
 }
 
 extension QueueRecord {
+    /// Status of a queue record. A queue record can be missed at most once.
+    /// - Returns: `.invalid` if record fails to satisfy invariants; else returns the corresponding status.
     var status: RecordStatus {
+        // record can only be either withdrawn, rejected or served
         if withdrawTime != nil {
             return .withdrawn
         }
@@ -168,8 +182,11 @@ extension QueueRecord {
                     if confirmAdmissionTime! < missTime! {
                         return .missedAndPending
                     }
+                    // a missed record can only be confirmed admission (again)
+                    // after readmission. Otherwise it must have been confirmed prior to missing.
                     return .invalid
                 }
+                // a record can only be readmitted after it is missed
                 if readmitTime! < missTime! {
                     return .invalid
                 }
@@ -183,12 +200,16 @@ extension QueueRecord {
             }
             return .admitted
         }
+        // a record can only be served after it is admitted.
         if serveTime != nil {
             return .invalid
         }
         return .pendingAdmission
     }
 
+    /// Compares `old` and this record and returns the change detected.
+    /// Records with different id are not comparable.
+    /// - Returns: the record modification if valid, otherwise nil if comparison was invalid.
     func getChangeType(from old: Record) -> RecordModification? {
         if self.id != old.id {
             // not valid comparison

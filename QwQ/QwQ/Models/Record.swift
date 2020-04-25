@@ -1,12 +1,12 @@
-//
-//  Record.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 19/3/20.
-//
-
 import Foundation
 
+/// Represents the basic structure of all records. Each record has attendee information and time of actions performed.
+/// Typically, a record can only be admitted then missed only once.
+/// - Invariant: a valid record may only be served after it is admitted.
+/// - Invariant: a valid record may only be confirmed admission after it is admitted.
+/// - Invariant: a valid record may only be missed after it is admitted.
+/// - Invariant: a valid record may only be readmitted after it is missed.
+/// - Invariant: a valid record may only either be served, rejected or withdrawn.
 protocol Record {
     var id: String { get }
     var restaurant: Restaurant { get }

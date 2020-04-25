@@ -647,14 +647,14 @@
 			isa = PBXGroup;
 			children = (
 				D4AA685824303D8700F739CF /* Collection.swift */,
-				D4AA685724303D8700F739CF /* RecordModification.swift */,
-				D42A5434244B4AE9008FFB48 /* BookRecord.swift */,
 				D42A5433244B4AE9008FFB48 /* RecordCollection.swift */,
-				D42A5435244B4AE9008FFB48 /* RecordStatus.swift */,
 				D4EA85CD241B29CC009EB85B /* User.swift */,
 				D4EA85CC241B29CB009EB85B /* Customer.swift */,
 				D4EA85CE241B29CC009EB85B /* Restaurant.swift */,
+				D42A5435244B4AE9008FFB48 /* RecordStatus.swift */,
+				D4AA685724303D8700F739CF /* RecordModification.swift */,
 				61480555242290B1003D6D44 /* Record.swift */,
+				D42A5434244B4AE9008FFB48 /* BookRecord.swift */,
 				D4EA85CB241B29CB009EB85B /* QueueRecord.swift */,
 			);
 			name = SharedModels;
