@@ -6,9 +6,13 @@
 //
 
 import FirebaseFirestore
+import FirebaseStorage
+import SDWebImage
 import os
 
 class FIRRestaurantInfoStorage: RestaurantInfoStorage {
+
+    static let storageRef = Storage.storage().reference().child("profile-pics")
 
     static func getRestaurantFromUID(uid: String,
                                      completion: @escaping (Restaurant) -> Void,
@@ -36,6 +40,16 @@ class FIRRestaurantInfoStorage: RestaurantInfoStorage {
                        log: Log.createRestaurantError, type: .error, error.localizedDescription)
             }
         }
+    }
+
+    static func getRestaurantProfilePic(uid: String, imageView: UIImageView) {
+        let reference = storageRef.child("\(uid).png")
+
+        let url = NSURL.sd_URL(with: reference)
+
+        SDImageCache.shared.removeImage(forKey: url?.absoluteString)
+
+        imageView.sd_setImage(with: reference, placeholderImage: imageView.image)
     }
 
 }
