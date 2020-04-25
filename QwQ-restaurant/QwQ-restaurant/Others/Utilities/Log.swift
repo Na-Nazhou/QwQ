@@ -30,6 +30,7 @@ struct Log {
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
     
     // MARK: FBError
+    static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "FBError")
     static let addQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
     static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
     static let queueRetrievalError = OSLog(subsystem: subsystem, category: "FBError")

@@ -1,14 +1,8 @@
-//
-//  FBBookingStorage.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 25/3/20.
-//
-
 import FirebaseFirestore
 import Foundation
 import os.log
 
+/// A Firestore-based storage handler for bookings. Reads and writes to Firestore and listens to changes to documents in Firestore.
 class FIRBookingStorage: RestaurantBookingStorage {
     // MARK: Storage as singleton
     static let shared = FIRBookingStorage()
@@ -33,7 +27,12 @@ class FIRBookingStorage: RestaurantBookingStorage {
         db.collection(Constants.bookingsDirectory)
             .document(record.id)
     }
-
+    
+    /// Updates a book record from `oldRecord` to `newRecord` in Firestore.
+    /// - Parameters:
+    ///     - oldRecord: outdated record.
+    ///     - newRecord: updated record.
+    ///     - completion: procedure to perform when the record is updated on Firestore.
     func updateRecord(oldRecord: BookRecord, newRecord: BookRecord, completion: @escaping () -> Void) {
         let oldDocRef = getBookRecordDocument(record: oldRecord)
         oldDocRef.setData(newRecord.dictionary) { (err) in
@@ -47,7 +46,11 @@ class FIRBookingStorage: RestaurantBookingStorage {
                 completion()
         }
     }
-
+    
+    /// Updates multiple book records in Firestore.
+    /// - Parameters:
+    ///     - newRecords: updated records to be updated to.
+    ///     - completion: procedure to perform when all new records are written.
     func updateRecords(newRecords: [BookRecord], completion: @escaping () -> Void) {
         let batch = db.batch()
         for newRecord in newRecords {
@@ -69,12 +72,13 @@ class FIRBookingStorage: RestaurantBookingStorage {
 
 extension FIRBookingStorage {
     // MARK: - Listeners
-
+    
+    /// Register to listen to all book records of `restaurant`.
     func registerListener(for restaurant: Restaurant) {
         removeListener()
+
         let date = Date()
         let calendar = Calendar.current
-        // TODO: use open/close time
         let startTime = calendar.startOfDay(for: date)
         listener = db.collection(Constants.bookingsDirectory)
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
@@ -95,7 +99,8 @@ extension FIRBookingStorage {
                     case .modified:
                         completion = { record in self.delegateWork { $0.didUpdateBookRecord(record) } }
                     case .removed:
-                        print("\n\tDetected removal of book record from db which should not happen.\n")
+                        os_log("Detected removal of book record from db which should not happen.",
+                               log: Log.unexpectedDiffError, type: .error)
                         completion = { _ in }
                     }
 
@@ -106,7 +111,11 @@ extension FIRBookingStorage {
                 }
             }
     }
-
+    
+    /// Generates and uses the book record from the Firestore book record document.
+    /// - Parameters:
+    ///     - document: Firestore book record document
+    ///     - completion: procedure to perform on the `BookRecord` upon generating a valid `BookRecord`
     private func makeBookRecord(document: DocumentSnapshot,
                                 restaurant: Restaurant,
                                 completion: @escaping (BookRecord) -> Void) {
@@ -133,7 +142,8 @@ extension FIRBookingStorage {
                     completion(rec)
                 }, errorHandler: { _ in })
     }
-
+    
+    /// Removes any registered listener.
     func removeListener() {
         listener?.remove()
         listener = nil
@@ -142,15 +152,18 @@ extension FIRBookingStorage {
 
 extension FIRBookingStorage {
     // MARK: - Delegates
-
+    
+    /// Register `del` as a delegate of this component.
     func registerDelegate(_ del: BookingStorageSyncDelegate) {
         logicDelegates.add(del)
     }
-
+    
+    /// Unregister `del` from this component.
     func unregisterDelegate(_ del: BookingStorageSyncDelegate) {
         logicDelegates.remove(del)
     }
-
+    
+    /// Delegates all registered delegates to do work.
     private func delegateWork(doWork: (BookingStorageSyncDelegate) -> Void) {
         for delegate in logicDelegates.allObjects {
             guard let delegate = delegate as? BookingStorageSyncDelegate else {
