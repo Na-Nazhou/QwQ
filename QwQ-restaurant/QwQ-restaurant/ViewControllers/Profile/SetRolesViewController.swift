@@ -22,6 +22,12 @@ class SetRolesViewController: UIViewController {
 
     private var roles: [Role] = []
 
+    private var rolesWithoutOwner: [Role] {
+        return roles.filter { (role) -> Bool in
+            role.roleName != Constants.ownerPermissionsKey
+        }
+    }
+
     private var defaultRole: String {
         return RoleStorage.defaultRole ?? ""
     }
@@ -51,7 +57,8 @@ class SetRolesViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         RoleStorage.setRestaurantRoles(roles: roles, errorHandler: handleError(error:))
 
-        let newDefaultRole = roles[defaultRolePicker.selectedRow(inComponent: 0)].roleName
+        let newDefaultRole = rolesWithoutOwner[defaultRolePicker.selectedRow(inComponent: 0)].roleName
+        RoleStorage.defaultRole = newDefaultRole
         RestaurantStorage.setDefaultRole(roleName: newDefaultRole, errorHandler: handleError(error:))
 
         super.viewWillDisappear(animated)
@@ -94,7 +101,7 @@ class SetRolesViewController: UIViewController {
         defaultRolePicker.reloadAllComponents()
 
         for role in roles where role.roleName == defaultRole {
-            if let index = roles.firstIndex(of: role) {
+            if let index = rolesWithoutOwner.firstIndex(of: role) {
                 defaultRolePicker.selectRow(index, inComponent: 0, animated: false)
             }
         }
@@ -173,7 +180,7 @@ extension SetRolesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return roles.count
+        return rolesWithoutOwner.count
     }
 
     func pickerView(_ pickerView: UIPickerView,
@@ -187,7 +194,7 @@ extension SetRolesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
         label.font = UIFont(name: "Comfortaa", size: 20)
         label.textColor = .white
-        label.text = roles[row].roleName
+        label.text = rolesWithoutOwner[row].roleName
         label.textAlignment = .center
 
         return label
