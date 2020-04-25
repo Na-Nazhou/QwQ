@@ -77,8 +77,8 @@ class FIRProfileStorage: ProfileStorage {
         }
     }
 
-    static func getCustomerProfilePic(uid: String,
-                                      placeholder imageView: UIImageView) {
+    static func getProfilePic(uid: String,
+                              placeholder imageView: UIImageView) {
         let reference = storageRef.child("\(uid).png")
         guard let image = imageView.image else {
             return

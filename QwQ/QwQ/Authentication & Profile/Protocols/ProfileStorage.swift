@@ -24,8 +24,8 @@ protocol ProfileStorage {
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
                                 errorHandler: @escaping (Error) -> Void)
 
-    static func getCustomerProfilePic(uid: String,
-                                      placeholder imageView: UIImageView)
+    static func getProfilePic(uid: String,
+                              placeholder imageView: UIImageView)
 
     // MARK: - Customer Info Update Methods
 

@@ -98,7 +98,7 @@ class RestaurantViewController: UIViewController {
 //            }
 //        }
 
-        FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
+        FIRProfileStorage.getProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
         if queueLogic.canQueue(for: restaurant) {
             queueButton.alpha = 1
