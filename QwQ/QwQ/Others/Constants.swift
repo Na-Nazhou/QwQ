@@ -160,6 +160,10 @@ struct Constants {
     static let timeKey = "time"
     
     // MARK: Notification mesages
+    static let notificationPermissionRequiredTitle = "Notifications Required!"
+    static let notificationPermissionRequiredMessage = "Notifications are necessary to respond to your queues/bookings promptly!"
+    + " Please head over to Settings and enable notifications for QwQ."
+    
     static let bookingAcceptedMessage = "You can now view your accepted booking in the Activities page!"
         + " Please arrive on time."
     static let bookingRejectedMessage = "You may consider booking at other restaurants."

@@ -682,8 +682,8 @@
 			children = (
 				D4BE8C722445E5EE00ADF7F2 /* Protocols */,
 				D47852D024442EB8006393C7 /* LocalNotificationManager.swift */,
-				D47852D424445279006393C7 /* QwQNotification.swift */,
 				D47852D824447FE9006393C7 /* QwQNotificationManager.swift */,
+				D47852D424445279006393C7 /* QwQNotification.swift */,
 				D4BE8C702445DC6C00ADF7F2 /* QwQNotificationId.swift */,
 			);
 			path = MockNotification;
