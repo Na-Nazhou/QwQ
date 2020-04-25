@@ -41,7 +41,7 @@ class RecordViewController: UIViewController {
         wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
-        if record.isPendingAdmission {
+        if record.isPendingAdmission || record.isMissedAndPending {
             setUpAdmitButton()
         }
 
