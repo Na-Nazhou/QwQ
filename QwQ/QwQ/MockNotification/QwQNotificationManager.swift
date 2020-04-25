@@ -23,11 +23,11 @@ class QwQNotificationManager: QwQNotificationHandler {
         if isAccept {
             assert(record.admitTime != nil)
             keyword = "Accepted"
-            description = "You can now view your accepted booking in the Activities page! Please arrive on time."
+            description = Constants.bookingAcceptedMessage
         } else {
             assert(record.rejectTime != nil)
             keyword = "Rejected"
-            description = "You may consider booking at other restaurants."
+            description = Constants.bookingRejectedMessage
         }
 
         let notifId = QwQNotificationId(record: record, timeDelayInMinutes: 0)
@@ -45,7 +45,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifIdTimeToEnter = QwQNotificationId(record: record, targetTime: record.time)
         let notifTimeToEnter = QwQNotification(
             notifId: notifIdTimeToEnter,
-            title: "Time to Enter for Your Booking!",
+            title: Constants.bookingAdmittedTitle,
             description: "\(record.restaurant.name) is waiting for your arrival since \(record.time.toString()).",
             shouldSend: true)
         os_log("Book enter notif prepared.",
@@ -75,7 +75,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "Please respond -- \(record.restaurant.name) has admitted you!",
-            description: "Accept or reject the admission on the Activities page! \nRespond within: 3 min",
+            description: Constants.queueAdmittedMessage,
             shouldSend: true)
         os_log("Queue admittance notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
@@ -99,7 +99,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "2 minutes left to respond -- \(record.restaurant.name) has admitted you!",
-            description: "Accept or reject the admission on the Activities page! \nRespond within: 2 min",
+            description: Constants.queueAdmit1minMessage,
             shouldSend: true)
         os_log("Queue admit response (1 min mark) notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
@@ -123,7 +123,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "1 min left to respond -- \(record.restaurant.name) has admitted you!",
-            description: "Accept or reject the admission on the Activities page! \nRespond within: 1 min",
+            description: Constants.queueAdmit2minMessage,
             shouldSend: true)
         os_log("Queue admit response (2 min mark) notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
@@ -147,7 +147,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notif = QwQNotification(
             notifId: notifId,
             title: "Seats confirmed for \(record.restaurant.name)!",
-            description: "Please arrive within 15min from the admitted time.",
+            description: Constants.queueConfirmedAdmissionMessage,
             shouldSend: true)
         os_log("Queue confirm admit notif prepared.",
                log: Log.queueNotifScheduled, type: .info)
@@ -160,7 +160,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notif = QwQNotification(
             notifId: notifId,
             title: "You have been rejected by \(record.restaurant.name).",
-            description: "Please try to be prompt next time.",
+            description: Constants.queueRejectedMessage,
             shouldSend: true)
         
         os_log("Queue rejection notif scheduled.")
@@ -173,7 +173,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifMiss = QwQNotification(
             notifId: notifMissId,
             title: "Missed queue for: \(record.restaurant.name).",
-            description: "You have been pushed back in the queue. Please wait in the vicinity.",
+            description: Constants.queueMissedMessage,
             shouldSend: true)
         os_log("Queue admit missed notif prepared.",
                log: Log.queueNotifScheduled, type: .info)

@@ -159,7 +159,15 @@ struct Constants {
     static let startTimeKey = "startTime"
     static let timeKey = "time"
     
-    // MARK: Queue timed settings
-    static let queueWaitConfirmTimeInMins = 3
-    static let queueWaitArrivalInMins = 15
+    // MARK: Notification mesages
+    static let bookingAcceptedMessage = "You can now view your accepted booking in the Activities page! Please arrive on time."
+    static let bookingRejectedMessage = "You may consider booking at other restaurants."
+    static let bookingAdmittedTitle = "Time to Enter for Your Booking!"
+    static let queueAdmittedMessage = "Accept or reject the admission on the Activities page! \nRespond within: 3 min"
+    static let queueAdmit1minMessage = "Accept or reject the admission on the Activities page! \nRespond within: 2 min"
+    static let queueAdmit2minMessage = "Accept or reject the admission on the Activities page! \nRespond within: 1 min"
+    static let queueConfirmedAdmissionMessage = "Please arrive within 15min from the admitted time."
+    static let queueRejectedMessage = "Please try to be prompt next time."
+    static let queueMissedMessage = "You have been pushed back in the queue. Please wait in the vicinity."
+    
 }
