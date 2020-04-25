@@ -1,13 +1,7 @@
-//
-//  RestaurantQueueLogicManager.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 17/4/20.
-//
-
 import Foundation
 import os.log
 
+/// A restaurant queue logic manager.
 class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, RestaurantQueueLogic {
 
     // Storage
@@ -45,10 +39,12 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
     }
 
     deinit {
-        os_log("DEINITING queue logic manager", log: Log.deinitLogic, type: .info)
+        os_log("Deiniting queue logic manager", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 
+    /// Admits the `record` and updates the estimatted waiting time for remaining records in queue.
+    /// Performs completion upon succesful admission.
     func admitCustomer(record: QueueRecord, completion: @escaping () -> Void) {
         var new: QueueRecord
         if record.wasOnceMissed {
@@ -87,7 +83,6 @@ class RestaurantQueueLogicManager: RestaurantRecordLogicManager<QueueRecord>, Re
 }
 
 extension RestaurantQueueLogicManager {
-
     // MARK: Syncing
 
     func didAddQueueRecord(_ record: QueueRecord) {
@@ -171,8 +166,8 @@ extension RestaurantQueueLogicManager {
     }
 }
 
-// MARK: - Miss timers and miss penalties
 extension RestaurantQueueLogicManager {
+    // MARK: - Miss timers and miss penalties
 
     private func isAdmitModification(_ record: QueueRecord) -> Bool {
         guard let oldRecord = currentQueue.find(record) else {
@@ -195,6 +190,7 @@ extension RestaurantQueueLogicManager {
         return true
     }
 
+    /// Schedules timer to automatically miss `qRecord` if admission is not connfirmed within some time.
     private func addInitialAutoMissTimer(for qRecord: QueueRecord) {
         var refTime = qRecord.admitTime!
         if qRecord.readmitTime != nil {
@@ -231,6 +227,7 @@ extension RestaurantQueueLogicManager {
         }
     }
 
+    /// Schedules timer to automatically miss `record` if customer does not arrive by some time.
     private func addDelayedAutoMissTimer(for record: QueueRecord) {
         var refTime = record.admitTime!
         if record.readmitTime != nil {

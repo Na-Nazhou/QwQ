@@ -1,13 +1,7 @@
-//
-//  RestaurantBookingLogicManager.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 17/4/20.
-//
-
 import Foundation
 import os.log
 
+/// A restaurant booking logic manager.
 class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, RestaurantBookingLogic {
 
     // Storage
@@ -38,7 +32,7 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, R
     }
 
     deinit {
-        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
+        os_log("Deiniting booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 
@@ -65,7 +59,6 @@ class RestaurantBookingLogicManager: RestaurantRecordLogicManager<BookRecord>, R
 }
 
 extension RestaurantBookingLogicManager {
-
     // MARK: Syncing
 
     func didAddBookRecord(_ record: BookRecord) {
@@ -102,6 +95,7 @@ extension RestaurantBookingLogicManager {
         didUpdateRecord(record, currentBookings, waitingBookings, historyBookings)
     }
 
+    /// Schedules a rejection for `record` to trigger after buffer time from book time if customer has yet to arrive.
     private func scheduleBufferRejectTimer(for record: BookRecord) {
         guard record.isConfirmedAdmission else {
             return

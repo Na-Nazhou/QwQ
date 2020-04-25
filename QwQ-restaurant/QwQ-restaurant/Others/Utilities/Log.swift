@@ -28,6 +28,8 @@ struct Log {
 
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
+
+    static let automaticQueueOpenClose = OSLog(subsystem: subsystem, category: "automaticQueueStatus")
     
     // MARK: FBError
     static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "FBError")
