@@ -27,6 +27,9 @@ protocol ProfileStorage {
     static func getCustomerProfilePic(uid: String,
                                       placeholder imageView: UIImageView)
 
+    // MARK: - Restaurant Profile Retrieval Methods
+//    static func getRestaurantProfilePic(uid: String, completion: @escaping (UIImage) -> Void)
+
     // MARK: - Customer Info Update Methods
 
     static func updateCustomerInfo(customer: Customer,
