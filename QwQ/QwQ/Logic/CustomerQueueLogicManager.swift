@@ -56,7 +56,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     deinit {
-        os_log("DEINITING queue logic manager", log: Log.deinitLogic, type: .info)
+        os_log("Deiniting queue logic manager", log: Log.deinitLogic, type: .info)
         queueStorage.unregisterDelegate(self)
     }
 
@@ -176,6 +176,7 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 extension CustomerQueueLogicManager {
 
     // MARK: Syncing
+    /// Detects modification to `record` and updates in-app models accordingly.
     func didUpdateQueueRecord(_ record: QueueRecord) {
         guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             return
@@ -198,7 +199,6 @@ extension CustomerQueueLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-//            assert(false, "Modification should be something")
             customerDidUpdateQueueRecord(record)
         }
     }
