@@ -77,13 +77,23 @@ class FIRProfileStorage: ProfileStorage {
         }
     }
 
-    static func getProfilePic(uid: String,
-                              placeholder imageView: UIImageView) {
+    static func getCustomerProfilePic(uid: String,
+                                      placeholder imageView: UIImageView) {
         let reference = storageRef.child("\(uid).png")
         guard let image = imageView.image else {
             return
         }
         imageView.checkCacheThenSetImage(with: reference, placeholder: image)
+    }
+
+    static func getRestaurantProfilePic(uid: String, imageView: UIImageView) {
+        let reference = storageRef.child("\(uid).png")
+
+        let url = NSURL.sd_URL(with: reference)
+
+        SDImageCache.shared.removeImage(forKey: url?.absoluteString)
+
+        imageView.sd_setImage(with: reference, placeholderImage: imageView.image)
     }
 
     static func updateCustomerInfo(customer: Customer,

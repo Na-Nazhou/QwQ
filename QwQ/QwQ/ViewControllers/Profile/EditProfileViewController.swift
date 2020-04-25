@@ -128,7 +128,7 @@ class EditProfileViewController: UIViewController {
         profileImageView.addGestureRecognizer(profileTapGestureRecognizer)
         profileImageView.isUserInteractionEnabled = true
 
-        Profile.getProfilePic(uid: uid, placeholder: profileImageView)
+        Profile.getCustomerProfilePic(uid: uid, placeholder: profileImageView)
     }
 
     private func handleError(error: Error) {
