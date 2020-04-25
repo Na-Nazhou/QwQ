@@ -9,6 +9,8 @@ import UIKit
 
 class RecordCell: UICollectionViewCell {
 
+    typealias CustomerStorage = FIRCustomerStorage
+
     var admitAction: (() -> Void)?
     var rejectAction: (() -> Void)?
     var serveAction: (() -> Void)?
@@ -39,7 +41,7 @@ class RecordCell: UICollectionViewCell {
     func setUpView(record: Record) {
         nameLabel.text = record.customer.name
         descriptionLabel.text = "\(record.groupSize) pax"
-        FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
+        CustomerStorage.getCustomerProfilePic(uid: record.customer.uid, imageView: profileImageView)
 
         setUpRecordImage(record: record)
         setUpActionButtons()
