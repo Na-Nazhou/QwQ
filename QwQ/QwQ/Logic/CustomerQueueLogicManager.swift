@@ -147,7 +147,6 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
     }
 
     func confirmAdmissionOfQueueRecord(_ record: QueueRecord) {
-        print("\n\tPUBLIC CONFIRM CALLED")
         confirmAdmission(of: record, completion: {
             self.activitiesDelegate?.didConfirmAdmissionOfRecord()
         })
@@ -155,7 +154,6 @@ class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, Custom
 
     private func confirmAdmission(of record: QueueRecord,
                                   completion: @escaping () -> Void) {
-        print("\tconfirmadmission\n")
         var newRecord = record
         newRecord.confirmAdmissionTime = Date()
         queueStorage.updateQueueRecord(oldRecord: record, newRecord: newRecord) {
@@ -180,11 +178,6 @@ extension CustomerQueueLogicManager {
         guard let oldRecord = queueRecords.first(where: { $0 == record }) else {
             return
         }
-
-        print("\n\trecord status is: ")
-        print(record.status)
-        print("\told record status was: ")
-        print(oldRecord.status)
 
         let modification = record.getChangeType(from: oldRecord)
         switch modification {
@@ -242,6 +235,8 @@ extension CustomerQueueLogicManager {
         os_log("Detected miss", log: Log.missCustomer, type: .info)
         addRecord(record, to: missedQueues)
         removeRecord(record, from: currentQueues)
+
+        notificationHandler.notifyQueueMissed(record: record)
     }
 
     private func didConfirmAdmission(of record: QueueRecord) {
