@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
     }
 
     private var trimmedPassword: String? {
-        return emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     override func viewDidLoad() {
