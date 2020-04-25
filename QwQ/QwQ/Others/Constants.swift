@@ -160,7 +160,8 @@ struct Constants {
     static let timeKey = "time"
     
     // MARK: Notification mesages
-    static let bookingAcceptedMessage = "You can now view your accepted booking in the Activities page! Please arrive on time."
+    static let bookingAcceptedMessage = "You can now view your accepted booking in the Activities page!"
+        + " Please arrive on time."
     static let bookingRejectedMessage = "You may consider booking at other restaurants."
     static let bookingAdmittedTitle = "Time to Enter for Your Booking!"
     static let queueAdmittedMessage = "Accept or reject the admission on the Activities page! \nRespond within: 3 min"
