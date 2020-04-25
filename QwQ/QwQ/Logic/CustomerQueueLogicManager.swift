@@ -1,6 +1,8 @@
 import Foundation
 import os.log
 
+/// A customer queue logic manager.
+/// Customers are not allowed to queue for the same restaurant more than once at any time.
 class CustomerQueueLogicManager: CustomerRecordLogicManager<QueueRecord>, CustomerQueueLogic {
 
     // Storage

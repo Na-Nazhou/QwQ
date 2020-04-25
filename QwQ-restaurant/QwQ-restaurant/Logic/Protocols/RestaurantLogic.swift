@@ -1,20 +1,15 @@
-//
-//  RestaurantLogic.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 17/4/20.
-//
-
+/// Represents the protocol a logic handler of restaurants should conform to.
 protocol RestaurantLogic: RestaurantStorageSyncDelegate {
 
-    // View Controllers
+    // MARK: View Controllers
+    /// Presentation delegate of restaurant activities.
     var activitiesDelegate: ActivitiesDelegate? { get set }
 
-    // Models
+    // MARK: Models
     var isQueueOpen: Bool { get }
 
-    /// Opens queue anfethadd registers the opening time of the restaurant as the current time.
+    /// Opens queue.
     func openQueue()
-    /// Closes queue and registers the closing time of the restaurant as the current time.
+    /// Closes queue.
     func closeQueue()
 }

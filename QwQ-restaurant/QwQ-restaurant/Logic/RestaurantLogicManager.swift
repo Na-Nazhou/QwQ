@@ -1,12 +1,6 @@
-//
-//  RestaurantLogicManager.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 16/4/20.
-//
-
 import Foundation
 
+/// A logic manager that handles restaurants.
 class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
@@ -81,7 +75,8 @@ class RestaurantLogicManager: RestaurantLogic {
         print("Fire close queue timer")
         closeQueue()
     }
-
+    
+    /// Opens queue and registers the opening time of the restaurant as the current time.
     func openQueue() {
         guard !restaurant.isQueueOpen else {
             return
@@ -92,7 +87,8 @@ class RestaurantLogicManager: RestaurantLogic {
         new.openQueue(at: time)
         updateRestaurant(new: new)
     }
-
+    
+    /// Closes queue and registers the closing time of the restaurant as the current time.
     func closeQueue() {
         guard restaurant.isQueueOpen else {
             return

@@ -1,7 +1,8 @@
 import FirebaseFirestore
 import os.log
 
-/// A Firestore-based storage handler for queues. Reads and writes to Firestore and listens to changes to documents in Firestore.
+/// A Firestore-based storage handler for queues. Reads and writes to Firestore and listens to changes to
+/// documents in Firestore.
 class FIRQueueStorage: RestaurantQueueStorage {
     // MARK: Storage as singleton
     static let shared = FIRQueueStorage()
@@ -78,10 +79,8 @@ extension FIRQueueStorage {
             .whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
             .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
-                os_log("Error getting queue record documents",
-                       log: Log.queueRetrievalError,
-                       type: .error,
-                       String(describing: err))
+                os_log("Error getting queue record documents", log: Log.queueRetrievalError,
+                       type: .error, String(describing: err))
                 return
             }
             snapshot.documentChanges.forEach { diff in
