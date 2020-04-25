@@ -53,13 +53,12 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notifTimeToEnter
     }
 
-    /// Sets 4 notifs: 1) admitted 2) 1min mark 3) 2min marl 3) 3min missed queue (pushed back)
+    /// Sets 3 notifs: 1) admitted 2) 1min mark 3) 2min mark
     func notifyQueueAdmittedAwaitingConfirmation(record: QueueRecord) {
         let queueNotifs = [
             admitQueueNotification(record),
             admitOneMinNotification(record),
-            admitTwoMinsNotification(record),
-            missedQueueNotification(record, hasConfirmedPreviously: false)
+            admitTwoMinsNotification(record)
         ]
         queueNotifs.forEach { notifManager.schedule(notif: $0) }
     }
@@ -67,7 +66,12 @@ class QwQNotificationManager: QwQNotificationHandler {
     private func admitQueueNotification(_ record: QueueRecord) -> QwQNotification {
         assert(record.admitTime != nil)
 
-        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 0)
+        var refTime = record.admitTime!
+        if record.readmitTime != nil {
+            refTime = record.readmitTime!
+        }
+
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 0, afterReference: refTime)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "Please respond -- \(record.restaurant.name) has admitted you!",
@@ -84,7 +88,14 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     private func withdrawableAdmitOneMinNotification(_ record: QueueRecord) -> QwQNotification {
-        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 1)
+        var refTime = Date()
+        if record.readmitTime != nil {
+            refTime = record.readmitTime!
+        } else if record.admitTime != nil {
+            refTime = record.admitTime!
+        }
+
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 1, afterReference: refTime)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "2 minutes left to respond -- \(record.restaurant.name) has admitted you!",
@@ -101,7 +112,14 @@ class QwQNotificationManager: QwQNotificationHandler {
     }
 
     private func withdrawableAdmitTwoMinsNotification(_ record: QueueRecord) -> QwQNotification {
-        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 2)
+        var refTime = Date()
+        if record.readmitTime != nil {
+            refTime = record.readmitTime!
+        } else if record.admitTime != nil {
+            refTime = record.admitTime!
+        }
+
+        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: 2, afterReference: refTime)
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "1 min left to respond -- \(record.restaurant.name) has admitted you!",
@@ -112,39 +130,13 @@ class QwQNotificationManager: QwQNotificationHandler {
         return notifAdmit
     }
 
-    private func missedQueueNotification(_ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
-        assert(record.admitTime != nil)
-        return withdrawableMissedQueueNotification(record, hasConfirmedPreviously: hasConfirmedPreviously)
-    }
-
-    private func withdrawableMissedQueueNotification(
-        _ record: QueueRecord, hasConfirmedPreviously: Bool) -> QwQNotification {
-        let timeInterval = hasConfirmedPreviously
-            ? Constants.queueWaitArrivalInMins
-            : Constants.queueWaitConfirmTimeInMins
-
-        let notifAdmitId = QwQNotificationId(record: record, timeDelayInMinutes: timeInterval)
-        let notifAdmit = QwQNotification(
-            notifId: notifAdmitId,
-            title: "Missed queue for: \(record.restaurant.name).",
-            description: "You have been pushed back in the queue. Please wait in the vicinity.",
-            shouldSend: true)
-        os_log("Queue admit missed notif prepared.",
-               log: Log.queueNotifScheduled, type: .info)
-        return notifAdmit
-    }
-
     func notifyBookingRejected(record: BookRecord) {
         let rejectNotif = accepOrRejectBookingNotification(record, isAccept: false)
         notifManager.schedule(notif: rejectNotif)
     }
 
     func notifyQueueConfirmed(record: QueueRecord) {
-        let notifs = [
-            confirmedAdmissionNotification(record),
-            missedQueueNotification(record, hasConfirmedPreviously: true)
-        ]
-        notifs.forEach { notifManager.schedule(notif: $0) }
+        notifManager.schedule(notif: confirmedAdmissionNotification(record))
     }
 
     private func confirmedAdmissionNotification(_ record: QueueRecord) -> QwQNotification {
@@ -174,6 +166,20 @@ class QwQNotificationManager: QwQNotificationHandler {
         os_log("Queue rejection notif scheduled.")
         notifManager.schedule(notif: notif)
     }
+    
+    func notifyQueueMissed(record: QueueRecord) {
+        assert(record.missTime != nil)
+        let notifMissId = QwQNotificationId(record: record, timeDelayInMinutes: 0, afterReference: record.missTime!)
+        let notifMiss = QwQNotification(
+            notifId: notifMissId,
+            title: "Missed queue for: \(record.restaurant.name).",
+            description: "You have been pushed back in the queue. Please wait in the vicinity.",
+            shouldSend: true)
+        os_log("Queue admit missed notif prepared.",
+               log: Log.queueNotifScheduled, type: .info)
+
+        notifManager.schedule(notif: notifMiss)
+    }
    
     func retractBookNotifications(for record: BookRecord) {
         let possiblyPendingBookNotif = bookTimeNotification(record)
@@ -184,9 +190,7 @@ class QwQNotificationManager: QwQNotificationHandler {
     func retractQueueNotifications(for record: QueueRecord) {
         let possiblyPendingQueueNotifs = [
             withdrawableAdmitOneMinNotification(record),
-            withdrawableAdmitTwoMinsNotification(record),
-            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: false),
-            withdrawableMissedQueueNotification(record, hasConfirmedPreviously: true)
+            withdrawableAdmitTwoMinsNotification(record)
         ]
         os_log("Queue notifs prepared to be withdrawn.", log: Log.withdrawNotif)
         removeNotifications(notifIds: possiblyPendingQueueNotifs.map { $0.notifId })
