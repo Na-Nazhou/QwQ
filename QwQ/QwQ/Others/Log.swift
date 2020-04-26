@@ -60,6 +60,8 @@ struct Log {
     
     static let segueError = OSLog(subsystem: subsystem, category: "segueError")
     
+    static let selectionStateError = OSLog(subsystem: subsystem, category: "selectionStateError")
+    
     static let imagePickingError = OSLog(subsystem: subsystem, category: "imagePickingError")
     
     // MARK: Notification logs

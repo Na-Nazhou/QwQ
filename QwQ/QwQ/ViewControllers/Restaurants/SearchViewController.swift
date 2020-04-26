@@ -5,7 +5,15 @@
 //  Created by Tan Su Yee on 13/3/20.
 //
 
+/**
+`SearchViewController` displays all restaurants and enables searching for restaurants.
+ 
+ It must conform to `PopoverContentControllerDelegate` and `UIPopoverPresentationControllerDelegate` to enable display of sorting criteria in a popover format.
+ It must conform to `UISearchBarDelegate` and `SearchDelegate` to enable searching of restaurants.
+*/
+
 import UIKit
+import os
 
 class SearchViewController: UIViewController {
 
@@ -101,12 +109,14 @@ class SearchViewController: UIViewController {
             editVC.restaurantLogic = restaurantLogic
             editVC.bookingLogic = bookingLogic
         default:
+            os_log("Segue not found.", log: Log.segueError, type: .error)
             assert(false)
         }
     }
 
     // MARK: Multi-select
 
+    /// Update view to match selection state
     @IBAction private func handleSelect(_ sender: Any) {
         if selectionState == .selectOne {
             queueButton.setTitle(Constants.queueButtonTitle, for: .normal)
@@ -116,7 +126,7 @@ class SearchViewController: UIViewController {
             selectionState = .selectAll
 
             restaurantCollectionView.allowsMultipleSelection = true
-        } else {
+        } else if selectionState == .selectAll {
             queueButton.setTitle("", for: .normal)
             bookButton.setTitle("", for: .normal)
             selectButton.setTitle(Constants.selectAllText, for: .normal)
@@ -125,9 +135,12 @@ class SearchViewController: UIViewController {
 
             reloadRestaurants()
             restaurantCollectionView.allowsMultipleSelection = false
+        } else {
+            os_log("Unknown selection state.", log: Log.selectionStateError, type: .error)
         }
     }
 
+    /// Make reservations at selected restaurants
     @IBAction private func handleBook(_ sender: Any) {
         guard checkSelectedRestaurants() else {
             return
@@ -136,6 +149,7 @@ class SearchViewController: UIViewController {
                           sender: selectedRestaurants)
     }
 
+    /// Queue at selected restaurants
     @IBAction private func handleQueue(_ sender: Any) {
         guard checkSelectedRestaurants() else {
             return
@@ -163,6 +177,7 @@ class SearchViewController: UIViewController {
 
     // MARK: Sort
 
+    /// Sort restaurants according to filter criteria
     @IBAction private func handleSort(_ sender: Any) {
         // Get the button frame
         let button = sender as? UIButton
@@ -207,12 +222,14 @@ extension SearchViewController: PopoverContentControllerDelegate {
         }
     }
     
+    /// Sort restaurant names in ascending alphabetical order
     private func handleSortByName() {
         sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
             restaurant.name < otherRestaurant.name
         }
     }
     
+    /// Sort restaurant locations in ascending alphabetical order
     private func handleSortByLocation() {
         sorter = { (restaurant: Restaurant, otherRestaurant: Restaurant) -> Bool in
             restaurant.address < otherRestaurant.address
@@ -242,11 +259,14 @@ extension SearchViewController: UISearchBarDelegate {
         reloadRestaurants()
     }
     
+    /// Filter restaurants based on search text
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filter = { _ in true }
             return
         }
+        
+        // Set filter to search text
         filter = { (item: Restaurant) -> Bool in
             item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
@@ -254,6 +274,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    /// Set up search bar header
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
@@ -274,6 +295,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         filtered.count
     }
     
+    /// Set up restaurant cells based on filtered restaurants
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView
@@ -284,6 +306,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         }
         
+        // Set up restaurant details
         let restaurant = filtered[indexPath.item]
         
         restaurantCell.backgroundColor = Constants.deselectedRestaurantColor
@@ -315,6 +338,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return false
     }
     
+    /// Segue to restaurant view controller to view selected restaurant details if selection state is selectOne
+    /// Else add restaurant to selected restaurants and highlight restaurant cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectionState == .selectAll {
             let cell = collectionView.cellForItem(at: indexPath)
@@ -327,6 +352,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    /// Change restaurant cell color back to unhighlighted color
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = Constants.deselectedRestaurantColor
@@ -334,7 +360,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension SearchViewController: SearchDelegate {
-
     func didUpdateRestaurantCollection() {
         reloadRestaurants()
     }

@@ -47,6 +47,8 @@ struct Constants {
     static let restaurantUnavailableMessage = "The queue for %@ is closed!"
     static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
     static let queueButtonTitle = "QUEUE"
+    static let canQueueButtonAlpha = CGFloat(1)
+    static let cannotQueueButtonAlpha = CGFloat(0.5)
     
     // MARK: Book record settings
     static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
