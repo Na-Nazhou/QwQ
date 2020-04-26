@@ -1,9 +1,13 @@
 //
-//  RoleSelectorViewController.swift
+//  PositionSelectorViewController.swift
 //  QwQ-restaurant
 //
 //  Created by Daniel Wong on 23/4/20.
 //
+
+/**
+`PositionSelectorViewController` manages roles of staffs of restaurant, and allows setting of roles.
+*/
 
 import UIKit
 
@@ -22,7 +26,6 @@ class PositionSelectorViewController: UIViewController {
         positionTableView.reloadData()
         super.viewDidLoad()
     }
-
 }
 
 extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSource {
@@ -33,6 +36,7 @@ extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSo
         return roles.count
     }
 
+    /// Set up available roles for staffs
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = positionTableView.dequeueReusableCell(withIdentifier: Constants.positionReuseIdentifier,
                                                          for: indexPath)
@@ -51,6 +55,7 @@ extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSo
         return positionCell
     }
 
+    /// Update staff role to selected role
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let roles = roles, let owner = owner else {
             return

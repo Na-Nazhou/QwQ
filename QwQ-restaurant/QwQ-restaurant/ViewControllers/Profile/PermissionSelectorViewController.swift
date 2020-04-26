@@ -5,10 +5,15 @@
 //  Created by Daniel Wong on 23/4/20.
 //
 
+/**
+`PermissionSelectorViewController` manages setting of permissions.
+ */
+
 import UIKit
 
 class PermissionSelectorViewController: UIViewController {
 
+    // MARK: View properties
     @IBOutlet var permissionTableView: UITableView!
 
     weak var delegate: PermissionSelectorDelegate?
@@ -30,7 +35,6 @@ class PermissionSelectorViewController: UIViewController {
         delegate?.updatePermission(permissions: permissions, for: owner)
         super.viewWillDisappear(animated)
     }
-
 }
 
 extension PermissionSelectorViewController: UITableViewDelegate, UITableViewDataSource {
@@ -38,6 +42,7 @@ extension PermissionSelectorViewController: UITableViewDelegate, UITableViewData
         return Permission.allPermissions.count
     }
 
+    /// Set up all available permissions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = permissionTableView.dequeueReusableCell(withIdentifier: Constants.permissionReuseIdentifier,
                                                            for: indexPath)
@@ -61,6 +66,7 @@ extension PermissionSelectorViewController: UITableViewDelegate, UITableViewData
 }
 
 extension PermissionSelectorViewController: PermissionCellDelegate {
+    /// Add permission to role permissions
     func addPermission(permission: Permission) {
         guard let permissions = currentPermissions else {
             return
@@ -72,6 +78,7 @@ extension PermissionSelectorViewController: PermissionCellDelegate {
         currentPermissions?.append(permission)
     }
 
+    /// Remove permissions from role permissions
     func removePermission(permission: Permission) {
         guard let permissions = currentPermissions else {
             return
@@ -81,5 +88,4 @@ extension PermissionSelectorViewController: PermissionCellDelegate {
             $0 != permission
         }
     }
-
 }

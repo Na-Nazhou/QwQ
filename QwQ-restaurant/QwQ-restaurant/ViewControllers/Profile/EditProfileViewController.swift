@@ -5,7 +5,15 @@
 //  Created by Daniel Wong on 14/3/20.
 //
 
+/**
+`EditProfileViewController` manages modification of restaurant profile info.
+ 
+ It must conform to `UIImagePickerControllerDelegate` and `UINavigationControllerDelegate`
+ so that users can choose restaurant profile and banner images.
+*/
+
 import UIKit
+import os
 
 class EditProfileViewController: UIViewController {
 
@@ -113,6 +121,7 @@ class EditProfileViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
+    /// Allow user to select whether to enable auto opening/ closing of queues
     @IBAction private func onSwitchChange(_ sender: UISwitch) {
         if sender.isOn {
             autoOpenTimePicker.isEnabled = true
@@ -127,12 +136,15 @@ class EditProfileViewController: UIViewController {
         handleBack()
     }
     
+    /// Allow user to select an image to be used as restaurant banner
     @IBAction private func handleEditBanner(_ sender: Any) {
         imageViewToEdit = bannerImageView
         showImagePickerControllerActionSheet()
     }
     
-    @IBAction private func saveButton(_ sender: Any) {
+    /// Save profile info if profile info are valid
+    @IBAction private func handleSave(_ sender: Any) {
+        // Check and validate all fields
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
@@ -154,6 +166,7 @@ class EditProfileViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
 
+        // Update profile info
         if let image = image {
             Profile.updateRestaurantProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
@@ -174,6 +187,7 @@ class EditProfileViewController: UIViewController {
                                      errorHandler: handleError(error:))
     }
 
+    /// Allow user to edit restaurant profile picture
     @objc private func handleProfileTap(_ sender: UITapGestureRecognizer) {
         imageViewToEdit = profileImageView
         showImagePickerControllerActionSheet()
@@ -285,7 +299,7 @@ class EditProfileViewController: UIViewController {
 
     private func validateAutoOpenCloseTime() -> Bool {
         if let openTime = autoOpenTime, let closeTime = autoCloseTime,
-            openTime > closeTime {
+            ValidationUtilities.validateAutoOpenCloseTime(autoOpenTime: openTime, autoCloseTime: closeTime) {
             showMessage(title: Constants.errorTitle,
                         message: Constants.openAfterCloseMessage,
                         buttonText: Constants.okayTitle)
@@ -297,6 +311,7 @@ class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    /// Allow user to choose whether to pick image from library or take a new image with camera
     func showImagePickerControllerActionSheet() {
         let photoLibraryAction = UIAlertAction(
         title: Constants.chooseFromPhotoLibraryTitle, style: .default
@@ -316,6 +331,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
                                actions: [photoLibraryAction, cameraAction, cancelAction])
     }
     
+    /// Present image picker to user
     func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -324,6 +340,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         present(imagePickerController, animated: true, completion: nil)
     }
     
+    /// Save selected image as profile image or banner image once user finishes picking image
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let selectedImageView = imageViewToEdit else {
@@ -336,8 +353,9 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImageView.image = originalImage
             image = originalImage
+        } else {
+            os_log("Image not found.", log: Log.imagePickingError, type: .error)
         }
         dismiss(animated: true, completion: nil)
     }
-    
 }

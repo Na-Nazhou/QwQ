@@ -25,7 +25,7 @@ struct Constants {
     static let errorTitle = "Error"
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
-
+    
     // MARK: Signup / Login / Profile
     static let profileUpdateSuccessMessage = "Your profile has been updated."
     static let missingFieldsTitle = "Error - Missing Fields"
@@ -42,28 +42,40 @@ struct Constants {
     static let fbLoginPermissionsMessage = "Please grant profile and email access with Facebook to continue."
     static let resetPasswordTitle = "Reset Password"
     static let resetPasswordMessage = "Please check your email to reset your password."
-
+    
     // MARK: Queue record settings
     static let restaurantUnavailableMessage = "The queue for %@ is closed!"
     static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
-
+    static let queueButtonTitle = "QUEUE"
+    static let canQueueButtonAlpha = CGFloat(1)
+    static let cannotQueueButtonAlpha = CGFloat(0.5)
+    
     // MARK: Book record settings
     static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
     static let exceedAdvanceBookingLimitMessage = "You have to book at least %@ hours in advance at %@."
     static let exceedOperatingHoursMessage = "%@ only operates at %@"
     static let bookingTimeInterval = 15
-
+    static let bookButtonTitle = "BOOK"
+    
     // MARK: Record settings
     static let defaultWheelchairFriendly = false
     static let defaultBabyChairQuantity = 0
-
+    
     static let noRestaurantSelectedMessage = "You have to select at least one restaurant"
     static let recordCreateSuccessMessage = "You have created a record."
     static let multipleRecordCreateSuccessMessage = "You have successfully created multiple records."
     static let recordUpdateSuccessMessage = "Your record has been updated."
     static let recordConfirmSuccessMessage = "Your record has been confirmed."
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
-
+    static let recordDateFormat = "ddMMyyyy"
+    static let selectOneText = "SELECT ONE"
+    static let selectAllText = "SELECT ALL"
+    static let missingRecordFieldsTitle = "Missing fields"
+    static let groupSizeErrorMessage = "Group size must be positive"
+    static let groupSizeBabyChairErrorMessage = "Group size must be greater than baby chair quantity!"
+    static let groupSizeMinSizeMessage = "Group size must be larger than the minimum group size"
+    static let groupSizeMaxSizeMessage = "Group size must be smaller than the maximum group size"
+    
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
@@ -76,7 +88,8 @@ struct Constants {
     static let logoutSegue = "logout"
     static let fbLoginCompletedSegue = "fbLoginComplete"
     static let loginEmailNotVerifiedSegue = "loginEmailNotVerified"
-
+    static let emailVerificationCancelledSegue = "goToLogin"
+    
     // MARK: Storage settings
     static let customersDirectory = "customers"
     static let restaurantsDirectory = "restaurants"
@@ -120,15 +133,6 @@ struct Constants {
     static let spinnerViewFrame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
     static let spinnerViewColor = UIColor.white
     
-    // MARK: Record settings
-    static let recordDateFormat = "ddMMyyyy"
-    
-    // MARK: Button settings
-    static let selectOneText = "SELECT ONE"
-    static let selectAllText = "SELECT ALL"
-    static let queueButtonTitle = "QUEUE"
-    static let bookButtonTitle = "BOOK"
-    
     // MARK: Model settings
     static let uidKey = "uid"
     static let nameKey = "name"
@@ -159,10 +163,15 @@ struct Constants {
     static let startTimeKey = "startTime"
     static let timeKey = "time"
     
-    // MARK: Notification mesages
+    // MARK: Queue timed settings
+    static let queueWaitConfirmTimeInMins = 3
+    static let queueWaitArrivalInMins = 15
+    
+    // MARK: Notification settings
     static let notificationPermissionRequiredTitle = "Notifications Required!"
-    static let notificationPermissionRequiredMessage = "Notifications are necessary to respond to your queues/bookings promptly!"
-    + " Please head over to Settings and enable notifications for QwQ."
+    static let notificationPermissionRequiredMessage = "Notifications are necessary to"
+        + " respond to your queues/bookings promptly!"
+        + " Please head over to Settings and enable notifications for QwQ."
     
     static let bookingAcceptedMessage = "You can now view your accepted booking in the Activities page!"
         + " Please arrive on time."
@@ -174,5 +183,7 @@ struct Constants {
     static let queueConfirmedAdmissionMessage = "Please arrive within 15min from the admitted time."
     static let queueRejectedMessage = "Please try to be prompt next time."
     static let queueMissedMessage = "You have been pushed back in the queue. Please wait in the vicinity."
-    
+    static let acceptKeyword = "Accept"
+    static let rejectKeyword = "Reject"
+    static let notificationPermissionsRequiredSettingsTitle = "Settings"
 }

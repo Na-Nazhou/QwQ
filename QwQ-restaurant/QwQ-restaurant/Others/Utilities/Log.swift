@@ -12,6 +12,7 @@ import Foundation
 private let subsystem = Bundle.main.bundleIdentifier!
 
 struct Log {
+    // MARK: Logic
     static let deinitLogic = OSLog(subsystem: subsystem, category: "deinitLogic")
 
     static let closeQueue = OSLog(subsystem: subsystem, category: "handleQueue")
@@ -29,27 +30,33 @@ struct Log {
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
 
-    static let automaticQueueOpenClose = OSLog(subsystem: subsystem, category: "automaticQueueStatus")
+    // MARK: Errors
+    static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "unexpectedDiffError")
+    static let addQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+    static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+    static let queueRetrievalError = OSLog(subsystem: subsystem, category: "queueError")
+    static let createQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+
+    static let addBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
+    static let updateBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
+    static let bookRetrievalError = OSLog(subsystem: subsystem, category: "bookError")
+    static let createBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
+
+    static let restaurantRetrievalError = OSLog(subsystem: subsystem, category: "retaurantError")
+    static let createRestaurantError = OSLog(subsystem: subsystem, category: "retaurantError")
+    static let updateRestaurantError = OSLog(subsystem: subsystem, category: "retaurantError")
+
+    static let cidError = OSLog(subsystem: subsystem, category: "customerError")
+    static let createCustomerError = OSLog(subsystem: subsystem, category: "customerError")
+
+    static let createStaffError = OSLog(subsystem: subsystem, category: "staffError")
+    static let createRoleError = OSLog(subsystem: subsystem, category: "staffError")
     
-    // MARK: FBError
-    static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "FBError")
-    static let addQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
-    static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
-    static let queueRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
-    static let createQueueRecordError = OSLog(subsystem: subsystem, category: "FBError")
+    static let recordError = OSLog(subsystem: subsystem, category: "recordError")
 
-    static let addBookRecordError = OSLog(subsystem: subsystem, category: "FBError")
-    static let updateBookRecordError = OSLog(subsystem: subsystem, category: "FBError")
-    static let bookRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
-    static let createBookRecordError = OSLog(subsystem: subsystem, category: "FBError")
+    static let segueError = OSLog(subsystem: subsystem, category: "segueError")
+    
+    static let imagePickingError = OSLog(subsystem: subsystem, category: "imagePickingError")
 
-    static let restaurantRetrievalError = OSLog(subsystem: subsystem, category: "FBError")
-    static let createRestaurantError = OSLog(subsystem: subsystem, category: "FBError")
-    static let updateRestaurantError = OSLog(subsystem: subsystem, category: "FBError")
-
-    static let cidError = OSLog(subsystem: subsystem, category: "FBError")
-    static let createCustomerError = OSLog(subsystem: subsystem, category: "FBError")
-
-    static let createStaffError = OSLog(subsystem: subsystem, category: "FBError")
-    static let createRoleError = OSLog(subsystem: subsystem, category: "FBError")
+    static let automaticQueueOpenClose = OSLog(subsystem: subsystem, category: "automaticQueueStatus")
 }

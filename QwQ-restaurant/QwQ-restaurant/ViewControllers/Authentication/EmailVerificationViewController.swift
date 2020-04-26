@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 25/3/20.
 //
 
+/**
+`EmailVerificationViewController` manages verification of email when a user signs up.
+*/
+
 import UIKit
 
 class EmailVerificationViewController: UIViewController {

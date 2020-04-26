@@ -21,7 +21,8 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
-    /// Updates the same element as `element` in this collection to `element` and returns true if `element` exists in collection.
+    /// Updates the same element as `element` in this collection to `element` and returns true if `element`
+    /// exists in collection.
     /// Else does not update and returns false.
     @discardableResult
     func update(_ element: T) -> Bool {

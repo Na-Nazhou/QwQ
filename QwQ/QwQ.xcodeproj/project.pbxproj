@@ -98,6 +98,7 @@
 		7EE6D019241DC0EA00C1465E /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */; };
 		7EE6D01F241E1CBB00C1465E /* EditQueueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */; };
 		7EE6D021241E202A00C1465E /* EditBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D020241E202A00C1465E /* EditBookingViewController.swift */; };
+		7EF876DB24556DBE00DDABF1 /* PopoverContentControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF876DA24556DBE00DDABF1 /* PopoverContentControllerDelegate.swift */; };
 		7EFB696E242210110073E535 /* EditBook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB696D242210110073E535 /* EditBook.storyboard */; };
 		7EFB6972242213000073E535 /* Queue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB6971242213000073E535 /* Queue.storyboard */; };
 		7EFB69742422130C0073E535 /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB69732422130C0073E535 /* Book.storyboard */; };
@@ -245,6 +246,7 @@
 		7EE6D018241DC0EA00C1465E /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		7EE6D01E241E1CBB00C1465E /* EditQueueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQueueViewController.swift; sourceTree = "<group>"; };
 		7EE6D020241E202A00C1465E /* EditBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookingViewController.swift; sourceTree = "<group>"; };
+		7EF876DA24556DBE00DDABF1 /* PopoverContentControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentControllerDelegate.swift; sourceTree = "<group>"; };
 		7EFB696D242210110073E535 /* EditBook.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditBook.storyboard; sourceTree = "<group>"; };
 		7EFB6971242213000073E535 /* Queue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Queue.storyboard; sourceTree = "<group>"; };
 		7EFB69732422130C0073E535 /* Book.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				5C11FD0D2418E652002B88E3 /* FIRAuthenticator.swift */,
 				5CA15947241C9F9400835102 /* FIRProfileStorage.swift */,
 				5C1A419824236D2800D1140B /* FIRRestaurantInfoStorage.swift */,
+				7EF876D82455238800DDABF1 /* Models */,
 				5C430B3324554D1B00703E3D /* Models */,
 				5C9411DD2423C1280093D92D /* Errors */,
 			);
@@ -418,6 +421,7 @@
 			children = (
 				7EC7E695241B385E00C2F9BB /* SearchViewController.swift */,
 				7EC7E697241B387000C2F9BB /* RestaurantViewController.swift */,
+				7EF876D924556DA200DDABF1 /* Delegates */,
 				7E1137FD24233B1F006984BB /* PopoverContentController.swift */,
 			);
 			path = Restaurants;
@@ -649,6 +653,24 @@
 				7E56AF9A2421F513002E9BAC /* Activities.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7EF876D82455238800DDABF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C9411DE2423D11F0093D92D /* SignupDetails.swift */,
+				5C9411E02423D1E30093D92D /* AuthDetails.swift */,
+				5CF9DB5724308196003B257B /* AuthTypes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7EF876D924556DA200DDABF1 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				7EF876DA24556DBE00DDABF1 /* PopoverContentControllerDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		D4494EAB241B241800BD0780 /* SharedModels */ = {
@@ -1072,6 +1094,7 @@
 				5C9411E12423D1E30093D92D /* AuthDetails.swift in Sources */,
 				7EC7E692241B379900C2F9BB /* SignUpViewController.swift in Sources */,
 				D42A5437244B4AEA008FFB48 /* BookRecord.swift in Sources */,
+				7EF876DB24556DBE00DDABF1 /* PopoverContentControllerDelegate.swift in Sources */,
 				D47852D124442EB8006393C7 /* LocalNotificationManager.swift in Sources */,
 				7E42822A242BA0EE0019A8A2 /* UIViewController+handleBack.swift in Sources */,
 				7EC7E696241B385E00C2F9BB /* SearchViewController.swift in Sources */,

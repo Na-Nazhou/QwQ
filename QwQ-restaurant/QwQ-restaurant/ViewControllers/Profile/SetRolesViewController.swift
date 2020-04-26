@@ -5,6 +5,13 @@
 //  Created by Daniel Wong on 23/4/20.
 //
 
+/**
+`SetRolesViewController` manages setting of permissions and modification of roles.
+ 
+ It must conform to `RoleCellDelegate` to enable handling of user interaction with role cells.
+ It must conform to `PermissionSelectorDelegate` to enable handling of user interaction with permission cells.
+*/
+
 import UIKit
 
 class SetRolesViewController: UIViewController {
@@ -64,7 +71,9 @@ class SetRolesViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
+    /// Add role if role does not exist
     @IBAction func handleAdd(_ sender: Any) {
+        // Check and validate role name
         guard let roleName = trimmedRoleName else {
             return
         }
@@ -76,6 +85,7 @@ class SetRolesViewController: UIViewController {
             return
         }
 
+        // Add role
         let role = Role(roleName: roleName, permissions: [])
 
         roles.append(role)
@@ -130,6 +140,7 @@ extension SetRolesViewController: UITableViewDelegate, UITableViewDataSource {
         return roles.count
     }
 
+    /// Set up all roles available
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = roleTableView.dequeueReusableCell(withIdentifier: Constants.roleReuseIdentifier, for: indexPath)
 
@@ -145,6 +156,7 @@ extension SetRolesViewController: UITableViewDelegate, UITableViewDataSource {
         return roleCell
     }
 
+    /// Allow deletion of role through swiping of role cell
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
@@ -183,6 +195,7 @@ extension SetRolesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return rolesWithoutOwner.count
     }
 
+    /// Show all available roles for staff
     func pickerView(_ pickerView: UIPickerView,
                     viewForRow row: Int,
                     forComponent component: Int,
@@ -192,18 +205,17 @@ extension SetRolesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             label = view
         }
 
-        label.font = UIFont(name: "Comfortaa", size: 20)
-        label.textColor = .white
+        label.font = Constants.setRolesFont
+        label.textColor = Constants.setRolesFontColor
         label.text = rolesWithoutOwner[row].roleName
-        label.textAlignment = .center
+        label.textAlignment = Constants.setRolesTextAlignment
 
         return label
-
     }
 }
 
 extension SetRolesViewController: RoleCellDelegate {
-
+    /// Show all permissions available to be edited
     func editPermissionsButtonPressed(cell: RoleCell, button: UIButton) {
         let frame = button.frame
         var popoverFrame = cell.convert(frame, to: roleTableView)
@@ -237,6 +249,7 @@ extension SetRolesViewController: RoleCellDelegate {
 }
 
 extension SetRolesViewController: PermissionSelectorDelegate, UIPopoverPresentationControllerDelegate {
+    /// Update permissions of role to selected permissions
     func updatePermission(permissions: [Permission], for cell: RoleCell) {
         guard let currentRole = cell.currentRole else {
             return

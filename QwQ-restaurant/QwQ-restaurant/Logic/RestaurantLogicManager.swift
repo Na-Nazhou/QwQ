@@ -114,7 +114,6 @@ class RestaurantLogicManager: RestaurantLogic {
 
 extension RestaurantLogicManager {
     // MARK: Syncing
-
     func didUpdateRestaurant(restaurant: Restaurant) {
         restaurantActivity.updateRestaurant(restaurant)
         scheduleQueueStatusTimer()

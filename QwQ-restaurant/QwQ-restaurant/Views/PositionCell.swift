@@ -14,5 +14,4 @@ class PositionCell: UITableViewCell {
     func setUpViews(position: Role) {
         self.roleLabel.text = position.roleName
     }
-
 }

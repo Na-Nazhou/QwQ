@@ -82,7 +82,7 @@
                                                     <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="17"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ve9-2G-jOh"/>
+                                                    <action selector="handleLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s7r-0G-dqH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99D-WQ-Szf">
@@ -389,7 +389,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="submitButton:" destination="cYR-K6-pmi" eventType="touchUpInside" id="iBc-uP-6WH"/>
+                                    <action selector="handleSubmit:" destination="cYR-K6-pmi" eventType="touchUpInside" id="lxK-3V-Roq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0T6-Za-95m">

@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 15/3/20.
 //
 
+/**
+`QueueRecordViewController` shows full record details of a queue record.
+*/
+
 import UIKit
 
 class QueueRecordViewController: RecordViewController {
@@ -24,6 +28,7 @@ class QueueRecordViewController: RecordViewController {
         }
     }
 
+    /// Admit a customer from the queue
     @IBAction override func handleAdmit(_ sender: Any) {
         guard let queueRecord = record as? QueueRecord else {
             return
@@ -34,6 +39,7 @@ class QueueRecordViewController: RecordViewController {
                                  completion: self.didUpdateRecord)
     }
 
+    /// Serve a customer from the queue who has accepted the offer
     @IBAction override func handleServe(_ sender: Any) {
         guard let queueRecord = record as? QueueRecord else {
             return
@@ -45,7 +51,7 @@ class QueueRecordViewController: RecordViewController {
 
     }
 
-    // TODO: add reject button 
+    /// Reject a customer from the queue
     @IBAction override func handleReject(_ sender: Any) {
         guard let queueRecord = record as? QueueRecord else {
             return

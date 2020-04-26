@@ -60,7 +60,7 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
         }
     }
 
-    func didCustomerUpdateRecord(_ record: T, _ currentList: RecordCollection<T>) {
+    private func didCustomerUpdateRecord(_ record: T, _ currentList: RecordCollection<T>) {
         currentList.update(record)
         activitiesDelegate?.didUpdateCurrentList()
     }

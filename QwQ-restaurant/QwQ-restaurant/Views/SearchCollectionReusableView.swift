@@ -11,5 +11,4 @@ class SearchCollectionReusableView: UICollectionReusableView {
 
     // MARK: View properties
     @IBOutlet private var searchBar: UISearchBar!
-    
 }

@@ -5,7 +5,14 @@
 //  Created by Tan Su Yee on 13/3/20.
 //
 
+/**
+`RestaurantViewController` displays restaurant details such as location, name, contact, menu.
+ 
+ It must conform to `RestaurantDelegate` to handle actions after restaurant is updated.
+*/
+
 import UIKit
+import os
 
 class RestaurantViewController: UIViewController {
 
@@ -44,6 +51,7 @@ class RestaurantViewController: UIViewController {
         handleBack()
     }
     
+    /// Segue to edit queue record view controller if restaurant is available for queueing
     @IBAction private func handleQueueTap(_ sender: Any) {
         guard let restaurant = restaurant,
             checkRestaurantQueue(for: restaurant) else {
@@ -51,6 +59,11 @@ class RestaurantViewController: UIViewController {
         }
 
         performSegue(withIdentifier: Constants.editQueueSelectedSegue, sender: self)
+    }
+    
+    /// Segue to edit book record view controller
+    @IBAction private func handleBookTap(_ sender: Any) {
+        performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
     }
 
     @discardableResult
@@ -67,10 +80,6 @@ class RestaurantViewController: UIViewController {
                     message: String(format: format, restaurant.name),
                     buttonText: Constants.okayTitle)
         return false
-    }
-
-    @IBAction private func handleBookTap(_ sender: Any) {
-        performSegue(withIdentifier: Constants.editBookSelectedSegue, sender: self)
     }
     
     private func setUpViews() {
@@ -101,9 +110,9 @@ class RestaurantViewController: UIViewController {
         FIRProfileStorage.getCustomerProfilePic(uid: restaurant.uid, placeholder: profileImageView)
 
         if queueLogic.canQueue(for: restaurant) {
-            queueButton.alpha = 1
+            queueButton.alpha = Constants.canQueueButtonAlpha
         } else {
-            queueButton.alpha = 0.5
+            queueButton.alpha = Constants.cannotQueueButtonAlpha
         }
     }
 
@@ -122,8 +131,7 @@ class RestaurantViewController: UIViewController {
 
             editQVC.queueLogic = queueLogic
             editQVC.restaurantLogic = restaurantLogic
-        }
-        if segue.identifier == Constants.editBookSelectedSegue {
+        } else if segue.identifier == Constants.editBookSelectedSegue {
             guard let editBVC = segue.destination as? EditBookingViewController else {
                 assert(false,
                        "Destination should be editRecordVC and restaurant should not be nil.")
@@ -135,14 +143,14 @@ class RestaurantViewController: UIViewController {
             editBVC.restaurantLogic = restaurantLogic
             editBVC.bookingLogic = bookingLogic
             return
+        } else {
+            os_log("Segue not found.", log: Log.segueError, type: .error)
         }
     }
 }
 
 extension RestaurantViewController: RestaurantDelegate {
-
     func didUpdateRestaurant() {
         setUpViews()
     }
-
 }

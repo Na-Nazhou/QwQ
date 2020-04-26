@@ -64,6 +64,13 @@ struct Constants {
     static let rejectCustomerTitle = "Reject Customer"
     static let rejectCustomerMessage = "The customer has been rejected."
     static let recordDateFormat = "ddMMyyyy"
+    static let admitButtonTitle = "ADMIT"
+    static let serveButtonTitle = "SERVE"
+    static let rejectButtonTitle = "REJECT"
+    static let pendingConfirmationButtonTitle = "PENDING CONFIRMATION"
+    static let pendingConfirmationButtonAlpha = CGFloat(0.5)
+    static let withdrawRejectFontColor = UIColor.systemGray
+    static let serveAdmitFontColor = UIColor.systemGreen
 
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -89,6 +96,7 @@ struct Constants {
     static let queueRecordReuseIdentifier = "queueRecordCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let activityCellHeight = CGFloat(300)
+    static let activityCellWidthRatio = CGFloat(0.9)
     static let statisticsReuseIdentifier = "statisticsCell"
     static let staffReuseIdentifier = "staffCell"
     static let roleReuseIdentifier = "roleCell"
@@ -96,6 +104,11 @@ struct Constants {
     static let positionSelectorVCIdentifier = "positionSelectorVC"
     static let permissionReuseIdentifier = "permissionCell"
     static let permissionSelectorVCIdentifier = "permissionSelectorVC"
+    
+    // MARK: Set roles setting
+    static let setRolesFont = UIFont(name: "Comfortaa", size: 20)
+    static let setRolesFontColor = UIColor.white
+    static let setRolesTextAlignment = NSTextAlignment.center
     
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]

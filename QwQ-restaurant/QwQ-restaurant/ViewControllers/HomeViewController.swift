@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 15/3/20.
 //
 
+/**
+`HomeViewController` represents the home page once a user logs into the application and manages tab bar settings.
+ */
+
 import UIKit
 
 class HomeViewController: UITabBarController {

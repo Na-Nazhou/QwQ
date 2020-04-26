@@ -50,7 +50,6 @@
 		5C9D9B5F242222310019B7EE /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5D242222310019B7EE /* AlertService.swift */; };
 		5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B5E242222310019B7EE /* UIViewController+dismissKeyboard.swift */; };
 		5C9D9B622422224B0019B7EE /* UIViewController+ShowMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D9B612422224B0019B7EE /* UIViewController+ShowMessage.swift */; };
-		5CAD354A2438CFC900245857 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD35492438CFC900245857 /* Staff.swift */; };
 		5CB065BC244EF34A0019B34C /* PermissionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB065BB244EF34A0019B34C /* PermissionError.swift */; };
 		5CB1D55F244D6A7E00700772 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1D55E244D6A7E00700772 /* Role.swift */; };
 		5CB1D561244D6C1B00700772 /* FormattingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1D560244D6C1B00700772 /* FormattingUtilities.swift */; };
@@ -134,6 +133,7 @@
 		7EE6D02F241E3CAA00C1465E /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D02E241E3CAA00C1465E /* RecordCell.swift */; };
 		7EE6D033241E3EAC00C1465E /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D032241E3EAC00C1465E /* Customer.swift */; };
 		7EE6D03C241E5AE400C1465E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6D03B241E5AE400C1465E /* HomeViewController.swift */; };
+		7EF876DD2455758E00DDABF1 /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF876DC2455758D00DDABF1 /* Staff.swift */; };
 		7EFB697A242218280073E535 /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB6979242218280073E535 /* Book.storyboard */; };
 		7EFB697C2422183C0073E535 /* Queue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB697B2422183C0073E535 /* Queue.storyboard */; };
 		86E8B66A33AA176245C7F422 /* Pods_QwQ_restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8C6BD326CF80939ACB4FCC /* Pods_QwQ_restaurant.framework */; };
@@ -304,6 +304,7 @@
 		7EE6D02E241E3CAA00C1465E /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		7EE6D032241E3EAC00C1465E /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		7EE6D03B241E5AE400C1465E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7EF876DC2455758D00DDABF1 /* Staff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		7EFB6979242218280073E535 /* Book.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Book.storyboard; sourceTree = "<group>"; };
 		7EFB697B2422183C0073E535 /* Queue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Queue.storyboard; sourceTree = "<group>"; };
 		85F6D1E37506F262F752247B /* Pods-QwQ-restaurantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QwQ-restaurantTests.release.xcconfig"; path = "Target Support Files/Pods-QwQ-restaurantTests/Pods-QwQ-restaurantTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -387,6 +388,7 @@
 			children = (
 				5C2CB12D242484A7003AFC6C /* AuthDetails.swift */,
 				5C2CB12B242484A0003AFC6C /* SignupDetails.swift */,
+				7EF876DC2455758D00DDABF1 /* Staff.swift */,
 				5C25394C24419FF10080BF88 /* UserType.swift */,
 			);
 			path = Models;
@@ -404,8 +406,6 @@
 		5C430B3424556B9700703E3D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				5C5006072451D00F00605085 /* RoleStorage.swift */,
-				5C50060B2451D0E300605085 /* StaffPositionStorage.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -469,6 +469,7 @@
 			children = (
 				5C430B3424556B9700703E3D /* Protocols */,
 				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
+				7EF876D7245520CB00DDABF1 /* Protocols */,
 				5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */,
 				5C9281182450B78E00A50DE0 /* FIRStaffPositionStorage.swift */,
 				5CB065BA244EF33B0019B34C /* Errors */,
@@ -788,6 +789,15 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		7EF876D7245520CB00DDABF1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5C5006072451D00F00605085 /* RoleStorage.swift */,
+				5C50060B2451D0E300605085 /* StaffPositionStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		CA84587BE8949D50EABA3CA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,11 +823,11 @@
 		D4EA85EB241B2C65009EB85B /* SharedModels */ = {
 			isa = PBXGroup;
 			children = (
-				61C868A9242C561F00CC6B9A /* Collection.swift */,
 				61ACB7FD242B1C3A002A1F47 /* RecordCollection.swift */,
 				D4EA85ED241B2C65009EB85B /* User.swift */,
 				7EE6D032241E3EAC00C1465E /* Customer.swift */,
 				D4EA85EF241B2C65009EB85B /* Restaurant.swift */,
+				61C868A9242C561F00CC6B9A /* Collection.swift */,
 				5CAD35492438CFC900245857 /* Staff.swift */,
 				6126DB11243A202100E588A6 /* RecordStatus.swift */,
 				D4D329CC2426184300F2A5A5 /* RecordModification.swift */,
@@ -1230,11 +1240,11 @@
 				5C1A419324236BE500D1140B /* FIRCustomerStorage.swift in Sources */,
 				D4EA85F4241B2C65009EB85B /* Restaurant.swift in Sources */,
 				7E7F7DC924221C6D00A080E5 /* BookRecordViewController.swift in Sources */,
-				5CAD354A2438CFC900245857 /* Staff.swift in Sources */,
 				5C2CB131242484D0003AFC6C /* AuthError.swift in Sources */,
 				D4EBA71A24384EC200FCB66C /* RestaurantStatisticsLogic.swift in Sources */,
 				5C9D9B60242222310019B7EE /* UIViewController+dismissKeyboard.swift in Sources */,
 				5CE1523A243DC50000A20ED6 /* Permission.swift in Sources */,
+				7EF876DD2455758E00DDABF1 /* Staff.swift in Sources */,
 				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,
 				D4EA85F2241B2C65009EB85B /* User.swift in Sources */,
 				D4EBA72224387B4B00FCB66C /* StatsDelegate.swift in Sources */,

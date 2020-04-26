@@ -5,6 +5,12 @@
 //  Created by Tan Su Yee on 25/3/20.
 //
 
+/**
+`StatisticsDetailsViewController` shows full statistics details of a statistics record.
+
+It must conform to `StatsDetailsDelegate` to handle statistics details after loading.
+*/
+
 import UIKit
 
 class StatisticsDetailsViewController: UIViewController {
@@ -54,9 +60,7 @@ class StatisticsDetailsViewController: UIViewController {
 }
 
 extension StatisticsDetailsViewController: StatsDetailsDelegate {
-
     func didCompleteFetchingData() {
         setUpViews()
     }
-
 }

@@ -1,3 +1,7 @@
+/**
+`EditRecordViewController` enables editing of a queue or book record.
+*/
+
 import UIKit
 
 class EditRecordViewController: UIViewController {
@@ -83,6 +87,7 @@ class EditRecordViewController: UIViewController {
         contactTextField.isEnabled = false
     }
 
+    /// Display add record success message
     func didAddRecord() {
         showMessage(
             title: Constants.successTitle,
@@ -93,6 +98,8 @@ class EditRecordViewController: UIViewController {
             })
     }
 
+    /// Display add record(s) success message
+    /// - Parameter newRecords: created records
     func didAddRecords(_ newRecords: [Record]) {
         guard !newRecords.isEmpty else {
             return
@@ -113,6 +120,7 @@ class EditRecordViewController: UIViewController {
             })
      }
 
+    /// Display update record success message
     func didUpdateRecord() {
         removeSpinner(spinner)
         showMessage(
@@ -124,6 +132,7 @@ class EditRecordViewController: UIViewController {
             })
     }
 
+    /// Display withdraw record success message
     func didWithdrawRecord() {
         removeSpinner(spinner)
         showMessage(
@@ -135,39 +144,45 @@ class EditRecordViewController: UIViewController {
             })
     }
 
+    /// Validate record details entered by user
+    /// - Returns: true if record details are valid, else false
     func checkRecordDetails() -> Bool {
         guard let groupSize = groupSize,
             let babyChairQuantity = babyChairQuantity else {
                 showMessage(title: Constants.errorTitle,
-                            message: "Missing fields",
+                            message: Constants.missingRecordFieldsTitle,
                             buttonText: Constants.okayTitle)
                 return false
         }
 
+        // Group size must be at least 1
         if groupSize <= 0 {
             showMessage(title: Constants.errorTitle,
-                        message: "Group size must be positive",
+                        message: Constants.groupSizeErrorMessage,
                         buttonText: Constants.okayTitle)
             return false
         }
 
+        // Group size must be more than baby chair quantity
         if groupSize < babyChairQuantity {
             showMessage(title: Constants.errorTitle,
-                        message: "Group size must be greater than baby chair quantity!",
+                        message: Constants.groupSizeBabyChairErrorMessage,
                         buttonText: Constants.okayTitle)
             return false
         }
 
+        // Group size must be equal to or more than minimum group size
         if !(restaurants.allSatisfy { groupSize >= $0.minGroupSize }) {
             showMessage(title: Constants.errorTitle,
-                        message: "Group size must be larger than the minimum group size",
+                        message: Constants.groupSizeMinSizeMessage,
                         buttonText: Constants.okayTitle)
             return false
         }
 
+        // Group size must be equal to or less than maximum group size
         if !(restaurants.allSatisfy { groupSize <= $0.maxGroupSize }) {
              showMessage(title: Constants.errorTitle,
-                         message: "Group size must be smaller than the maximum group size",
+                         message: Constants.groupSizeMaxSizeMessage,
                          buttonText: Constants.okayTitle)
         }
 

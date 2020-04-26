@@ -23,7 +23,6 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
 }
 
 extension LocalNotificationManager {
-
     /// Requests for user permission to allow notifications.
     func requestAuthorization() {
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
@@ -62,7 +61,8 @@ extension LocalNotificationManager {
             title: Constants.notificationPermissionRequiredTitle,
             message: Constants.notificationPermissionRequiredMessage,
             preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: Constants.notificationPermissionsRequiredSettingsTitle,
+                                           style: .default) { _ in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
@@ -74,7 +74,7 @@ extension LocalNotificationManager {
             }
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: Constants.cancelTitle, style: .default, handler: nil)
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
         DispatchQueue.main.async {
@@ -116,5 +116,4 @@ extension LocalNotificationManager {
     func removeNotifications(ids: [String]) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: ids)
     }
-
 }

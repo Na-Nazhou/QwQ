@@ -1,6 +1,7 @@
 import Foundation
 
-/// An id of `QwQNotification`. Each `QwQNotificationId` is defined by the related record's id and the time it should trigger at.
+/// An id of `QwQNotification`. Each `QwQNotificationId` is defined by the related record's id
+/// and the time it should trigger at.
 struct QwQNotificationId: Equatable {
     let recordId: String
     let targetTime: DateComponents

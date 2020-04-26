@@ -5,6 +5,13 @@
 //  Created by Tan Su Yee on 30/3/20.
 //
 
+/**
+`AddStaffViewController` manages staffs of restaurant, and allows adding of staffs and setting of staff roles.
+ 
+ It must conform to `StaffCellDelegate` to enable handling of user interaction with staff cells.
+ It must conform to `RoleSelectorDelegate` to enable selection of roles for staffs.
+*/
+
 import UIKit
 
 class AddStaffViewController: UIViewController {
@@ -46,22 +53,10 @@ class AddStaffViewController: UIViewController {
         staffTableView.delegate = self
         staffTableView.dataSource = self
     }
-
-    private func getAllRestaurantStaffComplete(staffPositions: [StaffPosition]) {
-        self.staffPositions = staffPositions
-        staffTableView.reloadData()
-
-        removeSpinner(spinner)
-    }
-
-    private func getRestaurantRolesComplete(roles: [Role]) {
-        self.roles = roles
-        self.roles.removeAll { (role) -> Bool in
-            role.roleName == "Owner"
-        }
-    }
     
+    /// Add staff if staff info is valid and does not exist
     @IBAction private func handleAdd(_ sender: Any) {
+        // Check and validate email
         guard let email = trimmedEmail else {
             return
         }
@@ -86,7 +81,8 @@ class AddStaffViewController: UIViewController {
                         buttonText: Constants.okayTitle)
             return
         }
-
+        
+        // Add staff and clear email field
         let staffPosition = StaffPosition(email: email, roleName: defaultRole)
 
         PositionStorage.updateStaffPosition(staffPosition: staffPosition,
@@ -100,6 +96,20 @@ class AddStaffViewController: UIViewController {
 
     @IBAction private func handleBack(_ sender: Any) {
         handleBack()
+    }
+    
+    private func getAllRestaurantStaffComplete(staffPositions: [StaffPosition]) {
+        self.staffPositions = staffPositions
+        staffTableView.reloadData()
+
+        removeSpinner(spinner)
+    }
+
+    private func getRestaurantRolesComplete(roles: [Role]) {
+        self.roles = roles
+        self.roles.removeAll { (role) -> Bool in
+            role.roleName == Constants.ownerPermissionsKey
+        }
     }
 
     private func checkIfAlreadyExists(email: String) -> Bool {
@@ -123,6 +133,7 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
         return staffPositions.count
     }
     
+    /// Set up staff position details for all restaurant staffs
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = staffTableView
             .dequeueReusableCell(withIdentifier: Constants.staffReuseIdentifier,
@@ -143,11 +154,11 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
         true
     }
 
+    /// Allow deletion of staff through swiping staff cell
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-
             let toDelete = staffPositions[indexPath.item]
 
             guard toDelete.roleName != Constants.ownerPermissionsKey else {
@@ -168,8 +179,7 @@ extension AddStaffViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension AddStaffViewController: StaffCellDelegate {
-    
-    // adapted from https://slicode.com/showing-popover-from-tableview-cells/
+    /// Adapted from https://slicode.com/showing-popover-from-tableview-cells/
     func editRoleButtonPressed(cell: StaffCell, button: UIButton) {
 
         let frame = button.frame
@@ -200,8 +210,8 @@ extension AddStaffViewController: StaffCellDelegate {
 }
 
 extension AddStaffViewController: RoleSelectorDelegate, UIPopoverPresentationControllerDelegate {
+    /// Update role of staff according to selection
     func roleSelected(controller: PositionSelectorViewController, selectedRole: String, owner: StaffCell) {
-
         let staffPosition = StaffPosition(email: owner.email, roleName: selectedRole)
 
         PositionStorage.updateStaffPosition(staffPosition: staffPosition,

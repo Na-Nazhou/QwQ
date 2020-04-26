@@ -5,6 +5,12 @@
 //  Created by Tan Su Yee on 15/3/20.
 //
 
+/**
+`EditBookingViewController` enables editing of a book record.
+ 
+ It must conform to `BookingDelegate` to enable error handling under certain circumstances.
+*/
+
 import UIKit
 
 class EditBookingViewController: EditRecordViewController {
@@ -19,6 +25,7 @@ class EditBookingViewController: EditRecordViewController {
         restaurants.map { $0.advanceBookingLimit }.max()!
     }
 
+    /// Update book record with new info
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
             return
@@ -83,7 +90,6 @@ class EditBookingViewController: EditRecordViewController {
 }
 
 extension EditBookingViewController: BookingDelegate {
-
     func didFindExistingRecord(at restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
                     message: String(format: Constants.alreadyBookRestaurantMessage, restaurant.name),

@@ -13,15 +13,15 @@ import SDWebImage
 
 /// A Firebase implementation of ProfileStorage.
 class FIRProfileStorage: ProfileStorage {
-
+    
     typealias Auth = FIRAuthenticator
-
+    
     static var currentUID: String?
     static var currentAuthType: AuthTypes?
-
+    
     static let dbRef = Firestore.firestore().collection(Constants.customersDirectory)
     static let storageRef = Storage.storage().reference().child("profile-pics")
-
+    
     static func createInitialCustomerProfile(uid: String,
                                              signupDetails: SignupDetails,
                                              email: String,
@@ -36,7 +36,7 @@ class FIRProfileStorage: ProfileStorage {
                     if let error = error {
                         errorHandler(error)
                     }
-                }
+            }
         } catch {
             os_log("Error serializing customer to write to firestore.",
                    log: Log.entityError,
@@ -44,7 +44,7 @@ class FIRProfileStorage: ProfileStorage {
                    error.localizedDescription)
         }
     }
-
+    
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
                                 errorHandler: @escaping (Error) -> Void) {
         guard let uid = currentUID else {
@@ -52,13 +52,13 @@ class FIRProfileStorage: ProfileStorage {
             return
         }
         let docRef = dbRef.document(uid)
-
+        
         docRef.getDocument { (document, error) in
             if let error = error {
                 errorHandler(error)
                 return
             }
-
+            
             let result = Result {
                 try document?.data(as: Customer.self)
             }
@@ -68,16 +68,21 @@ class FIRProfileStorage: ProfileStorage {
                     completion(customer)
                     return
                 }
-                print("Customer document does not exist")
+                os_log("Customer document does not exist.",
+                       log: Log.inexistentCustomer,
+                       type: .info)
             case .failure(let error):
-                print("Error decoding customer: \(error)")
+                os_log("Error decoding customer.",
+                       log: Log.decodeCustomerError,
+                       type: .error,
+                       error.localizedDescription)
             }
-
+            
             errorHandler(ProfileError.UserProfileNotFound)
             Auth.logout(completion: {}, errorHandler: errorHandler)
         }
     }
-
+    
     static func getCustomerProfilePic(uid: String,
                                       placeholder imageView: UIImageView) {
         let reference = storageRef.child("\(uid).png")
@@ -95,7 +100,7 @@ class FIRProfileStorage: ProfileStorage {
             return
         }
         let docRef = dbRef.document(uid)
-
+        
         do {
             try docRef.setData(from: customer) { (error) in
                 if let error = error {
@@ -112,7 +117,7 @@ class FIRProfileStorage: ProfileStorage {
                    error.localizedDescription)
         }
     }
-
+    
     static func updateCustomerProfilePic(uid: String,
                                          image: UIImage,
                                          errorHandler: @escaping (Error) -> Void) {
@@ -128,5 +133,5 @@ class FIRProfileStorage: ProfileStorage {
         }
         SDImageCache.shared.removeImage(forKey: storageRef.child("\(uid).png").fullPath, withCompletion: nil)
     }
-
+    
 }

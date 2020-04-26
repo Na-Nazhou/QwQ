@@ -31,11 +31,11 @@ class QwQNotificationManager: QwQNotificationHandler {
         var description: String
         if isAccept {
             assert(record.admitTime != nil)
-            keyword = "Accepted"
+            keyword = Constants.acceptKeyword
             description = Constants.bookingAcceptedMessage
         } else {
             assert(record.rejectTime != nil)
-            keyword = "Rejected"
+            keyword = Constants.rejectKeyword
             description = Constants.bookingRejectedMessage
         }
 

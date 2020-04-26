@@ -2,7 +2,8 @@ import FirebaseFirestore
 import Foundation
 import os.log
 
-/// A Firestore-based storage handler for queues. Reads and writes to Firestore and listens to changes to documents in Firestore.
+/// A Firestore-based storage handler for queues. Reads and writes to Firestore and listens to changes to documents
+/// in Firestore.
 class FIRQueueStorage: CustomerQueueStorage {
     // MARK: Storage as singleton
     static let shared = FIRQueueStorage()
@@ -119,7 +120,8 @@ extension FIRQueueStorage {
                         completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
                     case .removed:
                         os_log("Detected removal of queue record from db which should not happen.",
-                               log: Log.unexpectedDiffError, type: .error)
+                               log: Log.unexpectedDiffError,
+                               type: .error)
                         completion = { _ in }
                     }
                     self.makeQueueRecord(
