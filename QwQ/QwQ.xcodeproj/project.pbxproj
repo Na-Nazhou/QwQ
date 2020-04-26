@@ -337,9 +337,7 @@
 				5C11FD0D2418E652002B88E3 /* FIRAuthenticator.swift */,
 				5CA15947241C9F9400835102 /* FIRProfileStorage.swift */,
 				5C1A419824236D2800D1140B /* FIRRestaurantInfoStorage.swift */,
-				5C9411DE2423D11F0093D92D /* SignupDetails.swift */,
-				5C9411E02423D1E30093D92D /* AuthDetails.swift */,
-				5CF9DB5724308196003B257B /* AuthTypes.swift */,
+				7EF876D82455238800DDABF1 /* Models */,
 				5C9411DD2423C1280093D92D /* Errors */,
 			);
 			path = "Authentication & Profile";
@@ -641,6 +639,16 @@
 				7E56AF9A2421F513002E9BAC /* Activities.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7EF876D82455238800DDABF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C9411DE2423D11F0093D92D /* SignupDetails.swift */,
+				5C9411E02423D1E30093D92D /* AuthDetails.swift */,
+				5CF9DB5724308196003B257B /* AuthTypes.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D4494EAB241B241800BD0780 /* SharedModels */ = {

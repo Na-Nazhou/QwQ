@@ -460,9 +460,8 @@
 			isa = PBXGroup;
 			children = (
 				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
-				5C5006072451D00F00605085 /* RoleStorage.swift */,
+				7EF876D7245520CB00DDABF1 /* Protocols */,
 				5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */,
-				5C50060B2451D0E300605085 /* StaffPositionStorage.swift */,
 				5C9281182450B78E00A50DE0 /* FIRStaffPositionStorage.swift */,
 				5CB065BA244EF33B0019B34C /* Errors */,
 				5C43B88F244D8AB500254532 /* Models */,
@@ -779,6 +778,15 @@
 				7E6EBCD52430A2CB0058D19A /* Extensions */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		7EF876D7245520CB00DDABF1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5C5006072451D00F00605085 /* RoleStorage.swift */,
+				5C50060B2451D0E300605085 /* StaffPositionStorage.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		CA84587BE8949D50EABA3CA5 /* Frameworks */ = {
