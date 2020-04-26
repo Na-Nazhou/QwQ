@@ -15,6 +15,7 @@ class RestaurantBuilder {
     var contact = "66156257"
     var address = "31 Jurong East"
     var menu = "Aglio olio student meal at $9!"
+    var defaultRole: String = "Server"
     var maxGroupSize = 5
     var minGroupSize = 1
     var advanceBookingLimit = 2
@@ -27,7 +28,7 @@ class RestaurantBuilder {
     }
     
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
-         maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
+         defaultRole: String, maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
          queueOpenTime: Date?, queueCloseTime: Date?,
          autoOpenTime: TimeInterval?, autoCloseTime: TimeInterval?) {
         self.uid = uid
@@ -36,6 +37,7 @@ class RestaurantBuilder {
         self.contact = contact
         self.address = address
         self.menu = menu
+        self.defaultRole = defaultRole
         self.queueOpenTime = queueOpenTime
         self.queueCloseTime = queueCloseTime
         self.autoOpenTime = autoOpenTime
@@ -43,24 +45,6 @@ class RestaurantBuilder {
         self.maxGroupSize = maxGroupSize
         self.minGroupSize = minGroupSize
         self.advanceBookingLimit = advanceBookingLimit
-    }
-    
-    func getDictionary() -> [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact,
-            Constants.addressKey: address,
-            Constants.menuKey: menu,
-            Constants.maxGroupSizeKey: maxGroupSize,
-            Constants.minGroupSizeKey: minGroupSize,
-            Constants.advanceBookingLimitKey: advanceBookingLimit,
-            Constants.queueOpenTimeKey: queueOpenTime as Any,
-            Constants.queueCloseTimeKey: queueCloseTime as Any,
-            Constants.autoOpenTimeKey: autoOpenTime as Any,
-            Constants.autoCloseTimeKey: autoCloseTime as Any
-        ] 
     }
     
     func with(uid: String) -> RestaurantBuilder {
@@ -90,6 +74,11 @@ class RestaurantBuilder {
     
     func with(menu: String) -> RestaurantBuilder {
         self.menu = menu
+        return self
+    }
+    
+    func with(defaultRole: String) -> RestaurantBuilder {
+        self.defaultRole = defaultRole
         return self
     }
     
@@ -135,6 +124,7 @@ class RestaurantBuilder {
                    contact: contact,
                    address: address,
                    menu: menu,
+                   defaultRole: defaultRole,
                    maxGroupSize: maxGroupSize,
                    minGroupSize: minGroupSize,
                    advanceBookingLimit: advanceBookingLimit,

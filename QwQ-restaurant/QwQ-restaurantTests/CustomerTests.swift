@@ -10,7 +10,6 @@ import XCTest
 
 class CustomerTests: XCTestCase {
     var customer: Customer!
-    var customerFromDictionary: Customer?
     let dictionary = [
         Constants.uidKey: CustomerBuilder().uid,
         Constants.nameKey: CustomerBuilder().name,
@@ -21,7 +20,6 @@ class CustomerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         customer = CustomerBuilder().build()
-        customerFromDictionary = Customer(dictionary: dictionary)
     }
     
     func testInit() {
@@ -29,10 +27,6 @@ class CustomerTests: XCTestCase {
         XCTAssertEqual(customer.name, "John")
         XCTAssertEqual(customer.email, "john@mail.com")
         XCTAssertEqual(customer.contact, CustomerBuilder().contact)
-    }
-    
-    func testDictionaryInit() {
-        XCTAssertEqual(customerFromDictionary, customer)
     }
     
     func testEqual_sameId_isEqual() {

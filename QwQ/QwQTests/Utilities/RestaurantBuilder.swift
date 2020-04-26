@@ -45,24 +45,6 @@ class RestaurantBuilder {
         self.advanceBookingLimit = advanceBookingLimit
     }
     
-    func getDictionary() -> [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact,
-            Constants.addressKey: address,
-            Constants.menuKey: menu,
-            Constants.maxGroupSizeKey: maxGroupSize,
-            Constants.minGroupSizeKey: minGroupSize,
-            Constants.advanceBookingLimitKey: advanceBookingLimit,
-            Constants.queueOpenTimeKey: queueOpenTime,
-            Constants.queueCloseTimeKey: queueCloseTime,
-            Constants.autoOpenTimeKey: autoOpenTime,
-            Constants.autoCloseTimeKey: autoCloseTime
-        ]
-    }
-    
     func with(uid: String) -> RestaurantBuilder {
         self.uid = uid
         return self

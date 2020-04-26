@@ -24,15 +24,6 @@ class CustomerBuilder {
         self.contact = contact
     }
     
-    func getDictionary() -> [String: Any] {
-        [
-            Constants.uidKey: uid,
-            Constants.nameKey: name,
-            Constants.emailKey: email,
-            Constants.contactKey: contact
-        ]
-    }
-    
     func with(uid: String) -> CustomerBuilder {
         self.uid = uid
         return self
