@@ -6,6 +6,10 @@
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
+/**
+`ProfileViewController` manages profiles of staffs or restaurants.
+*/
+
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -36,7 +40,8 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    @IBAction private func logoutButton(_ sender: Any) {
+    /// Log user out of application
+    @IBAction private func handleLogout(_ sender: Any) {
         Auth.logout(completion: logoutComplete, errorHandler: handleError(error:))
     }
 
@@ -86,5 +91,4 @@ class ProfileViewController: UIViewController {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }
-
 }

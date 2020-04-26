@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 31/3/20.
 //
 
+/**
+`ForgotPasswordViewController` manages password resets of user through email.
+*/
+
 import UIKit
 
 class ForgotPasswordViewController: UIViewController {
@@ -24,6 +28,7 @@ class ForgotPasswordViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    /// Send password reset email to user email and show success or failure emssage
     @IBAction private func handleResetPassword(_ sender: Any) {
         guard let email = trimmedEmail else {
             showMessage(title: Constants.invalidEmailTitle,
@@ -51,5 +56,4 @@ class ForgotPasswordViewController: UIViewController {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }
-
 }

@@ -250,7 +250,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" Logout" image="square.and.arrow.up" catalog="system"/>
                                         <connections>
-                                            <action selector="logoutButton:" destination="ZIh-3X-Z4Q" eventType="touchUpInside" id="ZLQ-Ah-S2D"/>
+                                            <action selector="handleLogout:" destination="ZIh-3X-Z4Q" eventType="touchUpInside" id="qSX-Ew-C4o"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -650,7 +650,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveButton:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="iPH-ud-tXI"/>
+                                    <action selector="handleSave:" destination="uvb-Aq-pGb" eventType="touchUpInside" id="4AE-2b-QHZ"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="nzA-vM-KMR" customClass="ProfileImageView" customModule="QwQ_restaurant" customModuleProvider="target">

@@ -5,9 +5,15 @@
 //  Created by Tan Su Yee on 14/3/20.
 //
 
+/**
+`SignUpViewController` manages sign ups of staffs or restaurants.
+ 
+ It must conform to `SignupLogicDelegate` so that user can be signed up and stored in the database.
+*/
+
 import UIKit
 
-class SignUpViewController: UIViewController, SignupLogicDelegate {
+class SignUpViewController: UIViewController {
 
     // MARK: View properties
     @IBOutlet private var nameTextField: UITextField!
@@ -54,8 +60,9 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
         handleBack()
     }
     
-    @IBAction private func submitButton(_ sender: Any) {
-        
+    /// Sign up user if user details are valid
+    @IBAction private func handleSubmit(_ sender: Any) {
+        // Check and validate all fields
         guard checkIfAllFieldsAreFilled() else {
             showMessage(title: Constants.missingFieldsTitle,
                         message: Constants.missingFieldsMessage,
@@ -87,6 +94,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
 
         spinner = showSpinner(onView: view)
 
+        // Sign up user and log user in
         let signupDetails = SignupDetails(name: name, contact: contact)
         let authDetails = AuthDetails(email: email, password: password)
 
@@ -96,7 +104,7 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
     @IBAction private func onTapSegButton(_ sender: SegmentedControl) {
         selectedUserType = UserType(rawValue: sender.selectedIndex)!
     }
-
+    
     private func setUpSegmentedControl() {
         segmentedControl.items = Constants.segmentedControlSignUpTitles
     }
@@ -107,20 +115,6 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
                                          userType: selectedUserType)
         signupLogic.delegate = self
         signupLogic.beginSignup()
-    }
-    
-    func signUpComplete() {
-        /* Email verification code - to be enabled only in production application
-        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
-        return
-        */
-
-        if selectedUserType == UserType.staff {
-            StaffProfile.getStaffInfo(completion: getStaffInfoComplete(staff:), errorHandler: handleError(error:))
-        } else {
-            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
-                                                errorHandler: handleError(error:))
-        }
     }
 
     private func getStaffInfoComplete(staff: Staff) {
@@ -139,11 +133,6 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.signUpCompletedSegue, sender: self)
     }
-
-    func handleError(error: Error) {
-        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
-        removeSpinner(spinner)
-    }
     
     private func checkIfAllFieldsAreFilled() -> Bool {
         if let name = nameTextField.text,
@@ -156,5 +145,28 @@ class SignUpViewController: UIViewController, SignupLogicDelegate {
                 !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
         return false
+    }
+}
+
+extension SignUpViewController: SignupLogicDelegate {
+    /// Set up profile and staff info after sign up is completed
+    func signUpComplete() {
+        /* Email verification code - to be enabled only in production application
+        performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
+        return
+        */
+
+        if selectedUserType == UserType.staff {
+            StaffProfile.getStaffInfo(completion: getStaffInfoComplete(staff:), errorHandler: handleError(error:))
+        } else {
+            RestaurantProfile.getRestaurantInfo(completion: getRestaurantInfoComplete(restaurant:),
+                                                errorHandler: handleError(error:))
+        }
+    }
+    
+    /// Show error message and remove loading spinner
+    func handleError(error: Error) {
+        showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
+        removeSpinner(spinner)
     }
 }

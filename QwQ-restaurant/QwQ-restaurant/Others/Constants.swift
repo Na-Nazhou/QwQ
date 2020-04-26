@@ -89,6 +89,7 @@ struct Constants {
     static let queueRecordReuseIdentifier = "queueRecordCell"
     static let collectionViewHeaderReuseIdentifier = "collectionViewHeader"
     static let activityCellHeight = CGFloat(300)
+    static let activityCellWidthRatio = CGFloat(0.9)
     static let statisticsReuseIdentifier = "statisticsCell"
     static let staffReuseIdentifier = "staffCell"
     static let roleReuseIdentifier = "roleCell"

@@ -5,9 +5,15 @@
 //  Created by Tan Su Yee on 14/3/20.
 //
 
+/**
+`LoginViewController` manages logins of staffs or restaurants.
+ 
+ It must conform to `LoginLogicDelegate` so that user can be logged in and directed to the correct page according to profile completion status.
+*/
+
 import UIKit
 
-class LoginViewController: UIViewController, LoginLogicDelegate {
+class LoginViewController: UIViewController {
 
     // MARK: View properties
     @IBOutlet private var emailTextField: UITextField!
@@ -42,8 +48,9 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
     @IBAction private func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {
     }
 
-    @IBAction private func loginButton(_ sender: Any) {
-        
+    /// Log user in if user is valid
+    @IBAction private func handleLogin(_ sender: Any) {
+        // Check and validate all fields
         guard let email = trimmedEmail, let password = trimmedPassword else {
             return
         }
@@ -71,9 +78,9 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
 
         spinner = showSpinner(onView: view)
         
+        // Log user in
         let authDetails = AuthDetails(email: email, password: password)
         beginLogin(authDetails: authDetails)
-
     }
 
     private func beginLogin(authDetails: AuthDetails) {
@@ -88,30 +95,36 @@ class LoginViewController: UIViewController, LoginLogicDelegate {
         loginLogic.delegate = self
         loginLogic.getStaffInfo()
     }
-    
+}
+
+extension LoginViewController: LoginLogicDelegate {
+    /// Switch to home page once login is successful
     func loginComplete() {
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.loginCompletedSegue, sender: self)
     }
 
+    /// Switch to email verification page if email is not verified
     func emailNotVerified() {
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.emailNotVerifiedSegue, sender: self)
     }
 
+    /// Switch to no restaurant assigned page if staff has no restaurant assigned
     func noAssignedRestaurant() {
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.noAssignedRestaurantSegue, sender: self)
     }
 
+    /// Switch to no role assigned page if staff has no role assigned
     func noAssignedRole() {
         removeSpinner(spinner)
         handleError(error: PermissionError.PermissionsNotInitialised)
     }
 
+    /// Show error message in an alert box
     func handleError(error: Error) {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }
-
 }

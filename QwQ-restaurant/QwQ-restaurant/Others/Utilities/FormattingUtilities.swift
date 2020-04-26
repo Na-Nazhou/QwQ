@@ -8,7 +8,6 @@
 import Foundation
 
 class FormattingUtilities {
-
     static func convertAnyToStringArray(_ anyArray: [Any]) -> [String] {
         var result = [String]()
         for item in anyArray {

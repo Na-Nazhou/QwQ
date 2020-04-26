@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 12/4/20.
 //
 
+/**
+`StaffVerificationViewController` manages verification of staff.
+*/
+
 import UIKit
 
 class StaffVerificationViewController: UIViewController {
