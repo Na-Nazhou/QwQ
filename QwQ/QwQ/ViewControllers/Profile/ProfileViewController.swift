@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 13/3/20.
 //
 
+/**
+`ProfileViewController` manages profiles of customers.
+*/
+
 import UIKit
 import FacebookLogin
 
@@ -28,7 +32,8 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    @IBAction private func logoutButton(_ sender: Any) {
+    /// Log user out of application
+    @IBAction private func handleLogout(_ sender: Any) {
         guard let authType = Profile.currentAuthType else {
             return
         }

@@ -58,6 +58,10 @@ struct Log {
     static let bookNotifError = OSLog(subsystem: subsystem, category: "bookNotificationsError")
     static let queueNotifError = OSLog(subsystem: subsystem, category: "queueNotificationsError")
     
+    static let segueError = OSLog(subsystem: subsystem, category: "segueError")
+    
+    static let imagePickingError = OSLog(subsystem: subsystem, category: "imagePickingError")
+    
     // MARK: Notification logs
     static let scheduleSuccess = OSLog(subsystem: subsystem, category: "localNotifications")
     static let scheduleError = OSLog(subsystem: subsystem, category: "localNotifications")

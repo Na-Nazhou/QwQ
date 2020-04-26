@@ -5,7 +5,15 @@
 //  Created by Daniel Wong on 14/3/20.
 //
 
+/**
+`EditProfileViewController` manages modification of customer profile info.
+ 
+ It must conform to `UIImagePickerControllerDelegate` and `UINavigationControllerDelegate`
+ so that users can choose customer profile image.
+*/
+
 import UIKit
+import os
 
 class EditProfileViewController: UIViewController {
 
@@ -42,7 +50,9 @@ class EditProfileViewController: UIViewController {
         handleBack()
     }
 
-    @IBAction private func saveButton(_ sender: Any) {
+    /// Save profile info if profile info are valid
+    @IBAction private func handleSave(_ sender: Any) {
+        // Check and validate all fields
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -77,6 +87,7 @@ class EditProfileViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
 
+        // Update profile info
         if let image = image {
             Profile.updateCustomerProfilePic(uid: uid, image: image, errorHandler: handleError(error:))
         }
@@ -90,6 +101,7 @@ class EditProfileViewController: UIViewController {
         Profile.updateCustomerInfo(customer: customer, completion: updateComplete, errorHandler: handleError(error:))
     }
 
+    /// Allow user to edit profile picture
     @objc func handleProfileTap(_ sender: UITapGestureRecognizer) {
         showImagePickerControllerActionSheet()
     }
@@ -149,6 +161,7 @@ class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    /// Allow user to choose whether to pick image from library or take a new image with camera
     func showImagePickerControllerActionSheet() {
         let photoLibraryAction = UIAlertAction(
             title: Constants.chooseFromPhotoLibraryTitle, style: .default
@@ -164,6 +177,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
                                actions: [photoLibraryAction, cameraAction, cancelAction])
     }
     
+    /// Present image picker to user
     func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -172,6 +186,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         present(imagePickerController, animated: true, completion: nil)
     }
     
+    /// Save selected image as profile image or banner image once user finishes picking image
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -180,6 +195,8 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImageView.image = originalImage
             self.image = originalImage
+        } else {
+            os_log("Image not found.", log: Log.imagePickingError, type: .error)
         }
         dismiss(animated: true, completion: nil)
     }
