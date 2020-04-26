@@ -1,3 +1,4 @@
+/// Represents the various status of a record.
 enum RecordStatus: Int {
     case pendingAdmission
     case admitted

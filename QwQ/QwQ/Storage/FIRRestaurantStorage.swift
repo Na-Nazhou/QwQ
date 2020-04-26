@@ -2,6 +2,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import os.log
 
+/// A Firestore-based storage handler for restaurants. Reads and listens to changes to documents in Firestore.
 class FIRRestaurantStorage: RestaurantStorage {
     // MARK: Storage as singleton
     static let shared = FIRRestaurantStorage()
@@ -25,7 +26,8 @@ class FIRRestaurantStorage: RestaurantStorage {
 
 extension FIRRestaurantStorage {
     // MARK: - Listeners
-
+    
+    /// Register to listen to all restaurant documents on Firestore.
     func registerListener() {
         removeListener()
 
@@ -44,6 +46,9 @@ extension FIRRestaurantStorage {
             }
     }
 
+    /// Delegates work to registered delegates based on the document change.
+    /// If a valid restaurant is newly added, updated or removed, the delegates will add, update or remove respectively.
+    /// - Parameters: diff: Firestore document change for a restaurant document.
     private func parseDocumentChange(_ diff: DocumentChange) {
         let result = Result {
             try diff.document.data(as: Restaurant.self)
@@ -76,7 +81,8 @@ extension FIRRestaurantStorage {
             self.delegateWork { $0.didRemoveRestaurant(restaurant: restaurant) }
         }
     }
-
+    
+    /// Removes any registered listener.
     func removeListener() {
         listener?.remove()
         listener = nil
@@ -85,15 +91,18 @@ extension FIRRestaurantStorage {
 
 extension FIRRestaurantStorage {
     // MARK: - Delegates
-
+    
+    /// Register `del` as a delegate of this component.
     func registerDelegate(_ del: RestaurantStorageSyncDelegate) {
         logicDelegates.add(del)
     }
-
+    
+    /// Unregister `del` from this component.
     func unregisterDelegate(_ del: RestaurantStorageSyncDelegate) {
         logicDelegates.remove(del)
     }
-
+    
+    /// Delegates all registered delegates to do work.
     private func delegateWork(doWork: (RestaurantStorageSyncDelegate) -> Void) {
         for delegate in logicDelegates.allObjects {
             guard let delegate = delegate as? RestaurantStorageSyncDelegate else {
