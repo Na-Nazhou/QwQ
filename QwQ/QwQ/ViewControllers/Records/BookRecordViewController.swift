@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 18/3/20.
 //
 
+/**
+`BookRecordViewController` shows full record details of a book record.
+*/
+
 import UIKit
 
 class BookRecordViewController: RecordViewController {

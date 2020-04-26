@@ -5,6 +5,10 @@
 //  Created by Daniel Wong on 25/3/20.
 //
 
+/**
+`RecordViewController` shows full record details of a queue or book record.
+*/
+
 import UIKit
 
 class RecordViewController: UIViewController {

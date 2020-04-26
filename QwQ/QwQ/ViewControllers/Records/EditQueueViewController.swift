@@ -5,6 +5,12 @@
 //  Created by Tan Su Yee on 15/3/20.
 //
 
+/**
+`EditQueueViewController` enables editing of a queue record.
+ 
+ It must conform to `QueueDelegate` to enable error handling if restaurant queue is closed.
+*/
+
 import UIKit
 
 class EditQueueViewController: EditRecordViewController {
@@ -12,6 +18,7 @@ class EditQueueViewController: EditRecordViewController {
     // MARK: Logic properties
     var queueLogic: CustomerQueueLogic!
 
+    /// Update queue record with new info
     @IBAction override func handleSubmit(_ sender: Any) {
         guard super.checkRecordDetails() else {
             return
@@ -47,11 +54,9 @@ class EditQueueViewController: EditRecordViewController {
         super.viewDidLoad()
         queueLogic.queueDelegate = self
     }
-
 }
 
 extension EditQueueViewController: QueueDelegate {
-
     func didFindRestaurantQueueClosed(for restaurant: Restaurant) {
         showMessage(title: Constants.errorTitle,
                     message: String(format: Constants.restaurantUnavailableMessage, restaurant.name),

@@ -68,6 +68,11 @@ struct Constants {
     static let recordDateFormat = "ddMMyyyy"
     static let selectOneText = "SELECT ONE"
     static let selectAllText = "SELECT ALL"
+    static let missingRecordFieldsTitle = "Missing fields"
+    static let groupSizeErrorMessage = "Group size must be positive"
+    static let groupSizeBabyChairErrorMessage = "Group size must be greater than baby chair quantity!"
+    static let groupSizeMinSizeMessage = "Group size must be larger than the minimum group size"
+    static let groupSizeMaxSizeMessage = "Group size must be smaller than the maximum group size"
     
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
