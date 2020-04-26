@@ -10,12 +10,10 @@ import XCTest
 
 class RestaurantTests: XCTestCase {
     var restaurant: Restaurant!
-    var restaurantFromDictionary: Restaurant?
     
     override func setUp() {
         super.setUp()
         restaurant = RestaurantBuilder().build()
-        restaurantFromDictionary = Restaurant(dictionary: RestaurantBuilder().getDictionary())
     }
     
     func testInit() {
@@ -33,10 +31,6 @@ class RestaurantTests: XCTestCase {
         XCTAssertEqual(restaurant.advanceBookingLimit, 2)
         XCTAssertEqual(restaurant.autoOpenTime, TimeInterval(60))
         XCTAssertEqual(restaurant.autoCloseTime, TimeInterval(60))
-    }
-    
-    func testDictionaryInit() {
-        XCTAssertEqual(restaurantFromDictionary, restaurant)
     }
     
     func testEqual_sameId_isEqual() {

@@ -10,12 +10,10 @@ import XCTest
 
 class RestaurantTests: XCTestCase {
     var restaurant: Restaurant!
-    var restaurantFromDictionary: Restaurant?
     
     override func setUp() {
         super.setUp()
         restaurant = RestaurantBuilder().build()
-        restaurantFromDictionary = Restaurant(dictionary: RestaurantBuilder().getDictionary())
     }
     
     func testInit() {
@@ -25,6 +23,7 @@ class RestaurantTests: XCTestCase {
         XCTAssertEqual(restaurant.contact, "66156257")
         XCTAssertEqual(restaurant.address, "31 Jurong East")
         XCTAssertEqual(restaurant.menu, "Aglio olio student meal at $9!")
+        XCTAssertEqual(restaurant.defaultRole, "Server")
         XCTAssertEqual(restaurant.maxGroupSize, 5)
         XCTAssertEqual(restaurant.minGroupSize, 1)
         XCTAssertEqual(restaurant.advanceBookingLimit, 2)
@@ -33,10 +32,6 @@ class RestaurantTests: XCTestCase {
         XCTAssertEqual(restaurant.advanceBookingLimit, 2)
         XCTAssertEqual(restaurant.autoOpenTime, TimeInterval(60))
         XCTAssertEqual(restaurant.autoCloseTime, TimeInterval(60))
-    }
-    
-    func testDictionaryInit() {
-        XCTAssertEqual(restaurantFromDictionary, restaurant)
     }
     
     func testEqual_sameId_isEqual() {
@@ -71,6 +66,11 @@ class RestaurantTests: XCTestCase {
     
     func testEqual_differentMenu_isEqual() {
         let otherRestaurant = RestaurantBuilder().with(menu: "Spaghetti, carbonara, fusili").build()
+        XCTAssertEqual(otherRestaurant, restaurant)
+    }
+    
+    func testEqual_differentDefaultRole_isEqual() {
+        let otherRestaurant = RestaurantBuilder().with(defaultRole: "Owner").build()
         XCTAssertEqual(otherRestaurant, restaurant)
     }
     
