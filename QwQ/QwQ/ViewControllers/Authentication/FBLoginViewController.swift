@@ -5,6 +5,10 @@
 //  Created by Daniel Wong on 28/3/20.
 //
 
+/**
+`FBLoginViewController` manages logins of customers through facebook.
+*/
+
 import UIKit
 import FacebookCore
 import FacebookLogin
@@ -32,7 +36,9 @@ class FBLoginViewController: UIViewController {
         handleBack()
     }
     
-    @IBAction private func submitButton(_ sender: Any) {
+    /// Create customer profile in if info is valid
+    @IBAction private func handleSubmit(_ sender: Any) {
+        // Check and validate all fields
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -65,6 +71,7 @@ class FBLoginViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
 
+        // Create customer profile
         let authDetails = AuthDetails(email: email, password: "")
         let signupDetails = SignupDetails(name: name, contact: contact)
 
@@ -73,17 +80,19 @@ class FBLoginViewController: UIViewController {
                                              email: authDetails.email,
                                              errorHandler: handleError(error:))
         authCompleted()
-
     }
 
-    func performFBLogin() {
+    /// Log user in through facebook
+    private func performFBLogin() {
         let loginManager = LoginManager()
         loginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
             self.fbLoginManagerComplete(result: result)
         }
     }
 
-    func fbLoginManagerComplete(result: LoginResult) {
+    /// Display status of facebook login
+    /// - Parameter result: facebook login result
+    private func fbLoginManagerComplete(result: LoginResult) {
         switch result {
         case .cancelled:
             showMessage(title: Constants.errorTitle,
@@ -111,12 +120,13 @@ class FBLoginViewController: UIViewController {
         }
     }
 
-    func authCompleted() {
+    private func authCompleted() {
         spinner = showSpinner(onView: view)
         getUserDetails()
     }
 
-    func getUserDetails() {
+    /// Get user details through facebook
+    private func getUserDetails() {
         let connection = GraphRequestConnection()
         let request = GraphRequest(graphPath: "/me", parameters: ["fields": "name, email"])
 
@@ -127,11 +137,13 @@ class FBLoginViewController: UIViewController {
                                  buttonText: Constants.errorTitle)
             }
             
+            // Get email and name from facebook
             if let result = result as? [String: String], let name = result["name"], let email = result["email"] {
 
                 Profile.currentUID = email
                 Profile.currentAuthType = AuthTypes.Facebook
 
+                // Update fields with info
                 Profile.getCustomerInfo(completion: self.getUserInfoComplete(customer:)) { (_) in
                     self.removeSpinner(self.spinner)
                     self.nameTextField.text = name
@@ -144,7 +156,7 @@ class FBLoginViewController: UIViewController {
         connection.start()
     }
 
-    func getUserInfoComplete(customer: Customer) {
+    private func getUserInfoComplete(customer: Customer) {
         CustomerPostLoginSetupManager.setUp(asIdentity: customer)
         removeSpinner(spinner)
         performSegue(withIdentifier: Constants.fbLoginCompletedSegue, sender: self)
@@ -169,5 +181,4 @@ class FBLoginViewController: UIViewController {
         }
         return false
     }
-
 }

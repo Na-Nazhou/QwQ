@@ -5,6 +5,10 @@
 //  Created by Tan Su Yee on 13/3/20.
 //
 
+/**
+`SignUpViewController` manages sign ups of customers.
+*/
+
 import UIKit
 
 class SignUpViewController: UIViewController {
@@ -31,7 +35,9 @@ class SignUpViewController: UIViewController {
         handleBack()
     }
     
-    @IBAction private func submitButton(_ sender: Any) {
+    /// Sign up user if user details are valid
+    @IBAction private func handleSubmit(_ sender: Any) {
+        // Check and validate all fields
         let trimmedName = nameTextField.text?.trimmingCharacters(in: .newlines)
         let trimmedContact = contactTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -65,6 +71,7 @@ class SignUpViewController: UIViewController {
 
         spinner = showSpinner(onView: view)
 
+        // Sign up user and log user in
         let signupDetails = SignupDetails(name: name, contact: contact)
         let authDetails = AuthDetails(email: email, password: password)
 
@@ -106,5 +113,4 @@ class SignUpViewController: UIViewController {
         }
         return false
     }
-
 }

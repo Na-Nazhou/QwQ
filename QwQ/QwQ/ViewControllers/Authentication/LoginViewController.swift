@@ -6,6 +6,10 @@
 //  Copyright © 2020 Appfish. All rights reserved.
 //
 
+/**
+`LoginViewController` manages logins of customers through email or facebook.
+*/
+
 import UIKit
 import FacebookLogin
 import FacebookCore
@@ -38,7 +42,9 @@ class LoginViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
 
-    @IBAction private func loginButton(_ sender: Any) {
+    /// Log user in if user is valid
+    @IBAction private func handleLogin(_ sender: Any) {
+        // Check and validate all fields
         let trimmedEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -66,6 +72,8 @@ class LoginViewController: UIViewController {
                         buttonText: Constants.okayTitle)
             return
         }
+        
+        // Log user in
         let authDetails = AuthDetails(email: email, password: password)
         Auth.login(authDetails: authDetails, completion: authCompleted, errorHandler: handleError(error:))
 
@@ -85,6 +93,7 @@ class LoginViewController: UIViewController {
         let connection = GraphRequestConnection()
         let request = GraphRequest(graphPath: "/me", parameters: ["fields": "email"])
 
+        // Get current user
         connection.add(request) { (_, result, error) in
             if let error = error {
                 self.showMessage(title: Constants.errorTitle,
@@ -124,5 +133,4 @@ class LoginViewController: UIViewController {
         showMessage(title: Constants.errorTitle, message: error.localizedDescription, buttonText: Constants.okayTitle)
         removeSpinner(spinner)
     }
-
 }

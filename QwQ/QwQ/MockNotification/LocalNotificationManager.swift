@@ -58,7 +58,7 @@ extension LocalNotificationManager {
             title: Constants.permissionsRequestTitle,
             message: Constants.permissionsRequestMessage,
             preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: permissionsRequestSettingsTitle, style: .default) { _ in
+        let settingsAction = UIAlertAction(title: Constants.permissionsRequestSettingsTitle, style: .default) { _ in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }

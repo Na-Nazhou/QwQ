@@ -123,7 +123,7 @@ class QwQNotificationManager: QwQNotificationHandler {
         let notifAdmit = QwQNotification(
             notifId: notifAdmitId,
             title: "1 min left to respond -- \(record.restaurant.name) has admitted you!",
-            description: Constans.withdrawableAdmitTwoMinDescription,
+            description: Constants.withdrawableAdmitTwoMinDescription,
             shouldSend: true)
         os_log("Queue admit response (2 min mark) notif prepared.",
                log: Log.queueNotifScheduled, type: .info)

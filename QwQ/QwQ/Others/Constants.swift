@@ -25,7 +25,7 @@ struct Constants {
     static let errorTitle = "Error"
     static let okayTitle = "Okay"
     static let cancelTitle = "Cancel"
-
+    
     // MARK: Signup / Login / Profile
     static let profileUpdateSuccessMessage = "Your profile has been updated."
     static let missingFieldsTitle = "Error - Missing Fields"
@@ -42,7 +42,7 @@ struct Constants {
     static let fbLoginPermissionsMessage = "Please grant profile and email access with Facebook to continue."
     static let resetPasswordTitle = "Reset Password"
     static let resetPasswordMessage = "Please check your email to reset your password."
-
+    
     // MARK: Queue record settings
     static let restaurantUnavailableMessage = "The queue for %@ is closed!"
     static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
@@ -54,11 +54,11 @@ struct Constants {
     static let exceedOperatingHoursMessage = "%@ only operates at %@"
     static let bookingTimeInterval = 15
     static let bookButtonTitle = "BOOK"
-
+    
     // MARK: Record settings
     static let defaultWheelchairFriendly = false
     static let defaultBabyChairQuantity = 0
-
+    
     static let noRestaurantSelectedMessage = "You have to select at least one restaurant"
     static let recordCreateSuccessMessage = "You have created a record."
     static let multipleRecordCreateSuccessMessage = "You have successfully created multiple records."
@@ -81,7 +81,8 @@ struct Constants {
     static let logoutSegue = "logout"
     static let fbLoginCompletedSegue = "fbLoginComplete"
     static let loginEmailNotVerifiedSegue = "loginEmailNotVerified"
-
+    static let emailVerificationCancelledSegue = "goToLogin"
+    
     // MARK: Storage settings
     static let customersDirectory = "customers"
     static let restaurantsDirectory = "restaurants"
@@ -165,13 +166,16 @@ struct Constants {
         + " Please head over to Settings and enable notifications for QwQ."
     static let permissionsRequestSettingsTitle = "Settings"
     static let acceptKeyword = "Accepted"
-    static let acceptDescription = "You can now view your accepted booking in the Activities page! Please arrive on time."
+    static let acceptDescription = "You can now view your accepted booking in the "
+        + "Activities page! Please arrive on time."
     static let rejectKeyword = "Rejected"
     static let rejectDescription = "You may consider booking at other restaurants."
     static let bookTimeTitle = "Time to Enter for Your Booking!"
     static let admitQueueDescription = "Accept or reject the admission on the Activities page! \nRespond within: 3 min"
-    static let withdrawableAdmitOneMinDescription = "Accept or reject the admission on the Activities page! \nRespond within: 2 min"
-    static let withdrawableAdmitTwoMinDescription = "Accept or reject the admission on the Activities page! \nRespond within: 1 min"
+    static let withdrawableAdmitOneMinDescription = "Accept or reject the admission on the "
+        + "Activities page! \nRespond within: 2 min"
+    static let withdrawableAdmitTwoMinDescription = "Accept or reject the admission on the "
+        + "Activities page! \nRespond within: 1 min"
     static let confirmedAdmissionDescription = "Please arrive within 15min from the admitted time."
     static let queueRejectedDescription = "Please try to be prompt next time."
     static let queueMissedDescription = "You have been pushed back in the queue. Please wait in the vicinity."
