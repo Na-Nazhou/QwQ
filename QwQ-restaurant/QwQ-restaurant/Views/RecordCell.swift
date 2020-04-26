@@ -111,7 +111,7 @@ class RecordCell: UICollectionViewCell {
             statusLabel.text = "Reservation Time: \(bookRecord.time.toString())"
             timeLabel.text = bookRecord.time.getFormattedTime()
         }
-        timeLabel.textColor = .systemGreen
+        timeLabel.textColor = Constants.serveAdmitFontColor
         setUpAdmitButton()
     }
 
@@ -131,7 +131,7 @@ class RecordCell: UICollectionViewCell {
             disableAdmitButtonIfJustMissed(record: queueRecord)
         }
         assert(record as? BookRecord == nil)
-        timeLabel.textColor = .systemGreen
+        timeLabel.textColor = Constants.serveAdmitFontColor
         setUpAdmitButton()
     }
 
@@ -140,15 +140,15 @@ class RecordCell: UICollectionViewCell {
         case .served:
             statusLabel.text = "Served at: \(record.serveTime!.toString())"
             timeLabel.text = record.serveTime!.getFormattedTime()
-            timeLabel.textColor = .systemGreen
+            timeLabel.textColor = Constants.serveAdmitFontColor
         case .rejected:
             statusLabel.text = "Rejected at: \(record.rejectTime!.toString())"
             timeLabel.text = record.rejectTime!.getFormattedTime()
-            timeLabel.textColor = .systemGray
+            timeLabel.textColor = Constants.withdrawRejectFontColor
         case .withdrawn:
             statusLabel.text = "Withdrawn at: \(record.withdrawTime!.toString())"
             timeLabel.text = record.withdrawTime!.getFormattedTime()
-            timeLabel.textColor = .systemGray
+            timeLabel.textColor = Constants.withdrawRejectFontColor
         default:
             assert(false)
         }
@@ -163,7 +163,7 @@ class RecordCell: UICollectionViewCell {
         } else {
             timeLabel.text = record.admitTime!.getFormattedTime()
         }
-        timeLabel.textColor = .systemGray
+        timeLabel.textColor = Constants.withdrawRejectFontColor
         setUpServeButton()
         disableLeftButton()
     }
@@ -177,7 +177,7 @@ class RecordCell: UICollectionViewCell {
         }
         // For queue record should show a timer instead
         // show grey if exceed time limit
-        timeLabel.textColor = .systemGreen
+        timeLabel.textColor = Constants.serveAdmitFontColor
         setUpServeButton()
     }
 
@@ -208,18 +208,18 @@ class RecordCell: UICollectionViewCell {
     }
 
     private func setUpAdmitButton() {
-        leftButton.setTitle("ADMIT", for: .normal)
+        leftButton.setTitle(Constants.admitButtonTitle, for: .normal)
         leftButton.addTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
     }
 
     private func setUpServeButton() {
-        leftButton.setTitle("SERVE", for: .normal)
+        leftButton.setTitle(Constants.serveButtonTitle, for: .normal)
         leftButton.removeTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
         leftButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
     }
 
     private func setUpRejectButton() {
-        rightButton.setTitle("REJECT", for: .normal)
+        rightButton.setTitle(Constants.rejectButtonTitle, for: .normal)
         rightButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
     }
 
@@ -231,6 +231,7 @@ class RecordCell: UICollectionViewCell {
             return
         }
         disableLeftButton()
+        
         //add timer to enable.
         let enableTimer = Timer(
             fire: enableTime,

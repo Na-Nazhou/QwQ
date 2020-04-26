@@ -69,6 +69,8 @@ struct Constants {
     static let rejectButtonTitle = "REJECT"
     static let pendingConfirmationButtonTitle = "PENDING CONFIRMATION"
     static let pendingConfirmationButtonAlpha = CGFloat(0.5)
+    static let withdrawRejectFontColor = UIColor.systemGray
+    static let serveAdmitFontColor = UIColor.systemGreen
 
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
