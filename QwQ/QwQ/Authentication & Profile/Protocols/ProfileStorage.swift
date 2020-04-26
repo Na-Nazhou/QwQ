@@ -23,7 +23,7 @@ protocol ProfileStorage {
 
     // MARK: - Customer Creation Methods
 
-    /// Creates the initial customer profile upon signup
+    /// Creates the initial Customer profile upon signup
     /// - Parameters:
     ///     - uid: The uid of the user to be created
     ///     - signupDetails: A SignupDetails object including the name and the contact of the user
@@ -39,22 +39,22 @@ protocol ProfileStorage {
     static func getCustomerInfo(completion: @escaping (Customer) -> Void,
                                 errorHandler: @escaping (Error) -> Void)
 
-    /// This function gets a customer's profile photo based on the specified UID
+    /// This function gets a Customer's profile photo based on the specified UID
     static func getCustomerProfilePic(uid: String,
                                       placeholder imageView: UIImageView)
 
     // MARK: - Customer Info Update Methods
 
-    /// This function updates the customer info
+    /// This function updates the Customer info
     /// - Parameters:
-    ///     - customer: The customer to be updated
+    ///     - customer: The Customer to be updated
     static func updateCustomerInfo(customer: Customer,
                                    completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void)
 
-    /// This function updates the customer's profile photo
+    /// This function updates the Customer's profile photo
     /// - Parameters:
-    ///     - uid: The uid of the customer to be updated
+    ///     - uid: The uid of the Customer to be updated
     ///     - image: The image to be uploaded
     static func updateCustomerProfilePic(uid: String,
                                          image: UIImage,

@@ -22,9 +22,9 @@ protocol RestaurantInfoStorage {
                                      completion: @escaping (Restaurant) -> Void,
                                      errorHandler: ((Error) -> Void)?)
 
-    /// This function retrieves the Restaurant based on the specified UID
+    /// This function retrieves the Restaurant's profile photo based on the specified UID
     /// - Parameters:
-    ///     - uid: The uid of the restaurant to retrieve the profile photo for
+    ///     - uid: The uid of the Restaurant to retrieve the profile photo for
     ///     - imageView: The ImageView to load the image into
     static func getRestaurantProfilePic(uid: String, imageView: UIImageView)
     

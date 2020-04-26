@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Used to hold the email and password of a user
 struct AuthDetails {
     let email: String
     let password: String
