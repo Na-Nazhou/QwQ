@@ -7,12 +7,14 @@
 
 import Foundation
 
+/// Contains the possible errors thrown by Authenticator
 enum AuthError: Error {
     case AuthResultError
     case SignOutError
     case NotSignedIn
 }
 
+/// Descriptions for each AuthError
 extension AuthError: LocalizedError {
     public var errorDescription: String? {
         switch self {

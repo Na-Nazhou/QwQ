@@ -16,7 +16,7 @@ class RestaurantCell: UICollectionViewCell {
     @IBOutlet private var queueButton: UIButton!
     @IBOutlet private var profileImageView: UIImageView!
 
-    typealias ProfileStorage = FIRProfileStorage
+    typealias RestaurantStorage = FIRRestaurantInfoStorage
     
     @IBAction private func handleQueueTap(sender: Any?) {
         if queueAction?() ?? false {
@@ -31,7 +31,7 @@ class RestaurantCell: UICollectionViewCell {
         nameLabel.text = restaurant.name
         locationLabel.text = restaurant.address
 
-        ProfileStorage.getRestaurantProfilePic(uid: restaurant.uid, imageView: profileImageView)
+        RestaurantStorage.getRestaurantProfilePic(uid: restaurant.uid, imageView: profileImageView)
         setUpQueueButton()
     }
 

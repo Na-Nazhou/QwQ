@@ -7,9 +7,14 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
+import SDWebImage
 import os
 
 class FIRCustomerStorage: CustomerStorage {
+
+    static let storageRef = Storage.storage().reference().child("profile-pics")
+
     static func getCustomerFromUID(uid: String,
                                    completion: @escaping (Customer) -> Void,
                                    errorHandler: ((Error) -> Void)?) {
@@ -37,5 +42,15 @@ class FIRCustomerStorage: CustomerStorage {
                        log: Log.createCustomerError, type: .error, error.localizedDescription)
             }
         }
+    }
+
+    static func getCustomerProfilePic(uid: String, imageView: UIImageView) {
+        let reference = storageRef.child("\(uid).png")
+
+        let url = NSURL.sd_URL(with: reference)
+
+        SDImageCache.shared.removeImage(forKey: url?.absoluteString)
+
+        imageView.sd_setImage(with: reference, placeholderImage: imageView.image)
     }
 }

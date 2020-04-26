@@ -7,12 +7,14 @@
 
 import Foundation
 
+/// Contains the possible errors thrown by Permissions
 enum PermissionError: Error {
     case PermissionsNotInitialised
     case NotGrantedPermission
     case PermissionInUse
 }
 
+/// Descriptions for each PermissionError
 extension PermissionError: LocalizedError {
     public var errorDescription: String? {
         switch self {

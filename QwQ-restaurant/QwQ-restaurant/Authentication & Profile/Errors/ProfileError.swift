@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Contains the possible errors thrown by Profile
 enum ProfileError: Error {
     case NotSignedIn
     case IncorrectUserType
@@ -16,6 +17,7 @@ enum ProfileError: Error {
     case NoRestaurantAssigned
 }
 
+/// Descriptions for each ProfileError
 extension ProfileError: LocalizedError {
     public var errorDescription: String? {
         switch self {
