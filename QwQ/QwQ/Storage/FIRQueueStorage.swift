@@ -103,7 +103,9 @@ extension FIRQueueStorage {
                     case .modified:
                         completion = { record in self.delegateWork { $0.didUpdateQueueRecord(record) } }
                     case .removed:
-                        print("\n\tDetected removal of queue record from db which should not happen.\n")
+                        os_log("Detected removal of queue record from db which should not happen.",
+                               log: Log.removeDbRecordError,
+                               type: .error)
                         completion = { _ in }
                     }
                     self.makeQueueRecord(

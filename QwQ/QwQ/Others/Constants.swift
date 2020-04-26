@@ -46,12 +46,14 @@ struct Constants {
     // MARK: Queue record settings
     static let restaurantUnavailableMessage = "The queue for %@ is closed!"
     static let alreadyQueuedRestaurantMessage = "You are already in the queue for %@."
-
+    static let queueButtonTitle = "QUEUE"
+    
     // MARK: Book record settings
     static let alreadyBookRestaurantMessage = "You have a booking at %@ already."
     static let exceedAdvanceBookingLimitMessage = "You have to book at least %@ hours in advance at %@."
     static let exceedOperatingHoursMessage = "%@ only operates at %@"
     static let bookingTimeInterval = 15
+    static let bookButtonTitle = "BOOK"
 
     // MARK: Record settings
     static let defaultWheelchairFriendly = false
@@ -63,7 +65,10 @@ struct Constants {
     static let recordUpdateSuccessMessage = "Your record has been updated."
     static let recordConfirmSuccessMessage = "Your record has been confirmed."
     static let recordWithdrawSuccessMessage = "Your record has been withdrawn."
-
+    static let recordDateFormat = "ddMMyyyy"
+    static let selectOneText = "SELECT ONE"
+    static let selectAllText = "SELECT ALL"
+    
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
     static let loginCompletedSegue = "loginCompleted"
@@ -120,15 +125,6 @@ struct Constants {
     static let spinnerViewFrame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
     static let spinnerViewColor = UIColor.white
     
-    // MARK: Record settings
-    static let recordDateFormat = "ddMMyyyy"
-    
-    // MARK: Button settings
-    static let selectOneText = "SELECT ONE"
-    static let selectAllText = "SELECT ALL"
-    static let queueButtonTitle = "QUEUE"
-    static let bookButtonTitle = "BOOK"
-    
     // MARK: Model settings
     static let uidKey = "uid"
     static let nameKey = "name"
@@ -162,4 +158,21 @@ struct Constants {
     // MARK: Queue timed settings
     static let queueWaitConfirmTimeInMins = 3
     static let queueWaitArrivalInMins = 15
+    
+    // MARK: Notification settings
+    static let permissionsRequestTitle = "Notifications Required!"
+    static let permissionsRequestMessage = "Notifications are necessary to respond to your queues/bookings promptly!"
+        + " Please head over to Settings and enable notifications for QwQ."
+    static let permissionsRequestSettingsTitle = "Settings"
+    static let acceptKeyword = "Accepted"
+    static let acceptDescription = "You can now view your accepted booking in the Activities page! Please arrive on time."
+    static let rejectKeyword = "Rejected"
+    static let rejectDescription = "You may consider booking at other restaurants."
+    static let bookTimeTitle = "Time to Enter for Your Booking!"
+    static let admitQueueDescription = "Accept or reject the admission on the Activities page! \nRespond within: 3 min"
+    static let withdrawableAdmitOneMinDescription = "Accept or reject the admission on the Activities page! \nRespond within: 2 min"
+    static let withdrawableAdmitTwoMinDescription = "Accept or reject the admission on the Activities page! \nRespond within: 1 min"
+    static let confirmedAdmissionDescription = "Please arrive within 15min from the admitted time."
+    static let queueRejectedDescription = "Please try to be prompt next time."
+    static let queueMissedDescription = "You have been pushed back in the queue. Please wait in the vicinity."
 }

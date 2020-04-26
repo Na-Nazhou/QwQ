@@ -31,7 +31,7 @@ struct Log {
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
     static let recordError = OSLog(subsystem: subsystem, category: "recordError")
     
-    // MARK: FIRError
+    // MARK: Errors
     static let addQueueRecordError = OSLog(subsystem: subsystem, category: "QueueError")
     static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "QueueError")
     static let queueRetrievalError = OSLog(subsystem: subsystem, category: "QueueError")
@@ -51,8 +51,7 @@ struct Log {
 
     static let createStaffError = OSLog(subsystem: subsystem, category: "staffError")
     static let createRoleError = OSLog(subsystem: subsystem, category: "staffError")
-    
-    // MARK: UI errors
+
     static let segueError = OSLog(subsystem: subsystem, category: "segueError")
     
     static let imagePickingError = OSLog(subsystem: subsystem, category: "imagePickingError")
