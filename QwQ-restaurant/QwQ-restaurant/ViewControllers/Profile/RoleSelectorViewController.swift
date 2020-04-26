@@ -5,9 +5,13 @@
 //  Created by Daniel Wong on 23/4/20.
 //
 
+/**
+`RoleSelectorViewController` manages roles of staffs of restaurant, and allows setting of roles.
+*/
+
 import UIKit
 
-class PositionSelectorViewController: UIViewController {
+class RoleSelectorViewController: UIViewController {
 
     @IBOutlet var positionTableView: UITableView!
 
@@ -22,10 +26,9 @@ class PositionSelectorViewController: UIViewController {
         positionTableView.reloadData()
         super.viewDidLoad()
     }
-
 }
 
-extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSource {
+extension RoleSelectorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let roles = roles else {
             return 0
@@ -33,6 +36,7 @@ extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSo
         return roles.count
     }
 
+    /// Set up available roles for staffs
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = positionTableView.dequeueReusableCell(withIdentifier: Constants.positionReuseIdentifier,
                                                          for: indexPath)
@@ -51,6 +55,7 @@ extension PositionSelectorViewController: UITableViewDelegate, UITableViewDataSo
         return positionCell
     }
 
+    /// Update staff role to selected role
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let roles = roles, let owner = owner else {
             return

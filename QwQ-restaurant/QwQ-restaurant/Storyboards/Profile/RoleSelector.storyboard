@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Position Selector View Controller-->
+        <!--Role Selector View Controller-->
         <scene sceneID="Tux-VH-W4o">
             <objects>
-                <viewController id="iDW-yd-Hjk" customClass="PositionSelectorViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iDW-yd-Hjk" customClass="RoleSelectorViewController" customModule="QwQ_restaurant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yf2-eP-Zsz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

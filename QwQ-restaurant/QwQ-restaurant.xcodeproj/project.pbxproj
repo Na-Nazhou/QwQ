@@ -37,7 +37,7 @@
 		5C50060C2451D0E300605085 /* StaffPositionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50060B2451D0E300605085 /* StaffPositionStorage.swift */; };
 		5C50060E2451E09700605085 /* PermissionSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50060D2451E09700605085 /* PermissionSelectorViewController.swift */; };
 		5C5006102451E0AF00605085 /* RoleSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C50060F2451E0AF00605085 /* RoleSelector.storyboard */; };
-		5C5006122451E0BE00605085 /* PositionSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5006112451E0BE00605085 /* PositionSelectorViewController.swift */; };
+		5C5006122451E0BE00605085 /* RoleSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5006112451E0BE00605085 /* RoleSelectorViewController.swift */; };
 		5C5006142451ED3B00605085 /* PositionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5006132451ED3B00605085 /* PositionCell.swift */; };
 		5C90DB70244D67B300281514 /* FIRRoleStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */; };
 		5C9281172450AF5E00A50DE0 /* StaffPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9281162450AF5E00A50DE0 /* StaffPosition.swift */; };
@@ -198,7 +198,7 @@
 		5C50060B2451D0E300605085 /* StaffPositionStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffPositionStorage.swift; sourceTree = "<group>"; };
 		5C50060D2451E09700605085 /* PermissionSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSelectorViewController.swift; sourceTree = "<group>"; };
 		5C50060F2451E0AF00605085 /* RoleSelector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RoleSelector.storyboard; sourceTree = "<group>"; };
-		5C5006112451E0BE00605085 /* PositionSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionSelectorViewController.swift; sourceTree = "<group>"; };
+		5C5006112451E0BE00605085 /* RoleSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectorViewController.swift; sourceTree = "<group>"; };
 		5C5006132451ED3B00605085 /* PositionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionCell.swift; sourceTree = "<group>"; };
 		5C90DB6F244D67B300281514 /* FIRRoleStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRRoleStorage.swift; sourceTree = "<group>"; };
 		5C9281162450AF5E00A50DE0 /* StaffPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffPosition.swift; sourceTree = "<group>"; };
@@ -579,7 +579,7 @@
 				7E72B1A1241CA55100C1EE72 /* ProfileViewController.swift */,
 				7EE6D022241E393A00C1465E /* EditProfileViewController.swift */,
 				7EA7B4982432419400A6828F /* AddStaffViewController.swift */,
-				5C5006112451E0BE00605085 /* PositionSelectorViewController.swift */,
+				5C5006112451E0BE00605085 /* RoleSelectorViewController.swift */,
 				5C92811A2450BB5800A50DE0 /* SetRolesViewController.swift */,
 				5C50060D2451E09700605085 /* PermissionSelectorViewController.swift */,
 			);
@@ -1238,7 +1238,7 @@
 				7E72B19C241C9D4D00C1EE72 /* Constants.swift in Sources */,
 				D4EA85F2241B2C65009EB85B /* User.swift in Sources */,
 				D4EBA72224387B4B00FCB66C /* StatsDelegate.swift in Sources */,
-				5C5006122451E0BE00605085 /* PositionSelectorViewController.swift in Sources */,
+				5C5006122451E0BE00605085 /* RoleSelectorViewController.swift in Sources */,
 				5C5006142451ED3B00605085 /* PositionCell.swift in Sources */,
 				5C2CB12C242484A0003AFC6C /* SignupDetails.swift in Sources */,
 				D4EBA71824384E9A00FCB66C /* RestaurantStatisticsLogicManager.swift in Sources */,

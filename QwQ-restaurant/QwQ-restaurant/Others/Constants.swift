@@ -98,6 +98,11 @@ struct Constants {
     static let permissionReuseIdentifier = "permissionCell"
     static let permissionSelectorVCIdentifier = "permissionSelectorVC"
     
+    // MARK: Set roles setting
+    static let setRolesFont = UIFont(name: "Comfortaa", size: 20)
+    static let setRoleFontColor = UIColor.white
+    static let setRolesTextAlignment = NSTextAlignment.center
+    
     // MARK: Segmented control settings
     static let segmentedControlActivitiesTitles = ["Current", "Waiting", "History"]
     static let segmentedControlStatisticsTitles = ["Daily", "Weekly", "Monthly"]

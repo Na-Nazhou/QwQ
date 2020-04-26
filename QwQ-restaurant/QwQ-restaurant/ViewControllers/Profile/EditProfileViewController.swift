@@ -8,7 +8,8 @@
 /**
 `EditProfileViewController` manages modification of restaurant profile info.
  
- It must conform to `UIImagePickerControllerDelegate` and `UINavigationControllerDelegate` so that users can choose restaurant profile and banner images.
+ It must conform to `UIImagePickerControllerDelegate` and `UINavigationControllerDelegate`
+ so that users can choose restaurant profile and banner images.
 */
 
 import UIKit
