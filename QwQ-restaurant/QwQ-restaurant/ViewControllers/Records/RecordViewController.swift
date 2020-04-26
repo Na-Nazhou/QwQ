@@ -5,6 +5,10 @@
 //  Created by Daniel Wong on 25/3/20.
 //
 
+/**
+`RecordViewController` shows full record details of a queue or book record.
+*/
+
 import UIKit
 
 class RecordViewController: UIViewController {
@@ -62,13 +66,17 @@ class RecordViewController: UIViewController {
             hideActionButton()
         }
     }
-
-    @IBAction func handleBack(_ sender: Any) {
+    
+    func hideActionButton() {
+        actionButton.isHidden = true
+    }
+    
+    func didUpdateRecord() {
+        removeSpinner(spinner)
         handleBack()
     }
 
-    func didUpdateRecord() {
-        removeSpinner(spinner)
+    @IBAction func handleBack(_ sender: Any) {
         handleBack()
     }
 
@@ -100,13 +108,8 @@ class RecordViewController: UIViewController {
         actionButton.isEnabled = false
     }
 
-    // TODO: add reject button
     private func setUpRejectButton() {
         actionButton.setTitle(Constants.rejectButtonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
-    }
-
-    func hideActionButton() {
-        actionButton.isHidden = true
     }
 }
