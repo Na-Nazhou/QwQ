@@ -1,11 +1,4 @@
-//
-//  Customer.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 11/3/20.
-//  Copyright © 2020 Appfish. All rights reserved.
-//
-
+/// A customer, which is identified by his `uid` for equality and hash.
 struct Customer: User {
     let uid: String
     let name: String

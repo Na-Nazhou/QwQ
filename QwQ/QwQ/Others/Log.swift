@@ -41,6 +41,7 @@ struct Log {
     static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "queueRecordError")
     static let queueRetrievalError = OSLog(subsystem: subsystem, category: "queueRecordError")
     static let createQueueRecordError = OSLog(subsystem: subsystem, category: "queueRecordError")
+    static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "unexpectedDiffError")
 
     static let addBookRecordError = OSLog(subsystem: subsystem, category: "bookRecordError")
     static let updateBookRecordError = OSLog(subsystem: subsystem, category: "bookRecordError")

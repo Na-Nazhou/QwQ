@@ -1,13 +1,12 @@
-//
-//  BookRecord.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 16/3/20.
-//
-
 import Foundation
 import FirebaseFirestore
 
+/// A record for bookings. Each book record is identified `id`, in which equality and hash relies solely on.
+/// In addition to typical records, book records have a time booked.
+/// Once admitted, the booking is confirmed immediately. Bookings cannot be missed and will be
+/// rejected once the customer does not turn up within 15 min after the time booked.
+/// Invariants on a `Record` holds as well.
+/// - Invariant: book records cannot be missed nor readmited.
 struct BookRecord: Record {
     let id: String
     let restaurant: Restaurant
@@ -25,12 +24,15 @@ struct BookRecord: Record {
 
     let withdrawTime: Date?
     var confirmAdmissionTime: Date? {
-        admitTime   // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
+        admitTime
+        // for bookings, the first admitted one will be auto accepted, the rest withdrawn.
+        // hence once admitted, auto confirmed admission.
     }
 
     var missTime: Date?
     var readmitTime: Date?
-
+    
+    /// A Firestore-compatible book record dictionary representing a book record.
     var dictionary: [String: Any] {
         var data = [String: Any]()
         data[Constants.restaurantKey] = restaurant.uid
@@ -58,7 +60,9 @@ struct BookRecord: Record {
 
         return data
     }
-
+    
+    /// Constructs a copy of a book record at `restaurant` for `customer` at `time` with record id `id`
+    /// and attendee details. Optional parameters for action times can also be provided to initialise this book record.
     init(id: String, restaurant: Restaurant, customer: Customer, time: Date,
          groupSize: Int, babyChairQuantity: Int, wheelchairFriendly: Bool,
          admitTime: Date? = nil, serveTime: Date? = nil,
@@ -78,7 +82,9 @@ struct BookRecord: Record {
         self.withdrawTime = withdrawTime
         self.missTime = missTime
     }
-
+    
+    /// Constructs a book record for `customer` at `restaurant` from the given `dictionary`.
+    /// The `dictionary` should be a Firestore-compatible book record dictionary.
     init?(dictionary: [String: Any], customer: Customer, restaurant: Restaurant, id: String) {
         guard let groupSize = dictionary[Constants.groupSizeKey] as? Int,
             let babyChairQuantity = dictionary[Constants.babyChairQuantityKey] as? Int,
@@ -128,7 +134,13 @@ extension BookRecord: Hashable {
 }
 
 extension BookRecord {
+    /// Status of a book record. A book record cannot be missed.
+    /// - Returns: `.invalid` if record fails to satisfy invariants; else returns the corresponding status.
     var status: RecordStatus {
+        if missTime != nil {
+            return .invalid
+        }
+
         if withdrawTime != nil {
             return .withdrawn
         } else if rejectTime != nil {
@@ -144,7 +156,10 @@ extension BookRecord {
         }
         return .invalid
     }
-
+    
+    /// Compares `old` and this record and returns the change detected.
+    /// Records with different id are not comparable.
+    /// - Returns: the record modification if valid, otherwise nil if comparison was invalid.
     func getChangeType(from old: Record) -> RecordModification? {
         if self.id != old.id {
             // not valid comparison

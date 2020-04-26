@@ -1,10 +1,4 @@
-//
-//  Collection.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 25/3/20.
-//
-
+/// A collection of hashable objects.
 class Collection<T: Hashable> {
     var elements = Set<T>()
 
@@ -12,12 +6,14 @@ class Collection<T: Hashable> {
         elements.count
     }
 
+    /// Adds `element` to collection and returns true if there did not exist the same element in this collection.
     @discardableResult
     func add(_ element: T) -> Bool {
         let (isNew, _) = elements.insert(element)
         return isNew
     }
 
+    /// Adds `newElements` to collection and returns true if elements are added to this collection.
     @discardableResult
     func add(_ newElements: [T]) -> Bool {
         let origSize = size
@@ -25,6 +21,9 @@ class Collection<T: Hashable> {
         return size > origSize
     }
 
+    /// Updates the same element as `element` in this collection to `element` and returns true if `element`
+    /// exists in collection.
+    /// Else does not update and returns false.
     @discardableResult
     func update(_ element: T) -> Bool {
         if elements.contains(element) {
@@ -36,6 +35,7 @@ class Collection<T: Hashable> {
         return false
     }
 
+    /// Removes `element` from thhis collection and returns  true if something is removed.
     func remove(_ element: T) -> Bool {
         let removed = elements.remove(element)
         return removed != nil

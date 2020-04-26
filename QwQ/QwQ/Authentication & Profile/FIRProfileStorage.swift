@@ -11,6 +11,7 @@ import FirebaseUI
 import os
 import SDWebImage
 
+/// A Firebase implementation of ProfileStorage.
 class FIRProfileStorage: ProfileStorage {
     
     typealias Auth = FIRAuthenticator
@@ -90,17 +91,7 @@ class FIRProfileStorage: ProfileStorage {
         }
         imageView.checkCacheThenSetImage(with: reference, placeholder: image)
     }
-    
-    static func getRestaurantProfilePic(uid: String, imageView: UIImageView) {
-        let reference = storageRef.child("\(uid).png")
-        
-        let url = NSURL.sd_URL(with: reference)
-        
-        SDImageCache.shared.removeImage(forKey: url?.absoluteString)
-        
-        imageView.sd_setImage(with: reference, placeholderImage: imageView.image)
-    }
-    
+
     static func updateCustomerInfo(customer: Customer,
                                    completion: @escaping () -> Void,
                                    errorHandler: @escaping (Error) -> Void) {

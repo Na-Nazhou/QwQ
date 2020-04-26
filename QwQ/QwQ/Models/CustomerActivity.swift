@@ -1,7 +1,8 @@
 import Foundation
 
+/// A model of customer activity.
 class CustomerActivity {
-    // MARK: Customer as singleton
+    // MARK: Customer as singleton shared resource
     private static var customerActivity: CustomerActivity?
 
     static func shared(for customer: Customer? = nil) -> CustomerActivity {

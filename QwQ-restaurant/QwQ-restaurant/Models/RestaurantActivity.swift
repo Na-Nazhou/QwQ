@@ -1,5 +1,6 @@
+/// A model of the restaurant activity.
 class RestaurantActivity {
-    // MARK: Restaurant as singleton
+    // MARK: Restaurant as singleton shared resource
     private static var restaurantActivity: RestaurantActivity?
 
     static func shared(for restaurant: Restaurant? = nil) -> RestaurantActivity {

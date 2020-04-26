@@ -5,10 +5,12 @@
 //  Created by Daniel Wong on 20/4/20.
 //
 
+/// Defines a Role
 struct Role: Codable, Equatable {
     let roleName: String
     let permissions: [Permission]
 
+    /// The default roles to be created when a new Restaurant is created
     static var defaultRoles: [Role] {
         var roles = [Role]()
 

@@ -1,12 +1,6 @@
-//
-//  Collection+Statistics.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 15/4/20.
-//
-
 import Foundation
 
+/// A collection of statistics.
 extension Collection where T == Statistics {
 
     var statistics: [Statistics] {

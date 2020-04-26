@@ -1,3 +1,4 @@
+/// Represents the protocol a user should conform to.
 protocol User: Hashable, Codable {
     var uid: String { get }
     var name: String { get }

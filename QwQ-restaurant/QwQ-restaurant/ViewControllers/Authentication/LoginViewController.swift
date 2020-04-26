@@ -8,7 +8,8 @@
 /**
 `LoginViewController` manages logins of staffs or restaurants.
  
- It must conform to `LoginLogicDelegate` so that user can be logged in and directed to the correct page according to profile completion status.
+ It must conform to `LoginLogicDelegate` so that user can be logged in and directed to the correct page according to
+ profile completion status.
 */
 
 import UIKit

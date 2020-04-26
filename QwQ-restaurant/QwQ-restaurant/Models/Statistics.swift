@@ -1,12 +1,6 @@
-//
-//  Statistics.swift
-//  QwQ-restaurant
-//
-//  Created by Tan Su Yee on 25/3/20.
-//
-
 import Foundation
 
+/// A statistics model.
 class Statistics {
     let fromDate: Date
     let toDate: Date

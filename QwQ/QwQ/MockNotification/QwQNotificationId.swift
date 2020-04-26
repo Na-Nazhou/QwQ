@@ -1,5 +1,7 @@
 import Foundation
 
+/// An id of `QwQNotification`. Each `QwQNotificationId` is defined by the related record's id
+/// and the time it should trigger at.
 struct QwQNotificationId: Equatable {
     let recordId: String
     let targetTime: DateComponents
@@ -15,6 +17,7 @@ struct QwQNotificationId: Equatable {
             from: targetTime)
     }
 
+    /// Constructs a `QwQNotificationId` whose trigger time is set to `timeDelayInMinutes` after `afterReference` time.
     /// If afterReference is given non-nil, it will be taken as reference.
     /// Otherwise by default, takes admitTime of record as reference time, if available.
     /// If admitTime is nil, then either rejectTime or withdrawTime must be non-nil and hence taken as reference.

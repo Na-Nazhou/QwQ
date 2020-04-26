@@ -3,7 +3,7 @@ import os.log
 import UIKit
 import UserNotifications
 
-/// General notifications scheduler.
+/// A general local notifications scheduler that uses the `UserNotifictions` framework..
 class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     static let singleton = LocalNotificationManager()
 
@@ -23,6 +23,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
 }
 
 extension LocalNotificationManager {
+    /// Requests for user permission to allow notifications.
     func requestAuthorization() {
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
                 if let error = error {
@@ -37,6 +38,7 @@ extension LocalNotificationManager {
         }
     }
 
+    /// Schedules a notification if authorized. Requests authorization if not yet asked.
     func schedule(notif: Notification) {
         notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
@@ -53,12 +55,14 @@ extension LocalNotificationManager {
         }
     }
 
+    /// Requests authorization for notifications by asking to open settings.
     private func requestForPermissionsAgain() {
         let alertController = UIAlertController(
-            title: Constants.permissionsRequestTitle,
-            message: Constants.permissionsRequestMessage,
+            title: Constants.notificationPermissionRequiredTitle,
+            message: Constants.notificationPermissionRequiredMessage,
             preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: Constants.permissionsRequestSettingsTitle, style: .default) { _ in
+        let settingsAction = UIAlertAction(title: Constants.notificationPermissionsRequiredSettingsTitle,
+                                           style: .default) { _ in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
@@ -80,12 +84,14 @@ extension LocalNotificationManager {
         }
     }
 
+    /// Sends the notification to be scheduled in the framework.
     private func scheduleNotification(_ notification: Notification) {
         let content = UNMutableNotificationContent()
         content.title = notification.title
         content.body = notification.description
         content.sound = .default
 
+        // set to trigger immediately if target time is outdated.
         var trigger: UNNotificationTrigger?
         if Calendar.current.date(from: notification.timeScheduled)! <= Date()
             && notification.shouldBeSentRegardlessOfTime {
@@ -106,6 +112,7 @@ extension LocalNotificationManager {
         }
     }
 
+    /// Remove all notifications, if any, identified by ids in `ids`.
     func removeNotifications(ids: [String]) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: ids)
     }

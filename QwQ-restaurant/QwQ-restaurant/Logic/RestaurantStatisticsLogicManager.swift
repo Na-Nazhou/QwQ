@@ -1,5 +1,6 @@
 import Foundation
 
+/// A restaurant statistics logic manager.
 class RestaurantStatisticsLogicManager: RestaurantStatisticsLogic {
 
     // Storage

@@ -8,7 +8,8 @@
 /**
 `SearchViewController` displays all restaurants and enables searching for restaurants.
  
- It must conform to `PopoverContentControllerDelegate` and `UIPopoverPresentationControllerDelegate` to enable display of sorting criteria in a popover format.
+ It must conform to `PopoverContentControllerDelegate` and `UIPopoverPresentationControllerDelegate`
+ to enable display of sorting criteria in a popover format.
  It must conform to `UISearchBarDelegate` and `SearchDelegate` to enable searching of restaurants.
 */
 

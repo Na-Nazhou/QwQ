@@ -1,12 +1,6 @@
-//
-//  CustomerActivityLogicManager.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 9/4/20.
-//
-
 import Foundation
 
+/// A customer actiivity logic manager.
 class CustomerActivityLogicManager: CustomerActivityLogic {
 
     // Models

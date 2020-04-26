@@ -29,18 +29,18 @@ struct Log {
 
     static let newBookRecord = OSLog(subsystem: subsystem, category: "newRecord")
     static let newQueueRecord = OSLog(subsystem: subsystem, category: "newRecord")
-    static let recordError = OSLog(subsystem: subsystem, category: "recordError")
-    
-    // MARK: Errors
-    static let addQueueRecordError = OSLog(subsystem: subsystem, category: "QueueError")
-    static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "QueueError")
-    static let queueRetrievalError = OSLog(subsystem: subsystem, category: "QueueError")
-    static let createQueueRecordError = OSLog(subsystem: subsystem, category: "QueueError")
 
-    static let addBookRecordError = OSLog(subsystem: subsystem, category: "BookError")
-    static let updateBookRecordError = OSLog(subsystem: subsystem, category: "BookError")
-    static let bookRetrievalError = OSLog(subsystem: subsystem, category: "BookError")
-    static let createBookRecordError = OSLog(subsystem: subsystem, category: "BookError")
+    // MARK: Errors
+    static let unexpectedDiffError = OSLog(subsystem: subsystem, category: "unexpectedDiffError")
+    static let addQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+    static let updateQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+    static let queueRetrievalError = OSLog(subsystem: subsystem, category: "queueError")
+    static let createQueueRecordError = OSLog(subsystem: subsystem, category: "queueError")
+
+    static let addBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
+    static let updateBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
+    static let bookRetrievalError = OSLog(subsystem: subsystem, category: "bookError")
+    static let createBookRecordError = OSLog(subsystem: subsystem, category: "bookError")
 
     static let restaurantRetrievalError = OSLog(subsystem: subsystem, category: "retaurantError")
     static let createRestaurantError = OSLog(subsystem: subsystem, category: "retaurantError")
@@ -51,8 +51,12 @@ struct Log {
 
     static let createStaffError = OSLog(subsystem: subsystem, category: "staffError")
     static let createRoleError = OSLog(subsystem: subsystem, category: "staffError")
+    
+    static let recordError = OSLog(subsystem: subsystem, category: "recordError")
 
     static let segueError = OSLog(subsystem: subsystem, category: "segueError")
     
     static let imagePickingError = OSLog(subsystem: subsystem, category: "imagePickingError")
+
+    static let automaticQueueOpenClose = OSLog(subsystem: subsystem, category: "automaticQueueStatus")
 }

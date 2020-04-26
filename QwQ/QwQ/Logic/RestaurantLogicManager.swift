@@ -1,3 +1,4 @@
+/// A restaurant logic manager.
 class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
@@ -42,9 +43,9 @@ class RestaurantLogicManager: RestaurantLogic {
 }
 
 extension RestaurantLogicManager {
-
     // MARK: Syncing
-    
+
+    /// Updates the restaurants collection with `restaurant` and updates the presentation.
     func didUpdateRestaurant(restaurant: Restaurant) {
         if restaurantCollection.update(restaurant) {
             if restaurant == currentRestaurant {
@@ -57,12 +58,14 @@ extension RestaurantLogicManager {
         }
     }
 
+    /// Adds `restaurant` to the restaurants collection and updates the presentation.
     func didAddRestaurant(restaurant: Restaurant) {
         if restaurantCollection.add(restaurant) {
             searchDelegate?.didUpdateRestaurantCollection()
         }
     }
 
+    /// Removes `restaurant` from the restaurants collection and updtes the presentation.
     func didRemoveRestaurant(restaurant: Restaurant) {
         if restaurantCollection.remove(restaurant) {
             selectedRestaurantCollection.remove(restaurant)

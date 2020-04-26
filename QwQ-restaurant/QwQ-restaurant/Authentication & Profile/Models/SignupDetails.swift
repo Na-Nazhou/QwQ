@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Used to hold the name and contact of a user
 struct SignupDetails {
     let name: String
     let contact: String

@@ -1,12 +1,7 @@
-//
-//  RestaurantLogicManager.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 16/4/20.
-//
-
 import Foundation
+import os
 
+/// A logic manager that handles restaurants.
 class RestaurantLogicManager: RestaurantLogic {
 
     // Storage
@@ -34,6 +29,7 @@ class RestaurantLogicManager: RestaurantLogic {
         self.init(restaurantActivity: RestaurantActivity.shared())
     }
 
+    /// Constructs a restaurant logic manager and starts the timer to automatically close/open the queue.
     init(restaurantActivity: RestaurantActivity) {
         self.restaurantActivity = restaurantActivity
         self.queueStorage = FIRQueueStorage.shared
@@ -48,6 +44,7 @@ class RestaurantLogicManager: RestaurantLogic {
         closeQueueTimer?.invalidate()
     }
 
+    /// Schedules the timers to automatically open/close the queues.
     private func scheduleQueueStatusTimer() {
         guard restaurant.isAutoOpenCloseEnabled else {
             return
@@ -72,16 +69,19 @@ class RestaurantLogicManager: RestaurantLogic {
         RunLoop.main.add(closeQueueTimer!, forMode: .common)
     }
 
-    @objc func handleOpenQueueTimer() {
-        print("Fire open queue timer")
+    @objc private func handleOpenQueueTimer() {
+        os_log("Fire open queue timer",
+               log: Log.automaticQueueOpenClose, type: .info)
         openQueue()
     }
 
-    @objc func handleCloseQueueTimer() {
-        print("Fire close queue timer")
+    @objc private func handleCloseQueueTimer() {
+        os_log("Fire close queue timer",
+               log: Log.automaticQueueOpenClose, type: .info)
         closeQueue()
     }
-
+    
+    /// Opens queue and registers the opening time of the restaurant as the current time.
     func openQueue() {
         guard !restaurant.isQueueOpen else {
             return
@@ -92,7 +92,8 @@ class RestaurantLogicManager: RestaurantLogic {
         new.openQueue(at: time)
         updateRestaurant(new: new)
     }
-
+    
+    /// Closes queue and registers the closing time of the restaurant as the current time.
     func closeQueue() {
         guard restaurant.isQueueOpen else {
             return

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Contains the possible errors thrown by Profile
 enum ProfileError: Error {
     case NotSignedIn
     case UserProfileNotFound
@@ -14,6 +15,7 @@ enum ProfileError: Error {
     case NoImageSelected
 }
 
+/// Descriptions for each ProfileError
 extension ProfileError: LocalizedError {
     public var errorDescription: String? {
         switch self {

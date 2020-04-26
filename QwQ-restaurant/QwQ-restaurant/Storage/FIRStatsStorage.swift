@@ -1,6 +1,7 @@
 import FirebaseFirestore
 import os.log
 
+/// A Firetore-based storage handler for restaurant statistics. Reads from documents on Firestore.
 class FIRStatsStorage: RestaurantStatsStorage {
     // MARK: Storage as singleton
     static let shared = FIRStatsStorage()
@@ -14,6 +15,13 @@ class FIRStatsStorage: RestaurantStatsStorage {
         db.collection(Constants.bookingsDirectory)
     }
 
+    /// Returns the reference to the query for `restaurant` data that falls in time period stated in `stats`.
+    /// - Parameters:
+    ///     - restaurant: the restaurant to retrieve stats for,
+    ///     - stats: the stats with date stated.
+    ///     - collectionRef: the type of collection to retrieve stats from.
+    ///     - key: the time key to compare.
+    /// - Returns: filtered query object
     private func getRecordQuery(of restaurant: Restaurant, stats: Statistics,
                                 in collectionRef: CollectionReference, for key: String) -> Query {
         collectionRef.whereField(Constants.restaurantKey, isEqualTo: restaurant.uid)
@@ -31,6 +39,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
         getRecordQuery(of: restaurant, stats: stats, in: bookingDb, for: Constants.timeKey)
     }
 
+    /// Fetch total number of customers for `restaurant` and perform `completion` on the retrieved statitic.
     func fetchTotalNumCustomers(for restaurant: Restaurant,
                                 stats: Statistics,
                                 completion: @escaping (Int) -> Void) {
@@ -65,7 +74,9 @@ class FIRStatsStorage: RestaurantStatsStorage {
                 }
             }
     }
-    
+
+    /// Fetch total waiting time for customers for `restaurant` and perform `completion` on the retrieved statitic.
+    /// Waiting time for customers refer to the time customers have to wait to be admitted.
     func fetchTotalWaitingTimeForCustomer(for restaurant: Restaurant,
                                           stats: Statistics,
                                           completion: @escaping (Int) -> Void) {
@@ -92,6 +103,8 @@ class FIRStatsStorage: RestaurantStatsStorage {
             }
     }
 
+    /// Fetch total waiting time for `restaurant` and perform `completion` on the retrieved statitic.
+    /// Waiting time for restaurants refer to the time restaurants have to wait for customers to turn up.
     func fetchTotalWaitingTimeForRestaurant(for restaurant: Restaurant,
                                             stats: Statistics,
                                             completion: @escaping (Int) -> Void) {
@@ -117,6 +130,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
             }
     }
     
+    /// Fetch queue cancellation rate for `restaurant` and perform `completion` on the retrieved statitic.
     func fetchQueueCancellationRate(for restaurant: Restaurant,
                                     stats: Statistics,
                                     completion: @escaping (Int, Int) -> Void) {
@@ -141,6 +155,7 @@ class FIRStatsStorage: RestaurantStatsStorage {
             }
     }
     
+    /// Fetch booking cancellation rate for `restaurant` and perform `completion` on the retrieved statitic.
     func fetchBookingCancellationRate(for restaurant: Restaurant,
                                       stats: Statistics,
                                       completion: @escaping (Int, Int) -> Void) {
