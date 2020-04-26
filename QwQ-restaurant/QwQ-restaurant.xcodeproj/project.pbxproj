@@ -456,7 +456,7 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		5CE15236243DC4E000A20ED6 /* Permissions */ = {
+		5CE15236243DC4E000A20ED6 /* Roles & Permissions */ = {
 			isa = PBXGroup;
 			children = (
 				5CE15237243DC4F200A20ED6 /* PermissionsManager.swift */,
@@ -467,7 +467,7 @@
 				5CB065BA244EF33B0019B34C /* Errors */,
 				5C43B88F244D8AB500254532 /* Models */,
 			);
-			path = Permissions;
+			path = "Roles & Permissions";
 			sourceTree = "<group>";
 		};
 		61326804241F28FF00B770B6 /* Fonts */ = {
@@ -687,7 +687,7 @@
 				7E72B15B241C93FE00C1EE72 /* AppDelegate.swift */,
 				7E72B15D241C93FE00C1EE72 /* SceneDelegate.swift */,
 				5C44C9AA241DCE7B0097C006 /* Authentication & Profile */,
-				5CE15236243DC4E000A20ED6 /* Permissions */,
+				5CE15236243DC4E000A20ED6 /* Roles & Permissions */,
 				D4EA85FA241B2CC5009EB85B /* Storage */,
 				D4EA85F5241B2CA7009EB85B /* Logic */,
 				D4EA85E9241B2C65009EB85B /* Models */,
