@@ -10,6 +10,7 @@ import FirebaseStorage
 import SDWebImage
 import os
 
+/// A Firebase implementation of RestaurantInfoStorage.
 class FIRRestaurantInfoStorage: RestaurantInfoStorage {
 
     static let storageRef = Storage.storage().reference().child("profile-pics")

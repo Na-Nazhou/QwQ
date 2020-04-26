@@ -11,6 +11,7 @@ import FirebaseUI
 import os
 import SDWebImage
 
+/// A Firebase implementation of ProfileStorage.
 class FIRProfileStorage: ProfileStorage {
 
     typealias Auth = FIRAuthenticator

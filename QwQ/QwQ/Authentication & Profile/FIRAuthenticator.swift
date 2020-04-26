@@ -7,6 +7,7 @@
 
 import FirebaseAuth
 
+/// A Firebase implementation of Authenticator.
 class FIRAuthenticator: Authenticator {
 
     typealias Profile = FIRProfileStorage
@@ -43,6 +44,7 @@ class FIRAuthenticator: Authenticator {
                 FIRAuthenticator.logout(completion: completion, errorHandler: errorHandler)
             }, errorHandler: errorHandler)
             */
+            
             completion()
         }
     }
@@ -65,6 +67,7 @@ class FIRAuthenticator: Authenticator {
         do {
             try Auth.auth().signOut()
             Profile.currentUID = nil
+            Profile.currentAuthType = nil
             completion()
         } catch {
             errorHandler(AuthError.SignOutError)
