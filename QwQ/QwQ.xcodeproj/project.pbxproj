@@ -384,10 +384,10 @@
 		613267F9241F220C00B770B6 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				617B62DC241F392F0010AB30 /* SearchDelegate.swift */,
-				613267FA241F220C00B770B6 /* RestaurantDelegate.swift */,
-				617B62DE241F39EF0010AB30 /* RecordDelegate.swift */,
 				61673BF52422168400134891 /* ActivitiesDelegate.swift */,
+				617B62DC241F392F0010AB30 /* SearchDelegate.swift */,
+				617B62DE241F39EF0010AB30 /* RecordDelegate.swift */,
+				613267FA241F220C00B770B6 /* RestaurantDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";

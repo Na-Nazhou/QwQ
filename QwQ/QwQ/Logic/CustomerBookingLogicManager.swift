@@ -1,6 +1,8 @@
 import Foundation
 import os.log
 
+/// A customer booking logic manager.
+/// Customers are not allowed to book at the same restaurant for the same time.
 class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, CustomerBookingLogic {
 
     // Storage
@@ -53,7 +55,7 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
     }
 
     deinit {
-        os_log("DEINITING booking logic manager", log: Log.deinitLogic, type: .info)
+        os_log("Deiniting booking logic manager", log: Log.deinitLogic, type: .info)
         bookingStorage.unregisterDelegate(self)
     }
 
@@ -118,6 +120,7 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
         return true
     }
 
+    /// Returns true if there are no existing clashing records with `record`, false otherwise.
     private func checkExistingRecords(against record: BookRecord) -> Bool {
         if currentBookRecords.contains(where: {
             $0.restaurant == record.restaurant &&
@@ -129,6 +132,8 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
         return true
     }
 
+    /// Returns true if target book time of `record` is within the advance booking limit, false otherwise.
+    /// Being within the limit means the customer books for a time at least advance booking limit time in advance.
     private func checkAdvanceBookingLimit(of record: BookRecord) -> Bool {
         let advanceBookingLimit = record.restaurant.advanceBookingLimit
         let currentTime = Date.getCurrentTime()
@@ -136,6 +141,7 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
         return timeInterval >= advanceBookingLimit * 60 
     }
 
+    /// Returns true if th restaurant is operating at book time of `record`.
     private func checkRestaurantOperatingHours(of record: BookRecord) -> Bool {
         guard record.restaurant.isAutoOpenCloseEnabled else {
             return true
@@ -174,7 +180,7 @@ class CustomerBookingLogicManager: CustomerRecordLogicManager<BookRecord>, Custo
 extension CustomerBookingLogicManager {
 
     // MARK: Syncing
-
+    /// Detects modification to `record` and updates in-app models accordingly.
     func didUpdateBookRecord(_ record: BookRecord) {
         guard let oldRecord = bookRecords.first(where: { $0 == record }) else {
             return
@@ -193,7 +199,6 @@ extension CustomerBookingLogicManager {
         case .confirmAdmission:
             didConfirmAdmission(of: record)
         default:
-//            assert(false, "Modification should be something")
             customerDidUpdateBookRecord(record)
         }
     }

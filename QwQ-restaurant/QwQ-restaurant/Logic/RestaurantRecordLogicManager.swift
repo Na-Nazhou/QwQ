@@ -1,17 +1,12 @@
-//
-//  RestaurantRecordLogicManager.swift
-//  QwQ-restaurant
-//
-//  Created by Nazhou Na on 17/4/20.
-//
-
 import Foundation
 
+/// A generic restaurant record logic manager.
 class RestaurantRecordLogicManager<T: Record & Hashable> {
 
     // View Controller
     weak var activitiesDelegate: ActivitiesDelegate?
 
+    /// Adds `record` to the corresponding list based on its status.
     func didAddRecord(_ record: T,
                       _ currentList: RecordCollection<T>,
                       _ waitingList: RecordCollection<T>,
@@ -39,6 +34,7 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
         collection.add(record)
     }
 
+    /// Updates the record in its list.
     func didUpdateRecord(_ record: T,
                          _ currentList: RecordCollection<T>,
                          _ waitingList: RecordCollection<T>,
@@ -123,6 +119,7 @@ class RestaurantRecordLogicManager<T: Record & Hashable> {
         }
     }
 
+    /// Updates and returns a copy of `record` updated to `event` at the current time.
     func getUpdatedRecord(record: T, event: RecordModification) -> T {
         var new = record
         let time = Date()

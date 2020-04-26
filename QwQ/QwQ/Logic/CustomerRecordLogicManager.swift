@@ -1,18 +1,13 @@
-//
-//  CustomerRecordLogicManager.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 17/4/20.
-//
-
 import Foundation
 import os.log
 
+/// A generic customer record logic manager.
 class CustomerRecordLogicManager<T: Record & Hashable> {
 
     // View Controllers
     weak var activitiesDelegate: ActivitiesDelegate?
-
+    
+    /// Adds `record` to the corresponding list based on its status.
     func didAddRecord(_ record: T,
                       _ activeList: RecordCollection<T>,
                       _ missedList: RecordCollection<T>,
@@ -27,6 +22,7 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
         }
     }
 
+    /// Updates `record` in its list.
     func customerDidUpdateRecord(_ record: T,
                                  _ activeList: RecordCollection<T>,
                                  _ missedList: RecordCollection<T>,
@@ -43,6 +39,7 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
         updateRecord(record, in: activeList)
     }
 
+    /// Removes `record` from `activeList` and adds to `historyList`.
     func didWithdrawRecord(_ record: T,
                            _ activeList: RecordCollection<T>,
                            _ historyList: RecordCollection<T>) {
@@ -51,6 +48,7 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
         addRecord(record, to: historyList)
     }
 
+    /// Serves `record` and removes from `activeList` and adds to `historyList`.
     func didServeRecord(_ record: T,
                         _ activeList: RecordCollection<T>,
                         _ historyList: RecordCollection<T>) {
@@ -58,7 +56,8 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
         removeRecord(record, from: activeList)
         addRecord(record, to: historyList)
     }
-
+    
+    /// Rejects `record` and removes from `activeList` and adds to `historyList`.
     func didRejectRecord(_ record: T,
                          _ activeList: RecordCollection<T>,
                          _ historyList: RecordCollection<T>) {
@@ -67,6 +66,7 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
         addRecord(record, to: historyList)
     }
 
+    /// Adds `record` to `collection` and updates the presentation.
     func addRecord(_ record: T, to collection: RecordCollection<T>) {
         collection.add(record)
         if record.isMissedAndPending {
@@ -80,21 +80,24 @@ class CustomerRecordLogicManager<T: Record & Hashable> {
             activitiesDelegate?.didUpdateHistoryRecords()
         }
     }
-
+    
+    /// Removes `record` from `collection` and updates the presentation.
     func removeRecord(_ record: T, from collection: RecordCollection<T>) {
         collection.remove(record)
         activitiesDelegate?.didUpdateActiveRecords()
         activitiesDelegate?.didUpdateMissedRecords()
         activitiesDelegate?.didUpdateHistoryRecords()
     }
-
+    
+    /// Updates `record` in `collection` and updates the presentation.
     func updateRecord(_ record: T, in collection: RecordCollection<T>) {
         collection.update(record)
         activitiesDelegate?.didUpdateActiveRecords()
         activitiesDelegate?.didUpdateMissedRecords()
         activitiesDelegate?.didUpdateHistoryRecords()
     }
-
+    
+    /// Updates and returns a copy of `record` updated to `event` at the current time.
     func getUpdatedRecord<T: Record>(record: T, event: RecordModification) -> T {
         var new = record
         let time = Date()

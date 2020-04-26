@@ -1,6 +1,7 @@
 import FirebaseFirestore
 import Foundation
 
+/// A restaurant, which is identified by his `uid` for equality and hash.
 struct Restaurant: User {
 
     static let defaultMinGroupSize = 1
@@ -21,7 +22,9 @@ struct Restaurant: User {
     let maxGroupSize: Int
     let advanceBookingLimit: Int
 
+    /// Time to open from start of the day.
     let autoOpenTime: TimeInterval?
+    /// Time to close from start of the day.
     let autoCloseTime: TimeInterval?
 
     var isAutoOpenCloseEnabled: Bool {
@@ -63,7 +66,7 @@ struct Restaurant: User {
         }
     }
 
-    //previous recorded times
+    // recorded times from previous sessions
     var queueOpenTime: Date? {
         queueOpenTimestamp?.dateValue()
     }
@@ -97,6 +100,7 @@ struct Restaurant: User {
         return isOpen
     }
 
+    /// Constructs a restaurant.
     init(uid: String, name: String, email: String, contact: String, address: String, menu: String,
          defaultRole: String, maxGroupSize: Int, minGroupSize: Int, advanceBookingLimit: Int,
          queueOpenTime: Date? = nil, queueCloseTime: Date? = nil,
@@ -121,6 +125,7 @@ struct Restaurant: User {
 }
 
 extension Restaurant {
+    /// Coding keys to encode and decode a restaurant.
     enum CodingKeys: String, CodingKey {
         case uid
         case name

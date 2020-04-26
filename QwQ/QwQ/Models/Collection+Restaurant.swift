@@ -1,10 +1,4 @@
-//
-//  File.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 25/3/20.
-//
-
+/// A collection of restaurants.
 extension Collection where T == Restaurant {
 
     var restaurants: [Restaurant] {

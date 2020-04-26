@@ -1,5 +1,6 @@
 import Foundation
 
+/// A restaurant activity logic manager.
 class RestaurantActivityLogicManager: RestaurantActivityLogic {
 
     // Models

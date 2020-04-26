@@ -1,10 +1,4 @@
-//
-//  CustomerActivityLogic.swift
-//  QwQ
-//
-//  Created by Nazhou Na on 9/4/20.
-//
-
+/// Represents the protocol a customer activity logic handler should conform to.
 protocol CustomerActivityLogic {
 
     var activeRecords: [Record] { get }

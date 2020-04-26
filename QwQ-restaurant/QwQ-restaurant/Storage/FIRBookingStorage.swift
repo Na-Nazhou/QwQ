@@ -2,7 +2,8 @@ import FirebaseFirestore
 import Foundation
 import os.log
 
-/// A Firestore-based storage handler for bookings. Reads and writes to Firestore and listens to changes to documents in Firestore.
+/// A Firestore-based storage handler for bookings. Reads and writes to Firestore and listens to changes to
+/// documents in Firestore.
 class FIRBookingStorage: RestaurantBookingStorage {
     // MARK: Storage as singleton
     static let shared = FIRBookingStorage()
@@ -85,10 +86,8 @@ extension FIRBookingStorage {
             .whereField(Constants.timeKey, isGreaterThanOrEqualTo: startTime)
             .addSnapshotListener(includeMetadataChanges: false) { (snapshot, err) in
                 guard let snapshot = snapshot, err == nil else {
-                    os_log("Error getting book record documents",
-                           log: Log.bookRetrievalError,
-                           type: .error,
-                           String(describing: err))
+                    os_log("Error getting book record documents", log: Log.bookRetrievalError,
+                           type: .error, String(describing: err))
                     return
                 }
                 snapshot.documentChanges.forEach { diff in
