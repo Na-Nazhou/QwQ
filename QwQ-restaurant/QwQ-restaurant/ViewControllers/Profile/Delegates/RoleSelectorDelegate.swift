@@ -6,5 +6,5 @@
 //
 
 protocol RoleSelectorDelegate: AnyObject {
-    func roleSelected(controller: RoleSelectorViewController, selectedRole: String, owner: StaffCell)
+    func roleSelected(controller: PositionSelectorViewController, selectedRole: String, owner: StaffCell)
 }

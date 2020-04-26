@@ -64,6 +64,11 @@ struct Constants {
     static let rejectCustomerTitle = "Reject Customer"
     static let rejectCustomerMessage = "The customer has been rejected."
     static let recordDateFormat = "ddMMyyyy"
+    static let admitButtonTitle = "ADMIT"
+    static let serveButtonTitle = "SERVE"
+    static let rejectButtonTitle = "REJECT"
+    static let pendingConfirmationButtonTitle = "PENDING CONFIRMATION"
+    static let pendingConfirmationButtonAlpha = CGFloat(0.5)
 
     // MARK: Segue settings
     static let signUpCompletedSegue = "signupCompleted"
@@ -100,7 +105,7 @@ struct Constants {
     
     // MARK: Set roles setting
     static let setRolesFont = UIFont(name: "Comfortaa", size: 20)
-    static let setRoleFontColor = UIColor.white
+    static let setRolesFontColor = UIColor.white
     static let setRolesTextAlignment = NSTextAlignment.center
     
     // MARK: Segmented control settings

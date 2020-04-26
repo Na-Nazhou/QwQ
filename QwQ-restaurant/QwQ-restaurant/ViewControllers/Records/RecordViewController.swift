@@ -29,6 +29,7 @@ class RecordViewController: UIViewController {
            setUpViews()
     }
     
+    /// Set up record cell details
     func setUpViews() {
         guard let record = record else {
             return
@@ -41,18 +42,22 @@ class RecordViewController: UIViewController {
         wheelchairFriendlySwitch.isOn = record.wheelchairFriendly
         FIRRestaurantStorage.getRestaurantProfilePic(uid: record.customer.uid, placeholder: profileImageView)
 
+        // Only show admit button if record is missed or pending admit
         if record.isPendingAdmission || record.isMissedAndPending {
             setUpAdmitButton()
         }
 
+        // Only show pending confirmation button if record is admitted
         if record.isAdmitted {
             setUpPendingConfirmationButton()
         }
 
+        // Only show serve button if record is confirmed admitted
         if record.isConfirmedAdmission {
             setUpServeButton()
         }
 
+        // Do not show any buttons for past records
         if record.isHistoryRecord {
             hideActionButton()
         }
@@ -80,24 +85,24 @@ class RecordViewController: UIViewController {
     }
 
     private func setUpAdmitButton() {
-        actionButton.setTitle("ADMIT", for: .normal)
+        actionButton.setTitle(Constants.admitButtonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(handleAdmit), for: .touchUpInside)
     }
 
     private func setUpServeButton() {
-        actionButton.setTitle("SERVE", for: .normal)
+        actionButton.setTitle(Constants.serveButtonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(handleServe), for: .touchUpInside)
     }
 
     private func setUpPendingConfirmationButton() {
-        actionButton.setTitle("PENDING CONFIRMATION", for: .normal)
-        actionButton.alpha = 0.5
+        actionButton.setTitle(Constants.pendingConfirmationButtonTitle, for: .normal)
+        actionButton.alpha = Constants.pendingConfirmationButtonAlpha
         actionButton.isEnabled = false
     }
 
     // TODO: add reject button
     private func setUpRejectButton() {
-        actionButton.setTitle("REJECT", for: .normal)
+        actionButton.setTitle(Constants.rejectButtonTitle, for: .normal)
         actionButton.addTarget(self, action: #selector(handleReject), for: .touchUpInside)
     }
 

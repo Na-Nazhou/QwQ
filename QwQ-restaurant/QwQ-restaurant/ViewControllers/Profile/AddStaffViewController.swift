@@ -187,23 +187,23 @@ extension AddStaffViewController: StaffCellDelegate {
         popoverFrame = staffTableView.convert(popoverFrame, to: view)
         popoverFrame.origin.y -= 10
 
-        let roleSelector = self.storyboard?
+        let positionSelector = self.storyboard?
             .instantiateViewController(withIdentifier: Constants.positionSelectorVCIdentifier)
-            as? RoleSelectorViewController
+            as? PositionSelectorViewController
 
-        roleSelector?.modalPresentationStyle = .popover
-        roleSelector?.delegate = self
-        roleSelector?.owner = cell
-        roleSelector?.roles = roles
+        positionSelector?.modalPresentationStyle = .popover
+        positionSelector?.delegate = self
+        positionSelector?.owner = cell
+        positionSelector?.roles = roles
 
-        if let presentationController = roleSelector?.popoverPresentationController {
+        if let presentationController = positionSelector?.popoverPresentationController {
             presentationController.permittedArrowDirections = .up
             presentationController.sourceView = self.view
             presentationController.sourceRect = popoverFrame
             presentationController.delegate = self
 
-            if let roleSelector = roleSelector {
-                present(roleSelector, animated: true, completion: nil)
+            if let positionSelector = positionSelector {
+                present(positionSelector, animated: true, completion: nil)
             }
         }
     }
@@ -211,7 +211,7 @@ extension AddStaffViewController: StaffCellDelegate {
 
 extension AddStaffViewController: RoleSelectorDelegate, UIPopoverPresentationControllerDelegate {
     /// Update role of staff according to selection
-    func roleSelected(controller: RoleSelectorViewController, selectedRole: String, owner: StaffCell) {
+    func roleSelected(controller: PositionSelectorViewController, selectedRole: String, owner: StaffCell) {
         let staffPosition = StaffPosition(email: owner.email, roleName: selectedRole)
 
         PositionStorage.updateStaffPosition(staffPosition: staffPosition,

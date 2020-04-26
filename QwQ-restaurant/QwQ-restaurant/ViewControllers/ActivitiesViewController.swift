@@ -151,6 +151,7 @@ extension ActivitiesViewController: UISearchBarDelegate {
         reloadRecords()
     }
     
+    /// Filter records based on search text
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filter = { _ in true }
